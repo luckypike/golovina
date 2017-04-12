@@ -1,5 +1,8 @@
 {
   "name": "mint",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "breakpoint-sass": "^2.7.1"
+  }
 }

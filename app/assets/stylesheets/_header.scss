@@ -1,0 +1,20 @@
+.header {
+  &_logo {
+  }
+
+  @include breakpoint($s) {
+    display: flex;
+
+    &_logo {
+
+    }
+
+    &_nav {
+      margin-right: auto;
+    }
+
+    &_menu {
+      display: flex;
+    }
+  }
+}
