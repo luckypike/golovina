@@ -12,9 +12,9 @@ categories = YAML.load_file('db/categories.yml')
 
 categories.each_with_index do |(slug, c), id|
   category = Category.where(id: id + 1).first_or_initialize
-  category.title = category['title']
+  category.title = c['title']
   category.slug = slug
-  category.desc = category['desc']
+  category.desc = c['desc']
   category.save
 end
 
