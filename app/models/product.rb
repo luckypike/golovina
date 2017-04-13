@@ -10,7 +10,7 @@ class Product < ApplicationRecord
 
       images = []
       (1..19).each do |page|
-        s = JSON.parse open('https://www.kitandace.com/ca/en/search/results/?rootCategory=women&text=').read
+        s = JSON.parse open("https://www.kitandace.com/ca/en/search/results/?rootCategory=women&text=&page=#{page}").read
         s['results'].each do |p|
           images << p['defaultColorProduct']['descriptionMedias'][0]['url']
         end
