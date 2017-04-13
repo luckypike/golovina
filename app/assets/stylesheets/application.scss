@@ -1,4 +1,8 @@
 @import "breakpoint-sass/stylesheets/breakpoint";
+@import "reset-scss/reset.scss";
+
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic');
+
 
 $s: 48rem;
 $m: 60rem;
@@ -7,5 +11,11 @@ $xl: 100rem;
 
 $gutter: 1.25rem;
 
+@import "components/layout";
+
 @import "header";
 @import "page";
+
+body {
+  font-family: 'PT Sans', sans-serif;
+}

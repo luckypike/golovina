@@ -1,0 +1,20 @@
+.page_categories
+  .page_categories_intro
+    h1 Каталог
+
+    p
+      = Faker::Lorem.paragraph
+
+
+  - @categories.each do |category|
+    .page_categories_category
+      h2
+        = category.title
+
+      p
+        = category.desc
+
+      p
+        = link_to 'Все товары в категории', category
+
+= link_to 'New Category', new_category_path

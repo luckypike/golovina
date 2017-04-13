@@ -1,0 +1,14 @@
+.page_product
+  .page_product_category
+    = link_to @product.category.title, @product.category
+
+  .page_product_intro
+    h1
+      = @product.title
+
+    p
+      = @product.desc
+
+    .image
+      = image_tag @product.images.first.url
+

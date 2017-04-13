@@ -1,7 +1,9 @@
 {
   "name": "mint",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "reset-scss": "^1.0.0"
+  },
   "devDependencies": {
     "breakpoint-sass": "^2.7.1"
   }

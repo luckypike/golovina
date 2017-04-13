@@ -1,6 +1,9 @@
 .header {
+  padding: 1rem $gutter;
+  margin-bottom: 5rem;
+
   &_logo {
-    background-color: green;
+    margin-right: $gutter * 2;
   }
 
   @include breakpoint($s) {
@@ -16,6 +19,10 @@
 
     &_menu {
       display: flex;
+
+      &_item {
+        margin-right: $gutter;
+      }
     }
   }
 }

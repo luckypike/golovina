@@ -1,0 +1,26 @@
+.page_category
+  .page_category_catalog
+    = link_to 'Все категории', categories_path
+
+  .page_category_intro
+    h1
+      = @category.title
+
+    p
+      = @category.desc
+
+  .page_category_products
+    .products_list
+      - @category.products.each do |product|
+        .products_list_item
+          = link_to '', product, class: :link_fake
+
+          .image
+            .ar
+              = image_tag product.images.first.url
+
+          h3
+            = product.title
+
+          .price
+            = product.price

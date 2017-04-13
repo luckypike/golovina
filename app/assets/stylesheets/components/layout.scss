@@ -1,0 +1,50 @@
+$default-total-columns: 12;
+
+@mixin column-width ($columns, $total-columns: $default-total-columns) {
+  width: $columns / $total-columns * 100%;
+}
+
+@mixin column-shift ($columns, $side: left, $total-columns: $default-total-columns) {
+  margin-#{$side}: $columns / $total-columns * 100%;
+}
+
+@mixin column-pane {
+  align-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+
+  > * {
+    @include column-width(12);
+  }
+}
+
+@mixin page-static-gutter($top: 0, $bottom: 0) {
+  padding: $top $gutter $bottom;
+}
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > img, > svg, > video, > iframe, > div {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@mixin aspect-ratio-modify($width, $height) {
+  &:before {
+    padding-top: ($height / $width) * 100%;
+  }
+}

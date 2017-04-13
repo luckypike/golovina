@@ -1,0 +1,18 @@
+.page_categories {
+  &_intro,
+  &_category {
+    max-width: $xl;
+    padding: 0 $gutter;
+    margin: 0 auto 3rem;
+  }
+
+  &_category {
+    h2 {
+      margin-bottom: 1em;
+    }
+
+    p {
+      margin-bottom: 1em;
+    }
+  }
+}

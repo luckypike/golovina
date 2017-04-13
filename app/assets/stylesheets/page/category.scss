@@ -1,0 +1,45 @@
+.page_category {
+  &_catalog {
+    max-width: $xl;
+    margin: 0 auto 2rem;
+    padding: 0 $gutter;
+  }
+
+  &_intro {
+    max-width: $xl;
+    margin: 0 auto 3rem;
+    padding: 0 $gutter;
+  }
+
+  &_products {
+    max-width: $xl;
+    margin: auto;
+
+    .products_list {
+      display: flex;
+      flex-wrap: wrap;
+
+      &_item {
+        width: 25%;
+        padding: 0 $gutter;
+        position: relative;
+        margin-bottom: 2rem;
+
+        .image {
+          .ar {
+            @include aspect-ratio(540, 740);
+          }
+        }
+
+        .link_fake {
+          position: absolute;
+          left: $gutter;
+          right: $gutter;
+          top: 0;
+          bottom: 0;
+          z-index: 1;
+        }
+      }
+    }
+  }
+}

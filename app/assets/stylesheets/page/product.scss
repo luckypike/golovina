@@ -1,0 +1,8 @@
+.page_product {
+  &_category,
+  &_intro {
+    max-width: $xl;
+    margin: 0 auto 3rem;
+    padding: 0 $gutter;
+  }
+}
