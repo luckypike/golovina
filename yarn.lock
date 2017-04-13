@@ -6,6 +6,14 @@ breakpoint-sass@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/breakpoint-sass/-/breakpoint-sass-2.7.1.tgz#8ef6c4744dcc25ba83d969b6c9a17e5daa29980a"
 
+jquery@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
+
+pjax@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/pjax/-/pjax-0.2.4.tgz#0ae5885cfe663eb6a786156ed9c3de5bcb627513"
+
 reset-scss@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/reset-scss/-/reset-scss-1.0.0.tgz#7916042cc5a8bcffe68c9097232ba1195a8f8be9"

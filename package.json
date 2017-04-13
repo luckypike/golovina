@@ -2,6 +2,8 @@
   "name": "mint",
   "private": true,
   "dependencies": {
+    "jquery": "^3.2.1",
+    "pjax": "^0.2.4",
     "reset-scss": "^1.0.0"
   },
   "devDependencies": {

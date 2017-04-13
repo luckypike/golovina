@@ -11,4 +11,17 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
+//= require pjax/pjax
 //= require_tree .
+
+
+
+
+$(function(){
+  new Pjax({
+    elements: "a",
+    selectors: ["title", ".header", ".page"]
+  });
+});
+
