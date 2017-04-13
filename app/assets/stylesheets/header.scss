@@ -1,5 +1,6 @@
 .header {
   &_logo {
+    background-color: green;
   }
 
   @include breakpoint($s) {
