@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  get 'about/index'
-
   root 'static#index'
 
   scope 'about' do
-    get '', to: 'about#index'
+    get '', to: 'about#index', as: :about_index
   end
 
   resources :categories
