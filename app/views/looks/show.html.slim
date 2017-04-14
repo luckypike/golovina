@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @look.title
+
+= link_to 'Edit', edit_look_path(@look)
+'  |
+= link_to 'Back', looks_path

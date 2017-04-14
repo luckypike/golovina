@@ -1,0 +1,21 @@
+h1 Listing kits
+
+table
+  thead
+    tr
+      th Title
+      th
+      th
+      th
+
+  tbody
+    - @kits.each do |kit|
+      tr
+        td = kit.title
+        td = link_to 'Show', kit
+        td = link_to 'Edit', edit_kit_path(kit)
+        td = link_to 'Destroy', kit, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Kit', new_kit_path

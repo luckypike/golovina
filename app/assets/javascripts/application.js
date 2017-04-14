@@ -18,10 +18,10 @@
 
 
 
-$(function(){
-  new Pjax({
-    elements: "a",
-    selectors: ["title", ".header", ".page"]
-  });
-});
+//$(function(){
+//  new Pjax({
+//    elements: "a",
+//    selectors: ["title", ".header", ".page"]
+//  });
+//});
 

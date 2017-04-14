@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @kit.title
+
+= link_to 'Edit', edit_kit_path(@kit)
+'  |
+= link_to 'Back', kits_path

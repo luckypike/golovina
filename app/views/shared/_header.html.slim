@@ -1,14 +1,20 @@
 .header
   .header_logo
-    = link_to 'Mint', root_path
+    = link_to '', root_path
 
   .header_nav
     .header_menu
       .header_menu_item
+        = link_to 'Назначение', looks_path
+
+      .header_menu_item
+        = link_to 'Образы', kits_path
+
+      .header_menu_item
         = link_to 'Магазин', categories_path
 
       .header_menu_item
-        = link_to 'Мята', about_index_path
+        = link_to 'О нас', about_index_path
 
 
   .header_last

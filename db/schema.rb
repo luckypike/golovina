@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413132022) do
+ActiveRecord::Schema.define(version: 20170414145300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,33 @@ ActiveRecord::Schema.define(version: 20170413132022) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "kitables", force: :cascade do |t|
+    t.bigint "kit_id"
+    t.bigint "product_id"
+    t.index ["kit_id"], name: "index_kitables_on_kit_id"
+    t.index ["product_id"], name: "index_kitables_on_product_id"
+  end
+
+  create_table "kits", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lookables", force: :cascade do |t|
+    t.bigint "look_id"
+    t.string "lookable_type"
+    t.bigint "lookable_id"
+    t.index ["look_id"], name: "index_lookables_on_look_id"
+    t.index ["lookable_type", "lookable_id"], name: "index_lookables_on_lookable_type_and_lookable_id"
+  end
+
+  create_table "looks", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|

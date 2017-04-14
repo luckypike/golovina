@@ -4,6 +4,13 @@
 
   &_logo {
     margin-right: $gutter * 2;
+
+    > a {
+      display: block;
+      width: 80px;
+      height: 32px;
+      background-color: #f1f1f1;
+    }
   }
 
   @include breakpoint($s) {

@@ -1,0 +1,47 @@
+.page_looks {
+  &_intro {
+    padding: 0 $gutter;
+    margin: 0 auto 3rem;
+    max-width: $xl;
+  }
+
+  &_list {
+    @include column-pane;
+
+    padding: 0 $gutter;
+    margin: 0 auto 3rem;
+    max-width: $xl;
+
+    &_item {
+      padding: 1px;
+
+      .look {
+        @include aspect-ratio(3, 2);
+
+        background-color: #f1f1f1;
+
+        > a {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          z-index: 1;
+        }
+
+        h2 {
+          position: absolute;
+
+          left: $gutter;
+          top: 50%;
+        }
+      }
+    }
+
+    @include breakpoint($s) {
+      &_item {
+        @include column-width(6);
+      }
+    }
+  }
+}

@@ -18,8 +18,6 @@ categories.each_with_index do |(slug, c), id|
   category.save
 end
 
-
-
 categories = Category.all
 images = Product::faker_images
 
@@ -31,4 +29,29 @@ images = Product::faker_images
   product.category = categories.sample
   product.remote_images_urls = [images.sample]
   product.save
+end
+
+products = Product.all
+
+Kitable.destroy_all
+
+(0..14).each do |id|
+  kit = Kit.where(id: id + 1).first_or_initialize
+  kit.title = Faker::Commerce.product_name
+  kit.products = products.sample(rand(2..5))
+  kit.save
+end
+
+looks = YAML.load_file('db/looks.yml')
+
+Lookable.destroy_all
+
+kits = Kit.all
+
+looks.each_with_index do |(slug, c), id|
+  look = Look.where(id: id + 1).first_or_initialize
+  look.title = c['title']
+  look.products = products.sample(rand(10..20))
+  look.kits = kits.sample(rand(1..3))
+  look.save
 end

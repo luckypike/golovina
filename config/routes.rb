@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     get '', to: 'about#index', as: :about_index
   end
 
+  resources :looks
+  resources :kits
   resources :categories
   resources :products
 end
