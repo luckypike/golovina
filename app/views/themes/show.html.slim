@@ -30,7 +30,7 @@
       - @theme.products.each do |product|
         .page_theme_products_list_item
           .product
-            = link_to '', product, class: :link_fake
+            = link_to '', category_product_path(product.category, product), class: :link_fake
 
             .image
               = image_tag product.images.first.url

@@ -13,7 +13,7 @@
     .products_list
       - @category.products.each do |product|
         .products_list_item
-          = link_to '', product, class: :link_fake
+          = link_to '', category_product_path(product.category, product), class: :link_fake
 
           .image
             .ar
