@@ -42,16 +42,17 @@ Kitable.destroy_all
   kit.save
 end
 
-looks = YAML.load_file('db/looks.yml')
+themes = YAML.load_file('db/themes.yml')
 
-Lookable.destroy_all
+Themable.destroy_all
 
 kits = Kit.all
 
-looks.each_with_index do |(slug, c), id|
-  look = Look.where(id: id + 1).first_or_initialize
-  look.title = c['title']
-  look.products = products.sample(rand(10..20))
-  look.kits = kits.sample(rand(1..3))
-  look.save
+themes.each_with_index do |(slug, c), id|
+  theme = Theme.where(id: id + 1).first_or_initialize
+  theme.title = c['title']
+  theme.slug = slug
+  theme.products = products.sample(rand(4..12))
+  theme.kits = kits.sample(rand(1..3))
+  theme.save
 end

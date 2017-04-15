@@ -7,9 +7,22 @@
 @import "page/products";
 @import "page/product";
 
-@import "page/looks";
-@import "page/look";
+//@import "page/themes";
 
 @import "page/kits";
 @import "page/kit";
 
+.page {
+
+  @import "page/theme";
+  @import "page/themes";
+}
+
+.link_fake {
+  position: absolute;
+  left: $gutter;
+  right: $gutter;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}

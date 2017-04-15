@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170414145300) do
+ActiveRecord::Schema.define(version: 20170415054555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,20 +37,6 @@ ActiveRecord::Schema.define(version: 20170414145300) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "lookables", force: :cascade do |t|
-    t.bigint "look_id"
-    t.string "lookable_type"
-    t.bigint "lookable_id"
-    t.index ["look_id"], name: "index_lookables_on_look_id"
-    t.index ["lookable_type", "lookable_id"], name: "index_lookables_on_lookable_type_and_lookable_id"
-  end
-
-  create_table "looks", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.bigint "category_id"
@@ -60,6 +46,22 @@ ActiveRecord::Schema.define(version: 20170414145300) do
     t.datetime "updated_at", null: false
     t.json "images"
     t.index ["category_id"], name: "index_products_on_category_id"
+  end
+
+  create_table "themables", force: :cascade do |t|
+    t.bigint "theme_id"
+    t.string "themable_type"
+    t.bigint "themable_id"
+    t.index ["themable_type", "themable_id"], name: "index_themables_on_themable_type_and_themable_id"
+    t.index ["theme_id"], name: "index_themables_on_theme_id"
+  end
+
+  create_table "themes", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_themes_on_slug", unique: true
   end
 
   add_foreign_key "products", "categories"

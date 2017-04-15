@@ -1,0 +1,22 @@
+&_themes {
+  &_intro {
+    max-width: $xl;
+    margin: 0 auto 3rem;
+    padding: 0 $gutter;
+  }
+
+
+  &_list {
+    max-width: $xl;
+    margin: 0 auto;
+    padding: 0 $gutter;
+
+    &_wrapper {
+      background-color: #f1f1f1;
+      padding: 2rem 0;
+    }
+
+
+  }
+
+}

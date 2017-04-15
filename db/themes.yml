@@ -9,3 +9,12 @@ dresses:
 
 suits:
   title: Деловые костюмы
+
+holidays:
+  title: Выходные
+
+beach:
+  title: Пляж
+
+walking:
+  title: Прогулка

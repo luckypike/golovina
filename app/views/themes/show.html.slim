@@ -1,0 +1,41 @@
+.page.page_theme
+  .page_theme_image
+
+  .page_theme_intro
+    h1
+      = @theme.title
+
+    p
+      = Faker::Lorem.paragraph
+
+  .page_theme_kits
+    h2 Луки
+
+    .page_theme_kits_list
+      - @theme.kits.each do |kit|
+        .page_theme_kits_list_item
+          .kit
+            = link_to '', kit, class: :link_fake
+
+            .image
+
+            h3
+              = kit.title
+
+
+  .page_theme_products
+    h2 Каталог
+
+    .page_theme_products_list
+      - @theme.products.each do |product|
+        .page_theme_products_list_item
+          .product
+            = link_to '', product, class: :link_fake
+
+            .image
+              = image_tag product.images.first.url
+
+            h3
+              = product.title
+
+

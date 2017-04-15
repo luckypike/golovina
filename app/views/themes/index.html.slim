@@ -1,0 +1,14 @@
+.page.page_themes
+  .page_themes_intro
+    p
+      = Faker::Lorem.paragraph
+
+
+  .page_themes_list_wrapper
+    .page_themes_list
+      - @themes.each do |theme|
+        .page_themes_list_item
+          /= link_to '', theme, class: :link_fake
+
+          h2
+            = link_to theme.title, theme
