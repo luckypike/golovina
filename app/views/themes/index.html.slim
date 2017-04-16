@@ -4,11 +4,18 @@
       = Faker::Lorem.paragraph
 
 
-  .page_themes_list_wrapper
-    .page_themes_list
-      - @themes.each do |theme|
-        .page_themes_list_item
-          /= link_to '', theme, class: :link_fake
-
+  - @themes.each_with_index do |theme, i|
+    .page_themes_theme_wrapper class="th-#{theme.slug}"
+      .page_themes_theme class="th-i-#{i}"
+        .theme
           h2
             = link_to theme.title, theme
+
+        .kits
+          .kits_list
+            - theme.kits.take(3).each do |kit|
+              .kits_list_item
+                .image
+
+                .title
+                  = kit.title
