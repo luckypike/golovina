@@ -9,13 +9,30 @@ $m: 60rem;
 $l: 80rem;
 $xl: 100rem;
 
+$base-rhythm-line: 0.5rem;
+$base-line-height: 3;
+
 $gutter: 1.25rem;
 
+$primary-color: #000;
+$op-color: #fff;
+
 @import "components/layout";
+@import "components/fonts";
 
 @import "header";
 @import "page";
 
 body {
+  @include font-size(1.75);
+
   font-family: 'PT Sans', sans-serif;
+  width: 100%;
+  min-height: 100%;
+  //min-height: 100vh;
+}
+
+html {
+  height: 100%;
+
 }

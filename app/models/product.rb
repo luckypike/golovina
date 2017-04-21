@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  COLORS = %w(red yellow green blue pink white black gray)
+
   mount_uploaders :images, ImageUploader
 
   has_many :kitables

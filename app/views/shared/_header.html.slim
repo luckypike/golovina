@@ -1,8 +1,11 @@
 .header
-  .header_logo
-    = link_to '', root_path
-
   .header_nav
+    .header_burger
+      svg viewBox="0 0 24 24"
+        rect x=0 y=5 width=24 height=2
+        rect x=0 y=11 width=24 height=2
+        rect x=0 y=17 width=24 height=2
+
     .header_menu
       .header_menu_item
         = link_to 'Тематика', themes_path
@@ -17,5 +20,8 @@
         = link_to 'О нас', about_index_path
 
 
-  .header_last
-    | Last
+  .header_logo
+    = link_to '', root_path
+
+  .header_basket
+    | B

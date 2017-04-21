@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require jquery
 //= require pjax/pjax
+//= require swiper
 //= require_tree .
 
 

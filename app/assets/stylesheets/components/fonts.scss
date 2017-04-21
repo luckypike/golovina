@@ -1,0 +1,4 @@
+@mixin font-size($font-size, $line-height: $base-line-height) {
+  font-size: $font-size * $base-rhythm-line;
+  line-height: $line-height * $base-rhythm-line;
+}

@@ -1,4 +1,6 @@
-@import "page/static";
+@import "swiper.css";
+
+
 @import "page/about";
 
 @import "page/categories";
@@ -14,8 +16,19 @@
 
 .page {
 
+  &_container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    //min-height: 100vh;
+  }
+
   @import "page/theme";
   @import "page/themes";
+
+  @import "page/static";
 }
 
 .link_fake {

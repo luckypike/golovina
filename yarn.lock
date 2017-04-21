@@ -17,3 +17,7 @@ pjax@^0.2.4:
 reset-scss@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/reset-scss/-/reset-scss-1.0.0.tgz#7916042cc5a8bcffe68c9097232ba1195a8f8be9"
+
+swiper@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-3.4.2.tgz#39d6b410b1a39833e1f72d3b72999df5f5e38392"

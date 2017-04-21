@@ -1,3 +1,36 @@
-.page
-  h1 Mint Store
-  p Welcome to Mint store.
+.page.page_static_index
+  .swiper_primary.swiper-container
+    .swiper-wrapper
+      .swiper_primary_item.swiper-slide
+        .swiper_secondary.swiper-container
+          .swiper-wrapper
+            .swiper_secondary_item.swiper-slide
+              .text Пальто
+
+            .swiper_secondary_item.swiper-slide
+              .text Джинсы
+
+            .swiper_secondary_item.swiper-slide
+              .text Что-то
+
+            .swiper_secondary_item.swiper-slide
+              .text Ещё что-то
+
+
+      .swiper_primary_item.swiper-slide
+        .swiper_secondary.swiper-container
+          .swiper-wrapper
+            - @themes.each do |theme|
+              .swiper_secondary_item.swiper-slide class=theme.friendly_id
+                .text
+                  .title
+                    = t "themes.index.#{theme.friendly_id}"
+
+      .swiper_primary_item.swiper-slide
+        .swiper_secondary.swiper-container
+          .swiper-wrapper
+            - Product::COLORS.each do |color|
+              .swiper_secondary_item.swiper-slide class=color
+                .text
+                  .title
+                    = t "colors.index.#{color}"

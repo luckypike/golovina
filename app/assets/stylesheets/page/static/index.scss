@@ -1,0 +1,118 @@
+&_index {
+  width: 100%;
+  bottom: 0;
+  //top: $base-rhythm-line * $base-line-height * 3;
+  top: 0;
+  position: absolute;
+
+  .swiper_primary {
+    height: 100%;
+    //height: 100vh;
+    width: 100%;
+  }
+
+  .swiper_secondary {
+    height: 100%;
+    width: 100%;
+
+    &_item {
+      background: {
+        position: center bottom;
+        size: cover;
+      }
+
+      .text {
+        color: $op-color;
+        position: absolute;
+        left: $gutter;
+        right: 20%;
+        top: 50%;
+        transform: translateY(-50%);
+
+        .title {
+          @include font-size(4.25, 5);
+        }
+      }
+
+      &.red {
+        background-color: #9d3431;
+        background-image: image_url('temp/swiper/colors/red_small.jpg');
+      }
+
+      &.yellow {
+        background-color: #f6e57b;
+        background-image: image_url('temp/swiper/colors/yellow_small.jpg');
+      }
+
+      &.green {
+        background-color: #bea591;
+        background-image: image_url('temp/swiper/colors/green_small.jpg');
+      }
+
+      &.blue {
+        background-color: #9fbbc7;
+        background-image: image_url('temp/swiper/colors/blue_small.jpg');
+      }
+
+      &.pink {
+        background-color: #e3c7c6;
+        background-image: image_url('temp/swiper/colors/pink_small.jpg');
+      }
+
+      &.white {
+        background-color: #a9c1b3;
+        background-image: image_url('temp/swiper/colors/white_small.jpg');
+      }
+
+      &.black {
+        background-color: #49494d;
+        background-image: image_url('temp/swiper/colors/black_small.jpg');
+      }
+
+      &.gray {
+        background-color: #b9b9b7;
+        background-image: image_url('temp/swiper/colors/gray_small.jpg');
+      }
+
+      &.business {
+        background-color: #d0cbb7;
+        background-image: image_url('temp/swiper/colors/business_small.jpg');
+      }
+
+      &.date {
+        background-color: #b49786;
+        background-image: image_url('temp/swiper/colors/date_small.jpg');
+      }
+
+      &.walk {
+        background-color: #787860;
+        background-image: image_url('temp/swiper/colors/walk_small.jpg');
+      }
+
+      &.holiday {
+        background-color: #524e33;
+        background-image: image_url('temp/swiper/colors/holiday_small.jpg');
+      }
+
+      &.country {
+        background-color: #916b51;
+        background-image: image_url('temp/swiper/colors/country_small.jpg');
+      }
+
+      &.party {
+        background-color: #f6f3ea;
+        background-image: image_url('temp/swiper/colors/party_small.jpg');
+      }
+
+      &.moms {
+        background-color: #af8a60;
+        background-image: image_url('temp/swiper/colors/moms_small.jpg');
+      }
+
+      &.home {
+        background-color: #cec5bd;
+        background-image: image_url('temp/swiper/colors/home_small.jpg');
+      }
+    }
+  }
+}

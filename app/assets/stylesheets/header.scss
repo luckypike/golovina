@@ -1,20 +1,58 @@
 .header {
-  padding: 1rem $gutter;
-  margin-bottom: 5rem;
+  //background-color: $op-color;
+  height: $base-rhythm-line * $base-line-height  * 3;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 11;
 
   &_logo {
-    margin-right: $gutter * 2;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
     > a {
       display: block;
-      width: 80px;
-      height: 32px;
-      background-color: #f1f1f1;
+      width: 76px;
+      height: 28px;
+      background: image_url('logo.svg');
+    }
+  }
+
+  &_nav {
+    position: absolute;
+    left: $gutter;
+    top: $base-line-height * $base-rhythm-line;
+  }
+
+  &_basket {
+    position: absolute;
+    right: $gutter;
+    top: $base-line-height * $base-rhythm-line;
+  }
+
+  &_burger {
+    cursor: pointer;
+
+    svg {
+      display: block;
+      width: $base-rhythm-line * $base-line-height;
+      height: $base-rhythm-line * $base-line-height;
+    }
+  }
+
+  &_menu {
+    display: none;
+
+    &_item {
+      margin-right: $gutter;
     }
   }
 
   @include breakpoint($s) {
-    display: flex;
+    //display: flex;
 
     &_logo {
 
@@ -24,12 +62,6 @@
       margin-right: auto;
     }
 
-    &_menu {
-      display: flex;
 
-      &_item {
-        margin-right: $gutter;
-      }
-    }
   }
 }

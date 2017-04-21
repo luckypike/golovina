@@ -1,20 +1,23 @@
-casual:
-  title: Ежедневный кежуал
+business:
+  title: Деловой стиль
 
-sport:
-  title: Спортивный стиль
+date:
+  title: Свидание
 
-dresses:
-  title: Вечерние платья
-
-suits:
-  title: Деловые костюмы
-
-holidays:
-  title: Выходные
-
-beach:
-  title: Пляж
-
-walking:
+walk:
   title: Прогулка
+
+holiday:
+  title: Отпуск
+
+country:
+  title: Жизнь за городом
+
+party:
+  title: Выход в свет
+
+moms:
+  title: Для мам
+
+home:
+  title: Для дома

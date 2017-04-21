@@ -4,7 +4,8 @@
   "dependencies": {
     "jquery": "^3.2.1",
     "pjax": "^0.2.4",
-    "reset-scss": "^1.0.0"
+    "reset-scss": "^1.0.0",
+    "swiper": "^3.4.2"
   },
   "devDependencies": {
     "breakpoint-sass": "^2.7.1"
