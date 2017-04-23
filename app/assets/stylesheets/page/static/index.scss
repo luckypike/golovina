@@ -10,6 +10,71 @@
     //height: 100vh;
     width: 100%;
 
+    > {
+      .swiper-button-next,
+      .swiper-button-prev {
+        background: transparent;
+        display: flex;
+        margin-top: 0;
+        width: 110px;
+        height: 40px;
+        transition: opacity 0.2s;
+
+        .icon {
+          svg {
+            height: 40px;
+            width: 40px;
+
+            circle {
+              fill: none;
+              stroke: #fff;
+              stroke-width: 2px;
+            }
+
+            path {
+              fill: #fff;
+              fill-rule: evenodd;
+            }
+          }
+        }
+
+        .label {
+          @include font-size(1.5, 2);
+
+          align-self: center;
+          color: $op-color;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+      }
+
+      .swiper-button-prev {
+        top: $base-rhythm-line * $base-line-height * 3;
+        left: $gutter;
+
+        .label {
+          margin-left: $gutter / 2;
+        }
+
+      }
+
+      .swiper-button-next {
+        top: auto;
+        bottom: $space-m;
+        right: $gutter;
+        justify-content: flex-end;
+
+        .label {
+          margin-right: $gutter / 2;
+          order: -1;
+        }
+      }
+
+      .swiper-button-disabled {
+        opacity: 0;
+      }
+    }
+
     &_item {
       &.catalog {
         background-color: #f4f4f4;
@@ -27,6 +92,123 @@
     height: 100%;
     width: 100%;
 
+    .swiper-pagination {
+      height: 152px;
+      overflow: hidden;
+      left: $gutter;
+      right: auto;
+      //transform: translateY(-116px);
+      transform: translateY(-96px);
+
+
+      &-bullet {
+        background: transparent;
+        height: 40px;
+        width: 40px;
+        opacity: 1;
+        margin: 0 0 $base-rhythm-line * 2;
+
+        position: relative;
+        transition-duration: 0.25s;
+
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &:before {
+          border: 2px solid $op-color;
+          border-radius: 50%;
+          content: '';
+          height: $base-rhythm-line * 2;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+
+
+          //margin: -$base-rhythm-line 0 0 (-$base-rhythm-line);
+          transform: translate(-50%, -50%);
+          width: $base-rhythm-line * 2;
+          transition-duration: 0.34s;
+        }
+
+
+        &-active {
+          &:before {
+            background-color: $op-color;
+
+            height: 100%;
+            width: 100%;
+          }
+
+          &:after {
+            background: image_url('icons/more.svg');
+            content: '';
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+          }
+        }
+      }
+
+      &.act-0 {
+        > span {
+          transform: translateY(56px);
+        }
+      }
+
+      &.act-1 {
+        > span {
+          transform: translateY(0);
+        }
+      }
+
+      &.act-2 {
+        > span {
+          transform: translateY(-56px);
+        }
+      }
+
+      &.act-3 {
+        > span {
+          transform: translateY(-56px * 2);
+        }
+      }
+
+      &.act-4 {
+        > span {
+          transform: translateY(-56px * 3);
+        }
+      }
+
+      &.act-5 {
+        > span {
+          transform: translateY(-56px * 4);
+        }
+      }
+
+      &.act-6 {
+        > span {
+          transform: translateY(-56px * 5);
+        }
+      }
+
+      &.act-7 {
+        > span {
+          transform: translateY(-56px * 6);
+        }
+      }
+
+      &.act-8 {
+        > span {
+          transform: translateY(-56px * 7);
+        }
+      }
+    }
+
     &_item {
       background: {
         position: center bottom;
@@ -34,15 +216,34 @@
       }
 
       .text {
+        height: 40px;
         color: $op-color;
         position: absolute;
-        left: $gutter;
-        right: 20%;
+        left: $gutter * 2 + 2.5rem;
+        right: $gutter;
         top: 50%;
-        transform: translateY(-50%);
+        //transform: translateY(-60px);
+        transform: translateY(-40px);
 
         .title {
           @include font-size(4.25, 5);
+        }
+
+        .more {
+          display: none;
+          margin-top: 40px;
+
+          .button {
+            @include font-size(1.5, 5);
+
+            color: $primary-color;
+            background: $mint-color;
+            line-height: 40px;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0 $gutter;
+          }
         }
       }
 

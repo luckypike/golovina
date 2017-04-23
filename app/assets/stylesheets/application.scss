@@ -16,12 +16,24 @@ $gutter: 1.25rem;
 
 $primary-color: #000;
 $op-color: #fff;
+$mint-color: #d5ecdc;
+
+
+$space-s: $base-rhythm-line * $base-line-height;
+$space-m: $space-s * 2;
+
 
 @import "components/layout";
 @import "components/fonts";
 
 @import "header";
 @import "page";
+
+* {
+  &:before, &:after {
+    box-sizing: border-box;
+  }
+}
 
 body {
   @include font-size(1.75);

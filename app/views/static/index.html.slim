@@ -1,13 +1,32 @@
 .page.page_static_index
   .swiper_primary.swiper-container
+    .swiper-button-prev
+      .icon
+        svg
+          circle cx="20" cy="20" r="19"
+          path d="M18,16l-6,4,6,4V16Zm0,3H28v2H18V19Z"
+
+      .label
+        | Образы
+
+    .swiper-button-next
+      .icon
+        svg
+          circle cx="20" cy="20" r="19"
+          path d="M22,24l6-4-6-4v8ZM12,19H22v2H12V19Z"
+
+      .label
+        | Цвета
+
     .swiper-wrapper
-      .swiper_primary_item.swiper-slide.catalog
+      .swiper_primary_item.swiper-slide.catalog data-label="Образы"
         .catalog_list
           | Коллекция и образы
 
 
-      .swiper_primary_item.swiper-slide
+      .swiper_primary_item.swiper-slide data-label="Стили"
         .swiper_secondary.swiper-container
+          .swiper-pagination
           .swiper-wrapper
             - @themes.each do |theme|
               .swiper_secondary_item.swiper-slide class=theme.friendly_id
@@ -15,11 +34,18 @@
                   .title
                     = t "themes.index.#{theme.friendly_id}"
 
-      .swiper_primary_item.swiper-slide
+                  .more
+                    .button Начать покупки
+
+      .swiper_primary_item.swiper-slide data-label="Цвета"
         .swiper_secondary.swiper-container
+          .swiper-pagination
           .swiper-wrapper
             - Product::COLORS.each do |color|
               .swiper_secondary_item.swiper-slide class=color
                 .text
                   .title
                     = t "colors.index.#{color}"
+
+                  .more
+                    .button Начать покупки
