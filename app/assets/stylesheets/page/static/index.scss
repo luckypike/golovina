@@ -342,11 +342,21 @@
       &.business {
         background-color: #d0cbb7;
         background-image: image_url('temp/swiper/colors/business_small.jpg');
+
+        @include breakpoint($s) {
+          background-image: image_url('temp/swiper/colors/business_medium.jpg');
+          background-position: center top;
+        }
       }
 
       &.date {
         background-color: #b49786;
         background-image: image_url('temp/swiper/colors/date_small.jpg');
+
+        @include breakpoint($s) {
+          background-image: image_url('temp/swiper/colors/date_medium.jpg');
+          background-position: center top;
+        }
       }
 
       &.walk {
