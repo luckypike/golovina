@@ -17,6 +17,7 @@ $(function() {
   new Swiper('.swiper_secondary', {
     pagination: '.swiper-pagination',
     direction: 'vertical',
+    speed: 700,
     mousewheelControl: true,
     onSlideChangeStart: function(swiper) {
       swiper.paginationContainer.removeClass('act-0 act-1 act-2 act-3 act-4 act-5 act-6 act-7 act-8 act-10').addClass('act-' + swiper.activeIndex);

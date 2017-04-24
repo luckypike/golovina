@@ -4,6 +4,7 @@
   //top: $base-rhythm-line * $base-line-height * 3;
   top: 0;
   position: absolute;
+  overflow: hidden;
 
   .swiper_primary {
     height: 100%;
@@ -85,8 +86,9 @@
 
         .swiper_secondary_item {
           background: {
-            position: center;
-            size: cover;
+            color: #e8e7e5;
+            position: center bottom;
+            size: contain;
           }
 
           &:before {
