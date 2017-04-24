@@ -26,7 +26,22 @@ $(function() {
     }
   });
 
-  $('.swiper_secondary .swiper-pagination').on('click', '.swiper-pagination-bullet-active', function() {
-    window.location = $(this).parent().data('rel');
+  $('.swiper_primary_fast_item').each(function() {
+    var _this = $(this);
+
+    _this.load(_this.data('rel') + ' .page');
   });
+
+  $('.swiper_secondary .swiper-pagination').on('click', '.swiper-pagination-bullet-active', function() {
+    var _this = $(this);
+
+    $('.swiper_primary_fast_item.active').removeClass('active');
+    $('.swiper_primary_fast_item.' + _this.parent().data('rel')).addClass('active');
+
+    $('.swiper_primary_fast').addClass('active');
+    $('.header').removeClass('index');
+  });
+
+
+
 });

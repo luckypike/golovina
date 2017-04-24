@@ -1,4 +1,9 @@
 .page.page_static_index
+  .swiper_primary_fast
+    .swiper_primary_fast_item.themes data-rel=themes_path
+    .swiper_primary_fast_item.colors data-rel=colors_path
+    .swiper_primary_fast_item.categories data-rel=categories_path
+
   .swiper_primary.swiper-container
     .swiper-button-prev.swiper-button-disabled
       .icon
@@ -19,10 +24,9 @@
         | Цвета
 
     .swiper-wrapper
-
-      .swiper_primary_item.swiper-slide data-label="Стили"
+      .swiper_primary_item.swiper-slide data-label='Стили'
         .swiper_secondary.swiper-container
-          .swiper-pagination data-rel=themes_path
+          .swiper-pagination data-rel='themes'
           .swiper-wrapper
             - @themes.each do |theme|
               .swiper_secondary_item.swiper-slide class=theme.friendly_id
@@ -33,9 +37,11 @@
                   .more
                     = link_to theme.title, theme
 
-      .swiper_primary_item.swiper-slide data-label="Цвета"
+        /.swiper_primary_fast data-rel=themes_path
+
+      .swiper_primary_item.swiper-slide data-label='Цвета'
         .swiper_secondary.swiper-container
-          .swiper-pagination data-rel=colors_path
+          .swiper-pagination data-rel='colors'
           .swiper-wrapper
             - Theme::COLORS.each do |color|
               .swiper_secondary_item.swiper-slide class=color
@@ -46,9 +52,11 @@
                   .more
                     = link_to t("colors.#{color}"), '#'
 
-      .swiper_primary_item.swiper-slide.catalog data-label="Образы"
+        /.swiper_primary_fast data-rel=colors_path
+
+      .swiper_primary_item.swiper-slide.catalog data-label='Образы'
         .swiper_secondary.swiper-container
-          .swiper-pagination data-rel=categories_path
+          .swiper-pagination data-rel='categories'
           .swiper-wrapper
             - @kits.each do |kit|
               .swiper_secondary_item.swiper-slide style="background-image: url(#{kit.images.first.url});"

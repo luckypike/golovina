@@ -12,17 +12,6 @@
 //
 //= require rails-ujs
 //= require jquery
-//= require pjax/pjax
+//= require barba.js/dist/barba.js
 //= require swiper
 //= require_tree .
-
-
-
-
-//$(function(){
-//  new Pjax({
-//    elements: "a",
-//    selectors: ["title", ".header", ".page"]
-//  });
-//});
-

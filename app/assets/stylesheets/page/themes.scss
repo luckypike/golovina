@@ -1,13 +1,20 @@
 &_themes {
-  margin-top: $base-rhythm-line * $base-line-height * 3;
+  position: absolute;
+  padding-top: $base-rhythm-line * $base-line-height * 3;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100%;
+  width: 100%;
 
   &_theme {
+    width: 100%;
+
     background: {
       size: cover;
       position: center 25%;
     }
 
-    padding: ($base-rhythm-line * 2) $gutter;
+    padding: ($base-rhythm-line * 3) $gutter;
     position: relative;
 
     &:before {
@@ -25,6 +32,14 @@
       color: $op-color;
       position: relative;
       z-index: 1;
+
+      .title {
+        @include font-size(2);
+      }
+
+      .more {
+        @include font-size(1.75);
+      }
     }
 
     &.red {
@@ -105,6 +120,63 @@
     &.home {
       background-color: #cec5bd;
       background-image: image_url('temp/swiper/colors/home_small.jpg');
+    }
+  }
+
+  @include breakpoint($s) {
+    &_theme {
+      position: relative;
+      width: 50%;
+
+      .text {
+        position: absolute;
+        bottom: $space-m;
+        padding-right: $gutter;
+
+        .title {
+          @include font-size(4.25, 5);
+        }
+
+        .more {
+          margin-top: $base-rhythm-line * 3;
+
+          > a {
+            display: inline-block;
+            line-height: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+
+            &:after {
+              background-color: $op-color;
+              height: 2px;
+              position: absolute;
+              content: '';
+              left: 0;
+              right: 0;
+              bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include breakpoint($m) {
+    &_theme {
+      width: 25%;
+    }
+  }
+
+  @include breakpoint($l) {
+    &_theme {
+      width: 25%;
+
+      .text {
+        .title {
+          @include font-size(5.625, 6);
+        }
+      }
     }
   }
 }

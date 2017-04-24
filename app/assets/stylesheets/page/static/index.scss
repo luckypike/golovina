@@ -102,6 +102,33 @@
         }
       }
     }
+
+    &_fast {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.23s;
+      transform: translateY($base-rhythm-line * 6);
+
+      &_item {
+        display: none;
+
+        &.active {
+          display: block;
+        }
+      }
+
+      &.active {
+        visibility: visible;
+        opacity: 1;
+        transform: none;
+      }
+    }
   }
 
   .swiper_secondary {
@@ -150,6 +177,8 @@
 
 
         &-active {
+          cursor: pointer;
+
           &:before {
             background-color: $op-color;
 
@@ -246,9 +275,7 @@
         }
 
         .more {
-          //display: none;
           margin-top: $base-rhythm-line * 3;
-
 
           > a {
             display: inline-block;
@@ -267,18 +294,6 @@
               bottom: 0;
             }
           }
-
-          //.button {
-          //  @include font-size(1.5, 5);
-          //
-          //  color: $primary-color;
-          //  background: $mint-color;
-          //  line-height: 40px;
-          //  display: inline-block;
-          //  text-transform: uppercase;
-          //  letter-spacing: 0.1em;
-          //  padding: 0 $gutter;
-          //}
         }
       }
 
