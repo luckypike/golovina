@@ -1,68 +1,110 @@
 &_themes {
-  &_intro {
-    max-width: $xl;
-    margin: 0 auto 3rem;
-    padding: 0 $gutter;
-  }
+  margin-top: $base-rhythm-line * $base-line-height * 3;
 
   &_theme {
-    max-width: $xl;
-    margin: 0 auto;
-
-    &_wrapper {
-      //background-color: #f1f1f1;
-      padding: 2rem 0;
+    background: {
+      size: cover;
+      position: center 25%;
     }
 
-    .theme {
-      padding: 0 $gutter;
+    padding: ($base-rhythm-line * 2) $gutter;
+    position: relative;
+
+    &:before {
+      background-color: #000;
+      content: '';
+      opacity: 0.2;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      top: 0;
+      height: 100%;
     }
 
-    .kits {
-      &_list {
-        &_item {
-          .image {
-            @include aspect-ratio(540, 740);
-
-            background-color: #f1f1f1;
-          }
-        }
-      }
+    .text {
+      color: $op-color;
+      position: relative;
+      z-index: 1;
     }
 
+    &.red {
+      background-color: #9d3431;
+      background-image: image_url('temp/swiper/colors/red_small.jpg');
+    }
 
-    @include breakpoint($m) {
-      @include column-pane;
+    &.yellow {
+      background-color: #f6e57b;
+      background-image: image_url('temp/swiper/colors/yellow_small.jpg');
+    }
 
-      .theme {
-        @include column-width(4);
-      }
+    &.green {
+      background-color: #bea591;
+      background-image: image_url('temp/swiper/colors/green_small.jpg');
+    }
 
-      .kits {
-        @include column-width(8);
+    &.blue {
+      background-color: #9fbbc7;
+      background-image: image_url('temp/swiper/colors/blue_small.jpg');
+    }
 
-        &_list {
-          @include column-pane;
+    &.pink {
+      background-color: #e3c7c6;
+      background-image: image_url('temp/swiper/colors/pink_small.jpg');
+    }
 
-          &_item {
-            @include column-width(1, 3);
+    &.white {
+      background-color: #a9c1b3;
+      background-image: image_url('temp/swiper/colors/white_small.jpg');
+    }
 
-            padding: 0 $gutter;
-          }
-        }
-      }
+    &.black {
+      background-color: #49494d;
+      background-image: image_url('temp/swiper/colors/black_small.jpg');
+    }
 
+    &.gray {
+      background-color: #b9b9b7;
+      background-image: image_url('temp/swiper/colors/gray_small.jpg');
+    }
 
+    &.business {
+      background-color: #d0cbb7;
+      background-image: image_url('temp/swiper/colors/business_small.jpg');
+    }
 
-      &.th-i-1,
-      &.th-i-3,
-      &.th-i-5,
-      &.th-i-7 {
-        .theme {
-          order: 1;
-        }
-      }
+    &.date {
+      background-color: #b49786;
+      background-image: image_url('temp/swiper/colors/date_small.jpg');
+    }
 
+    &.walk {
+      background-color: #787860;
+      background-image: image_url('temp/swiper/colors/walk_small.jpg');
+    }
+
+    &.holiday {
+      background-color: #524e33;
+      background-image: image_url('temp/swiper/colors/holiday_small.jpg');
+    }
+
+    &.country {
+      background-color: #916b51;
+      background-image: image_url('temp/swiper/colors/country_small.jpg');
+    }
+
+    &.party {
+      background-color: #f6f3ea;
+      background-image: image_url('temp/swiper/colors/party_small.jpg');
+    }
+
+    &.moms {
+      background-color: #af8a60;
+      background-image: image_url('temp/swiper/colors/moms_small.jpg');
+    }
+
+    &.home {
+      background-color: #cec5bd;
+      background-image: image_url('temp/swiper/colors/home_small.jpg');
     }
   }
 }

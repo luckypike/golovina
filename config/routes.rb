@@ -11,4 +11,6 @@ Rails.application.routes.draw do
     resources :products, only: :show, path: ''
   end
   resources :products, except: [:index, :show]
+
+  get 'colors', to: 'themes#colors', as: :colors
 end

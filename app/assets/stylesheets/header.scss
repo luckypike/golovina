@@ -1,5 +1,5 @@
 .header {
-  //background-color: $op-color;
+  background-color: $op-color;
   height: $base-rhythm-line * $base-line-height  * 3;
   position: absolute;
   left: 0;
@@ -15,9 +15,26 @@
 
     > a {
       display: block;
-      width: 76px;
-      height: 28px;
-      background: image_url('logo.svg');
+
+      svg {
+        display: block;
+        width: 76px;
+        height: 28px;
+
+        .a, .b {
+          fill: none;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+
+        .a {
+          stroke: #4c4b4c;
+        }
+
+        .b {
+          stroke: #51b478;
+        }
+      }
     }
   }
 
@@ -31,6 +48,17 @@
     position: absolute;
     right: $gutter;
     top: $base-line-height * $base-rhythm-line;
+
+    .basket {
+
+      svg {
+        display: block;
+        height: 24px;
+        width: 24px;
+
+        fill: $primary-color;
+      }
+    }
   }
 
   &_burger {
@@ -40,6 +68,8 @@
       display: block;
       width: $base-rhythm-line * $base-line-height;
       height: $base-rhythm-line * $base-line-height;
+
+      fill: $primary-color;
     }
   }
 
@@ -48,6 +78,27 @@
 
     &_item {
       margin-right: $gutter;
+    }
+  }
+
+  &.index {
+    background-color: transparent;
+
+    .header_logo {
+      > a {
+        svg {
+          .a {
+            stroke: $op-color;
+          }
+        }
+      }
+    }
+
+    .header_burger,
+    .header_basket {
+      svg {
+        fill: $op-color;
+      }
     }
   }
 

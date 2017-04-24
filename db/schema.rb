@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421111339) do
+ActiveRecord::Schema.define(version: 20170424090812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,21 @@ ActiveRecord::Schema.define(version: 20170421111339) do
   end
 
   create_table "kits", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.json "images"
+  end
+
+  create_table "lookables", force: :cascade do |t|
+    t.bigint "look_id"
+    t.string "lookable_type"
+    t.bigint "lookable_id"
+    t.index ["look_id"], name: "index_lookables_on_look_id"
+    t.index ["lookable_type", "lookable_id"], name: "index_lookables_on_lookable_type_and_lookable_id"
+  end
+
+  create_table "looks", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

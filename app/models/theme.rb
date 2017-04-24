@@ -1,4 +1,6 @@
 class Theme < ApplicationRecord
+  COLORS = %w(red yellow green blue pink white black gray)
+
   extend FriendlyId
 
   validates_presence_of :slug

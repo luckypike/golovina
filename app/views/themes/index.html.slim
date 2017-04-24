@@ -1,21 +1,9 @@
 .page.page_themes
-  .page_themes_intro
-    p
-      = Faker::Lorem.paragraph
-
-
   - @themes.each_with_index do |theme, i|
-    .page_themes_theme_wrapper class="th-#{theme.slug}"
-      .page_themes_theme class="th-i-#{i}"
-        .theme
-          h2
-            = link_to theme.title, theme
+    .page_themes_theme class=theme.slug
+      .text
+        .title
+          = t "themes.index.#{theme.friendly_id}"
 
-        .kits
-          .kits_list
-            - theme.kits.take(3).each do |kit|
-              .kits_list_item
-                .image
-
-                .title
-                  = kit.title
+        .more
+          = link_to theme.title, theme
