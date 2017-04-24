@@ -1,5 +1,5 @@
 $(function() {
-  new Swiper('.swiper_primary', {
+  var swiper = new Swiper('.swiper_primary', {
     initialSlide: 0,
     nextButton: '.swiper-button-next',
     prevButton: '.swiper-button-prev',
@@ -14,11 +14,11 @@ $(function() {
     }
   });
 
-  new Swiper('.swiper_secondary', {
+  var swipers = new Swiper('.swiper_secondary', {
     pagination: '.swiper-pagination',
     direction: 'vertical',
-    speed: 700,
-    mousewheelControl: true,
+    //speed: 700,
+    //mousewheelControl: true,
     onSlideChangeStart: function(swiper) {
       swiper.paginationContainer.removeClass('act-0 act-1 act-2 act-3 act-4 act-5 act-6 act-7 act-8 act-10').addClass('act-' + swiper.activeIndex);
     },
@@ -45,4 +45,19 @@ $(function() {
 
 
 
+  var indicator = new WheelIndicator({
+    elem: document.querySelector('.swiper_primary'),
+    callback: function(e){
+      var s = $(e.target).closest('.swiper_secondary').data('id');
+
+      if(e.direction == 'up') {
+        swipers[s].slidePrev();
+      } else {
+        swipers[s].slideNext();
+      }
+      //console.log();
+    }
+  });
+
 });
+

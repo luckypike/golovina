@@ -25,7 +25,7 @@
 
     .swiper-wrapper
       .swiper_primary_item.swiper-slide data-label='Стили'
-        .swiper_secondary.swiper-container
+        .swiper_secondary.swiper-container data-id=0
           .swiper-pagination data-rel='themes'
           .swiper-wrapper
             - @themes.each do |theme|
@@ -40,7 +40,7 @@
         /.swiper_primary_fast data-rel=themes_path
 
       .swiper_primary_item.swiper-slide data-label='Цвета'
-        .swiper_secondary.swiper-container
+        .swiper_secondary.swiper-container data-id=1
           .swiper-pagination data-rel='colors'
           .swiper-wrapper
             - Theme::COLORS.each do |color|
@@ -55,7 +55,7 @@
         /.swiper_primary_fast data-rel=colors_path
 
       .swiper_primary_item.swiper-slide.catalog data-label='Образы'
-        .swiper_secondary.swiper-container
+        .swiper_secondary.swiper-container data-id=2
           .swiper-pagination data-rel='categories'
           .swiper-wrapper
             - @kits.each do |kit|

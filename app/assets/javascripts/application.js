@@ -13,5 +13,6 @@
 //= require rails-ujs
 //= require jquery
 //= require barba.js/dist/barba.js
+//= require wheel-indicator
 //= require swiper/dist/js/swiper.jquery.js
 //= require_tree .
