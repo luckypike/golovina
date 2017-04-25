@@ -21,15 +21,15 @@ end
 categories = Category.all
 images = Product::faker_images
 
-# (0..500).each do |id|
-#   product = Product.where(id: id + 1).first_or_initialize
-#   product.title = Faker::Commerce.product_name
-#   product.price = Faker::Commerce.price
-#   product.desc = Faker::Lorem.paragraph
-#   product.category = categories.sample
-#   product.remote_images_urls = [images.sample]
-#   product.save
-# end
+(0..500).each do |id|
+  product = Product.where(id: id + 1).first_or_initialize
+  product.title = Faker::Commerce.product_name
+  product.price = Faker::Commerce.price
+  product.desc = Faker::Lorem.paragraph
+  product.category = categories.sample
+  product.remote_images_urls = [images.sample]
+  product.save
+end
 
 products = Product.all
 

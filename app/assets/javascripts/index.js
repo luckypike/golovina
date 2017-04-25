@@ -40,7 +40,15 @@ $(function() {
     $('.swiper_primary_fast_item.' + _this.parent().data('rel')).addClass('active');
 
     $('.swiper_primary_fast').addClass('active');
-    $('.header').removeClass('index');
+    $('.page_static_index').addClass('with-scroll');
+    $('.header').addClass('hidden');
+  });
+
+  $('.swiper_primary_fast_close').on('click', function() {
+    $('.swiper_primary_fast').removeClass('active');
+    $('.swiper_primary_fast_item.active').removeClass('active');
+    $('.page_static_index').removeClass('with-scroll');
+    $('.header').removeClass('hidden');
   });
 
 

@@ -1,20 +1,9 @@
-.page.page_categories
-  .page_categories_intro
-    h1 Каталог
-
-    p
-      = Faker::Lorem.paragraph
-
-
+.page.page_themes
   - @categories.each do |category|
-    .page_categories_category
-      h2
-        = category.title
+    .page_themes_theme class=category.slug  style="background-image: url(#{category.products.first.images.first.url});"
+      .text
+        .title
+          = category.title
 
-      p
-        = category.desc
-
-      p
-        = link_to 'Все товары в категории', category
-
-= link_to 'New Category', new_category_path
+        .more
+          = link_to 'Купить', category_path(category)

@@ -1,5 +1,5 @@
 class Theme < ApplicationRecord
-  COLORS = %w(red yellow green blue pink white black gray)
+  COLORS = %w(white red yellow green blue pink black gray)
 
   extend FriendlyId
 
