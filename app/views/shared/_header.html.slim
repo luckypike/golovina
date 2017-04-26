@@ -1,4 +1,4 @@
-.header.with-nav class="#{current_page?(root_path) ? :index : :inside }"
+.header class="#{current_page?(root_path) ? :index : :inside }"
   .header_nav
     .header_burger
       svg viewBox="0 0 24 24"
@@ -6,19 +6,17 @@
         rect x=0 y=11 width=24 height=2
         rect x=0 y=17 width=24 height=2
 
+      .t Меню
+
     .header_menu
       .header_menu_item
-        = link_to 'Тематика', themes_path
+        = link_to 'Новинки', '#'
 
       .header_menu_item
-        = link_to 'Луки', kits_path
+        = link_to 'Распродажа', '#'
 
       .header_menu_item
-        = link_to 'Каталог', categories_path
-
-      .header_menu_item
-        = link_to 'О нас', about_index_path
-
+        = link_to 'Образы', '#'
 
   .header_logo
     = link_to root_path do

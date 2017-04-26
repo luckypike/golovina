@@ -46,6 +46,7 @@
   }
 
   &_nav {
+    display: flex;
     position: absolute;
     left: $gutter;
     top: $base-line-height * $base-rhythm-line;
@@ -69,6 +70,7 @@
   }
 
   &_burger {
+    display: flex;
     cursor: pointer;
 
     svg {
@@ -78,13 +80,29 @@
 
       fill: $primary-color;
     }
+
+    .t {
+      @include font-size(1.5);
+      margin-left: $gutter / 2;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
   }
 
   &_menu {
+    @include font-size(1.5);
+
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     display: none;
 
     &_item {
       margin-right: $gutter;
+    }
+
+    @include breakpoint($s) {
+      display: flex;
+      margin-left: $gutter;
     }
   }
 
@@ -99,6 +117,16 @@
           }
         }
       }
+    }
+
+    .header_burger {
+      .t {
+        color: $op-color;
+      }
+    }
+
+    .header_menu {
+      color: $op-color;
     }
 
     .header_burger,
@@ -228,6 +256,16 @@
           }
         }
       }
+    }
+
+    .header_burger {
+      .t {
+        color: $primary-color;
+      }
+    }
+
+    .header_menu {
+      color: $primary-color;
     }
 
     .header_burger,
