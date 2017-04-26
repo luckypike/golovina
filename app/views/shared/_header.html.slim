@@ -1,4 +1,4 @@
-.header class="#{current_page?(root_path) ? :index : :inside }"
+.header.with-nav class="#{current_page?(root_path) ? :index : :inside }"
   .header_nav
     .header_burger
       svg viewBox="0 0 24 24"
@@ -30,3 +30,76 @@
     .basket
       svg viewBox="0 0 24 24"
         path d="M2,10L6,20H18l4-10H2Zm3,2H19l-2.5,6h-9Zm6-8h2v6H11V4Z"
+
+
+  nav.nav
+    .nav_box.for-mobile
+      .nav_box_l
+        = link_to 'Главная', root_path
+
+    .nav_box
+      .nav_box_l.hn
+        | Стили
+
+      .nav_box_sg
+        ul
+          - @themes.each do |theme|
+            li
+              = link_to theme.title, theme
+
+    .nav_box
+      .nav_box_l.hn
+        | Цвета
+
+      .nav_box_sg
+        ul
+          - @colors.each do |color|
+            li
+              = link_to t("colors.#{color}"), '#'
+
+    .nav_box
+      .nav_box_l.hn
+        | Коллекция
+
+      .nav_box_sg
+        ul
+          - @categories.each do |category|
+            li
+              = link_to category.title, category_path(category)
+
+    .nav_box.main
+      .nav_box_l.not-for-mobile
+        = link_to 'Главная', root_path
+
+      .nav_box_l
+        = link_to 'Образы', '#'
+
+      .nav_box_l
+        = link_to 'Новинки', '#'
+
+      .nav_box_l
+        = link_to 'Распродажа', '#'
+
+      .nav_box_l
+        = link_to 'Территория Мяta', '#'
+
+      .nav_box_l
+        = link_to 'Контакты', '#'
+
+
+
+    .nav_search
+      input placeholder="Поиск"
+
+
+    .nav_add
+      ul
+        li
+          = link_to 'Доставка и оплата', '#'
+
+        li
+          = link_to 'Гид по размерам', '#'
+
+
+    .nav_social
+      = image_tag 'icons/social.png'

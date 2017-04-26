@@ -6,16 +6,19 @@
   top: 0;
   width: 100%;
   z-index: 10;
+  overflow: hidden;
 
   &.hidden {
     z-index: 0;
   }
 
+
+
   &_logo {
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: 22px;
+    transform: translateX(-50%);
 
     > a {
       display: block;
@@ -103,6 +106,164 @@
       svg {
         fill: $op-color;
       }
+    }
+  }
+
+  .nav {
+    visibility: hidden;
+    opacity: 0;
+
+    margin-top: $base-line-height * $base-rhythm-line * 3;
+    padding: 0 $gutter;
+
+    &_box {
+      &_l {
+        @include font-size(4.25, 5);
+
+        cursor: pointer;
+        margin-bottom: $base-rhythm-line;
+
+        &.not-for-mobile {
+          display: none;
+
+          @include breakpoint($s) {
+            display: block;
+          }
+        }
+      }
+
+      &_sg {
+        @include font-size(2, 4);
+
+        display: none;
+      }
+
+      &.for-mobile {
+        @include breakpoint($s) {
+          display: none;
+        }
+      }
+
+      &.main {
+        margin-bottom: $space-m;
+      }
+    }
+
+    &_search {
+
+      input {
+        @include font-size(1.75, 5);
+
+        appearance: none;
+        font-family: inherit;
+        border: 0;
+        border-radius: 0;
+        border-bottom: 1px solid $primary-color;
+        width: 100%;
+      }
+    }
+
+    &_add {
+      @include font-size(2.25, 4);
+
+      margin-top: $space-s;
+    }
+
+    &_social {
+      margin: $space-s 0;
+
+      img {
+        display: block;
+        height: 24px;
+      }
+    }
+
+    @include breakpoint($s) {
+      display: flex;
+      flex-wrap: wrap;
+      padding-top: $space-m;
+
+      &_box {
+        width: 25%;
+
+        &_sg {
+          display: block;
+        }
+      }
+
+      &_search {
+        width: 75%;
+        padding-right: $gutter;
+      }
+
+      &_add {
+        width: 25%;
+      }
+
+      &_social {
+        width: 25%;
+        margin-left: 75%;
+
+        img {
+          height: 32px;
+        }
+      }
+    }
+  }
+
+  &.with-nav {
+    background-color: $op-color;
+
+    position: fixed;
+    min-height: 100%;
+
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    .header_logo {
+      > a {
+        svg {
+          .a {
+            stroke: $primary-color;
+          }
+        }
+      }
+    }
+
+    .header_burger,
+    .header_basket {
+      svg {
+        fill: $primary-color;
+      }
+    }
+
+    .header_burger {
+      svg {
+        rect {
+          opacity: 0;
+
+
+          &:first-child {
+            transform-origin: 50% 50%;
+            y: 11px;
+            transform: rotateZ(-45deg);
+            opacity: 1;
+          }
+
+          &:last-child {
+            transform-origin: 50% 50%;
+            y: 11px;
+            transform: rotateZ(45deg);
+            opacity: 1;
+
+          }
+        }
+      }
+    }
+
+    .nav {
+      visibility: visible;
+      opacity: 1;
     }
   }
 

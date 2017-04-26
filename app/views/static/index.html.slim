@@ -31,7 +31,7 @@
         .swiper_secondary.swiper-container data-id=0
           .swiper-pagination data-rel='colors'
           .swiper-wrapper
-            - Theme::COLORS.each do |color|
+            - @colors.each do |color|
               .swiper_secondary_item.swiper-slide class=color
                 .text
                   .title
