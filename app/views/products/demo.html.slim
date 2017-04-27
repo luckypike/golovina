@@ -1,0 +1,26 @@
+.page.page_theme
+  .page_theme_intro
+    h1
+      = t('themes.index.business')
+
+  .page_theme_kits_wrapper
+    .page_theme_kits
+      .text
+        h2 Образы
+
+        p Необходимость носить одежду сдержанных цветов и классического кроя вовсе не означает, что вы не можете выглядеть при этом модно: смотрите лучшие streetstyle-примеры строгих, но ярких образов
+
+      .list
+        - @kits.each do |kit|
+          .list_item
+            .image
+              = image_tag kit.images.first.url
+
+            .data
+              .title
+                = kit.title
+
+              .price
+                => kit.products.sum(&:price).to_i * 30
+                | ₽
+

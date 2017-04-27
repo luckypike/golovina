@@ -38,7 +38,7 @@
                     = t "colors.index.#{color}"
 
                   .more
-                    = link_to t("colors.#{color}"), '#'
+                    = link_to t("colors.#{color}"), demo_path
 
       .swiper_primary_item.swiper-slide data-label='Стили'
         .swiper_secondary.swiper-container data-id=1
@@ -51,7 +51,7 @@
                     = t "themes.index.#{theme.friendly_id}"
 
                   .more
-                    = link_to theme.title, theme
+                    = link_to theme.title, demo_path
 
       .swiper_primary_item.swiper-slide.catalog data-label='Образы'
         .swiper_secondary.swiper-container data-id=2
@@ -64,4 +64,4 @@
                     = category.title
 
                   .more
-                    = link_to 'Купить', category_path(category)
+                    = link_to 'Купить', demo_path

@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   end
   resources :products, except: [:index, :show]
 
+  get 'demo', to: 'products#demo', as: :demo
+
   get 'colors', to: 'themes#colors', as: :colors
 end

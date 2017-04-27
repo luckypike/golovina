@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/ai/autoprefixer-rails.git
-  revision: b0f1f4a0b753a6dce8ce2b9c030efa46123b1fab
+  revision: 9e3476afbe6f8e643032dba06816db2f199078e2
   specs:
-    autoprefixer-rails (6.7.7.1)
+    autoprefixer-rails (6.7.7.2)
       execjs
 
 GIT
   remote: https://github.com/rails/sass-rails.git
-  revision: dfbcc6a53653d8908007e26324a0f299f026ec4f
+  revision: eafddf6eeecc7e8b3fb929e406cb64e401b759e3
   specs:
     sass-rails (6.0.0.beta1)
       railties (>= 4.0.0, < 5.1)
@@ -18,39 +18,39 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (5.1.0.rc1)
-      actionpack (= 5.1.0.rc1)
+    actioncable (5.1.0.rc2)
+      actionpack (= 5.1.0.rc2)
       nio4r (~> 2.0)
       websocket-driver (~> 0.6.1)
-    actionmailer (5.1.0.rc1)
-      actionpack (= 5.1.0.rc1)
-      actionview (= 5.1.0.rc1)
-      activejob (= 5.1.0.rc1)
+    actionmailer (5.1.0.rc2)
+      actionpack (= 5.1.0.rc2)
+      actionview (= 5.1.0.rc2)
+      activejob (= 5.1.0.rc2)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (5.1.0.rc1)
-      actionview (= 5.1.0.rc1)
-      activesupport (= 5.1.0.rc1)
+    actionpack (5.1.0.rc2)
+      actionview (= 5.1.0.rc2)
+      activesupport (= 5.1.0.rc2)
       rack (~> 2.0)
       rack-test (~> 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (5.1.0.rc1)
-      activesupport (= 5.1.0.rc1)
+    actionview (5.1.0.rc2)
+      activesupport (= 5.1.0.rc2)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    activejob (5.1.0.rc1)
-      activesupport (= 5.1.0.rc1)
+    activejob (5.1.0.rc2)
+      activesupport (= 5.1.0.rc2)
       globalid (>= 0.3.6)
-    activemodel (5.1.0.rc1)
-      activesupport (= 5.1.0.rc1)
-    activerecord (5.1.0.rc1)
-      activemodel (= 5.1.0.rc1)
-      activesupport (= 5.1.0.rc1)
+    activemodel (5.1.0.rc2)
+      activesupport (= 5.1.0.rc2)
+    activerecord (5.1.0.rc2)
+      activemodel (= 5.1.0.rc2)
+      activesupport (= 5.1.0.rc2)
       arel (~> 8.0)
-    activesupport (5.1.0.rc1)
+    activesupport (5.1.0.rc2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
       minitest (~> 5.1)
@@ -84,8 +84,8 @@ GEM
     ffi (1.9.18)
     friendly_id (5.2.1)
       activerecord (>= 4.0.0)
-    globalid (0.3.7)
-      activesupport (>= 4.1.0)
+    globalid (0.4.0)
+      activesupport (>= 4.2.0)
     i18n (0.8.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -93,7 +93,7 @@ GEM
       ruby_dep (~> 1.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    mail (2.6.4)
+    mail (2.6.5)
       mime-types (>= 1.16, < 4)
     method_source (0.8.2)
     mime-types (3.1)
@@ -110,26 +110,26 @@ GEM
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rails (5.1.0.rc1)
-      actioncable (= 5.1.0.rc1)
-      actionmailer (= 5.1.0.rc1)
-      actionpack (= 5.1.0.rc1)
-      actionview (= 5.1.0.rc1)
-      activejob (= 5.1.0.rc1)
-      activemodel (= 5.1.0.rc1)
-      activerecord (= 5.1.0.rc1)
-      activesupport (= 5.1.0.rc1)
+    rails (5.1.0.rc2)
+      actioncable (= 5.1.0.rc2)
+      actionmailer (= 5.1.0.rc2)
+      actionpack (= 5.1.0.rc2)
+      actionview (= 5.1.0.rc2)
+      activejob (= 5.1.0.rc2)
+      activemodel (= 5.1.0.rc2)
+      activerecord (= 5.1.0.rc2)
+      activesupport (= 5.1.0.rc2)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 5.1.0.rc1)
+      railties (= 5.1.0.rc2)
       sprockets-rails (>= 2.0.0)
     rails-dom-testing (2.0.2)
       activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    railties (5.1.0.rc1)
-      actionpack (= 5.1.0.rc1)
-      activesupport (= 5.1.0.rc1)
+    railties (5.1.0.rc2)
+      actionpack (= 5.1.0.rc2)
+      activesupport (= 5.1.0.rc2)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
@@ -157,7 +157,7 @@ GEM
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     sass (3.4.23)
-    selenium-webdriver (3.3.0)
+    selenium-webdriver (3.4.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
@@ -210,23 +210,23 @@ DEPENDENCIES
   autoprefixer-rails!
   babosa
   byebug
-  capybara (~> 2.13.0)
+  capybara
   carrierwave
   faker
   friendly_id
-  listen (>= 3.0.5, < 3.2)
-  pg (~> 0.18)
-  puma (~> 3.7)
-  rails (~> 5.1.0.rc1)
+  listen
+  pg
+  puma
+  rails (~> 5.1.0.rc2)
   rspec-rails
   sass-rails!
   selenium-webdriver
   simple_form
   slim-rails
   spring
-  spring-watcher-listen (~> 2.0.0)
-  uglifier (>= 1.3.0)
-  web-console (>= 3.3.0)
+  spring-watcher-listen
+  uglifier
+  web-console
 
 BUNDLED WITH
    1.14.6

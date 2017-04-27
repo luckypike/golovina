@@ -1,37 +1,75 @@
 &_theme {
-  &_image {
-    background-color: #f1f1f1;
-    width: 100%;
-    height: 400px;
-    margin: -5rem 0 3rem;
-  }
 
   &_intro {
     max-width: $xl;
     padding: 0 $gutter;
-    margin: 0 auto 3rem;
+    margin: $space-m auto;
+
+    @include breakpoint($s) {
+      margin: $space-m2 auto;
+    }
   }
 
   &_kits {
     max-width: $xl;
-    margin: 0 auto 3rem;
+    margin: 0 auto;
 
-    h2 {
-      margin-left: $gutter;
+    &_wrapper {
+      background-color: $mint-color;
+      padding: $space-m 0;
+
+      @include breakpoint($s) {
+        padding: $space-m2 0;
+      }
     }
 
-    &_list {
+    .text {
+      padding: 0 $gutter;
+      margin-bottom: $space-s;
+
+      @include breakpoint($s) {
+        margin-bottom: $space-s2;
+      }
+
+      @include breakpoint($m) {
+        max-width: 50%;
+      }
+    }
+
+    .list {
       &_item {
         padding: 0 $gutter;
 
-        .kit {
-          position: relative;
+        margin-bottom: $space-s * 1.5;
 
+        .image {
+          margin-bottom: $space-s;
 
-          .image {
-            @include aspect-ratio(540, 740);
+          img {
+            display: block;
+            width: 100%;
+          }
 
-            background-color: #f1f1f1;
+          @include breakpoint($s) {
+            margin-bottom: $space-s2;
+          }
+        }
+
+        .data {
+          @include font-size-small;
+
+          display: flex;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+
+          .price {
+            padding-left: $gutter;
+
+            flex-shrink: 0;
+          }
+
+          .title {
+            flex-grow: 1;
           }
         }
       }
@@ -40,6 +78,8 @@
         @include column-pane;
 
         &_item {
+          margin-bottom: 0;
+
           @include column-width(4);
         }
       }

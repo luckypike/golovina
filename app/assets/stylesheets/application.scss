@@ -11,16 +11,20 @@ $xl: 100rem;
 
 $base-rhythm-line: 0.5rem;
 $base-line-height: 3;
+$base-line-height2: $base-line-height + 1;
 
 $gutter: 1.25rem;
 
-$primary-color: #000;
+$primary-color: #282828;
 $op-color: #fff;
 $mint-color: #d5ecdc;
 
 
 $space-s: $base-rhythm-line * $base-line-height;
-$space-m: $space-s * 2;
+$space-m: $base-rhythm-line * $base-line-height * 2;
+
+$space-s2: $base-rhythm-line * ($base-line-height + 1);
+$space-m2: $base-rhythm-line * ($base-line-height + 1) * 2;
 
 
 @import "components/layout";
@@ -36,12 +40,17 @@ $space-m: $space-s * 2;
 }
 
 body {
-  @include font-size(1.75);
+  @include font-size(2);
 
   font-family: 'PT Sans', sans-serif;
   width: 100%;
+  color: $primary-color;
   min-height: 100%;
-  //min-height: 100vh;
+
+  @include breakpoint($s) {
+    @include font-size(2.25);
+  }
+
 }
 
 html {

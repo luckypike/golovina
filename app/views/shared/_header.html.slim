@@ -10,13 +10,13 @@
 
     .header_menu
       .header_menu_item
-        = link_to 'Новинки', '#'
+        = link_to 'Новинки', demo_path
 
       .header_menu_item
-        = link_to 'Распродажа', '#'
+        = link_to 'Распродажа', demo_path
 
       .header_menu_item
-        = link_to 'Образы', '#'
+        = link_to 'Образы', demo_path
 
   .header_logo
     = link_to root_path do
@@ -43,7 +43,7 @@
         ul
           - @themes.each do |theme|
             li
-              = link_to theme.title, theme
+              = link_to theme.title, demo_path
 
     .nav_box
       .nav_box_l.hn
@@ -53,7 +53,7 @@
         ul
           - @colors.each do |color|
             li
-              = link_to t("colors.#{color}"), '#'
+              = link_to t("colors.#{color}"), demo_path
 
     .nav_box
       .nav_box_l.hn
@@ -63,7 +63,7 @@
         ul
           - @categories.each do |category|
             li
-              = link_to category.title, category_path(category)
+              = link_to category.title, demo_path
 
     .nav_box.main
       .nav_box_l.not-for-mobile

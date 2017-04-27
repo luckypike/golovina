@@ -32,6 +32,12 @@ class KitsController < ApplicationController
 
   # PATCH/PUT /kits/1
   def update
+    # images = @kit.images
+    # images += kit_params[:images]
+    # @kit.images = images
+    #
+    # params[:kit].delete(:images)
+
     if @kit.update(kit_params)
       redirect_to @kit, notice: 'Kit was successfully updated.'
     else
@@ -53,6 +59,6 @@ class KitsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def kit_params
-      params.require(:kit).permit(:title)
+      params.require(:kit).permit(:title, { images: []})
     end
 end

@@ -53,19 +53,22 @@ $(function() {
 
 
 
-  var indicator = new WheelIndicator({
-    elem: document.querySelector('.swiper_primary'),
-    callback: function(e){
-      var s = $(e.target).closest('.swiper_secondary').data('id');
+  if($('.swiper_primary').length > 0) {
+    var indicator = new WheelIndicator({
+      elem: document.querySelector('.swiper_primary'),
+      callback: function(e){
+        var s = $(e.target).closest('.swiper_secondary').data('id');
 
-      if(e.direction == 'up') {
-        swipers[s].slidePrev();
-      } else {
-        swipers[s].slideNext();
+        if(e.direction == 'up') {
+          swipers[s].slidePrev();
+        } else {
+          swipers[s].slideNext();
+        }
+        //console.log();
       }
-      //console.log();
-    }
-  });
+    });
+  }
+
 
 });
 

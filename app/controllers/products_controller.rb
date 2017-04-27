@@ -1,6 +1,10 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+  def demo
+    @kits = Kit.order(id: :asc).limit(3)
+  end
+
   # GET /products
   def index
     @products = Product.all

@@ -15,6 +15,7 @@
 @import "page/kit";
 
 .page {
+  padding-top: $space-s * 3;
 
   &_container {
     position: absolute;
