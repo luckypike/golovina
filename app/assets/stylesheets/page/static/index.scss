@@ -5,6 +5,7 @@
   top: 0;
   position: absolute;
   overflow: hidden;
+  padding-top: 0;
 
   &.with-scroll {
     overflow-y: auto;

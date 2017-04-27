@@ -100,7 +100,7 @@
       margin-right: $gutter;
     }
 
-    @include breakpoint($s) {
+    @include breakpoint($m) {
       display: flex;
       margin-left: $gutter;
     }
