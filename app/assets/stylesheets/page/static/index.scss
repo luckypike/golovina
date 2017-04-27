@@ -97,16 +97,7 @@
             size: contain;
           }
 
-          &:before {
-            content: '';
-            opacity: 0.1;
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            background: #000;
-          }
+
         }
       }
     }
@@ -308,6 +299,17 @@
       background: {
         position: center bottom;
         size: cover;
+      }
+
+      &:before {
+        content: '';
+        opacity: 0.1;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        background: #000;
       }
 
       .text {

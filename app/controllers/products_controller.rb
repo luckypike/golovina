@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
 
   def demo
     @kits = Kit.order(id: :asc).limit(3)
+    @products = Product.order(id: :asc).limit(8)
   end
 
   # GET /products
@@ -57,6 +58,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:title, :category_id, :price, :desc)
+      params.require(:product).permit(:title, :category_id, :price, :desc, { images: []})
     end
 end

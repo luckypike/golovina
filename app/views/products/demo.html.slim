@@ -24,3 +24,28 @@
                 => kit.products.sum(&:price).to_i * 30
                 | ₽
 
+
+  .page_theme_products
+    .list
+      - @products.each do |product|
+        .list_item
+          .image_wrapper
+            .wl
+            .buy
+            .size
+              .size_all
+
+            .color
+              .color_all
+
+            .image
+              = image_tag product.images[0].url if product.images[0]
+              = image_tag product.images[1].url, class: :sec if product.images[1]
+
+          .data
+            .title
+              = product.title
+
+            .price
+              => product.price.to_i * 30
+              | ₽

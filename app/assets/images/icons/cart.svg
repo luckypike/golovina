@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+<defs>
+    <style>
+      .cls-1 {
+        fill: #d5ecdc;
+      }
+
+      .cls-2 {
+        fill: #282828;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="20" cy="20" r="20"/>
+  <path id="Cart_copy" data-name="Cart copy" class="cls-2" d="M10,18l4,10H26l4-10H10Zm3,2H27l-2.5,6h-9Zm6-8h2v6H19V12Z"/>
+</svg>
