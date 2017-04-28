@@ -146,9 +146,9 @@
 
             .size {
               position: absolute;
-              right: 48px + 4px;
-              bottom: 4px;
-              background: image_url('icons/whishlist.svg');
+              right: 4px;
+              bottom: 48px + 4px;
+              background: image_url('icons/size.svg');
               width: 40px;
               height: 40px;
 
@@ -171,16 +171,16 @@
               }
 
               @include breakpoint($s) {
-                right: 64px + 12px;
-                bottom: 12px;
+                right: 12px;
+                bottom: 64px + 12px;
               }
             }
 
             .color {
               position: absolute;
               right: 4px;
-              bottom: 48px + 4px;
-              background: image_url('icons/whishlist.svg');
+              bottom: 48px + 48px + 4px;
+              background: image_url('icons/color.svg');
               width: 40px;
               height: 40px;
 
@@ -204,7 +204,7 @@
 
               @include breakpoint($s) {
                 right: 12px;
-                bottom: 64px + 12px;
+                bottom: 64px + 64px + 12px;
               }
             }
           }
