@@ -1,0 +1,10 @@
+= simple_form_for(@color) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :slug
+    = f.association :parent_color
+
+  .form-actions
+    = f.button :submit

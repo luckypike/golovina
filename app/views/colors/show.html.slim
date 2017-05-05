@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @color.title
+p
+  strong Slug:
+  = @color.slug
+p
+  strong Parent color:
+  = @color.parent_color
+
+= link_to 'Edit', edit_color_path(@color)
+'  |
+= link_to 'Back', colors_path

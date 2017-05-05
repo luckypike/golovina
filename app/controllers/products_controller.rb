@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1
   def show
+    @variant = Variant.new(product: @product)
   end
 
   # GET /products/new

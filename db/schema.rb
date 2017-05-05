@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424090812) do
+ActiveRecord::Schema.define(version: 20170505151426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20170424090812) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.text "text"
+    t.bigint "parent_color_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_color_id"], name: "index_colors_on_parent_color_id"
+    t.index ["slug"], name: "index_colors_on_slug", unique: true
   end
 
   create_table "kitables", force: :cascade do |t|
@@ -81,5 +92,17 @@ ActiveRecord::Schema.define(version: 20170424090812) do
     t.index ["slug"], name: "index_themes_on_slug", unique: true
   end
 
+  create_table "variants", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "color_id"
+    t.jsonb "sizes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_id"], name: "index_variants_on_color_id"
+    t.index ["product_id"], name: "index_variants_on_product_id"
+  end
+
   add_foreign_key "products", "categories"
+  add_foreign_key "variants", "colors"
+  add_foreign_key "variants", "products"
 end

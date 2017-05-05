@@ -1,0 +1,11 @@
+/= debug @variant
+= simple_form_for [@variant.product.category, @variant.product, @variant] do |f|
+  = f.error_notification
+
+  .form-inputs
+    /= f.association :product
+    = f.association :color
+    /= f.input :sizes
+
+  .form-actions
+    = f.button :submit

@@ -14,7 +14,8 @@ table
   tbody
     - @products.each do |product|
       tr
-        td = product.title
+        td
+          = link_to product.title, category_product_path(product.category, product)
         td = product.category
         td = product.price
         td = product.desc

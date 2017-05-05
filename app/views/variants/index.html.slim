@@ -1,0 +1,25 @@
+h1 Listing variants
+
+table
+  thead
+    tr
+      th Product
+      th Color
+      th Sizes
+      th
+      th
+      th
+
+  tbody
+    - @variants.each do |variant|
+      tr
+        td = variant.product
+        td = variant.color
+        td = variant.sizes
+        td = link_to 'Show', variant
+        td = link_to 'Edit', edit_variant_path(variant)
+        td = link_to 'Destroy', variant, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Variant', new_variant_path
