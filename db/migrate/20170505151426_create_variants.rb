@@ -7,5 +7,6 @@ class CreateVariants < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+    add_index :variants, [:product_id, :color_id], unique: true
   end
 end

@@ -18,6 +18,17 @@ categories.each_with_index do |(slug, c), id|
   category.save
 end
 
+colors = YAML.load_file('db/colors.yml')
+
+colors.each_with_index do |(slug, c), id|
+  color = Color.where(id: id + 1).first_or_initialize
+  color.title = c['title']
+  color.slug = slug
+  color.desc = c['desc']
+  color.save
+end
+
+
 categories = Category.all
 images = Product::faker_images
 
@@ -52,6 +63,7 @@ kits = Kit.all
 themes.each_with_index do |(slug, c), id|
   theme = Theme.where(id: id + 1).first_or_initialize
   theme.title = c['title']
+  theme.desc = c['desc']
   theme.slug = slug
   theme.products = products.sample(rand(4..12))
   theme.kits = kits.sample(rand(1..3))

@@ -1,46 +1,32 @@
 class VariantsController < ApplicationController
-  before_action :set_variant, only: [:show, :edit, :update, :destroy]
+  before_action :set_product_and_variants, only: [:create, :index, :update, :destroy]
+  before_action :set_variant, only: [:show, :destroy]
 
-  # GET /variants
+
   def index
-    @variants = Variant.all
+    @product = Product.find(params[:product_id])
+    @variant = Variant.new(product: @product)
   end
 
-  # GET /variants/1
-  def show
-  end
-
-  # GET /variants/new
-  def new
-    @variant = Variant.new(product: Product.find(params[:product_id]))
-  end
-
-  # GET /variants/1/edit
-  def edit
-  end
-
-  # POST /variants
   def create
     @variant = Variant.new(variant_params)
     @variant.product = Product.find(params[:product_id])
 
     if @variant.save
-      redirect_to @variant, notice: 'Variant was successfully created.'
+      redirect_to [@variant.product.category, @variant.product, :variants], notice: 'Variant was successfully created.'
     else
-      render :new
+      render :index
     end
   end
 
-  # PATCH/PUT /variants/1
   def update
     if @variant.update(variant_params)
       redirect_to @variant, notice: 'Variant was successfully updated.'
     else
-      render :edit
+      render :index
     end
   end
 
-  # DELETE /variants/1
   def destroy
     @variant.destroy
     redirect_to variants_url, notice: 'Variant was successfully destroyed.'
@@ -55,5 +41,10 @@ class VariantsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def variant_params
       params.require(:variant).permit(:product_id, :color_id, :sizes)
+    end
+
+    def set_product_and_variants
+      @product = Product.find(params[:product_id])
+      @variants = @product.variants
     end
 end

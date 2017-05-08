@@ -1,25 +1,37 @@
-h1 Listing variants
+.page.page_product_form
+  h1 Размеры и цвета
 
-table
-  thead
-    tr
-      th Product
-      th Color
-      th Sizes
-      th
-      th
-      th
+  .page_product_form_variants
+    = simple_form_for @product do |f|
+      = f.error_notification
 
-  tbody
-    - @variants.each do |variant|
-      tr
+      .form-inputs
+        - @product.variants.each do |variant|
+          = f.simple_fields_for :variants_attributes, variant do |vf|
+            = vf.input :id, as: :hidden
+            = vf.association :color
+            = vf.input :sizes, as: :check_boxes, collection: [42, 44, 46]
+        /= f.association :product
+        / = f.association :color
+        /= f.input :sizes
+
+      .variants
+        - @variants.each do |variant|
+          .variants_item
+            = variant.id
+            =< variant.color.title
+
+      .form-actions
+        = f.button :submit
+
+      
+  .page_product_form_variant
+    == render 'form'
+
+      / tr
         td = variant.product
         td = variant.color
         td = variant.sizes
         td = link_to 'Show', variant
         td = link_to 'Edit', edit_variant_path(variant)
         td = link_to 'Destroy', variant, data: { confirm: 'Are you sure?' }, method: :delete
-
-br
-
-= link_to 'New Variant', new_variant_path

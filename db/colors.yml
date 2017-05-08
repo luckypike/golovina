@@ -1,0 +1,31 @@
+white:
+  title: Белый
+  desc: Светлая пора
+
+red:
+  title: Красный
+  desc: Красной нитью
+
+yellow:
+  title: Жёлтый
+  desc: Навстречу солнцу
+
+green:
+  title: Зелёный
+  desc: Путешествие в тропики
+
+blue:
+  title: Синий
+  desc: На волнах свободы
+
+pink:
+  title: Розовый
+  desc: Жизнь в розовом цвете
+
+black:
+  title: Черный
+  desc: Чёрное золото
+
+gray:
+  title: Серый
+  desc: Небо Лондона

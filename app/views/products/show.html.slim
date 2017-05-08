@@ -7,8 +7,8 @@
       = @product.title
 
     p.service
-      = link_to 'Добавить вариант', new_category_product_variant_path(@product.category, @product)
-      == render 'variants/form'
+      = link_to 'Добавить вариант', [@product.category, @product, :variants]
+      / == render 'variants/form'
 
     p
       = @product.desc

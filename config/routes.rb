@@ -10,10 +10,11 @@ Rails.application.routes.draw do
   resources :kits
   resources :categories, path: :catalog do
     resources :products, only: :show, path: '' do
-      resources :variants
+      resources :variants, only: [:index, :create, :destroy]
+      resource :variants, only: [:update]
     end
   end
-  resources :products, except: [:show]
+  resources :products, except: [:show, :new, :edit]
 
   get 'demo', to: 'products#demo', as: :demo
 

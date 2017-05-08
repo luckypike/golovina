@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170505151426) do
+ActiveRecord::Schema.define(version: 20170506043402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170505151426) do
   create_table "colors", force: :cascade do |t|
     t.string "title"
     t.string "slug"
-    t.text "text"
+    t.text "desc"
     t.bigint "parent_color_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,20 +47,6 @@ ActiveRecord::Schema.define(version: 20170505151426) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "images"
-  end
-
-  create_table "lookables", force: :cascade do |t|
-    t.bigint "look_id"
-    t.string "lookable_type"
-    t.bigint "lookable_id"
-    t.index ["look_id"], name: "index_lookables_on_look_id"
-    t.index ["lookable_type", "lookable_id"], name: "index_lookables_on_lookable_type_and_lookable_id"
-  end
-
-  create_table "looks", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|
@@ -89,6 +75,7 @@ ActiveRecord::Schema.define(version: 20170505151426) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "desc"
     t.index ["slug"], name: "index_themes_on_slug", unique: true
   end
 
@@ -99,6 +86,7 @@ ActiveRecord::Schema.define(version: 20170505151426) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["color_id"], name: "index_variants_on_color_id"
+    t.index ["product_id", "color_id"], name: "index_variants_on_product_id_and_color_id", unique: true
     t.index ["product_id"], name: "index_variants_on_product_id"
   end
 

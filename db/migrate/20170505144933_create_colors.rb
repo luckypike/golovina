@@ -3,7 +3,7 @@ class CreateColors < ActiveRecord::Migration[5.1]
     create_table :colors do |t|
       t.string :title
       t.string :slug
-      t.text :text
+      t.text :desc
       t.references :parent_color, index: true
 
       t.timestamps

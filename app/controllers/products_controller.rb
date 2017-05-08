@@ -12,8 +12,7 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1
-  def show
-    @variant = Variant.new(product: @product)
+  def show    
   end
 
   # GET /products/new
@@ -38,8 +37,9 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
+    p product_params
     if @product.update(product_params)
-      redirect_to @product, notice: 'Product was successfully updated.'
+      redirect_to [@product.category, @product, :variants], notice: 'Product was successfully updated.'
     else
       render :edit
     end
@@ -59,6 +59,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:title, :category_id, :price, :desc, { images: []})
+      params.require(:product).permit(:title, :category_id, :price, :desc, { images: []}, variants_attributes: [:id, sizes: []])
     end
 end
