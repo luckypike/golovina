@@ -19,19 +19,6 @@ class VariantsController < ApplicationController
     end
   end
 
-  def update
-    if @variant.update(variant_params)
-      redirect_to @variant, notice: 'Variant was successfully updated.'
-    else
-      render :index
-    end
-  end
-
-  def destroy
-    @variant.destroy
-    redirect_to variants_url, notice: 'Variant was successfully destroyed.'
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_variant
@@ -40,7 +27,7 @@ class VariantsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def variant_params
-      params.require(:variant).permit(:product_id, :color_id, :sizes)
+      params.require(:variant).permit(:product_id, :color_id, sizes: [])
     end
 
     def set_product_and_variants

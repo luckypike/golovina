@@ -9,8 +9,10 @@ class Product < ApplicationRecord
 
   belongs_to :category
 
-  has_many :variants
+  has_many :variants, inverse_of: :product
   accepts_nested_attributes_for :variants
+
+  validates_presence_of :title, :price
 
   class << self
     def faker_images

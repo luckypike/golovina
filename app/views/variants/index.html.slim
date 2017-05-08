@@ -1,5 +1,11 @@
 .page.page_product_form
-  h1 Размеры и цвета
+  h1
+    = @product.title
+    =< "##{@product.id}"
+
+  .to_product
+    = link_to 'Вернуться к товару', [@product.category, @product]
+
 
   .page_product_form_variants
     = simple_form_for @product do |f|
@@ -7,15 +13,13 @@
 
       .form-inputs
         - @product.variants.each do |variant|
-          = f.simple_fields_for :variants_attributes, variant do |vf|
-            = vf.input :id, as: :hidden
-            = vf.association :color
+          = f.simple_fields_for :variants, variant do |vf|
+            = variant.color.title
+            / = vf.input :id, as: :hidden
+            / = vf.association :color
             = vf.input :sizes, as: :check_boxes, collection: [42, 44, 46]
-        /= f.association :product
-        / = f.association :color
-        /= f.input :sizes
 
-      .variants
+      / .variants
         - @variants.each do |variant|
           .variants_item
             = variant.id
@@ -24,14 +28,6 @@
       .form-actions
         = f.button :submit
 
-      
+
   .page_product_form_variant
     == render 'form'
-
-      / tr
-        td = variant.product
-        td = variant.color
-        td = variant.sizes
-        td = link_to 'Show', variant
-        td = link_to 'Edit', edit_variant_path(variant)
-        td = link_to 'Destroy', variant, data: { confirm: 'Are you sure?' }, method: :delete

@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1
-  def show    
+  def show
   end
 
   # GET /products/new

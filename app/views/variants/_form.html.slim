@@ -5,7 +5,7 @@
   .form-inputs
     /= f.association :product
     = f.association :color
-    /= f.input :sizes
+    = f.input :sizes, as: :check_boxes, collection: [42, 44, 46]
 
   .form-actions
     = f.button :submit

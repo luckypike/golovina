@@ -1,7 +1,7 @@
 @import "breakpoint-sass/stylesheets/breakpoint";
 @import "reset-scss/reset.scss";
 
-@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic');
+// @import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic');
 
 
 $s: 48rem;
@@ -13,10 +13,11 @@ $base-rhythm-line: 0.5rem;
 $base-line-height: 3;
 $base-line-height2: $base-line-height + 1;
 
-$gutter: 1.25rem;
+$gutter: 1rem;
 
 $primary-color: #282828;
 $op-color: #fff;
+$separator-color: #dfdfdf;
 $mint-color: #d5ecdc;
 
 
@@ -42,7 +43,8 @@ $space-m2: $base-rhythm-line * ($base-line-height + 1) * 2;
 body {
   @include font-size(2);
 
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'futura-pt', sans-serif;
+  font-weight: 300;
   width: 100%;
   color: $primary-color;
   min-height: 100%;

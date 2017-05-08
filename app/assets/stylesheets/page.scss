@@ -7,7 +7,7 @@
 @import "page/category";
 
 @import "page/products";
-@import "page/product";
+
 
 //@import "page/themes";
 
@@ -27,6 +27,8 @@
 
   @import "page/theme";
   @import "page/themes";
+
+  @import "page/product";
 
   @import "page/static";
 }

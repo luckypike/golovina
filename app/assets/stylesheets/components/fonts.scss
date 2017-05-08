@@ -31,6 +31,8 @@
 
 h1 {
   @include font-size-h1;
+
+  margin-bottom: $base-rhythm-line * 2;
 }
 
 h2 {

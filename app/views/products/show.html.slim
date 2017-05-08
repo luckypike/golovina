@@ -1,18 +1,50 @@
 .page.page_product
-  .page_product_category
+  .page_product_image
+    .swiper_product.swiper-container
+      .swiper-wrapper
+        - @product.images.each do |image|
+          .swiper-slide
+            .img
+              = image_tag image.thumb.url
+
+  .page_product_buy
+    h1
+      = @product.title
+
+    .price
+      = number_to_rub @product.price
+
+    .to_cart
+      .to_cart_color
+        .label
+          | Цвет
+
+        .select
+
+      .to_cart_size
+        .label
+          | Размер
+
+        .select
+
+      .to_cart_action
+        = button_to 'Добавить в корзину', @product
+
+  .page_product_edit
+    p = link_to 'Редактировать', [:edit, @product]
+    p = link_to 'Варианты и цены', [@product.category, @product, :variants]
+  / .page_product_category
     = link_to @product.category.title, @product.category
 
-  .page_product_intro
+  / .page_product_intro
     h1
       = @product.title
 
     p.service
-      = link_to 'Добавить вариант', [@product.category, @product, :variants]
+      = link_to 'Варианты и цены', [@product.category, @product, :variants]
       / == render 'variants/form'
 
     p
       = @product.desc
 
-    .image
-      = image_tag @product.images.first.url
 

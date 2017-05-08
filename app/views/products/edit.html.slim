@@ -1,9 +1,7 @@
-.page
-  h1 Editing product
-
+.page.page_product_form
+  h1
+    | Редактировать товар ##{@product.id}
   == render 'form'
 
-  = link_to 'Show', @product
-  '  |
-  = link_to 'Back', products_path
+
 
