@@ -1,5 +1,8 @@
 .page.page_product
-  .page_product_image
+  .page_product_image.product_actions
+    = button_to [:wishlist, @product], class: :add_to_wishlist do
+      = inline_svg 'icons/wishlist.svg'
+
     .swiper_product.swiper-container
       .swiper-wrapper
         - @product.images.each do |image|

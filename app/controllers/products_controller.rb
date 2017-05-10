@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist]
 
   def demo
     @kits = Kit.order(id: :asc).limit(3)
@@ -49,6 +49,22 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     redirect_to products_url, notice: 'Product was successfully destroyed.'
+  end
+
+  def wishlist
+    unless user_signed_in?
+      user = User.create(email: "guest_#{Time.now.to_i}#{rand(100)}@mint-store.ru")
+      user.save!(validate: false)
+      sign_in(user)
+    end
+    p current_user
+
+    wishlist = Wishlist.find_or_initialize_by(user: current_user, product: @product)
+    wishlist.persisted? ? wishlist.destroy : wishlist.save
+
+    p wishlist
+
+    redirect_to [@product.category, @product]
   end
 
   private

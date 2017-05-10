@@ -1,6 +1,23 @@
 &_product {
   &_image {
+    position: relative;
     margin-bottom: $space-s;
+    user-select: none;
+
+    .add_to_wishlist {
+      left: $gutter;
+      position: absolute;
+      z-index: 2;
+      bottom: 0;
+
+      &:hover {
+        svg.wishlist {
+          .h {
+            fill: $op-color;
+          }
+        }
+      }
+    }
 
     .swiper {
       &-slide {

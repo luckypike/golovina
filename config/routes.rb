@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+
   root 'static#index'
 
   scope 'about' do
@@ -13,7 +15,13 @@ Rails.application.routes.draw do
       resources :variants, only: [:index, :create]
     end
   end
-  resources :products, only: [:edit, :update, :destroy]
+  resources :products, only: [:edit, :update, :destroy] do
+    member do
+      post :wishlist
+    end
+  end
+
+  get 'wishlist', to: 'wishlists#show'
 
   get 'demo', to: 'products#demo', as: :demo
 
