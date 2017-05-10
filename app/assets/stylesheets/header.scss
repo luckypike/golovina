@@ -52,19 +52,41 @@
     top: $base-line-height * $base-rhythm-line;
   }
 
-  &_basket {
+  &_caw {
     position: absolute;
+    display: flex;
     right: $gutter;
-    top: $base-line-height * $base-rhythm-line;
+    top: 2 * $base-rhythm-line;
 
-    .basket {
-
-      svg {
+    .wishlist {
+      &_icon {
         display: block;
-        height: 24px;
-        width: 24px;
 
-        fill: $primary-color;
+        .h {
+          fill: none;
+          stroke: $primary-color;
+          stroke-width: 2px;
+          fill-rule: evenodd;
+        }
+      }
+
+      a {
+        display: block;
+      }
+    }
+
+    .cart {
+      &_icon {
+        display: block;
+
+        .b {
+          fill: $primary-color;
+          fill-rule: evenodd;
+        }
+      }
+
+      a {
+        display: block;
       }
     }
   }
@@ -129,10 +151,23 @@
       color: $op-color;
     }
 
-    .header_burger,
-    .header_basket {
-      svg {
+    .header_burger {
+      rect {
         fill: $op-color;
+      }
+    }
+
+    .header_caw {
+      .wishlist_icon {
+        .h {
+          stroke: $op-color;
+        }
+      }
+
+      .cart_icon {
+        .b {
+          fill: $op-color;
+        }
       }
     }
   }

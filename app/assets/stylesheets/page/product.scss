@@ -10,8 +10,17 @@
       z-index: 2;
       bottom: 0;
 
+      .wishlist_icon {
+        .h {
+          fill: none;
+          stroke: #fff;
+          stroke-width: 2px;
+          fill-rule: evenodd;
+        }
+      }
+
       &:hover {
-        svg.wishlist {
+        .wishlist_icon {
           .h {
             fill: $op-color;
           }
@@ -23,69 +32,86 @@
       &-slide {
         .img {
           @include aspect-ratio(4, 5);
+
+          background: {
+            size: cover;
+            position: center top;
+          }
+
+          @include breakpoint($s) {
+            @include aspect-ratio-modify(1, 1);
+          }
+
+          @include breakpoint($m) {
+            @include aspect-ratio-modify(4, 5);
+          }
+
         }
       }
     }
   }
 
-  &_buy {
+  &_content {
     max-width: $xl;
     padding: 0 $gutter;
 
-    h1 {
-      @include font-size(2.5, 3.5);
+    .buy {
+      &_title {
+      }
 
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
+      &_price {
+        @include font-size-h1;
 
-    }
+        margin-bottom: $space-s;
+      }
 
-    .to_cart {
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: $space-s;
+      &_desc {
+        @include mq(0 ($s - 1px)) {
+          display: none;
+        }
+      }
 
-      &_size, &_color {
-        @include font-size(1.75, 5);
 
+      .to_cart {
         display: flex;
-        width: 50%;
+        flex-wrap: wrap;
+        margin-top: $space-s;
 
-        .select {
-          border: 1px solid $separator-color;
-          border-radius: 50%;
-          height: 2.5rem;
-          margin-left: auto;
-          width: 2.5rem;
+        &_size, &_color {
+          @include font-size(1.75, 5);
+
+          display: flex;
+          width: 50%;
+
+          .select {
+            border: 1px solid $separator-color;
+            border-radius: 50%;
+            height: 2.5rem;
+            margin-left: auto;
+            width: 2.5rem;
+          }
+        }
+
+        &_size {
+          padding-left: $gutter;
+        }
+
+        &_color {
+          padding-right: $gutter;
+        }
+
+
+
+        &_action {
+          margin-top: $space-s;
+          width: 100%;
+        }
+
+        .label {
+          text-transform: uppercase;
         }
       }
-
-      &_size {
-        padding-left: $gutter;
-      }
-
-      &_color {
-        padding-right: $gutter;
-      }
-
-
-
-      &_action {
-        margin-top: $space-s;
-        width: 100%;
-      }
-
-      .label {
-        text-transform: uppercase;
-      }
     }
-  }
-
-  &_category,
-  &_intro {
-    max-width: $xl;
-    margin: 0 auto 3rem;
-    padding: 0 $gutter;
   }
 
   &_form {
@@ -94,18 +120,44 @@
   }
 
   @include breakpoint($s) {
-    &_image {
-      margin-bottom: $space-m;
-    }
+    &_content {
+      .buy {
+        @include column-pane;
 
-    &_buy {
-      .to_cart {
-        margin-top: $space-m;
+        &_title {
+          @include column-width(8);
+        }
 
-        &_action {
+        &_price {
+          @include column-width(3);
+          @include column-shift(1);
+        }
+
+        &_desc {
+          @include column-width(8);
+          @include column-shift(4, right);
+        }
+
+        .to_cart {
           margin-top: $space-m;
+
+          &_action {
+            margin-top: $space-m;
+          }
         }
       }
+    }
+  }
+
+  @include breakpoint($m) {
+    @include column-pane;
+
+    &_image {
+      @include column-width(6);
+    }
+
+    &_content {
+      @include column-width(6);
     }
   }
 }

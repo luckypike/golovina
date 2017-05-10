@@ -7,47 +7,41 @@
       .swiper-wrapper
         - @product.images.each do |image|
           .swiper-slide
-            .img
-              = image_tag image.thumb.url
+            .img style="background-image: url('#{image.thumb.url}')"
+              / = image_tag
 
-  .page_product_buy
-    h1
-      = @product.title
+  .page_product_content
+    .buy
+      .buy_title
+        h1
+          = @product.title
 
-    .price
-      = number_to_rub @product.price
+      .buy_price
+        = number_to_rub @product.price
 
-    .to_cart
-      .to_cart_color
-        .label
-          | Цвет
+      - if @product.desc.present?
+        .buy_desc
+          = @product.desc
 
-        .select
+      .to_cart
+        .to_cart_color
+          .label
+            | Цвет
 
-      .to_cart_size
-        .label
-          | Размер
+          .select
 
-        .select
+        .to_cart_size
+          .label
+            | Размер
 
-      .to_cart_action
-        = button_to 'Добавить в корзину', @product
+          .select
 
-  .page_product_edit
-    p = link_to 'Редактировать', [:edit, @product]
-    p = link_to 'Варианты и цены', [@product.category, @product, :variants]
-  / .page_product_category
-    = link_to @product.category.title, @product.category
+        .to_cart_action
+          = button_to 'Добавить в корзину', @product
 
-  / .page_product_intro
-    h1
-      = @product.title
+    .edit
+      p = link_to 'Редактировать', [:edit, @product]
+      p = link_to 'Варианты и цены', [@product.category, @product, :variants]
 
-    p.service
-      = link_to 'Варианты и цены', [@product.category, @product, :variants]
-      / == render 'variants/form'
-
-    p
-      = @product.desc
 
 
