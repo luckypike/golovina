@@ -1,25 +1,9 @@
-h1 Listing colors
+.page.page_themes
+  - @colors.each_with_index do |color, i|
+    .page_themes_theme class=color.slug
+      .text
+        .title
+          = color.desc
 
-table
-  thead
-    tr
-      th Title
-      th Slug
-      th Parent color
-      th
-      th
-      th
-
-  tbody
-    - @colors.each do |color|
-      tr
-        td = color.title
-        td = color.slug
-        td = color.parent_color
-        td = link_to 'Show', color
-        td = link_to 'Edit', edit_color_path(color)
-        td = link_to 'Destroy', color, data: { confirm: 'Are you sure?' }, method: :delete
-
-br
-
-= link_to 'New Color', new_color_path
+        .more
+          = link_to color.title, color

@@ -1,6 +1,6 @@
 .page.page_themes
   - @categories.each do |category|
-    .page_themes_theme class=category.slug  style="background-image: url(#{category.products.first.images.first.url});"
+    .page_themes_theme class=category.slug
       .text
         .title
           = category.title

@@ -84,42 +84,48 @@
 
     &.business {
       background-color: #d0cbb7;
-      background-image: image_url('temp/swiper/colors/business_small.jpg');
+      background-image: image_url('temp/swiper/themes/business_small.jpg');
     }
 
     &.date {
       background-color: #b49786;
-      background-image: image_url('temp/swiper/colors/date_small.jpg');
+      background-image: image_url('temp/swiper/themes/date_small.jpg');
     }
 
     &.walk {
       background-color: #787860;
-      background-image: image_url('temp/swiper/colors/walk_small.jpg');
+      background-image: image_url('temp/swiper/themes/walk_small.jpg');
     }
 
     &.holiday {
       background-color: #524e33;
-      background-image: image_url('temp/swiper/colors/holiday_small.jpg');
+      background-image: image_url('temp/swiper/themes/holiday_small.jpg');
     }
 
     &.country {
       background-color: #916b51;
-      background-image: image_url('temp/swiper/colors/country_small.jpg');
+      background-image: image_url('temp/swiper/themes/country_small.jpg');
     }
 
     &.party {
       background-color: #f6f3ea;
-      background-image: image_url('temp/swiper/colors/party_small.jpg');
+      background-image: image_url('temp/swiper/themes/party_small.jpg');
     }
 
     &.moms {
       background-color: #af8a60;
-      background-image: image_url('temp/swiper/colors/moms_small.jpg');
+      background-image: image_url('temp/swiper/themes/moms_small.jpg');
     }
 
     &.home {
       background-color: #cec5bd;
-      background-image: image_url('temp/swiper/colors/home_small.jpg');
+      background-image: image_url('temp/swiper/themes/home_small.jpg');
+    }
+
+    @each $category in coats dresses suits shirts skirts trousers sweaters t-shirts {
+      &.#{$category} {
+        background-image: image_url('temp/swiper/categories/#{$category}_small.jpg');
+      }
     }
   }
 
