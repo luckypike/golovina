@@ -17,7 +17,10 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+    @product = Product.new()
+    if params[:category_id] && category = Category.friendly.find(params[:category_id])
+      @product.category = category
+    end
   end
 
   # GET /products/1/edit
@@ -29,7 +32,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      redirect_to @product, notice: 'Product was successfully created.'
+      redirect_to [@product.category, @product], notice: 'Product was successfully created.'
     else
       render :new
     end
@@ -37,9 +40,9 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
-    p product_params
+    # p product_params
     if @product.update(product_params)
-      redirect_to [@product.category, @product, :variants], notice: 'Product was successfully updated.'
+      redirect_to [@product.category, @product], notice: 'Product was successfully updated.'
     else
       render :edit
     end

@@ -7,18 +7,17 @@ Rails.application.routes.draw do
     get '', to: 'about#index', as: :about_index
   end
 
-  resources :themes
-  resources :colors
+  resources :themes, only: [:index, :show]
+  resources :colors, only: [:index, :show]
+
   resources :kits
-  resources :categories, path: :catalog do
-    resources :products, only: [:show, :new, :create], path: '' do
-      resources :variants, only: [:index, :create]
-    end
+  resources :categories, only: [:index, :show], path: :catalog do
+    resources :products, only: [:show], path: ''
   end
-  resources :products, only: [:edit, :update, :destroy] do
-    member do
-      post :wishlist
-    end
+
+  resources :products, except: [:index, :show] do
+    resources :variants, only: [:index, :create]
+    post :wishlist, on: :member
   end
 
   get 'wishlist', to: 'wishlists#show'

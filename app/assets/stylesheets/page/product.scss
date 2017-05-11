@@ -116,7 +116,8 @@
 
   &_form {
     max-width: $xl;
-    padding: 0 $gutter;
+    padding-left: $gutter;
+    padding-right: $gutter;
   }
 
   @include breakpoint($s) {

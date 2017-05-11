@@ -4,7 +4,7 @@
 @import "page/about";
 
 @import "page/categories";
-@import "page/category";
+
 
 @import "page/products";
 
@@ -24,6 +24,8 @@
     width: 100%;
     min-height: 100%;
   }
+
+  @import "page/category";
 
   @import "page/theme";
   @import "page/themes";

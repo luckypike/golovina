@@ -1,51 +1,30 @@
-.page.page_theme
-  .page_theme_intro
+.page.page_category
+  .page_category_intro
     h1
-      = t('themes.index.business')
+      | Новинки
 
-  .page_theme_kits_wrapper
-    .page_theme_kits
-      .text
-        h2 Образы
-
-        p Необходимость носить одежду сдержанных цветов и классического кроя вовсе не означает, что вы не можете выглядеть при этом модно: смотрите лучшие streetstyle-примеры строгих, но ярких образов
-
+  - unless @products.empty?
+    .page_category_products
       .list
-        - @kits.each do |kit|
+        - @products.each do |product|
           .list_item
-            .image
-              = image_tag kit.images.first.url
+            = link_to [product.category, product] do
+              .image_wrapper
+                .wl
+                .buy
+                .size
+                  .size_all
 
-            .data
-              .title
-                = kit.title
+                .color
+                  .color_all
 
-              .price
-                => kit.products.sum(&:price).to_i * 30
-                | ₽
+                .image
+                  = image_tag product.images[0].thumb.url if product.images[0]
+                  = image_tag product.images[1].thumb.url, class: :sec if product.images[1]
 
+              .data
+                .title
+                  = product.title
 
-  .page_theme_products
-    .list
-      - @products.each do |product|
-        .list_item
-          .image_wrapper
-            .wl
-            .buy
-            .size
-              .size_all
-
-            .color
-              .color_all
-
-            .image
-              = image_tag product.images[0].url if product.images[0]
-              = image_tag product.images[1].url, class: :sec if product.images[1]
-
-          .data
-            .title
-              = product.title
-
-            .price
-              => product.price.to_i * 30
-              | ₽
+                .price
+                  = number_to_rub product.price

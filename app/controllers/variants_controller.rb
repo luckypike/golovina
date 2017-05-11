@@ -13,7 +13,7 @@ class VariantsController < ApplicationController
     @variant.product = Product.find(params[:product_id])
 
     if @variant.save
-      redirect_to [@variant.product.category, @variant.product, :variants], notice: 'Variant was successfully created.'
+      redirect_to [@variant.product, :variants], notice: 'Variant was successfully created.'
     else
       render :index
     end

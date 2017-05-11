@@ -6,37 +6,60 @@
 }
 
 @mixin font-size-h1() {
-  @include font-size(2.5, 3.5);
-  // @include font-size(4.25, 5);
-
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
+  @include font-size(4.25, 5);
 
 
   @include breakpoint($s) {
-    @include font-size(4.25, 5);
+    @include font-size(5.625, 6);
   }
 
   @include breakpoint($l) {
     @include font-size(7, 8);
   }
+
 }
 
 @mixin font-size-h2() {
   @include font-size(3, 4);
 
   @include breakpoint($s) {
+    @include font-size(4.25, 5);
+  }
+
+  @include breakpoint($l) {
     @include font-size(5.625, 6);
   }
 }
 
-@mixin font-size-small() {
-  @include font-size(1.5, 2);
+@mixin font-size-h3() {
+  @include font-size(2.5, 3);
 
   @include breakpoint($s) {
-    @include font-size(1.75, 3);
+    @include font-size(3, 4);
+  }
+
+  @include breakpoint($l) {
+    @include font-size(4.25, 5);
   }
 }
+
+@mixin font-size-common() {
+  @include font-size(1.75, 3);
+
+  @include breakpoint($l) {
+    @include font-size(2, 4);
+  }
+}
+
+
+
+// @mixin font-size-small() {
+//   @include font-size(1.5, 2);
+
+//   @include breakpoint($s) {
+//     @include font-size(1.75, 3);
+//   }
+// }
 
 h1, h2, h3 {
   font-weight: 300;

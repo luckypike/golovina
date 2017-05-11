@@ -1,26 +1,53 @@
 .page.page_category
-  .page_category_catalog
-    = link_to 'Все категории', categories_path
-
   .page_category_intro
     h1
       = @category.title
 
-    p
-      = @category.desc
+  - unless @kits.empty?
+    .page_category_kits_wrapper
+      .page_category_kits
+        .text
+          h2 Образы
 
-  .page_category_products
-    .products_list
-      - @category.products.each do |product|
-        .products_list_item
-          = link_to '', category_product_path(product.category, product), class: :link_fake
+          p Необходимость носить одежду сдержанных цветов и классического кроя вовсе не означает, что вы не можете выглядеть при этом модно: смотрите лучшие streetstyle-примеры строгих, но ярких образов
 
-          .image
-            .ar
-              = image_tag product.images.first.url
+        .list
+          - @kits.each do |kit|
+            .list_item
+              .image
+                = image_tag kit.images.first.url
 
-          h3
-            = product.title
+              .data
+                .title
+                  = kit.title
 
-          .price
-            = product.price
+                .price
+                  => kit.products.sum(&:price).to_i * 30
+                  | ₽
+
+
+  - unless @products.empty?
+    .page_category_products
+      .list
+        - @products.each do |product|
+          .list_item
+            = link_to [product.category, product] do
+              .image_wrapper
+                .wl
+                .buy
+                .size
+                  .size_all
+
+                .color
+                  .color_all
+
+                .image
+                  = image_tag product.images[0].thumb.url if product.images[0]
+                  = image_tag product.images[1].thumb.url, class: :sec if product.images[1]
+
+              .data
+                .title
+                  = product.title
+
+                .price
+                  = number_to_rub product.price

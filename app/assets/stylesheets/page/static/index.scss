@@ -93,8 +93,8 @@
         .swiper_secondary_item {
           background: {
             color: #e8e7e5;
-            position: center bottom;
-            size: contain;
+            position: center;
+            // size: contain;
           }
 
 
@@ -447,81 +447,103 @@
 
       &.business {
         background-color: #d0cbb7;
-        background-image: image_url('temp/swiper/colors/business_small.jpg');
+        background-image: image_url('temp/swiper/themes/business_small.jpg');
 
         @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/business_medium.jpg');
+          background-image: image_url('temp/swiper/themes/business_medium.jpg');
           background-position: 70% top;
         }
       }
 
       &.date {
         background-color: #b49786;
-        background-image: image_url('temp/swiper/colors/date_small.jpg');
+        background-image: image_url('temp/swiper/themes/date_small.jpg');
 
         @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/date_medium.jpg');
+          background-image: image_url('temp/swiper/themes/date_medium.jpg');
           background-position: center top;
         }
       }
 
       &.walk {
         background-color: #787860;
-        background-image: image_url('temp/swiper/colors/walk_small.jpg');
+        background-image: image_url('temp/swiper/themes/walk_small.jpg');
 
         @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/walk_medium.jpg');
+          background-image: image_url('temp/swiper/themes/walk_medium.jpg');
           background-position: 40% top;
         }
       }
 
       &.holiday {
         background-color: #524e33;
-        background-image: image_url('temp/swiper/colors/holiday_small.jpg');
+        background-image: image_url('temp/swiper/themes/holiday_small.jpg');
 
         @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/holiday_medium.jpg');
+          background-image: image_url('temp/swiper/themes/holiday_medium.jpg');
           background-position: 20% top;
         }
       }
 
       &.country {
         background-color: #916b51;
-        background-image: image_url('temp/swiper/colors/country_small.jpg');
+        background-image: image_url('temp/swiper/themes/country_small.jpg');
 
         @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/country_medium.jpg');
+          background-image: image_url('temp/swiper/themes/country_medium.jpg');
           background-position: 80% top;
         }
       }
 
       &.party {
         background-color: #f6f3ea;
-        background-image: image_url('temp/swiper/colors/party_small.jpg');
+        background-image: image_url('temp/swiper/themes/party_small.jpg');
 
         @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/party_medium.jpg');
+          background-image: image_url('temp/swiper/themes/party_medium.jpg');
           background-position: 60% top;
         }
       }
 
       &.moms {
         background-color: #af8a60;
-        background-image: image_url('temp/swiper/colors/moms_small.jpg');
+        background-image: image_url('temp/swiper/themes/moms_small.jpg');
 
         @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/moms_medium.jpg');
+          background-image: image_url('temp/swiper/themes/moms_medium.jpg');
           background-position: 100% top;
         }
       }
 
       &.home {
         background-color: #cec5bd;
-        background-image: image_url('temp/swiper/colors/home_small.jpg');
+        background-image: image_url('temp/swiper/themes/home_small.jpg');
 
         @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/home_medium.jpg');
+          background-image: image_url('temp/swiper/themes/home_medium.jpg');
           background-position: 40% top;
+        }
+      }
+
+      @each $category in dresses suits shirts skirts trousers sweaters t-shirts {
+        &.#{$category} {
+          background-image: image_url('temp/swiper/categories/#{$category}_small.jpg');
+
+          @include breakpoint($s) {
+            background-image: image_url('temp/swiper/categories/#{$category}_medium.jpg');
+          }
+        }
+      }
+
+      &.coats {
+        background-image: image_url('temp/swiper/categories/coats_small.jpg');
+
+        @include breakpoint($s) {
+          background-image: image_url('temp/swiper/categories/coats_medium.jpg');
+        }
+
+        @include breakpoint($l) {
+          background-image: image_url('temp/swiper/categories/coats_large.jpg');
         }
       }
     }

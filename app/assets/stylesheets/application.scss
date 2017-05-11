@@ -41,18 +41,13 @@ $space-m2: $base-rhythm-line * ($base-line-height + 1) * 2;
 }
 
 body {
-  @include font-size(2);
+  @include font-size-common;
 
   font-family: 'futura-pt', sans-serif;
   font-weight: 300;
   width: 100%;
   color: $primary-color;
   min-height: 100%;
-
-  @include breakpoint($s) {
-    @include font-size(2.25);
-  }
-
 }
 
 html {

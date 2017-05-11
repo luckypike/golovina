@@ -1,41 +1,53 @@
-.page.page_theme
-  .page_theme_image
-
-  .page_theme_intro
+.page.page_category
+  .page_category_intro
     h1
-      = @theme.title
+      = @theme.desc
 
-    p
-      = Faker::Lorem.paragraph
+  - unless @kits.empty?
+    .page_category_kits_wrapper
+      .page_category_kits
+        .text
+          h2 Образы
 
-  .page_theme_kits
-    h2 Луки
+          p Необходимость носить одежду сдержанных цветов и классического кроя вовсе не означает, что вы не можете выглядеть при этом модно: смотрите лучшие streetstyle-примеры строгих, но ярких образов
 
-    .page_theme_kits_list
-      - @theme.kits.each do |kit|
-        .page_theme_kits_list_item
-          .kit
-            = link_to '', kit, class: :link_fake
+        .list
+          - @kits.each do |kit|
+            .list_item
+              .image
+                = image_tag kit.images.first.url
 
-            .image
+              .data
+                .title
+                  = kit.title
 
-            h3
-              = kit.title
-
-
-  .page_theme_products
-    h2 Каталог
-
-    .page_theme_products_list
-      - @theme.products.each do |product|
-        .page_theme_products_list_item
-          .product
-            = link_to '', category_product_path(product.category, product), class: :link_fake
-
-            .image
-              = image_tag product.images.first.url
-
-            h3
-              = product.title
+                .price
+                  => kit.products.sum(&:price).to_i * 30
+                  | ₽
 
 
+  - unless @products.empty?
+    .page_category_products
+      .list
+        - @products.each do |product|
+          .list_item
+            = link_to [product.category, product] do
+              .image_wrapper
+                .wl
+                .buy
+                .size
+                  .size_all
+
+                .color
+                  .color_all
+
+                .image
+                  = image_tag product.images[0].thumb.url if product.images[0]
+                  = image_tag product.images[1].thumb.url, class: :sec if product.images[1]
+
+              .data
+                .title
+                  = product.title
+
+                .price
+                  = number_to_rub product.price

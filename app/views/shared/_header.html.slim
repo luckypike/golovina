@@ -46,7 +46,7 @@
         ul
           - @themes.each do |theme|
             li
-              = link_to theme.title, demo_path
+              = link_to theme.title, theme
 
     .nav_box
       .nav_box_l.hn
@@ -56,7 +56,7 @@
         ul
           - @colors.each do |color|
             li
-              = link_to t("colors.#{color}"), demo_path
+              = link_to color.title, color
 
     .nav_box
       .nav_box_l.hn
@@ -66,20 +66,20 @@
         ul
           - @categories.each do |category|
             li
-              = link_to category.title, demo_path
+              = link_to category.title, category
 
     .nav_box.main
       .nav_box_l.not-for-mobile
         = link_to 'Главная', root_path
 
       .nav_box_l
-        = link_to 'Образы', '#'
+        = link_to 'Образы', demo_path
 
       .nav_box_l
-        = link_to 'Новинки', '#'
+        = link_to 'Новинки', demo_path
 
       .nav_box_l
-        = link_to 'Распродажа', '#'
+        = link_to 'Распродажа', demo_path
 
       .nav_box_l
         = link_to 'Территория Мяta', '#'
