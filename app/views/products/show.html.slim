@@ -37,9 +37,16 @@
           .select
 
         .to_cart_action
-          = button_to 'Добавить в корзину', @product
+          = button_to 'Добавить в корзину', @product, class: :btn
 
-    .edit
+      .delivery
+        | Бесплатная доставка по России от 15 000 ₽
+
+      .help
+        = link_to 'Условия доставки', '#'
+        = link_to 'Помощь с размером', '#'
+
+    / .edit
       p = link_to 'Редактировать', [:edit, @product]
       p = link_to 'Варианты и цены', [@product, :variants]
 

@@ -43,7 +43,7 @@
           }
 
           @include breakpoint($m) {
-            @include aspect-ratio-modify(4, 5);
+            // @include aspect-ratio-modify(4, 5);
           }
 
         }
@@ -56,11 +56,13 @@
     padding: 0 $gutter;
 
     .buy {
+      margin-bottom: $space-m;
+
       &_title {
       }
 
       &_price {
-        @include font-size-h1;
+        @include font-size-h2;
 
         margin-bottom: $space-s;
       }
@@ -75,7 +77,7 @@
       .to_cart {
         display: flex;
         flex-wrap: wrap;
-        margin-top: $space-s;
+        margin: $space-s 0;
 
         &_size, &_color {
           @include font-size(1.75, 5);
@@ -111,6 +113,30 @@
           text-transform: uppercase;
         }
       }
+
+      .delivery {
+        margin-bottom: $space-s;
+      }
+
+      .help {
+        @include font-size(1.5);
+
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+
+        a {
+          display: inline-block;
+          white-space: nowrap;
+        }
+
+        @include mq($s) {
+          a {
+            &:last-child {
+              margin-left: $gutter * 2;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -120,27 +146,17 @@
     padding-right: $gutter;
   }
 
-  @include breakpoint($s) {
+  @include mq($s) {
     &_content {
       .buy {
-        @include column-pane;
-
-        &_title {
-          @include column-width(8);
-        }
-
-        &_price {
-          @include column-width(3);
-          @include column-shift(1);
-        }
-
-        &_desc {
-          @include column-width(8);
-          @include column-shift(4, right);
-        }
-
         .to_cart {
-          margin-top: $space-m;
+          margin: $space-m 0;
+
+          &_size, &_color {
+            .select {
+              margin-left: $gutter;
+            }
+          }
 
           &_action {
             margin-top: $space-m;
@@ -150,7 +166,7 @@
     }
   }
 
-  @include breakpoint($m) {
+  @include mq($m) {
     @include column-pane;
 
     &_image {
@@ -159,6 +175,24 @@
 
     &_content {
       @include column-width(6);
+
+      .buy {
+        // Not on grid
+        margin-left: 8%;
+        margin-right: 10%;
+      }
+    }
+  }
+
+  @include mq($l) {
+    &_content {
+      // @include column-width(4);
+      // @include column-shift(1);
+      // @include column-shift(1, right);
+
+      .buy {
+        margin-top: $space-m2;
+      }
     }
   }
 }

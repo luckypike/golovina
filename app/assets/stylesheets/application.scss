@@ -54,3 +54,17 @@ html {
   height: 100%;
 
 }
+
+.btn {
+  @include font-size(1.5, 5);
+
+  appearance: none;
+  background: $mint-color;
+  border: 0;
+  cursor: pointer;
+  padding: 0 $gutter;
+  user-select: none;
+  text-align: center;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
