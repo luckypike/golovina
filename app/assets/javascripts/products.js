@@ -6,6 +6,6 @@ $(function(){
 
 
 
-  var product_swiper = new Swiper('.swiper_product', {
-  });
+  // var product_swiper = new Swiper('.swiper_product', {
+  // });
 });

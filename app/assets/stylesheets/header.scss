@@ -6,7 +6,7 @@
   top: 0;
   width: 100%;
   z-index: 10;
-  overflow: hidden;
+  // overflow: hidden;
 
   &.hidden {
     z-index: 0;
@@ -94,6 +94,7 @@
   &_burger {
     display: flex;
     cursor: pointer;
+    user-select: none;
 
     svg {
       display: block;
@@ -106,7 +107,7 @@
     .t {
       @include font-size(1.5);
       margin-left: $gutter / 2;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
     }
   }
@@ -130,219 +131,129 @@
 
   &.index {
     background-color: transparent;
-
-    .header_logo {
-      > a {
-        svg {
-          .a {
-            stroke: $op-color;
-          }
-        }
-      }
-    }
-
-    .header_burger {
-      .t {
-        color: $op-color;
-      }
-    }
-
-    .header_menu {
-      color: $op-color;
-    }
-
-    .header_burger {
-      rect {
-        fill: $op-color;
-      }
-    }
-
-    .header_caw {
-      .wishlist_icon {
-        .h {
-          stroke: $op-color;
-        }
-      }
-
-      .cart_icon {
-        .b {
-          fill: $op-color;
-        }
-      }
-    }
   }
 
-  .nav {
+  &_full {
     visibility: hidden;
     opacity: 0;
+    position: fixed;
+    background-color: $color-2;
+    z-index: 11;
+    width: 100%;
+    min-height: 100%;
+    transition: 0.3s opacity, 0s visibility 0.3s;
 
-    margin-top: $base-line-height * $base-rhythm-line * 3;
-    padding: 0 $gutter;
+    @include font-size(1.5, 2);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
 
-    &_box {
-      &_l {
-        @include font-size(4.25, 5);
+    &_container {
+      padding: 0 $gutter;
+      max-width: 27rem;
 
+      @include mq($m) {
+        padding: 0 $gutter * 2;
+      }
+
+      @include mq($xl) {
+        padding: 0 $gutter * 4;
+      }
+
+    }
+
+    &_close {
+      width: 100%;
+      height: $base-rhythm-line * $base-line-height  * 3;
+      position: relative;
+
+      svg {
         cursor: pointer;
-        margin-bottom: $base-rhythm-line;
+        position: absolute;
+        left: 0;
+        top: 28px;
+        width: 16px;
+        height: 16px;
 
-        &.not-for-mobile {
-          display: none;
-
-          @include breakpoint($s) {
-            display: block;
-          }
+        line {
+          stroke: $primary-color;
+          stroke-width: 1;
         }
       }
-
-      &_sg {
-        @include font-size(2, 4);
-
-        display: none;
-      }
-
-      &.for-mobile {
-        @include breakpoint($s) {
-          display: none;
-        }
-      }
-
-      &.main {
-        margin-bottom: $space-m;
-      }
     }
 
-    &_search {
-
-      input {
-        @include font-size(1.75, 5);
-
-        appearance: none;
-        font-family: inherit;
-        border: 0;
-        border-radius: 0;
-        border-bottom: 1px solid $primary-color;
-        width: 100%;
-      }
-    }
-
-    &_add {
-      @include font-size(2.25, 4);
-
-      margin-top: $space-s;
-    }
-
-    &_social {
-      margin: $space-s 0;
-
-      img {
-        display: block;
-        height: 24px;
-      }
-    }
-
-    @include breakpoint($s) {
+    &_themes {
       display: flex;
+      margin-bottom: $space-s;
       flex-wrap: wrap;
-      padding-top: $space-m;
 
-      &_box {
-        width: 25%;
-
-        &_sg {
-          display: block;
-        }
-      }
-
-      &_search {
-        width: 75%;
+      &_item {
+        width: 50%;
         padding-right: $gutter;
-      }
-
-      &_add {
-        width: 25%;
-      }
-
-      &_social {
-        width: 25%;
-        margin-left: 75%;
-
-        img {
-          height: 32px;
-        }
+        margin-bottom: $space-s;
       }
     }
   }
 
   &.with-nav {
-    background-color: $op-color;
+    // .header_logo {
+    //   > a {
+    //     svg {
+    //       .a {
+    //         stroke: $primary-color;
+    //       }
+    //     }
+    //   }
+    // }
 
-    position: fixed;
-    min-height: 100%;
+    // .header_burger {
+    //   .t {
+    //     color: $primary-color;
+    //   }
+    // }
 
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    // .header_menu {
+    //   color: $primary-color;
+    // }
 
-    .header_logo {
-      > a {
-        svg {
-          .a {
-            stroke: $primary-color;
-          }
-        }
-      }
-    }
+    // .header_burger,
+    // .header_basket {
+    //   svg {
+    //     fill: $primary-color;
+    //   }
+    // }
 
-    .header_burger {
-      .t {
-        color: $primary-color;
-      }
-    }
-
-    .header_menu {
-      color: $primary-color;
-    }
-
-    .header_burger,
-    .header_basket {
-      svg {
-        fill: $primary-color;
-      }
-    }
-
-    .header_burger {
-      svg {
-        rect {
-          opacity: 0;
+    // .header_burger {
+    //   svg {
+    //     rect {
+    //       opacity: 0;
 
 
-          &:first-child {
-            transform-origin: 50% 50%;
-            y: 11px;
-            transform: rotateZ(-45deg);
-            opacity: 1;
-          }
+    //       &:first-child {
+    //         transform-origin: 50% 50%;
+    //         y: 11px;
+    //         transform: rotateZ(-45deg);
+    //         opacity: 1;
+    //       }
 
-          &:last-child {
-            transform-origin: 50% 50%;
-            y: 11px;
-            transform: rotateZ(45deg);
-            opacity: 1;
+    //       &:last-child {
+    //         transform-origin: 50% 50%;
+    //         y: 11px;
+    //         transform: rotateZ(45deg);
+    //         opacity: 1;
 
-          }
-        }
-      }
-    }
+    //       }
+    //     }
+    //   }
+    // }
 
-    .nav {
+    .header_full {
       visibility: visible;
       opacity: 1;
+      transition: 0.3s opacity;
     }
   }
 
   @include breakpoint($s) {
-    //display: flex;
-
     &_logo {
 
     }
@@ -350,7 +261,25 @@
     &_nav {
       margin-right: auto;
     }
+  }
 
+  @include breakpoint($m) {
+    &_nav {
+      left: $gutter * 2;
+    }
 
+    &_caw {
+      right: $gutter * 2;
+    }
+  }
+
+  @include breakpoint($xl) {
+    &_nav {
+      left: $gutter * 4;
+    }
+
+    &_caw {
+      right: $gutter * 4;
+    }
   }
 }

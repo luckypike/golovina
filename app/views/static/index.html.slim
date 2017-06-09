@@ -1,67 +1,16 @@
 .page.page_static_index
-  .swiper_primary_fast
-    .swiper_primary_fast_close
-      .close
+  .page_static_index_themes
+    .themes
+      - @themes.each_with_index do |theme, i|
+        = link_to theme, class: [:themes_item, "themes_item_#{i}"] do
+          .themes_item_container class=[theme.friendly_id]
+            .text
+              .title
+                = theme.desc
 
-    .swiper_primary_fast_item.themes data-rel=themes_path
-    .swiper_primary_fast_item.colors data-rel=colors_path
-    .swiper_primary_fast_item.categories data-rel=categories_path
+              .more
+                = theme.title
 
-  .swiper_primary.swiper-container
-    .swiper-button-prev.swiper-button-disabled
-      .icon
-        svg
-          circle cx="20" cy="20" r="19"
-          path d="M18,16l-6,4,6,4V16Zm0,3H28v2H18V19Z"
-
-      .label
-
-
-    .swiper-button-next
-      .icon
-        svg
-          circle cx="20" cy="20" r="19"
-          path d="M22,24l6-4-6-4v8ZM12,19H22v2H12V19Z"
-
-      .label
-        | Стили
-
-    .swiper-wrapper
-      .swiper_primary_item.swiper-slide data-label='Цвета'
-        .swiper_secondary.swiper-container data-id=0
-          .swiper-pagination data-rel='colors'
-          .swiper-wrapper
-            - @colors.each do |color|
-              .swiper_secondary_item.swiper-slide class=color.friendly_id
-                .text
-                  .title
-                    = t "colors.index.#{color.friendly_id}"
-
-                  .more
-                    = link_to color.title, color
-
-      .swiper_primary_item.swiper-slide data-label='Стили'
-        .swiper_secondary.swiper-container data-id=1
-          .swiper-pagination data-rel='themes'
-          .swiper-wrapper
-            - @themes.each do |theme|
-              .swiper_secondary_item.swiper-slide class=theme.friendly_id
-                .text
-                  .title
-                    = t "themes.index.#{theme.friendly_id}"
-
-                  .more
-                    = link_to theme.title, theme
-
-      .swiper_primary_item.swiper-slide.catalog data-label='Образы'
-        .swiper_secondary.swiper-container data-id=2
-          .swiper-pagination data-rel='categories'
-          .swiper-wrapper
-            - @categories.each do |category|
-              .swiper_secondary_item.swiper-slide class=category.friendly_id
-                .text
-                  .title
-                    = category.title
-
-                  .more
-                    = link_to 'Купить', category
+      .themes_item.themes_item_all
+        .all
+          = link_to 'Посмотреть все', categories_path, class: :button

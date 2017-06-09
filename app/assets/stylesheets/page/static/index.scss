@@ -1,551 +1,192 @@
 &_index {
-  width: 100%;
-  bottom: 0;
-  //top: $base-rhythm-line * $base-line-height * 3;
-  top: 0;
-  position: absolute;
-  overflow: hidden;
-  padding-top: 0;
+  &_intro {
+    background-color: $op-color;
 
-  &.with-scroll {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    .logo {
+      padding: $space-s $gutter * 2;
+
+      svg {
+        display: block;
+        margin: 0 auto;
+        // max-height: 100%;
+        max-width: 100%;
+        max-height: 10rem;
+
+        .a, .b {
+          fill: none;
+          stroke-width: 0.5;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+
+        .a {
+          stroke: #4c4b4c;
+        }
+
+        .b {
+          stroke: #51b478;
+        }
+      }
+    }
+
+    .shop_me_harder {
+      @include font-size-h1;
+
+      margin: 0 auto $space-m;
+      text-align: center;
+    }
+
+    @include mq($s) {
+      padding: $space-m2 $gutter;
+
+      .shop_me_harder {
+        margin: $space-s2 auto;
+      }
+    }
   }
 
-  .swiper_primary {
-    height: 100%;
-    //height: 100vh;
-    width: 100%;
+  &_themes {
+    .themes {
+      @include column-pane;
 
-    > {
-      .swiper-button-next,
-      .swiper-button-prev {
-        background: transparent;
-        display: flex;
-        margin-top: 0;
-        width: 110px;
-        height: 40px;
-        transition: opacity 0.2s;
-
-        top: auto;
-        bottom: $space-m;
-
-
-        .icon {
-          svg {
-            height: 40px;
-            width: 40px;
-
-            circle {
-              fill: none;
-              stroke: #fff;
-              stroke-width: 2px;
-            }
-
-            path {
-              fill: #fff;
-              fill-rule: evenodd;
-            }
-          }
-        }
-
-        .label {
-          @include font-size(1.5, 2);
-
-          align-self: center;
-          color: $op-color;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-        }
-      }
-
-      .swiper-button-prev {
-        //top: $base-rhythm-line * $base-line-height * 3;
-        left: $gutter;
-
-        .label {
-          margin-left: $gutter;
-        }
-
-      }
-
-      .swiper-button-next {
-        right: $gutter;
-        justify-content: flex-end;
-
-        .label {
-          margin-right: $gutter;
-          order: -1;
-        }
-      }
-
-      .swiper-button-disabled {
-        opacity: 0;
-      }
-    }
-
-    &_item {
-      &.catalog {
-        background-color: #f4f4f4;
-        //padding-top: $base-rhythm-line * $base-line-height * 6;
-        //padding-left: $gutter;
-
-        .swiper_secondary_item {
-          background: {
-            color: #e8e7e5;
-            position: center;
-            // size: contain;
-          }
-
-
-        }
-      }
-    }
-
-    &_fast {
-      position: absolute;
-      left: 0;
-      top: $base-rhythm-line * $base-line-height * 3;
-      width: 100%;
-      bottom: 0;
-      z-index: 11;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s, transform 0.23s, visibility 0s 0.3s;
-      transform: translateY($base-rhythm-line * 6);
-      //overflow-x: hidden;
-      //overflow-y: auto;
-
-      &_close {
-        background-color: $op-color;
-        position: absolute;
-        width: 100%;
-        top: -($base-rhythm-line * $base-line-height * 3);
-        height: $base-line-height * $base-rhythm-line * 3;
-
-        .close {
-          background:{
-            image: image_url('icons/x.svg');
-            size: cover;
-            repeat: no-repeat;
-          }
-
-          content: '';
-          cursor: pointer;
-          width: 40px;
-          height: 40px;
-          position: absolute;
-          top: $base-rhythm-line * 2;
-          left: $gutter;
-          transform: rotateZ(45deg);
-
-          &:hover {
-
-          }
-        }
-      }
+      margin-top: -$space-s;
+      padding-bottom: $space-m - $space-s;
 
       &_item {
-        display: none;
-        //position: absolute;
-        //height: 100%;
-        //width: 100%;
-        //top: 0;
-        //left: 0;
+        display: block;
+        padding: $space-s 0;
 
-
-        .page_themes {
-          padding-top: 0;
-        }
-
-        &.active {
-          display: block;
-        }
-      }
-
-      &.active {
-        visibility: visible;
-        opacity: 1;
-        transform: none;
-        transition: opacity 0.3s, transform 0.23s;
-      }
-    }
-  }
-
-  .swiper_secondary {
-    height: 100%;
-    width: 100%;
-
-    .swiper-pagination {
-      height: 152px;
-      overflow: hidden;
-      left: $gutter;
-      right: auto;
-      transform: translateY(-136px);
-      //transform: translateY(-96px);
-
-
-      &-bullet {
-        background: transparent;
-        height: 40px;
-        width: 40px;
-        opacity: 1;
-        margin: 0 0 $base-rhythm-line * 2;
-
-        position: relative;
-        transition-duration: 0.25s;
-
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-
-        &:before {
-          border: 2px solid $op-color;
-          border-radius: 50%;
-          content: '';
-          height: $base-rhythm-line * 2;
-          position: absolute;
-          left: 50%;
-          top: 50%;
-
-
-          //margin: -$base-rhythm-line 0 0 (-$base-rhythm-line);
-          transform: translate(-50%, -50%);
-          width: $base-rhythm-line * 2;
-          transition-duration: 0.34s;
-        }
-
-
-        &-active {
-          cursor: pointer;
-
-          &:before {
-            background-color: $op-color;
-
-            height: 100%;
-            width: 100%;
+        &_container {
+          background: {
+            size: cover;
+            repeat: no-repeat;
+            position: top center;
           }
 
-          &:after {
-            background: image_url('icons/more.svg');
-            content: '';
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            z-index: 1;
+          @each $theme in business date walk country party home moms {
+            &.#{$theme} {
+              background-image: image_url('temp/#{$theme}_small.jpg');
+
+              @include mq($m) {
+                background-image: image_url('temp/#{$theme}_medium.jpg');
+              }
+            }
           }
-        }
-      }
 
-      &.act-0 {
-        > span {
-          transform: translateY(56px);
-        }
-      }
-
-      &.act-1 {
-        > span {
-          transform: translateY(0);
-        }
-      }
-
-      &.act-2 {
-        > span {
-          transform: translateY(-56px);
-        }
-      }
-
-      &.act-3 {
-        > span {
-          transform: translateY(-56px * 2);
-        }
-      }
-
-      &.act-4 {
-        > span {
-          transform: translateY(-56px * 3);
-        }
-      }
-
-      &.act-5 {
-        > span {
-          transform: translateY(-56px * 4);
-        }
-      }
-
-      &.act-6 {
-        > span {
-          transform: translateY(-56px * 5);
-        }
-      }
-
-      &.act-7 {
-        > span {
-          transform: translateY(-56px * 6);
-        }
-      }
-
-      &.act-8 {
-        > span {
-          transform: translateY(-56px * 7);
-        }
-      }
-    }
-
-    &_item {
-      background: {
-        position: center bottom;
-        size: cover;
-      }
-
-      &:before {
-        content: '';
-        opacity: 0.1;
-        position: absolute;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        background: #000;
-      }
-
-      .text {
-        height: 40px;
-        color: $op-color;
-        position: absolute;
-        left: $gutter * 2 + 2.5rem;
-        right: $gutter;
-        top: 50%;
-        transform: translateY(-80px);
-        //transform: translateY(-40px);
-
-        .title {
-          @include font-size(4.25, 5);
-        }
-
-        @include breakpoint($s) {
-          transform: translateY(-88px);
-
-          .title {
-            @include font-size(7, 8);
+          &.holiday {
+            background-image: image_url('temp/holiday.gif');
           }
         }
 
         .more {
-          margin-top: $base-rhythm-line * 3;
+          display: none;
+        }
 
-          > a {
-            display: inline-block;
-            line-height: 40px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            position: relative;
+        .text {
+          position: absolute;
 
-            &:after {
-              background-color: $op-color;
-              height: 2px;
-              position: absolute;
-              content: '';
-              left: 0;
-              right: 0;
-              bottom: 0;
+          .title {
+            bottom: $space-s;
+            padding: 0 $gutter;
+            position: absolute;
+            color: $op-color;
+          }
+        }
+
+        &_0, &_3, &_6 {
+          .themes_item_container {
+            @include aspect-ratio(5, 4);
+
+            background-color: $color-1;
+
+            @include mq($m) {
+              @include aspect-ratio-modify(2, 1);
+            }
+          }
+
+          .text {
+            .title {
+              @include font-size(4.25, 4);
             }
           }
         }
-      }
 
-      &.red {
-        background-color: #9d3431;
-        background-image: image_url('temp/swiper/colors/red_small.jpg');
+        &_1, &_2, &_4, &_5, &_7, &_8 {
+          padding: $space-s $gutter;
+          // @include column-width(6);
 
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/red_medium.jpg');
-          background-position: center top;
-        }
-      }
+          .themes_item_container {
+            @include aspect-ratio(4, 5);
 
-      &.yellow {
-        background-color: #f6e57b;
-        background-image: image_url('temp/swiper/colors/yellow_small.jpg');
+            @include mq($m) {
+              @include aspect-ratio-modify(5, 4);
+            }
+          }
 
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/yellow_medium.jpg');
-          background-position: center top;
-        }
-      }
+          .text {
+            .title {
+              @include font-size(3, 3);
+            }
+          }
 
-      &.green {
-        background-color: #bea591;
-        background-image: image_url('temp/swiper/colors/green_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/green_medium.jpg');
-          background-position: center top;
-        }
-      }
-
-      &.blue {
-        background-color: #9fbbc7;
-        background-image: image_url('temp/swiper/colors/blue_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/blue_medium.jpg');
-          background-position: center top;
-        }
-      }
-
-      &.pink {
-        background-color: #e3c7c6;
-        background-image: image_url('temp/swiper/colors/pink_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/pink_medium.jpg');
-          background-position: center top;
-        }
-      }
-
-      &.white {
-        background-color: #a9c1b3;
-        background-image: image_url('temp/swiper/colors/white_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/white_medium.jpg');
-          background-position: center top;
         }
 
-        @include breakpoint($l) {
-          background-image: image_url('temp/swiper/colors/white_large.jpg');
-        }
-      }
+        &_1, &_4, &_7 {
+          @include column-width(3, 4);
+          @include column-shift(1, right, 4);
 
-      &.black {
-        background-color: #49494d;
-        background-image: image_url('temp/swiper/colors/black_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/black_medium.jpg');
-          background-position: center top;
-        }
-      }
-
-      &.gray {
-        background-color: #b9b9b7;
-        background-image: image_url('temp/swiper/colors/gray_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/colors/gray_medium.jpg');
-          background-position: center top;
+          .themes_item_container {
+            background-color: $color-2;
+          }
         }
 
-        @include breakpoint($l) {
-          background-image: image_url('temp/swiper/colors/gray_large.jpg');
+        &_2, &_5, &_8 {
+          @include column-width(3, 4);
+          @include column-shift(1, left, 4);
+
+          .themes_item_container {
+            background-color: $color-3;
+          }
         }
-      }
 
-      &.business {
-        background-color: #d0cbb7;
-        background-image: image_url('temp/swiper/themes/business_small.jpg');
+        &_all {
+          padding: $space-s $gutter;
 
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/themes/business_medium.jpg');
-          background-position: 70% top;
-        }
-      }
+          .button {
+            @include font-size(1.5, 4);
 
-      &.date {
-        background-color: #b49786;
-        background-image: image_url('temp/swiper/themes/date_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/themes/date_medium.jpg');
-          background-position: center top;
-        }
-      }
-
-      &.walk {
-        background-color: #787860;
-        background-image: image_url('temp/swiper/themes/walk_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/themes/walk_medium.jpg');
-          background-position: 40% top;
-        }
-      }
-
-      &.holiday {
-        background-color: #524e33;
-        background-image: image_url('temp/swiper/themes/holiday_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/themes/holiday_medium.jpg');
-          background-position: 20% top;
-        }
-      }
-
-      &.country {
-        background-color: #916b51;
-        background-image: image_url('temp/swiper/themes/country_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/themes/country_medium.jpg');
-          background-position: 80% top;
-        }
-      }
-
-      &.party {
-        background-color: #f6f3ea;
-        background-image: image_url('temp/swiper/themes/party_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/themes/party_medium.jpg');
-          background-position: 60% top;
-        }
-      }
-
-      &.moms {
-        background-color: #af8a60;
-        background-image: image_url('temp/swiper/themes/moms_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/themes/moms_medium.jpg');
-          background-position: 100% top;
-        }
-      }
-
-      &.home {
-        background-color: #cec5bd;
-        background-image: image_url('temp/swiper/themes/home_small.jpg');
-
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/themes/home_medium.jpg');
-          background-position: 40% top;
-        }
-      }
-
-      @each $category in dresses suits shirts skirts trousers sweaters t-shirts {
-        &.#{$category} {
-          background-image: image_url('temp/swiper/categories/#{$category}_small.jpg');
-
-          @include breakpoint($s) {
-            background-image: image_url('temp/swiper/categories/#{$category}_medium.jpg');
+            display: inline-block;
+            padding: 0 $gutter;
+            background-color: $primary-color;
+            color: $op-color;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
           }
         }
       }
 
-      &.coats {
-        background-image: image_url('temp/swiper/categories/coats_small.jpg');
+      @include mq($m) {
+        margin-top: -$space-s2;
 
-        @include breakpoint($s) {
-          background-image: image_url('temp/swiper/categories/coats_medium.jpg');
+        padding-bottom: $space-m2 - $space-s2;
+
+        &_item {
+          padding: $space-s2 $gutter * 2;
         }
+      }
 
-        @include breakpoint($l) {
-          background-image: image_url('temp/swiper/categories/coats_large.jpg');
+      @include mq($xl) {
+
+        &_item {
+          padding: $space-s2 $gutter * 4;
         }
       }
     }
   }
+
+  // &.with-scroll {
+  //   overflow-y: auto;
+  //   -webkit-overflow-scrolling: touch;
+  // }
+
 }
