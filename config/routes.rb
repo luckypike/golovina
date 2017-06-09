@@ -9,19 +9,15 @@ Rails.application.routes.draw do
 
   resources :themes, only: :show
 
-  resources :kits
-  resources :categories, only: [:index, :show], path: :catalog do
-    resources :products, only: [:show], path: ''
-  end
+  # resources :kits
+  # resources :categories, only: [], path: :catalog do
+    # resources :products, only: [:show], path: ''
+  # end
 
-  resources :products, except: [:index, :show] do
+  resources :products, path: :catalog do
     resources :variants, only: [:index, :create]
     post :wishlist, on: :member
   end
 
   get 'wishlist', to: 'wishlists#show'
-
-  get 'demo', to: 'products#demo', as: :demo
-
-  # get 'colors', to: 'themes#colors', as: :colors
 end

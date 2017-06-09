@@ -1,28 +1,31 @@
-h1 Listing products
+.fast_filters
 
-table
-  thead
-    tr
-      th Title
-      th Category
-      th Price
-      th Desc
-      th
-      th
-      th
 
-  tbody
-    - @products.each do |product|
-      tr
-        td
-          = link_to product.title, category_product_path(product.category, product)
-        td = product.category
-        td = product.price
-        td = product.desc
-        td = link_to 'Show', product
-        td = link_to 'Edit', edit_product_path(product)
-        td = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete
+.page.page_products
+  .page_products_intro
 
-br
+  - unless @products.empty?
+    .page_products_list
+      .list
+        - @products.each do |product|
+          .list_item
+            = link_to product do
+              .image_wrapper
+                .wl
+                .buy
+                .size
+                  .size_all
 
-= link_to 'New Product', new_product_path
+                .color
+                  .color_all
+
+                .image
+                  = image_tag product.images[0].thumb.url if product.images[0]
+                  = image_tag product.images[1].thumb.url, class: :sec if product.images[1]
+
+              .data
+                .title
+                  = product.title
+
+                .price
+                  = number_to_rub product.price

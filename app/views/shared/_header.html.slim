@@ -9,13 +9,13 @@
 
     .header_menu
       .header_menu_item
-        = link_to 'Новинки', demo_path
+        = link_to 'Новинки', products_path
 
       .header_menu_item
-        = link_to 'Распродажа', demo_path
+        = link_to 'Распродажа', products_path
 
       .header_menu_item
-        = link_to 'Образы', demo_path
+        = link_to 'Образы', products_path
 
   .header_logo
     = link_to root_path do
@@ -44,36 +44,3 @@
           .header_full_themes_item
             = link_to theme.title, theme
 
-    .nav_box.main
-      .nav_box_l
-        = link_to 'Образы', demo_path
-
-      .nav_box_l
-        = link_to 'Новинки', demo_path
-
-      .nav_box_l
-        = link_to 'Распродажа', demo_path
-
-      .nav_box_l
-        = link_to 'Территория Мяta', '#'
-
-      .nav_box_l
-        = link_to 'Контакты', '#'
-
-
-
-    / .nav_search
-      input placeholder="Поиск"
-
-
-    / .nav_add
-      ul
-        li
-          = link_to 'Доставка и оплата', '#'
-
-        li
-          = link_to 'Гид по размерам', '#'
-
-
-    .nav_social
-      = image_tag 'icons/social.png'

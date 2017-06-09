@@ -1,21 +1,13 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist]
 
-  def demo
-    @kits = Kit.order(id: :asc).limit(3)
+  def index
     @products = Product.order(id: :asc).limit(8)
   end
 
-  # GET /products
-  def index
-    @products = Product.all
-  end
-
-  # GET /products/1
   def show
   end
 
-  # GET /products/new
   def new
     @product = Product.new()
     if params[:category_id] && category = Category.friendly.find(params[:category_id])
@@ -23,11 +15,9 @@ class ProductsController < ApplicationController
     end
   end
 
-  # GET /products/1/edit
   def edit
   end
 
-  # POST /products
   def create
     @product = Product.new(product_params)
 
@@ -38,9 +28,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /products/1
   def update
-    # p product_params
     if @product.update(product_params)
       redirect_to [@product.category, @product], notice: 'Product was successfully updated.'
     else
@@ -48,7 +36,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # DELETE /products/1
   def destroy
     @product.destroy
     redirect_to products_url, notice: 'Product was successfully destroyed.'
@@ -60,12 +47,9 @@ class ProductsController < ApplicationController
       user.save!(validate: false)
       sign_in(user)
     end
-    p current_user
 
     wishlist = Wishlist.find_or_initialize_by(user: current_user, product: @product)
     wishlist.persisted? ? wishlist.destroy : wishlist.save
-
-    p wishlist
 
     redirect_to [@product.category, @product]
   end
