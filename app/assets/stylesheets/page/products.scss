@@ -4,22 +4,31 @@
     padding: 0 $gutter;
     margin: $space-s auto;
 
+    h1 {
+      margin-bottom: 0;
+      text-align: center;
+    }
+
     @include breakpoint($s) {
-      margin: $space-m auto;
+      margin: $space-m auto $space-s;
     }
 
     @include breakpoint($l) {
-      margin: $space-m2 auto;
+      margin: $space-m2 auto $space-s2;
     }
   }
 
   &_list {
     padding: 0 $gutter / 2;
-    max-width: $xl;
+    // max-width: $xl;
     margin: 0 auto;
 
     .list {
+      @include column-pane;
+
       &_item {
+        @include column-width(6);
+
         padding: 0 $gutter / 2;
         user-select: none;
         margin-bottom: $space-m;
@@ -32,7 +41,7 @@
 
           &_wrapper {
             position: relative;
-            margin-bottom: $space-s;
+            margin-bottom: $base-rhythm-line;
 
             .wl {
               position: absolute;
@@ -153,17 +162,19 @@
         }
 
         .data {
-          display: flex;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
+          @include font-size-small;
+          // display: flex;
+          // text-transform: uppercase;
+          // letter-spacing: 0.1em;
 
           .price {
-            padding-left: $gutter;
-            flex-shrink: 0;
+            margin-bottom: $base-rhythm-line;
+            // padding-left: $gutter;
+            // flex-shrink: 0;
           }
 
           .title {
-            flex-grow: 1;
+            // flex-grow: 1;
           }
         }
 
@@ -178,18 +189,25 @@
       }
 
       @include breakpoint($s) {
-        @include column-pane;
-
         &_item {
           margin-bottom: $space-m2;
-
-          @include column-width(6);
         }
       }
 
       @include breakpoint($l) {
         &_item {
           @include column-width(3);
+
+          &_0 {
+            @include column-width(6);
+          }
+
+          &_5 {
+            @include column-width(6);
+
+            margin-top: -31.3%;
+          }
+
         }
       }
     }

@@ -1,22 +1,80 @@
-.fast_filters
+
+
 
 
 .page.page_products
   .page_products_intro
+    h1 Одежда
+
+  .fd_w
+    .fd_ph
+    .fd
+      .fd_b.fd_f
+        .title
+          | Фильтры
+
+        .fd_f_list
+          .fd_f_list_item
+            .name
+              | Тип
+
+            .opts
+              .opts_list
+                .opts_list_item
+                  | Пиджаки
+                .opts_list_item
+                  | Брюки
+
+          .fd_f_list_item
+            .name
+              | Стиль
+
+          .fd_f_list_item
+            .name
+              | Материал
+
+          .fd_f_list_item
+            .name
+              | Размер
+
+          .fd_f_list_item
+            .name
+              | Цвет
+
+
+      .fd_b.fd_s
+        .title
+          | Сортировка
+
+        .fd_f_list
+          .fd_f_list_item
+            .name
+              | Сортировать
+
+            .opts
+              .opts_list
+                .opts_list_item
+                  | Сначала дорогие
+                .opts_list_item
+                  | Сначала дешевые
+
+      .fd_b.fd_t
+        .title
+          | ^
 
   - unless @products.empty?
     .page_products_list
       .list
-        - @products.each do |product|
-          .list_item
+        - @products.each_with_index do |product, i|
+          .list_item class="list_item_#{i}"
             = link_to product do
               .image_wrapper
-                .wl
-                .buy
-                .size
+                / .wl
+                / .buy
+                / .size
                   .size_all
 
-                .color
+                / .color
                   .color_all
 
                 .image
@@ -24,8 +82,9 @@
                   = image_tag product.images[1].thumb.url, class: :sec if product.images[1]
 
               .data
+                .price
+                  = number_to_rub product.price
+
                 .title
                   = product.title
 
-                .price
-                  = number_to_rub product.price

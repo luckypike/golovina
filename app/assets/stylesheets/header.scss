@@ -1,4 +1,6 @@
 .header {
+  @include font-size-small;
+
   background-color: $op-color;
   height: $base-rhythm-line * $base-line-height  * 3;
   position: absolute;
@@ -105,18 +107,14 @@
     }
 
     .t {
-      @include font-size(1.5);
+      // @include font-size(1.5);
       margin-left: $gutter / 2;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      // letter-spacing: 0.2em;
+      // text-transform: uppercase;
     }
   }
 
   &_menu {
-    @include font-size(1.5);
-
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
     display: none;
 
     &_item {
