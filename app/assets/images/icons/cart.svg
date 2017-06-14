@@ -1,3 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="cart_icon"  width="40" height="40" viewBox="0 0 40 40">
-  <path class="b" d="M10,18l4,10H26l4-10H10Zm3,2H27l-2.5,6h-9Zm6-8h2v6H19V12Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" class="cart_icon" viewBox="0 0 24 24">
+  <path class="a" d="M17.18,9.76H6.82l-.82,9H18Z"/>
+  <path class="b" d="M9,8.25a3,3,0,0,1,6,0"/>
 </svg>

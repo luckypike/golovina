@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
   def set_cats
     @themes = Theme.order(id: :asc)
     @categories = Category.order(id: :asc)
-    @colors = Color.order(id: :asc)
+    # @colors = Color.order(id: :asc)
 
-    @kits = Kit.order(id: :asc)
-    @products = Product.order(id: :asc)
+    # @kits = Kit.order(id: :asc)
+    # @products = Product.order(id: :asc)
   end
 end

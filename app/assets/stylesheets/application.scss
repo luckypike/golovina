@@ -50,6 +50,10 @@ body {
   width: 100%;
   color: $primary-color;
   min-height: 100%;
+
+  &.full_screen {
+    overflow: hidden;
+  }
 }
 
 html {
