@@ -20,27 +20,53 @@
 
             .opts
               .opts_list
-                .opts_list_item
-                  | Пиджаки
-                .opts_list_item
-                  | Брюки
+                - @categories.each do |category|
+                  .opts_list_item
+                    = category.title
 
           .fd_f_list_item
             .name
               | Стиль
 
+            .opts
+              .opts_list
+                - @themes.each do |theme|
+                  .opts_list_item
+                    = theme.title
+
           .fd_f_list_item
             .name
               | Материал
+
+            .opts
+              .opts_list
+                .opts_list_item Кожа
+                .opts_list_item Хлопок
+                .opts_list_item Лён
+                .opts_list_item Вискоза
 
           .fd_f_list_item
             .name
               | Размер
 
+            .opts
+              .opts_list
+                .opts_list_item XS
+                .opts_list_item S
+                .opts_list_item M
+                .opts_list_item L
+                .opts_list_item XL
+                .opts_list_item XXL
+
           .fd_f_list_item
             .name
               | Цвет
 
+            .opts
+              .opts_list
+                - @colors.each do |color|
+                  .opts_list_item
+                    = color.title
 
       .fd_b.fd_s
         .title

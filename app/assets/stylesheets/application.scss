@@ -65,9 +65,10 @@ html {
   @include font-size(1.5, 5);
 
   appearance: none;
-  background: $mint-color;
+  background: $color-1;
   border: 0;
   cursor: pointer;
+  color: $op-color;
   padding: 0 $gutter;
   user-select: none;
   text-align: center;
