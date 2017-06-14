@@ -65,7 +65,9 @@
   - unless @products.empty?
     .page_products_list
       .list
-        - @products.each_with_index do |product, i|
+        / - @products.each_with_index do |product, i|
+        - (0..30).each do |i|
+          - product = @products.sample
           .list_item class="list_item_#{i}"
             = link_to product do
               .image_wrapper

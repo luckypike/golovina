@@ -208,6 +208,35 @@
             margin-top: -31.3%;
           }
 
+          &_10 {
+            @include column-width(9);
+          }
+
+          &_12 {
+            @include column-shift(9);
+
+            margin-top: -55%;
+          }
+
+          // &_9 {
+          //   margin-top: 31.3%;
+          // }
+
+          // &_10 {
+          //   @include column-width(6);
+          // }
+
+          // &_12 {
+          //   @include column-shift(9, right);
+
+          //   margin-top: -32%;
+          // }
+
+          // &_13 {
+          //   // @include column-shift(3, left);
+
+          //   // margin-top: -32%;
+          // }
         }
       }
     }
