@@ -13,7 +13,9 @@ html
     = typekit_include_tag
 
   body
-    = render '/shared/header'
+    == render '/shared/header'
 
     .page_container
       = yield
+
+    == render '/shared/footer'

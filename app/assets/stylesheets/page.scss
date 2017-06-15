@@ -10,14 +10,6 @@
 .page {
   padding-top: $space-s * 3;
 
-  &_container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 100%;
-  }
-
   @import "page/category";
 
   @import "page/theme";
