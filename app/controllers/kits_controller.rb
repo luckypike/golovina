@@ -59,6 +59,6 @@ class KitsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def kit_params
-      params.require(:kit).permit(:title, { images: []})
+      params.require(:kit).permit(:title, :theme_id, { images: []})
     end
 end

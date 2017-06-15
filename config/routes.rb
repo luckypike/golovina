@@ -7,9 +7,11 @@ Rails.application.routes.draw do
     get '', to: 'about#index', as: :about_index
   end
 
-  resources :themes, only: :show
 
-  # resources :kits
+  get '/:theme', to: 'themes#show', constraints: lambda { |req| Theme.find_by_slug(req.path[1..-1]) }, as: :theme
+  resources :themes
+
+  resources :kits
   # resources :categories, only: [], path: :catalog do
     # resources :products, only: [:show], path: ''
   # end

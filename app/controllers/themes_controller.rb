@@ -1,5 +1,5 @@
 class ThemesController < ApplicationController
-  before_action :set_theme, only: [:show, :edit, :update, :destroy]
+  before_action :set_theme, only: [:edit, :update, :destroy]
 
   def colors
 
@@ -10,6 +10,8 @@ class ThemesController < ApplicationController
   end
 
   def show
+    @theme = Theme.friendly.find(params[:theme])
+    @kits = Kit.order(id: :asc)
   end
 
   def new

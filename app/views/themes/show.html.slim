@@ -1,53 +1,17 @@
-.page.page_category
-  .page_category_intro
-    h1
-      = @theme.desc
+.page.page_theme
+  .page_theme_intro
+    .image class=@theme.friendly_id
+      h1
+        = @theme.title
 
-  - unless @kits.empty?
-    .page_category_kits_wrapper
-      .page_category_kits
-        .text
-          h2 Образы
+    .desc
+      | Может выглядеть очень сексуально. Приталенные жакеты и пальто, узкие юбки с запахом или разрезом,
+        шелковые блузки-гимнастерки — не поступаясь женственностью, вы выглядите уверенно в офисе или на деловой встрече.
 
-          p Необходимость носить одежду сдержанных цветов и классического кроя вовсе не означает, что вы не можете выглядеть при этом модно: смотрите лучшие streetstyle-примеры строгих, но ярких образов
-
-        .list
-          - @kits.each do |kit|
-            .list_item
-              .image
-                = image_tag kit.images.first.url
-
-              .data
-                .title
-                  = kit.title
-
-                .price
-                  => kit.products.sum(&:price).to_i * 30
-                  | ₽
-
-
-  - unless @products.empty?
-    .page_category_products
-      .list
-        - @products.each do |product|
-          .list_item
-            = link_to [product.category, product] do
-              .image_wrapper
-                .wl
-                .buy
-                .size
-                  .size_all
-
-                .color
-                  .color_all
-
-                .image
-                  = image_tag product.images[0].thumb.url if product.images[0]
-                  = image_tag product.images[1].thumb.url, class: :sec if product.images[1]
-
-              .data
-                .title
-                  = product.title
-
-                .price
-                  = number_to_rub product.price
+  .page_theme_kits
+    .olive
+    .kits_list
+      - @kits.each_with_index do |kit, i|
+        .kits_list_item class="kits_list_item_#{i}"
+          .image
+            = image_tag kit.images.first.url

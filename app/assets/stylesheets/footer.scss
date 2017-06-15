@@ -111,7 +111,7 @@
     }
   }
 
-  @include mq($l) {
+  @include mq($xl) {
     padding: $space-m2 $gutter * 3;
 
     &:before {

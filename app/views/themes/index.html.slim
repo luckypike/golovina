@@ -1,9 +1,9 @@
 .page.page_themes
   - @themes.each_with_index do |theme, i|
-    .page_themes_theme class=theme.slug
+    .page_themes_theme
       .text
         .title
-          = t "themes.index.#{theme.friendly_id}"
+          = theme.title
 
-        .more
-          = link_to theme.title, theme
+        .edit
+          = link_to 'редактировать', [:edit, theme]
