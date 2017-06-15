@@ -23,9 +23,23 @@ footer.footer
         = link_to 'Территория Мята', about_index_path
 
       .menu_list
-        - @categories.each do |category|
-          .menu_list_item
-            = link_to category.title, products_path
+        .menu_list_item
+          = link_to 'Наша история', '#'
+
+        .menu_list_item
+          = link_to 'События', '#'
+
+        .menu_list_item
+          = link_to 'Основательница бренда', '#'
+
+        .menu_list_item
+          = link_to 'Карьера', '#'
+
+        .menu_list_item
+          = link_to 'Контакты', '#'
+
+        .menu_list_item
+          = link_to 'Правовая информация', '#'
 
   .footer_image
     .image
