@@ -64,19 +64,21 @@
     top: $base-rhythm-line * 3 / 2;
 
     .wishlist {
-      display: none;
+
       &_icon {
         display: block;
+        height: $base-rhythm-line * 3;
+        width: $base-rhythm-line * 3;
 
-        .h {
+        .a {
           fill: none;
           stroke: $primary-color;
-          stroke-width: 2px;
-          fill-rule: evenodd;
+          stroke-miterlimit: 10;
         }
       }
 
       a {
+        padding: $base-rhythm-line * 3 / 2;
         display: block;
       }
     }
@@ -89,7 +91,7 @@
 
         .a, .b {
           fill: none;
-          stroke: #282828;
+          stroke: $primary-color;
         }
 
         .a {
