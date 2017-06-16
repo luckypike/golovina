@@ -118,5 +118,11 @@
       left: $gutter * 4;
       right: $gutter * 4;
     }
+
+    &_menu {
+      &_item {
+        width: 1 / 4 * 100%;
+      }
+    }
   }
 }
