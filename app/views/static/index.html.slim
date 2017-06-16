@@ -5,7 +5,7 @@
         = link_to theme, class: [:themes_item, "themes_item_#{i}"] do
           .themes_item_container class=[theme.friendly_id]
             - if theme.friendly_id == 'holiday'
-              = video_tag 'holiday.mp4', autoplay: true
+              = video_tag 'holiday.mp4', autoplay: true, loop: true
             .text
               .title
                 = theme.desc
