@@ -22,7 +22,7 @@
         transform: translateY(-50%);
       }
 
-      @each $theme in date walk country party home moms {
+      @each $theme in date walk country holiday party home moms {
         &.#{$theme} {
           background-image: image_url('temp/#{$theme}_small.jpg');
 

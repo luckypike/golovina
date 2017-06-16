@@ -245,8 +245,19 @@
         .image {
           @include aspect-ratio(4, 5);
 
-          background-color: $separator-color;
           margin-bottom: $base-rhythm-line / 2;
+
+          background: {
+            size: cover;
+            repeat: no-repeat;
+            position: top center;
+          }
+
+          @each $theme in business date walk country holiday party home moms {
+            &.#{$theme} {
+              background-image: image_url('temp/#{$theme}_top.jpg');
+            }
+          }
         }
       }
     }
