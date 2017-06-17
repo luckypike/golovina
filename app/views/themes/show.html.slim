@@ -14,4 +14,4 @@
       - @kits.each_with_index do |kit, i|
         .kits_list_item class="kits_list_item_#{i}"
           .image
-            = image_tag kit.images.first.url
+            = image_tag kit.images[0].thumb.url if kit.images[0]
