@@ -7,20 +7,6 @@ header.header class="#{current_page?(root_path) ? :index : :inside }"
 
       .t Меню
 
-    .header_menu
-      .header_menu_item.hhe
-        = link_to 'Стили', root_path
-
-      .header_menu_item.hhe
-        = link_to 'Одежда', products_path
-
-      .header_menu_item
-        = link_to 'Новинки', products_path
-
-      .header_menu_item
-        = link_to 'Распродажа', products_path
-
-
   .header_logo
     = link_to root_path do
       svg viewBox="0 0 76 28"
@@ -36,39 +22,15 @@ header.header class="#{current_page?(root_path) ? :index : :inside }"
       = link_to '#' do
         = inline_svg 'icons/cart.svg'
 
-  .header_full
-    .header_full_container
-      .header_full_close
-        svg viewBox="0 0 24 24"
-          line x1="0" y1="0" x2="24" y2="24"
-          line x1="0" y1="24" x2="24" y2="0"
+  .header_menu
+    .header_menu_item.hhe
+      = link_to 'Стили', root_path
 
-      .header_full_themes
-        - @themes.each do |theme|
-          .header_full_themes_item
-            = link_to theme.title, theme
+    .header_menu_item.hhe
+      = link_to 'Одежда', products_path
 
-      .header_full_main
-        .header_full_main_item
-          = link_to 'Одежда', products_path
+    .header_menu_item
+      = link_to 'Новинки', products_path
 
-        .header_full_main_item
-          = link_to 'Новинки', products_path
-
-        .header_full_main_item
-          = link_to 'Распродажа', products_path
-
-        .header_full_main_item
-          = link_to 'Территория красоты Мята', about_index_path
-
-      / .header_full_categories
-        - @categories.each do |category|
-          .header_full_themes_item
-            = link_to category.title, products_path
-
-  .header_second_row
-    .header_second_row_themes
-      - @themes.each do |theme|
-        = link_to theme, class: :header_second_row_themes_item do
-          .image class=theme.friendly_id
-          = theme.title
+    .header_menu_item
+      = link_to 'Распродажа', products_path

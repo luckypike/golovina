@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   end
 
 
-  get '/:theme', to: 'themes#show', constraints: lambda { |req| Theme.find_by_slug(req.path[1..-1]) }, as: :theme
-  resources :themes
+  # get '/:theme', to: 'themes#show', constraints: lambda { |req| Theme.find_by_slug(req.path[1..-1]) }, as: :theme
+  resources :themes, path: :styles
 
   resources :kits
   # resources :categories, only: [], path: :catalog do

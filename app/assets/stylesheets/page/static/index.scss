@@ -1,4 +1,107 @@
 &_index {
+  padding-top: 0;
+
+  &_placeholder {
+    height: 300vh;
+    position: relative;
+
+    .fade {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      transition-duration: 0.4s;
+
+      .logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 10 / 12 * 100%;
+        transform: translate(-50%, -50%);
+
+        svg {
+          .a, .b {
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 3px;
+          }
+
+          .a {
+            stroke: #4b4a4b;
+          }
+
+          .b {
+            stroke: #52b478;
+          }
+        }
+
+        @include breakpoint($s) {
+          width: 8 / 12 * 100%;
+        }
+
+        @include breakpoint($l) {
+          width: 4 / 12 * 100%;
+        }
+      }
+
+
+      .fade_out, .fade_in {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .fade_in {
+        background: {
+          image: image_url('pages/index/rec.jpg');
+          position: center;
+          size: cover;
+        }
+      }
+
+      .fade_out {
+        background: {
+          image: image_url('pages/index/rec_blur.jpg');
+          position: center;
+          size: cover;
+        }
+      }
+    }
+
+    &.QQ {
+      .fade {
+        position: absolute;
+        bottom: 0;
+        top: auto;
+
+        .fade_out {
+          // background: blue;
+        }
+      }
+    }
+
+    &.ZZ {
+      .fade {
+        // height: 90vh;
+        transform: scale(0.9);
+        // left: $gutter * 2;
+        // right: $gutter * 2;
+        // bottom: $gutter * 2;
+      }
+    }
+  }
+
+  &_themes {
+    background-color: pink;
+    width: 100%;
+    height: 700px;
+  }
+
   &_intro {
     background-color: $op-color;
 
@@ -28,202 +131,6 @@
         }
       }
     }
-
-    .shop_me_harder {
-      @include font-size-h1;
-
-      margin: 0 auto $space-m;
-      text-align: center;
-    }
-
-    @include mq($s) {
-      padding: $space-m2 $gutter;
-
-      .shop_me_harder {
-        margin: $space-s2 auto;
-      }
-    }
   }
-
-  &_themes {
-    .themes {
-      @include column-pane;
-
-      margin-top: -$space-s;
-      padding-bottom: $space-m - $space-s;
-
-      &_item {
-        display: block;
-        padding: $space-s 0;
-
-        &_container {
-          background: {
-            size: cover;
-            repeat: no-repeat;
-            position: top center;
-          }
-
-          @each $theme in business date walk country party home moms {
-            &.#{$theme} {
-              background-image: image_url('temp/#{$theme}_small.jpg');
-
-              @include mq($m) {
-                background-image: image_url('temp/#{$theme}_medium.jpg');
-              }
-            }
-          }
-
-          &.holiday {
-            background-image: image_url('temp/holiday.gif');
-          }
-        }
-
-        .more {
-          display: none;
-        }
-
-        .text {
-          position: absolute;
-
-          .title {
-            bottom: $space-s;
-            padding: 0 $gutter;
-            position: absolute;
-            color: $op-color;
-          }
-        }
-
-        &_0, &_3, &_6 {
-          .themes_item_container {
-            @include aspect-ratio(5, 4);
-
-            background-color: $color-1;
-
-            @include mq($m) {
-              @include aspect-ratio-modify(2, 1);
-            }
-          }
-
-          .text {
-            .title {
-              @include font-size(4.25, 4);
-            }
-          }
-        }
-
-        &_1, &_2, &_4, &_5, &_7, &_8 {
-          padding: $space-s $gutter;
-          // @include column-width(6);
-
-          .themes_item_container {
-            @include aspect-ratio(4, 5);
-
-            @include mq($m) {
-              @include aspect-ratio-modify(5, 4);
-            }
-          }
-
-          .text {
-            .title {
-              @include font-size(3, 3);
-            }
-          }
-
-        }
-
-        &_1, &_4, &_7 {
-          @include column-width(3, 4);
-          @include column-shift(1, right, 4);
-
-          .themes_item_container {
-            background-color: $color-2;
-          }
-        }
-
-        &_2, &_5, &_8 {
-          @include column-width(3, 4);
-          @include column-shift(1, left, 4);
-
-          .themes_item_container {
-            background-color: $color-3;
-          }
-        }
-
-        &_all {
-          padding: $space-s $gutter;
-
-          .button {
-            @include font-size(1.5, 4);
-
-            display: inline-block;
-            padding: 0 $gutter;
-            background-color: $primary-color;
-            color: $op-color;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-          }
-        }
-
-        .holiday {
-          // position: relative;
-
-          video {
-            display: none;
-            // position: absolute;
-            // left: 0;
-            // top: 0;
-            // width: 100%;
-            // height: 100%;
-
-            @include mq($m) {
-              display: block;
-            }
-          }
-        }
-      }
-
-      @include mq($s) {
-        &_item {
-          .text {
-            .title {
-              @include font-size(5.625, 6);
-            }
-          }
-        }
-      }
-
-      @include mq($m) {
-        margin-top: -$space-s2;
-
-        padding-bottom: $space-m2 - $space-s2;
-
-        &_item {
-          padding: $space-s2 $gutter * 2;
-        }
-      }
-
-      @include mq($l) {
-        &_item {
-          .text {
-            .title {
-              @include font-size(7, 8);
-            }
-          }
-        }
-      }
-
-      @include mq($xl) {
-
-        &_item {
-          padding: $space-s2 $gutter * 4;
-        }
-      }
-    }
-  }
-
-  // &.with-scroll {
-  //   overflow-y: auto;
-  //   -webkit-overflow-scrolling: touch;
-  // }
 
 }
