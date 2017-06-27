@@ -12,6 +12,25 @@
 
 
   .page_static_index_themes
+    .welcome
+      .title.h1 Вас ждет персональный шопинг
+      p Каждая история имеет свои повороты. То, что выглядит как тупик, может быть только началом новой главы.
 
+    .themes
+      .themes_list.swiper-container
+        .swiper-wrapper
+          - @themes.each_with_index do |theme, i|
+            .themes_list_item.swiper-slide
+              .themes_list_item_wrp class="i_#{i} i_l"
+                .image.image_main
+                  .im data-sp=(0 / (i % 2 + 1))
+                .image.image_sec
+                  .im data-sp=(60 * (i % 2 + 1) * 2)
+                .title
+                  = theme.desc
+
+
+    .to_all_themes
+      = link_to 'All styles', themes_path, class: :btn
 
 

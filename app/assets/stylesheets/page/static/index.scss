@@ -97,9 +97,189 @@
   }
 
   &_themes {
-    background-color: pink;
+    // background-color: pink;
+    position: relative;
     width: 100%;
-    height: 700px;
+    min-height: 100vh;
+
+    .welcome {
+      padding: ($base-rhythm-line * $base-line-height  * 3 + $space-s) $gutter $space-s;
+
+      .title {
+
+      }
+
+      @include mq($m) {
+        width: 8 / 12 * 100%;
+        margin: 0 auto $space-s2;
+      }
+
+      @include mq($l) {
+        padding: $space-s2 $gutter 0;
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        width: 4 / 16 * 100%;
+        margin-left: -(2 / 16 * 100%);
+
+      }
+
+      // @include mq($l) {
+      //   // padding: $space-s2 $gutter 0;
+      //   // position: absolute;
+      //   // left: 50%;
+      //   // top: $base-rhythm-line * 15;
+      //   width: 4 / 16 * 100%;
+      //   margin-left: -(2 / 16 * 100%);
+
+      // }
+    }
+
+    .themes {
+      margin-bottom: $space-s;
+
+      &_list {
+        // overflow-x: hidden;
+        // overflow-y: visible;
+
+        &_item {
+          padding: 0 $gutter;
+
+          &_wrp {
+            position: relative;
+
+            &.i_l {
+              padding-bottom: 12 * $base-rhythm-line;
+              margin-bottom: $base-rhythm-line * 12;
+            }
+
+          }
+
+          .image {
+
+
+            .im {
+              background-color: #f1f1f1;
+              @include aspect-ratio(4, 5);
+            }
+
+            &_sec {
+
+              display: block;
+              position: absolute;
+              width: 50%;
+              right: 0;
+              bottom: 0;
+
+              .im {
+                background-color: red;
+              }
+            }
+          }
+
+          .title {
+            @include font-size-h2;
+
+            position: absolute;
+            left: $gutter;
+            bottom: 0;
+            right: $gutter;
+            transform: translateY(100%);
+          }
+
+
+          @include mq($m) {
+            &_wrp {
+              &.i_l {
+                margin-bottom: 0;
+              }
+
+              &.i_0, &.i_2, &.i_4, &.i_6, &.i_8 {
+                width: 4 / 6 * 100%;
+                margin-left: 2 / 6 * 100%;
+                padding-bottom: 12 * $base-rhythm-line;
+
+                .title {
+                  position: absolute;
+                  left: auto;
+                  bottom: 70%;
+                  right: 50%;
+                  width: 100%;
+                  // transform: translateY(0);
+                }
+
+                .image_sec {
+                  bottom: auto;
+                  left: auto;
+                  right: 0;
+                  bottom: 0;
+                }
+
+              }
+
+              &.i_1, &.i_3, &.i_5, &.i_7, &.i_9 {
+                width: 4 / 6 * 100%;
+                margin-right: 2 / 6 * 100%;
+                padding-bottom: 0;
+                // margin-top: 18 * $base-rhythm-line;
+                padding-top: 16 * $base-rhythm-line;
+
+
+                .title {
+                  position: absolute;
+                  left: 50%;
+                  right: auto;
+                  bottom: 50%;
+                  width: 100%;
+                  // transform: translateY(50%);
+                }
+
+                .image_sec {
+                  bottom: auto;
+                  left: auto;
+                  right: 0;
+                  top: 0;
+                }
+              }
+            }
+          }
+
+          @include mq($l) {
+            &_wrp {
+              &.i_l {
+                width: 4 / 8 * 100%;
+                margin-left: 2 / 8 * 100%;
+                margin-right: 2 / 8 * 100%;
+              }
+
+              &.i_0, &.i_2, &.i_4, &.i_6, &.i_8 {
+                padding-bottom: 16 * $base-rhythm-line;
+              }
+
+              &.i_1, &.i_3, &.i_5, &.i_7, &.i_9 {
+                margin-top: 18 * $base-rhythm-line;
+                padding-top: 19 * $base-rhythm-line;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .to_all_themes {
+      margin-bottom: $space-s;
+      text-align: center;
+
+      @include mq($m) {
+        display: none;
+      }
+    }
+
+    @include mq($m) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 
   &_intro {

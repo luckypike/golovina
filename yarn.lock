@@ -21,7 +21,3 @@ reset-scss@^1.0.0:
 swiper@^3.4.2:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/swiper/-/swiper-3.4.2.tgz#39d6b410b1a39833e1f72d3b72999df5f5e38392"
-
-wheel-indicator@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/wheel-indicator/-/wheel-indicator-1.1.4.tgz#a5256cc5978600e895c252b781903958bb6f0151"

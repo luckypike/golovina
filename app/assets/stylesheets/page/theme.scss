@@ -78,7 +78,6 @@
       @include mq($l) {
         @include aspect-ratio(2, 1);
 
-        background: $color-1;
         display: block;
         position: absolute;
         left: 0;

@@ -1,4 +1,4 @@
-$default-total-columns: 12;
+$default-total-columns: 16;
 
 @mixin column-width ($columns, $total-columns: $default-total-columns) {
   width: $columns / $total-columns * 100%;
@@ -14,7 +14,7 @@ $default-total-columns: 12;
   flex-wrap: wrap;
 
   > * {
-    @include column-width(12);
+    @include column-width($default-total-columns);
   }
 }
 

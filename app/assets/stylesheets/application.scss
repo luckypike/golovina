@@ -1,5 +1,6 @@
 @import "breakpoint-sass/stylesheets/breakpoint";
 @import "reset-scss/reset.scss";
+@import "swiper/dist/css/swiper";
 
 // @import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic');
 
@@ -18,10 +19,11 @@ $gutter: 1rem;
 $primary-color: #282828;
 $op-color: #fff;
 $separator-color: #dfdfdf;
-$mint-color: #d5ecdc;
-$color-1: #9d9b7a;
-$color-2: #f5e9e0;
-$color-3: #a67148;
+$highlight-color: #e0ae39;
+// $mint-color: #d5ecdc;
+// $color-1: #9d9b7a;
+// $color-2: #f5e9e0;
+// $color-3: #a67148;
 
 $space-s: $base-rhythm-line * $base-line-height;
 $space-m: $base-rhythm-line * $base-line-height * 2;
@@ -63,16 +65,18 @@ html {
 }
 
 .btn {
-  @include font-size(1.5, 5);
+  @include font-size(1.5, 4);
 
   appearance: none;
-  background: $color-1;
-  border: 0;
+  background: transparent;
+  border: 1px solid $highlight-color;
   cursor: pointer;
-  color: $op-color;
-  padding: 0 $gutter;
+  color: $primary-color;
+  display: inline-block;
+  padding: $base-rhythm-line $gutter * 2;
   user-select: none;
   text-align: center;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  min-width: 10rem;
 }
