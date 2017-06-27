@@ -1,7 +1,7 @@
 $(function() {
   // console.log($('.page_static_index_themes').position().top);
   var _f = $('.fade');
-  var _fl = $('.fade .logo svg');
+  var _fl = $('.fade .logo_w');
   var _fo = $('.fade_out');
   var _fi = $('.fade_in');
   var _psip = $('.page_static_index_placeholder');
@@ -29,10 +29,11 @@ $(function() {
         opacity: 1
       });
 
-      var pk = 1 - ((scroll_top + $(window).height() - _psit.position().top) / _psit.height());
+      var pk = 1 - ((scroll_top + $(window).height() - _psit.position().top) / _psit.outerHeight());
 
     } else {
-      var k = scroll_top / (_psip.height() - _f.height());
+      var k = scroll_top / (_psip.outerHeight() - _f.outerHeight());
+
       pk = 0;
 
       k *= 2;
@@ -54,7 +55,8 @@ $(function() {
       });
 
       _fl.css({
-        transform: 'scale(' + (1 + (1.4 * k)) + ')'
+        transform: 'scale(' + (1 + (1.4 * k)) + ')',
+        filter: 'blur(' + (30 * k) + 'px)'
       });
 
 
@@ -86,6 +88,13 @@ $(function() {
     },
     onInit: function(swiper) {
       $(window).trigger('scroll');
+    }
+  });
+
+  var mint = new Vivus('mint_ani', {
+    type: 'scenario',
+    onReady: function() {
+      $('.desc', _fl).removeClass('inact');
     }
   });
 });

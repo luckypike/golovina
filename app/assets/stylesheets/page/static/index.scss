@@ -2,7 +2,8 @@
   padding-top: 0;
 
   &_placeholder {
-    height: 300vh;
+    height: 250vh;
+    padding-top: 150vh;
     position: relative;
 
     .fade {
@@ -20,6 +21,23 @@
         top: 50%;
         width: 10 / 12 * 100%;
         transform: translate(-50%, -50%);
+        // filter: blur(30px);
+
+        .desc {
+          @include font-size-bigger;
+
+          margin-top: $space-m;
+          text-align: center;
+          transition: 0.8s opacity 1.4s;
+
+          &.inact {
+            opacity: 0;
+          }
+
+          @include mq($m) {
+            margin-top: $base-rhythm-line * 17;
+          }
+        }
 
         svg {
           .a, .b {
@@ -70,6 +88,33 @@
           position: center;
           size: cover;
         }
+      }
+    }
+
+    .territory {
+      min-height: 100vh;
+
+      position: relative;
+      padding: 0 $gutter;
+
+      z-index: 3;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &_about {
+        color: $op-color;
+
+        .desc {
+          @include font-size-bigger;
+        }
+      }
+
+      &_contacts {
+        padding: $space-s $gutter;
+        background-color: $op-color;
+        margin-top: $base-rhythm-line * 15;
       }
     }
 
@@ -147,16 +192,28 @@
 
           &_wrp {
             position: relative;
+            display: block;
 
             &.i_l {
               padding-bottom: 12 * $base-rhythm-line;
               margin-bottom: $base-rhythm-line * 12;
             }
 
+            &:hover {
+              .image {
+                opacity: 0.2;
+              }
+
+              .title {
+                opacity: 1;
+                filter: blur(0);
+              }
+            }
+
           }
 
           .image {
-
+            transition: 2s opacity;
 
             .im {
               background-color: #f1f1f1;
@@ -185,6 +242,9 @@
             bottom: 0;
             right: $gutter;
             transform: translateY(100%);
+            opacity: 0;
+            filter: blur(20px);
+            transition: 2s filter cubic-bezier(.18,1,.21,1), 2s opacity cubic-bezier(.18,1,.21,1);
           }
 
 
