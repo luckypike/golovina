@@ -2,8 +2,9 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :title
+    / = f.input :title
     = f.association :theme
+    = f.association :products
     = f.file_field :images, multiple: true
 
   .form-actions

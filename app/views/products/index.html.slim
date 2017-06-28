@@ -89,7 +89,13 @@
           | ^
 
   - unless @products.empty?
-    .page_products_list
+    .list
+      - @products.each_with_index do |product, i|
+        .list_item
+          => link_to product.title, product
+          | (#{link_to 'редактировать', [:edit, product]})
+
+    / .page_products_list
       .list
         / - @products.each_with_index do |product, i|
         - (0..30).each do |i|

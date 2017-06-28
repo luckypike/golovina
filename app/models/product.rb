@@ -11,6 +11,10 @@ class Product < ApplicationRecord
 
   validates_presence_of :title, :price
 
+  def title
+    "#P#{id} - #{category.title}"
+  end
+
   class << self
   end
 end

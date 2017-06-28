@@ -147,8 +147,10 @@
     }
   }
 
-  &.index {
-    background-color: transparent;
+  &.inside {
+    .header_logo {
+      display: block;
+    }
   }
 
 

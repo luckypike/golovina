@@ -2,6 +2,12 @@
   .page_theme_kits
     .kits_list
       - @kits.each_with_index do |kit, i|
-        .kits_list_item class="kits_list_item_#{i}"
-          .image
-            = image_tag kit.images[0].thumb.url if kit.images[0]
+        .kits_list_item class="kits_list_item_s#{kit.products.size} kits_list_item_i#{i}"
+          .d.d_m.d_0
+            .d_image
+              = image_tag kit.images[0].thumb.url if kit.images[0]
+
+          - kit.products.each_with_index do |product, i|
+            .d.d_s class="d_#{i+1}"
+              .d_image
+                = image_tag product.images[0].thumb.url if product.images[0]

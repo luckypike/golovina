@@ -1,145 +1,91 @@
 &_theme {
-  &_intro {
-    padding: 0 $gutter;
-    position: relative;
-
-    .image {
-      @include aspect-ratio(5, 4);
-
-      background: {
-        size: cover;
-        repeat: no-repeat;
-        position: top center;
-      }
-
-      h1 {
-        color: $op-color;
-        position: absolute;
-        left: $gutter;
-        right: $gutter;
-        top: 50%;
-        text-align: center;
-        transform: translateY(-50%);
-      }
-
-      @each $theme in date walk country holiday party home moms {
-        &.#{$theme} {
-          background-image: image_url('temp/#{$theme}_small.jpg');
-
-          @include mq($m) {
-            background-image: image_url('temp/#{$theme}_medium.jpg');
-          }
-        }
-      }
-
-      &.business {
-        background-image: image_url('temp/business_alt_small.jpg');
-
-        @include mq($m) {
-          background-image: image_url('temp/business_alt_medium.jpg');
-        }
-      }
-
-      @include mq($s) {
-        @include aspect-ratio-modify(2, 1);
-      }
-    }
-
-
-    .desc {
-      @include font-size(2.5, 4);
-
-      margin: $space-m 0;
-      text-align: center;
-    }
-
-    @include mq($m) {
-      padding: 0 $gutter * 2;
-
-      .desc {
-        @include font-size(3, 6);
-
-        margin: $space-m2 auto;
-        width: 50%;
-      }
-    }
-
-    @include mq($xl) {
-      padding: 0 $gutter * 4;
-    }
-  }
 
   &_kits {
-    position: relative;
-
-    .olive {
-      display: none;
-
-      @include mq($l) {
-        @include aspect-ratio(2, 1);
-
-        display: block;
-        position: absolute;
-        left: 0;
-        top: $base-rhythm-line * 12;
-        width: 100%;
-      }
-    }
-
     .kits_list {
       @include column-pane;
 
       padding: 0 $gutter / 2;
 
+
       &_item {
-        @include column-width(6);
+        @include column-pane;
 
-        padding: 0 $gutter / 2 $space-s;
+        margin-bottom: $space-m - $gutter;
 
-        .image {
-          @include aspect-ratio(4, 5);
+        .d {
+          padding: 0 $gutter / 2 $gutter;
+
+          &_m {
+            @include column-width(2, 3);
+          }
+
+          &_s {
+            @include column-width(1, 3);
+          }
+
+          &_image {
+            @include aspect-ratio(4, 5);
+          }
+        }
+
+        &_s2 {
+          .d {
+            &_1 {
+              order: -1;
+              @include column-shift(2, left, 3);
+            }
+
+            &_3 {
+              // @include column-shift(1, left, 3);
+            }
+          }
+        }
+
+        &_s3 {
+          .d {
+            &_1 {
+              align-self: flex-end;
+            }
+
+            &_3 {
+              @include column-shift(1, left, 3);
+            }
+          }
+        }
+
+        &_s4 {
+          .d {
+            &_1 {
+              order: -1;
+            }
+          }
         }
       }
 
+
+
+
       @include mq($s) {
-        &_item {
-          padding: 0 $gutter / 2 $space-m;
-        }
+
       }
 
       @include mq($m) {
-        padding: 0 $gutter * 3 / 2;
-      }
-
-      @include mq($l) {
-        padding-top: $base-rhythm-line * 24;
+        margin-bottom: $space-m2 - $gutter;
+        padding: 0 $gutter;
 
         &_item {
-          @include column-width(3);
-
-          padding: 0 $gutter $space-m2;
-
-          &_0, &_7, &_12 {
-            @include column-width(6);
-          }
-
-          &_1, &_6, &_13 {
-            @include column-width(4);
-            @include column-shift(1, left);
-            @include column-shift(1, right);
-
-            align-self: center;
-          }
-
-          &_1 {
-            align-self: flex-start;
-            margin-top: -$base-rhythm-line * 24;
+          .d {
+            padding: 0 $gutter $gutter * 2;
           }
         }
       }
 
+      @include mq($l) {
+
+      }
+
       @include mq($xl) {
-        padding: $base-rhythm-line * 24 $gutter * 3 0;
+        padding: 0 $gutter * 3;
       }
     }
   }
