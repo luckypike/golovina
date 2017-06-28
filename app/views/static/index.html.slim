@@ -14,20 +14,29 @@
               | Хорошо знакомая территория
 
     .territory
-      .territory_about
+      .territory_about.wow.fadeInUp data-wow-duration="2s"
         .title.h1
           | Пмваиаиапиа
 
-        .decs
+        .desc
           | Каждая история имеет свои повороты. То, что выглядит как тупик, может быть только началом новой главы.
 
 
-      .territory_contacts
-        .title.h2
+      .territory_contacts.wow.fadeInUp data-wow-duration="2.5s" data-wow-delay="0.5s"
+        .title.h3
           | Территория Мяta
 
         .address
           | Улица Максима Горького, 184, Нижний Новгород
+
+        .tap
+          .tap_t
+            | 12:00 — 20:00,
+            br
+            | 12:00 — 18:00  Сб-Вс
+
+          .tap_p
+            | +7 910 134-07-77
 
   / .page_static_index_fade
 
@@ -36,6 +45,8 @@
     .welcome
       .title.h1 Вас ждет персональный шопинг
       p Каждая история имеет свои повороты. То, что выглядит как тупик, может быть только началом новой главы.
+      .more
+        = link_to 'All styles', themes_path, class: :btn
 
     .themes
       .themes_list.swiper-container

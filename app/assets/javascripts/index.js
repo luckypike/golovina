@@ -97,5 +97,8 @@ $(function() {
       $('.desc', _fl).removeClass('inact');
     }
   });
+
+  var wow = new WOW();
+  wow.init();
 });
 
