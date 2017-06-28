@@ -21,7 +21,6 @@
         top: 50%;
         width: 10 / 12 * 100%;
         transform: translate(-50%, -50%);
-        // filter: blur(30px);
 
         .desc {
           @include font-size-bigger;
@@ -93,12 +92,9 @@
 
     .territory {
       min-height: 100vh;
-
       position: relative;
       padding: 0 $gutter;
-
       z-index: 3;
-
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -133,12 +129,9 @@
             margin-top: $space-s2;
           }
         }
-
-
       }
 
       @include mq($m) {
-        // flex-direction: row;
         &_about {
           width: 6 / 16 * 100%;
           margin-left: 2 / 16 * 100%;
@@ -152,7 +145,6 @@
       }
 
       @include mq($l) {
-        // flex-direction: row;
         &_about {
           width: 4 / 16 * 100%;
         }
@@ -168,26 +160,17 @@
         position: absolute;
         bottom: 0;
         top: auto;
-
-        .fade_out {
-          // background: blue;
-        }
       }
     }
 
     &.ZZ {
       .fade {
-        // height: 90vh;
         transform: scale(0.9);
-        // left: $gutter * 2;
-        // right: $gutter * 2;
-        // bottom: $gutter * 2;
       }
     }
   }
 
   &_themes {
-    // background-color: pink;
     position: relative;
     width: 100%;
     min-height: 100vh;
@@ -216,29 +199,14 @@
         top: 20%;
         width: 4 / 16 * 100%;
         margin-left: -(2 / 16 * 100%);
-
         text-align: center;
-
       }
-
-      // @include mq($l) {
-      //   // padding: $space-s2 $gutter 0;
-      //   // position: absolute;
-      //   // left: 50%;
-      //   // top: $base-rhythm-line * 15;
-      //   width: 4 / 16 * 100%;
-      //   margin-left: -(2 / 16 * 100%);
-
-      // }
     }
 
     .themes {
       margin-bottom: $space-s;
 
       &_list {
-        // overflow-x: hidden;
-        // overflow-y: visible;
-
         &_item {
           padding: 0 $gutter;
 
@@ -282,15 +250,12 @@
                 filter: blur(0);
               }
             }
-
           }
 
           .image {
             transition: 0.6s opacity;
 
-
             .im {
-              // background-color: #f1f1f1;
               @include aspect-ratio(4, 5);
 
               background: {
@@ -301,20 +266,13 @@
             }
 
             &_sec {
-
               display: block;
               position: absolute;
               width: 50%;
               right: 0;
               bottom: 0;
-
-              .im {
-                // background-color: red;
-              }
             }
           }
-
-
 
           .title {
             @include font-size-h2;
@@ -347,13 +305,12 @@
                   bottom: 70%;
                   right: 50%;
                   width: 100%;
-                  // transform: translateY(0);
                 }
 
                 .image_sec {
                   bottom: auto;
                   left: auto;
-                  right: -(1 / 8 * 100%);
+                  right: 0;
                   bottom: 0;
                 }
 
@@ -363,9 +320,7 @@
                 width: 4 / 6 * 100%;
                 margin-right: 2 / 6 * 100%;
                 padding-bottom: 0;
-                // margin-top: 18 * $base-rhythm-line;
                 padding-top: 16 * $base-rhythm-line;
-
 
                 .title {
                   position: absolute;
@@ -373,7 +328,6 @@
                   right: auto;
                   bottom: 50%;
                   width: 100%;
-                  // transform: translateY(50%);
                 }
 
                 .image_sec {
@@ -396,6 +350,10 @@
 
               &.i_0, &.i_2, &.i_4, &.i_6, &.i_8 {
                 padding-bottom: 16 * $base-rhythm-line;
+
+                .image_sec {
+                  right: -(1 / 8 * 100%);
+                }
               }
 
               &.i_1, &.i_3, &.i_5, &.i_7, &.i_9 {
@@ -433,7 +391,6 @@
       svg {
         display: block;
         margin: 0 auto;
-        // max-height: 100%;
         max-width: 100%;
         max-height: 10rem;
 

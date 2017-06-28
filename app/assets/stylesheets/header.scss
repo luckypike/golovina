@@ -1,7 +1,6 @@
 .header {
   @include font-size-small;
 
-  background-color: $op-color;
   height: $base-rhythm-line * $base-line-height  * 3;
   position: fixed;
   left: 0;

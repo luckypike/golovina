@@ -1,15 +1,5 @@
 .page.page_theme
-  .page_theme_intro
-    .image class=@theme.friendly_id
-      h1
-        = @theme.title
-
-    .desc
-      | Может выглядеть очень сексуально. Приталенные жакеты и пальто, узкие юбки с запахом или разрезом,
-        шелковые блузки-гимнастерки — не поступаясь женственностью, вы выглядите уверенно в офисе или на деловой встрече.
-
   .page_theme_kits
-    .olive
     .kits_list
       - @kits.each_with_index do |kit, i|
         .kits_list_item class="kits_list_item_#{i}"
