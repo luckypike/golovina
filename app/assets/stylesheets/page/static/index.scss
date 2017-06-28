@@ -286,7 +286,7 @@
           }
 
           .image {
-            transition: 2s opacity;
+            transition: 0.6s opacity;
 
 
             .im {
@@ -353,7 +353,7 @@
                 .image_sec {
                   bottom: auto;
                   left: auto;
-                  right: 0;
+                  right: -(1 / 8 * 100%);
                   bottom: 0;
                 }
 
