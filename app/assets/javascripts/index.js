@@ -105,5 +105,7 @@ $(function() {
       }
     });
   }
+
+  new WOW().init();
 });
 
