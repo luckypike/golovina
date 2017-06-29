@@ -228,9 +228,20 @@
     .header_logo {
       display: block;
     }
+
+    .header_menu {
+
+
+      @include mq($l) {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
   }
 
-  &.with_nav, &.inside {
+
+
+  &.with_nav {
     .header_menu {
       opacity: 1;
       transform: translateX(0);
