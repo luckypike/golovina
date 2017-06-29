@@ -191,6 +191,10 @@
     .welcome {
       padding: ($base-rhythm-line * $base-line-height  * 3 + $space-s) $gutter $space-s;
 
+      p {
+        @include font-size-bigger();
+      }
+
       .more {
         display: none;
         margin-top: $space-m2;
