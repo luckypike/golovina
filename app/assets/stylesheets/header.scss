@@ -120,7 +120,12 @@
       width: $base-rhythm-line * $base-line-height;
       height: $base-rhythm-line * $base-line-height;
 
-      fill: $primary-color;
+
+
+      rect {
+        fill: $primary-color;
+        transition: 0.2s fill;
+      }
     }
 
     .t {
@@ -130,13 +135,51 @@
       // text-transform: uppercase;
     }
 
+    transition: 0.2s color;
+
+    &:hover {
+      color: $highlight-color;
+
+      svg {
+        rect {
+          fill: $highlight-color;
+        }
+      }
+    }
+
     @include mq($m) {
       // display: none;
     }
   }
 
   &_menu {
-    display: none;
+    background-color: $op-color;
+    // background: red;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    padding: $space-m2 $gutter;
+    left: 0;
+    width: 2 / 16 * 100%;
+    min-width: 160px;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition-duration: 0.4s;
+    transition-property: transform opacity;
+
+    a {
+      transition: 0.2s color;
+
+      &.active, &:hover {
+        color: $highlight-color;
+      }
+
+      &.subs {
+        &.active {
+          color: #858585;
+        }
+      }
+    }
 
     &_item {
       padding-right: $gutter;
@@ -145,11 +188,52 @@
         display: block;
       }
     }
+
+    &_sub {
+      @include font-size(1.25, 2);
+
+      padding: 0 0 $base-rhythm-line $gutter / 2;
+
+      &_item {
+        padding: $base-rhythm-line / 2 0;
+      }
+    }
+
+    &_filters {
+      margin-top: $space-s;
+      display: none;
+
+      .title {
+        @include font-size(2, 3);
+
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      @include mq($m) {
+        display: block;
+      }
+    }
+
+    @include mq($m) {
+      padding: $space-m2 0 0 $gutter * 2;
+    }
+
+    @include mq($xl) {
+      padding: $space-m2 0 0 $gutter * 4;
+    }
   }
 
   &.inside {
     .header_logo {
       display: block;
+    }
+  }
+
+  &.with_nav, &.inside {
+    .header_menu {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
 

@@ -62,9 +62,6 @@
         }
       }
 
-
-
-
       @include mq($s) {
 
       }
@@ -72,6 +69,7 @@
       @include mq($m) {
         margin-bottom: $space-m2 - $gutter;
         padding: 0 $gutter;
+
 
         &_item {
           .d {
@@ -81,11 +79,13 @@
       }
 
       @include mq($l) {
-
+        padding: 0 $gutter / 2;
+        width: 12 / 16 * 100%;
+        margin-left: 2 / 16 * 100%;
       }
 
       @include mq($xl) {
-        padding: 0 $gutter * 3;
+        // padding: 0 $gutter * 3;
       }
     }
   }

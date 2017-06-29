@@ -14,7 +14,7 @@
               | Хорошо знакомая территория
 
     .territory
-      .territory_about.wow.fadeInUp data-wow-duration="1.1s" data-wow-delay="0.6s"
+      .territory_about
         .title.h1
           | Пмваиаиапиа
 
@@ -22,7 +22,7 @@
           | Каждая история имеет свои повороты. То, что выглядит как тупик, может быть только началом новой главы.
 
 
-      .territory_contacts.wow.fadeInUp data-wow-duration="1.4s" data-wow-delay="0.6s"
+      .territory_contacts
         .title.h3
           | Территория Мяta
 
@@ -46,7 +46,7 @@
       .title.h1 Вас ждет персональный шопинг
       p Каждая история имеет свои повороты. То, что выглядит как тупик, может быть только началом новой главы.
       .more
-        = link_to 'All styles', themes_path, class: :btn
+        = link_to 'Начать покупки', @themes.first, class: :btn
 
     .themes
       .themes_list.swiper-container
@@ -63,6 +63,6 @@
 
 
     .to_all_themes
-      = link_to 'All styles', themes_path, class: :btn
+      = link_to 'Начать покупки', @themes.first, class: :btn
 
 

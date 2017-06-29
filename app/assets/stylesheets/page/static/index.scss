@@ -2,8 +2,8 @@
   padding-top: 0;
 
   &_placeholder {
-    height: 250vh;
-    padding-top: 150vh;
+    height: 200vh;
+    // padding-top: 150vh;
     position: relative;
 
     .fade {
@@ -14,6 +14,7 @@
       height: 100vh;
       overflow: hidden;
       transition-duration: 0.4s;
+      z-index: 2;
 
       .logo {
         position: absolute;
@@ -92,7 +93,11 @@
 
     .territory {
       min-height: 100vh;
-      position: relative;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 100vh;
       padding: 0 $gutter;
       z-index: 3;
       display: flex;
@@ -101,6 +106,7 @@
 
       &_about {
         color: $op-color;
+        opacity: 0;
 
         .desc {
           @include font-size-bigger;
@@ -109,8 +115,9 @@
 
       &_contacts {
         padding: $space-s $gutter;
-        background-color: $op-color;
+        background-color: rgba($op-color, 0.7);
         margin-top: $base-rhythm-line * 15;
+        opacity: 0;
 
         .tap {
           display: flex;
@@ -129,6 +136,7 @@
             margin-top: $space-s2;
           }
         }
+
       }
 
       @include mq($m) {
@@ -150,13 +158,14 @@
         }
 
         &_contacts {
+          padding: $space-s2 $gutter * 3;
           width: 4 / 16 * 100%;
         }
       }
     }
 
     &.QQ {
-      .fade {
+      .fade, .territory {
         position: absolute;
         bottom: 0;
         top: auto;
@@ -200,6 +209,7 @@
         width: 4 / 16 * 100%;
         margin-left: -(2 / 16 * 100%);
         text-align: center;
+        z-index: 3;
       }
     }
 

@@ -23,14 +23,36 @@ header.header class="#{current_page?(root_path) ? :index : :inside }"
         = inline_svg 'icons/cart.svg'
 
   .header_menu
-    .header_menu_item.hhe
-      = link_to 'Стили', root_path
-
-    .header_menu_item.hhe
-      = link_to 'Одежда', products_path
+    .header_menu_item
+      = link_to 'Shop', @themes.first
 
     .header_menu_item
-      = link_to 'Новинки', products_path
+      = active_link_to 'Стили', @themes.first, class: :subs
+      - if current_page? @themes.first
+        .header_menu_sub
+          - @themes.each do |theme|
+            .header_menu_sub_item
+              = active_link_to theme.title, theme
 
     .header_menu_item
-      = link_to 'Распродажа', products_path
+      = link_to 'Sale', @themes.first
+
+    .header_menu_item
+      = link_to 'New', @themes.first
+
+    - if current_page? @themes.first
+      .header_menu_filters
+        .title Фильтры
+
+        .header_menu_item
+          = link_to 'Цвет', '#'
+          .header_menu_sub
+            - @colors.each do |color|
+              .header_menu_sub_item
+                = link_to color.title, '#'
+
+        .header_menu_item
+          = link_to 'Материал', '#'
+
+        .header_menu_item
+          = link_to 'Размер', '#'
