@@ -77,7 +77,7 @@
       .fade_in {
         background: {
           image: image_url('pages/index/rec.jpg');
-          position: center;
+          position: 15% center;
           size: cover;
         }
       }
@@ -85,7 +85,7 @@
       .fade_out {
         background: {
           image: image_url('pages/index/rec_blur.jpg');
-          position: center;
+          position: 15% center;
           size: cover;
         }
       }
@@ -105,7 +105,7 @@
       justify-content: center;
 
       &_about {
-        color: $op-color;
+        // color: $op-color;
         opacity: 0;
 
         .desc {
@@ -114,10 +114,14 @@
       }
 
       &_contacts {
-        padding: $space-s $gutter;
-        background-color: rgba($op-color, 0.7);
-        margin-top: $base-rhythm-line * 15;
+        // padding: $space-s $gutter;
+        // background-color: rgba($op-color, 0.7);
+        margin-top: $base-rhythm-line * 6;
+        margin-bottom: $base-rhythm-line * 10;
         opacity: 0;
+
+        // transition-delay: 2s;
+        animation-delay: 0.4s;
 
         .tap {
           display: flex;
@@ -129,7 +133,7 @@
         }
 
         @include mq($s) {
-          margin-left: auto;
+          // margin-right: auto;
           max-width: 320px;
 
           .tap, .address {
@@ -140,27 +144,27 @@
       }
 
       @include mq($m) {
-        &_about {
+        &_about, &_contacts {
           width: 6 / 16 * 100%;
           margin-left: 2 / 16 * 100%;
         }
 
-        &_contacts {
-          width: 6 / 16 * 100%;
-          max-width: none;
-          margin-right: 2 / 16 * 100%;
-        }
+        // &_contacts {
+        //   width: 6 / 16 * 100%;
+        //   max-width: none;
+        //   margin-right: 2 / 16 * 100%;
+        // }
       }
 
       @include mq($l) {
-        &_about {
+        &_about, &_contacts {
           width: 4 / 16 * 100%;
         }
 
-        &_contacts {
-          padding: $space-s2 $gutter * 3;
-          width: 4 / 16 * 100%;
-        }
+        // &_contacts {
+        //   padding: $space-s2 $gutter * 3;
+        //   width: 4 / 16 * 100%;
+        // }
       }
     }
 
