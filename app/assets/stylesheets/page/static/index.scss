@@ -257,6 +257,26 @@
               }
             }
 
+            &.i_2 {
+              .image_main .im {
+                background-image: image_url('pages/index/i_1.jpg');
+              }
+
+              .image_sec .im {
+                background-image: image_url('pages/index/i_2.jpg');
+              }
+            }
+
+            &.i_3 {
+              .image_main .im {
+                background-image: image_url('pages/index/i_3.jpg');
+              }
+
+              .image_sec .im {
+                background-image: image_url('pages/index/i_0.jpg');
+              }
+            }
+
 
             &:hover {
               .image {
