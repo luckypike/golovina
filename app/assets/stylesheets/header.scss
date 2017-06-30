@@ -164,6 +164,7 @@
     min-width: 160px;
     opacity: 0;
     transform: translateX(-50%);
+    visibility: hidden;
     transition-duration: 0.4s;
     transition-property: transform opacity;
 
@@ -245,6 +246,7 @@
     .header_menu {
       opacity: 1;
       transform: translateX(0);
+      visibility: visible;
     }
   }
 
