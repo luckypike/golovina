@@ -62,14 +62,6 @@ ActiveRecord::Schema.define(version: 20170628145212) do
     t.index ["colors"], name: "index_products_on_colors", using: :gin
   end
 
-  create_table "themables", force: :cascade do |t|
-    t.bigint "theme_id"
-    t.string "themable_type"
-    t.bigint "themable_id"
-    t.index ["themable_type", "themable_id"], name: "index_themables_on_themable_type_and_themable_id"
-    t.index ["theme_id"], name: "index_themables_on_theme_id"
-  end
-
   create_table "themes", force: :cascade do |t|
     t.string "title"
     t.string "slug"
