@@ -1,11 +1,12 @@
 &_theme {
+  padding-left: $gutter;
+  padding-right: $gutter;
 
   &_kits {
     .kits_list {
       @include column-pane;
 
-      padding: 0 $gutter / 2;
-
+      margin: 0 -$gutter / 2;
 
       &_item {
         @include column-pane;
@@ -62,14 +63,8 @@
         }
       }
 
-      @include mq($s) {
-
-      }
-
       @include mq($m) {
-        margin-bottom: $space-m2 - $gutter;
-        padding: 0 $gutter;
-
+        margin: 0 0 $space-m2 - $gutter;
 
         &_item {
           .d {
@@ -77,16 +72,13 @@
           }
         }
       }
-
-      @include mq($l) {
-        padding: 0 $gutter / 2;
-        width: 12 / 16 * 100%;
-        margin-left: 2 / 16 * 100%;
-      }
-
-      @include mq($xl) {
-        // padding: 0 $gutter * 3;
-      }
     }
+  }
+
+  @include mq($l) {
+    padding-left: 0;
+    padding-right: 0;
+    width: 12 / 16 * 100%;
+    margin-left: 2 / 16 * 100%;
   }
 }

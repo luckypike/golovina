@@ -1,7 +1,3 @@
-
-
-
-
 .page.page_products
   .page_products_intro
     h1 Одежда
@@ -9,91 +5,56 @@
   .fd_w
     .fd_ph
     .fd
-      .fd_b.fd_f
-        .title
-          | Фильтры
+      .fd_i
+        .t
+          | Стиль
+          = inline_svg 'icons/varr.svg'
 
-        .fd_f_list
-          .fd_f_list_item
-            .name
-              | Тип
+        .f.themes
+          .f_l
+            - @themes.each do |theme|
+              .f_l_i
+                = theme.title
 
-            .opts
-              .opts_list
-                - @categories.each do |category|
-                  .opts_list_item
-                    = category.title
 
-          .fd_f_list_item
-            .name
-              | Стиль
+      .fd_i
+        .t
+          | Цвет
+          = inline_svg 'icons/varr.svg'
 
-            .opts
-              .opts_list
-                - @themes.each do |theme|
-                  .opts_list_item
-                    = theme.title
+        .f.colors
+          .f_l
+            - @colors.each do |color|
+              .f_l_i
+                = color.title
 
-          .fd_f_list_item
-            .name
-              | Материал
+      .fd_i
+        .t
+          | Размер
+          = inline_svg 'icons/varr.svg'
 
-            .opts
-              .opts_list
-                .opts_list_item Кожа
-                .opts_list_item Хлопок
-                .opts_list_item Лён
-                .opts_list_item Вискоза
-
-          .fd_f_list_item
-            .name
-              | Размер
-
-            .opts
-              .opts_list
-                .opts_list_item XS
-                .opts_list_item S
-                .opts_list_item M
-                .opts_list_item L
-                .opts_list_item XL
-                .opts_list_item XXL
-
-          .fd_f_list_item
-            .name
-              | Цвет
-
-            .opts
-              .opts_list
-                - @colors.each do |color|
-                  .opts_list_item
-                    = color.title
-
-      .fd_b.fd_s
-        .title
-          | Сортировка
-
-        .fd_f_list
-          .fd_f_list_item
-            .name
-              | Сортировать
-
-            .opts
-              .opts_list
-                .opts_list_item
-                  | Сначала дорогие
-                .opts_list_item
-                  | Сначала дешевые
-
-      .fd_b.fd_t
-        .title
-          | ^
+        .f.sizes
+          .f_l
+            .f_l_i XS
+            .f_l_i S
+            .f_l_i M
+            .f_l_i L
 
   - unless @products.empty?
-    .list
-      - @products.each_with_index do |product, i|
-        .list_item
-          => link_to product.title, product
-          | (#{link_to 'редактировать', [:edit, product]})
+    .page_products_grid
+      .products_list
+        - @products.each_with_index do |product, i|
+          .products_list_item
+            = link_to product do
+              .image
+                = image_tag product.images[0].thumb.url if product.images[0]
+
+              .data
+                .price
+                  = number_to_rub product.price
+
+                / .title
+                  = product.title
 
     / .page_products_list
       .list

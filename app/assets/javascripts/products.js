@@ -4,14 +4,16 @@ $(function(){
     $(this).toggleClass('active');
   });
 
-  $('.fd').on('mouseenter', function(){
-    $(this).addClass('fd_d');
-  }).on('mouseleave', function() {
-    $(this).removeClass('fd_d');
+  $('.fd_i').on('click', '.t', function() {
+    var _fdi = $(this).parent();
+    $('.fd_d').not(_fdi).removeClass('fd_d');
+    _fdi.toggleClass('fd_d', !_fdi.is('.fd_d'));
+    $('.fd_l .f.' + _fdi.data('f')).toggleClass('fa', _fdi.is('.fd_d'));
+
   });
 
-
-
-  // var product_swiper = new Swiper('.swiper_product', {
-  // });
+  $('.fd_w').on('mouseleave', function() {
+    var _fdi = $('.fd_i.fd_d', this);
+    $('.t', _fdi).trigger('click');
+  });
 });

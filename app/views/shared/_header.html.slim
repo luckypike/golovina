@@ -5,7 +5,7 @@ header.header class="#{current_page?(root_path) ? :index : :inside }"
         rect x=0 y=8 width=24 height=1
         rect x=0 y=15 width=24 height=1
 
-      .t Меню
+      / .t Menu
 
   .header_logo
     = link_to root_path do
@@ -23,24 +23,31 @@ header.header class="#{current_page?(root_path) ? :index : :inside }"
         = inline_svg 'icons/cart.svg'
 
   .header_menu
-    .header_menu_item
-      = link_to 'Shop', @themes.first
+    .header_menu_item class=(controller_name == 'themes' ? :active: nil)
+      .title
+        = active_link_to 'Looks', @themes.first, class: :subs
+
+      .sub
+        - @themes.each do |theme|
+          .sub_item
+            = active_link_to theme.title, theme
+
+    .header_menu_item class=(controller_name == 'products' ? :active: nil)
+      .title
+        = link_to 'Shop', @themes.first
+
+      .sub
+        - @categories.each do |category|
+          .sub_item
+            = active_link_to category.title, products_path(category: [category.id]), active: :exact
 
     .header_menu_item
-      = active_link_to 'Стили', @themes.first, class: :subs
-      - if current_page? @themes.first
-        .header_menu_sub
-          - @themes.each do |theme|
-            .header_menu_sub_item
-              = active_link_to theme.title, theme
+      = link_to 'Sale', root_path
 
     .header_menu_item
-      = link_to 'Sale', @themes.first
+      = link_to 'New', root_path
 
-    .header_menu_item
-      = link_to 'New', @themes.first
-
-    - if current_page? @themes.first
+    / - if current_page? @themes.first
       .header_menu_filters
         .title Фильтры
 
