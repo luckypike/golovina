@@ -1,22 +1,23 @@
-h1 Listing kinds
+.page.page_common
+  h1 Listing kinds
 
-table
-  thead
-    tr
-      th Title
-      th Category
-      th
-      th
-      th
-
-  tbody
-    - @kinds.each do |kind|
+  table
+    thead
       tr
-        td = kind.title
-        td = kind.category
-        td = link_to 'Edit', edit_kind_path(kind)
-        td = link_to 'Destroy', kind, data: { confirm: 'Are you sure?' }, method: :delete
+        th Title
+        th Category
+        th
+        th
+        th
 
-br
+    tbody
+      - @kinds.each do |kind|
+        tr
+          td = kind.title
+          td = kind.category
+          td = link_to 'Edit', edit_kind_path(kind)
+          td = link_to 'Destroy', kind, data: { confirm: 'Are you sure?' }, method: :delete
 
-= link_to 'New Kind', new_kind_path
+  br
+
+  = link_to 'New Kind', new_kind_path

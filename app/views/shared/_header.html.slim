@@ -1,4 +1,4 @@
-header.header class="#{current_page?(root_path) ? :index : :inside }"
+header.header class="#{menu_catalog? ? :with_nav : :nil }"
   .header_nav
     .header_burger
       svg viewBox="0 0 24 24"
@@ -23,7 +23,7 @@ header.header class="#{current_page?(root_path) ? :index : :inside }"
         = inline_svg 'icons/cart.svg'
 
   .header_menu
-    .header_menu_item class=(controller_name == 'themes' ? :active: nil)
+    .header_menu_item class=(menu_catalog? ? :active: nil)
       .title
         = active_link_to 'Looks', @themes.first, class: :subs
 
@@ -32,7 +32,7 @@ header.header class="#{current_page?(root_path) ? :index : :inside }"
           .sub_item
             = active_link_to theme.title, theme
 
-    .header_menu_item class=(controller_name == 'products' ? :active: nil)
+    .header_menu_item class=(menu_catalog? ? :active: nil)
       .title
         = link_to 'Shop', @themes.first
 
