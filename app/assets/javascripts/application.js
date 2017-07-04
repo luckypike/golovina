@@ -13,7 +13,7 @@
 //= require rails-ujs
 //= require jquery
 //= require vivus
-//= require wowjs
 //= require swiper/dist/js/swiper.jquery
+//= require wheel-indicator
 //= require barba.js/dist/barba.js
 //= require_tree .

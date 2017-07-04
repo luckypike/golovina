@@ -1,4 +1,42 @@
 $(function() {
+
+
+
+  if($('.swiper_primary').length > 0) {
+    var mint = new Vivus('mint_ani', {
+      type: 'scenario',
+      onReady: function() {
+        $('.desc', _fl).removeClass('inact');
+      }
+    });
+
+    var swiper = new Swiper('.swiper_primary', {
+      initialSlide: 0,
+      direction: 'vertical',
+      effect: 'fade',
+      // nextButton: '.swiper-button-next',
+      // prevButton: '.swiper-button-prev',
+      onSlideChangeStart: function(swiper) {
+
+      }
+    });
+
+    var indicator = new WheelIndicator({
+      elem: document.querySelector('.swiper_primary'),
+      callback: function(e){
+        console.log(e.direction);
+        var s = $(e.target).closest('.swiper_secondary').data('id');
+
+        if(e.direction == 'up') {
+          swiper.slidePrev(true, 800);
+        } else {
+          swiper.slideNext(true, 1400);
+        }
+        //console.log();
+      }
+    });
+  }
+
   // console.log($('.page_static_index_themes').position().top);
   var _f = $('.fade');
   var _fl = $('.fade .logo_w');
@@ -105,7 +143,5 @@ $(function() {
       }
     });
   }
-
-  new WOW().init();
 });
 
