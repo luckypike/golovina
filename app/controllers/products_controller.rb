@@ -4,8 +4,11 @@ class ProductsController < ApplicationController
   def index
     where = {}
     where[:category] = params[:category] if params[:category]
-    where[:variants] = { color: params[:color] } if params[:color]
-    @products = Product.includes(:kind, :variants).order(id: :asc).where(where)
+    where[:color] = params[:color] if params[:color]
+
+
+    @products = Variant.includes(product: [:kind]).themed_by(params[:theme]).where(where).map(&:product).uniq
+    # .order(id: :asc)
   end
 
   def show
@@ -33,6 +36,12 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
+      @product.variants.map do |v|
+        v.themes = @product.themes.map(&:id)
+        v.category = @product.category
+      end
+      @product.save
+
       redirect_to @product, notice: 'Product was successfully updated.'
     else
       render :edit
@@ -65,6 +74,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:kind_id, :theme_id, :category_id, :price, :desc, { images: []}, variants_attributes: [:id, :_destroy, sizes: []])
+      params.require(:product).permit(:kind_id, :category_id, :price, :desc, { images: []}, theme_ids: [], variants_attributes: [:id, :_destroy, sizes: []])
     end
 end

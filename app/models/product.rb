@@ -8,7 +8,9 @@ class Product < ApplicationRecord
 
   belongs_to :category
   belongs_to :kind
-  belongs_to :theme
+
+  has_many :themable
+  has_many :themes, through: :themable
 
   has_many :variants, inverse_of: :product
   accepts_nested_attributes_for :variants, allow_destroy: true
