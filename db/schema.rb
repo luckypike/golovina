@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628145212) do
+ActiveRecord::Schema.define(version: 20170704150006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 20170628145212) do
     t.datetime "updated_at", null: false
     t.index ["parent_color_id"], name: "index_colors_on_parent_color_id"
     t.index ["slug"], name: "index_colors_on_slug", unique: true
+  end
+
+  create_table "kinds", force: :cascade do |t|
+    t.string "title"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_kinds_on_category_id"
   end
 
   create_table "kitables", force: :cascade do |t|
@@ -58,8 +66,10 @@ ActiveRecord::Schema.define(version: 20170628145212) do
     t.datetime "updated_at", null: false
     t.json "images"
     t.string "colors", array: true
+    t.bigint "kind_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["colors"], name: "index_products_on_colors", using: :gin
+    t.index ["kind_id"], name: "index_products_on_kind_id"
   end
 
   create_table "themes", force: :cascade do |t|
@@ -109,8 +119,10 @@ ActiveRecord::Schema.define(version: 20170628145212) do
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 
+  add_foreign_key "kinds", "categories"
   add_foreign_key "kits", "themes"
   add_foreign_key "products", "categories"
+  add_foreign_key "products", "kinds"
   add_foreign_key "variants", "colors"
   add_foreign_key "variants", "products"
   add_foreign_key "wishlists", "products"

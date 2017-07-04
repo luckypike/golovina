@@ -3,29 +3,25 @@ business:
   desc: Уверенность в каждом шаге
 
 date:
-  title: Свидание
+  title: На свидание
   desc: Волнение первой встречи
 
 walk:
-  title: Прогулка
+  title: На любой день
   desc: Лёгкость в каждом движении
 
 holiday:
-  title: Отпуск
+  title: К морю
   desc: Идеальные каникулы
 
-country:
-  title: Загород
-  desc: Свобода движения
-
 party:
-  title: Выход в свет
+  title: Вечеринки и приемы
   desc: Быть на высоте
 
-home:
-  title: Для дома
-  desc: Домашний уют
+white:
+  title: Белые платья
+  desc: Легкость и чистота
 
 moms:
-  title: Для мам
+  title: Будущим мамам
   desc: В прекрасном положении

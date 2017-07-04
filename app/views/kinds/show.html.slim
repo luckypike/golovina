@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @kind.title
+p
+  strong Category:
+  = @kind.category
+
+= link_to 'Edit', edit_kind_path(@kind)
+'  |
+= link_to 'Back', kinds_path

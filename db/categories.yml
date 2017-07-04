@@ -1,5 +1,5 @@
 coats:
-  title: Пальто и куртки
+  title: Верхняя одежда
   desc:
 
 dresses:
@@ -17,7 +17,7 @@ skirts:
   title: Юбки
 
 trousers:
-  title: Брюки
+  title: Брюки и джинсы
 
 sweaters:
   title: Свитера и кардиганы
@@ -27,3 +27,9 @@ t-shirts:
 
 bags:
   title: Сумки
+
+shoes:
+  title: Обувь
+
+accessories:
+  title: Аксессуары

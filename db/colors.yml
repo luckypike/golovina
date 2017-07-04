@@ -2,6 +2,14 @@ white:
   title: Белый
   desc: Светлая пора
 
+black:
+  title: Черный
+  desc: Чёрное золото
+
+gray:
+  title: Серый
+  desc: Небо Лондона
+
 red:
   title: Красный
   desc: Красной нитью
@@ -22,10 +30,14 @@ pink:
   title: Розовый
   desc: Жизнь в розовом цвете
 
-black:
-  title: Черный
-  desc: Чёрное золото
+stripe:
+  title: Полосатый
 
-gray:
-  title: Серый
-  desc: Небо Лондона
+flowers:
+  title: Цветочный
+
+mono:
+  title: Черно-белое
+
+undef:
+  title: Авангард
