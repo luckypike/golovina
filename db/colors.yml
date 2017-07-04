@@ -32,12 +32,16 @@ pink:
 
 stripe:
   title: Полосатый
+  desc:
 
 flowers:
   title: Цветочный
+  desc:
 
 mono:
   title: Черно-белое
+  desc:
 
 undef:
   title: Авангард
+  desc:

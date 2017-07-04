@@ -24,7 +24,7 @@ class KindsController < ApplicationController
     @kind = Kind.new(kind_params)
 
     if @kind.save
-      redirect_to @kind, notice: 'Kind was successfully created.'
+      redirect_to kinds_path, notice: 'Kind was successfully created.'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class KindsController < ApplicationController
   # PATCH/PUT /kinds/1
   def update
     if @kind.update(kind_params)
-      redirect_to @kind, notice: 'Kind was successfully updated.'
+      redirect_to kinds_path, notice: 'Kind was successfully updated.'
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class KindsController < ApplicationController
   # DELETE /kinds/1
   def destroy
     @kind.destroy
-    redirect_to kinds_url, notice: 'Kind was successfully destroyed.'
+    redirect_to kinds_path, notice: 'Kind was successfully destroyed.'
   end
 
   private

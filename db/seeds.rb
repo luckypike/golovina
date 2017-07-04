@@ -10,30 +10,27 @@
 
 categories = YAML.load_file('db/categories.yml')
 
-categories.each_with_index do |(slug, c), id|
-  category = Category.where(id: id + 1).first_or_initialize
-  category.title = c['title']
-  category.slug = slug
-  category.desc = c['desc']
+categories.each_pair do |slug, v|
+  category = Category.where(slug: slug).first_or_initialize
+  category.title = v['title']
+  category.desc = v['desc']
   category.save
 end
 
 colors = YAML.load_file('db/colors.yml')
 
-colors.each_with_index do |(slug, c), id|
-  color = Color.where(id: id + 1).first_or_initialize
-  color.title = c['title']
-  color.slug = slug
-  color.desc = c['desc']
+colors.each_pair do |slug, v|
+  color = Color.where(slug: slug).first_or_initialize
+  color.title = v['title']
+  color.desc = v['desc']
   color.save
 end
 
 themes = YAML.load_file('db/themes.yml')
 
-themes.each_with_index do |(slug, c), id|
-  theme = Theme.where(id: id + 1).first_or_initialize
-  theme.title = c['title']
-  theme.desc = c['desc']
-  theme.slug = slug
+themes.each_pair do |slug, v|
+  theme = Theme.where(slug: slug).first_or_initialize
+  theme.title = v['title']
+  theme.desc = v['desc']
   theme.save
 end
