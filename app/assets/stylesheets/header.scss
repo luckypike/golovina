@@ -244,6 +244,24 @@
     }
   }
 
+  &.active {
+    @include mq($l) {
+      .header_menu {
+        opacity: 1;
+        transform: translateX(0);
+        visibility: visible;
+      }
+
+      .header_burger {
+        svg {
+          rect {
+            fill: $highlight-color;
+          }
+        }
+    }
+    }
+  }
+
 
   @include breakpoint($s) {
     &_logo {

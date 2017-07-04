@@ -1,7 +1,15 @@
 $(function() {
+  var _h = $('.header');
   $('.header_burger').on('click', function() {
-    $('.header').toggleClass('with_nav');
-    // $('body').toggleClass('full_screen');
+    if(_h.is('.active')) {
+      _h.removeClass('active');
+      if($('.header_menu', _h).css('visibility') == 'visible') {
+      } else {
+        _h.addClass('with_nav');
+      }
+    } else {
+      _h.toggleClass('with_nav');
+    }
   });
 
   $('.header_menu_item .title a').on('click', function(e) {
