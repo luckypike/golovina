@@ -2,7 +2,10 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist]
 
   def index
-    @products = Product.order(id: :asc).limit(8)
+    where = {}
+    where[:category] = params[:category] if params[:category]
+    where[:variants] = { color: params[:color] } if params[:color]
+    @products = Product.includes(:kind, :variants).order(id: :asc).where(where)
   end
 
   def show
@@ -62,6 +65,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:kind_id, :category_id, :price, :desc, { images: []}, variants_attributes: [:id, sizes: []])
+      params.require(:product).permit(:kind_id, :theme_id, :category_id, :price, :desc, { images: []}, variants_attributes: [:id, :_destroy, sizes: []])
     end
 end

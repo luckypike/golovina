@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704150006) do
+ActiveRecord::Schema.define(version: 20170704165250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,17 +67,11 @@ ActiveRecord::Schema.define(version: 20170704150006) do
     t.json "images"
     t.string "colors", array: true
     t.bigint "kind_id"
+    t.bigint "theme_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["colors"], name: "index_products_on_colors", using: :gin
     t.index ["kind_id"], name: "index_products_on_kind_id"
-  end
-
-  create_table "themables", force: :cascade do |t|
-    t.bigint "theme_id"
-    t.string "themable_type"
-    t.bigint "themable_id"
-    t.index ["themable_type", "themable_id"], name: "index_themables_on_themable_type_and_themable_id"
-    t.index ["theme_id"], name: "index_themables_on_theme_id"
+    t.index ["theme_id"], name: "index_products_on_theme_id"
   end
 
   create_table "themes", force: :cascade do |t|
@@ -131,6 +125,7 @@ ActiveRecord::Schema.define(version: 20170704150006) do
   add_foreign_key "kits", "themes"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "kinds"
+  add_foreign_key "products", "themes"
   add_foreign_key "variants", "colors"
   add_foreign_key "variants", "products"
   add_foreign_key "wishlists", "products"

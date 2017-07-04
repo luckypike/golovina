@@ -1,10 +1,9 @@
 .page.page_product_form
   h1
     = @product.title
-    =< "##{@product.id}"
 
   .to_product
-    = link_to 'Вернуться к товару', [@product.category, @product]
+    = link_to 'Вернуться к товару', @product
 
 
   .page_product_form_variants
@@ -15,15 +14,8 @@
         - @product.variants.each do |variant|
           = f.simple_fields_for :variants, variant do |vf|
             = variant.color.title
-            / = vf.input :id, as: :hidden
-            / = vf.association :color
             = vf.input :sizes, as: :check_boxes, collection: [42, 44, 46]
-
-      / .variants
-        - @variants.each do |variant|
-          .variants_item
-            = variant.id
-            =< variant.color.title
+            = vf.input :_destroy, as: :boolean
 
       .form-actions
         = f.button :submit

@@ -1,6 +1,6 @@
 module ApplicationHelper
   def menu_catalog?
-    p %w(themes products).include? controller_name
+    %w(themes products).include? controller_name
   end
 
   def typekit_include_tag

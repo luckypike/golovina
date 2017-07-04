@@ -8,10 +8,10 @@ class Product < ApplicationRecord
 
   belongs_to :category
   belongs_to :kind
-
+  belongs_to :theme
 
   has_many :variants, inverse_of: :product
-  accepts_nested_attributes_for :variants
+  accepts_nested_attributes_for :variants, allow_destroy: true
 
   validates_presence_of :price
 
@@ -20,7 +20,7 @@ class Product < ApplicationRecord
   end
 
   def set_category
-    self.category = kind.category
+    self.category = kind.category if kind
   end
 
   class << self
