@@ -1,4 +1,4 @@
-header.header class="#{menu_catalog? ? :with_nav : :nil }"
+header.header class="#{menu_catalog? ? :with_nav : nil } #{current_page?(root_path) ? :index : nil}"
   .header_nav
     .header_burger
       svg viewBox="0 0 24 24"
@@ -42,10 +42,18 @@ header.header class="#{menu_catalog? ? :with_nav : :nil }"
             = active_link_to category.title, products_path(category: [category.id]), active: :exact
 
     .header_menu_item
-      = link_to 'Sale', root_path
+      = link_to 'Sale', '#'
 
     .header_menu_item
-      = link_to 'New', root_path
+      = link_to 'New', '#'
+
+    .header_menu_item.sep
+      = link_to 'Мяtа', '#'
+
+    .header_menu_item.
+      = link_to 'Контакты', '#'
+
+
 
     / - if current_page? @themes.first
       .header_menu_filters
