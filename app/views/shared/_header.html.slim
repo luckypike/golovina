@@ -23,7 +23,7 @@ header.header class="#{menu_catalog? ? :with_nav : nil } #{current_page?(root_pa
         = inline_svg 'icons/cart.svg'
 
   .header_menu
-    .header_menu_item class=(menu_catalog? ? :active: nil)
+    .header_menu_item class=(controller_name == 'themes' ? :active: nil)
       .title
         = active_link_to 'Looks', @themes.first, class: :subs
 
@@ -32,7 +32,7 @@ header.header class="#{menu_catalog? ? :with_nav : nil } #{current_page?(root_pa
           .sub_item
             = active_link_to theme.title, theme
 
-    .header_menu_item class=(menu_catalog? ? :active: nil)
+    .header_menu_item class=(controller_name == 'products' ? :active: nil)
       .title
         = link_to 'Shop', @themes.first
 
