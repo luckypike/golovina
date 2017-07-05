@@ -180,16 +180,25 @@
             position: relative;
 
             .title {
-              @include font-size(1.25, 2);
 
               color: $op-color;
               padding: 0 $gutter / 2;
               position: absolute;
               bottom: $base-rhythm-line;
               left: 0;
-              letter-spacing: 0.2em;
-              text-transform: uppercase;
+
               width: 100%;
+
+              .sl {
+                display: none;
+              }
+
+              .n {
+                @include font-size(1.25, 2);
+
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+              }
             }
           }
 
@@ -206,7 +215,9 @@
           &.i_1 .image .im { background-image: image_url('pages/index/i_1.jpg'); }
           &.i_2 .image .im { background-image: image_url('pages/index/i_2.jpg'); }
           &.i_3 .image .im { background-image: image_url('pages/index/i_3.jpg'); }
-
+          &.i_4 .image .im { background-image: image_url('pages/index/i_4.jpg'); }
+          &.i_5 .image .im { background-image: image_url('pages/index/i_5.jpg'); }
+          &.i_6 .image .im { background-image: image_url('pages/index/i_6.jpg'); }
 
           &.i_1,
           &.i_4 {
@@ -247,14 +258,68 @@
           &_item {
             padding: 0 $gutter;
 
+            .image {
+              transition: 1.5s filter cubic-bezier(.18,1,.21,1), 1.5s opacity cubic-bezier(.18,1,.21,1);
+            }
+
             &.i_2 {
               .image .im {
                 @include aspect-ratio-modify(5, 4);
               }
             }
 
-            &_wrp {
+            .title {
+              color: $primary-color;
+              bottom: 50%;
+              opacity: 0;
+              filter: blur(20px);
+              transition: 1.5s filter cubic-bezier(.18,1,.21,1), 1.5s opacity cubic-bezier(.18,1,.21,1);
 
+              .sl {
+                @include font-size-h1;
+
+                display: block;
+
+
+              }
+            }
+
+            &.i_0,
+            &.i_2,
+            &.i_4,
+            &.i_6 {
+              .title {
+                left: -40%;
+                text-align: right;
+                right: 50%;
+
+              }
+            }
+
+            &.i_1,
+            &.i_3,
+            &.i_5,
+            &.i_7 {
+              .title {
+                right: -40%;
+                text-align: left;
+                left: 50%;
+
+              }
+            }
+
+            &_wrp {
+              &:hover {
+                .image {
+                  opacity: 0.2;
+                  filter: blur(5px);
+                }
+
+                .title {
+                  opacity: 1;
+                  filter: blur(0);
+                }
+              }
             }
           }
         }
