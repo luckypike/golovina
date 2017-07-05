@@ -37,7 +37,7 @@ header.header class="#{menu_catalog? ? :active : nil } #{current_page?(root_path
         = link_to 'Shop', @themes.first
 
       .sub
-        - @categories.each do |category|
+        - @categories.select{ |c| c.products.size > 0 }.each do |category|
           .sub_item
             = active_link_to category.title, products_path(category: [category.id]), active: :exact
 

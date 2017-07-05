@@ -10,7 +10,7 @@ class ThemesController < ApplicationController
   end
 
   def show
-    @kits = Kit.order(id: :asc)
+    @kits = @theme.kits
   end
 
   def new
