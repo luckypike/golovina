@@ -81,9 +81,19 @@
 
       &.i-3 {
         background-color: $op-color;
+        display: flex;
+
+        .themes {
+          align-self: center;
+        }
       }
       &.i-4 {
-        background-color: pink;
+        background-color: $op-color;
+        display: flex;
+
+        .themes {
+          align-self: center;
+        }
       }
 
       .fade {
@@ -148,6 +158,147 @@
 
         @include breakpoint($l) {
           width: 4 / 12 * 100%;
+        }
+      }
+    }
+
+    .themes {
+      width: 100%;
+
+      &_list {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 $gutter / 2;
+
+        &_item {
+          width: 50%;
+          padding: 0 $gutter / 2;
+          margin-bottom: $base-rhythm-line * 2;
+
+          &_wrp {
+            display: block;
+            position: relative;
+
+            .title {
+              @include font-size(1.25, 2);
+
+              color: $op-color;
+              padding: 0 $gutter / 2;
+              position: absolute;
+              bottom: $base-rhythm-line;
+              left: 0;
+              letter-spacing: 0.2em;
+              text-transform: uppercase;
+              width: 100%;
+            }
+          }
+
+          .image .im {
+            @include aspect-ratio(4, 5);
+
+            background: {
+              color: #888;
+              size: cover;
+            }
+          }
+
+          &.i_0 .image .im { background-image: image_url('pages/index/i_0.jpg'); }
+          &.i_1 .image .im { background-image: image_url('pages/index/i_1.jpg'); }
+          &.i_2 .image .im { background-image: image_url('pages/index/i_2.jpg'); }
+          &.i_3 .image .im { background-image: image_url('pages/index/i_3.jpg'); }
+
+
+          &.i_1,
+          &.i_4 {
+            .image .im {
+              @include aspect-ratio-modify(5, 4);
+            }
+          }
+
+          &.i_2,
+          &.i_6 {
+            margin-left: 1 / 8 * 100%;
+            width: 3 / 8 * 100%;
+
+            .image .im {
+              @include aspect-ratio-modify(1, 1);
+            }
+          }
+
+          &.i_6 {
+            margin-top: -15%;
+          }
+
+          &.i_3 {
+            margin-top: -15%;
+            margin-right: 1 / 8 * 100%;
+            width: 3 / 8 * 100%;
+          }
+        }
+      }
+
+      @include mq($m) {
+        width: 12 / 16 * 100%;
+        margin: 0 auto;
+
+        &_list {
+          padding: 0 $gutter;
+
+          &_item {
+            padding: 0 $gutter;
+
+            &.i_2 {
+              .image .im {
+                @include aspect-ratio-modify(5, 4);
+              }
+            }
+
+            &_wrp {
+
+            }
+          }
+        }
+      }
+
+      @include mq($l) {
+        &_list {
+
+          &_item {
+            &.i_0 {
+              width: 5 / 12 * 100%;
+              margin-left: 1 / 12 * 100%;
+              margin-bottom: $space-s2;
+            }
+
+            &.i_5 {
+              width: 5 / 12 * 100%;
+              margin-right: 1 / 12 * 100%;
+            }
+
+            &.i_1 {
+              width: 5 / 12 * 100%;
+              margin-right: 1 / 12 * 100%;
+              margin-top: 9%;
+            }
+
+            &.i_4 {
+              width: 5 / 12 * 100%;
+              margin-left: 1 / 12 * 100%;
+            }
+
+            &.i_2 {
+              width: 4 / 12 * 100%;
+              margin-right: 0;
+              margin-left: 2 / 12 * 100%;
+            }
+
+            &.i_3 {
+              width: 4 / 12 * 100%;
+              margin-top: -7%;
+              margin-left: 0;
+              margin-right: 2 / 12 * 100%;
+            }
+          }
         }
       }
     }

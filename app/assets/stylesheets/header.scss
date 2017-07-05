@@ -7,14 +7,12 @@
   top: 0;
   width: 100%;
   z-index: 10;
-  // overflow: hidden;
 
   &.hidden {
     z-index: 0;
   }
 
   &_logo {
-    // display: none;
     position: absolute;
     left: 50%;
     top: 22px;

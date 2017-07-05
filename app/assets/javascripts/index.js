@@ -14,6 +14,7 @@ $(function() {
       initialSlide: 0,
       direction: 'vertical',
       effect: 'fade',
+      initialSlide: 0,
       // nextButton: '.swiper-button-next',
       // prevButton: '.swiper-button-prev',
       onSlideChangeStart: function(swiper) {
