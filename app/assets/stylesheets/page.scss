@@ -88,25 +88,29 @@
         &_i {
           cursor: pointer;
           margin-bottom: $base-rhythm-line  / 2;
+
+          &.active {
+            color: $highlight-color;
+          }
         }
       }
 
-      &.colors {
+      &.color {
         padding-left: $gutter * 4.5 + $gutter;
       }
 
-      &.sizes {
+      &.size {
         padding-left: $gutter * 9 + $gutter * 2;
       }
 
       @include mq($m) {
         padding-left: $gutter;
 
-        &.colors {
+        &.color {
           padding-left: $gutter * 4.5 + $gutter * 2;
         }
 
-        &.sizes {
+        &.size {
           padding-left: $gutter * 9 + $gutter * 3;
         }
       }

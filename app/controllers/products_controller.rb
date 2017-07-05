@@ -3,9 +3,24 @@ class ProductsController < ApplicationController
 
   def index
     where = {}
-    where[:category] = params[:category] if params[:category]
-    where[:color] = params[:color] if params[:color]
 
+    %w(theme size).each do |f|
+      params[f] = params[f].present? ? params[f].map(&:to_i) : []
+      where[f.pluralize] = params[f] if params[f].present? && f != 'theme'
+    end
+
+    %w(category color).each do |f|
+      params[f] = params[f].present? ? params[f].map(&:to_i) : []
+      where[f] = params[f] if params[f].present?
+    end
+
+    # params[:category] = params[:category].presence || []
+    # params[:color] = params[:color].presence || []
+    # params[:theme] = params[:theme].presence || []
+    # params[:size] = params[:size].presence || []
+
+    p params
+    p where
 
     @products = Variant.includes(product: [:kind]).themed_by(params[:theme]).where(where).map(&:product).uniq
     # .order(id: :asc)

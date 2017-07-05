@@ -1,5 +1,5 @@
 class Variant < ApplicationRecord
-  scope :themed_by, ->(themes) { where('themes @> any(array[?]::jsonb[])', themes) if themes.present? }
+  scope :themed_by, ->(themes) { where('themes @> any(array[?]::jsonb[])', themes.map(&:to_s)) if themes.present? }
 
   before_validation :sync_themes_and_category
 
