@@ -57,6 +57,31 @@
           }
 
           transform: scale(4);
+
+          .about {
+            // opacity: 0;
+            position: absolute;
+            left: 50%;
+            // right: 10%;
+            top: 50%;
+            transform: scale(0.5) translate(-100%, -100%);
+            width: 80%;
+
+            .desc {
+              @include font-size-bigger;
+            }
+
+            @include mq($m) {
+              left: 45%;
+              // transform: scale(0.5) translate(-85%, -100%);
+              width: 6 / 12 * 100%;
+            }
+
+            @include mq($l) {
+              left: 40%;
+              width: 4 / 12 * 100%;
+            }
+          }
         }
 
         &.swiper-slide-active {
