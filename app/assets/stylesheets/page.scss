@@ -14,6 +14,16 @@
   @import "page/product";
 
   @import "page/static";
+
+  &_common {
+    padding-left: $gutter;
+    padding-right: $gutter;
+
+    @include mq($l) {
+      width: 12 / 16 * 100%;
+      margin: 0 auto;
+    }
+  }
 }
 
 .link_fake {

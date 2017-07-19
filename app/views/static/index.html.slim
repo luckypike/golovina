@@ -1,4 +1,64 @@
 .page.page_static_index
+  .page_static_index_mint
+    .logo
+
+  .page_static_index_themes
+    .themes_list
+      .themes_list_item.walk
+        .theme
+          .image
+          .text
+            .title
+              span
+                = @themes[2].desc
+          .desc
+            | Летние вечера всегда самые романтичные, а представить такие невозможно без летящего платья.
+
+      .themes_list_item.business
+        .theme
+          .image
+          .text
+            .title
+              span
+                = @themes[0].desc
+
+      .themes_list_item.slogan
+        .text
+          | Как демократичная костюмная ткань покорила парижскую высокую моду
+
+      .themes_list_item.date
+        .theme
+          .image
+          .text
+            .title
+              span
+                = @themes[1].desc
+
+      .themes_list_item.accessories
+        .text
+          | Как демократичная костюмная ткань покорила парижскую высокую моду
+
+      .themes_list_item.holiday
+        .theme
+          .image
+          .text
+            .title
+              span
+                = @themes[3].desc
+
+            .desc
+              span
+                | Если вы уже совершили поездку лета, сорвитесь еще в одну!
+
+      / - @themes.each_with_index do |theme, i|
+        .themes_list_item class="i_#{i}"
+          .theme
+            .image
+            .text
+              = theme.desc
+
+
+/ .page.page_static_index
   .swiper_primary.swiper-container
     .swiper-wrapper
       .swiper_primary_item.swiper-slide.i-1

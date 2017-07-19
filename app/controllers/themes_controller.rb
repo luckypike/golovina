@@ -51,6 +51,6 @@ class ThemesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def theme_params
-      params.require(:theme).permit(:title, :slug)
+      params.require(:theme).permit(:title, :slug, :desc)
     end
 end
