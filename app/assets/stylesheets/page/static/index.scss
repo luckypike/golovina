@@ -1,16 +1,93 @@
 &_index {
-  padding-top: 0;
+  // padding-top: 0;
 
   &_mint {
     margin-bottom: $space-m;
+    position: relative;
 
-    .logo {
-      @include aspect-ratio(1, 1);
-
-      background-color: #f3f3f3;
+    .facade {
+      background: {
+        color: #f3f3f3;
+        image: image_url('pages/index/facade_small.jpg');
+        position: center;
+        size: cover;
+      }
+      height: 320px;
 
       @include mq($s) {
-        @include aspect-ratio(2, 1);
+        height: 600px;
+
+        background: {
+          image: image_url('pages/index/facade_large.jpg');
+        }
+      }
+
+      @include mq($l) {
+        height: 800px;
+      }
+    }
+
+    .logo {
+      display: none;
+
+      &_est {
+        position: absolute;
+        bottom: $space-s;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      &_mint {
+        position: absolute;
+        width: 80%;
+        left: 10%;
+        right: 10%;
+        top: 50%;
+        margin-top: -50%;
+
+
+
+        .what {
+          @include font-size(4.25, 5);
+
+          font-weight: 300;
+          font-family: 'Cormorant', serif;
+          margin-top: $space-s;
+          text-align: center;
+        }
+
+        svg {
+          .a, .b {
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 3px;
+          }
+
+          .a {
+            stroke: #4b4a4b;
+          }
+
+          .b {
+            stroke: #52b478;
+          }
+        }
+      }
+
+      @include mq($m) {
+        height: 100%;
+        top: 0;
+        display: block;
+        position: absolute;
+        right: $gutter * 2;
+        width: calc(4 / 12 * 100% - #{$gutter});
+        background-color: #fff;
+      }
+
+      @include mq($l) {
+        right: calc(2 / 16 * 100% + #{$gutter});
+        width: calc(4 / 16 * 100% - #{$gutter / 2});
       }
     }
   }
@@ -344,6 +421,11 @@
   }
 
   @include mq($m) {
+    &_mint {
+      margin-bottom: $space-s * 4;
+      // padding: 0 $gutter;
+    }
+
     &_themes {
       padding-bottom: $space-m * 6;
     }
@@ -351,16 +433,13 @@
 
 
   @include mq($l) {
-    padding-left: 0;
-    padding-right: 0;
-    width: 12 / 16 * 100%;
-    margin-left: 2 / 16 * 100%;
 
-    &_mint {
-      padding: 0 $gutter;
-    }
 
     &_themes {
+
+      width: 12 / 16 * 100%;
+      margin-left: 2 / 16 * 100%;
+
       padding: 0 $gutter;
       padding-bottom: $space-m * 6;
     }

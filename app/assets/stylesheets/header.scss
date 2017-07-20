@@ -138,7 +138,7 @@
     bottom: 0;
     padding: $space-m2 $gutter;
     left: 0;
-    width: 2 / 16 * 100%;
+    width: calc(2 / 16 * 100% + #{$gutter});
     min-width: 160px;
     opacity: 0;
     transform: translateX(-50%);
