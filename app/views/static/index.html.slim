@@ -7,7 +7,7 @@
       .themes_list_item.walk
         .theme
           .image
-          .text
+          .text.mb
             .title
               span
                 = @themes[2].desc
@@ -17,7 +17,7 @@
       .themes_list_item.business
         .theme
           .image
-          .text
+          .text.mb
             .title
               span
                 = @themes[0].desc
@@ -29,7 +29,7 @@
       .themes_list_item.date
         .theme
           .image
-          .text
+          .text.mb
             .title
               span
                 = @themes[1].desc
@@ -41,7 +41,7 @@
       .themes_list_item.holiday
         .theme
           .image
-          .text
+          .text.mb
             .title
               span
                 = @themes[3].desc
@@ -49,6 +49,30 @@
             .desc
               span
                 | Если вы уже совершили поездку лета, сорвитесь еще в одну!
+
+      .themes_list_item.moms
+        .theme
+          .image
+          .text.mb
+            .title
+              span
+                = @themes[6].desc
+
+      .themes_list_item.party
+        .theme
+          .image
+          .text.mb
+            .title
+              span
+                = @themes[4].desc
+
+      .themes_list_item.white
+        .theme
+          .image
+          .text.mb
+            .title
+              span
+                = @themes[5].desc
 
       / - @themes.each_with_index do |theme, i|
         .themes_list_item class="i_#{i}"
