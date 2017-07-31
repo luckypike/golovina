@@ -2,7 +2,7 @@
   @include font-size-small;
 
   height: $base-rhythm-line * $base-line-height  * 3;
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   width: 100%;
@@ -220,7 +220,9 @@
 
   &.index {
     .header_logo {
-      display: none;
+      @include mq($m){
+        display: none;
+      }
     }
   }
 
@@ -272,6 +274,8 @@
   }
 
   @include breakpoint($m) {
+    position: fixed;
+
     &_nav {
       left: $gutter * 2;
     }

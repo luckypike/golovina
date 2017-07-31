@@ -40,7 +40,7 @@ $(function() {
         //   // k *= k;
         // }
 
-        if(_window.width() > 760) {
+        if(_window.width() >= 960) {
           _el.css({
             transform: 'translateY(' + (_el.parent().height() / 4 * k * -1) + 'px)'
           });
