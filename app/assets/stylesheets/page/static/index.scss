@@ -40,16 +40,16 @@
       }
 
       &_mint {
-        // width: 80%
+        text-align: center;
 
         .what {
           @include font-size(4.25, 5);
 
           font-weight: 300;
           font-family: 'Cormorant', serif;
-          margin-top: $space-s;
-          text-align: center;
           padding: 0 $gutter;
+          margin-top: $space-s;
+          margin-bottom: $space-s;
         }
 
         svg {
@@ -72,37 +72,72 @@
         }
       }
 
-      @include mq($m) {
+      @include mq($s) {
         height: 100%;
         top: 0;
         display: block;
         position: absolute;
-        right: $gutter * 2;
-        width: calc(4 / 12 * 100% - #{$gutter});
-        background-color: rgba(#fff, 0.85);
+        left: $gutter;
+        width: 50%;
+
+        // background-color: rgba(#fff, 0.85);
 
         &_mint {
           position: absolute;
-          width: 80%;
-          left: 10%;
-          right: 10%;
+          width: 100%;
+          left: $gutter;
           top: 50%;
-          margin-top: -50%;
+          transform: translatey(-50%);
+          text-align: left;
 
-          svg {
-            display: block;
+          .what {
+            @include font-size(9, 8);
+
+            padding: 0;
+            text-align: left;
           }
         }
 
         &_est {
+          text-align: left;
           display: block;
+        }
+
+        &:before {
+          background-color: #fff;
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          right: 2 / 3 * 100%;
         }
       }
 
+
       @include mq($l) {
-        right: calc(2 / 16 * 100% + #{$gutter});
-        width: calc(4 / 16 * 100% - #{$gutter / 2});
+        &_mint {
+          left: 0;
+
+          .what {
+            @include font-size(14, 12);
+          }
+        }
       }
+    }
+
+    @include mq($s) {
+      padding: 0 $gutter;
+    }
+
+    @include mq($m) {
+      padding: 0 $gutter * 2;
+    }
+
+    @include mq($l) {
+      padding: 0 $gutter;
+      width: 12 / 16 * 100%;
+      margin-left: 2 / 16 * 100%;
     }
   }
 
@@ -573,8 +608,6 @@
 
 
   @include mq($l) {
-
-
     &_themes {
 
       width: 12 / 16 * 100%;
@@ -590,7 +623,6 @@
 
     &_item {
       position: relative;
-      // min-height: 100vh;
 
       &.i-1 {
         position: relative;
