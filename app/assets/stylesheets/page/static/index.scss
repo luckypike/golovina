@@ -9,7 +9,7 @@
       background: {
         color: #f3f3f3;
         image: image_url('pages/index/facade_small.jpg');
-        position: center;
+        position: right center;
         size: cover;
       }
       height: 320px;
@@ -132,6 +132,8 @@
 
     @include mq($m) {
       padding: 0 $gutter * 2;
+      width: 12 / 14 * 100%;
+      margin-left: 2 / 14 * 100%;
     }
 
     @include mq($l) {
@@ -602,6 +604,10 @@
     }
 
     &_themes {
+
+      width: 12 / 14 * 100%;
+      margin-left: 2 / 14 * 100%;
+
       padding-bottom: $space-m * 6;
     }
   }

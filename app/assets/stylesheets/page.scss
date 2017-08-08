@@ -19,10 +19,19 @@
     padding-left: $gutter;
     padding-right: $gutter;
 
+    @include mq($m) {
+      width: 12 / 14 * 100%;
+      margin-left: 2 / 14 * 100%;
+    }
+
     @include mq($l) {
       width: 12 / 16 * 100%;
-      margin: 0 auto;
+      margin-left: 2 / 16 * 100%;
     }
+  }
+
+  @include mq($m) {
+    padding-top: $space-m2;
   }
 }
 
