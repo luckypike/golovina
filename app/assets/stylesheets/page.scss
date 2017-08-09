@@ -3,17 +3,7 @@
 @import "page/kit";
 
 .page {
-  padding-top: $space-s * 3;
-
-  @import "page/category";
-
-  @import "page/theme";
-  @import "page/themes";
-
-  @import "page/products";
-  @import "page/product";
-
-  @import "page/static";
+  padding-top: $base-rhythm-line * $base-line-height  * 3;
 
   &_common {
     padding-left: $gutter;
@@ -31,8 +21,18 @@
   }
 
   @include mq($m) {
-    padding-top: $space-m2;
+    // padding-top: $space-m2;
   }
+
+  @import "page/category";
+
+  @import "page/theme";
+  @import "page/themes";
+
+  @import "page/products";
+  @import "page/product";
+
+  @import "page/static";
 }
 
 .link_fake {

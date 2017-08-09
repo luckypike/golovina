@@ -222,13 +222,11 @@
     }
   }
 
-  // &.index {
-  //   .header_logo {
-  //     @include mq($m){
-  //       display: none;
-  //     }
-  //   }
-  // }
+  &.index {
+    .header_logo {
+      display: none;
+    }
+  }
 
 
 
@@ -248,23 +246,23 @@
     }
   }
 
-  // &.active {
-  //   @include mq($m) {
-  //     .header_menu {
-  //       opacity: 1;
-  //       transform: translateX(0);
-  //       visibility: visible;
-  //     }
+  &.active {
+    @include mq($m) {
+      .header_menu {
+        opacity: 1;
+        transform: translateX(0);
+        visibility: visible;
+      }
 
-  //     .header_burger {
-  //       svg {
-  //         rect {
-  //           fill: $highlight-color;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+      .header_burger {
+        svg {
+          rect {
+            fill: $highlight-color;
+          }
+        }
+      }
+    }
+  }
 
 
   @include breakpoint($s) {
@@ -278,26 +276,26 @@
   }
 
   @include breakpoint($m) {
-    height: $space-m2;
+    // height: $space-m2;
     position: fixed;
 
     &_logo {
-      left: $gutter * 2;
-      top: $space-m2;
-      transform: none;
+      // left: $gutter * 2;
+      // top: $space-m2;
+      // transform: none;
 
-      > a {
-        padding: $base-rhythm-line 0;
+      // > a {
+      //   padding: $base-rhythm-line 0;
 
-        svg {
-          width: 130px;
-          height: 48px;
-        }
-      }
+      //   svg {
+      //     width: 130px;
+      //     height: 48px;
+      //   }
+      // }
     }
 
     &_nav {
-      display: none;
+      // display: none;
       left: $gutter * 2;
     }
 
@@ -306,11 +304,11 @@
       right: $gutter;
     }
 
-    &_menu {
-      opacity: 1;
-      transform: translateX(0);
-      visibility: visible;
-    }
+    // &_menu {
+    //   opacity: 1;
+    //   transform: translateX(0);
+    //   visibility: visible;
+    // }
   }
 
   @include breakpoint($xl) {
@@ -318,9 +316,9 @@
       left: $gutter * 4;
     }
 
-    &_logo {
-      left: $gutter * 4;
-    }
+    // &_logo {
+    //   left: $gutter * 4;
+    // }
 
     &_caw {
       right: $gutter * 3;

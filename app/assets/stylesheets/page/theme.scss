@@ -6,7 +6,7 @@
     .kits_list {
       @include column-pane;
 
-      margin: 0 -$gutter / 2;
+      margin: 0 (-$gutter / 2);
 
       &_item {
         @include column-pane;
