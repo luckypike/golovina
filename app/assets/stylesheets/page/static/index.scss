@@ -2,7 +2,7 @@
   // padding-top: 0;
 
   &_mint {
-    margin-bottom: $space-m;
+    margin-bottom: $space-s;
     position: relative;
 
     .facade {
@@ -15,7 +15,18 @@
       height: 320px;
 
       @include mq($s) {
+        position: relative;
         height: 600px;
+
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, #fff, rgba(#fff, 0))
+        }
 
         background: {
           image: image_url('pages/index/facade_large.jpg');
@@ -141,6 +152,14 @@
       width: 12 / 16 * 100%;
       margin-left: 2 / 16 * 100%;
     }
+  }
+
+  &_discover {
+    @include font-size-small;
+
+    padding: 0 $gutter;
+    margin-bottom: $space-s;
+    text-align: center;
   }
 
   &_themes {
@@ -599,8 +618,12 @@
 
   @include mq($m) {
     &_mint {
-      margin-bottom: $space-s * 4;
+      margin-bottom: $space-s2;
       // padding: 0 $gutter;
+    }
+
+    &_discover {
+      margin-bottom: $space-s2;
     }
 
     &_themes {

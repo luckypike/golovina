@@ -75,6 +75,11 @@
     }
   }
 
+  @include mq($m) {
+    width: 12 / 14 * 100%;
+    margin-left: 2 / 14 * 100%;
+  }
+
   @include mq($l) {
     padding-left: 0;
     padding-right: 0;
