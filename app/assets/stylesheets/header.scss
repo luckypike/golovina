@@ -1,7 +1,7 @@
 .header {
   @include font-size-small;
 
-  height: $base-rhythm-line * $base-line-height  * 3;
+  height: $base-rhythm-line * 8;
   position: absolute;
   left: 0;
   top: 0;
@@ -15,6 +15,7 @@
   &_logo {
     position: absolute;
     left: 50%;
+    // left: $base-rhythm-line * $base-line-height + $gutter * 3;
     top: 22px;
     transform: translateX(-50%);
     z-index: 2;
@@ -53,7 +54,7 @@
     position: absolute;
     left: $gutter;
     margin-left:  - ($base-line-height * $base-rhythm-line / 2);
-    top: $base-line-height * $base-rhythm-line / 2;
+    top: $base-rhythm-line * 2;
     user-select: none;
     z-index: 2;
   }
@@ -61,8 +62,32 @@
   &_caw {
     position: absolute;
     display: flex;
-    right: 0;
-    top: $base-rhythm-line * 3 / 2;
+    right: $gutter - 0.625rem;
+    top: $base-rhythm-line * 2;
+
+    .phone {
+      .pa {
+        padding: $base-rhythm-line * 3 / 2 $base-rhythm-line / 2;
+        display: block;
+      }
+
+      &_icon {
+        display: block;
+        height: $base-rhythm-line * 3;
+        width: $base-rhythm-line * 3;
+
+
+        .a {
+          fill: #212121;
+        }
+
+        .b {
+          fill: none;
+          stroke: #212121;
+          stroke-miterlimit: 10;
+        }
+      }
+    }
 
     .wishlist {
       &_icon {
@@ -78,7 +103,7 @@
       }
 
       a {
-        padding: $base-rhythm-line * 3 / 2;
+        padding: $base-rhythm-line * 3 / 2 $base-rhythm-line / 2;
         display: block;
       }
     }
@@ -104,7 +129,7 @@
       }
 
       a {
-        padding: $base-rhythm-line * 3 / 2;
+        padding: $base-rhythm-line * 3 / 2 $base-rhythm-line / 2;
         display: block;
       }
     }
@@ -142,7 +167,7 @@
     bottom: 0;
     padding: $space-m2 $gutter;
     left: 0;
-    width: calc(2 / 16 * 100% + #{$gutter});
+    width: 2 / 16 * 100%;
     min-width: 160px;
     opacity: 0;
     transform: translateX(-50%);
@@ -213,22 +238,58 @@
       }
     }
 
-    @include mq($m) {
-      padding: ($space-m2 * 2 + $space-s2) 0 0 $gutter * 2;
-    }
+    // @include mq($m) {
+    //   padding: $space-m2 0 0 $gutter * 2;
+    // }
 
-    @include mq($xl) {
-      padding: ($space-m2 * 2 + $space-s2) 0 0 $gutter * 4;
-    }
+    // @include mq($xl) {
+    //   padding: $space-m2 0 0 $gutter * 4;
+    // }
   }
 
   &.index {
     .header_logo {
       display: none;
     }
+
+    .header_burger {
+      svg {
+        rect {
+          fill: $op-color;
+        }
+      }
+    }
+
+    .header_caw {
+      .phone {
+        &_icon {
+          .b {
+            stroke: $op-color;
+          }
+
+          .a {
+            fill: $op-color;
+          }
+        }
+      }
+
+      .wishlist {
+        &_icon {
+          .a {
+            stroke: $op-color;
+          }
+        }
+      }
+
+      .cart {
+        &_icon {
+          .a, .b {
+            stroke: $op-color;
+          }
+        }
+      }
+    }
   }
-
-
 
   &.with_nav {
     .header_menu {
@@ -266,8 +327,23 @@
 
 
   @include breakpoint($s) {
+    top: $base-rhythm-line * 3;
+    height: $base-rhythm-line * 9;
+
     &_logo {
 
+    }
+
+    &_menu {
+      padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter * 2;
+    }
+
+    &_caw {
+      .wishlist a,
+      .cart a,
+      .phone .pa {
+        padding: $base-rhythm-line * 3 / 2 $base-rhythm-line;
+      }
     }
 
     &_nav {
@@ -300,7 +376,7 @@
     }
 
     &_caw {
-      top: $base-rhythm-line;
+      // top: $base-rhythm-line;
       right: $gutter;
     }
 
@@ -311,10 +387,18 @@
     // }
   }
 
+
   @include breakpoint($xl) {
+    top: $base-rhythm-line * 6;
+
     &_nav {
       left: $gutter * 4;
     }
+
+    &_menu {
+      padding: ($space-m2 + $base-rhythm-line * 6) 0 0 $gutter * 4;
+    }
+    // padding: $space-m2 0 0 $gutter * 2;
 
     // &_logo {
     //   left: $gutter * 4;

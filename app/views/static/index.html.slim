@@ -7,11 +7,18 @@
 
     .logo
       svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 240" id="mint_ani"
-        path data-start="10" data-duration="300" class="a" d="M20,233.16S20,80.29,60.74,80.29c0,0,10.41-3.72,20.84,36.69s24.37,55.11,37.95,55.28,24.37-25.51,32.56-59.58S176.65,3,203.07,3c3.72,0,17.86.55,22.88,41.34s9.12,122.7,13,143.74,8.37,46.18,29.58,47.61,56-43.2,58.35-46.55,34.23-42.23,33.49-69.81-11-29.18-16.19-29.07-24,6.9-23.43,30,20.7,36.72,30.71,46.36c7,6.74,11,13.22,15.25,35.75s4.61,30.91,12.84,31.47,18.8-14,24.57-26.81,26.6-63.12,36.66-128.66,5.77-56.24,5.77-56.24a531.83,531.83,0,0,0-4.25,86.37c1.54,48,5.21,123.36,40.37,124,25.17.46,55.07-38.91,55.07-38.91s4.61,40.59,27.35,40.22,43.72-35,48-65.54-4.1-53.75-24.57-54.18S548,144.4,547.81,172.15s7.82,51.77,29.39,51.77,41.31-29.45,41.31-29.45-8.94,43.27,16,41.37c0,0,14.14-.6,25.49-7.29"
+        path data-start="10" data-duration="180" class="a" d="M20,233.16S20,80.29,60.74,80.29c0,0,10.41-3.72,20.84,36.69s24.37,55.11,37.95,55.28,24.37-25.51,32.56-59.58S176.65,3,203.07,3c3.72,0,17.86.55,22.88,41.34s9.12,122.7,13,143.74,8.37,46.18,29.58,47.61,56-43.2,58.35-46.55,34.23-42.23,33.49-69.81-11-29.18-16.19-29.07-24,6.9-23.43,30,20.7,36.72,30.71,46.36c7,6.74,11,13.22,15.25,35.75s4.61,30.91,12.84,31.47,18.8-14,24.57-26.81,26.6-63.12,36.66-128.66,5.77-56.24,5.77-56.24a531.83,531.83,0,0,0-4.25,86.37c1.54,48,5.21,123.36,40.37,124,25.17.46,55.07-38.91,55.07-38.91s4.61,40.59,27.35,40.22,43.72-35,48-65.54-4.1-53.75-24.57-54.18S548,144.4,547.81,172.15s7.82,51.77,29.39,51.77,41.31-29.45,41.31-29.45-8.94,43.27,16,41.37c0,0,14.14-.6,25.49-7.29"
 
         path data-start="120" data-duration="40" class="b" d="M416.28,97.63,466.69,88S481.94,68.4,496.08,68.4,526.6,83,526.6,83s-11.53,19.81-30,19.63S473,94.46,473,94.46l23.63-9"
 
+    .social_networks
+      = link_to '#', class: :instagram
+        = inline_svg 'icons/instagram.svg'
 
+      = link_to '#', class: :vk
+        = inline_svg 'icons/vk.svg'
+
+    .swiper-pagination.swiper-pagination-index
 
     .swiper-container
       .swiper-wrapper
@@ -51,80 +58,78 @@
 
 
 
+  .page_static_index_themes
+    .swiper-pagination.swiper-pagination-themes
 
-  / .page_static_index_themes
-    .themes_list
-      .themes_list_item.walk
-        = link_to @themes[2], class: :theme do
-          .image
-          .text.mb
-            .title
-              span
-                = @themes[2].desc
-          .desc.mb
-            | Летние вечера всегда самые романтичные, а представить такие невозможно без летящего платья.
-
-      .themes_list_item.business
-        = link_to @themes[0], class: :theme do
-          .image
-          .text.mb
-            .title
-              span
+    .swiper-container
+      .swiper-wrapper
+        .swiper-slide.business data-title=@themes[0].title data-title-short='Деловой'
+          = link_to @themes[0], class: :theme do
+            .image
+            .text.mb
+              .title
                 = @themes[0].desc
 
-      .themes_list_item.slogan
-        .text
-          / | Spring's standout shoes are all keeping
-          | Будь разной для окружающего мира. Это внешнее выражение твоей внутренней природы.
+              .desc
+                | Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или поездка за город к друзьям на вечеринку у бассейна.
 
-      .themes_list_item.holiday
-        = link_to @themes[3], class: :theme do
-          .image
-          .text.mb
-            .title
-              span
-                = @themes[3].desc
 
-          .desc
-            span
-              | Если вы уже совершили поездку лета, сорвитесь еще в одну!
-
-      / .themes_list_item.accessories
-        .text
-          .icon
-          | Вне зависимости от того, какой на вас макияж — сумочка не помешает
-
-      .themes_list_item.date
-        = link_to @themes[1], class: :theme do
-          .image
-          .text.mb
-            .title
-              span
+        .swiper-slide.date data-title=@themes[1].title data-title-short='Cвидание'
+          = link_to @themes[1], class: :theme do
+            .image
+            .text.mb
+              .title
                 = @themes[1].desc
 
-      / .themes_list_item.white
-        = link_to @themes[5], class: :theme do
-          .image
-          .text.mb
-            .title
-              span
-                = @themes[5].desc
+              .desc
+                | Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или поездка за город к друзьям на вечеринку у бассейна.
 
-      .themes_list_item.party
-        = link_to @themes[4], class: :theme do
-          .image
-          .text.mb
-            .title
-              span
+        .swiper-slide.walk data-title=@themes[2].title data-title-short='На каждый день'
+          = link_to @themes[2], class: :theme do
+            .image
+            .text.mb
+              .title
+                = @themes[2].desc
+
+              .desc
+                | Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или поездка за город к друзьям на вечеринку у бассейна.
+
+        .swiper-slide.holiday data-title=@themes[3].title data-title-short='К морю'
+          = link_to @themes[3], class: :theme do
+            .image
+            .text.mb
+              .title
+                = @themes[3].desc
+
+              .desc
+                | Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или поездка за город к друзьям на вечеринку у бассейна.
+
+        .swiper-slide.party data-title=@themes[4].title data-title-short='Вечеринки'
+          = link_to @themes[4], class: :theme do
+            .image
+            .text.mb
+              .title
                 = @themes[4].desc
 
-      / .themes_list_item.moms
-        = link_to @themes[6], class: :theme do
-          .image
-          .text.mb
-            .title
-              span
+              .desc
+                | Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или поездка за город к друзьям на вечеринку у бассейна.
+
+        .swiper-slide.white data-title=@themes[5].title data-title-short='Белые'
+          = link_to @themes[5], class: :theme do
+            .image
+            .text.mb
+              .title
+                = @themes[5].desc
+
+              .desc
+                | Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или поездка за город к друзьям на вечеринку у бассейна.
+
+        .swiper-slide.moms data-title=@themes[6].title data-title-short='Мамам'
+          = link_to @themes[6], class: :theme do
+            .image
+            .text.mb
+              .title
                 = @themes[6].desc
 
-
-
+              .desc
+                | Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или поездка за город к друзьям на вечеринку у бассейна.
