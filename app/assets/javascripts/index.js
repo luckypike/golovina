@@ -77,7 +77,7 @@ $(function() {
       paginationClickable: true,
       // paginationType: 'custom',
       paginationBulletRender: function(swiper, index, className) {
-        return '<div class="' + className + '"><span class="short">' + $(swiper.slides[index + 1]).data('title-short') + '</span><span class="full">' + $(swiper.slides[index + 1]).data('title') + '</span></div>';
+        return '<div class="' + className + '">' + $(swiper.slides[index + 1]).data('title') + '</div>';
       },
       autoplayDisableOnInteraction: false,
       onSlideChangeStart: function(swiper) {
@@ -107,7 +107,9 @@ $(function() {
       // paginationType: 'custom',
       paginationBulletRender: function(swiper, index, className) {
         return '<div class="' + className + '"><span class="short">' + $(swiper.slides[index + 1]).data('title-short') + '</span><span class="full">' + $(swiper.slides[index + 1]).data('title') + '</span></div>';
-      }
+      },
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev',
 
       // autoplay: 2000,
       // speed: 1200,

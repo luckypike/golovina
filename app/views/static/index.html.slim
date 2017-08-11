@@ -22,7 +22,7 @@
 
     .swiper-container
       .swiper-wrapper
-        .swiper-slide.ss_shop
+        .swiper-slide.ss_shop data-title='SHOP ONLINE'
           .text.inact
             .what
               | Территория приятного шопинга
@@ -30,7 +30,7 @@
             .action
               = link_to 'Shop online', products_path
 
-        .swiper-slide
+        .swiper-slide data-title='NEW'
           .text.inact
             .what
               | Новая свежая коллекция
@@ -38,7 +38,7 @@
             .action
               = link_to 'New', products_path
 
-        .swiper-slide
+        .swiper-slide data-title='LOOKS'
           .text.inact
             .what
               | Выбери своё настроение
@@ -60,6 +60,14 @@
 
   .page_static_index_themes
     .swiper-pagination.swiper-pagination-themes
+    .swiper-button
+      .swiper-button-next
+        svg
+          path d="M22,24l6-4-6-4v8ZM12,19H22v2H12V19Z"
+
+      .swiper-button-prev
+        svg
+          path d="M18,16l-6,4,6,4V16Zm0,3H28v2H18V19Z"
 
     .swiper-container
       .swiper-wrapper
