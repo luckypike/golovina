@@ -57,6 +57,10 @@ header.header class="#{menu_catalog? ? :active : nil } #{current_page?(root_path
     .header_menu_item.
       = link_to 'Контакты', '#'
 
+    - if user_signed_in? && current_user.is_admin?
+      .header_menu_item.sep
+        = link_to 'Управление товарами', all_products_path
+
 
 
     / - if current_page? @themes.first

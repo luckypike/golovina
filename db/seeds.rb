@@ -31,6 +31,9 @@ themes = YAML.load_file('db/themes.yml')
 themes.each_pair do |slug, v|
   theme = Theme.where(slug: slug).first_or_initialize
   theme.title = v['title']
+  theme.title_short = v['title_short']
   theme.desc = v['desc']
   theme.save
 end
+
+User.create_with(email: 'we+mint@luckypike.com', password: 'mint11', password_confirmation: 'mint11').find_or_create_by(id: 1)

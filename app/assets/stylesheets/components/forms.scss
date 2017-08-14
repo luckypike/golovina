@@ -1,0 +1,39 @@
+.form {
+  &_inputs {
+    .input {
+      margin-bottom: $base-rhythm-line * 2;
+
+      label {
+        @include font-size-small;
+
+        display: block;
+        margin-bottom: $base-rhythm-line / 2;
+      }
+
+      input[type=text],
+      input[type=number],
+      textarea, select {
+        border: 1px solid $separator-color;;
+        border-radius: 0;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        padding: 0  $gutter;
+
+        &:focus {
+          border-color: $highlight-color;
+        }
+      }
+
+      &.product_themes {
+        label {
+          display: inline;
+        }
+
+        .checkbox {
+          margin-left: $gutter;
+        }
+      }
+    }
+  }
+}

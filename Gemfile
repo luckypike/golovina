@@ -33,6 +33,9 @@ gem 'devise'
 
 gem 'active_link_to'
 
+gem 'rails-i18n'
+gem 'enum_help'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

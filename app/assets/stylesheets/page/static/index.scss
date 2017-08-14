@@ -481,6 +481,7 @@
         &-slide {
           a {
             left: $gutter * 2;
+            right: $gutter * 2;
 
             .text {
               left: 50%;
@@ -512,6 +513,7 @@
         &-slide {
           a {
             left: $gutter;
+            right: $gutter;
 
             .image {
               // left: $gutter;

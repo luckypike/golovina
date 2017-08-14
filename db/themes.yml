@@ -1,27 +1,34 @@
 business:
-  title: Деловой
+  title: Деловой стиль
+  title_short: Деловой
   desc: Полетели к новым карьерным вершинам
 
 date:
   title: На свидание
+  title_short: Свидание
   desc: Соглашайтесь на свидание
 
 walk:
   title: На любой день
+  title_short: На любой день
   desc: Прекрасное время летних развлечений
 
 holiday:
   title: К морю
+  title_short: К морю
   desc: Сбегите с подружкой к теплому морю
 
 party:
   title: Вечеринки и приемы
+  title_short: Вечеринки
   desc: Настроение коктейльной вечеринки
 
 white:
   title: Белые платья
+  title_short: Белые
   desc: Торжество белых ночей
 
 moms:
   title: Будущим мамам
+  title_short: Мамам
   desc: Совместите творчество и материнство

@@ -4,7 +4,8 @@
   .form-inputs
     / = f.input :title
     = f.association :theme
-    = f.association :products
+    = f.input :created_at unless f.object.new_record?
+    = f.association :products, label_method: :title_safe
     = f.file_field :images, multiple: true
 
   .form-actions

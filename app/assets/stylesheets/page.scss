@@ -3,15 +3,15 @@
 @import "page/kit";
 
 .page {
-  padding-top: $base-rhythm-line * $base-line-height  * 3;
+  padding-top: $base-rhythm-line * 8;
 
   &_common {
     padding-left: $gutter;
     padding-right: $gutter;
 
     @include mq($m) {
-      width: 12 / 14 * 100%;
-      margin-left: 2 / 14 * 100%;
+      // width: 12 / 14 * 100%;
+      // margin-left: 2 / 14 * 100%;
     }
 
     @include mq($l) {
@@ -20,8 +20,12 @@
     }
   }
 
-  @include mq($m) {
-    // padding-top: $space-m2;
+  @include mq($s) {
+    padding-top: $base-rhythm-line * 12;
+  }
+
+  @include mq($xl) {
+    padding-top: $base-rhythm-line * 15;
   }
 
   @import "page/category";
@@ -33,6 +37,8 @@
   @import "page/product";
 
   @import "page/static";
+
+  @import "page/auth";
 }
 
 .link_fake {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704201807) do
+ActiveRecord::Schema.define(version: 20170814160629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20170704201807) do
     t.json "images"
     t.string "colors", array: true
     t.bigint "kind_id"
+    t.integer "state", default: 0
+    t.string "title"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["colors"], name: "index_products_on_colors", using: :gin
     t.index ["kind_id"], name: "index_products_on_kind_id"
@@ -87,6 +89,7 @@ ActiveRecord::Schema.define(version: 20170704201807) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "desc"
+    t.string "title_short"
     t.index ["slug"], name: "index_themes_on_slug", unique: true
   end
 

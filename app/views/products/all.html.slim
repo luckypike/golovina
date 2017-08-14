@@ -1,0 +1,9 @@
+.page.page_common.page_products_all
+  .page_products_all_list
+    .products
+      .products_new
+        = link_to 'Добавить', [:new, :product]
+      - @products.each do |product|
+        .products_item
+          = link_to product.title_safe, [:edit, product]
+          =< l(product.created_at)

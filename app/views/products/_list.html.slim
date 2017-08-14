@@ -1,0 +1,14 @@
+.products_list
+  - products.sort_by(&:created_at).reverse.each_with_index do |product, i|
+    .products_list_item class="i_#{i}"
+      .image
+        = image_tag product.images[0].thumb.url if product.images[0]
+
+      .title
+        = product.title
+
+      .price
+        = number_to_rub product.price
+
+      / .date
+        = l(product.created_at)

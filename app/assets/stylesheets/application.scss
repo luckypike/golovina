@@ -36,6 +36,7 @@ $space-m2: $base-rhythm-line * ($base-line-height + 1) * 2;
 
 @import "components/layout";
 @import "components/fonts";
+@import "components/forms";
 
 @import "header";
 @import "page";

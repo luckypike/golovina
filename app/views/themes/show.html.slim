@@ -1,8 +1,30 @@
-.page.page_theme
-  .page_theme_kits
-    .kits_list
+.page.page_common.page_theme
+  .page_theme_intro class=@theme.slug
+    .siblings
+      - @themes.each do |theme|
+        .siblings_item
+          = link_to theme do
+            span.full
+              = theme.title
+
+            span.short
+              = theme.title_short
+
+
+    .theme
+      .image
+      .text.mb
+        .title
+          = @theme.desc
+
+        .desc
+          | Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или поездка за город к друзьям на вечеринку у бассейна.
+
+  .page_theme_products
+    == render 'products/list', products: @products
+    / .kits_list
       - @kits.each_with_index do |kit, i|
-        .kits_list_item class="kits_list_item_s#{kit.products.size} kits_list_item_i#{i}"
+        .kits_list_item class=" kits_list_item_i#{i}"
           .d.d_m.d_0
             .d_image
               = image_tag kit.images[0].thumb.url if kit.images[0]

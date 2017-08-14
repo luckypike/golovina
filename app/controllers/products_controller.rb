@@ -81,6 +81,10 @@ class ProductsController < ApplicationController
     redirect_to [@product.category, @product]
   end
 
+  def all
+    @products = Product.order(id: :desc)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -89,6 +93,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:kind_id, :category_id, :price, :desc, { images: []}, theme_ids: [], variants_attributes: [:id, :_destroy, sizes: []])
+      params.require(:product).permit(:title, :state, :created_at, :kind_id, :category_id, :price, :desc, { images: []}, theme_ids: [], variants_attributes: [:id, :_destroy, sizes: []])
     end
 end

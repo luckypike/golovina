@@ -6,6 +6,10 @@ class Kit < ApplicationRecord
   has_many :products, through: :kitables
 
   def title
-    "#K#{id}"
+    products.map(&:title_safe).to_sentence.downcase.upcase_first
+  end
+
+  def price
+    products.map(&:price).sum
   end
 end

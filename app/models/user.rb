@@ -7,4 +7,8 @@ class User < ApplicationRecord
   def remember_me
     true
   end
+
+  def is_admin?
+    self.id == 1
+  end
 end

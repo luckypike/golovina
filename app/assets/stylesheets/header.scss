@@ -325,7 +325,7 @@
   }
 
   &.active {
-    @include mq($m) {
+    @include mq($l) {
       .header_menu {
         opacity: 1;
         transform: translateX(0);

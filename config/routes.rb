@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :products, path: :catalog do
     resources :variants, only: [:index, :create]
     post :wishlist, on: :member
+    get :all, on: :collection
   end
 
   get 'wishlist', to: 'wishlists#show'

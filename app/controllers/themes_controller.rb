@@ -10,7 +10,7 @@ class ThemesController < ApplicationController
   end
 
   def show
-    @kits = @theme.kits
+    @products = Product.left_outer_joins(:kitables).active.where(kitables: { id: nil }) + Kit.includes(:products).where.not(kitables: { id: nil }).where(products: { state: :active })
   end
 
   def new
