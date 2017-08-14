@@ -2,6 +2,7 @@
 
   &_swiper {
     background-color: #333;
+    position: relative;
 
     .ss {
       position: absolute;
@@ -131,6 +132,7 @@
     .swiper {
       &-container {
         height: 100vh;
+        transition: 0.2s height;
       }
 
       &-wrapper {
@@ -268,6 +270,7 @@
     .swiper {
       &-container {
         height: calc(100vh - 4rem);
+        transition: 0.2s height;
       }
 
       &-wrapper {
@@ -414,23 +417,7 @@
           }
         }
 
-        // &.business {
-        //   .image {
-        //     background-image: image_url('pages/index/business.jpg');
-        //   }
-        // }
 
-        // &.date {
-        //   .image {
-        //     background-image: image_url('pages/index/date.jpg');
-        //   }
-        // }
-
-        // &.walk {
-        //   .image {
-        //     background-image: image_url('pages/index/walk.jpg');
-        //   }
-        // }
 
         @each $category in business date walk holiday party white moms  {
           &.#{$category} {

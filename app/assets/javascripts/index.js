@@ -5,6 +5,7 @@ $(function() {
   // var whz = wh / 2;
   var _psit = $('.page_static_index_themes');
   var _psis = $('.page_static_index_swiper');
+  var _h = $('.header');
   var _sp = $('.swiper-pagination', _psit);
 
   if(_psit.length > 0) {
@@ -31,6 +32,7 @@ $(function() {
       var sh = (144 * (k - 1));
 
       _sp.toggleClass('act', sh > -28);
+      _h.toggleClass('index_act', sh > -28);
 
       _sp.css({
         'margin-top': sh + 'px'
@@ -124,18 +126,26 @@ $(function() {
     });
 
     _sc.on('recalc', function() {
-      _sc.height(_window.height());
+      _sc.height(_window.outerHeight());
     });
 
     _sct.on('recalc', function() {
-      _sct.height(_window.height());
+      _sct.height(_window.outerHeight() - $('.header').outerHeight(true));
     });
 
     _window.on('resize', function() {
       // _sc.trigger('recalc');
-      // _sct.trigger('recalc');
+      _sct.trigger('recalc');
     }).trigger('resize');
   }
 
 });
 
+
+window.addEventListener("load",function() {
+  // Set a timeout...
+  setTimeout(function(){
+    // Hide the address bar!
+    window.scrollTo(0, 1);
+  }, 0);
+});

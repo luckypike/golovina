@@ -4,6 +4,7 @@
   height: $base-rhythm-line * 8;
   position: absolute;
   left: 0;
+  margin-top: 0;
   top: 0;
   width: 100%;
   z-index: 10;
@@ -249,7 +250,15 @@
 
   &.index {
     .header_logo {
-      display: none;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.25s opacity, 0s visibility 0.25s;
+
+      svg {
+        .a {
+          stroke: $op-color;
+        }
+      }
     }
 
     .header_burger {
@@ -287,6 +296,14 @@
             stroke: $op-color;
           }
         }
+      }
+    }
+
+    &_act {
+      .header_logo {
+        visibility: visible;
+        opacity: 1;
+        transition: 0.25s opacity;
       }
     }
   }
@@ -327,7 +344,7 @@
 
 
   @include breakpoint($s) {
-    top: $base-rhythm-line * 3;
+    margin-top: $base-rhythm-line * 3;
     height: $base-rhythm-line * 9;
 
     &_logo {
@@ -376,20 +393,19 @@
     }
 
     &_caw {
-      // top: $base-rhythm-line;
       right: $gutter;
-    }
 
-    // &_menu {
-    //   opacity: 1;
-    //   transform: translateX(0);
-    //   visibility: visible;
-    // }
+      .wishlist a,
+      .cart a,
+      .phone .pa {
+        padding: $base-rhythm-line * 3 / 2;
+      }
+    }
   }
 
 
   @include breakpoint($xl) {
-    top: $base-rhythm-line * 6;
+    margin-top: $base-rhythm-line * 6;
 
     &_nav {
       left: $gutter * 4;

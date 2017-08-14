@@ -55,6 +55,7 @@ body {
   width: 100%;
   color: $primary-color;
   min-height: 100%;
+  text-size-adjust: 100%;
 
   &.full_screen {
     overflow: hidden;
