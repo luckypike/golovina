@@ -1,4 +1,4 @@
-.page_static_index
+.page_static_index.barba_container  data-namespace='index'
   .page_static_index_swiper
     .ss
       .ss_0
@@ -72,7 +72,7 @@
     .swiper-container
       .swiper-wrapper
         .swiper-slide.business data-title=@themes[0].title data-title-short=@themes[0].title_short
-          = link_to @themes[0], class: :theme do
+          = link_to @themes[0], class: [:theme, :barba_only] do
             .image
             .text.mb
               .title
