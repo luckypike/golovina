@@ -1,5 +1,5 @@
 .products_list
-  - products.sort_by(&:created_at).reverse.each_with_index do |product, i|
+  - products.select{ |p| p.images[0] }.sort_by(&:created_at).reverse.each_with_index do |product, i|
     .products_list_item class="i_#{i}"
       .image
         = image_tag product.images[0].thumb.url if product.images[0]

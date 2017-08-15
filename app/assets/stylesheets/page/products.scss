@@ -20,45 +20,4 @@
       margin: $space-m2 auto $space-s2;
     }
   }
-
-  &_grid {
-    .products_list {
-      @include column-pane;
-
-      margin: 0 -$gutter / 2;
-
-      &_item {
-        @include column-width(1, 2);
-
-        padding: 0 $gutter / 2;
-
-        .image {
-          @include aspect-ratio(4, 5);
-        }
-
-        .data {
-          margin-bottom: $base-rhythm-line * 2;
-        }
-      }
-
-      @include mq($m) {
-        margin: 0 0 $space-m2 - $gutter;
-
-        &_item {
-        }
-      }
-    }
-  }
-
-  @include mq($m) {
-    width: 12 / 14 * 100%;
-    margin-left: 2 / 14 * 100%;
-  }
-
-  @include mq($l) {
-    padding-left: 0;
-    padding-right: 0;
-    width: 12 / 16 * 100%;
-    margin-left: 2 / 16 * 100%;
-  }
 }

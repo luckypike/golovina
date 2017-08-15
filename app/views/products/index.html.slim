@@ -40,21 +40,24 @@
             .f_l_i M
             .f_l_i L
 
-  - unless @products.empty?
-    .page_products_grid
-      .products_list
-        - @products.each_with_index do |product, i|
-          .products_list_item
-            = link_to product do
-              .image
-                = image_tag product.images[0].thumb.url if product.images[0]
+  .page_products_list
+    == render 'products/list', products: @products
 
-              .data
-                .price
-                  = number_to_rub product.price
+  / - unless @products.empty?
+  /   .page_products_grid
+  /     .products_list
+  /       - @products.each_with_index do |product, i|
+  /         .products_list_item
+  /           = link_to product do
+  /             .image
+  /               = image_tag product.images[0].thumb.url if product.images[0]
 
-                .title
-                  = product.title
+  /             .data
+  /               .price
+  /                 = number_to_rub product.price
+
+  /               .title
+  /                 = product.title
 
     / .page_products_list
       .list

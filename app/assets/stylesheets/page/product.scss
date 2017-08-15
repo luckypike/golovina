@@ -141,11 +141,10 @@
   }
 
   &_form {
-    max-width: $xl;
-    padding-left: $gutter;
-    padding-right: $gutter;
+    .form {
+      max-width: $s;
+    }
   }
-
   @include mq($s) {
     &_content {
       .buy {

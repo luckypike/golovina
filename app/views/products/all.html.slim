@@ -7,3 +7,4 @@
         .products_item
           = link_to product.title_safe, [:edit, product]
           =< l(product.created_at)
+          =< link_to product.variants.size, [product, :variants]

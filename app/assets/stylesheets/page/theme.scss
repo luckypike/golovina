@@ -1,7 +1,5 @@
 &_theme {
   &_intro {
-    // height: calc(100vh - 4rem);
-
     .siblings {
       @include font-size-small;
 
@@ -173,104 +171,89 @@
 
 
   &_products {
-    .products_list {
+  }
+}
 
+.products_list {
+  &_item {
+    margin-bottom: $space-m;
+    text-align: center;
 
-      &_item {
-        margin-bottom: $space-m;
-        text-align: center;
+    .image {
+      @include aspect-ratio(4, 5);
+
+      margin-bottom: $space-s;
+    }
+
+    .title {
+      @include font-size-small;
+    }
+  }
+
+  @include mq($s) {
+    display: flex;
+    flex-wrap: wrap;
+
+    &_item {
+      margin-bottom: $space-s2 * 3;
+      width: 100%;
+
+      .title {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+      }
+
+      &.i_0, &.i_6 {
+        @include column-width(6, 12);
 
         .image {
-          @include aspect-ratio(4, 5);
-
-          margin-bottom: $space-s;
-        }
-
-        .title {
-          @include font-size-small;
-        }
-      }
-
-      @include mq($s) {
-        display: flex;
-        flex-wrap: wrap;
-
-        &_item {
-          margin-bottom: $space-s2 * 3;
-          width: 100%;
-
-          .title {
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-
-          }
-
-          &.i_0 {
-            @include column-width(6, 12);
-
-            .image {
-              img{
-                padding: 5%;
-                background-color: #f0e7d6;
-              }
-            }
-          }
-
-          &.i_1 {
-            @include column-width(4, 12);
-            @include column-shift(1, left, 12);
-            @include column-shift(1, right, 12);
-
-            align-self: flex-end;
-          }
-
-          &.i_2 {
-            @include column-width(5, 12);
-            @include column-shift(4, left, 12);
-            @include column-shift(3, right, 12);
-          }
-
-          &.i_3 {
-            @include column-width(4, 12);
-            @include column-shift(1, left, 12);
-          }
-
-          &.i_4 {
-            @include column-width(6, 12);
-            @include column-shift(1, left, 12);
-
-            .image {
-              img{
-                padding: 5%;
-                background-color: #e0dfda;
-              }
-            }
+          img{
+            padding: 5%;
+            background-color: #f0e7d6;
           }
         }
       }
 
-      @include mq($m) {
-        padding: 0 $gutter;
+      &.i_1, &.i_7 {
+        @include column-width(4, 12);
+        @include column-shift(1, left, 12);
+        @include column-shift(1, right, 12);
+
+        align-self: flex-end;
       }
 
-      @include mq($l) {
-        padding: 0;
+      &.i_2, &.i_5, &.i_8 {
+        @include column-width(5, 12);
+        @include column-shift(4, left, 12);
+        @include column-shift(3, right, 12);
+      }
+
+      &.i_3, &.i_9 {
+        @include column-width(4, 12);
+        @include column-shift(1, left, 12);
+      }
+
+      &.i_4, &.i_10 {
+        @include column-width(6, 12);
+        @include column-shift(1, left, 12);
+
+        .image {
+          img{
+            padding: 5%;
+            background-color: #e0dfda;
+          }
+        }
       }
     }
   }
-  // padding-left: $gutter;
-  // padding-right: $gutter;
 
-  // @include mq($m) {
-  //   width: 12 / 14 * 100%;
-  //   margin-left: 2 / 14 * 100%;
-  // }
+  @include mq($m) {
+    padding: 0 $gutter;
+  }
 
-  // @include mq($l) {
-  //   padding-left: 0;
-  //   padding-right: 0;
-  //   width: 12 / 16 * 100%;
-  //   margin-left: 2 / 16 * 100%;
-  // }
+  @include mq($l) {
+    padding: 0;
+  }
 }
