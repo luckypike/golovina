@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20170815081345) do
     t.integer "state", default: 0
     t.string "title"
     t.boolean "sale", default: false
-    t.boolean "new", default: false
+    t.boolean "latest", default: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["colors"], name: "index_products_on_colors", using: :gin
     t.index ["kind_id"], name: "index_products_on_kind_id"

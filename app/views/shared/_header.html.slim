@@ -46,20 +46,20 @@ header.header class="#{menu_catalog? ? :active : nil }"
             = active_link_to category.title, products_path(category: [category.id]), active: :exact
 
     .header_menu_item
-      = link_to 'Sale', '#'
+      = link_to 'Sale', [:sale, :products]
 
     .header_menu_item
-      = link_to 'New', '#'
+      = link_to 'New', [:latest, :products]
 
     .header_menu_item.sep
-      = link_to 'Мяtа', '#'
+      = link_to 'Мяtа', [:about, :index]
 
-    .header_menu_item.
-      = link_to 'Контакты', '#'
+    .header_menu_item
+      = link_to 'Контакты', [:contacts]
 
     - if user_signed_in? && current_user.is_admin?
       .header_menu_item.sep
-        = link_to 'Управление товарами', all_products_path
+        = link_to 'Управление товарами', [:all, :products]
 
 
 

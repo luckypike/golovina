@@ -39,6 +39,14 @@ class ProductsController < ApplicationController
   def edit
   end
 
+  def latest
+    @products = Variant.includes(:product).where(products: { latest: true }).map(&:product).uniq
+  end
+
+  def sale
+    @products = Variant.includes(:product).where(products: { sale: true }).map(&:product).uniq
+  end
+
   def create
     @product = Product.new(product_params)
 
@@ -93,6 +101,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:title, :state, :created_at, :kind_id, :category_id, :price, :desc, { images: []}, theme_ids: [], variants_attributes: [:id, :_destroy, sizes: []])
+      params.require(:product).permit(:title, :state, :latest, :sale, :created_at, :kind_id, :category_id, :price, :desc, { images: []}, theme_ids: [], variants_attributes: [:id, :_destroy, sizes: []])
     end
 end

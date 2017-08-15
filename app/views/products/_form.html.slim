@@ -7,7 +7,11 @@
       / = f.input :created_at unless f.object.new_record?
       = f.association :kind
       = f.association :themes, as: :check_boxes
-      = f.input :state
+
+      = f.input :latest
+      = f.input :sale
+
+      = f.input :state, include_blank: false
       = f.input :price
       = f.file_field :images, multiple: true
       - if f.object.images[0]

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get '', to: 'about#index', as: :about_index
   end
 
+  get :contacts, to: 'static#contacts'
 
   resources :kinds, except: [:show]
 
@@ -21,8 +22,16 @@ Rails.application.routes.draw do
   resources :products, path: :catalog do
     resources :variants, only: [:index, :create]
     post :wishlist, on: :member
-    get :all, on: :collection
+
+    collection do
+      get :all
+      get :latest
+      get :sale
+    end
   end
+
+  # get :new, to 'products#new'
+  # get :new, to 'products#new'
 
   get 'wishlist', to: 'wishlists#show'
 end

@@ -22,6 +22,8 @@ ru:
         title: Название
         kind: Тип
         themes: Стили
+        latest: NEW
+        sale: SALE
     #   user:
     #     new:
     #       email: 'E-mail to sign in.'
@@ -37,3 +39,11 @@ ru:
     # prompts:
     #   defaults:
     #     age: 'Select your age'
+
+
+  enums:
+    product:
+      state:
+        undef: Новый
+        active: Активный
+        archived: Архив

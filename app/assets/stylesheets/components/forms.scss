@@ -26,6 +26,14 @@
         }
       }
 
+      &.boolean {
+        label {
+          input {
+            margin-right: $gutter / 2;
+          }
+        }
+      }
+
       &.product_themes {
         display: flex;
         flex-wrap: wrap;

@@ -9,6 +9,25 @@
     padding-left: $gutter;
     padding-right: $gutter;
 
+    &_intro {
+      max-width: $xl;
+      padding: 0 $gutter;
+      margin: $base-rhythm-line auto;
+
+      h1 {
+        margin-bottom: 0;
+        text-align: center;
+      }
+
+      @include breakpoint($s) {
+        margin: $space-m auto $space-s;
+      }
+
+      @include breakpoint($l) {
+        margin: $space-m2 auto $space-s2;
+      }
+    }
+
     @include mq($m) {
       // width: 12 / 14 * 100%;
       // margin-left: 2 / 14 * 100%;
