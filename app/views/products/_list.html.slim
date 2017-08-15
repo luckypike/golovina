@@ -1,6 +1,6 @@
 .products_list
   - products.select{ |p| p.images[0] }.sort_by(&:created_at).reverse.each_with_index do |product, i|
-    .products_list_item class="i_#{i}"
+    .products_list_item class="i_#{i % 6}"
       .image
         = image_tag product.images[0].thumb.url if product.images[0]
 

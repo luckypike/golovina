@@ -172,6 +172,117 @@
 
   &_products {
   }
+
+  &_footer {
+    .inst {
+      @include font-size-small;
+
+      margin-bottom: $space-m;
+      text-align: center;
+      position: relative;
+
+      > a {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+      }
+
+      .name {
+        @include font-size-h1;
+
+        background: {
+          image: image_url('icons/instagram.svg');
+          size: $base-rhythm-line * 4;
+          position: center $base-rhythm-line / 2;
+        }
+
+        font-weight: 300;
+        font-family: 'Cormorant', serif;
+        font-style: italic;
+        text-transform: lowercase;
+
+        margin: $base-rhythm-line * 5 auto 0;
+        padding: $base-rhythm-line * 5 0 $base-rhythm-line;
+      }
+    }
+
+    .next {
+      .theme {
+        position: relative;
+
+        .image {
+          @include aspect-ratio(5, 4);
+
+          background: {
+            color: #f1f1f1;
+            size: cover;
+            position: center;
+          }
+
+          @each $category in business date walk holiday party white moms  {
+            &.#{$category} {
+              background-image: image_url('pages/index/#{$category}.jpg');
+            }
+          }
+        }
+
+        .title {
+          @include font-size-h1;
+
+          position: absolute;
+          left: 15%;
+          top: 50%;
+          transform: translateY(-50%);
+          font-weight: 300;
+          font-family: 'Cormorant', serif;
+        }
+
+        > a {
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 1;
+        }
+      }
+    }
+
+    @include mq($s) {
+      display: flex;
+
+      .inst {
+        @include column-width(6, 12);
+
+        align-self: center;
+        margin-bottom: 0;
+      }
+
+      .next {
+        @include column-width(6, 12);
+      }
+    }
+
+    @include mq($m) {
+      .next {
+        .theme {
+          .image {
+            width: 4 / 6 * 100%;
+          }
+
+          .title {
+            left: 40%;
+          }
+        }
+
+      }
+    }
+  }
 }
 
 .products_list {

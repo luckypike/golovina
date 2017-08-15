@@ -8,6 +8,7 @@
   &_common {
     padding-left: $gutter;
     padding-right: $gutter;
+    padding-bottom: $space-m;
 
     &_intro {
       max-width: $xl;
@@ -29,6 +30,7 @@
     }
 
     @include mq($m) {
+      padding-bottom: $space-m2;
       // width: 12 / 14 * 100%;
       // margin-left: 2 / 14 * 100%;
     }
