@@ -1,5 +1,6 @@
 $(function() {
   var _h = $('.header');
+
   $('.header_burger').on('click', function() {
     if(_h.is('.active')) {
       _h.removeClass('active');
@@ -38,5 +39,19 @@ $(function() {
   $('.header_contact .close').on('click', function() {
     _h.removeClass('call_me');
   });
+
+
+
+  var _window = $(window);
+
+  _window.on('scroll', function() {
+    if(_window.scrollTop() > _h.outerHeight(true)) {
+      if(!_h.is('.no_hide_logo')) {
+        _h.addClass('hide_logo');
+      }
+    } else {
+      _h.removeClass('hide_logo');
+    }
+  }).trigger('scroll');
 
 });

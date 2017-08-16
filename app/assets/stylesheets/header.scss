@@ -312,6 +312,14 @@
     // }
   }
 
+  &.hide_logo {
+    .header_logo {
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.25s opacity, 0s visibility 0.25s;
+    }
+  }
+
   &.index {
     .header_logo {
       visibility: hidden;
