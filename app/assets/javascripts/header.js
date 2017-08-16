@@ -30,4 +30,13 @@ $(function() {
     $('.sub', this).show();
   });
 
+
+  $('.phone').on('click', function(){
+    _h.toggleClass('call_me');
+  });
+
+  $('.header_contact .close').on('click', function() {
+    _h.removeClass('call_me');
+  });
+
 });

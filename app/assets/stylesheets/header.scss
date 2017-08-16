@@ -60,6 +60,68 @@
     z-index: 2;
   }
 
+  &_contact {
+    background-color: $op-color;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    padding-top: $base-rhythm-line * 2;
+    opacity: 0;
+    right: 0;
+    left: 0;
+    top: -25%;
+    white-space: nowrap;
+    visibility: hidden;
+    transition: 0.2s top, 0.2s opacity, 0s visibility 0.2s;
+
+    z-index: 3;
+
+    .call {
+      display: block;
+      padding: $base-rhythm-line * 3 / 2 0;
+    }
+
+    .whatsapp {
+      height: $base-rhythm-line * 6;
+      width: $base-rhythm-line * 3;
+      margin-right: $gutter / 2;
+
+      background: {
+        image: image_url('icons/whatsapp.svg');
+        position: center;
+        size: $base-rhythm-line * 3;
+      }
+    }
+
+    .viber {
+      height: $base-rhythm-line * 6;
+      width: $base-rhythm-line * 3;
+      margin-right: $gutter / 2;
+
+      background: {
+        image: image_url('icons/viber.svg');
+        position: center;
+        size: $base-rhythm-line * 3;
+      }
+    }
+
+    .close {
+      // background-color: #ccc;
+      // margin-left: $gutter / 2;
+      // margin-right: $gutter;
+      height: $base-rhythm-line * 6;
+      width: $base-rhythm-line * 6;
+      padding: $gutter;
+      svg {
+        display: block;
+
+        line {
+          stroke: #000;
+        }
+      }
+    }
+  }
+
   &_caw {
     position: absolute;
     display: flex;
@@ -67,6 +129,8 @@
     top: $base-rhythm-line * 2;
 
     .phone {
+      cursor: pointer;
+
       .pa {
         padding: $base-rhythm-line * 3 / 2 $base-rhythm-line / 2;
         display: block;
@@ -117,7 +181,7 @@
 
         .a, .b {
           fill: none;
-          stroke: $primary-color;
+          stroke: rgba($primary-color, 0.2);
         }
 
         .a {
@@ -293,9 +357,15 @@
       .cart {
         &_icon {
           .a, .b {
-            stroke: $op-color;
+            stroke: rgba($op-color, 0.3);
           }
         }
+      }
+    }
+
+    .header_contact {
+      @include mq($s) {
+        color: $op-color;
       }
     }
 
@@ -305,6 +375,20 @@
         opacity: 1;
         transition: 0.25s opacity;
       }
+    }
+  }
+
+  &.call_me {
+    // .header_logo {
+    //   opacity: 0;
+    //   visibility: hidden;
+    // }
+
+    .header_contact {
+      opacity: 1;
+      top: 0;
+      visibility: visible;
+      transition: 0.2s top, 0.2s opacity;
     }
   }
 
@@ -351,8 +435,19 @@
 
     }
 
+    &_contact {
+      background: none;
+      left: auto;
+
+      right: 8rem;
+
+      .close {
+        display: none;
+      }
+    }
+
     &_menu {
-      padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter * 2;
+      padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter;
     }
 
     &_caw {
@@ -371,6 +466,14 @@
   @include breakpoint($m) {
     // height: $space-m2;
     position: fixed;
+
+    &_contact {
+      right: 10.5rem;
+    }
+
+    &_menu {
+      padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter * 2;
+    }
 
     &_logo {
       // left: $gutter * 2;
@@ -409,6 +512,10 @@
 
     &_nav {
       left: $gutter * 4;
+    }
+
+    &_contact {
+      right: 12rem;
     }
 
     &_menu {

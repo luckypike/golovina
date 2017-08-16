@@ -26,6 +26,15 @@ header.header class="#{menu_catalog? ? :active : nil }"
       = link_to '#' do
         = inline_svg 'icons/cart.svg'
 
+  .header_contact
+    = link_to '', 'whatsapp://send?phone=' + Rails.application.secrets[:phone], class: :whatsapp
+    = link_to '', 'viber://add?number=' + Rails.application.secrets[:phone], class: :viber
+    = link_to Rails.application.secrets[:phone_human], 'tel://' + Rails.application.secrets[:phone], class: :call
+    .close
+      svg viewBox="0 0 16 16"
+        line x1="1" y1="1" x2="15" y2="15"
+        line x1="1" y1="15" x2="15" y2="1"
+
   .header_menu
     .header_menu_item class=(controller_name == 'themes' ? :active: nil)
       .title
