@@ -38,4 +38,27 @@ $(function(){
       _this.addClass('active');
     }
   });
+
+
+  $('.products_list_item a').on('click', function(e) {
+    var _this = $(this);
+    var _pi = _this.parent();
+
+    // console.log(_pi.data('src'));
+    $.getJSON(_pi.data('src'), function(product) {
+      var _opnd = $('<div></div>', {
+        class: 'products_list_item products_list_item_pre'
+      });
+
+      _opnd.append('<div class="image">' + product.image + '</div>');
+      _opnd.append('<div class="title">' + product.title + '</div>');
+
+      _opnd.insertAfter(_pi);
+      _pi.addClass('has_opnd');
+    });
+
+
+
+    return false;
+  });
 });

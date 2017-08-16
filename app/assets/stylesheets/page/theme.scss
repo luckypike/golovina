@@ -286,28 +286,99 @@
 }
 
 .products_list {
+  display: flex;
+  flex-wrap: wrap;
+
   &_item {
-    margin-bottom: $space-m;
+    margin-bottom: $space-s;
     text-align: center;
+    position: relative;
+    width: 100%;
+
+    > a {
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+
 
     .image {
       @include aspect-ratio(4, 5);
 
-      margin-bottom: $space-s;
+      margin-bottom: $base-rhythm-line;
     }
 
     .title {
       @include font-size-small;
+
+      display: none;
+    }
+
+    &.i_0, &.i_6 {
+      @include column-width(6, 12);
+
+      .image {
+        img{
+          padding: 5%;
+          background-color: #f0e7d6;
+        }
+      }
+    }
+
+    &.i_1, &.i_7 {
+      @include column-width(4, 12);
+      @include column-shift(1, left, 12);
+      @include column-shift(1, right, 12);
+
+      align-self: flex-end;
+    }
+
+    &.i_2, &.i_5, &.i_8 {
+      @include column-width(5, 12);
+      @include column-shift(4, left, 12);
+      @include column-shift(3, right, 12);
+    }
+
+    &.i_3, &.i_9 {
+      @include column-width(4, 12);
+      @include column-shift(1, left, 12);
+    }
+
+    &.i_4, &.i_10 {
+      @include column-width(6, 12);
+      @include column-shift(1, left, 12);
+
+      .image {
+        img{
+          padding: 5%;
+          background-color: #e0dfda;
+        }
+      }
+    }
+
+    &.has_opnd {
+      // opacity: 0;
+      // visibility: hidden;
+      // display: none;
+    }
+
+    &_pre {
+      .title {
+        display: block;
+      }
     }
   }
 
   @include mq($s) {
-    display: flex;
-    flex-wrap: wrap;
+
 
     &_item {
-      margin-bottom: $space-s2 * 3;
-      width: 100%;
+      // margin-bottom: $space-s2 * 3;
+
 
       .title {
         white-space: nowrap;
@@ -316,47 +387,7 @@
 
       }
 
-      &.i_0, &.i_6 {
-        @include column-width(6, 12);
 
-        .image {
-          img{
-            padding: 5%;
-            background-color: #f0e7d6;
-          }
-        }
-      }
-
-      &.i_1, &.i_7 {
-        @include column-width(4, 12);
-        @include column-shift(1, left, 12);
-        @include column-shift(1, right, 12);
-
-        align-self: flex-end;
-      }
-
-      &.i_2, &.i_5, &.i_8 {
-        @include column-width(5, 12);
-        @include column-shift(4, left, 12);
-        @include column-shift(3, right, 12);
-      }
-
-      &.i_3, &.i_9 {
-        @include column-width(4, 12);
-        @include column-shift(1, left, 12);
-      }
-
-      &.i_4, &.i_10 {
-        @include column-width(6, 12);
-        @include column-shift(1, left, 12);
-
-        .image {
-          img{
-            padding: 5%;
-            background-color: #e0dfda;
-          }
-        }
-      }
     }
   }
 

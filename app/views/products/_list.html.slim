@@ -1,6 +1,8 @@
 .products_list
   - products.select{ |p| p.images[0] }.sort_by(&:created_at).reverse.each_with_index do |product, i|
-    .products_list_item class="i_#{i % 6}"
+    .products_list_item class="i_#{i % 6}" data-src=polymorphic_path(product, format: :json)
+      = link_to '', product
+
       .image
         = image_tag product.images[0].thumb.url if product.images[0]
 
