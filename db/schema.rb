@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170815081345) do
+ActiveRecord::Schema.define(version: 20170817094256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 20170815081345) do
     t.index ["slug"], name: "index_colors_on_slug", unique: true
   end
 
+  create_table "images", force: :cascade do |t|
+    t.string "photo"
+    t.string "imagable_type"
+    t.bigint "imagable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["imagable_type", "imagable_id"], name: "index_images_on_imagable_type_and_imagable_id"
+  end
+
   create_table "kinds", force: :cascade do |t|
     t.string "title"
     t.bigint "category_id"
@@ -53,7 +62,6 @@ ActiveRecord::Schema.define(version: 20170815081345) do
   create_table "kits", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.json "images"
     t.bigint "theme_id"
     t.index ["theme_id"], name: "index_kits_on_theme_id"
   end
@@ -64,7 +72,6 @@ ActiveRecord::Schema.define(version: 20170815081345) do
     t.text "desc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.json "images"
     t.string "colors", array: true
     t.bigint "kind_id"
     t.integer "state", default: 0

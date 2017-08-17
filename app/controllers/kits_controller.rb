@@ -13,10 +13,12 @@ class KitsController < ApplicationController
   # GET /kits/new
   def new
     @kit = Kit.new
+    @kit.images.build
   end
 
   # GET /kits/1/edit
   def edit
+    @kit.images.build if @kit.images.size == 0
   end
 
   # POST /kits
@@ -59,6 +61,6 @@ class KitsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def kit_params
-      params.require(:kit).permit(:title, :created_at, :theme_id, { images: []}, product_ids: [])
+      params.require(:kit).permit(:title, :created_at, :theme_id, { images: []}, product_ids: [], images_attributes: [:photo])
     end
 end

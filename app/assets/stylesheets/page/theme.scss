@@ -291,18 +291,32 @@
 
   &_item {
     margin-bottom: $space-s;
-    text-align: center;
-    position: relative;
     width: 100%;
 
-    > a {
-      display: block;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      z-index: 1;
+
+
+    .sh {
+      position: relative;
+      text-align: center;
+
+      > a {
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+      }
+
+      .title {
+        @include font-size-small;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: none;
+      }
     }
 
 
@@ -312,29 +326,76 @@
       margin-bottom: $base-rhythm-line;
     }
 
-    .title {
-      @include font-size-small;
-
-      display: none;
+    .price {
+      margin-bottom: $base-rhythm-line * 2;
     }
 
-    &.i_0, &.i_6 {
+    .desc {
+
+    }
+
+    .more {
+      @include font-size-small;
+
+      margin-bottom: $base-rhythm-line * 2;
+      max-width: 475px;
+
+      .buy {
+        display: flex;
+
+        .sizes {
+          border: 1px solid $separator-color;
+          margin-right: $gutter / 2;
+          padding: $base-rhythm-line;
+          text-align: center;
+          width: 80px;
+
+        }
+
+        .add {
+          background-color: $sand-color;
+          padding: $base-rhythm-line;
+          text-align: center;
+          flex-grow: 1;
+        }
+      }
+
+      .goto {
+        text-align: center;
+        display: block;
+        margin-top: $base-rhythm-line;
+        border: 1px solid $separator-color;
+        padding: $base-rhythm-line;
+      }
+    }
+
+    .pre {
+      display: none;
+
+      margin-bottom: $base-rhythm-line * 2;
+    }
+
+    &.i_0 {
       @include column-width(6, 12);
 
       .image {
         img{
           padding: 5%;
-          background-color: #f0e7d6;
+          background-color: $sand-color;
         }
       }
     }
 
-    &.i_1, &.i_7 {
+    &.i_1 {
       @include column-width(4, 12);
       @include column-shift(1, left, 12);
       @include column-shift(1, right, 12);
 
       align-self: flex-end;
+
+      &.ao {
+        @include column-shift(7, left, 12);
+      }
     }
 
     &.i_2, &.i_5, &.i_8 {
@@ -343,12 +404,12 @@
       @include column-shift(3, right, 12);
     }
 
-    &.i_3, &.i_9 {
+    &.i_3 {
       @include column-width(4, 12);
       @include column-shift(1, left, 12);
     }
 
-    &.i_4, &.i_10 {
+    &.i_4 {
       @include column-width(6, 12);
       @include column-shift(1, left, 12);
 
@@ -357,6 +418,10 @@
           padding: 5%;
           background-color: #e0dfda;
         }
+      }
+
+      &.ao {
+        @include column-shift(5, left, 12);
       }
     }
 
@@ -371,6 +436,33 @@
         display: block;
       }
     }
+
+    &.o {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100%;
+
+      .pre {
+        display: block;
+
+        @include mq($m) {
+          display: flex;
+
+          .image {
+            width: 50%;
+          }
+
+          .text {
+            width: 4 / 12 * 100%;
+            margin-left: 1 / 12 * 100%;
+          }
+        }
+      }
+
+      .sh {
+        display: none;
+      }
+    }
   }
 
   @include mq($s) {
@@ -378,14 +470,6 @@
 
     &_item {
       // margin-bottom: $space-s2 * 3;
-
-
-      .title {
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-
-      }
 
 
     }

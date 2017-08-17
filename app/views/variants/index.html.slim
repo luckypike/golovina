@@ -5,19 +5,22 @@
   .to_product
     = link_to 'Вернуться к товару', @product
 
-
   .page_product_form_variants
     = simple_form_for @product do |f|
       = f.error_notification
 
-      .form-inputs
+      .form_inputs
         - @product.variants.each do |variant|
           = f.simple_fields_for :variants, variant do |vf|
             = variant.color.title
-            = vf.input :sizes, as: :check_boxes, collection: [42, 44, 46]
+            = vf.input :sizes, as: :check_boxes, collection: [40, 42, 44, 46]
             = vf.input :_destroy, as: :boolean
 
-      .form-actions
+          - variant.images.each do |image|
+            .thumb
+              = image_tag image.photo.thumb.url
+
+      .form_actions
         = f.button :submit
 
 

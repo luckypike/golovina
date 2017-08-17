@@ -1,0 +1,38 @@
+<div class="image">
+  {{{ photo }}}
+</div>
+
+<div class="text">
+  <div class="title">
+    <h1>
+      {{ title }}
+    </h1>
+  </div>
+
+  <div class="price">
+    {{{ price }}}
+  </div>
+
+  <div class="more">
+    {{#if kit}}
+    {{else}}
+      <div class="buy">
+        {{#if sizes}}
+          <div class="sizes">
+            Размер
+          </div>
+        {{/if}}
+
+        <div class="add">Добавить в корзину</div>
+      </div>
+    {{/if}}
+    {{{ goto }}}
+  </div>
+
+
+  {{#if desc}}
+    <div class="desc">
+      {{ desc }}
+    </div>
+  {{/if}}
+</div>

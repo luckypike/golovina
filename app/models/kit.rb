@@ -1,9 +1,10 @@
 class Kit < ApplicationRecord
-  mount_uploaders :images, ImageUploader
-
   belongs_to :theme
   has_many :kitables, dependent: :destroy
   has_many :products, through: :kitables
+
+  has_many :images, as: :imagable
+  accepts_nested_attributes_for :images
 
   def title
     products.map(&:title_safe).to_sentence.downcase.upcase_first
@@ -11,5 +12,13 @@ class Kit < ApplicationRecord
 
   def price
     products.map(&:price).sum
+  end
+
+  def entity_created_at
+    created_at
+  end
+
+  def photo
+    images[0].photo.presence || nil
   end
 end

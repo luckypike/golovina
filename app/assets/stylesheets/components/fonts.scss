@@ -5,6 +5,11 @@
   line-height: $line-height * $base-rhythm-line;
 }
 
+@mixin font-headers() {
+  font-weight: 300;
+  font-family: 'Cormorant', serif;
+}
+
 
 @mixin font-size-h1() {
   @include font-size(4.25, 5);
@@ -76,9 +81,7 @@ h1, h2, h3 {
 
 h1, .h1 {
   @include font-size-h1;
-
-  font-weight: 300;
-  font-family: 'Cormorant', serif;
+  @include font-headers;
 
   margin-bottom: $base-rhythm-line * 2;
 }

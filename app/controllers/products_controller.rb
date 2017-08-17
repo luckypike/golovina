@@ -19,9 +19,6 @@ class ProductsController < ApplicationController
     # params[:theme] = params[:theme].presence || []
     # params[:size] = params[:size].presence || []
 
-    p params
-    p where
-
     @products = Variant.includes(product: [:kind]).themed_by(params[:theme]).where(where).map(&:product).uniq
     # .order(id: :asc)
   end

@@ -3,8 +3,6 @@ class Product < ApplicationRecord
 
   before_validation :set_category
 
-  mount_uploaders :images, ImageUploader
-
   has_many :kitables
   has_many :kits, through: :kitables
 
@@ -29,6 +27,14 @@ class Product < ApplicationRecord
 
   def set_category
     self.category = kind.category if kind
+  end
+
+  def photo
+    variants.first.images[0].photo.presence || nil
+  end
+
+  def sizes
+    variants.first.sizes
   end
 
   class << self

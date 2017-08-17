@@ -14,6 +14,6 @@
 //= require jquery
 //= require vivus
 //= require swiper/dist/js/swiper.jquery
-//= require wheel-indicator
+//= require handlebars/dist/handlebars
 //= require barba.js/dist/barba.js
 //= require_tree .

@@ -7,11 +7,22 @@ class Variant < ApplicationRecord
   belongs_to :color
   belongs_to :category
 
+  has_many :images, as: :imagable
+  accepts_nested_attributes_for :images
+
   validates_uniqueness_of :color_id, scope: [:product_id]
 
 
   def sync_themes_and_category
     self.themes = product.themes.map(&:id)
     self.category = product.category
+  end
+
+  def entity_created_at
+      product.created_at
+  end
+
+  def photo
+    images[0].photo.presence || nil
   end
 end

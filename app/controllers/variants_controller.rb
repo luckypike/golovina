@@ -6,13 +6,16 @@ class VariantsController < ApplicationController
   def index
     @product = Product.find(params[:product_id])
     @variant = Variant.new(product: @product)
+    @variant.images.build
+    # @variant.color = Color.find(1)
   end
 
   def create
     @variant = Variant.new(variant_params)
+    p  @variant.images
     @variant.product = Product.find(params[:product_id])
 
-    if @variant.save
+    if @variant.save!
       redirect_to [@variant.product, :variants], notice: 'Variant was successfully created.'
     else
       render :index
@@ -27,7 +30,7 @@ class VariantsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def variant_params
-      params.require(:variant).permit(:product_id, :color_id, sizes: [])
+      params.require(:variant).permit(:product_id, :color_id, sizes: [], images_attributes: [:photo])
     end
 
     def set_product_and_variants
