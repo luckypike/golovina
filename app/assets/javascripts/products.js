@@ -40,28 +40,28 @@ $(function(){
   });
 
 
-  $('.products_list_item').on('click', '.a, .pre .image', function(e) {
-    var _this = $(this);
-    var _pi = _this.parent().parent();
-    // if(_this.is('.a')) _pi = _this.parent();
+  // $('.products_list_item').on('click', '.a, .pre .image', function(e) {
+  //   var _this = $(this);
+  //   var _pi = _this.parent().parent();
+  //   // if(_this.is('.a')) _pi = _this.parent();
 
-    var source = $("#products-pre-template").html();
-    var template = Handlebars.compile(source);
+  //   var source = $("#products-pre-template").html();
+  //   var template = Handlebars.compile(source);
 
-    if(_pi.is('.o')) {
-      _pi.removeClass('o').next().removeClass('ao');
-    } else {
-      _pi.addClass('o');
-      var _n = _pi.next();
-      if(_n.length > 0) {
-        _n.addClass('ao');
-      }
+  //   if(_pi.is('.o')) {
+  //     _pi.removeClass('o').next().removeClass('ao');
+  //   } else {
+  //     _pi.addClass('o');
+  //     var _n = _pi.next();
+  //     if(_n.length > 0) {
+  //       _n.addClass('ao');
+  //     }
 
-      $.getJSON(_pi.data('src'), function(product) {
-        $('.pre', _pi).html(template(product));
-      });
-    }
+  //     $.getJSON(_pi.data('src'), function(product) {
+  //       $('.pre', _pi).html(template(product));
+  //     });
+  //   }
 
-    return false;
-  });
+  //   return false;
+  // });
 });

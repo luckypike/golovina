@@ -1,5 +1,7 @@
 &_theme {
   &_intro {
+    margin-bottom: $space-m;
+
     .siblings {
       @include font-size-small;
 
@@ -27,14 +29,7 @@
     .theme {
       display: block;
       position: relative;
-      // position: absolute;
-      // width: 100%;
-      // left: $gutter;
-      // right: $gutter;
-      // top: $space-m;
-      // transform: translateY(-50%);
-      // padding: 0 $gutter;
-      margin-bottom: $space-m;
+
 
       .image {
         @include aspect-ratio(4, 5);
@@ -76,9 +71,9 @@
     }
 
     @include mq($s) {
+      margin-bottom: $space-m2;
+
       .theme {
-        margin-bottom: $space-m2 * 2;
-        // position: re;
         height: calc(100vh - 14rem);
 
         .image {
@@ -94,7 +89,6 @@
         }
 
         .text {
-          // left: 50%;
           transform: translateY(-50%);
 
           .title {
@@ -137,18 +131,10 @@
 
     @include mq($l) {
       padding: 0;
-      // height: calc(100vh - 7.5rem);
+      margin-bottom: $space-m2 * 2;
 
       .theme {
-        .image {
-          // left: $gutter;
-        }
-
         .text {
-          .title {
-            // @include font-size(14, 13);
-          }
-
           .desc {
             margin-left: 4 / 6 * 100%;
           }
@@ -168,7 +154,6 @@
       }
     }
   }
-
 
   &_products {
   }
@@ -291,33 +276,20 @@
 
   // TODO: Rewrite
   &_item {
+    display: block;
     margin-bottom: $space-s;
+    text-align: center;
     width: 100%;
 
-    .sh {
-      position: relative;
-      text-align: center;
 
-      > a {
-        display: block;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 1;
-      }
+    .title {
+      @include font-size-small;
 
-      .title {
-        @include font-size-small;
-
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        display: none;
-      }
+      display: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-
 
     .image {
       @include aspect-ratio(4, 5);
@@ -331,47 +303,6 @@
 
     .desc {
 
-    }
-
-    .more {
-      @include font-size-small;
-
-      margin-bottom: $base-rhythm-line * 2;
-      max-width: 475px;
-
-      .buy {
-        display: flex;
-
-        .sizes {
-          border: 1px solid $separator-color;
-          margin-right: $gutter / 2;
-          padding: $base-rhythm-line;
-          text-align: center;
-          width: 80px;
-
-        }
-
-        .add {
-          background-color: $sand-color;
-          padding: $base-rhythm-line;
-          text-align: center;
-          flex-grow: 1;
-        }
-      }
-
-      .goto {
-        text-align: center;
-        display: block;
-        margin-top: $base-rhythm-line;
-        border: 1px solid $separator-color;
-        padding: $base-rhythm-line;
-      }
-    }
-
-    .pre {
-      display: none;
-
-      margin-bottom: $base-rhythm-line * 2;
     }
 
     &.i_0 {
@@ -397,7 +328,7 @@
       }
     }
 
-    &.i_2, &.i_5, &.i_8 {
+    &.i_2, &.i_5 {
       @include column-width(5, 12);
       @include column-shift(4, left, 12);
       @include column-shift(3, right, 12);
@@ -418,59 +349,12 @@
           background-color: #f9f9f9;
         }
       }
-
-      &.ao {
-        @include column-shift(5, left, 12);
-      }
-    }
-
-    &.has_opnd {
-      // opacity: 0;
-      // visibility: hidden;
-      // display: none;
-    }
-
-    &_pre {
-      .title {
-        display: block;
-      }
-    }
-
-    &.o {
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-      width: 100%;
-
-      .pre {
-        display: block;
-
-        @include mq($m) {
-          display: flex;
-
-          .image {
-            width: 50%;
-          }
-
-          .text {
-            width: 4 / 12 * 100%;
-            margin-left: 1 / 12 * 100%;
-          }
-        }
-      }
-
-      .sh {
-        display: none;
-      }
     }
   }
 
   @include mq($s) {
-
-
     &_item {
-      // margin-bottom: $space-s2 * 3;
-
-
+      margin-bottom: $space-s2;
     }
   }
 
@@ -480,5 +364,9 @@
 
   @include mq($l) {
     padding: 0;
+
+    &_item {
+      margin-bottom: $space-m2;
+    }
   }
 }

@@ -9,15 +9,6 @@
         h1
           = @kit.title
 
-      .price
-        | Стоимость комплекта
-        br
-        = number_to_rub @kit.price
-
-
-      .desc
-        | Оформите заказ сегодня и получите товары в течение 3–5 рабочих дней. Бесплатная доставка по России от 15 000 ₽.
-
     .kit_products
       - @kit.products.each_with_index do |product, i|
         .kit_products_item class="i_#{i % 2}"

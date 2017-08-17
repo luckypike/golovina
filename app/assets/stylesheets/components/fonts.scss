@@ -12,7 +12,7 @@
 
 
 @mixin font-size-h1() {
-  @include font-size(4.25, 5);
+  @include font-size(3, 3);
 
 
   @include breakpoint($s) {

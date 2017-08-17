@@ -6,8 +6,8 @@ class Kit < ApplicationRecord
   has_many :images, as: :imagable
   accepts_nested_attributes_for :images
 
-  def title
-    products.map(&:title_safe).to_sentence.downcase.upcase_first
+  def title_safe
+    self.title.presence || products.map(&:title_safe).to_sentence.downcase.upcase_first
   end
 
   def price

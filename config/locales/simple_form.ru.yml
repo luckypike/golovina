@@ -17,6 +17,7 @@ ru:
         state: Статус
         price: Стоимость
         desc: Описание
+        photo: Фотография
 
       product:
         title: Название
@@ -24,6 +25,12 @@ ru:
         themes: Стили
         latest: NEW
         sale: SALE
+
+      kit:
+        title: Эмоция
+        theme: Стиль
+        products: Товары
+
     #   user:
     #     new:
     #       email: 'E-mail to sign in.'

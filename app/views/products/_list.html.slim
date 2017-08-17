@@ -1,21 +1,6 @@
 .products_list
   - products.sort_by(&:entity_created_at).reverse.each_with_index do |entity, i|
     - product = entity.is_a?(Variant) ? entity.product : entity
-    .products_list_item class="i_#{i % 6}" data-src=polymorphic_path(product, format: :json)
-      .sh
-        = link_to '', product, class: [:a]
-
-        .image
-          = image_tag entity.images.first.photo.thumb.url if entity.images.size > 0
-
-        .title
-          = product.title
-
-        .price
-          = number_to_rub product.price
-
-      .pre
-
-
-script id="products-pre-template" type="text/x-handlebars-template"
-  == render 'products/pre.handlebars'
+    = link_to product, class: [:products_list_item, "i_#{i % 6}"] do
+      .image
+        = image_tag entity.images.first.photo.thumb.url if entity.images.size > 0

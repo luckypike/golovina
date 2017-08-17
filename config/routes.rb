@@ -30,10 +30,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :images
-
-  # get :new, to 'products#new'
-  # get :new, to 'products#new'
-
   get 'wishlist', to: 'wishlists#show'
 end
