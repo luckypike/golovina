@@ -1,9 +1,24 @@
-p#notice = notice
+.page.page_common.page_kit
+  .kit
+    .kit_image
+      .image
+        = image_tag @kit.photo
 
-p
-  strong Title:
-  = @kit.title
+    .kit_text
+      .title
+        h1
+          = @kit.title
 
-= link_to 'Edit', edit_kit_path(@kit)
-'  |
-= link_to 'Back', kits_path
+      .price
+        | Стоимость комплекта
+        br
+        = number_to_rub @kit.price
+
+
+      .desc
+        | Оформите заказ сегодня и получите товары в течение 3–5 рабочих дней. Бесплатная доставка по России от 15 000 ₽.
+
+    .kit_products
+      - @kit.products.each_with_index do |product, i|
+        .kit_products_item class="i_#{i % 2}"
+          == render 'products/item', product: product

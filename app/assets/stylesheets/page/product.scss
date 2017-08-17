@@ -1,143 +1,6 @@
 &_product {
-  &_image {
-    position: relative;
-    margin-bottom: $space-s;
-    user-select: none;
+  &_item {
 
-    .add_to_wishlist {
-      left: $gutter;
-      position: absolute;
-      z-index: 2;
-      bottom: 0;
-
-      .wishlist_icon {
-        .h {
-          fill: none;
-          stroke: #fff;
-          stroke-width: 2px;
-          fill-rule: evenodd;
-        }
-      }
-
-      &:hover {
-        .wishlist_icon {
-          .h {
-            fill: $op-color;
-          }
-        }
-      }
-    }
-
-    .swiper {
-      &-slide {
-        .img {
-          @include aspect-ratio(4, 5);
-
-          background: {
-            size: cover;
-            position: center top;
-          }
-
-          @include breakpoint($s) {
-            @include aspect-ratio-modify(1, 1);
-          }
-
-          @include breakpoint($m) {
-            // @include aspect-ratio-modify(4, 5);
-          }
-
-        }
-      }
-    }
-  }
-
-  &_content {
-    max-width: $xl;
-    padding: 0 $gutter;
-
-    .buy {
-      margin-bottom: $space-m;
-
-      &_title {
-      }
-
-      &_price {
-        @include font-size-h2;
-
-        margin-bottom: $space-s;
-      }
-
-      &_desc {
-        @include mq(0 ($s - 1px)) {
-          display: none;
-        }
-      }
-
-
-      .to_cart {
-        display: flex;
-        flex-wrap: wrap;
-        margin: $space-s 0;
-
-        &_size, &_color {
-          @include font-size(1.75, 5);
-
-          display: flex;
-          width: 50%;
-
-          .select {
-            border: 1px solid $separator-color;
-            border-radius: 50%;
-            height: 2.5rem;
-            margin-left: auto;
-            width: 2.5rem;
-          }
-        }
-
-        &_size {
-          padding-left: $gutter;
-        }
-
-        &_color {
-          padding-right: $gutter;
-        }
-
-
-
-        &_action {
-          margin-top: $space-s;
-          width: 100%;
-        }
-
-        .label {
-          text-transform: uppercase;
-        }
-      }
-
-      .delivery {
-        margin-bottom: $space-s;
-      }
-
-      .help {
-        @include font-size(1.5);
-
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-
-        a {
-          display: inline-block;
-          white-space: nowrap;
-        }
-
-        @include mq($s) {
-          a {
-            &:last-child {
-              margin-left: $gutter * 2;
-            }
-          }
-        }
-      }
-    }
   }
 
   &_form {
@@ -145,22 +8,76 @@
       max-width: $s;
     }
   }
+
   @include mq($s) {
-    &_content {
+
+  }
+
+  @include mq($m) {
+
+
+  }
+
+  @include mq($l) {
+
+
+  }
+
+  @include mq($m) {
+    .product {
+      margin-top: $space-s2;
+    }
+  }
+}
+
+.product {
+  &_image {
+
+
+    .image {
+      @include aspect-ratio(4, 5);
+
+      margin-bottom: $base-rhythm-line;
+    }
+  }
+
+  &_text {
+    .price {
+      margin-bottom: $base-rhythm-line * 2;
+    }
+
+    .more {
+      @include font-size-small;
+
+      margin-bottom: $base-rhythm-line * 2;
+      max-width: 475px;
+
       .buy {
-        .to_cart {
-          margin: $space-m 0;
+        display: flex;
 
-          &_size, &_color {
-            .select {
-              margin-left: $gutter;
-            }
-          }
+        .sizes {
+          border: 1px solid $separator-color;
+          margin-right: $gutter / 2;
+          padding: $base-rhythm-line;
+          text-align: center;
+          width: 80px;
 
-          &_action {
-            margin-top: $space-m;
-          }
         }
+
+        .add {
+          background-color: $sand-color;
+          padding: $base-rhythm-line;
+          text-align: center;
+          flex-grow: 1;
+        }
+      }
+
+      .goto {
+        text-align: center;
+        display: block;
+        margin-top: $base-rhythm-line;
+        border: 1px solid $separator-color;
+        padding: $base-rhythm-line;
       }
     }
   }
@@ -168,30 +85,32 @@
   @include mq($m) {
     @include column-pane;
 
+    padding: 0 $gutter;
+
     &_image {
-      @include column-width(6);
+      @include column-width(6, 12);
     }
 
-    &_content {
-      @include column-width(6);
+    &_text {
+      @include column-width(4, 12);
+      @include column-shift(1, left, 12);
+      @include column-shift(1, right, 12);
 
-      .buy {
-        // Not on grid
-        margin-left: 8%;
-        margin-right: 10%;
+      .title {
+        margin-bottom: $base-rhythm-line * 4;
+      }
+
+      .price {
+        margin-bottom: $base-rhythm-line * 8;
+      }
+
+      .more {
+        margin-bottom: $base-rhythm-line * 8;
       }
     }
   }
 
   @include mq($l) {
-    &_content {
-      // @include column-width(4);
-      // @include column-shift(1);
-      // @include column-shift(1, right);
-
-      .buy {
-        margin-top: $space-m2;
-      }
-    }
+    padding: 0;
   }
 }

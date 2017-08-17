@@ -289,11 +289,10 @@
   display: flex;
   flex-wrap: wrap;
 
+  // TODO: Rewrite
   &_item {
     margin-bottom: $space-s;
     width: 100%;
-
-
 
     .sh {
       position: relative;
@@ -416,7 +415,7 @@
       .image {
         img{
           padding: 5%;
-          background-color: #e0dfda;
+          background-color: #f9f9f9;
         }
       }
 

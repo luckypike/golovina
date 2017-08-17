@@ -1,50 +1,6 @@
-.page.page_product
-  .page_product_image.product_actions
-    = button_to [:wishlist, @product], class: :add_to_wishlist do
-      = inline_svg 'icons/wishlist.svg'
+.page.page_common.page_product
+  == render 'products/item', product: @product
 
-    .swiper_product.swiper-container
-      .swiper-wrapper
-        - @product.images.each do |image|
-          .swiper-slide
-            .img style="background-image: url('#{image.thumb.url}')"
-              / = image_tag
-
-  .page_product_content
-    .buy
-      .buy_title
-        h1
-          = @product.title
-
-      .buy_price
-        = number_to_rub @product.price
-
-      - if @product.desc.present?
-        .buy_desc
-          = @product.desc
-
-      .to_cart
-        .to_cart_color
-          .label
-            | Цвет
-
-          .select
-
-        .to_cart_size
-          .label
-            | Размер
-
-          .select
-
-        .to_cart_action
-          = button_to 'Добавить в корзину', @product, class: :btn
-
-      .delivery
-        | Бесплатная доставка по России от 15 000 ₽
-
-      .help
-        = link_to 'Условия доставки', '#'
-        = link_to 'Помощь с размером', '#'
 
     / .edit
       p = link_to 'Редактировать', [:edit, @product]
