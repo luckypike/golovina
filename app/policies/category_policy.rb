@@ -8,7 +8,7 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def update?
-    user.is_editor?
+    user&.is_editor?
   end
 
   def edit?

@@ -4,12 +4,6 @@ class VariantPolicy < ApplicationPolicy
   end
 
   def update?
-    user.if_editor?
-  end
-
-  class Scope < Scope
-    def resolve
-      scope
-    end
+    user&.is_editor?
   end
 end

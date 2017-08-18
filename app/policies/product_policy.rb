@@ -28,7 +28,7 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def update?
-    user.is_editor?
+    user&.is_editor?
   end
 
   def edit?
