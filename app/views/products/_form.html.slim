@@ -4,8 +4,8 @@
 
     .form_inputs
       = f.input :title
-      = f.input :created_at unless f.object.new_record?
-      = f.association :kind
+      / = f.input :created_at unless f.object.new_record?
+      = f.association :category
       = f.association :themes, as: :check_boxes
 
       = f.input :latest
@@ -19,6 +19,12 @@
       /     = image_tag f.object.images[0].thumb.url
 
       = f.input :desc
+
+      - if f.object.new_record?
+        = f.simple_fields_for :variants do |vf|
+          = vf.association :color
+          = vf.input :sizes, as: :check_boxes, collection: [40, 42, 44, 46]
+
 
     .form_actions
       = f.button :submit

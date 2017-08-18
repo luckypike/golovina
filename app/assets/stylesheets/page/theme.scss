@@ -156,6 +156,12 @@
   }
 
   &_products {
+    &_empty {
+      @include font-size-h2;
+
+      margin-bottom: $space-m2;
+      text-align: center;
+    }
   }
 
   &_footer {

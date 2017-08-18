@@ -7,8 +7,8 @@ class Variant < ApplicationRecord
   belongs_to :color
   belongs_to :category
 
-  has_many :images, as: :imagable
-  accepts_nested_attributes_for :images
+  has_many :images, as: :imagable, dependent: :destroy
+  # accepts_nested_attributes_for :images
 
   validates_uniqueness_of :color_id, scope: [:product_id]
 

@@ -30,6 +30,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'devise'
+gem 'pundit'
 
 gem 'active_link_to'
 

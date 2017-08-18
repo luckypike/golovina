@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'images/create'
+
   devise_for :users
 
   root 'static#index'
@@ -19,16 +21,31 @@ Rails.application.routes.draw do
     # resources :products, only: [:show], path: ''
   # end
 
-  resources :products, path: :catalog do
-    resources :variants, only: [:index, :create]
-    post :wishlist, on: :member
+  resources :images, only: [:create]
+  resources :variants, only: [:create, :update]
 
+  resources :categories
+
+  resources :products, path: :catalog do
     collection do
       get :all
       get :latest
       get :sale
+      get ':slug', to: 'products#category', as: :category, constraints: lambda { |request| Category.find_by_slug(request.params[:slug]).present? }
     end
+
   end
+
+  # resources :products, path: :catalog do
+  #   resources :variants, only: [:create]
+  #   post :wishlist, on: :member
+
+  #   collection do
+  #     get :all
+  #     get :latest
+  #     get :sale
+  #   end
+  # end
 
   get 'wishlist', to: 'wishlists#show'
 end

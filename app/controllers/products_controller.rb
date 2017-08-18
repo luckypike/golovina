@@ -24,6 +24,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    authorize @product
     # respond_to do |format|
     #   format.html
     #   format.json
@@ -32,24 +33,36 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new()
+    @product.variants.build
     if params[:category_id] && category = Category.friendly.find(params[:category_id])
       @product.category = category
     end
+    authorize @product
   end
 
   def edit
+    authorize @product
   end
 
   def latest
+    authorize Product
+
     @products = Variant.includes(:product).where(products: { latest: true }).map(&:product).uniq
   end
 
   def sale
+    authorize Product
+
     @products = Variant.includes(:product).where(products: { sale: true }).map(&:product).uniq
+  end
+
+  def category
+    authorize Product
   end
 
   def create
     @product = Product.new(product_params)
+    authorize @product
 
     if @product.save
       redirect_to @product, notice: 'Product was successfully created.'
@@ -59,12 +72,14 @@ class ProductsController < ApplicationController
   end
 
   def update
+    authorize @product
+
     if @product.update(product_params)
-      @product.variants.map do |v|
-        v.themes = @product.themes.map(&:id)
-        v.category = @product.category
-      end
-      @product.save
+      # @product.variants.map do |v|
+      #   v.themes = @product.themes.map(&:id)
+      #   v.category = @product.category
+      # end
+      # @product.save
 
       redirect_to @product, notice: 'Product was successfully updated.'
     else
@@ -91,6 +106,7 @@ class ProductsController < ApplicationController
   end
 
   def all
+    authorize Product
     @products = Product.order(id: :desc)
   end
 
@@ -102,6 +118,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:title, :state, :latest, :sale, :created_at, :kind_id, :category_id, :price, :desc, { images: []}, theme_ids: [], variants_attributes: [:id, :_destroy, sizes: []])
+      params.require(:product).permit(:title, :state, :latest, :sale, :created_at, :kind_id, :category_id, :price, :desc, { images: []}, theme_ids: [], variants_attributes: [:id, :color_id, :_destroy, sizes: []])
     end
 end

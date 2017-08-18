@@ -10,6 +10,7 @@ class ThemesController < ApplicationController
   end
 
   def show
+    authorize @theme
     @products = Variant.includes(:images, product: [:kitables]).themed_by([@theme.id]).where.not(images: { id: nil }) + Kit.includes(:images, :products).where.not(kitables: { id: nil }).where(products: { state: :active }).where.not(images: { id: nil })
     # @products = Product.left_outer_joins(:kitables).active.where(kitables: { id: nil }) + Kit.includes(:products).where.not(kitables: { id: nil }).where(products: { state: :active })
   end

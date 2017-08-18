@@ -1,6 +1,34 @@
 .page.page_common.page_product
   == render 'products/item', product: @product
 
+  - if policy(@product).edit?
+    .page_product_form_variants
+      .form
+        - @product.variants.each do |variant|
+          = simple_form_for variant, remote: true do |f|
+            = f.error_notification
+
+            .form_inputs
+              = f.object.color.title
+              = f.input :sizes, as: :check_boxes, collection: [40, 42, 44, 46]
+
+            .dropzone data-url=images_path data-params={ 'image[imagable_type]': 'Variant', 'image[imagable_id]': variant.id }.to_json
+
+    .page_product_form_variant
+      .form
+        = simple_form_for Variant.new(product: @product) do |f|
+          = f.error_notification
+
+          .form_inputs
+            = f.hidden_field :product_id
+            = f.association :color
+            / = f.input :sizes, as: :check_boxes, collection: [40, 42, 44, 46]
+            / = f.simple_fields_for :images do |i_f|
+              = i_f.input :photo
+
+          .form_actions
+            = f.button :submit
+
 
     / .edit
       p = link_to 'Редактировать', [:edit, @product]

@@ -34,6 +34,7 @@
         }
       }
 
+      &.variant_sizes,
       &.product_themes {
         display: flex;
         flex-wrap: wrap;
@@ -52,6 +53,8 @@
           }
         }
       }
+
+
     }
 
     .thumb {

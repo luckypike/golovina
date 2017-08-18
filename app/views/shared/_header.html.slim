@@ -47,24 +47,25 @@ header.header class="#{menu_catalog? ? :active : nil }"
 
     .header_menu_item class=((controller_name == 'products' && !%w(sale new).include?(action_name)) ? :active: nil)
       .title
-        = link_to 'Shop', @themes.first
+        = link_to 'Shop', @categories.first
 
       .sub
-        - @categories.select{ |c| c.products.size > 0 }.each do |category|
+        - @categories.reject{ |c| c.parent_category }.each do |category|
           .sub_item
-            = active_link_to category.title, products_path(category: [category.id]), active: :exact
+            = active_link_to category.title, category_products_path(slug: category.slug)
+            / = active_link_to category.title, products_path(category: [category.id]), active: :exact
 
     .header_menu_item
-      = link_to 'Sale', [:sale, :products]
+      = active_link_to 'Sale', [:sale, :products]
 
     .header_menu_item
-      = link_to 'New', [:latest, :products]
+      = active_link_to 'New', [:latest, :products]
 
     .header_menu_item.sep
-      = link_to 'Мяtа', [:about, :index]
+      = active_link_to 'Мяtа', [:about, :index]
 
     .header_menu_item
-      = link_to 'Контакты', [:contacts]
+      = active_link_to 'Контакты', [:contacts]
 
     - if user_signed_in? && current_user.is_admin?
       .header_menu_item.sep

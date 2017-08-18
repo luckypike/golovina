@@ -5,7 +5,7 @@
   .form-inputs
     = f.association :color
     = f.input :sizes, as: :check_boxes, collection: [40, 42, 44, 46]
-    = f.simple_fields_for :images do |i_f|
+    / = f.simple_fields_for :images do |i_f|
       = i_f.input :photo
 
   .form-actions

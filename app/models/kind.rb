@@ -1,5 +1,5 @@
 class Kind < ApplicationRecord
-  validates_presence_of :title
+  # validates_presence_of :title
 
-  belongs_to :category
+  # belongs_to :category
 end

@@ -1,7 +1,7 @@
   .product
     .product_image
       .image
-        = image_tag product.photo
+        = image_tag product.photo if product.photo
 
     .product_text
       .title

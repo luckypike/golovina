@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require jquery
 //= require vivus
+//= require dropzone/dist/dropzone
 //= require swiper/dist/js/swiper.jquery
 //= require barba.js/dist/barba.js
 //= require_tree .

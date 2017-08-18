@@ -1,0 +1,5 @@
+class StaticPolicy < Struct.new(:user, :dashboard)
+  def index?
+    true
+  end
+end

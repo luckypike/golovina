@@ -21,7 +21,12 @@
           | Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или поездка за город к друзьям на вечеринку у бассейна.
 
   .page_theme_products
-    == render 'products/list', products: @products
+    - if @products.empty?
+      .page_theme_products_empty
+        | В этом стиле на текущий момент не товаров
+
+    - else
+      == render 'products/list', products: @products
 
 
   .page_theme_footer

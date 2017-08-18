@@ -1,9 +1,13 @@
-.page.page_themes
-  - @categories.each do |category|
-    .page_themes_theme class=category.slug
-      .text
-        .title
-          = category.title
+.page.page_common.page_categories
+  .page_categories_list
+    .categories_add
+      = link_to 'Добавить', [:new, :category]
+    .categories_list
+      - @categories.reject{ |c| c.parent_category }.each do |category|
+        .categories_list_item
+          = link_to category.title, [:edit, category]
 
-        .more
-          = link_to 'Купить', category_path(category)
+        - category.categories.each do |c|
+          .categories_list_item
+            | —
+            =< link_to c.title, [:edit, c]

@@ -3,7 +3,7 @@ class Kit < ApplicationRecord
   has_many :kitables, dependent: :destroy
   has_many :products, through: :kitables
 
-  has_many :images, as: :imagable
+  has_many :images, as: :imagable, dependent: :destroy
   accepts_nested_attributes_for :images
 
   def title_safe
