@@ -3,15 +3,16 @@ class VariantsController < ApplicationController
   # before_action :set_variant, only: [:show, :destroy]
 
 
-  def index
-    @product = Product.find(params[:product_id])
-    @variant = Variant.new(product: @product)
-    @variant.images.build
-    # @variant.color = Color.find(1)
-  end
+  # def index
+  #   @product = Product.find(params[:product_id])
+  #   @variant = Variant.new(product: @product)
+  #   @variant.images.build
+  #   # @variant.color = Color.find(1)
+  # end
 
   def create
     @variant = Variant.new(variant_params)
+    authorize @variant
     # @variant.product = Product.find(params[:product_id])
 
     if @variant.save!

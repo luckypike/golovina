@@ -1,29 +1,30 @@
 class KitsController < ApplicationController
   before_action :set_kit, only: [:show, :edit, :update, :destroy]
 
-  # GET /kits
   def index
+    authorize Kit
     @kits = Kit.all
   end
 
-  # GET /kits/1
   def show
+    authorize @kit
   end
 
-  # GET /kits/new
   def new
     @kit = Kit.new
     @kit.images.build
+
+    authorize @kit
   end
 
-  # GET /kits/1/edit
   def edit
     @kit.images.build if @kit.images.size == 0
+    authorize @kit
   end
 
-  # POST /kits
   def create
     @kit = Kit.new(kit_params)
+    authorize @kit
 
     if @kit.save
       redirect_to @kit, notice: 'Kit was successfully created.'
@@ -32,13 +33,8 @@ class KitsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /kits/1
   def update
-    # images = @kit.images
-    # images += kit_params[:images]
-    # @kit.images = images
-    #
-    # params[:kit].delete(:images)
+    authorize @kit
 
     if @kit.update(kit_params)
       redirect_to @kit, notice: 'Kit was successfully updated.'
@@ -47,7 +43,6 @@ class KitsController < ApplicationController
     end
   end
 
-  # DELETE /kits/1
   def destroy
     @kit.destroy
     redirect_to kits_url, notice: 'Kit was successfully destroyed.'
