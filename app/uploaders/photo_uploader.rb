@@ -29,6 +29,10 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  version :drag do
+    process resize_to_fill: [300, 300]
+  end
+
   version :thumb do
     process resize_to_fill: [1000, 1250]
   end
@@ -40,9 +44,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    if original_filename
-      @name ||= Digest::MD5.hexdigest(File.dirname(current_path))
-      "#{@name}.#{file.extension}"
-    end
+    "#{@model.uuid}.#{file.extension}"
   end
 end

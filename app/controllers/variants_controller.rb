@@ -1,6 +1,6 @@
 class VariantsController < ApplicationController
   # before_action :set_product_and_variants, only: [:create, :index, :update, :destroy]
-  # before_action :set_variant, only: [:show, :destroy]
+  before_action :set_variant, only: [:update, :destroy]
 
 
   # def index
@@ -10,21 +10,34 @@ class VariantsController < ApplicationController
   #   # @variant.color = Color.find(1)
   # end
 
-  def create
-    @variant = Variant.new(variant_params)
+  def update
     authorize @variant
-    # @variant.product = Product.find(params[:product_id])
 
-    if @variant.save!
-      redirect_to @variant.product, notice: 'Variant was successfully created.'
+    if @variant.update(variant_params)
+      head :ok
     else
-      render :index
+      render text: "\"#{@variant.errors.full_messages.first}\"", status: 422
     end
   end
 
+  # def create
+  #   @variant = Variant.new(variant_params)
+  #   authorize @variant
+  #   # @variant.product = Product.find(params[:product_id])
+
+  #   if @variant.save!
+  #     redirect_to @variant.product, notice: 'Variant was successfully created.'
+  #   else
+  #     render :index
+  #   end
+  # end
+
   private
-  # Use callbacks to share common setup or constraints between actions.
+  def set_variant
+    @variant = Variant.find(params[:id])
+  end
+
   def variant_params
-    params.require(:variant).permit(:product_id, :color_id, sizes: [])
+    params.require(:variant).permit(sizes: [])
   end
 end

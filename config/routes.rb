@@ -11,22 +11,20 @@ Rails.application.routes.draw do
 
   get :contacts, to: 'static#contacts'
 
-  resources :kinds, except: [:show]
-
-  # get '/:theme', to: 'themes#show', constraints: lambda { |req| Theme.find_by_slug(req.path[1..-1]) }, as: :theme
-  resources :themes, path: :styles
+  resources :themes, path: :styles, except: [:index, :destroy]
 
   resources :kits
-  # resources :categories, only: [], path: :catalog do
-    # resources :products, only: [:show], path: ''
-  # end
 
   resources :images, only: [:create]
   resources :variants, only: [:create, :update]
 
   resources :categories
 
-  resources :products, path: :catalog do
+  resources :products, path: :catalog, except: [:index, :destroy] do
+    member do
+      post :publish
+    end
+
     collection do
       get :all
       get :latest

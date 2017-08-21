@@ -14,6 +14,7 @@
 //= require jquery
 //= require vivus
 //= require dropzone/dist/dropzone
+//= require dragula/dist/dragula.min
 //= require swiper/dist/js/swiper.jquery
 //= require barba.js/dist/barba.js
 //= require_tree .

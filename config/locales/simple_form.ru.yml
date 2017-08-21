@@ -31,6 +31,10 @@ ru:
         theme: Стиль
         products: Товары
 
+      variant:
+        sizes: Размеры
+        color: Цвет
+
     #   user:
     #     new:
     #       email: 'E-mail to sign in.'

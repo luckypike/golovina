@@ -39,6 +39,20 @@ $(function(){
     }
   });
 
+  var _evf = $('.edit_variant');
+
+  _evf.on('change', function() {
+    var _this = $(this);
+
+    $('.form_actions input', _this).trigger('click');
+
+    // _evf.trigger('submit.rails');
+    // _evf.submit();
+
+    // return false;
+
+  });
+
 
   // $('.products_list_item').on('click', '.a, .pre .image', function(e) {
   //   var _this = $(this);

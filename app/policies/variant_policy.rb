@@ -4,6 +4,7 @@ class VariantPolicy < ApplicationPolicy
   end
 
   def update?
+    p 'XXX'
     user&.is_editor?
   end
 end

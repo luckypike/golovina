@@ -2,17 +2,30 @@
   == render 'products/item', product: @product
 
   - if policy(@product).edit?
+    .page_product_form_state
+      = button_to 'Опубликовать', [:publish, @product], class: [:btn]
+
     .page_product_form_variants
-      .form
-        - @product.variants.each do |variant|
-          = simple_form_for variant, remote: true do |f|
+      - @product.variants.each do |variant|
+        .form
+          = simple_form_for variant, remote: true, namespace: "variant_#{variant.id}", authenticity_token: true do |f|
             = f.error_notification
 
             .form_inputs
-              = f.object.color.title
+              h3
+                = f.object.color.title
               = f.input :sizes, as: :check_boxes, collection: [40, 42, 44, 46]
 
-            .dropzone data-url=images_path data-params={ 'image[imagable_type]': 'Variant', 'image[imagable_id]': variant.id }.to_json
+            .form_photos
+              .form_photos_list
+                - variant.images.each do |images|
+                  .form_photos_list_item
+                    = image_tag images.photo.drag.url
+
+              .dropzone data-url=images_path data-params={ 'image[imagable_type]': 'Variant', 'image[imagable_id]': variant.id }.to_json
+
+            .form_actions
+              = f.button :submit
 
     .page_product_form_variant
       .form

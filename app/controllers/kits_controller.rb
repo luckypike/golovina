@@ -39,6 +39,7 @@ class KitsController < ApplicationController
     if @kit.update(kit_params)
       redirect_to @kit, notice: 'Kit was successfully updated.'
     else
+      @kit.images.build if @kit.images.size == 0
       render :edit
     end
   end
@@ -49,13 +50,11 @@ class KitsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_kit
-      @kit = Kit.find(params[:id])
-    end
+  def set_kit
+    @kit = Kit.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def kit_params
-      params.require(:kit).permit(:title, :created_at, :theme_id, { images: []}, product_ids: [], images_attributes: [:id, :photo])
-    end
+  def kit_params
+    params.require(:kit).permit(:title, :created_at, :theme_id, { images: []}, product_ids: [], images_attributes: [:id, :photo])
+  end
 end

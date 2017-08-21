@@ -7,6 +7,72 @@
     .form {
       max-width: $s;
     }
+
+    &_state {
+      margin-top: $space-s;
+    }
+
+    &_variants {
+      margin-top: $space-s;
+      max-width: $s;
+
+      .form {
+        margin-bottom: $space-s;
+        border-bottom: 1px solid $separator-color;
+        padding-bottom: $space-s;
+
+        h3 {
+          margin-bottom: $base-rhythm-line;
+        }
+
+        .form_photos {
+
+
+          &_list {
+            margin-bottom: $space-s;
+            // display: flex;
+
+            &_item {
+              margin-bottom: $base-rhythm-line;
+
+              img {
+                display: block;
+                width: 100px;
+              }
+            }
+          }
+
+          @include mq($s) {
+            &_list {
+              display: flex;
+
+              &_item {
+                margin-bottom: 0;
+                margin-right: $gutter;
+              }
+            }
+          }
+        }
+
+        .form_actions {
+          display: none;
+        }
+      }
+
+
+
+      .dropzone {
+        border: 1px dashed $highlight-color;
+        // border-radius: 5px;
+        background: $sand-color;
+        min-height: $space-m2;
+        padding: $space-s $gutter;
+
+        .dz-message {
+          text-align: center;
+        }
+      }
+    }
   }
 
   @include mq($s) {
