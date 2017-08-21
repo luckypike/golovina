@@ -43,15 +43,39 @@ $(function() {
 
 
   var _window = $(window);
+  var didScroll;
+  var lastScrollTop = 0;
 
   _window.on('scroll', function() {
-    if(_window.scrollTop() > _h.outerHeight(true)) {
+    didScroll = true;
+
+    if(_window.scrollTop() > 1) {
       if(!_h.is('.no_hide_logo')) {
         _h.addClass('hide_logo');
       }
     } else {
-      _h.removeClass('hide_logo');
+      _h.removeClass('hide_logo no_themes');
     }
   }).trigger('scroll');
 
+
+   setInterval(function() {
+    if (didScroll) {
+      var st = _window.scrollTop();
+
+      if(Math.abs(lastScrollTop - st) <= 5)
+          return;
+
+      if (st > lastScrollTop){
+          _h.addClass('no_themes');
+      } else {
+        if(st + _window.height() < $(document).height()) {
+          _h.removeClass('no_themes');
+        }
+      }
+
+      lastScrollTop = st;
+      didScroll = false;
+    }
+  }, 250);
 });

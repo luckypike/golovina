@@ -4,10 +4,12 @@
   height: $base-rhythm-line * 8;
   position: absolute;
   left: 0;
-  margin-top: 0;
+  padding-top: 0;
   top: 0;
   width: 100%;
   z-index: 10;
+  transition: height 0.2s;
+  background: $op-color;
 
   &.hidden {
     z-index: 0;
@@ -17,7 +19,7 @@
     position: absolute;
     left: 50%;
     // left: $base-rhythm-line * $base-line-height + $gutter * 3;
-    top: 22px;
+    bottom: 1.125rem;
     transform: translateX(-50%);
     z-index: 2;
     transition-duration: 0.4s;
@@ -55,7 +57,7 @@
     position: absolute;
     left: $gutter;
     margin-left:  - ($base-line-height * $base-rhythm-line / 2);
-    top: $base-rhythm-line * 2;
+    bottom: $base-rhythm-line;
     user-select: none;
     z-index: 2;
   }
@@ -126,7 +128,7 @@
     position: absolute;
     display: flex;
     right: $gutter - 0.625rem;
-    top: $base-rhythm-line * 2;
+    bottom: $base-rhythm-line;
 
     .phone {
       cursor: pointer;
@@ -312,11 +314,59 @@
     // }
   }
 
+  &_themes {
+    display: none;
+    background: $op-color;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    transition: height 0.3s, opacity 0.4s;
+    overflow: hidden;
+    height: $base-rhythm-line * 8;
+
+    .themes_list {
+      display: flex;
+      justify-content: space-between;
+
+      &_item {
+        padding: $base-rhythm-line * 2.5 0;
+
+        .full {
+          display: none;
+        }
+      }
+    }
+
+    @include mq($s) {
+      display: block;
+      padding: 0 $gutter;
+    }
+
+    @include mq($m) {
+      padding: 0 $gutter * 2;
+    }
+
+    @include mq($l) {
+      padding: 0 (2 / 16 * 100%);
+
+      .themes_list {
+        padding: 0 $gutter;
+      }
+
+    }
+  }
+
   &.hide_logo {
-    .header_logo {
-      visibility: hidden;
-      opacity: 0;
-      transition: 0.25s opacity, 0s visibility 0.25s;
+    @include mq($m) {
+      height: $base-rhythm-line * 8;
+
+
+      &.no_themes {
+        .header_themes {
+          height: 0;
+          opacity: 0;
+        }
+      }
     }
   }
 
@@ -436,12 +486,16 @@
 
 
   @include breakpoint($s) {
-    margin-top: $base-rhythm-line * 3;
-    height: $base-rhythm-line * 9;
+    // padding-top: $base-rhythm-line * 3;
+    height: $base-rhythm-line * 12;
 
-    &_logo {
+    // &_nav, &_caw {
+    //   top: $base-rhythm-line * 3;
+    // }
 
-    }
+    // &_logo {
+    //   top: (1.125rem + $base-rhythm-line * 2);
+    // }
 
     &_contact {
       background: none;
@@ -516,7 +570,8 @@
 
 
   @include breakpoint($xl) {
-    margin-top: $base-rhythm-line * 6;
+    // padding-top: $base-rhythm-line * 6;
+    height: $base-rhythm-line * 15;
 
     &_nav {
       left: $gutter * 4;

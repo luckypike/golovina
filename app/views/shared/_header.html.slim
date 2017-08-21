@@ -72,20 +72,13 @@ header.header class="#{menu_catalog? ? :active : nil }"
         = link_to 'Управление товарами', [:products]
 
 
+  .header_themes
+    .themes_list
+      - @themes.each do |theme|
+        .themes_list_item
+          = link_to theme do
+            span.full
+              = theme.title
 
-    / - if current_page? @themes.first
-      .header_menu_filters
-        .title Фильтры
-
-        .header_menu_item
-          = link_to 'Цвет', '#'
-          .header_menu_sub
-            - @colors.each do |color|
-              .header_menu_sub_item
-                = link_to color.title, '#'
-
-        .header_menu_item
-          = link_to 'Материал', '#'
-
-        .header_menu_item
-          = link_to 'Размер', '#'
+            span.short
+              = theme.title_short
