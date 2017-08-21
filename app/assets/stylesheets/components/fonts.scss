@@ -82,19 +82,14 @@ h1, h2, h3 {
 h1, .h1 {
   @include font-size-h1;
   @include font-headers;
-
-  margin-bottom: $base-rhythm-line * 2;
 }
 
 h2, .h2 {
   @include font-size-h2;
-
-  margin-bottom: $base-rhythm-line * 2;
 }
 
 h3, .h3 {
   @include font-size-h3;
-
-  margin-bottom: $base-rhythm-line * 2;
 }
+
 

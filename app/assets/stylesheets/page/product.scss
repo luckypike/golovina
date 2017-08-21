@@ -85,6 +85,7 @@
 
           &_item {
             height: auto;
+            margin-bottom: $base-rhythm-line;
           }
         }
       }
@@ -123,13 +124,14 @@
 
   @include mq($m) {
     .product {
-      margin-top: $space-s2;
+      // margin-top: $space-s2;
     }
   }
 }
 
 .product {
   &_images {
+    // margin-bottom: $space-s;
 
 
     .images_list {
@@ -145,11 +147,7 @@
 
     .image {
       @include aspect-ratio(4, 5);
-
-      margin-bottom: $base-rhythm-line;
-      // width: 100%;
     }
-
   }
 
   &_data {
@@ -164,11 +162,11 @@
     // }
 
     .price {
-      margin-bottom: $base-rhythm-line * 2;
+      // margin-bottom: $space-s;
     }
 
     .variants {
-      margin-bottom: $base-rhythm-line * 2;
+      // margin-bottom: $space-s;
 
       &_list {
         display: flex;
@@ -193,13 +191,12 @@
     }
 
     .desc {
-      margin-bottom: $base-rhythm-line * 2;
+      // margin-bottom: $space-s;
     }
 
     .more {
       @include font-size-small;
 
-      margin-bottom: $base-rhythm-line * 2;
       max-width: 475px;
 
       .buy {
@@ -245,18 +242,6 @@
       @include column-width(4, 12);
       @include column-shift(1, left, 12);
       @include column-shift(1, right, 12);
-
-      .title {
-        margin-bottom: $base-rhythm-line * 4;
-      }
-
-      .price {
-        margin-bottom: $base-rhythm-line * 8;
-      }
-
-      .more {
-        margin-bottom: $base-rhythm-line * 8;
-      }
     }
   }
 

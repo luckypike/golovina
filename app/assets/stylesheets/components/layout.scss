@@ -48,3 +48,51 @@ $default-total-columns: 16;
     padding-top: ($height / $width) * 100%;
   }
 }
+
+@mixin lv1 {
+  margin-bottom: $base-rhythm-line * $base-line-height * 4;
+
+  @include mq($s) {
+    margin-bottom: $base-rhythm-line * ($base-line-height + 1) * 4;
+  }
+}
+
+.lv1 {
+  @include lv1;
+}
+
+@mixin lv2 {
+  margin-bottom: $base-rhythm-line * $base-line-height * 2;
+
+  @include mq($s) {
+    margin-bottom: $base-rhythm-line * ($base-line-height + 1) * 2;
+  }
+}
+
+.lv2 {
+  @include lv2;
+}
+
+@mixin lv3 {
+  margin-bottom: $base-rhythm-line * $base-line-height;
+
+  @include mq($s) {
+    margin-bottom: $base-rhythm-line * ($base-line-height + 1);
+  }
+}
+
+.lv3 {
+  @include lv3;
+}
+
+@mixin lv4 {
+  margin-bottom: $base-rhythm-line * $base-line-height / 2;
+
+  @include mq($s) {
+    margin-bottom: $base-rhythm-line * ($base-line-height + 1) / 2;
+  }
+}
+
+.lv4 {
+  @include lv4;
+}

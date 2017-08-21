@@ -1,15 +1,15 @@
 .page.page_common.page_kit
   .kit
-    .kit_image
-      .image
-        = image_tag @kit.photo
+    .kit_intro.lv2
+      .image.lv3
+        .img
+          = image_tag @kit.photo
 
-    .kit_text
       .title
         h1
           = @kit.title
 
     .kit_products
       - @kit.products.each_with_index do |product, i|
-        .kit_products_item class="i_#{i % 2}"
+        .kit_products_item.lv2 class="i_#{i % 2}"
           == render 'products/item', product: product

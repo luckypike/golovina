@@ -1,56 +1,37 @@
 .kit {
-  &_image {
-
-
+  &_intro {
     .image {
-      @include aspect-ratio(4, 5);
-
-      margin-bottom: $base-rhythm-line;
-    }
-  }
-
-  &_text {
-
-    .title {
-
-    }
-
-    .price {
-      margin-bottom: $base-rhythm-line * 2;
-    }
-  }
-
-  &_products {
-    &_item {
-      margin-top: $base-rhythm-line * 4;
+      .img {
+        @include aspect-ratio(4, 5);
+      }
     }
   }
 
   @include mq($m) {
-    @include column-pane;
-
     padding: 0 $gutter;
 
-    &_image {
-      @include column-width(6, 12);
-    }
+    &_intro {
+      @include column-pane;
 
-    &_text {
-      @include column-width(4, 12);
-      @include column-shift(1, left, 12);
+      .image {
+        @include column-width(6, 12);
 
-      .title {
-        margin-bottom: $base-rhythm-line * 4;
+        margin-bottom: 0;
       }
 
-      .price {
-        margin-bottom: $base-rhythm-line * 8;
+      .title {
+        @include column-width(4, 12);
+        @include column-shift(1, left, 12);
       }
     }
 
     &_products {
       &_item {
-        margin-top: $base-rhythm-line * 12;
+        .product {
+          &_images {
+            margin-bottom: 0;
+          }
+        }
 
         &.i_0 {
           .product {

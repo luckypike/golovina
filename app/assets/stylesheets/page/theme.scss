@@ -300,15 +300,7 @@
     .image {
       @include aspect-ratio(4, 5);
 
-      margin-bottom: $base-rhythm-line;
-    }
-
-    .price {
-      margin-bottom: $base-rhythm-line * 2;
-    }
-
-    .desc {
-
+      // margin-bottom: $base-rhythm-line;
     }
 
     &.i_0 {
