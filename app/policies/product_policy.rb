@@ -3,7 +3,11 @@ class ProductPolicy < ApplicationPolicy
     true
   end
 
-  def all?
+  def variants?
+    update?
+  end
+
+  def index?
     create?
   end
 

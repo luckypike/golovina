@@ -1,34 +1,13 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :variants]
 
   def index
-    where = {}
-
-    %w(theme size).each do |f|
-      params[f] = params[f].present? ? params[f].map(&:to_i) : []
-      where[f.pluralize] = params[f] if params[f].present? && f != 'theme'
-    end
-
-    %w(category color).each do |f|
-      params[f] = params[f].present? ? params[f].map(&:to_i) : []
-      where[f] = params[f] if params[f].present?
-    end
-
-    # params[:category] = params[:category].presence || []
-    # params[:color] = params[:color].presence || []
-    # params[:theme] = params[:theme].presence || []
-    # params[:size] = params[:size].presence || []
-
-    @products = Variant.includes(product: [:kind]).themed_by(params[:theme]).where(where).map(&:product).uniq
-    # .order(id: :asc)
+    authorize Product
+    @products = Product.order(id: :desc)
   end
 
   def show
     authorize @product
-    # respond_to do |format|
-    #   format.html
-    #   format.json
-    # end
   end
 
   def new
@@ -58,6 +37,30 @@ class ProductsController < ApplicationController
 
   def category
     authorize Product
+
+    # where = {}
+
+    # %w(theme size).each do |f|
+    #   params[f] = params[f].present? ? params[f].map(&:to_i) : []
+    #   where[f.pluralize] = params[f] if params[f].present? && f != 'theme'
+    # end
+
+    # %w(category color).each do |f|
+    #   params[f] = params[f].present? ? params[f].map(&:to_i) : []
+    #   where[f] = params[f] if params[f].present?
+    # end
+
+    # # params[:category] = params[:category].presence || []
+    # # params[:color] = params[:color].presence || []
+    # # params[:theme] = params[:theme].presence || []
+    # # params[:size] = params[:size].presence || []
+
+    # @products = Variant.includes(product: [:kind]).themed_by(params[:theme]).where(where).map(&:product).uniq
+    # # .order(id: :asc)
+  end
+
+  def variants
+    authorize Product
   end
 
   def create
@@ -75,12 +78,6 @@ class ProductsController < ApplicationController
     authorize @product
 
     if @product.update(product_params)
-      # @product.variants.map do |v|
-      #   v.themes = @product.themes.map(&:id)
-      #   v.category = @product.category
-      # end
-      # @product.save
-
       redirect_to @product, notice: 'Product was successfully updated.'
     else
       render :edit
@@ -105,19 +102,13 @@ class ProductsController < ApplicationController
     redirect_to [@product.category, @product]
   end
 
-  def all
-    authorize Product
-    @products = Product.order(id: :desc)
-  end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def product_params
-      params.require(:product).permit(:title, :state, :latest, :sale, :created_at, :kind_id, :category_id, :price, :desc, { images: []}, theme_ids: [], variants_attributes: [:id, :color_id, :_destroy, sizes: []])
-    end
+  def product_params
+    params.require(:product).permit(:title, :state, :latest, :sale, :created_at, :kind_id, :category_id, :price, :desc, { images: []}, theme_ids: [], variants_attributes: [:id, :color_id, :_destroy, sizes: []])
+  end
 end

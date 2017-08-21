@@ -1,24 +1,44 @@
   .product
-    .product_image
-      .image
-        = image_tag product.photo if product.photo
+    .product_images.swiper-container
+      .images_list.swiper-wrapper
+      / .product_image_list
+        - product.images.each do |image|
+          - if image.photo
+            .product_image_list_item
+              .image
+                = image_tag image.photo
 
-    .product_text
-      .title
-        h1
-          = product.title_safe
+    .product_data
+      .data
+        .title
+          h1
+            = product.title_safe
 
-      .price
-        = number_to_rub product.price
+        .price
+          = number_to_rub product.price
 
-
-      .more
-        .buy
-          .sizes Размер
-          .add Добавить в корзину
-
-      .desc
-        | Свитер из хлопка с вырезом. Женственная модель украшена вязкой «косами» на кокетке. Удлиненные манжеты дополнены металлическими пуговицами с геральдической символикой.
-      / - if product.desc
         .desc
-          = product.desc
+          | Свитер из хлопка с вырезом. Женственная модель украшена вязкой «косами» на кокетке. Удлиненные манжеты дополнены металлическими пуговицами с геральдической символикой.
+
+
+        .variants.live
+          .variants_title
+          .variants_list
+            - product.variants.each do |variant|
+              .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json])
+                .icon class=variant.color.slug
+
+        .more
+          .buy
+            .sizes Размер
+            .add Добавить в корзину
+
+
+        / - if product.desc
+          .desc
+            = product.desc
+
+        - if policy(product).edit?
+          .edit
+            = link_to 'Редактировать', [:edit, product]
+            =< link_to 'Размеры и цвета', [:variants, product]

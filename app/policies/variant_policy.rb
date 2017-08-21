@@ -1,10 +1,13 @@
 class VariantPolicy < ApplicationPolicy
+  def images?
+    true
+  end
+
   def create?
     update?
   end
 
   def update?
-    p 'XXX'
     user&.is_editor?
   end
 end

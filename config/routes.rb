@@ -16,13 +16,18 @@ Rails.application.routes.draw do
   resources :kits
 
   resources :images, only: [:create]
-  resources :variants, only: [:create, :update]
+  resources :variants, only: [:create, :update] do
+    member do
+      get :images
+    end
+  end
 
   resources :categories
 
-  resources :products, path: :catalog, except: [:index, :destroy] do
+  resources :products, path: :catalog, except: [:destroy] do
     member do
       post :publish
+      get :variants
     end
 
     collection do

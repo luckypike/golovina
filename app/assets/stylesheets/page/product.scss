@@ -13,67 +13,99 @@
     }
 
     &_variants {
-      margin-top: $space-s;
-      max-width: $s;
+      &_variants {
+        margin-top: $space-s;
+        max-width: $s;
 
-      .form {
-        margin-bottom: $space-s;
-        border-bottom: 1px solid $separator-color;
-        padding-bottom: $space-s;
+        .form {
+          margin-bottom: $space-s;
+          border-bottom: 1px solid $separator-color;
+          padding-bottom: $space-s;
 
-        h3 {
-          margin-bottom: $base-rhythm-line;
-        }
-
-        .form_photos {
-
-
-          &_list {
-            margin-bottom: $space-s;
-            // display: flex;
-
-            &_item {
-              margin-bottom: $base-rhythm-line;
-
-              img {
-                display: block;
-                width: 100px;
-              }
-            }
+          h3 {
+            margin-bottom: $base-rhythm-line;
           }
 
-          @include mq($s) {
+          .form_photos {
+
+
             &_list {
-              display: flex;
+              margin-bottom: $space-s;
+              // display: flex;
 
               &_item {
-                margin-bottom: 0;
-                margin-right: $gutter;
+                margin-bottom: $base-rhythm-line;
+
+                img {
+                  display: block;
+                  width: 100px;
+                }
+              }
+            }
+
+            @include mq($s) {
+              &_list {
+                display: flex;
+
+                &_item {
+                  margin-bottom: 0;
+                  margin-right: $gutter;
+                }
               }
             }
           }
+
+          .form_actions {
+            display: none;
+          }
         }
 
-        .form_actions {
-          display: none;
-        }
-      }
 
 
+        .dropzone {
+          border: 1px dashed $highlight-color;
+          // border-radius: 5px;
+          background: $sand-color;
+          min-height: $space-m2;
+          padding: $space-s $gutter;
 
-      .dropzone {
-        border: 1px dashed $highlight-color;
-        // border-radius: 5px;
-        background: $sand-color;
-        min-height: $space-m2;
-        padding: $space-s $gutter;
-
-        .dz-message {
-          text-align: center;
+          .dz-message {
+            text-align: center;
+          }
         }
       }
     }
   }
+
+  .product {
+    &_images {
+      @include mq($m) {
+        .images_list {
+          display: block;
+
+          &_item {
+            height: auto;
+          }
+        }
+      }
+    }
+
+    &_data {
+
+      @include mq($m) {
+        .data {
+          position: fixed;
+          width: 4 / 12 * 100%;
+        }
+      }
+
+      @include mq($l) {
+        width: 4 / 16 * 100%;
+      }
+    }
+  }
+
+
 
   @include mq($s) {
 
@@ -97,18 +129,70 @@
 }
 
 .product {
-  &_image {
+  &_images {
+
+
+    .images_list {
+      // display: flex;
+
+      &_item {
+        // width: 100%;
+      }
+
+    }
+
 
 
     .image {
       @include aspect-ratio(4, 5);
 
       margin-bottom: $base-rhythm-line;
+      // width: 100%;
     }
+
   }
 
-  &_text {
+  &_data {
+    // position: relative;
+
+    // .data {
+    //   position: absolute;
+    //   left: 0;
+    //   right: 0;
+    //   top: 0;
+
+    // }
+
     .price {
+      margin-bottom: $base-rhythm-line * 2;
+    }
+
+    .variants {
+      margin-bottom: $base-rhythm-line * 2;
+
+      &_list {
+        display: flex;
+
+        &_item {
+          border: 1px solid $separator-color;
+          cursor: pointer;
+          padding: 3px;
+          margin-right: $gutter;
+
+          .icon {
+            background: $separator-color;
+            height: $base-rhythm-line * 4;
+            width: $base-rhythm-line * 4;
+          }
+
+          &.active {
+            border-color: $highlight-color;
+          }
+        }
+      }
+    }
+
+    .desc {
       margin-bottom: $base-rhythm-line * 2;
     }
 
@@ -153,11 +237,11 @@
 
     padding: 0 $gutter;
 
-    &_image {
+    &_images {
       @include column-width(6, 12);
     }
 
-    &_text {
+    &_data {
       @include column-width(4, 12);
       @include column-shift(1, left, 12);
       @include column-shift(1, right, 12);

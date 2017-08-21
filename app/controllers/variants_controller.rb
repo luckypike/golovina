@@ -1,6 +1,6 @@
 class VariantsController < ApplicationController
   # before_action :set_product_and_variants, only: [:create, :index, :update, :destroy]
-  before_action :set_variant, only: [:update, :destroy]
+  before_action :set_variant, only: [:update, :destroy, :images]
 
 
   # def index
@@ -18,6 +18,12 @@ class VariantsController < ApplicationController
     else
       render text: "\"#{@variant.errors.full_messages.first}\"", status: 422
     end
+  end
+
+  def images
+    authorize @variant
+
+    render json: @variant.images
   end
 
   # def create
