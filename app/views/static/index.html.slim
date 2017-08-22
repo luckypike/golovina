@@ -12,10 +12,10 @@
         path data-start="120" data-duration="40" class="b" d="M416.28,97.63,466.69,88S481.94,68.4,496.08,68.4,526.6,83,526.6,83s-11.53,19.81-30,19.63S473,94.46,473,94.46l23.63-9"
 
     .social_networks
-      = link_to '#', class: :instagram
+      = link_to Rails.application.secrets[:instagram], class: :instagram
         = inline_svg 'icons/instagram.svg'
 
-      = link_to '#', class: :vk
+      = link_to Rails.application.secrets[:vk], class: :vk
         = inline_svg 'icons/vk.svg'
 
     .swiper-pagination.swiper-pagination-index

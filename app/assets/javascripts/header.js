@@ -5,9 +5,9 @@ $(function() {
   $('.header_burger').on('click', function() {
     _h.toggleClass('with_nav');
     _b.toggleClass('full_screen');
-  });
+  }).trigger('click1');
 
-  $('.header_overlay').on('click', function() {
+  $('.header_overlay, .header_menu_close').on('click', function() {
     $('.header_burger').trigger('click');
   });
 
@@ -29,7 +29,6 @@ $(function() {
     $('.sub', this).show();
   });
 
-
   $('.phone').on('click', function(){
     _h.toggleClass('call_me');
   });
@@ -37,8 +36,6 @@ $(function() {
   $('.header_contact .close').on('click', function() {
     _h.removeClass('call_me');
   });
-
-
 
   var _window = $(window);
   var didScroll;

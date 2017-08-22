@@ -36,6 +36,11 @@ header.header class="#{menu_index? ? :index : nil }"
         line x1="1" y1="15" x2="15" y2="1"
 
   .header_menu
+    / .header_menu_close
+      svg viewBox="0 0 16 16"
+        line x1="1" y1="1" x2="15" y2="15"
+        line x1="1" y1="15" x2="15" y2="1"
+
     .header_menu_item class=(controller_name == 'themes' ? :active: nil)
       .title
         = active_link_to 'Looks', @themes.first, class: :subs
@@ -70,6 +75,14 @@ header.header class="#{menu_index? ? :index : nil }"
     - if user_signed_in? && current_user.is_admin?
       .header_menu_item.sep
         = link_to 'Управление товарами', [:products]
+
+    .header_menu_social
+      .social_networks
+        = link_to Rails.application.secrets[:instagram], class: :instagram
+          = inline_svg 'icons/instagram.svg'
+
+        = link_to Rails.application.secrets[:vk], class: :vk
+          = inline_svg 'icons/vk.svg'
 
   .header_overlay
 

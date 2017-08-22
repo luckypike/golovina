@@ -67,10 +67,8 @@
     .social_networks {
       display: none;
       position: absolute;
-      left: 50%;
-      bottom: $space-s;
-      margin-left: -$space-s2;
-
+      left: $gutter * 2;
+      bottom: 25%;
       z-index: 3;
 
       a {
@@ -83,20 +81,20 @@
           display: block;
 
           .a {
-            fill: #fff;
+            fill: $op-color;
             fill-rule: evenodd;
           }
         }
       }
 
-      @include mq($l) {
-        display: flex;
-        left: $gutter * 2;
-        margin-left: -$space-s /4;
-        bottom: 96px;
+      @include mq($m) {
+        display: block;
+        // left: $gutter * 2;
+        // margin-left: -$space-s /4;
+        // bottom: 96px;
       }
 
-      @include mq($l) {
+      @include mq($xl) {
         left: $gutter * 4;
       }
     }
@@ -306,21 +304,21 @@
         &-prev, &-next {
           background: none;
           margin-top: -$base-rhythm-line * 2.5;
-            width: $base-rhythm-line * 5;
-            height: $base-rhythm-line * 5;
+          width: $base-rhythm-line * 5;
+          height: $base-rhythm-line * 5;
 
-          &:before {
-            position: absolute;
-            content: '';
-            border-radius: 50%;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            border: 1px solid $highlight-color;
-            opacity: 0.3;
-            transition: 0.2s transform;
-          }
+          // &:before {
+          //   position: absolute;
+          //   content: '';
+          //   border-radius: 50%;
+          //   width: 100%;
+          //   height: 100%;
+          //   top: 0;
+          //   left: 0;
+          //   border: 1px solid $highlight-color;
+          //   opacity: 0.3;
+          //   transition: 0.2s transform;
+          // }
 
           svg {
             display: block;
@@ -328,11 +326,11 @@
             height: $base-rhythm-line * 5;
           }
 
-          &:hover {
-            &:before {
-              transform: scale(1.5);
-            }
-          }
+          // &:hover {
+          //   &:before {
+          //     transform: scale(1.5);
+          //   }
+          // }
         }
 
         &-prev {
@@ -466,6 +464,10 @@
       }
 
       @include mq($m) {
+        &-button {
+          display: block;
+        }
+
         &-slide {
           a {
             top: $space-m2;
