@@ -1,4 +1,4 @@
-header.header class="#{menu_catalog? ? :active : nil }"
+header.header class="#{menu_index? ? :index : nil }"
   .header_nav
     .header_burger
       svg viewBox="0 0 24 24"
@@ -71,6 +71,7 @@ header.header class="#{menu_catalog? ? :active : nil }"
       .header_menu_item.sep
         = link_to 'Управление товарами', [:products]
 
+  .header_overlay
 
   .header_themes
     .themes_list

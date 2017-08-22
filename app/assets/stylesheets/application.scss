@@ -59,7 +59,15 @@ body {
   text-size-adjust: 100%;
 
   &.full_screen {
+    height: 100%;
     overflow: hidden;
+    width: 100%;
+    position: fixed;
+
+    .header_overlay {
+      // opacity: 0.4;
+      visibility: visible;
+    }
   }
 }
 

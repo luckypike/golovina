@@ -1,6 +1,10 @@
 module ApplicationHelper
-  def menu_catalog?
-    %w(products).include?(controller_name) && %w(index).include?(action_name)
+  def menu_index?
+    %w(static).include?(controller_name) && %w(index).include?(action_name)
+  end
+
+  def lipsum_index
+    'Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или dfgf.'
   end
 
   def typekit_include_tag

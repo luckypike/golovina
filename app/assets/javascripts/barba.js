@@ -14,7 +14,7 @@ Barba.Pjax.preventCheck = function(evt, element) {
   }
 };
 
-var _h = $('.header');
+// var _h = $('.header');
 
 var Index = Barba.BaseView.extend({
   namespace: 'index',
@@ -24,7 +24,7 @@ var Index = Barba.BaseView.extend({
     var _psis = $('.page_static_index_swiper');
     var _sp = $('.swiper-pagination', _psit);
 
-    $('.header').addClass('index');
+    $('.header').addClass('index no_hide_logo');
 
     if(_psit.length > 0) {
       _sp.on('click', '.swiper-pagination-bullet', function() {
@@ -40,7 +40,7 @@ var Index = Barba.BaseView.extend({
         var sh = (144 * (k - 1));
 
         _sp.toggleClass('act', sh > -28);
-        _h.toggleClass('index_act', sh > -28);
+        $('.header').toggleClass('index_act', sh > -28);
 
         _sp.css({
           'margin-top': sh + 'px'
@@ -54,22 +54,45 @@ var Index = Barba.BaseView.extend({
     if(_psis.length > 0) {
       var index_swiper = new Swiper(_sc, {
         loop: true,
+        speed: 1400,
         effect: 'slide',
         pagination: '.swiper-pagination-index',
         paginationClickable: true,
-        paginationBulletRender: function(swiper, index, className) {
-          return '<div class="' + className + '">' + $(swiper.slides[index + 1]).data('title') + '</div>';
-        },
+        autoplay: 4000,
+        // paginationBulletRender: function(swiper, index, className) {
+        //   return '<div class="' + className + '">' + $(swiper.slides[index + 1]).data('title') + '</div>';
+        // },
         autoplayDisableOnInteraction: false,
         onSlideChangeStart: function(swiper) {
+          swiper.params.speed = 1400;
+          // console.log(swiper.touches);
+
           var _ss = $('.ss_' + swiper.realIndex);
           $('.ss > div').not(_ss).removeClass('active');
           _ss.addClass('active');
         },
-        onSetTranslate: function(swiper, translate) {
+        onTransitionStart: function(swiper) {
+          console.log(swiper);
+          console.log(swiper.params);
         },
-        onSliderMove: function(swiper, event) {
-          var tr = -swiper.translate - swiper.activeIndex * swiper.width;
+
+        onAutoplayStart: function(swiper) {
+          // swiper.params.speed = 2000;
+        },
+
+        onAutoplayStop: function(swiper) {
+          // swiper.params.speed = 300;
+          // console.log('QQQ');
+        },
+
+        onSetTransition: function(swiper, transition) {
+          // console.log(swiper);
+          // console.log(transition);
+          // transition = 1500;
+        },
+        onTouchEnd: function(swiper, event) {
+          // console.log('onTouchEnd');
+          swiper.params.speed = 300;
         },
       });
 
@@ -110,7 +133,7 @@ var Index = Barba.BaseView.extend({
     console.log('onEnterCompleted');
   },
   onLeave: function() {
-    $('.header').removeClass('index');
+    $('.header').removeClass('index no_hide_logo');
   },
   onLeaveCompleted: function() {
     console.log('onLeaveCompleted');

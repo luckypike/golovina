@@ -42,11 +42,11 @@
   }
 
   @include mq($s) {
-    padding-top: $base-rhythm-line * 12;
+    padding-top: $base-rhythm-line * 20 + $space-s2;
   }
 
   @include mq($xl) {
-    padding-top: $base-rhythm-line * 15;
+    padding-top: $base-rhythm-line * 23 + $space-m2;
   }
 
   @import "page/category";

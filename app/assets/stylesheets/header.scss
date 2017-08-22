@@ -59,7 +59,7 @@
     margin-left:  - ($base-line-height * $base-rhythm-line / 2);
     bottom: $base-rhythm-line;
     user-select: none;
-    z-index: 2;
+    z-index: 5;
   }
 
   &_contact {
@@ -234,13 +234,16 @@
     bottom: 0;
     padding: $space-m2 $gutter;
     left: 0;
-    width: 2 / 16 * 100%;
-    min-width: 160px;
+    width: 100%;
+    min-width: 230px;
     opacity: 0;
     transform: translateX(-50%);
     visibility: hidden;
     transition-duration: 0.4s;
     transition-property: transform opacity;
+    z-index: 4;
+    overflow-y: scroll;
+    overflow-scrolling: touch;
 
     a {
       transition: 0.2s color;
@@ -314,6 +317,19 @@
     // }
   }
 
+  &_overlay {
+    background: $primary-color;
+    opacity: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    overflow-y: scroll;
+    visibility: hidden;
+  }
+
   &_themes {
     display: none;
     background: $op-color;
@@ -344,6 +360,18 @@
 
     @include mq($m) {
       padding: 0 $gutter * 2;
+
+      .themes_list {
+        &_item {
+          .full {
+            display: block;
+          }
+
+          .short {
+            display: none;
+          }
+        }
+      }
     }
 
     @include mq($l) {
@@ -360,7 +388,6 @@
     @include mq($m) {
       height: $base-rhythm-line * 8;
 
-
       &.no_themes {
         .header_themes {
           height: 0;
@@ -371,6 +398,12 @@
   }
 
   &.index {
+    background: none;
+
+    .header_themes {
+      display: none;
+    }
+
     .header_logo {
       visibility: hidden;
       opacity: 0;
@@ -466,36 +499,8 @@
     }
   }
 
-  &.active {
-    @include mq($l) {
-      .header_menu {
-        opacity: 1;
-        transform: translateX(0);
-        visibility: visible;
-      }
-
-      .header_burger {
-        svg {
-          rect {
-            fill: $highlight-color;
-          }
-        }
-      }
-    }
-  }
-
-
   @include breakpoint($s) {
-    // padding-top: $base-rhythm-line * 3;
     height: $base-rhythm-line * 12;
-
-    // &_nav, &_caw {
-    //   top: $base-rhythm-line * 3;
-    // }
-
-    // &_logo {
-    //   top: (1.125rem + $base-rhythm-line * 2);
-    // }
 
     &_contact {
       background: none;
@@ -510,6 +515,7 @@
 
     &_menu {
       padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter;
+      width: 2 / 16 * 100%;
     }
 
     &_caw {

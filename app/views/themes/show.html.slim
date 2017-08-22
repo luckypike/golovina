@@ -1,16 +1,5 @@
 .page.page_common.page_theme.barba_container namespace='theme'
   .page_theme_intro class=@theme.slug
-    .siblings
-      - @themes.each do |theme|
-        .siblings_item
-          = link_to theme do
-            span.full
-              = theme.title
-
-            span.short
-              = theme.title_short
-
-
     .theme
       .image
       .text.mb
@@ -18,7 +7,7 @@
           = @theme.desc
 
         .desc
-          | Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или поездка за город к друзьям на вечеринку у бассейна.
+          = lipsum_index
 
   .page_theme_products
     - if @products.empty?

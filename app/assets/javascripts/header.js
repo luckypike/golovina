@@ -1,16 +1,14 @@
 $(function() {
   var _h = $('.header');
+  var _b = $('body');
 
   $('.header_burger').on('click', function() {
-    if(_h.is('.active')) {
-      _h.removeClass('active');
-      if($('.header_menu', _h).css('visibility') == 'visible') {
-      } else {
-        _h.addClass('with_nav');
-      }
-    } else {
-      _h.toggleClass('with_nav');
-    }
+    _h.toggleClass('with_nav');
+    _b.toggleClass('full_screen');
+  });
+
+  $('.header_overlay').on('click', function() {
+    $('.header_burger').trigger('click');
   });
 
   $('.header_menu_item .title a').on('click', function(e) {
@@ -49,7 +47,7 @@ $(function() {
   _window.on('scroll', function() {
     didScroll = true;
 
-    if(_window.scrollTop() > 1) {
+    if(_window.scrollTop() > 3) {
       if(!_h.is('.no_hide_logo')) {
         _h.addClass('hide_logo');
       }
@@ -63,7 +61,7 @@ $(function() {
     if (didScroll) {
       var st = _window.scrollTop();
 
-      if(Math.abs(lastScrollTop - st) <= 5)
+      if(Math.abs(lastScrollTop - st) < 3)
           return;
 
       if (st > lastScrollTop){
