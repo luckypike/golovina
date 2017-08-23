@@ -12,7 +12,7 @@
           .form_inputs
             h3
               = f.object.color.title
-            = f.input :sizes, as: :check_boxes, collection: [40, 42, 44, 46]
+            = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes].each
 
           .form_photos
             .form_photos_list

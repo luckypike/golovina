@@ -166,16 +166,19 @@
     }
 
     .variants {
-      // margin-bottom: $space-s;
+      &_title {
+        margin-bottom: $base-rhythm-line * 2;
+      }
 
       &_list {
         display: flex;
+        user-select: none;
 
         &_item {
           border: 1px solid $separator-color;
           cursor: pointer;
           padding: 3px;
-          margin-right: $gutter;
+          margin-right: $gutter / 2;
 
           .icon {
             background: $separator-color;
@@ -190,44 +193,122 @@
       }
     }
 
+    .sizes {
+      &_title {
+        margin-bottom: $base-rhythm-line * 2;
+      }
+
+      &_list {
+        display: flex;
+        user-select: none;
+
+        &_item {
+          border: 1px solid $separator-color;
+          cursor: pointer;
+          line-height: 38px;
+          width: $base-rhythm-line * 5;
+          text-align: center;
+          margin-right: $gutter / 2;
+          transition: color 0.2s, border 0.2s;
+
+
+          .cross_line {
+            display: block;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+
+            line {
+              stroke: $separator-color;
+            }
+          }
+
+          &.size_0 {
+            display: none;
+          }
+
+          &.inactive {
+            color: $separator-color;
+            cursor: default;
+            border-color: $separator-color;
+
+            position: relative;
+
+            .cross_line {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+
+          &.active {
+            border-color: $highlight-color;
+          }
+        }
+      }
+
+      &.one_size {
+        .sizes_list {
+          &_item {
+            display: none;
+
+            &.size_0 {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+
     .desc {
       // margin-bottom: $space-s;
     }
 
-    .more {
-      @include font-size-small;
+    .buy {
+      display: flex;
+      max-width: 380px;
 
-      max-width: 475px;
+      .wishlist {
+        border: 1px solid $separator-color;
+        margin-left: $gutter / 2;
+        padding: $base-rhythm-line;
 
-      .buy {
-        display: flex;
+        &_icon {
+          display: block;
+          width: $space-s;
+          height: $space-s;
 
-        .sizes {
-          border: 1px solid $separator-color;
-          margin-right: $gutter / 2;
-          padding: $base-rhythm-line;
-          text-align: center;
-          width: 80px;
-
-        }
-
-        .add {
-          background-color: $sand-color;
-          padding: $base-rhythm-line;
-          text-align: center;
-          flex-grow: 1;
+          .a {
+            fill: none;
+            stroke: $primary-color;
+            stroke-miterlimit: 10;
+          }
         }
       }
 
-      .goto {
-        text-align: center;
-        display: block;
-        margin-top: $base-rhythm-line;
-        border: 1px solid $separator-color;
+      .add {
+        @include font-size-small;
+
+        background-color: $sand-color;
         padding: $base-rhythm-line;
+        text-align: center;
+        flex-grow: 1;
       }
     }
+
+    .goto {
+      text-align: center;
+      display: block;
+      margin-top: $base-rhythm-line;
+      border: 1px solid $separator-color;
+      padding: $base-rhythm-line;
+    }
   }
+
 
   @include mq($m) {
     @include column-pane;

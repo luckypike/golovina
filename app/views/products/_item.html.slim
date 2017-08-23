@@ -17,15 +17,28 @@
 
         .variants.live.lv3
           .variants_title
+            | Тест
+
           .variants_list
             - product.variants.each do |variant|
               .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json])
                 .icon class=variant.color.slug
 
-        .more
-          .buy
-            .sizes Размер
-            .add Добавить в корзину
+        .sizes.live.lv3 data-sizes=product.variants.map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json
+          .sizes_title
+            | Подберите свой размер
+
+          .sizes_list
+            - Rails.application.secrets[:sizes].each do |size|
+              .sizes_list_item data-size=size class="size_#{size}"
+                svg.cross_line viewBox="0 0 40 40"
+                  line x1="0" y1="40" x2="40" y2="0"
+                = size
+
+        .buy
+          .add Добавить в корзину
+          .wishlist
+            = inline_svg 'icons/wishlist.svg'
 
 
         / - if product.desc

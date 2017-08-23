@@ -60,9 +60,12 @@ $(function(){
 
     _v.each(function() {
       var _vv = $(this);
-      var _variants = $('.variants_list_item', _vv)
+      var _s = _vv.next();
+      var _variants = $('.variants_list_item', _vv);
       var _variant = _variants.first();
       var _pp = _vv.closest('.page_product');
+
+      var _sizes = $('.sizes_list_item', _s);
 
       if(_pp.length) {
         if(hash == '') {
@@ -83,6 +86,39 @@ $(function(){
         var _this = $(this);
         _variants.not(this).removeClass('active');
         _this.addClass('active');
+
+
+        var sizes = _s.data('sizes')[_this.data('id')];
+
+        if($.inArray(0, sizes) >= 0) {
+          _s.addClass('one_size');
+
+          _sizes.each(function() {
+            var _cs = $(this);
+            if(parseInt(_cs.data('size')) == 0) {
+              _cs.removeClass('inactive').addClass('active');
+            }
+          });
+
+        } else {
+          _s.removeClass('one_size');
+          _sizes.each(function() {
+            var _cs = $(this);
+
+            if(parseInt(_cs.data('size')) == 0) {
+              _cs.removeClass('active');
+            } else {
+              if($.inArray(parseInt(_cs.data('size')), sizes) < 0) {
+                _cs.addClass('inactive').removeClass('active');
+              } else {
+                _cs.removeClass('inactive');
+              }
+            }
+          });
+        }
+
+
+
 
         if(_pp.length) {
           history.replaceState(undefined, undefined, '#' + _this.data('id'));
@@ -108,6 +144,14 @@ $(function(){
 
           _pip.data('loading', false);
         });
+      });
+
+      _sizes.on('click', function() {
+        var _this = $(this);
+        if(!_this.is('.inactive')) {
+          _this.addClass('active');
+          _sizes.not(this).removeClass('active');
+        }
 
       });
 
