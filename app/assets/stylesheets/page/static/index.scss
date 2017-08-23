@@ -299,13 +299,14 @@
         right: $gutter;
         bottom: $space-s2;
         height: $base-rhythm-line * 5;
-        width: $base-rhythm-line * 12;
+        width: $base-rhythm-line * 16;
 
         &-prev, &-next {
           background: none;
           margin-top: -$base-rhythm-line * 2.5;
-          width: $base-rhythm-line * 5;
+          width: $base-rhythm-line * 6;
           height: $base-rhythm-line * 5;
+          transition: 0.2s transform;
 
           // &:before {
           //   position: absolute;
@@ -317,20 +318,18 @@
           //   left: 0;
           //   border: 1px solid $highlight-color;
           //   opacity: 0.3;
-          //   transition: 0.2s transform;
+          //
           // }
 
           svg {
             display: block;
-            width: $base-rhythm-line * 5;
+            width: $base-rhythm-line * 6;
             height: $base-rhythm-line * 5;
           }
 
-          // &:hover {
-          //   &:before {
-          //     transform: scale(1.5);
-          //   }
-          // }
+          &:hover {
+            transform: scale(1.2);
+          }
         }
 
         &-prev {

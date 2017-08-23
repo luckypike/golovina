@@ -184,6 +184,25 @@
             background: $separator-color;
             height: $base-rhythm-line * 4;
             width: $base-rhythm-line * 4;
+
+            &.black {
+              background: black;
+            }
+
+            &.yellow {
+              background: yellow;
+            }
+
+            &.red {
+              background: red;
+            }
+
+            &.white {
+              background: #fafafa;
+            }
+
+
+
           }
 
           &.active {
@@ -207,6 +226,7 @@
           cursor: pointer;
           line-height: 38px;
           width: $base-rhythm-line * 5;
+          height: $base-rhythm-line * 5;
           text-align: center;
           margin-right: $gutter / 2;
           transition: color 0.2s, border 0.2s;
@@ -229,7 +249,11 @@
           }
 
           &.size_0 {
+            color: $op-color;
             display: none;
+            background: {
+              image: image_url('icons/one_size.svg');
+            }
           }
 
           &.inactive {

@@ -120,7 +120,7 @@ $(function(){
 
 
 
-        if(_pp.length) {
+        if(_pp.length & _variants.length > 1) {
           history.replaceState(undefined, undefined, '#' + _this.data('id'));
         }
 
