@@ -37,8 +37,11 @@ class ProductsController < ApplicationController
 
   def category
     authorize Product
+    @category = Category.friendly.find(params[:slug])
 
-    # where = {}
+    where = {
+      category: @category.categories
+    }
 
     # %w(theme size).each do |f|
     #   params[f] = params[f].present? ? params[f].map(&:to_i) : []
@@ -55,7 +58,7 @@ class ProductsController < ApplicationController
     # # params[:theme] = params[:theme].presence || []
     # # params[:size] = params[:size].presence || []
 
-    # @products = Variant.includes(product: [:kind]).themed_by(params[:theme]).where(where).map(&:product).uniq
+    @products = Variant.includes(:images, product: [:variants]).themed_by(params[:theme]).where(where)
     # # .order(id: :asc)
   end
 

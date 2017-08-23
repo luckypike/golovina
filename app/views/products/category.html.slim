@@ -1,0 +1,89 @@
+.page.page_common.page_products
+  .page_common_intro.lv3
+    h1
+      = @category.title
+
+  .fd_w
+    .fd_ph
+    .fd.lv3 data-url=products_path data-cur={ category: params[:category], theme: params[:theme], color: params[:color], size: params[:size] }.to_json
+      .fd_i
+        .t
+          | Стиль
+          = inline_svg 'icons/varr.svg'
+
+        .f.theme
+          .f_l
+            - @themes.each do |theme|
+              .f_l_i data-f='theme' data-v=theme.id
+                = theme.title
+
+
+      .fd_i
+        .t
+          | Цвет
+          = inline_svg 'icons/varr.svg'
+
+        .f.color
+          .f_l
+            - @colors.each do |color|
+              .f_l_i data-f='color' data-v=color.id
+                = color.title
+
+      .fd_i
+        .t
+          | Размер
+          = inline_svg 'icons/varr.svg'
+
+        .f.size
+          .f_l
+            .f_l_i XS
+            .f_l_i S
+            .f_l_i M
+            .f_l_i L
+
+  .page_products_list
+    == render 'products/list', products: @products
+
+  / - unless @products.empty?
+  /   .page_products_grid
+  /     .products_list
+  /       - @products.each_with_index do |product, i|
+  /         .products_list_item
+  /           = link_to product do
+  /             .image
+  /               = image_tag product.images[0].thumb.url if product.images[0]
+
+  /             .data
+  /               .price
+  /                 = number_to_rub product.price
+
+  /               .title
+  /                 = product.title
+
+    / .page_products_list
+      .list
+        / - @products.each_with_index do |product, i|
+        - (0..30).each do |i|
+          - product = @products.sample
+          .list_item class="list_item_#{i}"
+            = link_to product do
+              .image_wrapper
+                / .wl
+                / .buy
+                / .size
+                  .size_all
+
+                / .color
+                  .color_all
+
+                .image
+                  = image_tag product.images[0].thumb.url if product.images[0]
+                  = image_tag product.images[1].thumb.url, class: :sec if product.images[1]
+
+              .data
+                .price
+                  = number_to_rub product.price
+
+                .title
+                  = product.title
+

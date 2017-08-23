@@ -3,7 +3,35 @@
 @import "page/kit";
 
 .page {
-  padding-top: $base-rhythm-line * 8;
+  padding-top: $base-rhythm-line * 8 + $space-s;
+
+  &_container {
+    &.under_filters {
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: $base-rhythm-line * 20;
+        right: 0;
+        bottom: 0;
+        background-color: rgba($primary-color, 0.1);
+
+        @include mq($s) {
+          top: $base-rhythm-line * 38;
+        }
+
+        @include mq($l) {
+          top: $base-rhythm-line * 41;
+        }
+
+        @include mq($xl) {
+          top: $base-rhythm-line * 48;
+        }
+      }
+    }
+  }
 
   &_common {
     padding-left: $gutter;
@@ -13,7 +41,7 @@
     &_intro {
       max-width: $xl;
       padding: 0 $gutter;
-      margin: $base-rhythm-line auto;
+      // margin-top: $space-s;
 
       h1 {
         margin-bottom: 0;
@@ -21,11 +49,11 @@
       }
 
       @include breakpoint($s) {
-        margin: $space-m auto $space-s;
+        margin: 0 auto $space-s;
       }
 
       @include breakpoint($l) {
-        margin: $space-m2 auto $space-s2;
+        margin: 0 auto $space-s2;
       }
     }
 
@@ -73,9 +101,9 @@
 
 .fd {
   display: flex;
-  position: relative;
+  // position: relative;
   z-index: 3;
-  margin-bottom: $space-s;
+  // margin-bottom: $space-s;
 
   &_w {
     @include font-size-small;
@@ -90,6 +118,7 @@
     margin-right: $gutter;
     width: $gutter * 4.5;
     user-select: none;
+    position: relative;
 
 
     .t {
@@ -106,6 +135,7 @@
         width: 10px;
         height: 24px;
 
+
         polyline {
           fill: none;
           stroke-width: 1px;
@@ -121,19 +151,21 @@
 
       background-color: $op-color;
       position: absolute;
-      left: 0;
-      right: 0;
+      left: -$gutter * 2;
       top: 0;
-      padding: $base-rhythm-line * 4 0 $base-rhythm-line;
+      padding: $space-m $gutter * 2 $space-s;
       visibility: hidden;
       opacity: 0;
-      transform: translateY(-$base-rhythm-line * 2);
+      // transform: translateY(-$base-rhythm-line * 2);
       transition: 0.3s opacity, 0.2s transform, 0s visibility 0.3s;
+      min-width: $gutter * 8.5;
+      z-index: 1;
 
       &_l {
         &_i {
           cursor: pointer;
-          margin-bottom: $base-rhythm-line  / 2;
+          margin-bottom: $base-rhythm-line;
+          white-space: nowrap;
 
           &.active {
             color: $highlight-color;
@@ -141,24 +173,24 @@
         }
       }
 
-      &.color {
-        padding-left: $gutter * 4.5 + $gutter;
-      }
+      // &.color {
+      //   padding-left: $gutter * 4.5 + $gutter;
+      // }
 
-      &.size {
-        padding-left: $gutter * 9 + $gutter * 2;
-      }
+      // &.size {
+      //   padding-left: $gutter * 9 + $gutter * 2;
+      // }
 
       @include mq($m) {
-        padding-left: $gutter;
+        // padding-left: $gutter;
 
-        &.color {
-          padding-left: $gutter * 4.5 + $gutter * 2;
-        }
+        // &.color {
+        //   padding-left: $gutter * 4.5 + $gutter * 2;
+        // }
 
-        &.size {
-          padding-left: $gutter * 9 + $gutter * 3;
-        }
+        // &.size {
+        //   padding-left: $gutter * 9 + $gutter * 3;
+        // }
       }
     }
 
@@ -180,9 +212,18 @@
         transition: 0.3s opacity, 0.2s transform;
       }
     }
-  }
 
-  @include mq($m) {
-    padding: 0 $gutter;
+    @include mq($s) {
+      margin-right: $gutter * 3;
+
+      .t {
+        padding-right: 20px;
+        line-height: 40px;
+
+        svg {
+          top: 8px;
+        }
+      }
+    }
   }
 }
