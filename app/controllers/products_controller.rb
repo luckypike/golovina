@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
     @category = Category.friendly.find(params[:slug])
 
     where = {
-      category: @category.categories
+      category: @category.categories.map(&:id) <<  + @category.id
     }
 
     # %w(theme size).each do |f|
