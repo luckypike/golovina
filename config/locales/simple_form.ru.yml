@@ -18,6 +18,10 @@ ru:
         price: Стоимость
         desc: Описание
         photo: Фотография
+        category: Категория
+        color: Цвет
+        sizes: Размеры
+
 
       product:
         title: Название
@@ -32,8 +36,6 @@ ru:
         products: Товары
 
       variant:
-        sizes: Размеры
-        color: Цвет
 
     #   user:
     #     new:

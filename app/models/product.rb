@@ -16,12 +16,8 @@ class Product < ApplicationRecord
 
   validates_presence_of :price, :state, :title
 
-  def title_auto
-    "#{kind.title} ##{id}"
-  end
-
   def title_safe
-    (self.title.presence || title_auto).downcase.upcase_first
+    (self.title.presence || self.id.to_s).downcase.upcase_first
   end
 
   # def set_category

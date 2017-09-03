@@ -36,20 +36,52 @@
               &_item {
                 margin-bottom: $base-rhythm-line;
 
+
                 img {
                   display: block;
                   width: 100px;
+                  margin-right: $gutter;
                 }
+
+                a {
+                  @include font-size-small;
+                  display: block;
+                  float: right;
+                  appearance: none;
+                  background: transparent;
+                  border: 1px solid $highlight-color;
+                  cursor: pointer;
+                  color: $primary-color;
+                  padding: $base-rhythm-line $gutter;
+                  user-select: none;
+                  text-align: center;
+                }
+
               }
             }
 
             @include mq($s) {
               &_list {
                 display: flex;
+                flex-wrap: wrap;
 
                 &_item {
-                  margin-bottom: 0;
+                  // margin-bottom: 0;
                   margin-right: $gutter;
+                  position: relative;
+
+                  img {
+                    margin-right: 0;
+                  }
+
+                  a {
+                    float: none;
+                    background-color: $op-color;
+                    position: absolute;
+                    left: $base-rhythm-line / 2;
+                    bottom: $base-rhythm-line / 2;
+                    padding: 0  $gutter / 2;
+                  }
                 }
               }
             }
@@ -71,6 +103,40 @@
 
           .dz-message {
             text-align: center;
+          }
+
+          .dz-preview {
+            padding: 0;
+            margin-top: $base-rhythm-line;
+            display: flex;
+            width: auto;
+
+            &.dz-success {
+              display: none;
+            }
+          }
+
+          .dz-image {
+            img {
+              height: 40px;
+              width: 40px;
+            }
+          }
+
+          .dz-progress {
+            background-color: $separator-color;
+            border: 0;
+            width: 170px;
+            margin-left: $gutter;
+            height: 40px;
+          }
+
+          .dz-details {
+            display: none;
+          }
+
+          .dz-success-mark, .dz-error-message, .dz-error-mark, .dz-success-mark {
+            display: none;
           }
         }
       }

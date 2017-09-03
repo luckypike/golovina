@@ -242,7 +242,7 @@
     transition-duration: 0.4s;
     transition-property: transform opacity;
     z-index: 4;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-scrolling: touch;
 
     a {

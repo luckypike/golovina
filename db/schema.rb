@@ -17,12 +17,13 @@ ActiveRecord::Schema.define(version: 20170821090405) do
 
   create_table "categories", force: :cascade do |t|
     t.string "title"
+    t.string "slug"
     t.text "desc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "slug"
     t.bigint "parent_category_id"
     t.index ["parent_category_id"], name: "index_categories_on_parent_category_id"
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
   create_table "colors", force: :cascade do |t|

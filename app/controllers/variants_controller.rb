@@ -26,17 +26,17 @@ class VariantsController < ApplicationController
     render json: @variant.images
   end
 
-  # def create
-  #   @variant = Variant.new(variant_params)
-  #   authorize @variant
-  #   # @variant.product = Product.find(params[:product_id])
+  def create
+    @variant = Variant.new(variant_params)
+    authorize @variant
 
-  #   if @variant.save!
-  #     redirect_to @variant.product, notice: 'Variant was successfully created.'
-  #   else
-  #     render :index
-  #   end
-  # end
+    if @variant.save
+      redirect_to [:variants, @variant.product], notice: 'Variant was successfully created.'
+    else
+      @product = @variant.product
+      render 'products/variants'
+    end
+  end
 
   private
   def set_variant
@@ -44,6 +44,6 @@ class VariantsController < ApplicationController
   end
 
   def variant_params
-    params.require(:variant).permit(sizes: [])
+    params.require(:variant).permit(:product_id, :color_id, sizes: [])
   end
 end

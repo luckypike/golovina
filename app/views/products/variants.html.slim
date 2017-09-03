@@ -16,9 +16,10 @@
 
           .form_photos
             .form_photos_list
-              - variant.images.each do |images|
+              - variant.images.each do |image|
                 .form_photos_list_item
-                  = image_tag images.photo.drag.url
+                  = link_to 'Удалить', image, method: :delete
+                  = image_tag image.photo.drag.url
 
             .dropzone data-url=images_path data-params={ 'image[imagable_type]': 'Variant', 'image[imagable_id]': variant.id }.to_json
 
@@ -27,7 +28,7 @@
 
   .page_product_form_variants_variant
     .form
-      = simple_form_for Variant.new(product: @product) do |f|
+      = simple_form_for @variant do |f|
         = f.error_notification
 
         .form_inputs

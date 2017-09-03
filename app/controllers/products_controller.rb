@@ -64,6 +64,7 @@ class ProductsController < ApplicationController
 
   def variants
     authorize Product
+    @variant = Variant.new(product: @product)
   end
 
   def create

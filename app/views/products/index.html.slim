@@ -5,6 +5,14 @@
         = link_to 'Добавить', [:new, :product]
       - @products.each do |product|
         .products_item
-          = link_to product.title_safe, [:edit, product]
-          / =< l(product.created_at)
-          / =< link_to product.variants.size, [product, :variants]
+          strong
+            = link_to product do
+              | ##{product.id}
+              =<> product.title_safe
+
+          span.actions
+            | (
+            => link_to 'редактировать', [:edit, product]
+            | /
+            =< link_to 'цвета и размеры', [:variants, product]
+            | )
