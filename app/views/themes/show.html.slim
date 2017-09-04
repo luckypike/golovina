@@ -1,13 +1,13 @@
 .page.page_common.page_theme.barba_container namespace='theme'
-  .page_theme_intro class=@theme.slug
-    .theme
+  .page_theme_intro
+    .theme_intro class=@theme.slug
       .image
       .text.mb
         .title
-          = @theme.desc
+          = @theme.title_long
 
         .desc
-          = lipsum_index
+          = @theme.desc
 
   .page_theme_products
     - if @products.empty?
@@ -18,7 +18,24 @@
       == render 'products/list', products: @products
 
 
-  .page_theme_footer
+  .page_theme_themes
+    - @themes[(@themes.index(@theme) + 1)..-1].each_with_index do |theme, i|
+      .theme_intro.lv2 class=[theme.slug, "i_#{i % 3}"]
+        = link_to '', theme
+
+        .image.lv3
+
+        .text.mb
+          .title
+            = theme.title_long
+
+          .desc
+            = theme.desc
+
+          .more
+            = link_to 'Выбирай настроение', theme, class: :btn
+
+  / .page_theme_footer
     .inst
       = link_to '', 'https://www.instagram.com/mint_territory/'
       p
@@ -39,4 +56,4 @@
         = link_to '', nxt
         .image class=nxt.slug
         .title
-          = nxt.desc
+          = nxt.title_long

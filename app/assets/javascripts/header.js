@@ -38,12 +38,8 @@ $(function() {
   });
 
   var _window = $(window);
-  var didScroll;
-  var lastScrollTop = 0;
 
   _window.on('scroll', function() {
-    didScroll = true;
-
     if(_window.scrollTop() > 3) {
       if(!_h.is('.no_hide_logo')) {
         _h.addClass('hide_logo');
@@ -52,25 +48,4 @@ $(function() {
       _h.removeClass('hide_logo no_themes');
     }
   }).trigger('scroll');
-
-
-   setInterval(function() {
-    if (didScroll) {
-      var st = _window.scrollTop();
-
-      if(Math.abs(lastScrollTop - st) < 3)
-          return;
-
-      if (st > lastScrollTop){
-          _h.addClass('no_themes');
-      } else {
-        if(st + _window.height() < $(document).height()) {
-          _h.removeClass('no_themes');
-        }
-      }
-
-      lastScrollTop = st;
-      didScroll = false;
-    }
-  }, 250);
 });

@@ -1,5 +1,8 @@
   .product
     .product_images.swiper-container.lv3
+      - if product.undef? && policy(product).edit?
+        .images_list_add_images
+          = link_to 'Добавить фотографии', [:variants, product], class: :btn
       .images_list.swiper-wrapper
 
     .product_data
@@ -12,7 +15,7 @@
           = number_to_rub product.price
 
         .desc.lv3
-          | Свитер из хлопка с вырезом. Женственная модель украшена вязкой «косами» на кокетке. Удлиненные манжеты дополнены металлическими пуговицами с геральдической символикой.
+          = product.desc
 
 
         .variants.live.lv3

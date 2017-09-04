@@ -29,6 +29,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  process resize_to_fill: [2400, 3000]
+
   version :drag do
     process resize_to_fill: [300, 300]
   end

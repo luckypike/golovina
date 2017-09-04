@@ -140,7 +140,24 @@
           }
         }
       }
+
+      &_variant {
+        form {
+          // display: flex;
+        }
+
+        .form_actions {
+          // padding-left: $gutter;
+          // padding-top: 28px;
+
+          .btn {
+            padding: $base-rhythm-line / 2 $gutter;
+          }
+        }
+      }
     }
+
+
   }
 
   .product {

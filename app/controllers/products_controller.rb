@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :variants]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :variants, :publish]
 
   def index
     authorize Product
@@ -72,7 +72,7 @@ class ProductsController < ApplicationController
     authorize @product
 
     if @product.save
-      redirect_to @product, notice: 'Product was successfully created.'
+      redirect_to [:variants, @product], notice: 'Product was successfully created.'
     else
       render :new
     end
@@ -91,6 +91,14 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     redirect_to products_url, notice: 'Product was successfully destroyed.'
+  end
+
+  def publish
+    authorize @product
+
+    @product.active!
+
+    redirect_to @product
   end
 
   def wishlist

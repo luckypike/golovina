@@ -31,7 +31,7 @@ themes = YAML.load_file('db/themes.yml')
 themes.each_pair do |slug, v|
   theme = Theme.where(slug: slug).first_or_initialize
   theme.title = v['title']
-  theme.title_short = v['title_short']
+  theme.title_long = v['title_long']
   theme.desc = v['desc']
   theme.save
 end

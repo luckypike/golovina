@@ -14,7 +14,7 @@ header.header class="#{menu_index? ? :index : nil }"
         path class="b" d="M46.94,11.47l5.91-1.12s1.79-2.27,3.44-2.27,3.58,1.69,3.58,1.69-1.35,2.3-3.51,2.28-2.77-.95-2.77-.95l2.77-1"
 
   .header_caw
-    .phone
+    / .phone
       .pa
         = inline_svg 'icons/iphone.svg'
 
@@ -26,7 +26,7 @@ header.header class="#{menu_index? ? :index : nil }"
       = link_to '#' do
         = inline_svg 'icons/cart.svg'
 
-  .header_contact
+  / .header_contact
     = link_to '', 'whatsapp://send?phone=' + Rails.application.secrets[:phone], class: :whatsapp
     = link_to '', 'viber://add?number=' + Rails.application.secrets[:phone], class: :viber
     = link_to Rails.application.secrets[:phone_human], 'tel://' + Rails.application.secrets[:phone], class: :call
@@ -43,7 +43,7 @@ header.header class="#{menu_index? ? :index : nil }"
 
     .header_menu_item class=(controller_name == 'themes' ? :active: nil)
       .title
-        = active_link_to 'Looks', @themes.first, class: :subs
+        = active_link_to 'Настроения', @themes.first, class: :subs
 
       .sub
         - @themes.each do |theme|
@@ -52,7 +52,7 @@ header.header class="#{menu_index? ? :index : nil }"
 
     .header_menu_item class=((controller_name == 'products' && !%w(sale new).include?(action_name)) ? :active: nil)
       .title
-        = link_to 'Shop', @categories.first
+        = link_to 'Каталог', @categories.first
 
       .sub
         - @categories.reject{ |c| c.parent_category }.each do |category|
@@ -91,8 +91,4 @@ header.header class="#{menu_index? ? :index : nil }"
       - @themes.each do |theme|
         .themes_list_item
           = link_to theme do
-            span.full
               = theme.title
-
-            span.short
-              = theme.title_short

@@ -80,12 +80,11 @@ html {
   @include font-size(1.5, 4);
 
   appearance: none;
-  background: transparent;
-  border: 1px solid $highlight-color;
+  background: $sand-color;
   cursor: pointer;
   color: $primary-color;
   display: inline-block;
-  padding: $base-rhythm-line $gutter * 2;
+  padding: $base-rhythm-line / 2 $gutter * 2;
   user-select: none;
   text-align: center;
   letter-spacing: 0.2em;

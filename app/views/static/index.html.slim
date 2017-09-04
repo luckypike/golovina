@@ -1,5 +1,5 @@
-.page_static_index.barba_container  data-namespace='index'
-  .page_static_index_swiper
+.page.page_static_index.barba_container  data-namespace='index'
+  .page_static_index_swiper.lv1
     .ss
       .ss_0
       .ss_1
@@ -22,29 +22,29 @@
 
     .swiper-container
       .swiper-wrapper
-        .swiper-slide.ss_shop data-title='SHOP ONLINE'
+        .swiper-slide.ss_shop
           .text.inact
             .what
               | Территория приятного шопинга
 
             .action
-              = link_to 'Shop online', products_path
+              = link_to 'Начать покупки', products_path, class: :btn
 
-        .swiper-slide data-title='NEW'
+        .swiper-slide
           .text.inact
             .what
-              | Новая свежая коллекция
+              | Подбери образ под настроение
 
             .action
-              = link_to 'New', products_path
+              = link_to 'Выбрать настроение', @themes.first, class: :btn
 
-        .swiper-slide data-title='LOOKS'
+        .swiper-slide
           .text.inact
             .what
-              | Выбери своё настроение
+              | В октябре
 
-            .action
-              = link_to 'Looks', products_path
+            / .action
+              = link_to 'Looks', products_path, class: :btn
 
 
         / .swiper-slide.ss_4
@@ -56,9 +56,24 @@
               = link_to 'Golovina', products_path
 
 
-
-
   .page_static_index_themes
+    - @themes.each_with_index do |theme, i|
+      .theme_intro.lv2 class=[theme.slug, "i_#{i % 3}"]
+        = link_to '', theme
+
+        .image.lv3
+
+        .text.mb
+          .title
+            = theme.title_long
+
+          .desc
+            = theme.desc
+
+          .more
+            = link_to 'Выбирай настроение', theme, class: :btn
+
+  / .page_static_index_themes
     .swiper-pagination.swiper-pagination-themes
     .swiper-button
       .swiper-button-next

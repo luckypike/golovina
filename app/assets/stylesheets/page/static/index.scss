@@ -1,4 +1,5 @@
 &_index {
+  padding-top: 0;
 
   &_swiper {
     background-color: #333;
@@ -18,7 +19,7 @@
         top: 0;
         height: 100%;
         width: 100%;
-        background-color: rgba(#000, 0.3);
+        background-color: rgba(#000, 0.1);
       }
 
       > div {
@@ -46,19 +47,19 @@
 
       &_0 {
         background: {
-          image: image_url('pages/index/ss_1.jpg');
+          image: image_url('pages/index/ss_0.jpg');
         }
       }
 
       &_1 {
         background: {
-          image: image_url('pages/index/ss_2.jpg');
+          image: image_url('pages/index/ss_1.jpg');
         }
       }
 
       &_2 {
         background: {
-          image: image_url('pages/index/ss_4.jpg');
+          image: image_url('pages/index/ss_2.jpg');
         }
       }
 
@@ -181,23 +182,23 @@
           }
 
           .action {
-            @include font-size-small;
+            // @include font-size-small;
 
-            width: 140px;
-            margin: auto;
+            // width: 140px;
+            // margin: auto;
 
-            a {
-              color: #fff;
-              border: 1px solid $highlight-color;
-              display: block;
-              padding: $base-rhythm-line $gutter;
-              transition: 0.4s background, 0.4s color;
+            // a {
+            //   color: #fff;
+            //   border: 1px solid $highlight-color;
+            //   display: block;
+            //   padding: $base-rhythm-line $gutter;
+            //   transition: 0.4s background, 0.4s color;
 
-              &:hover {
-                color: $primary-color;
-                background-color: $highlight-color;
-              }
-            }
+            //   &:hover {
+            //     color: $primary-color;
+            //     background-color: $highlight-color;
+            //   }
+            // }
           }
         }
       }
@@ -280,339 +281,37 @@
   }
 
   &_themes {
-    position: relative;
-    z-index: 2;
+    padding: 0 $gutter;
 
-    .swiper {
-      &-container {
-        height: calc(100vh - 4rem);
-        transition: 0.2s height;
+    .theme_intro {
+      &.i_0 {
+
       }
 
-      &-wrapper {
-        // transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+      &.i_1 {
+        margin-right: 1 / 4 * 100%;
+        width: 3 / 4 * 100%;
       }
 
-      &-button {
-        display: none;
-        position: absolute;
-        right: $gutter;
-        bottom: $space-s2;
-        height: $base-rhythm-line * 5;
-        width: $base-rhythm-line * 16;
-
-        &-prev, &-next {
-          background: none;
-          margin-top: -$base-rhythm-line * 2.5;
-          width: $base-rhythm-line * 6;
-          height: $base-rhythm-line * 5;
-          transition: 0.2s transform;
-
-          // &:before {
-          //   position: absolute;
-          //   content: '';
-          //   border-radius: 50%;
-          //   width: 100%;
-          //   height: 100%;
-          //   top: 0;
-          //   left: 0;
-          //   border: 1px solid $highlight-color;
-          //   opacity: 0.3;
-          //
-          // }
-
-          svg {
-            display: block;
-            width: $base-rhythm-line * 6;
-            height: $base-rhythm-line * 5;
-          }
-
-          &:hover {
-            transform: scale(1.2);
-          }
-        }
-
-        &-prev {
-          left: 0;
-        }
-
-        &-next {
-          right: 0;
-        }
-
-        @include mq($s) {
-          bottom: $space-m2;
-        }
-
-        @include mq($m) {
-          right: $gutter * 2;
-        }
-
-        @include mq($xl) {
-          right: $gutter * 4;
-        }
-      }
-
-      &-pagination {
-        @include font-size-small;
-
-        display: none;
-        color: $op-color;
-        bottom: auto;
-        top: 0;
-        text-align: left;
-        padding: 0 $gutter;
-        transition-duration: 0s;
-        z-index: 2;
-        width: 100%;
-
-        &-bullet {
-          background: none;
-          border-radius: 0;
-          height: auto;
-          width: auto;
-          opacity: 1;
-          padding: $base-rhythm-line * 2.5 0;
-          display: block;
-          white-space: nowrap;
-
-          .full {
-            display: none;
-          }
-
-
-        }
-
-        &.act {
-          color: $primary-color;
-
-          .swiper-pagination-bullet-active {
-            color: $highlight-color;
-          }
-        }
-      }
-
-      &-slide {
-        a {
-          display: block;
-          position: absolute;
-          left: $gutter;
-          right: $gutter;
-          top: $space-m;
-
-          .image {
-            @include aspect-ratio(4, 5);
-
-            background: {
-              color: #f1f1f1;
-              size: cover;
-              position: top center;
-            }
-
-            &:before {
-              background: $primary-color;
-              opacity: 0.3;
-            }
-          }
-
-          .text {
-            color: white;
-            position: absolute;
-            right: $gutter;
-            left: $gutter;
-            top: 50%;
-
-            .title {
-              @include font-size(4.25, 5);
-              @include font-headers;
-            }
-
-            .desc {
-              display: none;
-            }
-          }
-        }
-
-
-
-        @each $category in business date walk holiday party white moms  {
-          &.#{$category} {
-            .image {
-              background-image: image_url('pages/index/#{$category}.jpg');
-            }
-          }
-        }
-      }
-
-      @include mq($s) {
-        &-container {
-          height: calc(100vh - 7rem);
-        }
-
-        &-slide {
-          a {
-            top: $space-m2;
-
-            .text {
-              .title {
-                @include font-size(10, 9);
-              }
-            }
-          }
-        }
-      }
-
-      @include mq($m) {
-        &-button {
-          display: block;
-        }
-
-        &-slide {
-          a {
-            top: $space-m2;
-            left: $gutter * 2;
-            right: $gutter * 2;
-
-            .image {
-              width: 8 / 12 * 100%;
-
-              &:before {
-                opacity: 0;
-              }
-            }
-
-            .text {
-              color: $primary-color;
-              left: 50%;
-              top: 10%;
-
-              .title {
-                @include font-size(9, 8);
-              }
-
-              .desc {
-                @include font-headers;
-                @include font-size-h3;
-
-                font-style: italic;
-                display: block;
-                margin-top: $space-s2;
-                margin-left: 2 / 6 * 100%;
-                padding-left: $gutter * 2;
-              }
-            }
-          }
-
-          &.moms,
-          &.date,
-          &.party {
-            a {
-              .image {
-                width: 8 / 12 * 100%;
-                margin-left: 2 / 12 * 100%;
-
-              }
-
-              .text {
-                left: 0;
-
-                .title {
-                  width: 6 / 12 * 100%;
-                }
-
-                .desc {
-                  margin-left: 8 / 12 * 100%;
-                  width: 4 / 12 * 100%;
-                }
-              }
-            }
-          }
-
-          &.white,
-          &.walk {
-            a {
-              .image {
-                width: 8 / 12 * 100%;
-                margin-left: 4 / 12 * 100%;
-
-              }
-
-              .text {
-                left: 0;
-
-                .title {
-                  width: 6 / 12 * 100%;
-                }
-
-                .desc {
-                  margin-left: 2 / 12 * 100%;
-                  width: 4 / 12 * 100%;
-                }
-              }
-            }
-          }
-        }
-
-
-        &-pagination {
-          display: flex;
-          justify-content: space-between;
-          padding: 0 $gutter * 2;
-
-          &-bullet {
-            .full {
-              display: inline;
-            }
-
-            .short {
-              display: none;
-            }
-          }
-        }
-      }
-
-      @include mq($l) {
-        &-slide {
-          a {
-            left: $gutter;
-            right: $gutter;
-
-            .text {
-              top: 20%;
-            }
-          }
-        }
-
-        &-pagination {
-          padding: 0 $gutter;
-          width: 12 / 16 * 100%;
-          left: 2 / 16 * 100%;
-        }
-
-        &-container {
-          width: 12 / 16 * 100%;
-          margin-left: 2 / 16 * 100%;
-          height: calc(100vh - 7.5rem);
-        }
-      }
-
-      @include mq($xl + 100) {
-        &-slide {
-          a {
-            .text {
-              .title {
-                @include font-size(14, 13);
-              }
-            }
-          }
-        }
+      &.i_2 {
+        width: 3 / 4 * 100%;
+        margin-left: 1 / 4 * 100%;
       }
     }
-  }
 
-  @include mq($m) {
-  }
+    @include mq($m) {
+      padding: 0 $gutter * 2;
 
-  @include mq($l) {
+      .theme_intro {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+    }
+
+    @include mq($l) {
+      width: 12 / 16 * 100%;
+      margin-left: 2 / 16 * 100%;
+    }
   }
 }

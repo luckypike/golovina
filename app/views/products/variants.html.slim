@@ -26,7 +26,7 @@
           .form_actions
             = f.button :submit
 
-  .page_product_form_variants_variant
+  .page_product_form_variants_variant.lv2
     .form
       = simple_form_for @variant do |f|
         = f.error_notification
@@ -37,3 +37,6 @@
 
         .form_actions
           = f.button :submit
+
+  .page_product_form_variants_publish
+    = button_to 'Сохранить и опубликовать товар', [:publish, @product], class: :btn

@@ -39,6 +39,10 @@ class ProductPolicy < ApplicationPolicy
     update?
   end
 
+  def publish?
+    update?
+  end
+
   class Scope < Scope
     def resolve
       scope

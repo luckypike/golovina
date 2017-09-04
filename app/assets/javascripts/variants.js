@@ -10,6 +10,7 @@ $(function() {
       url: _this.data('url'),
       paramName: 'image[photo]',
       params: _this.data('params'),
+      dictDefaultMessage: "Перетащите сюда фотографии товаров",
       headers: {
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       }

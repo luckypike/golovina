@@ -9,7 +9,7 @@
   width: 100%;
   z-index: 10;
   transition: height 0.2s;
-  background: $op-color;
+  // background: $op-color;
 
   &.hidden {
     z-index: 0;
@@ -349,7 +349,7 @@
 
   &_themes {
     display: none;
-    background: $op-color;
+    // background: $op-color;
     position: absolute;
     top: 100%;
     width: 100%;
@@ -370,28 +370,12 @@
       }
     }
 
-    @include mq($s) {
-      display: block;
-      padding: 0 $gutter;
-    }
-
-    @include mq($m) {
-      padding: 0 $gutter * 2;
-
-      .themes_list {
-        &_item {
-          .full {
-            display: block;
-          }
-
-          .short {
-            display: none;
-          }
-        }
-      }
-    }
-
     @include mq($l) {
+      display: block;
+      padding: 0 $gutter * 2;
+    }
+
+    @include mq($xl) {
       padding: 0 (2 / 16 * 100%);
 
       .themes_list {
@@ -482,23 +466,62 @@
         visibility: visible;
         opacity: 1;
         transition: 0.25s opacity;
+
+        svg {
+          .a {
+            stroke: $primary-color;
+          }
+        }
+      }
+
+      .header_burger {
+        svg {
+          rect {
+            fill: $primary-color;
+          }
+        }
+      }
+
+      .header_caw {
+        .phone {
+          &_icon {
+            .b {
+              stroke: $primary-color;
+            }
+
+            .a {
+              fill: $primary-color;
+            }
+          }
+        }
+
+        .wishlist {
+          &_icon {
+            .a {
+              stroke: $primary-color;
+            }
+          }
+        }
+
+        .cart {
+          &_icon {
+            .a, .b {
+              stroke: rgba($primary-color, 0.3);
+            }
+          }
+        }
       }
     }
   }
 
-  &.call_me {
-    // .header_logo {
-    //   opacity: 0;
-    //   visibility: hidden;
-    // }
-
-    .header_contact {
-      opacity: 1;
-      top: 0;
-      visibility: visible;
-      transition: 0.2s top, 0.2s opacity;
-    }
-  }
+  // &.call_me {
+  //   .header_contact {
+  //     opacity: 1;
+  //     top: 0;
+  //     visibility: visible;
+  //     transition: 0.2s top, 0.2s opacity;
+  //   }
+  // }
 
   &.with_nav {
     .header_menu {

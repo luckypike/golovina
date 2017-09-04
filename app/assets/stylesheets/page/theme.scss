@@ -4,198 +4,6 @@
   &_intro {
     margin-bottom: $space-m;
 
-    .theme {
-      display: block;
-      position: relative;
-
-
-      .image {
-        @include aspect-ratio(4, 5);
-
-        background: {
-          color: #f1f1f1;
-          size: cover;
-          position: top center;
-        }
-
-        &:before {
-          background: $primary-color;
-          opacity: 0.3;
-        }
-      }
-
-      .text {
-        color: white;
-        position: absolute;
-        right: $gutter;
-        left: $gutter;
-        top: 50%;
-
-        .title {
-          @include font-size(4.25, 5);
-          @include font-headers;
-        }
-
-        .desc {
-          display: none;
-        }
-      }
-    }
-
-
-    @each $category in business date walk holiday party white moms  {
-      &.#{$category} {
-        .image {
-          background-image: image_url('pages/index/#{$category}.jpg');
-        }
-      }
-    }
-
-    @include mq($s) {
-      margin-bottom: $space-m2;
-
-      .theme {
-        .text {
-          .title {
-            @include font-size(10, 9);
-          }
-        }
-      }
-    }
-
-    // @include mq($s) {
-    //   margin-bottom: $space-m2;
-
-    //   .theme {
-    //     .image {
-    //       width: 8 / 12 * 100%;
-
-    //       &:before {
-    //         opacity: 0;
-    //       }
-    //     }
-
-    //     .text {
-    //       color: $primary-color;
-    //       left: 50%;
-    //       top: 25%;
-
-    //       .title {
-    //         @include font-size(10, 9);
-    //       }
-
-    //       .desc {
-    //         display: block;
-    //         margin-top: $space-s2;
-    //       }
-    //     }
-    //   }
-    // }
-
-    @include mq($m) {
-      padding: 0 $gutter;
-
-      .theme {
-        .image {
-          width: 8 / 12 * 100%;
-
-          &:before {
-            opacity: 0;
-          }
-        }
-
-        .text {
-          color: $primary-color;
-          left: 50%;
-          top: 10%;
-
-          .title {
-            @include font-size(9, 8);
-          }
-
-          .desc {
-            @include font-headers;
-            @include font-size-h3;
-
-            font-style: italic;
-            display: block;
-            margin-top: $space-s2;
-            margin-left: 2 / 6 * 100%;
-            padding-left: $gutter * 2;
-          }
-        }
-      }
-
-      &.moms,
-      &.party,
-      &.date {
-        .theme {
-          .image {
-            width: 8 / 12 * 100%;
-            margin-left: 2 / 12 * 100%;
-
-          }
-
-          .text {
-            left: 0;
-
-            .title {
-              width: 6 / 12 * 100%;
-            }
-
-            .desc {
-              margin-left: 8 / 12 * 100%;
-              width: 4 / 12 * 100%;
-            }
-          }
-        }
-      }
-
-      &.white,
-      &.walk {
-        .theme {
-          .image {
-            width: 8 / 12 * 100%;
-            margin-left: 4 / 12 * 100%;
-
-          }
-
-          .text {
-            left: 0;
-
-            .title {
-              width: 6 / 12 * 100%;
-            }
-
-            .desc {
-              margin-left: 2 / 12 * 100%;
-              width: 4 / 12 * 100%;
-            }
-          }
-        }
-      }
-    }
-
-    @include mq($l) {
-      padding: 0;
-      margin-bottom: $space-m2 * 2;
-
-      .theme {
-        .text {
-          top: 20%;
-        }
-      }
-    }
-
-    @include mq($xl + 100) {
-      .theme {
-        .text {
-          .title {
-            @include font-size(14, 13);
-          }
-        }
-      }
-    }
   }
 
   &_products {
@@ -266,7 +74,7 @@
             opacity: 0.3;
           }
 
-          @each $category in business date walk holiday party white moms  {
+          @each $category in business active party special walk holiday warm {
             &.#{$category} {
               background-image: image_url('pages/index/#{$category}.jpg');
             }
@@ -342,6 +150,209 @@
     padding-top: $base-rhythm-line * 23;
   }
 }
+
+
+.theme_intro {
+  display: block;
+  position: relative;
+
+  > a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    z-index: 2;
+  }
+
+  .image {
+    @include aspect-ratio(4, 5);
+
+    background: {
+      color: #f1f1f1;
+      size: cover;
+      position: top center;
+    }
+
+    // &:before {
+    //   background: $primary-color;
+    //   opacity: 0.3;
+    // }
+  }
+
+  .text {
+    // color: white;
+    // position: absolute;
+    // right: $gutter;
+    // left: $gutter;
+    // top: 50%;
+
+    .more {
+      margin-top: $base-rhythm-line * $base-line-height;
+
+      a {
+        padding: $base-rhythm-line / 2 $gutter;
+      }
+
+      @include mq($s) {
+        margin-top: $base-rhythm-line * ($base-line-height + 1);
+      }
+    }
+
+    .title {
+      @include font-size-h1;
+      @include font-headers;
+    }
+
+    .desc {
+      display: none;
+    }
+  }
+
+  @each $category in business active party special walk holiday warm {
+    &.#{$category} {
+      .image {
+        background-image: image_url('pages/index/#{$category}.jpg');
+      }
+    }
+  }
+
+  @include mq($s) {
+    // margin-bottom: $space-m2;
+
+    .text {
+      .title {
+        // @include font-size(10, 9);
+      }
+    }
+  }
+
+  @include mq($m) {
+    // padding: 0 $gutter;
+
+    > a {
+      width: 8 / 12 * 100%;
+      height: 100%;
+    }
+
+    .image {
+      width: 8 / 12 * 100%;
+
+      &:before {
+        opacity: 0;
+      }
+    }
+
+    .text {
+      position: absolute;
+      color: $primary-color;
+      left: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+
+      .title {
+        @include font-size(9, 8);
+      }
+
+      .desc {
+        @include font-headers;
+        @include font-size-h3;
+
+        font-style: italic;
+        display: block;
+        margin-top: $space-s2;
+        margin-left: 2 / 6 * 100%;
+        padding-left: $gutter * 2;
+      }
+
+      .more {
+        padding-left: $gutter * 2;
+        margin-left: 2 / 6 * 100%;
+      }
+    }
+
+    &.active,
+    &.party,
+    &.date {
+      .image {
+        width: 8 / 12 * 100%;
+        margin-left: 2 / 12 * 100%;
+
+      }
+
+      > a {
+        width: 8 / 12 * 100%;
+        margin-left: 2 / 12 * 100%;
+      }
+
+      .text {
+        left: 0;
+        width: 100%;
+
+        .title {
+          width: 6 / 12 * 100%;
+        }
+
+        .desc, .more {
+          margin-left: 8 / 12 * 100%;
+          width: 4 / 12 * 100%;
+        }
+      }
+    }
+
+    &.special,
+    &.walk {
+      .image {
+        width: 8 / 12 * 100%;
+        margin-left: 4 / 12 * 100%;
+      }
+
+      > a {
+        width: 8 / 12 * 100%;
+        margin-left: 4 / 12 * 100%;
+      }
+
+      .text {
+        left: 0;
+
+        .title {
+          width: 6 / 12 * 100%;
+        }
+
+        .desc, .more {
+          margin-left: 2 / 12 * 100%;
+          width: 4 / 12 * 100%;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+// @include mq($l) {
+//   // padding: 0;
+//   margin-bottom: $space-m2 * 2;
+
+//   .theme {
+//     .text {
+//       top: 20%;
+//     }
+//   }
+// }
+
+// @include mq($xl + 100) {
+//   .theme {
+//     .text {
+//       .title {
+//         @include font-size(14, 13);
+//       }
+//     }
+//   }
+// }
 
 .products_list {
   display: flex;

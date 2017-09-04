@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :products, path: :catalog, except: [:destroy] do
     member do
       post :publish
+      post :archive
       get :variants
     end
 
