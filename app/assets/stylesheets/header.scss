@@ -364,8 +364,10 @@
       &_item {
         padding: $base-rhythm-line * 2.5 0;
 
-        .full {
-          display: none;
+        a {
+          &.active {
+            color: $highlight-color;
+          }
         }
       }
     }

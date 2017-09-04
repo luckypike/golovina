@@ -90,5 +90,5 @@ header.header class="#{menu_index? ? :index : nil }"
     .themes_list
       - @themes.each do |theme|
         .themes_list_item
-          = link_to theme do
+          = active_link_to theme do
               = theme.title
