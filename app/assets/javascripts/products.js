@@ -126,6 +126,11 @@ $(function(){
         var _il = _this.closest('.product').find('.product_images .images_list');
         var _pip = _il.parent();
         _pip.data('loading', true);
+        var swiper = _pip.data('swiper');
+        if(swiper) {
+          swiper.destroy(true, true);
+        }
+
 
         $.getJSON(_this.data('url'), function(images) {
           _il.html('');
@@ -134,11 +139,11 @@ $(function(){
           });
 
           if(_il.css('display') == 'flex') {
-           var swiper = new Swiper (_pip, {
+            var swiper = new Swiper (_pip, {
 
             });
             _pip.data('has_swiper', true);
-            _pip.data('swiper'. swiper);
+            _pip.data('swiper', swiper);
           }
 
           _pip.data('loading', false);
