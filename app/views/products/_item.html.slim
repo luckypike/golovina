@@ -20,11 +20,11 @@
 
         .variants.live.lv3
           .variants_title
-            | Тест
+
 
           .variants_list
             - product.variants.each do |variant|
-              .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json])
+              .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json]) data-label=variant.color.title
                 .icon class=variant.color.slug
 
         .sizes.live.lv3 data-sizes=product.variants.select(&:sizes).map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json

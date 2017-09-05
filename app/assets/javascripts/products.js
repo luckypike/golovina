@@ -88,6 +88,10 @@ $(function(){
 
 
         var sizes = _s.data('sizes')[_this.data('id')];
+        var label = _this.data('label');
+
+        var _vl = _this.parent().prev();
+        _vl.text(label);
 
         if($.inArray(0, sizes) >= 0) {
           _s.addClass('one_size');
