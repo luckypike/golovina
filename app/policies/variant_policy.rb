@@ -10,4 +10,8 @@ class VariantPolicy < ApplicationPolicy
   def update?
     user&.is_editor?
   end
+
+  def destroy?
+    update?
+  end
 end

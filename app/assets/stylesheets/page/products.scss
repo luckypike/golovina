@@ -20,4 +20,12 @@
       margin: $space-m2 auto $space-s2;
     }
   }
+
+  &_all {
+    .products {
+      &_new {
+
+      }
+    }
+  }
 }

@@ -142,7 +142,12 @@
       }
 
       &_variant {
-        form {
+        .toggle {
+
+        }
+
+        .form {
+          display: none;
           // display: flex;
         }
 
@@ -152,6 +157,7 @@
 
           .btn {
             padding: $base-rhythm-line / 2 $gutter;
+            margin-right: $gutter;
           }
         }
       }
@@ -168,7 +174,7 @@
 
           &_item {
             height: auto;
-            margin-bottom: $base-rhythm-line;
+            margin-bottom: $base-rhythm-line * 4;
           }
         }
       }
@@ -413,6 +419,10 @@
       margin-top: $base-rhythm-line;
       border: 1px solid $separator-color;
       padding: $base-rhythm-line;
+    }
+
+    .edit {
+      margin-top: $base-rhythm-line * 4;
     }
   }
 

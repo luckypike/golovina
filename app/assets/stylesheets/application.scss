@@ -79,6 +79,8 @@ html {
 .btn {
   @include font-size(1.5, 4);
 
+  font-family: inherit;
+  font-weight: inherit;
   appearance: none;
   background: $sand-color;
   cursor: pointer;
@@ -90,4 +92,11 @@ html {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   min-width: 10rem;
+
+  &_gr {
+    @include font-size(1.5, 3.75);
+
+    background-color: $op-color;
+    border: 1px solid $separator-color;
+  }
 }

@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  get 'images/create'
-
-  devise_for :users
-
   root 'static#index'
 
-  scope 'about' do
-    get '', to: 'about#index', as: :about_index
+  scope format: false do
+    devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout'}
+
+    scope 'about' do
+      get '', to: 'about#index', as: :about_index
+    end
   end
+
+
 
   get :contacts, to: 'static#contacts'
 
@@ -16,7 +18,7 @@ Rails.application.routes.draw do
   resources :kits
 
   resources :images, only: [:create, :show, :destroy]
-  resources :variants, only: [:create, :update] do
+  resources :variants, only: [:create, :update, :destroy] do
     member do
       get :images
     end

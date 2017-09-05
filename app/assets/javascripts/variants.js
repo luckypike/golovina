@@ -17,9 +17,21 @@ $(function() {
     });
 
     dz.on('success', function(file, data) {
+      // var _this = $(this);
       // console.log(file);
       // console.log(response);
-      $('.form_photos_list').append('<div class="form_photos_list_item"><a rel="nofollow" data-method="delete" href="' + data.url + '">Удалить</a><img src="' + data.image.photo.drag.url + '"></div>');
+      _this.prev().append('<div class="form_photos_list_item"><a rel="nofollow" data-method="delete" href="' + data.url + '">Удалить</a><img src="' + data.image.photo.drag.url + '"></div>');
     });
+  });
+
+  $('.page_product_form_variants_variant .toggle').on('click', function() {
+    $(this).next().toggle();
+  });
+
+  $('.page_product_form_variants_variant').each(function() {
+    var _this = $(this);
+    if(_this.find('.error_notification').length) {
+      $('.form', _this).show();
+    }
   });
 });

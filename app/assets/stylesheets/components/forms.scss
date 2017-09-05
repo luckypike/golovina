@@ -1,4 +1,9 @@
 .form {
+  .error_notification {
+    color: red;
+    font-weight: bold;
+  }
+
   &_inputs {
     .input {
       margin-bottom: $base-rhythm-line * 2;
@@ -10,13 +15,21 @@
         margin-bottom: $base-rhythm-line / 2;
       }
 
+      .error {
+        color: red;
+        font-weight: bold;
+      }
+
       input[type=text],
+      input[type=email],
+      input[type=password],
       input[type=number],
       textarea, select {
         border: 1px solid $separator-color;;
         border-radius: 0;
         font-family: inherit;
         font-size: inherit;
+        font-weight: inherit;
         line-height: inherit;
         padding: 0  $gutter;
         width: 100%;
@@ -34,6 +47,7 @@
         }
       }
 
+      &.product_variants_sizes,
       &.variant_sizes,
       &.product_themes {
         display: flex;
@@ -51,6 +65,16 @@
           input {
             margin-right: $gutter / 2;
           }
+        }
+      }
+
+      &.field_with_errors {
+        input[type=text],
+        input[type=email],
+        input[type=password],
+        input[type=number],
+        textarea, select {
+          border-color: red;
         }
       }
 

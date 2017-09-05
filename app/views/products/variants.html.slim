@@ -3,6 +3,9 @@
     .page_product_form_state
       = button_to 'Опубликовать', [:publish, @product], class: [:btn]
 
+  .page_common_back.lv3
+    = link_to '< Вернуться к товару', @product, class: [:btn, :btn_gr]
+
   .page_product_form_variants_variants
     - @product.variants.each do |variant|
       .form
@@ -12,6 +15,8 @@
           .form_inputs
             h3
               = f.object.color.title
+            = link_to 'Удалить вариант', f.object, method: :delete, class: [:btn, :btn_gr]
+
             = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes].each
 
           .form_photos
@@ -27,6 +32,10 @@
             = f.button :submit
 
   .page_product_form_variants_variant.lv2
+    .toggle.lv4
+      .btn.btn_gr
+        | Новый вариант товара в другом цвете
+
     .form
       = simple_form_for @variant do |f|
         = f.error_notification
@@ -37,6 +46,7 @@
 
         .form_actions
           = f.button :submit
+          = link_to 'Управление цветами товаров'
 
   .page_product_form_variants_publish
     = button_to 'Сохранить и опубликовать товар', [:publish, @product], class: :btn

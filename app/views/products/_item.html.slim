@@ -27,7 +27,7 @@
               .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json])
                 .icon class=variant.color.slug
 
-        .sizes.live.lv3 data-sizes=product.variants.map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json
+        .sizes.live.lv3 data-sizes=product.variants.select(&:sizes).map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json
           .sizes_title
             | Подберите свой размер
 
@@ -50,5 +50,5 @@
 
         - if policy(product).edit?
           .edit
-            = link_to 'Редактировать', [:edit, product]
-            =< link_to 'Размеры и цвета', [:variants, product]
+            = link_to 'Редактировать', [:edit, product], class: [:btn, :btn_gr]
+            =< link_to 'Размеры и цвета', [:variants, product], class: [:btn, :btn_gr]

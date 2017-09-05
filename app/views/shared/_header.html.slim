@@ -72,6 +72,12 @@ header.header class="#{menu_index? ? :index : nil }"
     .header_menu_item
       = active_link_to 'Контакты', [:contacts]
 
+    .header_menu_item.sep
+      - if signed_in?
+        = active_link_to t(:logout), destroy_user_session_path, method: :delete
+      - else
+        = active_link_to t(:login), new_user_session_path
+
     - if user_signed_in? && current_user.is_admin?
       .header_menu_item.sep
         = link_to 'Управление товарами', [:products]

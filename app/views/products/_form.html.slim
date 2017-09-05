@@ -21,7 +21,6 @@
       = f.input :desc
 
       - if f.object.new_record?
-        | Фотографии добавляются после создания товара.
         = f.simple_fields_for :variants do |vf|
           = vf.association :color
           = vf.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes]

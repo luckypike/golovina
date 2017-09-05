@@ -38,6 +38,14 @@ class VariantsController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @variant
+
+    @variant.destroy
+
+    redirect_to [:variants, @variant.product]
+  end
+
   private
   def set_variant
     @variant = Variant.find(params[:id])
