@@ -22,15 +22,15 @@
 
     .swiper-container
       .swiper-wrapper
-        .swiper-slide.ss_shop
+        .swiper-slide.ss_new
           .text.inact
             .what
-              | Территория приятного шопинга
+              | Новая коллекция
 
             .action
-              = link_to 'Начать покупки', products_path, class: :btn
+              = link_to 'new', [:latest, :products], class: :btn
 
-        .swiper-slide
+        .swiper-slide.ss_shop
           .text.inact
             .what
               | Подбери образ под настроение
@@ -41,19 +41,10 @@
         .swiper-slide
           .text.inact
             .what
-              | В октябре
-
-            / .action
-              = link_to 'Looks', products_path, class: :btn
-
-
-        / .swiper-slide.ss_4
-          .text.inact
-            .what
-              | Уникальный неповторимый стиль
+              | Последение события
 
             .action
-              = link_to 'Golovina', products_path
+              = link_to 'О мяте', about_index_path, class: :btn
 
 
   .page_static_index_themes
