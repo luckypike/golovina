@@ -381,18 +381,21 @@
     .image {
       @include aspect-ratio(4, 5);
 
-      // margin-bottom: $base-rhythm-line;
+      img{
+        padding: 5%;
+        background-color: #F7F8F5;
+      }
     }
 
     &.i_0 {
       @include column-width(6, 12);
 
-      .image {
-        img{
-          padding: 5%;
-          background-color: #F7F8F5;
-        }
-      }
+      // .image {
+      //   img{
+      //     padding: 5%;
+      //     background-color: #F7F8F5;
+      //   }
+      // }
     }
 
     &.i_1 {
@@ -424,8 +427,8 @@
 
       .image {
         img{
-          padding: 5%;
-          background-color: #f9f9f9;
+          // padding: 5%;
+          // background-color: #f9f9f9;
         }
       }
     }
