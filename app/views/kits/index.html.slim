@@ -1,22 +1,17 @@
-.page.page_common
-  h1 Listing kits
+.page.page_common.page_kits
+  .page_kits_list
+    .kits
+      .kits_new.lv2
+        = link_to 'Новый образ', [:new, :kit], class: :btn
 
-  table
-    thead
-      tr
-        th Title
-        th
-        th
-        th
-
-    tbody
       - @kits.each do |kit|
-        tr
-          td = kit.title
-          td = link_to 'Show', kit
-          td = link_to 'Edit', edit_kit_path(kit)
-          td = link_to 'Destroy', kit, data: { confirm: 'Are you sure?' }, method: :delete
+        .kits_item
+          strong
+            = link_to kit do
+              | ##{kit.id}
+              =<> kit.title
 
-  br
-
-  = link_to 'New Kit', new_kit_path
+          span.actions
+            | (
+            => link_to 'редактировать', [:edit, kit]
+            | )
