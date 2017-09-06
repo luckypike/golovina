@@ -1,4 +1,6 @@
 class Color < ApplicationRecord
+  mount_uploader :image, ColorUploader
+
   # extend FriendlyId
 
   # validates_presence_of :slug

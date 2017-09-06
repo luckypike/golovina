@@ -57,6 +57,15 @@
       }
     }
 
+    &_form {
+      .color_ex {
+        img {
+          height: 32px;
+          width: 32px;
+        }
+      }
+    }
+
     @include mq($m) {
       padding-bottom: $space-m2;
       // width: 12 / 14 * 100%;

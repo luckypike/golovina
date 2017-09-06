@@ -36,6 +36,8 @@ ru:
 
       color:
         title: Название цвета
+        parent_color: Родительский цвет
+        image: Картинка
 
       variant:
 

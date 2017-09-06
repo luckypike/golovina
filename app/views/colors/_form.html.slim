@@ -5,6 +5,13 @@
     .form_inputs
       = f.input :title
       = f.association :parent_color
+      = f.input :color, input_html: { type: :color }
+      - if @color.image?
+        .color_ex
+          = image_tag @color.image.url
+          = f.check_box :remove_image
+
+      = f.input :image
 
     .form_actions
       = f.button :submit

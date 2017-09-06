@@ -270,36 +270,12 @@
           margin-right: $gutter / 2;
 
           .icon {
-            background: $separator-color;
+            background: {
+              color: $separator-color;
+              size: cover;
+            };
             height: $base-rhythm-line * 4;
             width: $base-rhythm-line * 4;
-
-            &.black {
-              background: black;
-            }
-
-            &.yellow {
-              background: yellow;
-            }
-
-            &.red {
-              background: red;
-            }
-
-            &.green {
-              background: green;
-            }
-
-            &.pink {
-              background: pink;
-            }
-
-            &.white {
-              background: #fafafa;
-            }
-
-
-
           }
 
           &.active {

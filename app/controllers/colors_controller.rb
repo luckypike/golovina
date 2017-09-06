@@ -36,6 +36,7 @@ class ColorsController < ApplicationController
 
   # PATCH/PUT /colors/1
   def update
+    authorize @color
     if @color.update(color_params)
       redirect_to [:colors], notice: 'Color was successfully updated.'
     else
@@ -46,7 +47,7 @@ class ColorsController < ApplicationController
   # DELETE /colors/1
   def destroy
     @color.destroy
-    redirect_to colors_url, notice: 'Color was successfully destroyed.'
+    redirect_to [:colors], notice: 'Color was successfully destroyed.'
   end
 
   private
@@ -57,6 +58,6 @@ class ColorsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def color_params
-      params.require(:color).permit(:title, :slug, :parent_color_id)
+      params.require(:color).permit(:title, :color, :image, :parent_color_id, :remove_image)
     end
 end
