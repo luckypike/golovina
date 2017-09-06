@@ -24,7 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :categories
+  resources :categories, except: [:show]
+  resources :colors, except: [:show]
 
   resources :products, path: :catalog, except: [:destroy] do
     member do

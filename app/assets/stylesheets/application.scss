@@ -21,7 +21,8 @@ $op-color: #fff;
 $separator-color: #dfdfdf;
 $highlight-color: #e0ae39;
 
-$sand-color: #fff5e9;
+$sand-color: #f6ece0;
+$sand-hover-color: #D2C1AE;
 // $mint-color: #d5ecdc;
 // $color-1: #9d9b7a;
 // $color-2: #f5e9e0;
@@ -92,6 +93,11 @@ html {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   min-width: 10rem;
+  transition: background 0.3s;
+
+  &:hover {
+    background: $sand-hover-color;
+  }
 
   &_gr {
     @include font-size(1.5, 3.75);

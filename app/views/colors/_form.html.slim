@@ -1,10 +1,10 @@
-= simple_form_for(@color) do |f|
-  = f.error_notification
+.form
+  = simple_form_for(@color) do |f|
+    = f.error_notification
 
-  .form-inputs
-    = f.input :title
-    = f.input :slug
-    = f.association :parent_color
+    .form_inputs
+      = f.input :title
+      = f.association :parent_color
 
-  .form-actions
-    = f.button :submit
+    .form_actions
+      = f.button :submit

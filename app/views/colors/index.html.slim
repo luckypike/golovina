@@ -1,9 +1,37 @@
-.page.page_themes
-  - @colors.each_with_index do |color, i|
-    .page_themes_theme class=color.slug
-      .text
-        .title
-          = color.desc
+.page.page_common.page_colors
+  .page_colors_list
+    .colors_add
+      = link_to 'Новый цвет', [:new, :color], class: :btn
 
-        .more
-          = link_to color.title, color
+    - @colors.reject{ |c| c.parent_color }.each_with_index do |color, i|
+      .colors_list
+        .colors_list_item
+          = link_to color.title, [:edit, color]
+
+        - color.colors.each do |c|
+          .colors_list_item
+            | —
+            =< link_to c.title, [:edit, c]
+
+/       .text
+/         .title
+/           = color.desc
+
+/         .more
+/           = link_to color.title, color
+
+
+/ .page.page_common.page_categories
+/   .page_categories_list
+/     .categories_add
+/       = link_to 'Добавить', [:new, :category], class: :btn
+
+/     .categories_list
+/       - @categories.reject{ |c| c.parent_category }.each do |category|
+/         .categories_list_item
+/           = link_to category.title, [:edit, category]
+
+/         - category.categories.each do |c|
+/           .categories_list_item
+/             | —
+/             =< link_to c.title, [:edit, c]

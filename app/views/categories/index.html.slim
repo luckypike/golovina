@@ -1,7 +1,8 @@
 .page.page_common.page_categories
   .page_categories_list
     .categories_add
-      = link_to 'Добавить', [:new, :category]
+      = link_to 'Добавить', [:new, :category], class: :btn
+
     .categories_list
       - @categories.reject{ |c| c.parent_category }.each do |category|
         .categories_list_item

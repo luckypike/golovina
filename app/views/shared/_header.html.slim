@@ -80,7 +80,16 @@ header.header class="#{menu_index? ? :index : nil }"
 
     - if user_signed_in? && current_user.is_admin?
       .header_menu_item.sep
-        = link_to 'Управление товарами', [:products]
+        | Управление
+
+      .header_menu_item
+        = active_link_to 'Товары', [:products]
+
+      .header_menu_item
+        = active_link_to 'Категории', [:categories]
+
+      .header_menu_item
+        = active_link_to 'Цвета', [:colors]
 
     .header_menu_social
       .social_networks
