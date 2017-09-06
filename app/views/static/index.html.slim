@@ -48,8 +48,8 @@
 
 
   .page_static_index_themes
-    - @themes.each_with_index do |theme, i|
-      .theme_intro.lv2 class=[theme.slug, "i_#{i % 3}"]
+    - @themes.sort_by(&:weight).each_with_index do |theme, i|
+      .theme_intro.lv2 class=[theme.slug, "i_#{i % 2}"]
         = link_to '', theme
 
         .image.lv3
@@ -62,86 +62,4 @@
             = theme.desc
 
           .more
-            = link_to 'Выбирай настроение', theme, class: :btn
-
-  / .page_static_index_themes
-    .swiper-pagination.swiper-pagination-themes
-    .swiper-button
-      .swiper-button-next
-        = image_tag 'icons/arrow_right.svg'
-
-      .swiper-button-prev
-        = image_tag 'icons/arrow_left.svg'
-
-    .swiper-container
-      .swiper-wrapper
-        .swiper-slide.business data-title=@themes[0].title data-title-short=@themes[0].title_short
-          = link_to @themes[0], class: [:theme, :barba_only] do
-            .image
-            .text.mb
-              .title
-                = @themes[0].desc
-
-              .desc
-                = lipsum_index
-
-
-        .swiper-slide.date data-title=@themes[1].title data-title-short=@themes[1].title_short
-          = link_to @themes[1], class: :theme do
-            .image
-            .text.mb
-              .title
-                = @themes[1].desc
-
-              .desc
-                = lipsum_index
-
-        .swiper-slide.walk data-title=@themes[2].title data-title-short=@themes[2].title_short
-          = link_to @themes[2], class: :theme do
-            .image
-            .text.mb
-              .title
-                = @themes[2].desc
-
-              .desc
-                = lipsum_index
-
-        .swiper-slide.holiday data-title=@themes[3].title data-title-short=@themes[3].title_short
-          = link_to @themes[3], class: :theme do
-            .image
-            .text.mb
-              .title
-                = @themes[3].desc
-
-              .desc
-                = lipsum_index
-
-        .swiper-slide.party data-title=@themes[4].title data-title-short=@themes[4].title_short
-          = link_to @themes[4], class: :theme do
-            .image
-            .text.mb
-              .title
-                = @themes[4].desc
-
-              .desc
-                = lipsum_index
-
-        .swiper-slide.white data-title=@themes[5].title data-title-short=@themes[5].title_short
-          = link_to @themes[5], class: :theme do
-            .image
-            .text.mb
-              .title
-                = @themes[5].desc
-
-              .desc
-                = lipsum_index
-
-        .swiper-slide.moms data-title=@themes[6].title data-title-short=@themes[6].title_short
-          = link_to @themes[6], class: :theme do
-            .image
-            .text.mb
-              .title
-                = @themes[6].desc
-
-              .desc
-                = lipsum_index
+            = link_to 'Выбирай настроение', theme, class: [:btn, :btn_gr]

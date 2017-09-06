@@ -33,6 +33,7 @@ themes.each_pair do |slug, v|
   theme.title = v['title']
   theme.title_long = v['title_long']
   theme.desc = v['desc']
+  theme.weight = v['weight']
   theme.save
 end
 
