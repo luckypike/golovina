@@ -220,19 +220,10 @@
 
 .product {
   &_images {
-    // margin-bottom: $space-s;
-
-
     .images_list {
-      // display: flex;
-
       &_item {
-        // width: 100%;
       }
-
     }
-
-
 
     .image {
       @include aspect-ratio(4, 5);
@@ -240,20 +231,6 @@
   }
 
   &_data {
-    // position: relative;
-
-    // .data {
-    //   position: absolute;
-    //   left: 0;
-    //   right: 0;
-    //   top: 0;
-
-    // }
-
-    .price {
-      // margin-bottom: $space-s;
-    }
-
     .variants {
       &_title {
         margin-bottom: $base-rhythm-line * 2;
@@ -359,10 +336,6 @@
           }
         }
       }
-    }
-
-    .desc {
-      // margin-bottom: $space-s;
     }
 
     .buy {

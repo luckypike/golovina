@@ -142,9 +142,17 @@ $(function(){
             _il.append('<div class="images_list_item swiper-slide"><div class="image"><img src="' + image.photo.thumb.url + '"></div></div>');
           });
 
+          _pip.append('<div class="swiper-pagination"></div>');
+
           if(_il.css('display') == 'flex') {
             var swiper = new Swiper (_pip, {
-
+              pagination: $('.swiper-pagination', _pip),
+              paginationClickable: true,
+              paginationBulletRender: function(swiper, index, className) {
+                console.log();
+                var url = $(swiper.slides[index]).find('img').attr('src');
+                return '<div class="' + className + '"><div class="img" style="background-image: url(' + url + ')"></div></div>';
+              },
             });
             _pip.data('has_swiper', true);
             _pip.data('swiper', swiper);
