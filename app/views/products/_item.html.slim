@@ -39,8 +39,8 @@
                 = size if size > 0
 
         .buy
-          .add Добавить в корзину
-          .wishlist
+          = link_to 'Добавить в корзину', [:cart, :variants], class: [:btn, :cart, :inactive], method: :post, remote: true, data: { disable_with: 'Добавляем..' }
+          = link_to [:wishlist, :variants], class: :wishlist, method: :post, remote: true do
             = inline_svg 'icons/wishlist.svg'
 
 

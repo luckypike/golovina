@@ -19,11 +19,11 @@ header.header class="#{menu_index? ? :index : nil }"
         = inline_svg 'icons/iphone.svg'
 
     .wishlist
-      = link_to wishlist_path do
+      = link_to [:wishlist], data: { src: polymorphic_path([:wishlist], format: :json) } do
         = inline_svg 'icons/wishlist.svg'
 
     .cart
-      = link_to '#' do
+      = link_to [:cart], data: { src: polymorphic_path([:cart], format: :json) } do
         = inline_svg 'icons/cart.svg'
 
   / .header_contact
@@ -103,6 +103,27 @@ header.header class="#{menu_index? ? :index : nil }"
           = inline_svg 'icons/vk.svg'
 
   .header_overlay
+
+  .header_cart
+    .header_cart_title
+      | Корзина
+
+      .close
+        svg viewBox="0 0 16 16"
+          line x1="1" y1="1" x2="15" y2="15"
+          line x1="1" y1="15" x2="15" y2="1"
+
+    .header_cart_items
+
+    .header_cart_sum
+      | Сумма покупки
+      br
+      .sum
+
+    .header_cart_buttons
+      = link_to 'Корзина', [:cart], class: :btn
+
+  .header_wishlist
 
   .header_themes
     .themes_list

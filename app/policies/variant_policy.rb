@@ -14,4 +14,12 @@ class VariantPolicy < ApplicationPolicy
   def destroy?
     update?
   end
+
+  def wishlist?
+    user
+  end
+
+  def cart?
+    user
+  end
 end

@@ -1,6 +1,4 @@
 .header {
-  @include font-size-small;
-
   height: $base-rhythm-line * 8;
   position: absolute;
   left: 0;
@@ -183,7 +181,7 @@
 
         .a, .b {
           fill: none;
-          stroke: rgba($primary-color, 0.2);
+          stroke: $primary-color;
         }
 
         .a {
@@ -227,6 +225,8 @@
   }
 
   &_menu {
+    @include font-size-small;
+
     background-color: $op-color;
     // background: red;
     position: fixed;
@@ -348,6 +348,8 @@
   }
 
   &_themes {
+    @include font-size-small;
+
     display: none;
     // background: $op-color;
     position: absolute;
@@ -388,6 +390,81 @@
       }
 
     }
+  }
+
+  &_cart {
+    background-color: $op-color;
+    // background: red;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    padding: $base-rhythm-line $gutter;
+    right: 0;
+    width: 100%;
+    min-width: 230px;
+    opacity: 0;
+    transform: translateX(50%);
+    visibility: hidden;
+    transition-duration: 0.4s;
+    transition-property: transform opacity;
+    z-index: 6;
+    overflow-y: auto;
+    overflow-scrolling: touch;
+
+    &_title {
+      @include font-size-small;
+
+      line-height: $base-rhythm-line * 6;
+      position: relative;
+
+      .close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 16px 8px;
+        cursor: pointer;
+
+
+        svg {
+          display: block;
+          width: 16px;
+          height: 16px;
+
+          line {
+            stroke: $primary-color;
+          }
+        }
+      }
+    }
+
+    &_items {
+      &_item {
+        .image {
+          @include aspect-ratio(4, 5);
+
+          background-color: #f1f1f1;
+          margin-bottom: $base-rhythm-line * 2;
+        }
+
+        .title {
+          @include font-size-small;
+        }
+
+        .color_and_size {
+          color: #858585;
+        }
+
+        .price {
+          @include font-size-small;
+        }
+      }
+    }
+
+    &_sum {
+      @include font-size-small;
+    }
+
+
   }
 
   &.hide_logo {
@@ -454,7 +531,7 @@
       .cart {
         &_icon {
           .a, .b {
-            stroke: rgba($op-color, 0.3);
+            stroke: $op-color;
           }
         }
       }
@@ -544,6 +621,14 @@
     }
   }
 
+  &.with_cart {
+    .header_cart {
+      opacity: 1;
+      transform: translateX(0);
+      visibility: visible;
+    }
+  }
+
   @include breakpoint($s) {
     height: $base-rhythm-line * 12;
 
@@ -560,6 +645,11 @@
 
     &_menu {
       padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter;
+      width: 2 / 16 * 100%;
+    }
+
+    &_cart {
+      padding: ($space-m2 + $base-rhythm-line * 3) $gutter 0;
       width: 2 / 16 * 100%;
     }
 
@@ -586,6 +676,40 @@
 
     &_menu {
       padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter * 2;
+    }
+
+    &_cart {
+      padding: ($base-rhythm-line * 5) $gutter * 3 0;
+
+      &_title {
+        .close {
+          right: -0.625rem;
+        }
+      }
+
+      &_items {
+        // padding: 0 $gutter;
+        margin-bottom: $space-s2;
+
+        &_item {
+          margin-top: $space-s2;
+          text-align: center;
+        }
+      }
+
+      &_sum {
+        // padding: 0 $gutter;
+        margin-bottom: $space-s2;
+        text-align: center;
+
+
+      }
+
+      &_buttons {
+        // padding: 0 $gutter;
+        margin-bottom: $space-s2;
+
+      }
     }
 
     &_logo {

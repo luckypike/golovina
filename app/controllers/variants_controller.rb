@@ -1,14 +1,34 @@
 class VariantsController < ApplicationController
-  # before_action :set_product_and_variants, only: [:create, :index, :update, :destroy]
   before_action :set_variant, only: [:update, :destroy, :images]
+  before_action :set_user, only: [:wishlist, :cart]
 
 
-  # def index
-  #   @product = Product.find(params[:product_id])
-  #   @variant = Variant.new(product: @product)
-  #   @variant.images.build
-  #   # @variant.color = Color.find(1)
-  # end
+  def wishlist
+    variant = Variant.includes(:product).find(params[:variant_id])
+    authorize variant
+
+    wishlist = Wishlist.find_or_initialize_by(user: current_user, variant: variant)
+    wishlist.persisted? ? wishlist.destroy : wishlist.save
+
+    redirect_to product_path(variant.product, anchor: variant.id)
+  end
+
+  def cart
+    sleep 1
+    variant = Variant.includes(:product).find(params[:variant_id])
+    authorize variant
+
+    if variant.sizes.reject(&:blank?).include?(params[:size])
+      cart = Cart.find_or_initialize_by(user: current_user, variant: variant, size: params[:size])
+      cart.quantity += 1 if cart.persisted?
+      cart.save
+    end
+
+    respond_to do |format|
+      format.html { redirect_to product_path(variant.product, anchor: variant.id) }
+      format.js { render plain: Cart.where(user: current_user).map(&:quantity).sum }
+    end
+  end
 
   def update
     authorize @variant
@@ -47,6 +67,14 @@ class VariantsController < ApplicationController
   end
 
   private
+  def set_user
+    unless user_signed_in?
+      user = User.create(email: "guest_#{Time.now.to_i}#{rand(100)}@mint-store.ru")
+      user.save!(validate: false)
+      sign_in(user)
+    end
+  end
+
   def set_variant
     @variant = Variant.find(params[:id])
   end

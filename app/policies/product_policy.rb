@@ -3,6 +3,14 @@ class ProductPolicy < ApplicationPolicy
     true
   end
 
+  def wishlist?
+    user
+  end
+
+  def cart?
+    user
+  end
+
   def variants?
     update?
   end

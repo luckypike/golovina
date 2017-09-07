@@ -60,6 +60,7 @@ $(function(){
     _v.each(function() {
       var _vv = $(this);
       var _s = _vv.next();
+      var _b = _s.next();
       var _variants = $('.variants_list_item', _vv);
       var _variant = _variants.first();
       var _pp = _vv.closest('.page_product');
@@ -81,10 +82,45 @@ $(function(){
         }
       }
 
+      // TODO: rewrite this selectors
+
+      _b.on('set_variant', function() {
+        if(_b.data('wishlist') == undefined) {
+          _b.data('wishlist', $('.wishlist', _b).attr('href'));
+        }
+
+        $('.wishlist', _b).attr('href', _b.data('wishlist') + '?variant_id=' + _vv.data('active_variant'));
+        _b.trigger('set_size');
+      });
+
+      _b.on('set_size', function() {
+        if(_b.data('cart') == undefined) {
+          _b.data('cart', $('.cart', _b).attr('href'));
+        }
+
+        if(_s.data('active_size') == undefined) {
+          $('.cart', _b).attr('href', _b.data('cart')).addClass('inactive');
+        } else {
+          $('.cart', _b).attr('href', _b.data('cart') + '?variant_id=' + _vv.data('active_variant') + '&size=' + _s.data('active_size')).removeClass('inactive');
+        }
+      });
+
+      $('.cart', _b).on('click', function() {
+        if($(this).is('.inactive')) {
+          return false;
+        }
+      }).on('ajax:success', function(event, c) {
+        var detail = event.detail;
+        var data = detail[0], status = detail[1],  xhr = detail[2];
+
+        console.log(data);
+      });
+
       _variants.on('click', function() {
         var _this = $(this);
         _variants.not(this).removeClass('active');
         _this.addClass('active');
+        _vv.data('active_variant', _this.data('id'));
 
 
         var sizes = _s.data('sizes')[_this.data('id')];
@@ -113,6 +149,10 @@ $(function(){
             } else {
               if($.inArray(parseInt(_cs.data('size')), sizes) < 0) {
                 _cs.addClass('inactive').removeClass('active');
+                if(_s.data('active_size') != undefined && _s.data('active_size') == _cs.data('size')) {
+                  _s.removeData('active_size');
+                  _b.trigger('set_size');
+                }
               } else {
                 _cs.removeClass('inactive');
               }
@@ -134,6 +174,8 @@ $(function(){
         if(swiper) {
           swiper.destroy(true, true);
         }
+
+        _b.trigger('set_variant');
 
 
         $.getJSON(_this.data('url'), function(images) {
@@ -167,6 +209,8 @@ $(function(){
         if(!_this.is('.inactive')) {
           _this.addClass('active');
           _sizes.not(this).removeClass('active');
+          _s.data('active_size', _this.data('size'));
+          _b.trigger('set_size');
         }
 
       });

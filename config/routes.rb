@@ -22,6 +22,11 @@ Rails.application.routes.draw do
     member do
       get :images
     end
+
+    collection do
+      post :wishlist
+      post :cart
+    end
   end
 
   resources :categories, except: [:show]
@@ -55,4 +60,5 @@ Rails.application.routes.draw do
   # end
 
   get 'wishlist', to: 'wishlists#show'
+  get 'cart', to: 'cart#show'
 end

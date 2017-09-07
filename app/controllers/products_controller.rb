@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :variants, :publish]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish]
 
   def index
     authorize Product
@@ -100,20 +100,6 @@ class ProductsController < ApplicationController
 
     redirect_to @product
   end
-
-  def wishlist
-    unless user_signed_in?
-      user = User.create(email: "guest_#{Time.now.to_i}#{rand(100)}@mint-store.ru")
-      user.save!(validate: false)
-      sign_in(user)
-    end
-
-    wishlist = Wishlist.find_or_initialize_by(user: current_user, product: @product)
-    wishlist.persisted? ? wishlist.destroy : wishlist.save
-
-    redirect_to [@product.category, @product]
-  end
-
 
   private
   def set_product

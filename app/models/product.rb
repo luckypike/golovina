@@ -20,10 +20,6 @@ class Product < ApplicationRecord
     (self.title.presence || self.id.to_s).downcase.upcase_first
   end
 
-  # def set_category
-  #   self.category = kind.category if kind
-  # end
-
   def photo
     if variants.size > 0 && variants.first.images[0]
       variants.first.images[0].photo

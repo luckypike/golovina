@@ -8,9 +8,11 @@ class Variant < ApplicationRecord
   belongs_to :category
 
   has_many :images, -> { order(created_at: :asc) }, as: :imagable, dependent: :destroy
-  # accepts_nested_attributes_for :images
 
   validates_uniqueness_of :color_id, scope: [:product_id]
+
+  has_many :wishlists, dependent: :destroy
+  has_many :carts, dependent: :destroy
 
 
   def sync_themes_and_category

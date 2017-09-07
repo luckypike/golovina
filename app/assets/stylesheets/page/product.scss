@@ -345,7 +345,7 @@
       .wishlist {
         border: 1px solid $separator-color;
         margin-left: $gutter / 2;
-        padding: $base-rhythm-line;
+        padding: calc(#{$base-rhythm-line} - 1px);
 
         &_icon {
           display: block;
@@ -360,14 +360,14 @@
         }
       }
 
-      .add {
-        @include font-size-small;
-
-        background-color: $sand-color;
-        padding: $base-rhythm-line;
-        text-align: center;
-        flex-grow: 1;
+      .cart {
+        &.inactive {
+          color: $separator-color;
+          background-color: rgba($separator-color, 0.13);
+        }
       }
+
+
     }
 
     .goto {
