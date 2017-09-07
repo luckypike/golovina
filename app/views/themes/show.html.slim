@@ -1,7 +1,9 @@
 .page.page_common.page_theme.barba_container namespace='theme'
   .page_theme_intro
-    .theme_intro class=@theme.slug
-      .image
+    .theme_intro class=[@theme.slug, "i_#{@theme.weight % 2}"]
+      .image.lv3
+        .img
+
       .text.mb
         .title
           = @theme.title_long
@@ -20,40 +22,19 @@
 
   .page_theme_themes
     - @themes[(@themes.index(@theme) + 1)..-1].each_with_index do |theme, i|
-      .theme_intro.lv2 class=[theme.slug, "i_#{i % 3}"]
-        = link_to '', theme
-
+      .theme_intro.lv2 class=[theme.slug, "i_#{(i + @themes.index(@theme) + 1) % 2}"]
         .image.lv3
+          .img
 
         .text.mb
-          .title
-            = theme.title_long
+          = link_to theme do
+            .title
+              = theme.title_long
 
-          .desc
-            = theme.desc
+            .desc
+              = theme.desc
 
-          .more
-            = link_to 'Выбирай настроение', theme, class: :btn
+            .more
+              .btn.btn_gr
+                | Выбирай настроение
 
-  / .page_theme_footer
-    .inst
-      = link_to '', 'https://www.instagram.com/mint_territory/'
-      p
-        | Instagam
-        br
-        | подписывайтесь
-
-      .name @mint_territory
-
-      p 25,3К подписчиков
-
-
-    .next
-      - nxt = @themes[@themes.index(@theme) + 1]
-      - nxt = @themes.first unless nxt
-
-      .theme
-        = link_to '', nxt
-        .image class=nxt.slug
-        .title
-          = nxt.title_long

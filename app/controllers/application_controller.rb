@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, unless: :devise_controller?
 
   def set_cats
-    @themes = Theme.order(id: :asc)
+    @themes = Theme.order(weight: :asc)
     @categories = Category.order(id: :asc)
     @colors = Color.order(id: :asc)
   end

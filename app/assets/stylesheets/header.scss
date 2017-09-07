@@ -365,6 +365,9 @@
         padding: $base-rhythm-line * 2.5 0;
 
         a {
+          transition: color 0.2s;
+
+          &:hover,
           &.active {
             color: $highlight-color;
           }

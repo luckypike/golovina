@@ -4,26 +4,8 @@ $(function() {
   var _psis = $('.page_static_index_swiper');
   var _sp = $('.swiper-pagination', _psit);
 
-  // $('.header').addClass('index no_hide_logo');
-
   if(_psit.length > 0) {
-    _sp.on('click', '.swiper-pagination-bullet', function() {
-      $('html, body').animate({
-        scrollTop: _window.height()
-      }, 600);
-    });
-
     _window.on('scroll', function() {
-      // var k = (_window.scrollTop() / _psit.height());
-      // if(k < 0) k = 0;
-      // if(k > 1) k = 1;
-      // var sh = (144 * (k - 1));
-
-      // _sp.toggleClass('act', );
-      // _sp.css({
-      //   'margin-top': sh + 'px'
-      // });
-
       $('.header').toggleClass('index_act', _psis.height() - 30 <= _window.scrollTop());
     }).trigger('scroll');
   }
@@ -74,18 +56,6 @@ $(function() {
         // console.log('onTouchEnd');
         swiper.params.speed = 300;
       },
-    });
-
-    var themes_swiper = new Swiper(_sct, {
-      loop: true,
-      effect: 'slide',
-      pagination: '.swiper-pagination-themes',
-      paginationClickable: true,
-      paginationBulletRender: function(swiper, index, className) {
-        return '<div class="' + className + '"><span class="short">' + $(swiper.slides[index + 1]).data('title-short') + '</span><span class="full">' + $(swiper.slides[index + 1]).data('title') + '</span></div>';
-      },
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
     });
 
     var mint = new Vivus('mint_ani', {

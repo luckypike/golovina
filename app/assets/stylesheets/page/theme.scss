@@ -15,6 +15,23 @@
     }
   }
 
+  &_themes {
+    .theme_intro {
+      visibility: hidden;
+      transform: translateY(8rem);
+      opacity: 0;
+
+      transition: opacity 1s, transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+      &.vis {
+        visibility: visible;
+        transform: none;
+
+        opacity: 1;
+      }
+    }
+  }
+
   &_footer {
     .inst {
       @include font-size-small;
@@ -156,43 +173,34 @@
   display: block;
   position: relative;
 
-  > a {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 80%;
-    z-index: 2;
-  }
+  // > a {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 80%;
+  //   z-index: 2;
+  // }
 
   .image {
     @include aspect-ratio(4, 5);
 
-    background: {
-      color: #f1f1f1;
-      size: cover;
-      position: top center;
-    }
+    overflow: hidden;
 
-    // &:before {
-    //   background: $primary-color;
-    //   opacity: 0.3;
-    // }
+    .img {
+      // transition: transform 1.6s;
+
+      background: {
+        color: #f1f1f1;
+        size: cover;
+        position: top center;
+      }
+    }
   }
 
   .text {
-    // color: white;
-    // position: absolute;
-    // right: $gutter;
-    // left: $gutter;
-    // top: 50%;
-
     .more {
       margin-top: $base-rhythm-line * $base-line-height;
-
-      a {
-        padding: $base-rhythm-line / 2 $gutter;
-      }
 
       @include mq($s) {
         margin-top: $base-rhythm-line * ($base-line-height + 1);
@@ -202,27 +210,43 @@
     .title {
       @include font-size-h1;
       @include font-headers;
+
+      transition: transform 0.5s;
+      transform-origin: left bottom;
     }
 
     .desc {
       display: none;
+    }
+
+    .btn_gr {
+      padding: $base-rhythm-line / 2 $gutter;
+      width: 100%;
+      text-align: center;
+      max-width: 260px;
+    }
+
+    > a {
+      display: block;
+
+      &:hover {
+        .btn_gr {
+          background-color: $sand-color;
+        }
+
+        .title {
+          transform: scale(1.03);
+        }
+      }
     }
   }
 
   @each $category in business active party special walk holiday warm {
     &.#{$category} {
       .image {
-        background-image: image_url('pages/index/#{$category}.jpg');
-      }
-    }
-  }
-
-  @include mq($s) {
-    // margin-bottom: $space-m2;
-
-    .text {
-      .title {
-        // @include font-size(10, 9);
+        .img {
+          background-image: image_url('pages/index/#{$category}.jpg');
+        }
       }
     }
   }
@@ -271,37 +295,6 @@
       }
     }
 
-    // &.active,
-    // &.party,
-    // &.date {
-    //   .image {
-    //     width: 8 / 12 * 100%;
-    //     margin-left: 2 / 12 * 100%;
-
-    //   }
-
-    //   > a {
-    //     width: 8 / 12 * 100%;
-    //     margin-left: 2 / 12 * 100%;
-    //   }
-
-    //   .text {
-    //     left: 0;
-    //     width: 100%;
-
-    //     .title {
-    //       width: 6 / 12 * 100%;
-    //     }
-
-    //     .desc, .more {
-    //       margin-left: 8 / 12 * 100%;
-    //       width: 4 / 12 * 100%;
-    //     }
-    //   }
-    // }
-
-
-
     &.i_1 {
       .image {
         width: 8 / 12 * 100%;
@@ -333,30 +326,6 @@
 
 
 
-
-
-
-// @include mq($l) {
-//   // padding: 0;
-//   margin-bottom: $space-m2 * 2;
-
-//   .theme {
-//     .text {
-//       top: 20%;
-//     }
-//   }
-// }
-
-// @include mq($xl + 100) {
-//   .theme {
-//     .text {
-//       .title {
-//         @include font-size(14, 13);
-//       }
-//     }
-//   }
-// }
-
 .products_list {
   display: flex;
   flex-wrap: wrap;
@@ -382,7 +351,7 @@
       @include aspect-ratio(4, 5);
 
       img{
-        padding: 5%;
+        padding: 30px;
         background-color: #F7F8F5;
       }
     }

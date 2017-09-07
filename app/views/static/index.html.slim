@@ -28,7 +28,7 @@
               | Новая коллекция
 
             .action
-              = link_to 'new', [:latest, :products], class: :btn
+              = link_to 'new', [:latest, :products], class: [:btn, :btn_gr]
 
         .swiper-slide.ss_shop
           .text.inact
@@ -36,7 +36,7 @@
               | Подбери образ под настроение
 
             .action
-              = link_to 'Выбрать настроение', @themes.first, class: :btn
+              = link_to 'Выбрать настроение', @themes.first, class: [:btn, :btn_gr]
 
         .swiper-slide
           .text.inact
@@ -44,22 +44,23 @@
               | Последение события
 
             .action
-              = link_to 'О мяте', about_index_path, class: :btn
+              = link_to 'О мяте', about_index_path, class: [:btn, :btn_gr]
 
 
   .page_static_index_themes
     - @themes.sort_by(&:weight).each_with_index do |theme, i|
       .theme_intro.lv2 class=[theme.slug, "i_#{i % 2}"]
-        = link_to '', theme
-
         .image.lv3
+          .img
 
         .text.mb
-          .title
-            = theme.title_long
+          = link_to theme do
+            .title
+              = theme.title_long
 
-          .desc
-            = theme.desc
+            .desc
+              = theme.desc
 
-          .more
-            = link_to 'Выбирай настроение', theme, class: [:btn, :btn_gr]
+            .more
+              .btn.btn_gr
+                | Выбирай настроение

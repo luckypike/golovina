@@ -182,6 +182,13 @@
           }
 
           .action {
+            .btn_gr {
+              color: $op-color;
+
+              &:hover {
+                color: $primary-color;
+              }
+            }
             // @include font-size-small;
 
             // width: 140px;
