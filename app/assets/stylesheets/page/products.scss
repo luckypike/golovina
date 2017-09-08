@@ -38,6 +38,7 @@
 
         .data {
           display: flex;
+          flex-wrap: wrap;
 
           >  div {
             margin-right: $gutter / 2;
@@ -51,17 +52,30 @@
 
         .images {
           display: flex;
+          flex-wrap: wrap;
 
           img {
             display: block;
             width: 80px;
             height: 100px;
             margin-right: $gutter / 2;
+            margin-bottom: $base-rhythm-line;
+          }
+        }
+
+        .edit {
+          .btn {
+            margin-top: $base-rhythm-line;
+            line-height: $base-rhythm-line * 2;
+            padding: $base-rhythm-line / 2 $gutter / 2;
           }
         }
 
         .themes {
+          @include font-size-small;
+
           display: flex;
+          letter-spacing: 0.05em;
           margin-bottom: $base-rhythm-line;
 
           &_item {

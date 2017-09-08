@@ -13,7 +13,8 @@
           .products_item
             .data
               .title
-                = product.title
+                strong
+                  = product.title
 
               .price
                 = number_to_rub product.price
@@ -31,6 +32,11 @@
                 - variant.images[0..1].each do |image|
                   = image_tag image.photo.preview.url if image.photo?
 
+            - if policy(product).edit?
+              .edit
+                = link_to 'Редактировать', [:edit, product], class: [:btn, :btn_gr]
+                =< link_to 'Размеры и цвета', [:variants, product], class: [:btn, :btn_gr]
+
 
         - category.categories.each do |category_category|
           .products_category
@@ -41,7 +47,8 @@
             .products_item
               .data
                 .title
-                  = product.title
+                  strong
+                    = product.title
 
                 .price
                   = number_to_rub product.price
@@ -58,6 +65,11 @@
                 - product.variants.each do |variant|
                   - variant.images[0..1].each do |image|
                     = image_tag image.photo.preview.url if image.photo?
+
+              - if policy(product).edit?
+                .edit
+                  = link_to 'Редактировать', [:edit, product], class: [:btn, :btn_gr]
+                  =< link_to 'Размеры и цвета', [:variants, product], class: [:btn, :btn_gr]
 
 
           / strong
