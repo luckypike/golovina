@@ -172,8 +172,11 @@
           .what {
             @include font-size(4.25, 5);
 
+            min-height: $base-rhythm-line * 10;
+
             @include breakpoint($s) {
               @include font-size(5.625, 6);
+
               min-height: $base-rhythm-line * 12;
             }
 
