@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   def index
     authorize Product
-    @products = Product.order(id: :desc)
+    @categories = Category.includes(:products).all
   end
 
   def show

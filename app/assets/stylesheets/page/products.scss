@@ -26,6 +26,51 @@
       &_new {
 
       }
+
+      &_category {
+        margin-top: $space-s2;
+      }
+
+      &_item {
+        margin-bottom: $space-s2 / 2;
+        border-bottom: 1px solid $separator-color;
+        padding-bottom: $space-s2 / 2;
+
+        .data {
+          display: flex;
+
+          >  div {
+            margin-right: $gutter / 2;
+
+            &:after {
+              content: '/';
+              margin-left: $gutter / 2;
+            }
+          }
+        }
+
+        .images {
+          display: flex;
+
+          img {
+            display: block;
+            width: 80px;
+            height: 100px;
+            margin-right: $gutter / 2;
+          }
+        }
+
+        .themes {
+          display: flex;
+          margin-bottom: $base-rhythm-line;
+
+          &_item {
+            background-color: #f1f1f1;
+            margin-right: $gutter / 2;
+            padding: 0 0.3rem;
+          }
+        }
+      }
     }
   }
 }
