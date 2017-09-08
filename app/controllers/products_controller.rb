@@ -26,13 +26,13 @@ class ProductsController < ApplicationController
   def latest
     authorize Product
 
-    @products = Variant.includes(:product).where(products: { latest: true }).map(&:product).uniq
+    @products = Variant.includes(:images, product: [:variants]).where(products: { latest: true })
   end
 
   def sale
     authorize Product
 
-    @products = Variant.includes(:product).where(products: { sale: true }).map(&:product).uniq
+    @products = Variant.includes(:images, product: [:variants]).where(products: { sale: true })
   end
 
   def category
