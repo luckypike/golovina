@@ -27,4 +27,8 @@ class Variant < ApplicationRecord
   def photo
     images[0].photo.presence || nil
   end
+
+  def in_wishlist user
+    Wishlist.where(user: user, variant: self).any?
+  end
 end

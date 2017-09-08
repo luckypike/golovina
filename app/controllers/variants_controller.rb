@@ -10,11 +10,13 @@ class VariantsController < ApplicationController
     wishlist = Wishlist.find_or_initialize_by(user: current_user, variant: variant)
     wishlist.persisted? ? wishlist.destroy : wishlist.save
 
-    redirect_to product_path(variant.product, anchor: variant.id)
+    respond_to do |format|
+      format.html { redirect_to product_path(variant.product, anchor: variant.id) }
+      format.js { render plain: wishlist.persisted? }
+    end
   end
 
   def cart
-    sleep 1
     variant = Variant.includes(:product).find(params[:variant_id])
     authorize variant
 
@@ -43,7 +45,7 @@ class VariantsController < ApplicationController
   def images
     authorize @variant
 
-    render json: @variant.images
+    render json: { images: @variant.images, wishlist: @variant.in_wishlist(current_user) }
   end
 
   def create
@@ -69,7 +71,7 @@ class VariantsController < ApplicationController
   private
   def set_user
     unless user_signed_in?
-      user = User.create(email: "guest_#{Time.now.to_i}#{rand(100)}@mint-store.ru")
+      user = User.create(email: "guest_#{Devise.friendly_token.first(10)}@mint-store.ru")
       user.save!(validate: false)
       sign_in(user)
     end

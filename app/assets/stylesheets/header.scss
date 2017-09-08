@@ -168,7 +168,7 @@
       }
 
       a {
-        padding: $base-rhythm-line * 3 / 2 $base-rhythm-line / 2;
+        padding: $base-rhythm-line * 3 / 2 $base-rhythm-line;
         display: block;
       }
     }
@@ -194,8 +194,16 @@
       }
 
       a {
-        padding: $base-rhythm-line * 3 / 2 $base-rhythm-line / 2;
+        padding: $base-rhythm-line * 3 / 2 $base-rhythm-line;
         display: block;
+      }
+
+      &.nil {
+        opacity: 0.3;
+
+        > a {
+          cursor: default;
+        }
       }
     }
   }

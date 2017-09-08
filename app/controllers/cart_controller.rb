@@ -1,6 +1,6 @@
 class CartController < ApplicationController
   def show
-    authorize Cart
+    authorize :cart
     @items = Cart.where(user: current_user)
   end
 end

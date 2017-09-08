@@ -53,7 +53,8 @@ $(function() {
   var _ca = $('.cart a', _h);
 
   _ca.on('click', function() {
-    if(_h.width() > 960) {
+    if(_h.width() > 960 && _ca.parent().is('.active')) {
+
       var _this = $(this);
       var src = _this.data('src');
 
@@ -64,14 +65,16 @@ $(function() {
         var _hci = $('.header_cart_items');
         _hci.html('');
         $.each(data.items, function(i, e) {
-          _hci.append('<div class="header_cart_items_item"><div class="image"></div><div class="title">' + e.title + '</div><div class="color_and_size">' + e.color + ' |  ' + e.size + '</div><div class="price">' + e.price + '</div></div>');
+          _hci.append('<div class="header_cart_items_item"><div class="image"><img src="' + e.image + '"></div><div class="title">' + e.title + '</div><div class="color_and_size">' + e.color + ' |  ' + e.size + '</div><div class="price">' + e.price + '</div></div>');
         });
 
         $('.header_cart_sum').html(data.sum);
       });
       return false;
     } else {
-
+      if(!_ca.parent().is('.active')) {
+        return false;
+      }
     }
 
 

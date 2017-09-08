@@ -109,11 +109,28 @@ $(function(){
         if($(this).is('.inactive')) {
           return false;
         }
-      }).on('ajax:success', function(event, c) {
+      }).on('ajax:success', function(event) {
         var detail = event.detail;
         var data = detail[0], status = detail[1],  xhr = detail[2];
 
-        console.log(data);
+        console.log(parseInt(data) > 0);
+        if(parseInt(data) > 0) {
+          $('.header .cart').removeClass('nil').addClass('active');
+        } else {
+          $('.header .cart').addClass('nil').removeClass('active');
+        }
+      });
+
+
+      $('.wishlist', _b).on('ajax:success', function(event) {
+        var detail = event.detail;
+        var data = detail[0], status = detail[1],  xhr = detail[2];
+
+        if(data == 'true'){
+          $(this).addClass('in_wl');
+        } else {
+          $(this).removeClass('in_wl');
+        }
       });
 
       _variants.on('click', function() {
@@ -138,7 +155,6 @@ $(function(){
               _cs.removeClass('inactive').addClass('active');
             }
           });
-
         } else {
           _s.removeClass('one_size');
           _sizes.each(function() {
@@ -178,11 +194,17 @@ $(function(){
         _b.trigger('set_variant');
 
 
-        $.getJSON(_this.data('url'), function(images) {
+        $.getJSON(_this.data('url'), function(data) {
           _il.html('');
-          $.each(images, function(i, image) {
+          $.each(data.images, function(i, image) {
             _il.append('<div class="images_list_item swiper-slide"><div class="image"><img src="' + image.photo.thumb.url + '"></div></div>');
           });
+
+          if(data.wishlist) {
+            _this.closest('.product').find('.wishlist').addClass('in_wl');
+          } else {
+            _this.closest('.product').find('.wishlist').removeClass('in_wl');
+          }
 
           _pip.append('<div class="swiper-pagination"></div>');
 

@@ -1,2 +1,18 @@
-h1 Wishlists#show
-p Find me in app/views/wishlists/show.html.slim
+.page.page_common.page_wishlist
+  .page_common_intro.lv3
+    h1
+      | Избранное
+
+  .page_wishlist_items
+    .items
+      - @items.each do |item|
+        .items_item.lv3
+          = link_to item.variant.product do
+            .image.lv4
+              = image_tag item.variant.images.first.photo.thumb.url
+
+            .title.lv4
+              = item.variant.product.title
+
+            .price
+              = number_to_rub item.variant.product.price

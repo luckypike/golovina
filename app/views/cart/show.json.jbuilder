@@ -3,6 +3,7 @@ json.items @items do |item|
   json.color item.variant.color.title
   json.size item.size
   json.price number_to_rub(item.variant.product.price)
+  json.image item.variant.images.first.photo.preview.url
 end
 
 json.sum number_to_rub(@items.map{ |i| i.variant.product.price }.sum)

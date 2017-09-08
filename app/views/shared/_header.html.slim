@@ -22,7 +22,7 @@ header.header class="#{menu_index? ? :index : nil }"
       = link_to [:wishlist], data: { src: polymorphic_path([:wishlist], format: :json) } do
         = inline_svg 'icons/wishlist.svg'
 
-    .cart
+    .cart class=(@cart.any? ? :active : :nil)
       = link_to [:cart], data: { src: polymorphic_path([:cart], format: :json) } do
         = inline_svg 'icons/cart.svg'
 

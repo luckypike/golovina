@@ -1,0 +1,34 @@
+&_wishlist {
+  &_items {
+    .items {
+      @include column-pane;
+
+      margin-left: -$gutter / 2;
+      margin-right: -$gutter / 2;
+
+      &_item {
+        @include column-width(1, 2);
+
+        padding: 0 $gutter / 2;
+
+        > a {
+          display: block;
+        }
+
+        .image {
+          @include aspect-ratio(4, 5);
+
+          background-color: $sand-color;
+        }
+
+        .title, .price {
+          @include font-size-small;
+        }
+
+        @include mq($m) {
+          @include column-width(1, 4);
+        }
+      }
+    }
+  }
+}

@@ -353,9 +353,18 @@
           height: $space-s;
 
           .a {
-            fill: none;
+            fill: $op-color;
             stroke: $primary-color;
             stroke-miterlimit: 10;
+            transition: fill 0.2s;
+          }
+        }
+
+        &.in_wl {
+          .wishlist_icon {
+            .a {
+              fill: $primary-color;
+            }
           }
         }
       }

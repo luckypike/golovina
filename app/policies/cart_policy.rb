@@ -1,5 +1,5 @@
-class CartPolicy < ApplicationPolicy
+class CartPolicy < Struct.new(:user, :dashboard)
   def show?
-    user
+    true
   end
 end
