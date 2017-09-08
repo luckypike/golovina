@@ -3,6 +3,50 @@ class ProductsController < ApplicationController
 
   def index
     authorize Product
+    redirect_to [:all, :products]
+    #
+    # where = {}
+    # @products = Variant.includes(:images, product: [:variants]).where(where).order('products.created_at DESC')
+    # render :category
+  end
+
+  def all
+    authorize Product
+    @where ||= {}
+
+    @products = Variant.includes(:images, product: [:variants]).themed_by(params[:theme]).where(@where).order('products.created_at DESC')
+    render :all
+  end
+
+  def category
+    @category = Category.friendly.find(params[:slug])
+
+    @where = {
+      category: @category.categories.map(&:id) <<  + @category.id
+    }
+
+    self.all
+
+    # %w(theme size).each do |f|
+    #   params[f] = params[f].present? ? params[f].map(&:to_i) : []
+    #   where[f.pluralize] = params[f] if params[f].present? && f != 'theme'
+    # end
+
+    # %w(category color).each do |f|
+    #   params[f] = params[f].present? ? params[f].map(&:to_i) : []
+    #   where[f] = params[f] if params[f].present?
+    # end
+
+    # # params[:category] = params[:category].presence || []
+    # # params[:color] = params[:color].presence || []
+    # # params[:theme] = params[:theme].presence || []
+    # # params[:size] = params[:size].presence || []
+
+
+  end
+
+  def control
+    authorize Product
     @categories = Category.includes(:products).all
   end
 
@@ -33,33 +77,6 @@ class ProductsController < ApplicationController
     authorize Product
 
     @products = Variant.includes(:images, product: [:variants]).where(products: { sale: true })
-  end
-
-  def category
-    authorize Product
-    @category = Category.friendly.find(params[:slug])
-
-    where = {
-      category: @category.categories.map(&:id) <<  + @category.id
-    }
-
-    # %w(theme size).each do |f|
-    #   params[f] = params[f].present? ? params[f].map(&:to_i) : []
-    #   where[f.pluralize] = params[f] if params[f].present? && f != 'theme'
-    # end
-
-    # %w(category color).each do |f|
-    #   params[f] = params[f].present? ? params[f].map(&:to_i) : []
-    #   where[f] = params[f] if params[f].present?
-    # end
-
-    # # params[:category] = params[:category].presence || []
-    # # params[:color] = params[:color].presence || []
-    # # params[:theme] = params[:theme].presence || []
-    # # params[:size] = params[:size].presence || []
-
-    @products = Variant.includes(:images, product: [:variants]).themed_by(params[:theme]).where(where)
-    # # .order(id: :asc)
   end
 
   def variants

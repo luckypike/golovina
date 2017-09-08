@@ -1,4 +1,8 @@
 class ProductPolicy < ApplicationPolicy
+  def control?
+    create?
+  end
+
   def show?
     true
   end
@@ -16,7 +20,11 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def index?
-    create?
+    category?
+  end
+
+  def all?
+    category?
   end
 
   def create?

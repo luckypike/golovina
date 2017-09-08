@@ -43,7 +43,7 @@ header.header class="#{menu_index? ? :index : nil }"
 
     .header_menu_item class=(controller_name == 'themes' ? :active: nil)
       .title
-        = active_link_to 'Настроения', @themes.first, class: :subs
+        = active_link_to 'Настроения', [:themes], class: :subs
 
       .sub
         - @themes.each do |theme|
@@ -52,9 +52,12 @@ header.header class="#{menu_index? ? :index : nil }"
 
     .header_menu_item class=((controller_name == 'products' && !%w(sale new).include?(action_name)) ? :active: nil)
       .title
-        = link_to 'Каталог', @categories.first
+        = link_to t(:catalog), [:products]
 
       .sub
+        .sub_item
+          = active_link_to 'Все товары', [:all, :products], active: :exact
+
         - @categories.reject{ |c| c.parent_category }.each do |category|
           .sub_item
             = active_link_to category.title, category_products_path(slug: category.slug)
@@ -83,7 +86,7 @@ header.header class="#{menu_index? ? :index : nil }"
         | Управление
 
       .header_menu_item
-        = active_link_to 'Товары', [:products]
+        = active_link_to 'Товары', [:control, :products]
 
       .header_menu_item
         = active_link_to 'Образы', [:kits]

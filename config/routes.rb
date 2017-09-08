@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get :contacts, to: 'static#contacts'
 
-  resources :themes, path: :styles, except: [:index, :destroy]
+  resources :themes, path: :styles, except: [:destroy]
 
   resources :kits
 
@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   end
 
   resources :categories, except: [:show]
+
   resources :colors, except: [:show]
 
   resources :products, path: :catalog, except: [:destroy] do
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
     end
 
     collection do
+      get :control
       get :all
       get :latest
       get :sale
