@@ -12,7 +12,7 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-    self.id == 1
+    self.id == 1 || self.id == 2
   end
 
   def is_editor?
