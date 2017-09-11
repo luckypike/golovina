@@ -34,4 +34,11 @@ $(function() {
       $('.form', _this).show();
     }
   });
+
+  $('form.edit_variant').on('ajax:success', function(event) {
+    var detail = event.detail;
+    var data = detail[0], status = detail[1],  xhr = detail[2];
+    var _form = $(this).find('.form_inputs');
+    _form.find('h3').text($('.variant_color select option:selected', _form).text());
+  });
 });

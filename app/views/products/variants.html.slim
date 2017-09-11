@@ -17,6 +17,7 @@
               = f.object.color.title
             = link_to 'Удалить вариант', f.object, method: :delete, class: [:btn, :btn_gr]
 
+            = f.association :color
             = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes].map{ |s| [I18n.t("sizes.size_#{s}"), s.to_s] }
             = f.input :out_of_stock
 

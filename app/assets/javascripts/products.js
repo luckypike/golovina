@@ -113,7 +113,6 @@ $(function(){
         var detail = event.detail;
         var data = detail[0], status = detail[1],  xhr = detail[2];
 
-        console.log(parseInt(data) > 0);
         if(parseInt(data) > 0) {
           $('.header .cart').removeClass('nil').addClass('active');
         } else {
