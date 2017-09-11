@@ -27,7 +27,7 @@
 
         .f.color
           .f_l
-            - @colors.each do |color|
+            - @colors.reject(&:parent_color).each do |color|
               .f_l_i data-f='color' data-v=color.id
                 = color.title
 
@@ -38,54 +38,9 @@
 
         .f.size
           .f_l
-            .f_l_i XS
-            .f_l_i S
-            .f_l_i M
-            .f_l_i L
+            - Rails.application.secrets[:sizes].each do |size|
+              .f_l_i data-f='size' data-v=size
+                = t("sizes.size_#{size}")
 
   .page_products_list
     == render 'products/list', products: @products
-
-  / - unless @products.empty?
-  /   .page_products_grid
-  /     .products_list
-  /       - @products.each_with_index do |product, i|
-  /         .products_list_item
-  /           = link_to product do
-  /             .image
-  /               = image_tag product.images[0].thumb.url if product.images[0]
-
-  /             .data
-  /               .price
-  /                 = number_to_rub product.price
-
-  /               .title
-  /                 = product.title
-
-    / .page_products_list
-      .list
-        / - @products.each_with_index do |product, i|
-        - (0..30).each do |i|
-          - product = @products.sample
-          .list_item class="list_item_#{i}"
-            = link_to product do
-              .image_wrapper
-                / .wl
-                / .buy
-                / .size
-                  .size_all
-
-                / .color
-                  .color_all
-
-                .image
-                  = image_tag product.images[0].thumb.url if product.images[0]
-                  = image_tag product.images[1].thumb.url, class: :sec if product.images[1]
-
-              .data
-                .price
-                  = number_to_rub product.price
-
-                .title
-                  = product.title
-

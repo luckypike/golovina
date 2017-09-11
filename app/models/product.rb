@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   enum state: { undef: 0, active: 1, archived: 2 }
 
-  # before_validation :set_category
+  after_save :sync_variants
 
   has_many :kitables, dependent: :destroy
   has_many :kits, through: :kitables
@@ -32,6 +32,14 @@ class Product < ApplicationRecord
 
   def sizes
     variants.first.sizes
+  end
+
+  def sync_variants
+    self.variants.each do |variant|
+      variant.themes = self.themes.map(&:id)
+      variant.category = self.category
+      variant.save
+    end
   end
 
   class << self

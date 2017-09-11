@@ -14,6 +14,8 @@ class ProductsController < ApplicationController
     authorize Product
     @where ||= {}
 
+    p @where
+
     @products = Variant.includes(:images, product: [:variants]).themed_by(params[:theme]).where(@where).order('products.created_at DESC')
     render :all
   end
