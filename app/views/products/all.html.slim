@@ -1,7 +1,9 @@
+
+
 .page.page_common.page_products
   .page_common_intro.lv3
     h1
-      = @category ? @category.title : t(:catalog)
+      = title(@category ? @category.title : t(:catalog_all))
 
   .fd_w
     .fd_ph

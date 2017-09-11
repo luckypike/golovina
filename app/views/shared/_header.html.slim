@@ -56,7 +56,7 @@ header.header class="#{menu_index? ? :index : nil }"
 
       .sub
         .sub_item
-          = active_link_to 'Все товары', [:all, :products], active: :exact
+          = active_link_to t(:catalog_all), [:all, :products], active: :exact
 
         - @categories.reject{ |c| c.parent_category }.each do |category|
           .sub_item

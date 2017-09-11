@@ -1,7 +1,8 @@
 doctype html
 html
   head
-    title Mint
+    = display_meta_tags site: 'Мята', reverse: true, separator: '—'
+
     = csrf_meta_tags
     = favicon_link_tag
 

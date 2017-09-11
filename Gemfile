@@ -29,6 +29,8 @@ gem 'inline_svg'
 gem 'carrierwave'
 gem 'mini_magick'
 
+gem 'meta-tags'
+
 gem 'devise'
 gem 'pundit'
 

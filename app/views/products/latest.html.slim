@@ -1,6 +1,7 @@
 .page.page_common.page_latest
   .page_common_intro
-    h1 NEW
+    h1
+      = title 'New'
 
   .page_products_list
     == render 'products/list', products: @products

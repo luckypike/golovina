@@ -1,6 +1,7 @@
 .page.page_common.page_sale
   .page_common_intro
-    h1 SALE
+    h1
+      = title 'Sale'
 
   .page_products_list
     == render 'products/list', products: @products
