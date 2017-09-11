@@ -108,8 +108,9 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    authorize @product
     @product.destroy
-    redirect_to products_url, notice: 'Product was successfully destroyed.'
+    redirect_to [:control, :products], notice: 'Product was successfully destroyed.'
   end
 
   def publish

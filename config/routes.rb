@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
   resources :colors, except: [:show]
 
-  resources :products, path: :catalog, except: [:destroy] do
+  resources :products, path: :catalog do
     member do
       post :publish
       post :archive

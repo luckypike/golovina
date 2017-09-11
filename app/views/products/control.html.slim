@@ -36,6 +36,7 @@
               .edit
                 = link_to 'Редактировать', [:edit, product], class: [:btn, :btn_gr]
                 =< link_to 'Размеры и цвета', [:variants, product], class: [:btn, :btn_gr]
+                =< link_to 'Удалить', product, class: [:btn, :btn_gr], method: :delete, data: { confirm: 'Точно удалить?' }
 
 
         - category.categories.each do |category_category|
@@ -70,6 +71,7 @@
                 .edit
                   = link_to 'Редактировать', [:edit, product], class: [:btn, :btn_gr]
                   =< link_to 'Размеры и цвета', [:variants, product], class: [:btn, :btn_gr]
+                  =< link_to 'Удалить', product, class: [:btn, :btn_gr], method: :delete, data: { confirm: 'Точно удалить?' }
 
 
           / strong

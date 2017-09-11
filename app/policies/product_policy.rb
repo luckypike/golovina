@@ -59,6 +59,10 @@ class ProductPolicy < ApplicationPolicy
     update?
   end
 
+  def destroy?
+    user&.is_admin?
+  end
+
   class Scope < Scope
     def resolve
       scope

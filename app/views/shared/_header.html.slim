@@ -81,7 +81,7 @@ header.header class="#{menu_index? ? :index : nil }"
       - else
         = active_link_to t(:login), new_user_session_path
 
-    - if user_signed_in? && current_user.is_admin?
+    - if user_signed_in? && current_user.is_editor?
       .header_menu_item.sep
         | Управление
 
