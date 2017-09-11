@@ -1,0 +1,9 @@
+<% if Rails.env.production? %>
+User-Agent: *
+Allow: /
+host: https://mint-store.ru
+Sitemap: https://mint-store.ru/sitemap.xml
+<% else %>
+User-Agent: *
+Disallow: /
+<% end %>

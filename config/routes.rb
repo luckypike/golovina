@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get :contacts, to: 'static#contacts'
 
+  get 'robots.:format', to: 'static#robots'
+
   resources :themes, path: :styles, except: [:destroy]
 
   resources :kits
