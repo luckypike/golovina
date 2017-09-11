@@ -328,8 +328,6 @@
   }
 }
 
-
-
 .products_list {
   display: flex;
   flex-wrap: wrap;
@@ -366,13 +364,6 @@
 
     &.i_0 {
       @include column-width(6, 12);
-
-      // .image {
-      //   img{
-      //     padding: 5%;
-      //     background-color: #F7F8F5;
-      //   }
-      // }
     }
 
     &.i_1 {
@@ -401,13 +392,6 @@
     &.i_4 {
       @include column-width(6, 12);
       @include column-shift(1, left, 12);
-
-      .image {
-        img{
-          // padding: 5%;
-          // background-color: #f9f9f9;
-        }
-      }
     }
   }
 
