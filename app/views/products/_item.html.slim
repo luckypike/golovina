@@ -15,7 +15,7 @@
           = number_to_rub product.price
 
         .desc.lv3
-          = product.desc
+          = markdown product.desc
 
 
         .variants.live.lv3
@@ -40,7 +40,7 @@
 
         .buy
           = link_to 'Добавить в корзину', [:cart, :variants], class: [:btn, :cart, :inactive], method: :post, remote: true, data: { disable_with: 'Добавляем..' }
-          = link_to [:wishlist, :variants], class: :wishlist, method: :post, remote: true do
+          = link_to [:wishlist, :variants], class: [:wishlist], method: :post, remote: true do
             = inline_svg 'icons/wishlist.svg'
 
 

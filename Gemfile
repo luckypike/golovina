@@ -31,6 +31,8 @@ gem 'mini_magick'
 
 gem 'meta-tags'
 
+gem 'redcarpet'
+
 gem 'devise'
 gem 'pundit'
 
