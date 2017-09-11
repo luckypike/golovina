@@ -1,6 +1,59 @@
-.page.page_common.page_cart
-  .page_cart_items
-    .items
-      - @items.each do |item|
-        .items_item
-          = debug item
+.page_cart_container
+  .page.page_cart.page_common
+    .page_cart_intro.lv2
+      h1
+        = title 'Корзина'
+
+    .page_cart_title.lv3
+      .h3
+        | Заказ № #{@order.number}
+
+    .page_cart_items
+      .items
+        - @items.each do |item|
+          .items_item.lv3
+            = link_to item.variant.product, class: :image
+              - if item.variant.images.size > 0
+                .img
+                  = image_tag item.variant.images.order(created_at: :asc).first.photo.preview.url
+
+            .data
+              .title
+                = link_to item.variant.product.title_safe, item.variant.product
+
+              .color
+                ' Цвет:
+                = item.variant.color.title
+
+              .size
+                ' Размер:
+                = t("sizes.size_#{item.size}")
+
+              .quantity
+                ' Количество:
+                = item.quantity
+
+              .actions
+                / = link_to 'Добавить ещё', '#', class: [:btn, :btn_gr]
+                = link_to 'Удалить из корзины', '#'
+
+
+      .summary
+        .title.lv3
+          | Сумма к оплате
+
+        .summary_list
+          .summary_list_item.lv3
+            | Товары на сумму: #{number_to_rub(@items.map{ |i| i.variant.product.price }.sum)}
+
+          .summary_test.lv3
+            | Интернет-магазин работает в тестовом режиме. К сожалению, временно невозможно оплатить заказ. Мы предлагаем вам зарезервировать нужные вам товары, а наш менеджер свяжется с вами для подтверждения заказа и поможет оформить доставку и оплату.
+
+          .summary_form
+              / .form
+                = simple_form_for @user do |f|
+                  .form_inputs
+                    = f.input :name
+
+              / .form
+                .form_inputs

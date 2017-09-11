@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911095619) do
+ActiveRecord::Schema.define(version: 20170911161016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,25 @@ ActiveRecord::Schema.define(version: 20170911095619) do
     t.index ["theme_id"], name: "index_kits_on_theme_id"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "variant_id"
+    t.integer "quantity"
+    t.integer "size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["variant_id"], name: "index_order_items_on_variant_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "state", default: 0
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.bigint "category_id"
     t.decimal "price"
@@ -125,6 +144,8 @@ ActiveRecord::Schema.define(version: 20170911095619) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "remember_token"
+    t.string "phone"
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -156,6 +177,9 @@ ActiveRecord::Schema.define(version: 20170911095619) do
   add_foreign_key "carts", "users"
   add_foreign_key "carts", "variants"
   add_foreign_key "kits", "themes"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "variants"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "themables", "products"
   add_foreign_key "themables", "themes"

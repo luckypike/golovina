@@ -79,7 +79,7 @@
   }
 
   @include mq($s) {
-    padding-top: $base-rhythm-line * 20 + $space-s2;
+    padding-top: $base-rhythm-line * 16 + $space-s2;
   }
 
   @include mq($xl) {
@@ -98,6 +98,7 @@
   @import "page/wishlist";
 
   @import "page/auth";
+  @import "page/cart";
 }
 
 .link_fake {

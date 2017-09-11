@@ -69,14 +69,6 @@ class VariantsController < ApplicationController
   end
 
   private
-  def set_user
-    unless user_signed_in?
-      user = User.create(email: "guest_#{Devise.friendly_token.first(10)}@mint-store.ru")
-      user.save!(validate: false)
-      sign_in(user)
-    end
-  end
-
   def set_variant
     @variant = Variant.find(params[:id])
   end
