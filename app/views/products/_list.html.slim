@@ -4,6 +4,6 @@
     - url = polymorphic_path(product)
     - url = polymorphic_path(product, anchor: entity.id) if entity.is_a?(Variant) && entity.product.variants.size > 1
 
-    = link_to url, class: [:products_list_item, "i_#{i % 6}"], anchor: 'QQ' do
+    = link_to url, class: [:products_list_item, "i_#{i % 6}"] do
       .image
-        = image_tag entity.images.first.photo.thumb.url if entity.images.size > 0
+        = image_tag entity.images.order(created_at: :asc).first.photo.thumb.url, alt: product.title_safe if entity.images.size > 0
