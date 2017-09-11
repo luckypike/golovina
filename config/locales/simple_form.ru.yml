@@ -40,6 +40,7 @@ ru:
         image: Картинка
 
       variant:
+        out_of_stock: Нет в наличии
 
     #   user:
     #     new:
@@ -57,6 +58,12 @@ ru:
     #   defaults:
     #     age: 'Select your age'
 
+  sizes:
+    size_0: ONE SIZE
+    size_40: '40'
+    size_42: '42'
+    size_44: '44'
+    size_46: '46'
 
   enums:
     product:
