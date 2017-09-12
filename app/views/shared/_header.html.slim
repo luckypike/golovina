@@ -50,7 +50,7 @@ header.header class="#{menu_index? ? :index : nil }"
           .sub_item
             = active_link_to theme.title, theme
 
-    .header_menu_item class=((controller_name == 'products' && !%w(sale new).include?(action_name)) ? :active: nil)
+    .header_menu_item class=((controller_name == 'products' && !%w(sale latest).include?(action_name)) ? :active: nil)
       .title
         = link_to t(:catalog), [:products]
 
