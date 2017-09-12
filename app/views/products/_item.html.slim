@@ -28,7 +28,7 @@
                 .icon class=variant.color.slug style="background-color: #{variant.color.color}; #{variant.color.image? ? "background-image: url(#{variant.color.image.url})" : ''}"
 
         .sizes.live.lv3 data-sizes=product.variants.select(&:sizes).map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json
-          .sizes_title
+          / .sizes_title
             | Подберите свой размер
 
           .sizes_list
