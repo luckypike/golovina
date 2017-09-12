@@ -14,9 +14,15 @@ class ProductsController < ApplicationController
     authorize Product
     @where ||= {}
 
-    p @where
+    %w(category color).each do |f|
+      params[f] = params[f].present? ? params[f].map(&:to_i) : []
+      @where[f] = params[f] if params[f].present?
+    end
 
-    @products = Variant.includes(:images, product: [:variants]).themed_by(params[:theme]).where(@where).order('products.created_at DESC')
+    params[:theme] = params[:theme].presence || []
+    params[:size] = params[:size].presence || []
+
+    @products = Variant.includes(:images, product: [:variants]).themed_by(params[:theme]).sized_by(params[:size]).where(@where).order('products.created_at DESC')
     render :all
   end
 
@@ -30,7 +36,7 @@ class ProductsController < ApplicationController
     self.all
 
     # %w(theme size).each do |f|
-    #   params[f] = params[f].present? ? params[f].map(&:to_i) : []
+    #
     #   where[f.pluralize] = params[f] if params[f].present? && f != 'theme'
     # end
 
@@ -39,10 +45,7 @@ class ProductsController < ApplicationController
     #   where[f] = params[f] if params[f].present?
     # end
 
-    # # params[:category] = params[:category].presence || []
-    # # params[:color] = params[:color].presence || []
-    # # params[:theme] = params[:theme].presence || []
-    # # params[:size] = params[:size].presence || []
+
 
 
   end

@@ -1,5 +1,4 @@
 
-
 .page.page_common.page_products
   .page_common_intro.lv3
     h1
@@ -7,14 +6,17 @@
 
   .fd_w
     .fd_ph
-    .fd.lv3 data-url=products_path data-cur={ category: params[:category], theme: params[:theme], color: params[:color], size: params[:size] }.to_json
+    .fd.lv3 data-url=url_for(@category ? [:category, :products] : [:all, :products]) data-cur={ category: params[:category], theme: params[:theme].map(&:to_i), color: params[:color], size: params[:size].map(&:to_i) }.to_json
       .fd_i
         .t
-          | Стиль
+          | Настроение
           = inline_svg 'icons/varr.svg'
 
         .f.theme
           .f_l
+            .f_l_i data-f='theme' data-v=-1
+              | Все
+
             - @themes.each do |theme|
               .f_l_i data-f='theme' data-v=theme.id
                 = theme.title
@@ -27,6 +29,9 @@
 
         .f.color
           .f_l
+            .f_l_i data-f='color' data-v=-1
+              | Все
+
             - @colors.reject(&:parent_color).each do |color|
               .f_l_i data-f='color' data-v=color.id
                 = color.title
@@ -38,6 +43,9 @@
 
         .f.size
           .f_l
+            .f_l_i data-f='size' data-v=-1
+              | Все
+
             - Rails.application.secrets[:sizes].each do |size|
               .f_l_i data-f='size' data-v=size
                 = t("sizes.size_#{size}")

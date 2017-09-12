@@ -21,12 +21,18 @@ $(function(){
 
   $('.f_l_i').on('click', function() {
     var _this = $(this);
-    var p = $.inArray(_this.data('v'), filters[_this.data('f')]);
-    if(p >= 0) {
-      filters[_this.data('f')].splice(p, 1);
+    if(_this.data('v') == -1) {
+      filters[_this.data('f')] = [];
     } else {
-      filters[_this.data('f')].push(_this.data('v'));
+      var p = $.inArray(_this.data('v'), filters[_this.data('f')]);
+      if(p >= 0) {
+        filters[_this.data('f')].splice(p, 1);
+      } else {
+        filters[_this.data('f')].push(_this.data('v'));
+      }
     }
+
+
 
     window.location.href = $('.fd').data('url') + '?' + $.param(filters);
   });
@@ -34,6 +40,11 @@ $(function(){
   $('.f_l_i').each(function() {
     var _this = $(this);
     if($.inArray(_this.data('v'), filters[_this.data('f')]) >= 0) {
+      _this.addClass('active');
+    }
+
+
+    if(filters[_this.data('f')].length == 0 && _this.data('v') == -1) {
       _this.addClass('active');
     }
   });

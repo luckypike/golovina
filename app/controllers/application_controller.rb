@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
 
   def set_cats
     @themes = Theme.order(weight: :asc)
-    @categories = Category.order(id: :asc)
-    @colors = Color.order(id: :asc)
+    @categories = Category.includes(:parent_category).order(id: :asc)
+    @colors = Color.includes(:parent_color).order(id: :asc)
   end
 
   def set_cart
