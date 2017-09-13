@@ -72,6 +72,7 @@ $(function(){
       var _vv = $(this);
       var _s = _vv.next();
       var _b = _s.next();
+      var _oos = _b.next();
       var _variants = $('.variants_list_item', _vv);
       var _variant = _variants.first();
       var _pp = _vv.closest('.page_product');
@@ -156,16 +157,34 @@ $(function(){
         var _vl = _this.parent().prev();
         _vl.text(label);
 
+
+        _oos.removeClass('active');
+
         if($.inArray(0, sizes) >= 0) {
           _s.addClass('one_size');
 
           _sizes.each(function() {
             var _cs = $(this);
             if(parseInt(_cs.data('size')) == 0) {
-              _cs.removeClass('inactive').addClass('active');
+              if(_this.data('oos') == true) {
+                _cs.removeClass('active').addClass('inactive');
+                _s.removeData('active_size');
+                _b.trigger('set_size');
+                _oos.addClass('active');
+
+              } else {
+                _cs.removeClass('inactive').addClass('active');
+                _cs.trigger('click');
+              }
             }
           });
         } else {
+          if(_this.data('oos') == true) {
+            sizes = [];
+            _oos.addClass('active');
+
+          }
+
           _s.removeClass('one_size');
           _sizes.each(function() {
             var _cs = $(this);
@@ -185,7 +204,6 @@ $(function(){
             }
           });
         }
-
 
 
 

@@ -69,10 +69,10 @@ header.header class="#{menu_index? ? :index : nil }"
     .header_menu_item
       = active_link_to 'New', [:latest, :products]
 
-    .header_menu_item.sep
+    / .header_menu_item.sep
       = active_link_to 'Мяtа', [:about, :index]
 
-    .header_menu_item
+    / .header_menu_item
       = active_link_to 'Контакты', [:contacts]
 
     .header_menu_item.sep

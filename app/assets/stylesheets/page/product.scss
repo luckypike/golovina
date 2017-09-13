@@ -444,6 +444,15 @@
 
     }
 
+    .out_of_stock {
+      visibility: hidden;
+      margin-top: $space-s;
+
+      &.active {
+        visibility: visible;
+      }
+    }
+
     .goto {
       text-align: center;
       display: block;

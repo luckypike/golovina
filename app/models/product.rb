@@ -17,7 +17,7 @@ class Product < ApplicationRecord
   validates_presence_of :price, :state, :title
 
   def title_safe
-    title_temp = (self.title.presence || self.id.to_s)
+    title_temp = (self.title.presence || self.id.to_s).strip
     title_temp = title_temp.downcase.upcase_first if title_temp.first == title_temp.first.downcase
     title_temp
   end

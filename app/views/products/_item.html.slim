@@ -24,7 +24,7 @@
 
           .variants_list
             - product.variants.each do |variant|
-              .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json]) data-label=variant.color.title
+              .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json]) data-label=variant.color.title data-oos=variant.out_of_stock.to_s
                 .icon class=variant.color.slug style="background-color: #{variant.color.color}; #{variant.color.image? ? "background-image: url(#{variant.color.image.url})" : ''}"
 
         .sizes.live.lv3 data-sizes=product.variants.select(&:sizes).map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json
@@ -43,6 +43,9 @@
           = link_to [:wishlist, :variants], class: [:wishlist], method: :post, remote: true do
             = inline_svg 'icons/wishlist.svg'
 
+
+        .out_of_stock
+          | Товар временно отсутствует.
 
         / - if product.desc
           .desc
