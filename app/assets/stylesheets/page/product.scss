@@ -296,6 +296,28 @@
   }
 
   &_data {
+    .price {
+      display: flex;
+
+      > div {
+        display: inline;
+      }
+
+      &_last {
+        @include font-size-bigger;
+
+        margin-right: $gutter;
+
+        &.red {
+          color: rgb(204, 12, 47);
+        }
+      }
+
+      &_old {
+        text-decoration: line-through;
+      }
+    }
+
     .variants {
       &_title {
         margin-bottom: $base-rhythm-line * 2;

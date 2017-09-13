@@ -12,7 +12,16 @@
             = product.title_safe
 
         .price.lv3
-          = number_to_rub product.price
+          - if product.price_last
+            .price_last.red
+              = number_to_rub product.price_last
+
+            .price_old
+              = number_to_rub product.price
+
+          - else
+            .price_last
+              = number_to_rub product.price
 
         .desc.lv3
           = markdown product.desc
