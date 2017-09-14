@@ -56,22 +56,17 @@ $space-m2: $base-rhythm-line * ($base-line-height + 1) * 2;
 
 body {
   @include font-size-common;
+  @include font-main;
 
-  font-family: 'futura-pt', sans-serif;
-  font-weight: 400;
   width: 100%;
   color: $primary-color;
   min-height: 100%;
   text-size-adjust: 100%;
 
   &.full_screen {
-    // height: 100%;
     overflow: hidden;
-    // width: 100%;
-    // position: fixed;
 
     .header_overlay {
-      // opacity: 0.4;
       visibility: visible;
     }
   }
@@ -79,7 +74,6 @@ body {
 
 html {
   height: 100%;
-
 }
 
 .btn {

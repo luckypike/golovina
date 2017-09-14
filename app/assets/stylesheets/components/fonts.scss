@@ -5,11 +5,15 @@
   line-height: $line-height * $base-rhythm-line;
 }
 
-@mixin font-headers() {
+@mixin font-headers {
   font-weight: 300;
   font-family: 'Cormorant', serif;
 }
 
+@mixin font-main {
+  font-family: 'futura-pt', sans-serif;
+  font-weight: 400;
+}
 
 @mixin font-size-h1() {
   @include font-size(3, 3);
