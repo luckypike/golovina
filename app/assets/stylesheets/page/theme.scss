@@ -215,6 +215,22 @@
       transform-origin: left bottom;
     }
 
+    .short {
+      @include font-size-small();
+
+      display: inline-block;
+      background: $sand-color;
+      padding: 0 $gutter / 2;
+
+      @include mq($m) {
+        @include font-size(2.5, 4);
+      }
+
+      // letter-spacing: 0.2em;
+      // text-transform: uppercase;
+
+    }
+
     .desc {
       display: none;
     }
@@ -289,6 +305,10 @@
         padding-left: $gutter * 2;
       }
 
+      .short {
+        margin-left: calc(2 / 6 * 100% + #{$gutter * 2});
+      }
+
       .more {
         padding-left: $gutter * 2;
         margin-left: 2 / 6 * 100%;
@@ -311,6 +331,10 @@
 
         .title {
           width: 7 / 12 * 100%;
+        }
+
+        .short {
+          margin-left: 0;
         }
 
         .desc, .more {

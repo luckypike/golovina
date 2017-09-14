@@ -1,0 +1,27 @@
+.products_item
+  .data
+    .title
+      strong
+        = product.title
+
+    .price
+      = number_to_rub product.price
+
+    .colors
+      = product.variants.map{ |v| v.color.title + ': ' + (v.sizes.present? ? v.sizes.reject(&:blank?).to_sentence : 'размеры не указаны') }.join(' / ')
+
+  .themes
+    - product.themes.each do |theme|
+      .themes_item
+        = theme.title
+
+  .images
+    - product.variants.each do |variant|
+      - variant.images[0..1].each do |image|
+        = image_tag image.photo.preview.url if image.photo?
+
+  - if policy(product).edit?
+    .edit
+      = link_to 'Редактировать', [:edit, product], class: [:btn, :btn_gr]
+      =< link_to 'Размеры и цвета', [:variants, product], class: [:btn, :btn_gr]
+      =< link_to 'Удалить', product, class: [:btn, :btn_gr], method: :delete, data: { confirm: 'Точно удалить?' }

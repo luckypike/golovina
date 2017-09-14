@@ -48,29 +48,29 @@
       &_0 {
         background: {
           image: image_url('pages/index/ss_0.jpg');
-          position: 30% center;
+          position: 30% top;
         }
 
         @include mq($m) {
-          background-position: center;
+          background-position: center top;
         }
       }
 
       &_1 {
         background: {
           image: image_url('pages/index/ss_1.jpg');
-          position: 25% center;
+          position: 25% top;
         }
 
         @include mq($m) {
-          background-position: center;
+          background-position: center top;
         }
       }
 
       &_2 {
         background: {
           image: image_url('pages/index/ss_2.jpg');
-          position: center;
+          position: center top;
         }
       }
 
