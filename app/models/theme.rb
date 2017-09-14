@@ -1,5 +1,5 @@
 class Theme < ApplicationRecord
-  COLORS = %w(white red yellow green blue pink black gray)
+  enum state: { inactive: 0, active: 1 }
 
   extend FriendlyId
 

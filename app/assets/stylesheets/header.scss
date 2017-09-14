@@ -255,14 +255,51 @@
 
     a {
       transition: 0.2s color;
+      position: relative;
+      display: block;
+
+
+      &:before {
+        background: $highlight-color;
+        opacity: 0;
+        border-radius: 50%;
+        content: '';
+        position: absolute;
+        left: -$base-rhythm-line * 1;
+        top: 10px;
+        height: 4px;
+        width: 4px;
+        transition: opacity 0.2s;
+
+        @include mq($m) {
+          left: -$base-rhythm-line * 2;
+        }
+      }
 
       &.active, &:hover {
         color: $highlight-color;
+
+
+
+        &:before {
+          opacity: 1;
+        }
+
+
+      }
+
+      &.active {
+        font-weight: $bold;
       }
 
       &.subs {
         &.active {
           color: #858585;
+          font-weight: 400;
+
+          &:before {
+            content: none;
+          }
         }
       }
     }
@@ -301,6 +338,12 @@
 
         &_item {
           padding: $base-rhythm-line / 2 0;
+
+          a {
+            &:before {
+              top: 6px;
+            }
+          }
         }
       }
 
@@ -308,6 +351,12 @@
         .title {
           a {
             color: #858585;
+            font-weight: 400;
+
+            &:before {
+              content: none;
+            }
+
           }
         }
       }
@@ -376,10 +425,26 @@
 
         a {
           transition: color 0.2s;
+          position: relative;
+
+          &:after {
+            opacity: 0;
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 4px;
+            background: $highlight-color;
+            transition: opacity 0.2s;
+          }
 
           &:hover,
           &.active {
-            color: $highlight-color;
+            // color: $highlight-color;
+            &:after {
+              opacity: 1;
+            }
           }
         }
       }
