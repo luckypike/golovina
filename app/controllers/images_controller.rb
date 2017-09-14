@@ -11,6 +11,14 @@ class ImagesController < ApplicationController
     end
   end
 
+  def weight
+    image = Image.find(params[:id])
+    authorize image
+
+    image.update_attribute(:weight, params[:weight])
+    head :ok
+  end
+
   def destroy
     image = Image.find(params[:id])
     authorize image

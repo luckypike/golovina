@@ -1,0 +1,27 @@
+.categories_sort {
+  &_item {
+    position: relative;
+    padding-left: 40px;
+
+    .draggable-handle {
+      position: absolute;
+      height: 32px;
+      width: 32px;
+      left: 0;
+      top: 0;
+
+      svg {
+        height: 32px;
+        width: 32px;
+
+        .r1 {
+          height: 2px;
+          width: 16px;
+          fill: #eee;
+          x: 8px;
+          y: 14px;
+        }
+      }
+    }
+  }
+}

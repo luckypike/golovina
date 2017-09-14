@@ -41,4 +41,34 @@ $(function() {
     var _form = $(this).find('.form_inputs');
     _form.find('h3').text($('.variant_color select option:selected', _form).text());
   });
+
+  $('.form_photos_list').on('change', '.image_weight', function() {
+    $.ajax({
+      url: $('.form_photos_list').data('weight'),
+      type: 'post',
+      data: {
+        id: $(this).data('id'),
+        weight: $(this).val(),
+      },
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    return false;
+  });
+
+  // var drake = dragula({
+  //   direction: 'horizontal',
+  // });
+
+  // drake.on('drop', function(el, target, source, sibling) {
+  //   console.log(el);
+  // });
+
+  // var _fpl = $('.form_photos_list');
+
+  // if(_fpl.length) {
+  //   drake.containers.push(_fpl[0]);
+  // }
 });

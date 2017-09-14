@@ -2,6 +2,7 @@
 @import 'reset-scss/reset.scss';
 @import 'swiper/dist/css/swiper';
 @import 'dropzone/src/basic';
+@import 'dragula/dist/dragula.css';
 
 @import url('https://fonts.googleapis.com/css?family=Cormorant:300,300i&subset=cyrillic');
 
@@ -42,6 +43,8 @@ $space-m2: $base-rhythm-line * ($base-line-height + 1) * 2;
 @import "header";
 @import "page";
 @import "footer";
+
+
 
 * {
   &:before, &:after {
@@ -110,3 +113,45 @@ html {
     }
   }
 }
+
+// body.dragging, body.dragging * {
+//   cursor: move !important;
+// }
+
+// .dragged {
+//   position: absolute;
+//   opacity: 0.5;
+//   z-index: 2000;
+//   background: $separator-color;
+// }
+
+// .strbl li.placeholder {
+//   position: relative;
+//   background-color: green;
+//   min-height: 10px;
+//   /** More li styles **/
+// }
+// .strbl li.placeholder:before {
+//   position: absolute;
+//   /** Define arrowhead **/
+// }
+
+// .strbl {
+//   li {
+//     position: relative;
+//     padding-left: 32px;
+
+//     &.dragged {
+//       position: absolute;
+//     }
+//   }
+
+//   .icn {
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+//     width: 20px;
+//     height: 32px;
+//     background-color: blue;
+//   }
+// }

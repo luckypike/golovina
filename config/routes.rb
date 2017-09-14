@@ -19,7 +19,12 @@ Rails.application.routes.draw do
 
   resources :kits
 
-  resources :images, only: [:create, :show, :destroy]
+  resources :images, only: [:create, :show, :destroy] do
+    collection do
+      post :weight
+    end
+  end
+
   resources :variants, only: [:create, :update, :destroy] do
     member do
       get :images

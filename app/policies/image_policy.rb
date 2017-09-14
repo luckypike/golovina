@@ -6,4 +6,8 @@ class ImagePolicy < ApplicationPolicy
   def destroy?
     create?
   end
+
+  def weight?
+    create?
+  end
 end

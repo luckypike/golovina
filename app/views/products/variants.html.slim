@@ -22,9 +22,10 @@
             = f.input :out_of_stock
 
           .form_photos
-            .form_photos_list
+            .form_photos_list data-weight=weight_images_path
               - variant.images.each do |image|
                 .form_photos_list_item
+                  = text_field_tag "weight[image.id]", image.weight, class: :image_weight, data: { id: image.id }
                   = link_to 'Удалить', image, method: :delete
                   = image_tag image.photo.drag.url
 

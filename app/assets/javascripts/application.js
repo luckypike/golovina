@@ -17,4 +17,5 @@
 //= require dragula/dist/dragula.min
 //= require swiper/dist/js/swiper.jquery
 //= require barba.js/dist/barba.js
+//= require dragula
 //= require_tree .

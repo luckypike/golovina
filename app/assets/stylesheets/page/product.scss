@@ -27,8 +27,6 @@
           }
 
           .form_photos {
-
-
             &_list {
               margin-bottom: $space-s;
               // display: flex;
@@ -41,6 +39,18 @@
                   display: block;
                   width: 100px;
                   margin-right: $gutter;
+                }
+
+                input {
+                  border: 1px solid $separator-color;;
+                  border-radius: 0;
+                  font-family: inherit;
+                  font-size: inherit;
+                  font-weight: inherit;
+                  line-height: inherit;
+                  padding: 0  $gutter;
+                  width: 60px;
+                  margin-bottom: $base-rhythm-line;
                 }
 
                 a {
