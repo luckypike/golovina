@@ -16,6 +16,6 @@ class User < ApplicationRecord
   end
 
   def is_editor?
-    is_admin? || [2].include?(id)
+    is_admin? || [2, 3].include?(id)
   end
 end
