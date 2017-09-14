@@ -37,7 +37,7 @@
 
         background: {
           size: cover;
-          position: center;
+          // position: center;
         }
 
         &.active {
@@ -48,18 +48,29 @@
       &_0 {
         background: {
           image: image_url('pages/index/ss_0.jpg');
+          position: 30% center;
+        }
+
+        @include mq($m) {
+          background-position: center;
         }
       }
 
       &_1 {
         background: {
           image: image_url('pages/index/ss_1.jpg');
+          position: 25% center;
+        }
+
+        @include mq($m) {
+          background-position: center;
         }
       }
 
       &_2 {
         background: {
           image: image_url('pages/index/ss_2.jpg');
+          position: center;
         }
       }
 
