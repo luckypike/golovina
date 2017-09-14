@@ -26,9 +26,15 @@ class Category < ApplicationRecord
       categories.each do |category|
         tree << category
         if category.categories.size > 0
-          category.categories.each do |category_category|
-            category_category.title = '-- ' + category_category.title
-            tree << category_category
+          category.categories.each do |cc|
+            cc.title = '- ' + cc.title
+            tree << cc
+            if cc.categories.size > 0
+              cc.categories.each do |ccc|
+                ccc.title = '— ' + ccc.title
+                tree << ccc
+              end
+            end
           end
         end
       end
