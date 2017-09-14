@@ -26,17 +26,17 @@ $(function() {
     e.preventDefault();
   });
 
-  $('.header_menu_item.active').each(function(){
+  $('.header_menu_item.opened').each(function(){
     $('.sub', this).show();
   });
 
-  $('.phone').on('click', function(){
-    _h.toggleClass('call_me');
-  });
+  // $('.phone').on('click', function(){
+  //   _h.toggleClass('call_me');
+  // });
 
-  $('.header_contact .close').on('click', function() {
-    _h.removeClass('call_me');
-  });
+  // $('.header_contact .close').on('click', function() {
+  //   _h.removeClass('call_me');
+  // });
 
   var _window = $(window);
 

@@ -36,12 +36,7 @@ header.header class="#{menu_index? ? :index : nil }"
         line x1="1" y1="15" x2="15" y2="1"
 
   .header_menu
-    / .header_menu_close
-      svg viewBox="0 0 16 16"
-        line x1="1" y1="1" x2="15" y2="15"
-        line x1="1" y1="15" x2="15" y2="1"
-
-    .header_menu_item class=(controller_name == 'themes' ? :active: nil)
+    .header_menu_item class=(controller_name == 'themes' ? :opened: nil)
       .title
         = active_link_to 'Настроения', [:themes], class: :subs
 
@@ -50,24 +45,24 @@ header.header class="#{menu_index? ? :index : nil }"
           .sub_item
             = active_link_to theme.title, theme
 
-    .header_menu_item class=((controller_name == 'products' && !%w(sale latest).include?(action_name)) ? :active: nil)
-      .title
-        = link_to t(:catalog), [:products]
 
-      .sub
-        .sub_item
-          = active_link_to t(:catalog_all), [:all, :products], active: :exact
+    .header_menu_item.sep.sep_after
+      = active_link_to 'New', [:latest, :products]
 
-        - @categories.reject{ |c| c.parent_category }.each do |category|
-          .sub_item
-            = active_link_to category.title, category_products_path(slug: category.slug)
-            / = active_link_to category.title, products_path(category: [category.id]), active: :exact
 
-    .header_menu_item
+    - @categories.reject{ |c| c.parent_category }.each do |category|
+      .header_menu_item class=((controller_name == 'products' && action_name = 'category' && category.categories.map(&:slug).include?(params[:slug])) ? :opened: nil)
+        .title
+          = active_link_to category.title, category_products_path(slug: category.slug)
+
+        .sub
+          - category.categories.each do |category_category|
+            .sub_item
+              = active_link_to category_category.title, category_products_path(slug: category_category.slug)
+
+    .header_menu_item.sep
       = active_link_to 'Sale', [:sale, :products]
 
-    .header_menu_item
-      = active_link_to 'New', [:latest, :products]
 
     / .header_menu_item.sep
       = active_link_to 'Мяtа', [:about, :index]

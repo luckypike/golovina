@@ -1,9 +1,11 @@
 require "babosa"
 
 class Category < ApplicationRecord
+  enum state: { inactive: 0, active: 1 }
+
   extend FriendlyId
 
-  validates_presence_of :slug
+  validates_presence_of :slug, :state, :title
   validates_uniqueness_of :slug
 
   friendly_id :title, use: :slugged

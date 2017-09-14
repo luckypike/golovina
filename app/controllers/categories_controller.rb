@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @category = Category.new
+    @category = Category.new(state: :active)
     authorize @category
   end
 
@@ -53,6 +53,6 @@ class CategoriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def category_params
-      params.require(:category).permit(:title, :slug, :parent_category_id, :desc)
+      params.require(:category).permit(:title, :slug, :state, :weight, :parent_category_id, :desc)
     end
 end

@@ -8,23 +8,23 @@
 
 # require 'open-uri'
 
-categories = YAML.load_file('db/categories.yml')
+# categories = YAML.load_file('db/categories.yml')
 
-categories.each_pair do |slug, v|
-  category = Category.where(slug: slug).first_or_initialize
-  category.title = v['title']
-  category.desc = v['desc']
-  category.save
-end
+# categories.each_pair do |slug, v|
+#   category = Category.where(slug: slug).first_or_initialize
+#   category.title = v['title']
+#   category.desc = v['desc']
+#   category.save
+# end
 
-colors = YAML.load_file('db/colors.yml')
+# colors = YAML.load_file('db/colors.yml')
 
-colors.each_pair do |slug, v|
-  color = Color.where(slug: slug).first_or_initialize
-  color.title = v['title']
-  color.desc = v['desc']
-  color.save
-end
+# colors.each_pair do |slug, v|
+#   color = Color.where(slug: slug).first_or_initialize
+#   color.title = v['title']
+#   color.desc = v['desc']
+#   color.save
+# end
 
 themes = YAML.load_file('db/themes.yml')
 

@@ -4,7 +4,10 @@
 
     .form_inputs
       = f.input :title
+      = f.input :slug
       = f.association :parent_category, collection: Category::tree
+      = f.input :state
+      = f.input :weight
       = f.input :desc
 
     .form_actions

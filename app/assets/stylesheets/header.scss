@@ -363,6 +363,10 @@
 
       &.sep {
         margin-top: $base-rhythm-line * 2;
+
+        &_after {
+          margin-bottom: $base-rhythm-line * 2;
+        }
       }
     }
 

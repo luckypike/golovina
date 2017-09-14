@@ -14,12 +14,17 @@
 
           = category.title
 
-    .categories_list
+    ul.categories_sort
       - @categories.reject{ |c| c.parent_category }.each do |category|
-        .categories_list_item
+        li
           = link_to category.title, [:edit, category]
 
-        - category.categories.each do |c|
-          .categories_list_item
-            | —
-            =< link_to c.title, [:edit, c]
+        - category.categories.each do |category_category|
+          ul
+            li
+              = link_to category_category.title, [:edit, category_category]
+
+            - category_category.categories.each do |ccc|
+              ul
+                li
+                  = link_to ccc.title, [:edit, ccc]

@@ -20,7 +20,7 @@ ru:
         category: Категория
         color: Цвет
         sizes: Размеры
-
+        weight: Вес
 
       product:
         title: Название
@@ -41,6 +41,10 @@ ru:
 
       variant:
         out_of_stock: Нет в наличии
+
+      category:
+        title: Название
+        parent_category: Родительская категория
 
     #   user:
     #     new:
@@ -66,6 +70,11 @@ ru:
     size_46: '46'
 
   enums:
+    category:
+      state:
+        active: Активный
+        inactive: Скрытый
+
     product:
       state:
         undef: Новый
