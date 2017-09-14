@@ -223,7 +223,7 @@
       padding: 0 $gutter / 2;
 
       @include mq($m) {
-        @include font-size(2.5, 4);
+        @include font-size(2.25, 4);
       }
 
       // letter-spacing: 0.2em;
