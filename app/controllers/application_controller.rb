@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def set_cats
     @themes = Theme.active.order(weight: :asc)
-    @categories = Category.includes(:parent_category).active.order(weight: :asc)
+    @categories = Category.includes(:parent_category, :categories).active.order(weight: :asc)
     @colors = Color.includes(:parent_color).order(title: :asc)
   end
 

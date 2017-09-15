@@ -6,4 +6,4 @@
 
     = link_to url, class: [:products_list_item, "i_#{i % 6}"] do
       .image
-        = image_tag entity.images.order(created_at: :asc).first.photo.thumb.url, alt: product.title_safe if entity.images.size > 0
+        = image_tag entity.images.sort_by{ |i| [i.weight, i.created_at] }.first.photo.thumb.url, alt: product.title_safe if entity.images.size > 0
