@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
 
       @order.active!
       @order.update_attribute(:address, params[:order][:address])
+      OrderMailer.checkout(@order).deliver_now
     end
   end
 end

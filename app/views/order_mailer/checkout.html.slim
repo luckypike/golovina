@@ -1,0 +1,42 @@
+.order
+  p
+    strong
+      ' Заказ №
+      = @order.number
+
+  p
+    ' Имя:
+    = @order.user.name
+    br
+
+    ' Телефон:
+    = @order.user.phone
+    br
+
+    ' Эл. почта:
+    = @order.user.email
+    br
+
+    ' Адрес:
+    = @order.address
+
+  .order_items
+    - @order.order_items.each do |item|
+      div
+        = image_tag(root_url + item.variant.images.first.photo.preview.url)
+        p
+          strong
+            = item.variant.product.title_safe
+          br
+
+          ' Цвет:
+          = item.variant.color.title
+          br
+
+          ' Размер:
+          = t("sizes.size_#{item.size}")
+          br
+
+          ' Количество:
+          = item.quantity
+

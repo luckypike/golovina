@@ -18,6 +18,7 @@ $(function() {
     } else {
       $('.page_cart_items').slideUp(400, function() {
         $(this).remove();
+        $('.page_cart_title').after('<div class="page_cart_success">Заказ сформирован и отправлен нашим менеджерам. Мы свяжемся с вами в ближайшее время.</div>');
       });
     }
   });

@@ -15,7 +15,7 @@
             = link_to item.variant.product, class: :image
               - if item.variant.images.size > 0
                 .img
-                  = image_tag item.variant.images.order(created_at: :asc).first.photo.preview.url
+                  = image_tag root_url + item.variant.images.order(created_at: :asc).first.photo.preview.url
 
             .data
               .title
@@ -65,6 +65,3 @@
 
                   .form_actions
                     = f.button :submit
-
-              / .form
-                .form_inputs

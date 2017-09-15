@@ -66,4 +66,5 @@ group :development do
   gem 'spring-watcher-listen'
 
   gem 'faker'
+  gem 'letter_opener'
 end
