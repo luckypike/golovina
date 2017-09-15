@@ -6,7 +6,7 @@
       = f.input :title
       = f.association :theme
       / = f.input :created_at unless f.object.new_record?
-      = f.association :products, label_method: :title_safe
+      = f.association :products, collection: Product.order(title: :asc), label_method: :title_safe, input_html: { class: :as_selectize }
 
       = f.simple_fields_for :images do |i_f|
         = i_f.input :photo

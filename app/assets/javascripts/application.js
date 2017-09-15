@@ -18,4 +18,5 @@
 //= require swiper/dist/js/swiper.jquery
 //= require barba.js/dist/barba.js
 //= require dragula
+//= require selectize/dist/js/standalone/selectize
 //= require_tree .

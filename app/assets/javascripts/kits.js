@@ -4,4 +4,6 @@ $(function() {
     var swiper = _this.parent().data('swiper');
     swiper.slideNext();
   });
+
+  $('.as_selectize').selectize();
 });
