@@ -477,7 +477,12 @@
     }
 
     .after_add {
-      display: none;
+      margin-top: $base-rhythm-line;
+
+      a {
+        margin-top: $base-rhythm-line;
+      }
+      // display: none;
     }
 
     .out_of_stock {
