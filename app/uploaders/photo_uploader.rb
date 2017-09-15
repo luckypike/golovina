@@ -29,7 +29,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-  process resize_to_fill: [2400, 3000]
+  process resize_to_limit: [5000, 5000]
 
   version :drag do
     process resize_to_fill: [300, 300]
@@ -44,6 +44,13 @@ class PhotoUploader < CarrierWave::Uploader::Base
     process resize_to_fill: [1000, 1250]
     process :optimize
   end
+
+  version :large do
+    process resize_to_fill: [2000, 2500]
+    process :optimize
+  end
+
+
 
   # version :cart do
   #   process resize_to_fill: [320, 400]
