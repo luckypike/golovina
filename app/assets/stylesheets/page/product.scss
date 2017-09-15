@@ -232,6 +232,7 @@
   &_images {
     .images {
       &_list {
+
       }
     }
 
@@ -517,6 +518,7 @@
   @include mq($m) {
     @include column-pane;
 
+    align-items: flex-start;
     padding: 0 $gutter;
 
     &_images {
