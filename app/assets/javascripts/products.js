@@ -97,6 +97,7 @@ $(function(){
       // TODO: rewrite this selectors
 
       _b.on('set_variant', function() {
+        $('.after_add', _b.parent()).hide();
         if(_b.data('wishlist') == undefined) {
           _b.data('wishlist', $('.wishlist', _b).attr('href'));
         }
@@ -106,6 +107,7 @@ $(function(){
       });
 
       _b.on('set_size', function() {
+        $('.after_add', _b.parent()).hide();
         if(_b.data('cart') == undefined) {
           _b.data('cart', $('.cart', _b).attr('href'));
         }
@@ -127,6 +129,7 @@ $(function(){
 
         if(parseInt(data) > 0) {
           $('.header .cart').removeClass('nil').addClass('active').find('.counter .d').html(parseInt(data));
+          $('.after_add', _b.parent()).slideDown();
         } else {
           $('.header .cart').addClass('nil').removeClass('active');
         }

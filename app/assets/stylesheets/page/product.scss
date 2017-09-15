@@ -476,6 +476,10 @@
 
     }
 
+    .after_add {
+      display: none;
+    }
+
     .out_of_stock {
       visibility: hidden;
       margin-top: $space-s;

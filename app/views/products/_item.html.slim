@@ -52,6 +52,10 @@
           = link_to [:wishlist, :variants], class: [:wishlist], method: :post, remote: true do
             = inline_svg 'icons/wishlist.svg'
 
+        .after_add
+          ' Товар добавлен в корзину.
+          = link_to 'Оформить заказ', [:cart], class: [:btn, :btn_gr]
+
 
         .out_of_stock
           | Товар временно отсутствует.
