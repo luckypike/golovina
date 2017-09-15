@@ -435,17 +435,18 @@
             opacity: 0;
             content: '';
             position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 4px;
-            background: $highlight-color;
+            left: -$gutter / 2;
+            right: -$gutter / 2;
+            top: -$base-rhythm-line;
+            bottom: -$base-rhythm-line;
+            background: $sand-color;
             transition: opacity 0.2s;
+            z-index: -1;
           }
 
           &:hover,
           &.active {
-            // color: $highlight-color;
+            color: $highlight-color;
             &:after {
               opacity: 1;
             }
