@@ -377,11 +377,11 @@
       @include aspect-ratio(4, 5);
 
       img{
-        padding: $base-rhythm-line;
+        // padding: $base-rhythm-line;
         background-color: #F7F8F5;
 
         @include mq($s) {
-          padding: $base-rhythm-line * 3;
+          // padding: $base-rhythm-line * 3;
         }
       }
     }
