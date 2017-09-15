@@ -24,7 +24,14 @@ header.header class="#{menu_index? ? :index : nil }"
 
     .cart class=(@cart.any? ? :active : :nil)
       = link_to [:cart], data: { src: polymorphic_path([:cart], format: :json) } do
-        = inline_svg 'icons/cart.svg'
+        svg.cart_icon xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'
+          g
+            path.a d="M29.18,21.76H18.82l-.82,9H30Z"
+            path.b d="M21,20.25a3,3,0,0,1,6,0"
+          g.counter class=(@cart.size > 0 ? :active : :inactive)
+            circle.c cx="32" cy="16" r="8"
+            text.d x='32' y='19'
+              = @cart.size
 
   / .header_contact
     = link_to '', 'whatsapp://send?phone=' + Rails.application.secrets[:phone], class: :whatsapp

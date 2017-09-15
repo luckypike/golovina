@@ -126,7 +126,7 @@ $(function(){
         var data = detail[0], status = detail[1],  xhr = detail[2];
 
         if(parseInt(data) > 0) {
-          $('.header .cart').removeClass('nil').addClass('active');
+          $('.header .cart').removeClass('nil').addClass('active').find('.counter .d').html(parseInt(data));
         } else {
           $('.header .cart').addClass('nil').removeClass('active');
         }

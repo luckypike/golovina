@@ -125,7 +125,7 @@
   &_caw {
     position: absolute;
     display: flex;
-    right: $gutter - 0.625rem;
+    right: 0;
     bottom: $base-rhythm-line;
 
     .phone {
@@ -176,12 +176,12 @@
     .cart {
       &_icon {
         display: block;
-        height: $base-rhythm-line * 3;
-        width: $base-rhythm-line * 3;
+        height: $base-rhythm-line * 6;
+        width: $base-rhythm-line * 6;
 
         .a, .b {
           fill: none;
-          stroke: $primary-color;
+          stroke: #282828;
         }
 
         .a {
@@ -191,15 +191,35 @@
         .b {
           stroke-miterlimit: 10;
         }
+
+        .c {
+          fill: #282828;
+        }
+
+        .d {
+          @include font-main;
+          font-size: 10px;
+          fill: #fff;
+          letter-spacing: -0.06em;
+          text-anchor: middle;
+        }
+
+        .e {
+          letter-spacing: -0.06em;
+        }
       }
 
       a {
-        padding: $base-rhythm-line * 3 / 2 $base-rhythm-line;
+        // padding: $base-rhythm-line * 3 / 2 $base-rhythm-line;
         display: block;
       }
 
       &.nil {
         opacity: 0.3;
+
+        .counter {
+          opacity: 0;
+        }
 
         > a {
           cursor: default;
@@ -666,7 +686,7 @@
         .cart {
           &_icon {
             .a, .b {
-              stroke: rgba($primary-color, 0.3);
+              stroke: $primary-color;
             }
           }
         }
@@ -733,9 +753,8 @@
 
     &_caw {
       .wishlist a,
-      .cart a,
       .phone .pa {
-        padding: $base-rhythm-line * 3 / 2 $base-rhythm-line;
+        padding: $base-rhythm-line * 3 / 2;
       }
     }
 
@@ -814,9 +833,9 @@
       right: $gutter;
 
       .wishlist a,
-      .cart a,
+      // .cart a,
       .phone .pa {
-        padding: $base-rhythm-line * 3 / 2;
+        // padding: $base-rhythm-line * 3 / 2;
       }
     }
   }
