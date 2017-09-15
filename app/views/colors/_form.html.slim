@@ -4,7 +4,7 @@
 
     .form_inputs
       = f.input :title
-      = f.association :parent_color
+      = f.association :parent_color, collection: Color.tree
       = f.input :color, input_html: { type: :color }
       - if @color.image?
         .color_ex
@@ -15,3 +15,4 @@
 
     .form_actions
       = f.button :submit
+      =< link_to 'Удалить', @color, class: [:btn, :btn_gr], method: :delete, data: { confirm: 'Точно удалить?' } unless @color.new_record?

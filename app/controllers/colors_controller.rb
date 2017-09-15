@@ -4,7 +4,7 @@ class ColorsController < ApplicationController
   # GET /colors
   def index
     authorize Color
-    @colors = Color.all
+    @colors = Color.all.order(title: :asc)
   end
 
   # GET /colors/1
@@ -46,6 +46,7 @@ class ColorsController < ApplicationController
 
   # DELETE /colors/1
   def destroy
+    authorize @color
     @color.destroy
     redirect_to [:colors], notice: 'Color was successfully destroyed.'
   end

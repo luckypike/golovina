@@ -14,7 +14,7 @@ class Color < ApplicationRecord
   class << self
     def tree
       tree = []
-      colors = where(parent_color: nil).order(id: :asc)
+      colors = where(parent_color: nil).order(title: :asc)
       colors.each do |color|
         tree << color
         if color.colors.size > 0

@@ -11,6 +11,10 @@ class ColorPolicy < ApplicationPolicy
     create?
   end
 
+  def destroy?
+    create?
+  end
+
   def update?
     user&.is_editor?
   end
