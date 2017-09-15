@@ -50,10 +50,21 @@
             | Интернет-магазин работает в тестовом режиме. К сожалению, временно невозможно оплатить заказ. Мы предлагаем вам зарезервировать нужные вам товары, а наш менеджер свяжется с вами для подтверждения заказа и поможет оформить доставку и оплату.
 
           .summary_form
-              / .form
-                = simple_form_for @user do |f|
+              .form
+                = simple_form_for @order, url: [:checkout, @order], method: :post, remote: true do |f|
                   .form_inputs
-                    = f.input :name
+                    = f.input :address
+
+                    = simple_fields_for :user do |ff|
+                      - if @order.user.is_guest?
+                        = ff.input :name, required: false
+                        = ff.input :phone, required: false
+                        = ff.input :email, required: false, input_html: { value: nil }
+
+                  .form_errors
+
+                  .form_actions
+                    = f.button :submit
 
               / .form
                 .form_inputs

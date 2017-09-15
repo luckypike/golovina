@@ -46,6 +46,19 @@ ru:
         title: Название
         parent_category: Родительская категория
 
+      user:
+        name: Имя
+        phone: Телефон
+        email: Эл. почта
+
+      order:
+        address: Адрес доставки
+
+
+    hints:
+      order:
+        address: Не заполняйте это поле если планируете забрать заказ самостоятельно.
+
     #   user:
     #     new:
     #       email: 'E-mail to sign in.'

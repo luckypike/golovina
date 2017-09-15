@@ -11,6 +11,9 @@ ru:
       variant:
         create: Добавить вариант
 
+      order:
+        update: Оформить
+
 
   catalog: Каталог
   catalog_all: Все товары

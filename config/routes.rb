@@ -70,4 +70,10 @@ Rails.application.routes.draw do
 
   get 'wishlist', to: 'wishlists#show'
   get 'cart', to: 'cart#show'
+
+  resources :orders, only: [] do
+    member do
+      post :checkout
+    end
+  end
 end

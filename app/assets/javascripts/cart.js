@@ -1,2 +1,24 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+$(function() {
+  $('.summary_form form').on('ajax:success', function(event) {
+    var _this = $(this);
+    var detail = event.detail;
+    var data = detail[0], status = detail[1],  xhr = detail[2];
+    if(data.status == 'unprocessable_entity') {
+      if(data.error.common != undefined) {
+        $('.form_errors', _this).html(data.error.common);
+      } else {
+        if(data.error.phone != undefined) {
+          $('.form_errors', _this).html('Данный телефон уже используется. Нужно сначала войти.');
+        }
+        if(data.error.email != undefined) {
+          $('.form_errors', _this).html('Данная эл. почта уже используется. Нужно сначала войти.');
+        }
+      }
+
+    } else {
+      $('.page_cart_items').slideUp(400, function() {
+        $(this).remove();
+      });
+    }
+  });
+});

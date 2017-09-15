@@ -1,6 +1,7 @@
 &_cart {
   padding-top: $space-s;
   padding-bottom: 0;
+  min-height: 100vh;
 
 
   &_intro {
@@ -38,21 +39,9 @@
 
         .actions {
           margin-top: $base-rhythm-line;
-          // max-width: 110px;
 
           a {
             color: #858585;
-
-
-            // @include font-size(1.25, 2.5);
-
-            // display: block;
-            // padding: 0 0.3em;
-            // min-width: auto;
-            // border-color: $separator-color;
-            // margin-top: $base-rhythm-line;
-
-
           }
         }
 
@@ -67,6 +56,25 @@
         @include font-size-bigger;
         @include font-headers;
 
+      }
+
+      &_form {
+        margin-bottom: $space-m2;
+
+        .form {
+          &_actions {
+            .btn {
+              background: $primary_color;
+              color: $op_color;
+            }
+          }
+
+          &_errors {
+            color: red;
+            font-weight: $bold;
+            margin-bottom: $space-s;
+          }
+        }
       }
     }
 
@@ -107,6 +115,10 @@
 
     @include mq($s) {
       margin-top: $base-rhythm-line * 16;
+    }
+
+    @include mq($s) {
+      margin-top: $base-rhythm-line * 20;
     }
 
     @include mq($xl) {

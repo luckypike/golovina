@@ -7,8 +7,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates_uniqueness_of :phone
+
   def remember_me
     true
+  end
+
+  def is_guest?
+    self.email.start_with?('guest_') && self.email.end_with?('@mint-store.ru') && self.phone.blank?
   end
 
   def is_admin?
