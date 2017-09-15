@@ -1,0 +1,1 @@
+server 'mint-store.ru', user: 'deploy', roles: %w{app db web}
