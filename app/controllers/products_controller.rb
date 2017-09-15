@@ -30,7 +30,8 @@ class ProductsController < ApplicationController
     @category = Category.friendly.find(params[:slug])
 
     @where = {
-      category: @category.categories.map(&:id) <<  + @category.id
+      category: @category.categories.map(&:id) <<  + @category.id,
+      products: { state: :active }
     }
 
     self.all
@@ -75,13 +76,13 @@ class ProductsController < ApplicationController
   def latest
     authorize Product
 
-    @products = Variant.includes(:images, product: [:variants]).where(products: { latest: true })
+    @products = Variant.includes(:images, product: [:variants]).where(products: { latest: true, state: :active })
   end
 
   def sale
     authorize Product
 
-    @products = Variant.includes(:images, product: [:variants]).where(products: { sale: true })
+    @products = Variant.includes(:images, product: [:variants]).where(products: { sale: true, state: :active })
   end
 
   def variants

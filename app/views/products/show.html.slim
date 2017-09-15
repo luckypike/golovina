@@ -1,6 +1,10 @@
 - title [@product.category.title, @product.title_safe]
 - description @product.desc
 
+- set_meta_tags noindex: true if @product.archived?
+
+- set_meta_tags og: { image: @product.images.order(weight: :asc).select(&:photo).map{ |i| i.photo.url } }
+
 .page.page_common.page_product
   == render 'products/item', product: @product
 

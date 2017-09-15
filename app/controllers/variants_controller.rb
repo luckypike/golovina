@@ -20,7 +20,7 @@ class VariantsController < ApplicationController
     variant = Variant.includes(:product).find(params[:variant_id])
     authorize variant
 
-    if variant.sizes.reject(&:blank?).include?(params[:size])
+    if variant.sizes.reject(&:blank?).include?(params[:size]) && variant.product.active?
       cart = Cart.find_or_initialize_by(user: current_user, variant: variant, size: params[:size])
       cart.quantity += 1 if cart.persisted?
       cart.save

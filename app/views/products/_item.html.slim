@@ -5,7 +5,7 @@
           = link_to 'Добавить фотографии', [:variants, product], class: :btn
       .images_list.swiper-wrapper
 
-    .product_data
+    .product_data class=product.state
       .data
         .title.lv3
           h1

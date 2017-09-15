@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    = display_meta_tags site: 'Мята', reverse: true, separator: '—'
+    = display_meta_tags site: 'Мята', reverse: true, separator: '—', og: { title: :title, site_name: 'Интернет-магазин одежды «Мята»' }
 
     = csrf_meta_tags
     = favicon_link_tag

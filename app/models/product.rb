@@ -14,6 +14,8 @@ class Product < ApplicationRecord
   has_many :variants, inverse_of: :product, dependent: :destroy
   accepts_nested_attributes_for :variants, allow_destroy: true
 
+  has_many :images, through: :variants
+
   validates_presence_of :price, :state, :title
 
   def title_safe

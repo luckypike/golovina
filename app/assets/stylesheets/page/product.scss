@@ -496,6 +496,12 @@
     .edit {
       margin-top: $base-rhythm-line * 4;
     }
+
+    &.archived {
+      .sizes, .buy {
+        display: none;
+      }
+    }
   }
 
 
