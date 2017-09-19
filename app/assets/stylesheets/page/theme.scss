@@ -355,6 +355,7 @@
 .products_list {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
 
   // TODO: Rewrite
   &_item {
@@ -362,6 +363,7 @@
     margin-bottom: $space-s;
     text-align: center;
     width: 100%;
+    position: relative;
 
 
     .title {
@@ -371,6 +373,17 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    .price {
+      // @include font-size-small;
+      @include font-size(1.5);
+
+      color: $primary-color;
+      position: absolute;
+      right: 0;
+      bottom: -$base-rhythm-line * 2.75;
+      z-index: 2;
     }
 
     .image {
