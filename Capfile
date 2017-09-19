@@ -7,6 +7,8 @@ install_plugin Capistrano::SCM::Git
 require 'capistrano/rails'
 require 'capistrano/passenger'
 
+require 'capistrano/sitemap_generator'
+
 require 'capistrano/rbenv'
 set :rbenv_type, :user
 set :rbenv_ruby, '2.4.1'

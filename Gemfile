@@ -43,6 +43,8 @@ gem 'enum_help'
 
 gem 'jbuilder'
 
+gem 'sitemap_generator'
+
 gem 'capistrano'
 gem 'capistrano-rails'
 gem 'capistrano-passenger'
