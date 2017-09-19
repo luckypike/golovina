@@ -12,3 +12,6 @@ append :linked_files, 'config/database.yml', 'config/secrets.yml'
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/uploads", "public/.well-known"
 
 set :keep_releases, 5
+
+
+after :finishing, 'sitemap:create'
