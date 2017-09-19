@@ -8,3 +8,32 @@
 .page.page_common.page_product
   == render 'products/item', product: @product
 
+  - unless @product.kits.empty?
+    .page_product_kits.lv2
+      .kits
+        .kits_title.lv3
+          h3 В другом настроении
+
+        - @product.kits.each_with_index do |kit, i|
+          .kits_item class="i_#{i % 2}"
+            .image.lv4
+              .img
+                = image_tag kit.photo.thumb.url if kit.photo
+
+            .title
+              .theme.lv4
+                = kit.theme.title
+
+              .h1.lv4
+                = kit.title
+
+              = link_to 'Примерить образ', kit, class: [:btn, :btn_gr]
+
+
+  - unless @product.similar_products.empty?
+    .page_product_similar
+      .title.lv3
+        h3 Похожие вещи
+
+      = render 'products/list', products: @product.similar_products.map(&:variants).flatten
+

@@ -4,7 +4,6 @@
 
     .form_inputs
       = f.input :title
-      / = f.input :created_at unless f.object.new_record?
       = f.association :category, collection: Category.tree
       = f.association :themes, as: :check_boxes
 
@@ -14,10 +13,6 @@
       = f.input :state, include_blank: false
       = f.input :price
       = f.input :price_last
-      / = f.file_field :images, multiple: true
-      / - if f.object.images[0]
-      /   .thumb
-      /     = image_tag f.object.images[0].thumb.url
 
       = f.input :desc
 
@@ -26,6 +21,7 @@
           = vf.association :color, collection: Color.tree
           = vf.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes]
 
+      = f.association :similar_products, collection: Product.order(title: :asc), label_method: :title_safe, input_html: { class: :as_selectize }
 
     .form_actions
       = f.button :submit

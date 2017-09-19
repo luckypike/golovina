@@ -176,6 +176,81 @@
 
   }
 
+  &_kits {
+    .kits {
+
+      &_title {
+        text-align: center;
+      }
+
+      &_item {
+        .image {
+          .img {
+            @include aspect-ratio(4, 5);
+          }
+        }
+
+        .title {
+          .theme {
+            @include font-size-small();
+
+            display: inline-block;
+            background: $sand-color;
+            padding: 0 $gutter / 2;
+
+            @include mq($m) {
+              // @include font-size(2.25, 4);
+            }
+          }
+        }
+
+        @include mq($m) {
+          @include column-pane;
+
+          .image {
+            @include column-width(6, 12);
+          }
+
+          .title {
+            @include column-width(5, 12);
+            @include column-shift(1, left, 12);
+
+            align-self: center;
+
+
+          }
+
+          &.i_0 {
+            .image {
+              order: 1;
+            }
+
+            .title {
+              @include column-width(5, 12);
+              @include column-shift(1, right, 12);
+              @include column-shift(0, left, 12);
+            }
+          }
+
+        }
+      }
+
+      @include mq($m) {
+        padding: 0 $gutter;
+      }
+
+      @include mq($l) {
+        padding: 0;
+      }
+    }
+  }
+
+  &_similar {
+    > .title {
+      text-align: center;
+    }
+  }
+
   .product {
     &_images {
       @include mq($m) {
@@ -194,13 +269,13 @@
 
       @include mq($m) {
         .data {
-          position: fixed;
-          width: 4 / 12 * 100%;
+          // position: fixed;
+          // width: 4 / 12 * 100%;
         }
       }
 
       @include mq($l) {
-        width: 4 / 16 * 100%;
+        // width: 4 / 16 * 100%;
       }
     }
   }

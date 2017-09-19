@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915143334) do
+ActiveRecord::Schema.define(version: 20170919113259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,15 @@ ActiveRecord::Schema.define(version: 20170915143334) do
     t.index ["kind_id"], name: "index_products_on_kind_id"
   end
 
+  create_table "similarables", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "similar_product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_similarables_on_product_id"
+    t.index ["similar_product_id"], name: "index_similarables_on_similar_product_id"
+  end
+
   create_table "themables", force: :cascade do |t|
     t.bigint "product_id"
     t.bigint "theme_id"
@@ -187,6 +196,7 @@ ActiveRecord::Schema.define(version: 20170915143334) do
   add_foreign_key "order_items", "variants"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
+  add_foreign_key "similarables", "products"
   add_foreign_key "themables", "products"
   add_foreign_key "themables", "themes"
   add_foreign_key "variants", "categories"
