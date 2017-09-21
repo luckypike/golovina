@@ -67,8 +67,8 @@ header.header class="#{menu_index? ? :index : nil }"
             .sub_item
               = active_link_to category_category.title, category_products_path(slug: category_category.slug)
 
-    .header_menu_item.sep
-      = active_link_to 'Смотреть всё', category_products_path(slug: :all)
+    .header_menu_item
+      = active_link_to 'Посмотреть всё', category_products_path(slug: :all)
 
     .header_menu_item.sep
       = active_link_to 'Sale', [:sale, :products]
