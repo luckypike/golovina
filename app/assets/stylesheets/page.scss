@@ -38,6 +38,28 @@
     padding-right: $gutter;
     padding-bottom: $space-m;
 
+    &_text {
+      p {
+        margin-bottom: $base-rhythm-line * $base-line-height / 2;
+
+        @include mq($s) {
+          margin-bottom: $base-rhythm-line * ($base-line-height + 1) / 2;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      @include mq($m) {
+        padding: 0 $gutter;
+      }
+
+      @include mq($xl) {
+        padding: 0;
+      }
+    }
+
     &_intro {
       max-width: $xl;
       padding: 0 $gutter;

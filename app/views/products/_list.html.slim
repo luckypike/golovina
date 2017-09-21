@@ -5,9 +5,11 @@
     - url = polymorphic_path(product, anchor: entity.id) if entity.is_a?(Variant) && entity.product.variants.size > 1
 
     = link_to url, class: [:products_list_item, "i_#{i % 6}"] do
-      - if entity.is_a?(Variant)
-        .price
-          = number_to_rub product.price
-
       .image
         = image_tag entity.images.sort_by{ |i| [i.weight, i.created_at] }.first.photo.thumb.url, alt: product.title_safe if entity.images.size > 0
+
+      - if entity.is_a?(Variant)
+        .title_and_price
+          = product.title_safe
+          .price
+            = number_to_rub product.price

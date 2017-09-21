@@ -375,19 +375,30 @@
       white-space: nowrap;
     }
 
-    .price {
-      //
-      @include font-size(1.5);
+    .title_and_price {
+      @include font-size(1.125, 1.5);
+
 
       color: $primary-color;
-      position: absolute;
-      right: 0;
-      bottom: -$base-rhythm-line * 2.75;
+      margin-top: $base-rhythm-line / 2;
+      margin-bottom: -$base-rhythm-line * 2;
+      // position: absolute;
+      // right: 0;
+      // bottom: -$base-rhythm-line * 2.75;
       z-index: 2;
+      text-align: center;
+      text-transform: uppercase;
 
-      @include mq($l) {
+      .price {
+        // @include font-size(1.25, 1.5);
+      }
+
+      @include mq($s) {
         @include font-size-small;
-        bottom: -$base-rhythm-line * 4;
+
+        margin-top: $base-rhythm-line;
+        margin-bottom: -$base-rhythm-line;
+        // bottom: -$base-rhythm-line * 4;
       }
     }
 

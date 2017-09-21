@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     scope 'about' do
       get '', to: 'about#index', as: :about_index
     end
+
+    scope 'customers' do
+      get '', to: 'static#customers', as: :customers
+    end
   end
 
 
