@@ -7,7 +7,7 @@ class ThemesController < ApplicationController
 
   def index
     authorize Theme
-    redirect_to Theme.order(weight: :asc).first
+    # redirect_to Theme.order(weight: :asc).first
   end
 
   def show

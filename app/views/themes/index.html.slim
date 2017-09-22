@@ -1,9 +1,29 @@
-.page.page_themes
-  - @themes.each_with_index do |theme, i|
-    .page_themes_theme
-      .text
-        .title
-          = theme.title
+/ - set_meta_tags title: 'Все настроения', site: nil
+- description 'Интернет-магазин одежды, организованный по понятным вам стилям.'
+- keywords ['офисный стиль', 'спортивный стиль', 'шерстяные вещи', 'платья']
 
-        .edit
-          = link_to 'редактировать', [:edit, theme]
+.page.page_themes.page_common
+  .page_common_intro.lv3
+    h1
+      = title 'Все настроения'
+
+  .page_themes_themes
+    - @themes.sort_by(&:weight).each_with_index do |theme, i|
+      .theme_intro.lv2 class=[theme.slug, "i_#{i % 2}"]
+        .image.lv3
+          .img
+
+        .text.mb
+          = link_to theme do
+            .short.lv4
+              = theme.title
+
+            .title
+              = theme.title_long
+
+            .desc
+              = theme.desc
+
+            .more
+              .btn.btn_gr
+                | Выбирай настроение
