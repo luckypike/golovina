@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates_uniqueness_of :phone
+  validates_presence_of :phone, :name
 
   def remember_me
     true

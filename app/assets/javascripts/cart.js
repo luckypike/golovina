@@ -1,19 +1,31 @@
 $(function() {
+
+  $('.user_phone input.tel').mask('+7 (000) 000-00-00');
+
+
+
   $('.summary_form form').on('ajax:success', function(event) {
     var _this = $(this);
     var detail = event.detail;
     var data = detail[0], status = detail[1],  xhr = detail[2];
     if(data.status == 'unprocessable_entity') {
-      if(data.error.common != undefined) {
-        $('.form_errors', _this).html(data.error.common);
-      } else {
-        if(data.error.phone != undefined) {
-          $('.form_errors', _this).html('Данный телефон уже используется. Нужно сначала войти.');
-        }
-        if(data.error.email != undefined) {
-          $('.form_errors', _this).html('Данная эл. почта уже используется. Нужно сначала войти.');
-        }
-      }
+
+      $.each(data.error, function(i, e) {
+        $('.form_errors', _this)
+        console.log(i);
+        console.log(e);
+      });
+
+      // if(.common != undefined) {
+      //   $('.form_errors', _this).html(data.error.common);
+      // } else {
+      //   if(data.error.phone != undefined) {
+      //     $('.form_errors', _this).html('Данный телефон уже используется. Нужно сначала войти.');
+      //   }
+      //   if(data.error.email != undefined) {
+      //     $('.form_errors', _this).html('Данная эл. почта уже используется. Нужно сначала войти.');
+      //   }
+      // }
 
     } else {
       $('.page_cart_items').slideUp(400, function() {

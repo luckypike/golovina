@@ -53,13 +53,13 @@
               .form
                 = simple_form_for @order, url: [:checkout, @order], method: :post, remote: true do |f|
                   .form_inputs
-                    = f.input :address
-
                     = simple_fields_for :user do |ff|
                       - if @order.user.is_guest?
-                        = ff.input :name, required: false
-                        = ff.input :phone, required: false
+                        = ff.input :name
+                        = ff.input :phone, input_html: { class: :as_cleave_phone, value: '+7' }
                         = ff.input :email, required: false, input_html: { value: nil }
+
+                    = f.input :address
 
                   .form_errors
 

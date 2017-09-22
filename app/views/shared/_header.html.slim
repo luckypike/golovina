@@ -49,7 +49,7 @@ header.header class="#{menu_index? ? :index : nil }"
 
       .sub
         .sub_item
-          = active_link_to 'Все настроения', [:themes], active: :exact
+          = active_link_to 'Посмотреть всё', [:themes], active: :exact
 
         - @themes.each do |theme|
           .sub_item

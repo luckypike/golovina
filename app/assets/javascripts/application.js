@@ -19,4 +19,5 @@
 //= require barba.js/dist/barba.js
 //= require dragula
 //= require selectize/dist/js/standalone/selectize
+//= require jquery-mask-plugin/dist/jquery.mask.min
 //= require_tree .
