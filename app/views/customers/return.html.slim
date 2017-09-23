@@ -1,0 +1,12 @@
+.page.page_common.page_customers.page_customers_return
+  .page_common_intro.lv2
+    h1
+      = title 'Возврат'
+
+  .page_common_text.lv3
+    p Возврат возможен в течение 14 дней после совершения покупки в оффлайн-магазине или в течение 7 дней после получения товара из интернет-магазина.
+
+    p Товар должен сохранить свой первоначальный вид, фабричные ярлыки, пломбы, этикетки.
+
+    p Если вам не понравилась или не подошла купленная в интернет-магазине вещь свяжитесь с нами по телефону #{link_to Rails.application.secrets[:contacts][:nnov][:phone], 'tel://' + Rails.application.secrets[:contacts][:nnov][:phone_tel]}.
+

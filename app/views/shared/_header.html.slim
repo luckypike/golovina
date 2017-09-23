@@ -76,10 +76,19 @@ header.header class="#{menu_index? ? :index : nil }"
     .header_menu_item.sep
       = active_link_to 'Sale', [:sale, :products]
 
-    .header_menu_item.sep
-      = active_link_to 'Покупателям', [:customers]
+    .header_menu_item.sep class=(controller_name == 'customers' ? :opened: nil)
+      .title
+        = active_link_to 'Покупателям', [:customers], active: :exact
 
+      .sub
+        .sub_item
+          = active_link_to 'Доставка', customers_delivery_path
 
+        .sub_item
+          = active_link_to 'Оплата', customers_payment_path
+
+        .sub_item
+          = active_link_to 'Возврат', customers_return_path
 
     / .header_menu_item.sep
       = active_link_to 'Мяtа', [:about, :index]

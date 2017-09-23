@@ -7,10 +7,6 @@ class StaticController < ApplicationController
     authorize :static, :index?
   end
 
-  def customers
-    authorize :static, :index?
-  end
-
   def robots
     authorize :static, :robots?
     respond_to :text

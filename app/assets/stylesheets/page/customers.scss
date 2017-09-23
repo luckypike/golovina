@@ -1,0 +1,15 @@
+&_customers {
+  @include mq($m) {
+    @include font-size(2.25, 4);
+  }
+
+
+  .page_common_text {
+    max-width: $m;
+  }
+
+
+  &_delivery {
+
+  }
+}

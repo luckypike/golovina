@@ -4,12 +4,15 @@ Rails.application.routes.draw do
   scope format: false do
     devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout'}
 
-    scope 'about' do
-      get '', to: 'about#index', as: :about_index
+    namespace 'about', module: nil do
+      get '', to: 'about#index'
     end
 
-    scope 'customers' do
-      get '', to: 'static#customers', as: :customers
+    namespace 'customers', module: nil do
+      get '', to: 'customers#index'
+      get 'delivery', to: 'customers#delivery'
+      get 'payment', to: 'customers#payment'
+      get 'return', to: 'customers#return'
     end
   end
 
