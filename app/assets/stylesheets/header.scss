@@ -278,7 +278,11 @@
       overflow-y: scroll;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
-      padding: $space-s2 7rem $space-m2 0;
+      padding: $space-s2 7rem $space-s2 0;
+
+      @include mq($xl) {
+        padding: $space-s2 4rem $space-s2 0;
+      }
     }
 
     &_section {
@@ -319,6 +323,7 @@
 
         &_title {
           display: flex;
+          width: 100%;
 
 
 
@@ -327,6 +332,7 @@
             width: 10px;
             height: 24px;
             margin-left: $gutter / 2;
+            flex-shrink: 0;
 
             polyline {
               fill: none;
@@ -334,6 +340,18 @@
               stroke: $primary-color;
               stroke-linecap: butt;
               stroke-linejoin: miter;
+            }
+
+
+          }
+
+          @include mq($xl) {
+            span {
+              flex-grow: 1;
+            }
+
+            .varr_icon {
+              margin-left: auto;
             }
           }
         }

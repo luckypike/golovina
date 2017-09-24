@@ -543,6 +543,10 @@
       }
 
       .cart {
+        padding-left: 0;
+        padding-right: 0;
+        flex-grow: 1;
+
         &.inactive {
           color: $separator-color;
           background-color: rgba($separator-color, 0.13);
