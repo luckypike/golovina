@@ -2,41 +2,44 @@ $(function() {
   var _h = $('.header');
   var _b = $('body');
 
-  $('.header_burger').on('click', function() {
+  var _hb = $('.header_burger');
+
+  _hb.on('click', function() {
     _h.toggleClass('with_nav');
     _b.toggleClass('full_screen');
-  });
+  }).trigger('click1');
+
 
   $('.header_overlay, .header_menu_close').on('click', function() {
     _h.removeClass('with_nav with_cart');
     _b.removeClass('full_screen');
   });
 
-  $('.header_menu_item .title a').on('click', function(e) {
-    var _hmi = $(this).closest('.header_menu_item');
-    if(_hmi.is('.active')) {
-      _hmi.removeClass('active');
-      $('.sub', _hmi).slideUp();
-    } else {
-      $('.header_menu_item.active .sub').slideUp();
-      $('.header_menu_item.active').removeClass('active');
-      _hmi.addClass('active');
-      $('.sub', _hmi).slideDown();
-    }
-    e.preventDefault();
+  $('.header_menu_section .section_title').on('click', function() {
+    var _this = $(this).next();
+    $('.header_menu_section .section_list').not(_this).not(_this.parents('.section_list')).slideUp();
+    _this.slideToggle();
   });
 
-  $('.header_menu_item.opened').each(function(){
-    $('.sub', this).show();
+  // $('.header_menu_item .title a').on('click', function(e) {
+  //   var _hmi = $(this).closest('.header_menu_item');
+  //   if(_hmi.is('.active')) {
+  //     _hmi.removeClass('active');
+  //     $('.sub', _hmi).slideUp();
+  //   } else {
+  //     $('.header_menu_item.active .sub').slideUp();
+  //     $('.header_menu_item.active').removeClass('active');
+  //     _hmi.addClass('active');
+  //     $('.sub', _hmi).slideDown();
+  //   }
+  //   e.preventDefault();
+  // });
+
+  $('.header_menu_section a.active').each(function(){
+    $(this).parents('.section_list').show();
+    // $('.sub', this).show();
   });
 
-  // $('.phone').on('click', function(){
-  //   _h.toggleClass('call_me');
-  // });
-
-  // $('.header_contact .close').on('click', function() {
-  //   _h.removeClass('call_me');
-  // });
 
   var _window = $(window);
 

@@ -12,12 +12,17 @@
 //
 //= require rails-ujs
 //= require jquery
+
 //= require vivus
+
 //= require dropzone/dist/dropzone
-//= require dragula/dist/dragula.min
+
 //= require swiper/dist/js/swiper.jquery
-//= require barba.js/dist/barba.js
+
+//= require dragula/dist/dragula.min
 //= require dragula
+
 //= require selectize/dist/js/standalone/selectize
 //= require jquery-mask-plugin/dist/jquery.mask.min
+
 //= require_tree .

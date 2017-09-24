@@ -66,6 +66,10 @@ body {
   text-size-adjust: 100%;
 
   &.full_screen {
+    @include mq(0 ($xl - 1)) {
+
+    }
+
     overflow: hidden;
 
     .header_overlay {

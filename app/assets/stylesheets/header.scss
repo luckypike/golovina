@@ -51,13 +51,14 @@
   }
 
   &_nav {
-    display: flex;
-    position: absolute;
+    // display: flex;
+    position: fixed;
     left: $gutter;
+    top: $base-rhythm-line;
     margin-left:  - ($base-line-height * $base-rhythm-line / 2);
-    bottom: $base-rhythm-line;
+    // bottom: $base-rhythm-line;
     user-select: none;
-    z-index: 5;
+    z-index: 3;
   }
 
   &_contact {
@@ -253,25 +254,104 @@
   }
 
   &_menu {
-    @include font-size-small;
+
 
     background-color: $op-color;
-    // background: red;
     position: fixed;
     top: 0;
     bottom: 0;
-    padding: $space-m2 $gutter;
+    padding: 0 $gutter * 2;
     left: 0;
     width: 100%;
-    min-width: 230px;
+    // min-width: 200px;
     opacity: 0;
     transform: translateX(-50%);
     visibility: hidden;
     transition-duration: 0.4s;
     transition-property: transform opacity;
     z-index: 4;
-    overflow-y: auto;
-    overflow-scrolling: touch;
+    overflow: hidden;
+
+    &_container {
+      width: calc(100% + 4rem);
+      height: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: $space-s2 7rem $space-m2 0;
+    }
+
+    &_section {
+      position: relative;
+      padding-bottom: $base-rhythm-line * 2;
+
+      // &.as_l1 {
+      //   @include font-size-small;
+      //   @include font-size(2, 3);
+      // }
+
+      .l1 {
+        @include font-size-small;
+        @include font-size(2, 3);
+        // @include font-size-common;
+      }
+
+      .l2 {
+        padding-top: $base-rhythm-line;
+
+        @include font-size-small;
+      }
+
+
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: $base-rhythm-line;
+        width: 100%;
+        border-bottom: 1px solid $separator-color;
+      }
+
+      .section {
+
+
+        // padding: $base-rhythm-line 0;
+
+        &_title {
+          display: flex;
+
+
+
+          .varr_icon {
+            display: block;
+            width: 10px;
+            height: 24px;
+            margin-left: $gutter / 2;
+
+            polyline {
+              fill: none;
+              stroke-width: 1px;
+              stroke: $primary-color;
+              stroke-linecap: butt;
+              stroke-linejoin: miter;
+            }
+          }
+        }
+
+        &_list {
+          display: none;
+          padding-bottom: $base-rhythm-line;
+
+          &.ll2 {
+            @include font-size-small;
+          }
+
+          &.opn {
+            display: block;
+          }
+        }
+      }
+    }
 
     a {
       transition: 0.2s color;
@@ -325,15 +405,18 @@
     }
 
     &_close {
+      position: fixed;
+      right: $gutter * 1.5;
+      top: $base-rhythm-line;
+      padding: 16px 8px;
       cursor: pointer;
-      padding: $base-rhythm-line * 2;
-      width: $base-rhythm-line * 6;
-      margin-left: -$base-rhythm-line * 1.5;
+      z-index: 3;
+
 
       svg {
         display: block;
-        width: $base-rhythm-line * 2;
-        height: $base-rhythm-line * 2;
+        width: 16px;
+        height: 16px;
 
         line {
           stroke: $primary-color;
@@ -704,6 +787,9 @@
   // }
 
   &.with_nav {
+    .header_nav {
+    }
+
     .header_menu {
       opacity: 1;
       transform: translateX(0);
@@ -742,13 +828,13 @@
     }
 
     &_menu {
-      padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter;
-      width: 2 / 16 * 100%;
+      // padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter;
+      width: 20rem;
     }
 
     &_cart {
       padding: ($space-m2 + $base-rhythm-line * 3) $gutter 0;
-      width: 2 / 16 * 100%;
+      width: 20rem;
     }
 
     &_caw {
@@ -772,7 +858,7 @@
     }
 
     &_menu {
-      padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter * 2;
+      // padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter * 2;
     }
 
     &_cart {
@@ -840,6 +926,18 @@
     }
   }
 
+  @include breakpoint($xl) {
+    &_menu {
+      // top: 10rem;
+      padding: $space-m2 $gutter 0;
+      width: 2 / 16 * 100%;
+    }
+
+    &_cart {
+      width: 2 / 16 * 100%;
+    }
+  }
+
 
   @include breakpoint($xl) {
     // padding-top: $base-rhythm-line * 6;
@@ -853,9 +951,7 @@
       right: 12rem;
     }
 
-    &_menu {
-      padding: ($space-m2 + $base-rhythm-line * 6) 0 0 $gutter * 4;
-    }
+
     // padding: $space-m2 0 0 $gutter * 2;
 
     // &_logo {

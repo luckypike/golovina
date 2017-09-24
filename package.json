@@ -2,7 +2,6 @@
   "name": "mint",
   "private": true,
   "dependencies": {
-    "barba.js": "^1.0.0",
     "dragula": "^3.7.2",
     "dropzone": "^5.1.1",
     "jquery": "^3.2.1",

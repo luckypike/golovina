@@ -43,64 +43,131 @@ header.header class="#{menu_index? ? :index : nil }"
         line x1="1" y1="15" x2="15" y2="1"
 
   .header_menu
-    .header_menu_item class=(controller_name == 'themes' ? :opened: nil)
-      .title
-        = active_link_to 'Настроения', [:themes], class: :subs
+    .header_menu_close
+      svg viewBox="0 0 16 16"
+        line x1="1" y1="1" x2="15" y2="15"
+        line x1="1" y1="15" x2="15" y2="1"
+    .header_menu_container
+      .header_menu_section
+        .section
+          .section_title.l1
+            | NEW
+            = inline_svg 'icons/varr.svg'
 
-      .sub
-        .sub_item
-          = active_link_to 'Посмотреть всё', [:themes], active: :exact
+          .section_list
+            .section_list_item.l2
+              = active_link_to 'Комплекты', [:latest, :products]
 
-        - @themes.each do |theme|
-          .sub_item
-            = active_link_to theme.title, theme
+            .section_list_item.l2
+              = active_link_to 'Товары', [:latest, :products]
+
+      .header_menu_section
+        .section
+          .section_title.l1
+            | Настроения
+            = inline_svg 'icons/varr.svg'
+
+          .section_list
+            - @themes.each do |theme|
+              .section_list_item.l2
+                = active_link_to theme.title, theme
 
 
-    .header_menu_item.sep.sep_after
-      = active_link_to 'New', [:latest, :products]
+      .header_menu_section
+        .section
+          .section_title.l1
+            | Каталог
+            = inline_svg 'icons/varr.svg'
 
+          .section_list
+            - @categories.reject{ |c| c.parent_category }.each do |category|
+              .section
+                .section_title.l2
+                  = category.title
+                  = inline_svg 'icons/varr.svg'
 
-    - @categories.reject{ |c| c.parent_category }.each do |category|
-      .header_menu_item class=((controller_name == 'products' && action_name = 'category' && category.categories.map(&:slug).include?(params[:slug])) ? :opened: nil)
+                .section_list
+                  - category.categories.each do |category_category|
+                    .section_list_item
+                      = active_link_to category_category.title, category_products_path(slug: category_category.slug)
+
+      .header_menu_section
+        = active_link_to 'Sale', [:sale, :products], class: :l1
+
+      .header_menu_section
+        .section
+          .section_title.l1
+            | Покупателям
+            = inline_svg 'icons/varr.svg'
+
+          .section_list
+            .section_list_item.l2
+              = active_link_to 'Доставка', customers_delivery_path
+
+            .section_list_item.l2
+              = active_link_to 'Оплата', customers_payment_path
+
+            .section_list_item.l2
+              = active_link_to 'Возврат', customers_return_path
+
+      .header_menu_section
+        - if signed_in?
+          = active_link_to t(:logout), destroy_user_session_path, method: :delete, class: :l1
+        - else
+          = active_link_to t(:login), new_user_session_path, class: :l1
+
+      / .header_menu_item class=(controller_name == 'themes' ? :opened: nil)
         .title
-          = active_link_to category.title, category_products_path(slug: category.slug)
+          = active_link_to 'Настроения', [:themes], class: :subs
 
         .sub
-          - category.categories.each do |category_category|
+          .sub_item
+            = active_link_to 'Посмотреть всё', [:themes], active: :exact
+
+          - @themes.each do |theme|
             .sub_item
-              = active_link_to category_category.title, category_products_path(slug: category_category.slug)
+              = active_link_to theme.title, theme
 
-    .header_menu_item
-      = active_link_to 'Посмотреть всё', category_products_path(slug: :all)
 
-    .header_menu_item.sep
-      = active_link_to 'Sale', [:sale, :products]
+      / .header_menu_item.sep.sep_after
+        = active_link_to 'New', [:latest, :products]
 
-    .header_menu_item.sep class=(controller_name == 'customers' ? :opened: nil)
-      .title
-        = active_link_to 'Покупателям', [:customers], active: :exact
 
-      .sub
-        .sub_item
-          = active_link_to 'Доставка', customers_delivery_path
+      / - @categories.reject{ |c| c.parent_category }.each do |category|
+        .header_menu_item class=((controller_name == 'products' && action_name = 'category' && category.categories.map(&:slug).include?(params[:slug])) ? :opened: nil)
+          .title
+            = active_link_to category.title, category_products_path(slug: category.slug)
 
-        .sub_item
-          = active_link_to 'Оплата', customers_payment_path
+          .sub
+            - category.categories.each do |category_category|
+              .sub_item
+                = active_link_to category_category.title, category_products_path(slug: category_category.slug)
 
-        .sub_item
-          = active_link_to 'Возврат', customers_return_path
+      / .header_menu_item
+        = active_link_to 'Посмотреть всё', category_products_path(slug: :all)
 
-    / .header_menu_item.sep
-      = active_link_to 'Мяtа', [:about, :index]
+      / .header_menu_item.sep
+        = active_link_to 'Sale', [:sale, :products]
 
-    / .header_menu_item
-      = active_link_to 'Контакты', [:contacts]
+      / .header_menu_item.sep class=(controller_name == 'customers' ? :opened: nil)
+        .title
+          = active_link_to 'Покупателям', [:customers], active: :exact
 
-    .header_menu_item.sep
-      - if signed_in?
-        = active_link_to t(:logout), destroy_user_session_path, method: :delete
-      - else
-        = active_link_to t(:login), new_user_session_path
+        .sub
+          .sub_item
+            = active_link_to 'Доставка', customers_delivery_path
+
+          .sub_item
+            = active_link_to 'Оплата', customers_payment_path
+
+          .sub_item
+            = active_link_to 'Возврат', customers_return_path
+
+      / .header_menu_item.sep
+        - if signed_in?
+          = active_link_to t(:logout), destroy_user_session_path, method: :delete
+        - else
+          = active_link_to t(:login), new_user_session_path
 
     - if user_signed_in? && current_user.is_editor?
       .header_menu_item.sep
@@ -118,7 +185,7 @@ header.header class="#{menu_index? ? :index : nil }"
       .header_menu_item
         = active_link_to 'Цвета', [:colors]
 
-    .header_menu_social
+    / .header_menu_social
       .social_networks
         = link_to Rails.application.secrets[:instagram], class: :instagram
           = inline_svg 'icons/instagram.svg'
