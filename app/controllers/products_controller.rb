@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
     params[:theme] = params[:theme].presence || []
     params[:size] = params[:size].presence || []
 
-    @products = Variant.includes(:images, product: [:variants]).themed_by(params[:theme]).sized_by(params[:size]).where(@where).order('products.created_at DESC')
+    @products = Variant.includes(:images, product: [:variants]).themed_by(params[:theme]).sized_by(params[:size]).where(@where).where(products: { state: :active }).order('products.created_at DESC')
     render :all
   end
 
