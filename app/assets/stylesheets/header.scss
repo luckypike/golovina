@@ -519,8 +519,8 @@
   }
 
   &_overlay {
-    background: $primary-color;
-    opacity: 0;
+    background: $op-color;
+    opacity: 0.4;
     position: fixed;
     left: 0;
     right: 0;
@@ -529,6 +529,7 @@
     z-index: 2;
     overflow-y: scroll;
     visibility: hidden;
+    transition: opacity 0.3s;
   }
 
   &_themes {

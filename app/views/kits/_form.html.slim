@@ -3,9 +3,10 @@
     = f.error_notification
 
     .form_inputs
-      = f.input :title
+      / = f.input :title
+      = f.input :latest
+      = f.input :state
       = f.association :theme
-      / = f.input :created_at unless f.object.new_record?
       = f.association :products, collection: Product.order(title: :asc), label_method: :title_safe, input_html: { class: :as_selectize }
 
       = f.simple_fields_for :images do |i_f|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919113259) do
+ActiveRecord::Schema.define(version: 20170925201216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(version: 20170919113259) do
     t.datetime "updated_at", null: false
     t.bigint "theme_id"
     t.string "title"
+    t.boolean "latest", default: false
+    t.integer "state", default: 0
     t.index ["theme_id"], name: "index_kits_on_theme_id"
   end
 

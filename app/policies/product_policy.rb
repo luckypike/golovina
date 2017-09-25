@@ -43,6 +43,10 @@ class ProductPolicy < ApplicationPolicy
     category?
   end
 
+  def kits?
+    category?
+  end
+
   def latest?
     category?
   end

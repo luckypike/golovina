@@ -3,7 +3,7 @@ class KitsController < ApplicationController
 
   def index
     authorize Kit
-    @kits = Kit.all
+    @kits = Kit.order(created_at: :desc)
   end
 
   def show
@@ -11,7 +11,7 @@ class KitsController < ApplicationController
   end
 
   def new
-    @kit = Kit.new
+    @kit = Kit.new(state: :active)
     @kit.images.build
 
     authorize @kit
@@ -55,6 +55,6 @@ class KitsController < ApplicationController
   end
 
   def kit_params
-    params.require(:kit).permit(:title, :created_at, :theme_id, { images: []}, product_ids: [], images_attributes: [:id, :photo])
+    params.require(:kit).permit(:title, :created_at, :theme_id, :state, :latest, { images: []}, product_ids: [], images_attributes: [:id, :photo])
   end
 end

@@ -1,4 +1,6 @@
 class Kit < ApplicationRecord
+  enum state: { undef: 0, active: 1, archived: 2 }
+
   belongs_to :theme
   has_many :kitables, dependent: :destroy
   has_many :products, through: :kitables
@@ -6,7 +8,7 @@ class Kit < ApplicationRecord
   has_many :images, as: :imagable, dependent: :destroy
   accepts_nested_attributes_for :images
 
-  # validates_presence_of :images
+  validates_presence_of :state
   validate :at_least_one_photo
 
 

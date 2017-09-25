@@ -33,6 +33,7 @@ ru:
         title: Эмоция
         theme: Стиль
         products: Товары
+        latest: NEW
 
       color:
         title: Название цвета
@@ -89,6 +90,12 @@ ru:
         inactive: Скрытый
 
     product:
+      state:
+        undef: Новый
+        active: Активный
+        archived: Архив
+
+    kit:
       state:
         undef: Новый
         active: Активный
