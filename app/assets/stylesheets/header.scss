@@ -59,6 +59,7 @@
     // bottom: $base-rhythm-line;
     user-select: none;
     z-index: 3;
+    transition: top 0.2s;
   }
 
   &_contact {
@@ -278,10 +279,10 @@
       overflow-y: scroll;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
-      padding: $space-s2 7rem $space-s2 0;
+      padding: $space-m2 7rem $space-s2 0;
 
       @include mq($xl) {
-        padding: $space-s2 4rem $space-s2 0;
+        // padding: $space-s2 4rem $space-s2 0;
       }
     }
 
@@ -324,6 +325,7 @@
         &_title {
           display: flex;
           width: 100%;
+          cursor: pointer;
 
 
 
@@ -345,15 +347,15 @@
 
           }
 
-          @include mq($xl) {
-            span {
-              flex-grow: 1;
-            }
+          // @include mq($xl) {
+          //   span {
+          //     flex-grow: 1;
+          //   }
 
-            .varr_icon {
-              margin-left: auto;
-            }
-          }
+          //   .varr_icon {
+          //     margin-left: auto;
+          //   }
+          // }
         }
 
         &_list {
@@ -670,6 +672,10 @@
     @include mq($m) {
       height: $base-rhythm-line * 8;
 
+      .header_nav {
+        top: $base-rhythm-line;
+      }
+
       &.no_themes {
         .header_themes {
           height: 0;
@@ -845,6 +851,10 @@
       }
     }
 
+    &_nav {
+      top: $base-rhythm-line * 5;
+    }
+
     &_menu {
       // padding: ($space-m2 + $base-rhythm-line * 3) 0 0 $gutter;
       width: 20rem;
@@ -947,8 +957,8 @@
   @include breakpoint($xl) {
     &_menu {
       // top: 10rem;
-      padding: $space-m2 $gutter 0;
-      width: 2 / 16 * 100%;
+      // padding: $space-m2 $gutter 0;
+      // width: 2 / 16 * 100%;
     }
 
     &_cart {
