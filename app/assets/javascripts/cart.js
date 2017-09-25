@@ -8,9 +8,12 @@ $(function() {
     var _this = $(this);
     var detail = event.detail;
     var data = detail[0], status = detail[1],  xhr = detail[2];
+    console.log(_this);
+    console.log(status);
 
     if(status == 'OK') {
       var _ii = _this.closest('.items_item');
+      console.log(_ii);
       _ii.slideUp(function() {
         _ii.remove();
       });
