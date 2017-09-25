@@ -10,8 +10,9 @@ $(function() {
     var data = detail[0], status = detail[1],  xhr = detail[2];
 
     if(status == 'OK') {
-      _this.closest('.items_item').slideUp(function() {
-        $(this).remove();
+      var _ii = _this.closest('.items_item');
+      _ii.slideUp(function() {
+        _ii.remove();
       });
     }
 
