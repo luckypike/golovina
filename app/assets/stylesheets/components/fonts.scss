@@ -85,7 +85,7 @@ h1, h2, h3 {
 
 h1, .h1 {
   @include font-size-h1;
-  @include font-headers;
+
 }
 
 h2, .h2 {

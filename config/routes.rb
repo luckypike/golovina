@@ -77,7 +77,11 @@ Rails.application.routes.draw do
   # end
 
   get 'wishlist', to: 'wishlists#show'
-  get 'cart', to: 'cart#show'
+  # get 'cart', to: 'cart#show'
+  namespace 'cart', module: nil do
+    get '', to: 'cart#show'
+    delete ':id/destroy', to: 'cart#destroy', as: :destroy
+  end
 
   resources :orders, only: [] do
     member do

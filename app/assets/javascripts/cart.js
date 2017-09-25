@@ -4,6 +4,19 @@ $(function() {
 
 
 
+  $('.cart_destroy').on('ajax:success', function(event) {
+    var _this = $(this);
+    var detail = event.detail;
+    var data = detail[0], status = detail[1],  xhr = detail[2];
+
+    if(status == 'OK') {
+      _this.closest('.items_item').slideUp(function() {
+        $(this).remove();
+      });
+    }
+
+  });
+
   $('.summary_form form').on('ajax:success', function(event) {
     var _this = $(this);
     var detail = event.detail;

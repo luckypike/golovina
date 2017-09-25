@@ -35,7 +35,7 @@
 
               .actions
                 / = link_to 'Добавить ещё', '#', class: [:btn, :btn_gr]
-                = link_to 'Удалить из корзины', '#'
+                = link_to 'Удалить из корзины', [:cart, :destroy, id: item.id], remote: true, class: :cart_destroy, method: :delete
 
 
       .summary
