@@ -91,7 +91,7 @@
             opacity: 0.3;
           }
 
-          @each $category in business active party special walk holiday young {
+          @each $category in business active party special walk holiday young warm {
             &.#{$category} {
               background-image: image_url('pages/index/#{$category}.jpg');
             }
@@ -257,7 +257,7 @@
     }
   }
 
-  @each $category in business active party special walk holiday young {
+  @each $category in business active party special walk holiday young warm {
     &.#{$category} {
       .image {
         .img {
