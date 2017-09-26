@@ -1,8 +1,27 @@
-.kit {
+&_kit {
   &_intro {
     .image {
       .img {
         @include aspect-ratio(4, 5);
+      }
+    }
+  }
+
+  &_form {
+    &.dz_form {
+      position: relative;
+      &.dz-drag-hover {
+
+        &:after {
+          content: '';
+          position: fixed;
+          background: rgba($primary-color, 0.5);
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          z-index: 3;
+        }
       }
     }
   }

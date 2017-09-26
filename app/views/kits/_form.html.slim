@@ -6,10 +6,13 @@
       / = f.input :title
       = f.input :latest
       = f.input :state
+      = f.association :images, as: :text
+      .dz_preview
+      = button_tag 'Добавить фото', type: :button, class: :dz_clickable
       = f.association :theme
       = f.association :products, collection: Product.order(title: :asc), label_method: :title_safe, input_html: { class: :as_selectize }
 
-      = f.simple_fields_for :images do |i_f|
+      / = f.simple_fields_for :images do |i_f|
         = i_f.input :photo
 
     .form_actions

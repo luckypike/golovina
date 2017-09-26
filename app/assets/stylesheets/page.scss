@@ -1,6 +1,5 @@
 @import "page/about";
 @import "page/kits";
-@import "page/kit";
 
 .page {
   padding-top: $base-rhythm-line * 8 + $space-s;
@@ -122,6 +121,8 @@
 
   @import "page/auth";
   @import "page/cart";
+
+  @import "page/kit";
 
   @import "page/customers";
 }

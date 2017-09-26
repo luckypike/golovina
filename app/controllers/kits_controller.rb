@@ -12,13 +12,13 @@ class KitsController < ApplicationController
 
   def new
     @kit = Kit.new(state: :active)
-    @kit.images.build
+    # @kit.images.build
 
     authorize @kit
   end
 
   def edit
-    @kit.images.build if @kit.images.size == 0
+    # @kit.images.build if @kit.images.size == 0
     authorize @kit
   end
 
@@ -27,7 +27,7 @@ class KitsController < ApplicationController
     authorize @kit
 
     if @kit.save
-      redirect_to @kit, notice: 'Kit was successfully created.'
+      redirect_to [:kits], notice: 'Kit was successfully created.'
     else
       render :new
     end
@@ -37,9 +37,9 @@ class KitsController < ApplicationController
     authorize @kit
 
     if @kit.update(kit_params)
-      redirect_to @kit, notice: 'Kit was successfully updated.'
+      redirect_to [:kits], notice: 'Kit was successfully updated.'
     else
-      @kit.images.build if @kit.images.size == 0
+      # @kit.images.build if @kit.images.size == 0
       render :edit
     end
   end
@@ -55,6 +55,6 @@ class KitsController < ApplicationController
   end
 
   def kit_params
-    params.require(:kit).permit(:title, :created_at, :theme_id, :state, :latest, { images: []}, product_ids: [], images_attributes: [:id, :photo])
+    params.require(:kit).permit(:title, :created_at, :theme_id, :state, :latest, image_ids: [], product_ids: [])
   end
 end

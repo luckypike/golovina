@@ -1,15 +1,13 @@
 - title [@kit.theme.title, @kit.title]
 
-/ - set_meta_tags noindex: true if @product.archived?
-
-- set_meta_tags og: { image: @kit.images.select(&:photo).map{ |i| i.photo.url } }
+/ - set_meta_tags og: { image: @kit.images.select(&:photo).map{ |i| i.photo.url } }
 
 .page.page_common.page_kit
   .kit
     .kit_intro.lv2
       .image.lv3
         .img
-          = image_tag @kit.photo
+          / = image_tag @kit.photo
 
       .title
         h1

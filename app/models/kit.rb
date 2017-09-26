@@ -9,7 +9,7 @@ class Kit < ApplicationRecord
   accepts_nested_attributes_for :images
 
   validates_presence_of :state
-  validate :at_least_one_photo
+  # validate :at_least_one_photo
 
 
 
