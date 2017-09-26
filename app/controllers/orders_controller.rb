@@ -15,16 +15,16 @@ class OrdersController < ApplicationController
       end
     end
 
-    # unless @order.user.reload.is_guest?
-    #   @cart.each do |item|
-    #     @order.order_items.build(variant: item.variant, quantity: item.quantity, size: item.size)
-    #     item.destroy
-    #   end
-    #   @order.save
+    unless @order.user.reload.is_guest?
+      @cart.each do |item|
+        @order.order_items.build(variant: item.variant, quantity: item.quantity, size: item.size)
+        item.destroy
+      end
+      @order.save
 
-    #   @order.active!
-    #   @order.update_attribute(:address, params[:order][:address])
-    #   OrderMailer.checkout(@order).deliver_now
-    # end
+      @order.active!
+      @order.update_attribute(:address, params[:order][:address])
+      OrderMailer.checkout(@order).deliver_now
+    end
   end
 end
