@@ -131,6 +131,9 @@ header.header class="#{menu_index? ? :index : nil }"
 
             .section_list
               .section_list_item.l2
+                = active_link_to 'Заказы', [:orders]
+
+              .section_list_item.l2
                 = active_link_to 'Товары', [:control, :products]
 
               .section_list_item.l2

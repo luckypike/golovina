@@ -1,0 +1,26 @@
+&_orders {
+  &_list {
+    .orders {
+      &_item {
+        margin-bottom: $space-s2;
+
+        &_items {
+          display: flex;
+          flex-wrap: wrap;
+
+          > div {
+            width: 120px;
+            margin-right: $gutter;
+
+            img {
+              display: block;
+
+              width: 120px;
+              height: 150px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

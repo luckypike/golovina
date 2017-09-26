@@ -1,4 +1,9 @@
 class OrdersController < ApplicationController
+  def index
+    authorize Order
+    @orders = Order.where(state: [:active, :archived]).order(id: :desc)
+  end
+
   def checkout
     @order = Order.find(params[:id])
     authorize @order

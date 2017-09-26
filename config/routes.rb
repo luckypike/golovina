@@ -83,7 +83,7 @@ Rails.application.routes.draw do
     delete ':id/destroy', to: 'cart#destroy', as: :destroy
   end
 
-  resources :orders, only: [] do
+  resources :orders, only: [:index] do
     member do
       post :checkout
     end

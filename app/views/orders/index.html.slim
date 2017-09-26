@@ -1,0 +1,46 @@
+.page.page_common.page_orders
+  .page_orders_list
+    .orders
+      - @orders.each do |order|
+        .orders_item
+          p
+            strong
+              ' Заказ №
+              = order.number
+
+          p
+            ' Имя:
+            = order.user.name
+            br
+
+            ' Телефон:
+            = order.user.phone
+            br
+
+            ' Эл. почта:
+            = order.user.email
+            br
+
+            ' Адрес:
+            = order.address
+
+          .orders_item_items
+            - order.order_items.each do |item|
+              div
+                - if item.variant.images.size > 0 && item.variant.images.first.photo
+                  = image_tag item.variant.images.first.photo.preview.url
+                p
+                  strong
+                    = link_to item.variant.product.title_safe, item.variant.product
+                  br
+
+                  ' Цвет:
+                  = item.variant.color.title
+                  br
+
+                  ' Размер:
+                  = t("sizes.size_#{item.size}")
+                  br
+
+                  ' Количество:
+                  = item.quantity
