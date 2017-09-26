@@ -579,12 +579,13 @@
       }
     }
 
+    // @include mq($l) {
+    //   display: block;
+    //   padding: 0 $gutter * 2;
+    // }
+
     @include mq($l) {
       display: block;
-      padding: 0 $gutter * 2;
-    }
-
-    @include mq($xl) {
       padding: 0 (2 / 16 * 100%);
 
       .themes_list {

@@ -12,7 +12,7 @@ class ThemesController < ApplicationController
 
   def show
     authorize @theme
-    kits = Kit.includes(:images, :products).where.not(kitables: { id: nil }).where(products: { state: :active }, theme: @theme).where.not(images: { id: nil })
+    kits = Kit.includes(:images, :products).where.not(kitables: { id: nil }).where(products: { state: :active }, theme: @theme, state: :active).where.not(images: { id: nil })
     excluded_products = kits.map(&:products).flatten.map(&:id)
 
     variants = Variant.includes(:images, product: [:kitables, :variants]).themed_by([@theme.id]).where(products: { state: :active }).where.not(images: { id: nil }, products: { id: excluded_products })

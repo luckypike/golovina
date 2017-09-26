@@ -6,9 +6,14 @@
       / = f.input :title
       = f.input :latest
       = f.input :state
-      = f.association :images, as: :text
+      = f.association :images, as: :text, input_html: { class: :dz_images }
       .dz_preview
-      = button_tag 'Добавить фото', type: :button, class: :dz_clickable
+        - @kit.images.each do |image|
+          .dz_preview_item data-id=image.id
+            = image_tag image.photo.preview.url
+            = link_to 'X', image, method: :delete, class: :destroy, remote: true
+
+      = button_tag 'Добавить фото', type: :button, class: [:dz_clickable, :btn]
       = f.association :theme
       = f.association :products, collection: Product.order(title: :asc), label_method: :title_safe, input_html: { class: :as_selectize }
 

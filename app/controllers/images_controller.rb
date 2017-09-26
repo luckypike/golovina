@@ -3,6 +3,8 @@ class ImagesController < ApplicationController
     image = Image.new(image_params)
     authorize image
 
+    sleep 1
+
     if image.save
       # head :ok
       render json: { image: image, url: image_path(image) }
@@ -31,6 +33,9 @@ class ImagesController < ApplicationController
       }
       format.json {
         render json: image
+      }
+      format.js {
+        head :ok
       }
     end
   end

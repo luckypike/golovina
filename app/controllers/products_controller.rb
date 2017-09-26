@@ -88,7 +88,7 @@ class ProductsController < ApplicationController
   def kits
     authorize Product
 
-    @products = Kit.includes(:images, :products).where.not(kitables: { id: nil }).where(products: { state: :active }, latest: true).where.not(images: { id: nil })
+    @products = Kit.includes(:images, :products).where.not(kitables: { id: nil }).where(products: { state: :active }, latest: true, state: :active).where.not(images: { id: nil })
 
   end
 

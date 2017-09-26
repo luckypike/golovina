@@ -3,17 +3,16 @@
 / - set_meta_tags og: { image: @kit.images.select(&:photo).map{ |i| i.photo.url } }
 
 .page.page_common.page_kit
-  .kit
-    .kit_intro.lv2
-      .image.lv3
-        .img
-          / = image_tag @kit.photo
+  .page_kit_intro.lv2
+      .images.lv3
+        - @kit.images.each do |image|
+          .images_item.lv3
+            .img
+              = image_tag image.photo.large.url
 
-      .title
-        h1
-          = @kit.title
 
-    .kit_products
-      - @kit.products.each_with_index do |product, i|
-        .kit_products_item.lv2 class="i_#{i % 2}"
+  .page_kit_products
+    .products
+      - @products.each_with_index do |product, i|
+        .products_item.lv2 class="i_#{i % 2}"
           == render 'products/item', product: product

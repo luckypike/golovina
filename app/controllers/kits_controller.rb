@@ -8,6 +8,7 @@ class KitsController < ApplicationController
 
   def show
     authorize @kit
+    @products = @kit.kitables.order(id: :asc).includes(:product).map(&:product)
   end
 
   def new
@@ -55,6 +56,7 @@ class KitsController < ApplicationController
   end
 
   def kit_params
+    params[:kit][:image_ids] = JSON.parse(params[:kit][:image_ids]) if params[:kit][:image_ids].present? && params[:kit][:image_ids].is_a?(String)
     params.require(:kit).permit(:title, :created_at, :theme_id, :state, :latest, image_ids: [], product_ids: [])
   end
 end

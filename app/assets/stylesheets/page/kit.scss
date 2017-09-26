@@ -1,8 +1,10 @@
 &_kit {
   &_intro {
-    .image {
-      .img {
-        @include aspect-ratio(4, 5);
+    .images {
+      &_item {
+        .img {
+          @include aspect-ratio(4, 5);
+        }
       }
     }
   }
@@ -10,6 +12,8 @@
   &_form {
     &.dz_form {
       position: relative;
+      z-index: 4;
+
       &.dz-drag-hover {
 
         &:after {
@@ -24,44 +28,84 @@
         }
       }
     }
+
+    .dz_clickable {
+      margin-bottom: $base-rhythm-line;
+    }
+
+    .dz_preview {
+      display: flex;
+
+      &_item {
+        border: 1px solid $separator_color;
+        width: 130px;
+        height: 160px;
+        background-color: $sand-color;
+        margin-right: $gutter / 2;
+        margin-bottom: $base-rhythm-line;
+        padding: 4px;
+        position: relative;
+
+        .destroy {
+          position: absolute;
+          right: $gutter;
+          top: $base-rhythm-line;
+          line-height: 24px;
+          width: 24px;
+          background: rgba(#000, 0.5);
+          border-radius: 2px;
+          text-align: center;
+          color: #fff;
+
+        }
+
+        img {
+          display: block;
+          width: 120px;
+          height: 150px;
+        }
+      }
+    }
   }
 
   @include mq($m) {
-    padding: 0 $gutter;
+
 
     &_intro {
-      @include column-pane;
+      .images {
+        @include column-pane;
+        padding: 0 $gutter / 2;
 
-      .image {
-        @include column-width(6, 12);
+        &_item {
+          @include column-width(6, 12);
+          padding: 0 $gutter / 2;
 
-        margin-bottom: 0;
+          margin-bottom: 0;
+        }
       }
 
-      .title {
-        @include column-width(4, 12);
-        @include column-shift(1, left, 12);
-      }
     }
 
     &_products {
-      &_item {
-        .product {
-          &_images {
-            margin-bottom: 0;
+      .products {
+        &_item {
+          .product {
+            &_images {
+              margin-bottom: 0;
 
-            .images {
-              &_list {
-                cursor: pointer;
+              .images {
+                &_list {
+                  cursor: pointer;
+                }
               }
             }
           }
-        }
 
-        &.i_0 {
-          .product {
-            &_images {
-              order: 1;
+          &.i_0 {
+            .product {
+              &_images {
+                order: 1;
+              }
             }
           }
         }
@@ -70,6 +114,12 @@
   }
 
   @include mq($l) {
-    padding: 0;
+    &_intro {
+      .images {
+        padding: 0;
+        margin-left: -$gutter / 2;
+        margin-right: -$gutter / 2;
+      }
+    }
   }
 }
