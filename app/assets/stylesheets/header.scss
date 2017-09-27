@@ -255,7 +255,9 @@
   }
 
   &_menu {
+    @include font-size(1.5, 3);
 
+    letter-spacing: 0.1em;
 
     background-color: $op-color;
     position: fixed;
@@ -264,7 +266,6 @@
     padding: 0 $gutter * 2;
     left: 0;
     width: 100%;
-    // min-width: 200px;
     opacity: 0;
     transform: translateX(-50%);
     visibility: hidden;
@@ -280,31 +281,25 @@
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
       padding: $space-m2 7rem $space-s2 0;
-
-      @include mq($xl) {
-        // padding: $space-s2 4rem $space-s2 0;
-      }
     }
 
     &_section {
       position: relative;
       padding-bottom: $base-rhythm-line * 2;
 
-      // &.as_l1 {
-      //   @include font-size-small;
-      //   @include font-size(2, 3);
-      // }
-
       .l1 {
-        @include font-size-small;
-        @include font-size(1.75, 3);
-        // @include font-size-common;
+        @include font-size(1.5, 3);
+
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
       }
 
       .l2 {
         padding-top: $base-rhythm-line;
 
-        @include font-size-small;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        @include font-size(1.25, 3);
       }
 
 
