@@ -71,8 +71,13 @@
 
       &_2 {
         background: {
-          image: image_url('pages/index/ss_2.jpg');
-          position: center top;
+          image: image_url('pages/index/ss_2_s.jpg');
+        }
+
+        @include mq($m) {
+          background: {
+            image: image_url('pages/index/ss_2_l.jpg');
+          }
         }
       }
 
