@@ -37,7 +37,7 @@
 
         background: {
           size: cover;
-          // position: center;
+          position: center;
         }
 
         &.active {
@@ -47,23 +47,25 @@
 
       &_0 {
         background: {
-          image: image_url('pages/index/ss_0.jpg');
-          position: 30% top;
+          image: image_url('pages/index/ss_0_s.jpg');
         }
 
         @include mq($m) {
-          background-position: center top;
+          background: {
+            image: image_url('pages/index/ss_0_l.jpg');
+          }
         }
       }
 
       &_1 {
         background: {
-          image: image_url('pages/index/ss_1.jpg');
-          position: 25% top;
+          image: image_url('pages/index/ss_1_s.jpg');
         }
 
         @include mq($m) {
-          background-position: center top;
+          background: {
+            image: image_url('pages/index/ss_1_l.jpg');
+          }
         }
       }
 
