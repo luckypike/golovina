@@ -1,0 +1,9 @@
+.page.page_common.page_auth
+  .page_auth_form
+    .form
+      = simple_form_for(@user, url: [:login]) do |f|
+        .form_inputs
+          = f.input :phone, autofocus: true, input_html: { class: :as_cleave_phone, value: '' }
+
+        / .form_actions
+          = f.button :submit, t(:login)

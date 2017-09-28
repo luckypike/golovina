@@ -18,3 +18,14 @@ ru:
   catalog: Каталог
   catalog_all: Все товары
 
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: Нужно указать имя
+            phone:
+              wrong_length: Неправильный формат номера
+              taken: На этот номер уже ранее заказывали, войдите чтобы продолжить оформление заказа.

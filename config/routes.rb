@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root 'static#index'
 
   scope format: false do
-    devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout'}
+    devise_for :users, path: '', path_names: { sign_out: 'logout'}
+
+    get 'login', to: 'sessions#login'
 
     namespace 'about', module: nil do
       get '', to: 'about#index'

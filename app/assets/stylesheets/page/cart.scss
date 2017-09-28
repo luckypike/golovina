@@ -69,10 +69,17 @@
             }
           }
 
-          &_errors {
-            color: red;
-            font-weight: $bold;
-            margin-bottom: $space-s;
+          .input {
+            &_error {
+              color: red;
+              font-weight: $bold;
+              margin-top: $base-rhythm-line;
+              margin-bottom: $base-rhythm-line;
+            }
+          }
+
+          &_error {
+
           }
         }
       }

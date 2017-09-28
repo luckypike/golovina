@@ -1,7 +1,6 @@
 $(function() {
 
-  $('.user_phone input.tel').mask('+7 (000) 000-00-00');
-
+  $('.as_cleave_phone').mask('+7 000 000-00-00');
 
 
   $('.cart_destroy').on('ajax:success', function(event) {
@@ -24,10 +23,20 @@ $(function() {
     var data = detail[0], status = detail[1],  xhr = detail[2];
     if(data.status == 'unprocessable_entity') {
 
+      $('.input_error', _this).remove();
+
       $.each(data.error, function(i, e) {
-        $('.form_errors', _this)
+        var _f = $('.user_' + i, _this);
+
+        var text = e[0];
+        _f.append('<div class="input_error">' + text + '</div>');
+        // $('.form_errors', _this)
         console.log(i);
-        console.log(e);
+        console.log(e[0]);
+
+        // for (var i = 0, len = e.length; i < len; i++) {
+        //   console.log(e[i].error);
+        // }
       });
 
       // if(.common != undefined) {

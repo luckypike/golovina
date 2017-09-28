@@ -120,7 +120,7 @@ header.header class="#{menu_index? ? :index : nil }"
         - if signed_in?
           = active_link_to t(:logout), destroy_user_session_path, method: :delete, class: :l1
         - else
-          = active_link_to t(:login), new_user_session_path, class: :l1
+          = active_link_to t(:login), [:login], class: :l1
 
       - if user_signed_in? && current_user.is_editor?
         .header_menu_section

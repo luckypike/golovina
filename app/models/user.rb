@@ -10,6 +10,10 @@ class User < ApplicationRecord
   validates_uniqueness_of :phone
   validates_presence_of :phone, :name
 
+  validates :phone, length: { is: 11 }
+
+  before_validation :clear_phone
+
   def remember_me
     true
   end
@@ -24,5 +28,12 @@ class User < ApplicationRecord
 
   def is_editor?
     is_admin? || [2, 3].include?(id)
+  end
+
+  def clear_phone
+    if self.phone.present?
+      self.phone.sub!('/^8/', '+7')
+      self.phone.gsub!(/[\D]/, '')
+    end
   end
 end
