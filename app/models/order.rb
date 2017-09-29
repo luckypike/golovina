@@ -21,6 +21,6 @@ class Order < ApplicationRecord
   end
 
   def sms_message
-    "Заказ № #{self.number} на сумму #{number_to_rub(self.amount).gsub('&nbsp;', ' ')} принят. Мы позвоним для подтверждения."
+    "Заказ № #{self.number} на сумму #{number_to_rub(self.amount).gsub('&nbsp;', ' ')} принят. Ожидайте, пожалуйста, звонка."
   end
 end
