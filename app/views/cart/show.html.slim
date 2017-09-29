@@ -56,7 +56,7 @@
                     = simple_fields_for :user do |ff|
                       - if @order.user.is_guest?
                         = ff.input :name
-                        = ff.input :phone, input_html: { class: :as_cleave_phone, value: '+7' }
+                        = ff.input :phone, input_html: { class: :as_cleave_phone, value: '' }
                         = ff.input :email, required: false, input_html: { value: nil }
 
                     = f.input :address

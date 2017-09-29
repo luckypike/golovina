@@ -4,6 +4,10 @@
     font-weight: bold;
   }
 
+  &_desc {
+    margin-bottom: $base-rhythm-line * 2;
+  }
+
   &_inputs {
     .input {
       margin-bottom: $base-rhythm-line * 2;

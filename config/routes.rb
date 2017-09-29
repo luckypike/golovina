@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   scope format: false do
     devise_for :users, path: '', path_names: { sign_out: 'logout'}
 
-    get 'login', to: 'sessions#login'
+    namespace 'login', module: nil do
+      get '', to: 'sessions#login'
+      post 'code', to: 'sessions#code'
+      post '', to: 'sessions#auth'
+    end
+
 
     namespace 'about', module: nil do
       get '', to: 'about#index'

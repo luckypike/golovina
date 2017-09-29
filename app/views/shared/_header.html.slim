@@ -117,7 +117,7 @@ header.header class="#{menu_index? ? :index : nil }"
               = active_link_to 'Возврат', customers_return_path
 
       .header_menu_section
-        - if signed_in?
+        - if signed_in? && !current_user.is_guest?
           = active_link_to t(:logout), destroy_user_session_path, method: :delete, class: :l1
         - else
           = active_link_to t(:login), [:login], class: :l1

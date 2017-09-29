@@ -2,5 +2,15 @@
   &_form {
     margin: $space-m auto 0;
     max-width: $s / 2;
+
+    form {
+      &.request_code {
+
+      }
+
+      &.login_with_code {
+        display: none;
+      }
+    }
   }
 }
