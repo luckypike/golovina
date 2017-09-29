@@ -1,3 +1,5 @@
+require 'sms'
+
 class OrdersController < ApplicationController
   def index
     authorize Order
@@ -22,7 +24,7 @@ class OrdersController < ApplicationController
 
     unless @order.user.reload.is_guest?
       @cart.each do |item|
-        @order.order_items.build(variant: item.variant, quantity: item.quantity, size: item.size)
+        @order.order_items.build(variant: item.variant, quantity: item.quantity, size: item.size, price: item.variant.product.price_sell)
         item.destroy
       end
       @order.save
@@ -30,6 +32,12 @@ class OrdersController < ApplicationController
       @order.active!
       @order.update_attribute(:address, params[:order][:address])
       OrderMailer.checkout(@order).deliver_now
+
+      if Rails.env.production?
+        Sms.message(@order.user.phone, @order.sms_message)
+      else
+        OrderMailer.sms_test(@order).deliver_now
+      end
     end
   end
 end

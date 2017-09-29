@@ -20,6 +20,11 @@
     ' Адрес:
     = @order.address
 
+    br
+
+    ' Общая стоимость:
+    = number_to_rub @order.amount
+
   .order_items
     - @order.order_items.each do |item|
       div
@@ -39,4 +44,9 @@
 
           ' Количество:
           = item.quantity
+
+          br
+
+          ' Стоимость:
+          = number_to_rub item.price
 

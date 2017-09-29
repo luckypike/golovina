@@ -33,6 +33,8 @@ gem 'meta-tags'
 
 gem 'redcarpet'
 
+gem 'addressable'
+
 gem 'devise'
 gem 'pundit'
 

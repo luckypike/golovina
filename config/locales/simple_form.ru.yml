@@ -15,6 +15,7 @@ ru:
         password: Пароль
         state: Статус
         price: Стоимость
+        price_last: Стоимость скидкой
         desc: Описание
         photo: Фотография
         category: Категория

@@ -35,6 +35,10 @@ class Product < ApplicationRecord
     end
   end
 
+  def price_sell
+    self.price_last.presence || self.price
+  end
+
   def sizes
     variants.first.sizes
   end
