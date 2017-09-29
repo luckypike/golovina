@@ -65,6 +65,7 @@
         @include mq($m) {
           background: {
             image: image_url('pages/index/ss_1_l.jpg');
+            position: center 43% !important;
           }
         }
       }
@@ -77,6 +78,7 @@
         @include mq($m) {
           background: {
             image: image_url('pages/index/ss_2_l.jpg');
+            position: center 33% !important;
           }
         }
       }
