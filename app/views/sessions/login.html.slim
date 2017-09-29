@@ -10,6 +10,9 @@
 
         .form_actions
           = f.button :submit, 'Получить код', data: { disable_with: 'Высылаем код..' }
+          br
+          br
+          = link_to 'Войти с помощью электронной почты', new_user_session_path
 
       = simple_form_for @user, url: [:login], html: { class: :login_with_code } do |f|
         .form_desc
@@ -18,8 +21,6 @@
         .form_inputs
           = f.input :phone, autofocus: true, input_html: { class: :as_cleave_phone, value: '' }
           = f.input :code
-
-          / = link_to 'Далее', [:login, :code], class: [:btn, :request_code], method: :post, remote: true, data: { params: "phone=7920" }
 
         .form_actions
           = f.button :submit, t(:login)
