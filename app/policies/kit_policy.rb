@@ -1,6 +1,6 @@
 class KitPolicy < ApplicationPolicy
   def show?
-    true
+    !record.undef? || user&.is_editor?
   end
 
   def index?
