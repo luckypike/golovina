@@ -211,6 +211,7 @@
       @include font-size-h1;
       @include font-headers;
 
+      display: none;
       transition: transform 0.5s;
       transform-origin: left bottom;
     }
@@ -218,8 +219,8 @@
     .short {
       @include font-size-small();
 
-      display: inline-block;
       background: $sand-color;
+      display: inline-block;
       padding: 0 $gutter / 2;
 
       @include mq($m) {
@@ -232,7 +233,11 @@
     }
 
     .desc {
-      display: none;
+      @include font-headers;
+      @include font-size-h3;
+
+      font-style: italic;
+
     }
 
     .btn_gr {
@@ -292,17 +297,13 @@
 
       .title {
         @include font-size(9, 8);
+        display: block;
       }
 
       .desc {
-        @include font-headers;
-        @include font-size-h3;
-
-        font-style: italic;
-        display: block;
         margin-top: $space-s2;
-        margin-left: 2 / 6 * 100%;
         padding-left: $gutter * 2;
+        margin-left: 2 / 6 * 100%;
       }
 
       .short {
