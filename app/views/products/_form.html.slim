@@ -15,6 +15,7 @@
       = f.input :price_last
 
       = f.input :desc
+      = f.input :comp
 
       - if f.object.new_record?
         = f.simple_fields_for :variants do |vf|

@@ -7,7 +7,7 @@
 
     .product_data class=product.state
       .data
-        .title.lv3
+        .title.lv4
           h1
             = product.title_safe
 
@@ -23,18 +23,15 @@
             .price_last
               = number_to_rub product.price
 
-        .desc.lv3
-          = markdown product.desc
-
 
         .variants.live.lv3
-          .variants_title
-
-
           .variants_list
             - product.variants.each do |variant|
               .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json]) data-label=variant.color.title data-oos=variant.out_of_stock.to_s
                 .icon class=variant.color.slug style="background-color: #{variant.color.color}; #{variant.color.image? ? "background-image: url(#{variant.color.image.url})" : ''}"
+
+          .variants_title
+
 
         .sizes.live.lv3 data-sizes="#{product.variants.select(&:sizes).map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json}"
           / .sizes_title
@@ -58,7 +55,7 @@
 
 
         .out_of_stock
-          | Товар временно отсутствует.
+          | Товар в этом цвете временно отсутствует.
 
         / - if product.desc
           .desc
@@ -68,3 +65,71 @@
           .edit
             = link_to 'Редактировать', [:edit, product], class: [:btn, :btn_gr]
             =< link_to 'Размеры и цвета', [:variants, product], class: [:btn, :btn_gr]
+
+      .acc
+        - if product.desc.present?
+          .acc_item
+            .title
+              .title_label
+                = t('simple_form.labels.defaults.desc')
+
+            .content
+              = markdown product.desc
+
+        - if product.comp.present?
+          .acc_item
+            .title
+              .title_label
+                = t('simple_form.labels.defaults.comp')
+
+            .content
+              = markdown product.comp
+
+
+        .acc_item
+          .title
+            .title_label
+              | Таблица размеров
+
+          .content
+            | Таблица соответствия размеров
+
+        .acc_item
+          .title
+            .title_label
+              | Доставка
+
+            .title_desc
+              - if Time.now.hour >= 20
+                | Завтра
+              - else
+                | Сегодня
+
+          .content
+            .delivery_fast
+              .tabs
+                .tabs_item.active rel="nn"
+                  | Н. Новгород
+
+                .tabs_item rel="msk"
+                  | Москва
+
+                .tabs_item rel="rus"
+                  | Россия
+
+              .text
+                .text_item.nn.active
+                  p Заказы оформленные до 20:00 в будни и до 18:00 в выходные будут доставлены в день заказа.
+                  p Стоимость с примеркой — 180 ₽. Если вещь не подошла и вы хотите её вернуть — 270 ₽.
+
+                .text_item.msk
+                  p Заказы оформленные до 20:00 в будни будут доставлены на следующий день. Заказы оформленные в выходные будут доставлены в понедельник.
+
+                  p Стоимость доставки 410 ₽.
+
+                .text_item.rus
+                  p Доставка осуществляется от 2 до 5 дней, кроме выходных дней.
+
+                  p Стоимость доставки от 500 ₽ (зависит от вашего региона).
+
+

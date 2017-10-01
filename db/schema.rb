@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929134529) do
+ActiveRecord::Schema.define(version: 20171001152538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20170929134529) do
     t.boolean "sale", default: false
     t.boolean "latest", default: false
     t.decimal "price_last"
+    t.text "comp"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["colors"], name: "index_products_on_colors", using: :gin
     t.index ["kind_id"], name: "index_products_on_kind_id"

@@ -72,7 +72,7 @@ $(function(){
       var _vv = $(this);
       var _s = _vv.next();
       var _b = _s.next();
-      var _oos = _b.next();
+      var _oos = _b.next().next();
       var _variants = $('.variants_list_item', _vv);
       var _variant = _variants.first();
       var _pp = _vv.closest('.page_product');
@@ -157,7 +157,7 @@ $(function(){
         var sizes = _s.data('sizes')[_this.data('id')];
         var label = _this.data('label');
 
-        var _vl = _this.parent().prev();
+        var _vl = _this.parent().next();
         _vl.text(label);
 
 
@@ -307,7 +307,17 @@ $(function(){
 
 
 
+  $('.product_data .acc .title').on('click', function() {
+    $(this).next().slideToggle();
+  });
 
+  $('.delivery_fast .tabs_item').on('click', function() {
+    $('.delivery_fast .tabs_item').not(this).removeClass('active');
+    $(this).addClass('active');
+
+    $('.delivery_fast .text_item').removeClass('active');
+    $('.delivery_fast .text_item.' + $(this).attr('rel')).addClass('active');
+  });
 
   // var _pd = $('.page_product .product_data');
   // var _window = $(window);
