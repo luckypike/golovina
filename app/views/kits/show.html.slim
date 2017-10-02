@@ -10,6 +10,11 @@
             .img
               = image_tag image.photo.large.url
 
+  - if policy(@kit).edit?
+    .page_kit_edit.lv2
+      .edit
+        = link_to 'Редактировать образ', [:edit, @kit], class: :btn_gr
+
 
   .page_kit_products
     .products

@@ -4,9 +4,17 @@
     - url = polymorphic_path(product)
     - url = polymorphic_path(product, anchor: entity.id) if entity.is_a?(Variant) && entity.product.variants.size > 1
 
-    = link_to url, class: [:products_list_item, "i_#{i % 6}"] do
-      .image
-        = image_tag entity.images.sort_by{ |i| [i.weight, i.created_at] }.first.photo.thumb.url, alt: product.title_safe if entity.images.size > 0
+    .products_list_item class="i_#{i % 6}"
+      = link_to '', url, class: :fake
+
+      .vispart
+        .image
+          = image_tag entity.images.sort_by{ |i| [i.weight, i.created_at] }.first.photo.thumb.url, alt: product.title_safe if entity.images.size > 0
+
+        - if policy(product).edit?
+          .control
+            = link_to '', [:edit, product], class: :edit
+
 
       - if entity.is_a?(Variant)
         .title_and_price

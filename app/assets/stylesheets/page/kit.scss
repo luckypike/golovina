@@ -9,6 +9,26 @@
     }
   }
 
+  &_edit {
+    .edit {
+      .btn_gr {
+        @include font-size(1.25);
+
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+
+        font-family: inherit;
+        font-weight: inherit;
+        appearance: none;
+        cursor: pointer;
+        color: $primary-color;
+        display: inline-block;
+        padding: $base-rhythm-line / 2 $gutter / 2;
+        user-select: none;
+      }
+    }
+  }
+
   &_form {
     &.dz_form {
       position: relative;

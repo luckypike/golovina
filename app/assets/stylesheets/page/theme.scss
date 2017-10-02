@@ -366,6 +366,39 @@
     width: 100%;
     position: relative;
 
+    .fake {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+
+    .vispart {
+      position: relative;
+
+      .control {
+        padding: $base-rhythm-line;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 5;
+
+        a {
+          background-color: rgba($primary-color, 0.5);
+          display: block;
+          width: 24px;
+          height: 24px;
+
+          &.edit {
+            background-image: image_url('icons/edit_white.svg');
+            background-size: 24px 24px;
+          }
+        }
+      }
+    }
+
 
     .title {
       @include font-size-small;
@@ -382,29 +415,22 @@
 
       color: $primary-color;
       margin-top: $base-rhythm-line / 2;
-      margin-bottom: -$base-rhythm-line * 2;
-      // position: absolute;
-      // right: 0;
-      // bottom: -$base-rhythm-line * 2.75;
+      // margin-bottom: -$base-rhythm-line * 2;
       z-index: 2;
       text-align: center;
-      // text-transform: uppercase;
-
-      .price {
-        // @include font-size(1.25, 1.5);
-      }
 
       @include mq($s) {
         @include font-size-small;
 
         margin-top: $base-rhythm-line;
-        margin-bottom: -$base-rhythm-line;
-        // bottom: -$base-rhythm-line * 4;
+        // margin-bottom: -$base-rhythm-line;
       }
     }
 
     .image {
       @include aspect-ratio(4, 5);
+
+      background: $sand-color;
 
       img{
         // padding: $base-rhythm-line;
@@ -463,7 +489,7 @@
     padding: 0;
 
     &_item {
-      margin-bottom: $space-m2;
+      // margin-bottom: $space-m2;
     }
   }
 }
