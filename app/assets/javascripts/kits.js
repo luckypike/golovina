@@ -55,8 +55,78 @@ $(function() {
       _images.val(JSON.stringify(images));
 
       $(file.previewElement).data('id', data.image.id)
-      $(file.previewElement).append('<a rel="nofollow" data-remote="true" data-method="delete" href="' + data.url + '" class="destroy">X</a><img src="' + data.image.photo.preview.url + '">');
+      $(file.previewElement).append('<div class="pos" data-pos="' + data.image.weight + '"><input type="hidden" name="kit[images_attributes][' + data.image.id + '][weight]" value="0" class="pos_value"><input type="hidden" name="kit[images_attributes][' + data.image.id + '][id]" value="' + data.image.id + '"><div class="l"></div></div><img src="' + data.image.photo.preview.url + '"><div class="control"><a rel="nofollow" data-remote="true" data-method="delete" href="' + data.url + '" class="destroy"></a></div>');
       // _this.prev().append('<div class="form_photos_list_item"><a rel="nofollow" data-method="delete" href="' + data.url + '">Удалить</a><img src="' + data.image.photo.drag.url + '"></div>');
     });
   });
+
+  var _dzp = $('.dz_preview');
+
+  _dzp.on('click', '.dz_preview_item', function(event) {
+    var _this = $(this);
+    var _pos = $('.pos', this)
+
+
+    var pos = parseInt(_pos.data('pos'));
+    if(pos > 0) {
+      $('.pos', _dzp).each(function(i, el) {
+        var _el = $(el);
+        var cpos = _el.data('pos');
+        if(cpos > pos) {
+          _el.data('pos', cpos - 1);
+        }
+      });
+
+      _dzp.data('max', _dzp.data('max') - 1);
+
+      pos = 0;
+
+
+    } else {
+      pos = _dzp.data('max');
+      pos = pos + 1;
+      _dzp.data('max', pos);
+    }
+
+    _pos.data('pos', pos);
+
+    _dzp.trigger('redraw');
+  });
+
+  _dzp.on('redraw', function() {
+    $('.dz_preview_item', _dzp).each(function(i, el) {
+      var _el = $(el);
+      var _pos = $('.pos', el);
+      var pos = _pos.data('pos');
+
+      $('.pos_value', _pos).val(pos);
+
+
+      if(pos < 1) {
+        $('.l', _pos).html('');
+      } else {
+        $('.l', _pos).html(_pos.data('pos'));
+      }
+
+    });
+  });
+
+  // if(_dzp.length == 1) {
+  //   var drake = dragula({
+  //     containers: [_dzp[0]],
+  //     moves: function (el, container, handle) {
+  //       return handle.classList.contains('move');
+  //     },
+  //     // direction: 'vertical',
+  //     direction: 'horizontal',
+  //     copy: false,
+  //   }).on('drag', function(el, source) {
+  //     // console.log('QQ');
+  //   });
+  //   _dzp.on('touchmove', '.move', function(e) {
+  //     var _el = $(e.target);
+  //     e.preventDefault();
+  //   });
+  // }
+
 });

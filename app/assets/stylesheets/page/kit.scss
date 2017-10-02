@@ -30,6 +30,12 @@
   }
 
   &_form {
+    .kit_images {
+      .dz_images {
+        display: none;
+      }
+    }
+
     &.dz_form {
       position: relative;
       z-index: 4;
@@ -55,34 +61,84 @@
 
     .dz_preview {
       display: flex;
+      flex-wrap: wrap;
 
       &_item {
         border: 1px solid $separator_color;
-        width: 130px;
-        height: 160px;
+        width: 88px;
+        height: 108px;
         background-color: $sand-color;
         margin-right: $gutter / 2;
         margin-bottom: $base-rhythm-line;
-        padding: 4px;
+        padding: 3px;
         position: relative;
 
-        .destroy {
+        .move {
           position: absolute;
-          right: $gutter;
+          left: $base-rhythm-line;
           top: $base-rhythm-line;
-          line-height: 24px;
+          z-index: 5;
+          background-color: rgba($primary-color, 0.5);
+          display: block;
           width: 24px;
-          background: rgba(#000, 0.5);
-          border-radius: 2px;
-          text-align: center;
-          color: #fff;
+          height: 24px;
 
         }
 
+        .pos {
+          color: $op-color;
+          font-weight: $bold;
+          position: absolute;
+          right: $base-rhythm-line;
+          top: $base-rhythm-line;
+          z-index: 1;
+          background-color: rgba($primary-color, 0.7);
+          display: block;
+          width: 24px;
+          height: 24px;
+          text-align: center;
+          line-height: 24px;
+          border-radius: 50%;
+        }
+
+        .control {
+          display: flex;
+          padding: $base-rhythm-line;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          z-index: 5;
+
+          a, .a {
+            background-color: rgba($primary-color, 0.5);
+            display: block;
+            width: 24px;
+            height: 24px;
+
+            &.destroy {
+              background-image: image_url('icons/delete_white.svg');
+              background-size: 24px 24px;
+            }
+          }
+        }
+
+        // .destroy {
+        //   position: absolute;
+        //   right: $gutter;
+        //   top: $base-rhythm-line;
+        //   line-height: 24px;
+        //   width: 24px;
+        //   background: rgba(#000, 0.5);
+        //   border-radius: 2px;
+        //   text-align: center;
+        //   color: #fff;
+
+        // }
+
         img {
           display: block;
-          width: 120px;
-          height: 150px;
+          width: 80px;
+          height: 100px;
         }
       }
     }

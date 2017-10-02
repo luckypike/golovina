@@ -52,7 +52,13 @@
         }
       }
 
+      &.kit_state,
       &.variant_state {
+        label {
+          display: block;
+          max-width: 280px;
+        }
+
         .radio {
           input {
             margin-right: $gutter / 2;

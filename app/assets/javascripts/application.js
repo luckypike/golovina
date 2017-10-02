@@ -19,9 +19,6 @@
 
 //= require swiper/dist/js/swiper.jquery
 
-//= require dragula/dist/dragula.min
-//= require dragula
-
 //= require selectize/dist/js/standalone/selectize
 //= require jquery-mask-plugin/dist/jquery.mask.min
 
