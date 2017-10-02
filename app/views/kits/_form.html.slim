@@ -27,7 +27,9 @@
               = link_to '', image, method: :delete, class: :destroy, remote: true
 
       = button_tag 'Добавить фото', type: :button, class: [:dz_clickable, :btn]
-      = f.association :products, collection: Product.order(title: :asc), label_method: :title_safe, input_html: { class: :as_selectize }
+
+
+      = f.association :products, collection: Product.order(title: :asc), label_method: :title_safe, input_html: { class: :as_selectize_variants, data: { url: variants_path(format: :json) } }
 
       / = f.simple_fields_for :images do |i_f|
         = i_f.input :photo

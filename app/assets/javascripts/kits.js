@@ -5,7 +5,21 @@ $(function() {
     swiper.slideNext();
   });
 
-  $('.as_selectize').selectize();
+  $('.as_selectize_variants').selectize({
+    load: function(query, callback) {
+      if (!query.length) return callback();
+      $.getJSON(this.$input.data('url'), {
+          q: query,
+        })
+        .done(function() {
+          console.log(res.movies);
+          callback(res.movies);
+        })
+        .fail(function() {
+          callback();
+      });
+    }
+  });
 
   $('.dz_preview').on('ajax:success', '.destroy', function(event) {
     var detail = event.detail;
