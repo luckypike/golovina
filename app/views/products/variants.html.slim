@@ -15,7 +15,7 @@
           .form_inputs
             h3
               = f.object.color.title
-            = link_to 'Удалить вариант', f.object, method: :delete, class: [:btn, :btn_gr]
+            = link_to 'Удалить вариант', f.object, method: :delete, class: [:btn, :btn_gr], data: { confirm: 'Уверены что хотите удалить вариант? Это приведет к полному удалению фотографий и из истории заказов. Возможно вы хотите его просто скрыть?' }
 
             = f.association :color, collection: Color.tree
             = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes].map{ |s| [I18n.t("sizes.size_#{s}"), s.to_s] }

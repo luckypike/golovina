@@ -23,6 +23,10 @@
             .price_last
               = number_to_rub product.price
 
+        - if policy(product).edit?
+          .edit
+            = link_to 'Редактировать товар', [:edit, product], class: :btn_gr
+            =< link_to 'Размеры и цвета', [:variants, product], class: :btn_gr
 
         .variants.live.lv3
           .variants_list
@@ -57,15 +61,6 @@
         .out_of_stock
           | Товар в этом цвете временно отсутствует.
 
-        / - if product.desc
-          .desc
-            = product.desc
-
-        - if policy(product).edit?
-          .edit
-            = link_to 'Редактировать', [:edit, product], class: [:btn, :btn_gr]
-            =< link_to 'Размеры и цвета', [:variants, product], class: [:btn, :btn_gr]
-
       .acc
         - if product.desc.present?
           .acc_item
@@ -86,7 +81,7 @@
               = markdown product.comp
 
 
-        .acc_item
+        / .acc_item
           .title
             .title_label
               | Таблица размеров

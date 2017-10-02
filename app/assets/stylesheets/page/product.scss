@@ -605,8 +605,25 @@
     }
 
     .edit {
-      margin-top: $base-rhythm-line * 2;
+      // margin-top: $base-rhythm-line;
       margin-bottom: $base-rhythm-line * 2;
+
+      .btn_gr {
+        @include font-size(1.25);
+
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+
+        font-family: inherit;
+        font-weight: inherit;
+        appearance: none;
+        cursor: pointer;
+        color: $primary-color;
+        display: inline-block;
+        padding: $base-rhythm-line / 2 $gutter / 2;
+        user-select: none;
+      }
+
     }
 
     .acc {
@@ -623,11 +640,15 @@
 
           &_desc {
             align-self: center;
-            border: 1px solid $primary-color;
+            border: 1px solid $separator-color;
             margin-left: $gutter;
             line-height: 16px;
-            border-radius: 10px;
+            // border-radius: 10px;
             padding: 0 $gutter / 2 2px;
+
+            @include mq($l) {
+              line-height: 20px;
+            }
           }
 
         }
