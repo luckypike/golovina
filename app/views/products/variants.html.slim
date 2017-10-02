@@ -19,7 +19,8 @@
 
             = f.association :color, collection: Color.tree
             = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes].map{ |s| [I18n.t("sizes.size_#{s}"), s.to_s] }
-            = f.input :out_of_stock
+            / = f.input :out_of_stock
+            = f.input :state, as: :radio_buttons
 
           .form_photos
             .form_photos_list data-weight=weight_images_path

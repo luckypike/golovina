@@ -30,6 +30,7 @@ ru:
         themes: Стили
         latest: NEW
         sale: SALE
+        similar_products: Похожие товары
 
       kit:
         title: Эмоция
@@ -104,6 +105,14 @@ ru:
         undef: Новый
         active: Активный
         archived: Архив
+
+
+    variant:
+      state:
+        active: Активный
+        archived: Архив
+        out: Нет в наличии
+
 
     kit:
       state:

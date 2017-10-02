@@ -1,4 +1,6 @@
 class Variant < ApplicationRecord
+  enum state: { active: 1, archived: 2, out: 3 }
+
   scope :themed_by, ->(themes) { where('variants.themes @> any(array[?]::jsonb[])', themes.map(&:to_s)) if themes.present? }
   scope :sized_by, ->(sizes) { where('variants.sizes ?| array[:sizes]', { sizes: sizes.map(&:to_s) }) if sizes.present? }
 

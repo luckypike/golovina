@@ -52,6 +52,14 @@
         }
       }
 
+      &.variant_state {
+        .radio {
+          input {
+            margin-right: $gutter / 2;
+          }
+        }
+      }
+
       &.product_variants_sizes,
       &.variant_sizes,
       &.product_themes {
@@ -66,6 +74,10 @@
         .checkbox {
           margin-right: $gutter;
           white-space: nowrap;
+
+          &:last-child {
+            margin-right: 0;
+          }
 
           input {
             margin-right: $gutter / 2;

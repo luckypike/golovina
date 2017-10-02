@@ -30,8 +30,8 @@
 
         .variants.live.lv3
           .variants_list
-            - product.variants.each do |variant|
-              .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json]) data-label=variant.color.title data-oos=variant.out_of_stock.to_s
+            - product.variants.where(state: [:active, :out]).each do |variant|
+              .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json]) data-label=variant.color.title data-oos=variant.out?.to_s
                 .icon class=variant.color.slug style="background-color: #{variant.color.color}; #{variant.color.image? ? "background-image: url(#{variant.color.image.url})" : ''}"
 
           .variants_title
