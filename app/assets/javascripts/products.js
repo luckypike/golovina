@@ -308,6 +308,7 @@ $(function(){
 
 
   $('.product_data .acc .title').on('click', function() {
+    $('.product_data .acc .content').not($(this).next()).slideUp();
     $(this).next().slideToggle();
   });
 
