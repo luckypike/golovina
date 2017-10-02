@@ -5,7 +5,7 @@
 .page.page_common.page_kit
   .page_kit_intro.lv2
       .images.lv3
-        - @kit.images.each do |image|
+        - @kit.images.sort_by{ |i| [(i.weight.zero? ? 99 : i.weight), i.created_at] }.each do |image|
           .images_item.lv3
             .img
               = image_tag image.photo.large.url
