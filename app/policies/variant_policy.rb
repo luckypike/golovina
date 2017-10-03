@@ -3,6 +3,10 @@ class VariantPolicy < ApplicationPolicy
     true
   end
 
+  def index?
+    user&.is_editor?
+  end
+
   def create?
     update?
   end

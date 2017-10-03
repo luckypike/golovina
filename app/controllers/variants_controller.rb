@@ -2,6 +2,15 @@ class VariantsController < ApplicationController
   before_action :set_variant, only: [:update, :destroy, :images]
   before_action :set_user, only: [:wishlist, :cart]
 
+  def index
+    authorize Variant
+
+    @variants = Variant.includes(:product, :images, :color).all.select{ |v| v.title.downcase.include? params[:q].downcase }
+
+    respond_to do |format|
+      format.json
+    end
+  end
 
   def wishlist
     variant = Variant.includes(:product).find(params[:variant_id])

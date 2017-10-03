@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :variants, only: [:create, :update, :destroy] do
+  resources :variants, only: [:index, :create, :update, :destroy] do
     member do
       get :images
     end

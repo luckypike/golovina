@@ -29,10 +29,14 @@
       = button_tag 'Добавить фото', type: :button, class: [:dz_clickable, :btn]
 
 
-      = f.association :products, collection: Product.order(title: :asc), label_method: :title_safe, input_html: { class: :as_selectize_variants, data: { url: variants_path(format: :json) } }
+      = f.association :variants, collection: f.object.variants, input_html: { class: :as_variants }
+      .as_variants_choose data-url=variants_path(format: :json)
+        .as_variants_choose_text
+          .input
+            = text_field_tag 'text'
 
-      / = f.simple_fields_for :images do |i_f|
-        = i_f.input :photo
+        .as_variants_choose_list
+
 
     .form_actions
       = f.button :submit

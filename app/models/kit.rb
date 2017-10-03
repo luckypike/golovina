@@ -3,7 +3,7 @@ class Kit < ApplicationRecord
 
   belongs_to :theme
   has_many :kitables, dependent: :destroy
-  has_many :products, through: :kitables
+  has_many :variants, through: :kitables
 
   has_many :images, as: :imagable, dependent: :destroy
   accepts_nested_attributes_for :images
@@ -14,7 +14,7 @@ class Kit < ApplicationRecord
 
 
   def title_safe
-    self.title.presence || products.map(&:title_safe).to_sentence.downcase.upcase_first
+    self.title.presence || variants.map(&:product).map(&:title_safe).to_sentence.downcase.upcase_first
   end
 
   def price

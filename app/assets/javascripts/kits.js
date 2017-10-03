@@ -5,21 +5,101 @@ $(function() {
     swiper.slideNext();
   });
 
-  $('.as_selectize_variants').selectize({
-    load: function(query, callback) {
-      if (!query.length) return callback();
-      $.getJSON(this.$input.data('url'), {
+
+
+
+  $('.as_variants_choose').on('redraw', function() {
+    var _this = $(this);
+    var _text = $('.as_variants_choose_text input', this);
+    var _list = $('.as_variants_choose_list', this);
+    var query = _text.val();
+
+
+    if(_this.data('query') != query) {
+      $.getJSON(_this.data('url'), {
           q: query,
         })
-        .done(function() {
-          console.log(res.movies);
-          callback(res.movies);
+        .done(function(data) {
+          _list.html('');
+
+          $.each(data.variants, function(i, variant) {
+            var img = '';
+            if(variant.image != undefined) {
+              img = '<img src="' + variant.image + '" alt="">';
+            }
+            var item =  '<div class="as_variants_choose_list_item">' +
+              '<div class="img">' + img + '</div>' +
+              '<div class="data">' +
+                '<div class="product_label">' + variant.title + '</div>' +
+                '<div class="color">' + variant.color + '</div>' +
+              '</div>' +
+            '</div>';
+            _list.append(item);
+          });
+
         })
         .fail(function() {
-          callback();
+
       });
+      _this.data('query', query);
     }
+  }).trigger('redraw');
+
+  $('.as_variants_choose_text input').on('keyup', function() {
+    $(this).closest('.as_variants_choose').trigger('redraw');
   });
+
+  // $('.as_selectize_variants').selectize({
+  //   valueField: 'id',
+  //   labelField: 'title_full',
+  //   searchField: 'title_full',
+  //   // options: [],
+  //   preload: true,
+  //   create: false,
+  //   render: {
+  //     option: function(item, escape) {
+  //       // var actors = [];
+  //       // for (var i = 0, n = item.abridged_cast.length; i < n; i++) {
+  //       //   actors.push('<span>' + escape(item.abridged_cast[i].name) + '</span>');
+  //       // }
+  //       console.log(item);
+  //       return '<div class="selectize-variant">' +
+  //         '<div class="img"><img src="' + escape(item.image) + '" alt=""></div>' +
+  //         '<div class="data">' +
+  //           '<div class="product_label">' + escape(item.title) + '</div>' +
+  //           '<div class="color">' + escape(item.color) + '</div>' +
+  //         '</div>' +
+  //       '</div>';
+  //     }
+  //   },
+  //   load: function(query, callback) {
+  //     // if (!query.length) return callback();
+
+  //     // $.ajax({
+  //     //     url: this.$input.data('url'),
+  //     //     type: 'GET',
+  //     //     error: function() {
+  //     //         callback();
+  //     //     },
+  //     //     success: function(res) {
+  //     //         callback(res.variants);
+  //     //     }
+  //     // });
+
+  //     console.log(this.$input.data('url'));
+
+  //     $.getJSON(this.$input.data('url'), {
+  //         q: query,
+  //       })
+  //       .done(function(data) {
+  //         // console.log(data.variants);
+  //         return callback(data.variants);
+  //       })
+  //       .fail(function() {
+  //         return callback();
+  //     });
+  //   }
+  // });
 
   $('.dz_preview').on('ajax:success', '.destroy', function(event) {
     var detail = event.detail;
@@ -144,3 +224,4 @@ $(function() {
   // }
 
 });
+

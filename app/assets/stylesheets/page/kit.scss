@@ -142,11 +142,50 @@
         }
       }
     }
+
+    .kit_variants {
+      .as_variants {
+        display: none;
+      }
+    }
+
+    .as_variants {
+      &_choose {
+        margin-bottom: $base-rhythm-line * 5;
+
+
+        &_list {
+          display: flex;
+          flex-wrap: wrap;
+          // margin-right: -$gutter;
+
+
+
+          &_item {
+            align-items: flex-start;
+            display: flex;
+            width: 250px;
+            padding-right: $gutter * 2;
+            margin-bottom: $base-rhythm-line;
+
+            .img {
+              flex-shrink: 0;
+              width: 50px;
+              margin-right: $gutter / 2;
+              @include aspect-ratio(4, 5);
+            }
+
+            .data {
+              @include font-size(1.5, 2);
+            }
+
+          }
+        }
+      }
+    }
   }
 
   @include mq($m) {
-
-
     &_intro {
       .images {
         @include column-pane;
@@ -198,4 +237,20 @@
       }
     }
   }
+}
+
+.as_variants {
+  // .selectize-dropdown-content {
+  //   max-height: 400px;
+
+  //   .selectize-variant {
+  //     display: flex;
+
+  //     .img {
+  //       width: 40px;
+  //       margin-right: $gutter;
+  //       @include aspect-ratio(4, 5);
+  //     }
+  //   }
+  // }
 }

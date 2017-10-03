@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002095818) do
+ActiveRecord::Schema.define(version: 20171003101817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,8 +65,10 @@ ActiveRecord::Schema.define(version: 20171002095818) do
   create_table "kitables", force: :cascade do |t|
     t.bigint "kit_id"
     t.bigint "product_id"
+    t.bigint "variant_id"
     t.index ["kit_id"], name: "index_kitables_on_kit_id"
     t.index ["product_id"], name: "index_kitables_on_product_id"
+    t.index ["variant_id"], name: "index_kitables_on_variant_id"
   end
 
   create_table "kits", force: :cascade do |t|
@@ -198,6 +200,7 @@ ActiveRecord::Schema.define(version: 20171002095818) do
 
   add_foreign_key "carts", "users"
   add_foreign_key "carts", "variants"
+  add_foreign_key "kitables", "variants"
   add_foreign_key "kits", "themes"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "variants"

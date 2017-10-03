@@ -31,6 +31,10 @@ class Variant < ApplicationRecord
     images[0].photo.presence || nil
   end
 
+  def title
+    "#{self.product.title_safe} (#{self.color.title})"
+  end
+
   def in_wishlist user
     Wishlist.where(user: user, variant: self).any?
   end
