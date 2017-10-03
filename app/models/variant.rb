@@ -17,6 +17,9 @@ class Variant < ApplicationRecord
   has_many :wishlists, dependent: :destroy
   has_many :carts, dependent: :destroy
 
+  has_many :kitables, dependent: :destroy
+  has_many :kits, through: :kitables
+
 
   def sync_themes_and_category
     self.themes = product.themes.map(&:id)

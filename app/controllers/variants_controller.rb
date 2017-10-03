@@ -5,7 +5,10 @@ class VariantsController < ApplicationController
   def index
     authorize Variant
 
-    @variants = Variant.includes(:product, :images, :color).all.select{ |v| v.title.downcase.include? params[:q].downcase }
+    @selected = Variant.includes(:product, :images, :color, :kitables).where(id: params[:selected], kitables: { kit_id: params[:kit_id] }).sort_by{ |v| v.kitables.first.id }
+
+    @variants = Variant.includes(:product, :images, :color).where.not(id: @selected.map(&:id)).order(created_at: :desc).limit(params[:q].present? ? nil : 12).select{ |v| v.title.downcase.include? params[:q].downcase }
+
 
     respond_to do |format|
       format.json

@@ -30,7 +30,7 @@
 
 
       = f.association :variants, collection: f.object.variants, input_html: { class: :as_variants }
-      .as_variants_choose data-url=variants_path(format: :json)
+      .as_variants_choose data-url=variants_path(format: :json) data-kit_id=@kit.id
         .as_variants_choose_text
           .input
             = text_field_tag 'text'

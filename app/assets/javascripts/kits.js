@@ -6,7 +6,16 @@ $(function() {
   });
 
 
+  $('.as_variants_choose_list').on('click', '.as_variants_choose_list_item', function() {
+    var _this = $(this);
+    _this.toggleClass('selected');
 
+    if(_this.is('.selected')) {
+      $(".as_variants").append('<option selected="selected" value="' + _this.data('id') + '"></option>');
+    } else {
+      $('.as_variants option[value="' + _this.data('id') + '"]').remove();
+    }
+  });
 
   $('.as_variants_choose').on('redraw', function() {
     var _this = $(this);
@@ -18,22 +27,39 @@ $(function() {
     if(_this.data('query') != query) {
       $.getJSON(_this.data('url'), {
           q: query,
+          kit_id: _this.data('kit_id'),
+          selected: $(".as_variants option:selected").map(function(){ return this.value }).get(),
         })
         .done(function(data) {
           _list.html('');
+
+          $.each(data.selected, function(i, variant) {
+            var img = '';
+            if(variant.image != undefined) {
+              img = '<img src="' + variant.image + '" alt="">';
+            }
+            var item =  '<div class="as_variants_choose_list_item selected" data-id="' + variant.id + '"><div class="frame">' +
+              '<div class="img">' + img + '</div>' +
+              '<div class="data">' +
+                '<div class="product_label">' + variant.title + '</div>' +
+                '<div class="color">' + variant.color + '</div>' +
+              '</div>' +
+            '</div></div>';
+            _list.append(item);
+          });
 
           $.each(data.variants, function(i, variant) {
             var img = '';
             if(variant.image != undefined) {
               img = '<img src="' + variant.image + '" alt="">';
             }
-            var item =  '<div class="as_variants_choose_list_item">' +
+            var item =  '<div class="as_variants_choose_list_item" data-id="' + variant.id + '"><div class="frame">' +
               '<div class="img">' + img + '</div>' +
               '<div class="data">' +
                 '<div class="product_label">' + variant.title + '</div>' +
                 '<div class="color">' + variant.color + '</div>' +
               '</div>' +
-            '</div>';
+            '</div></div>';
             _list.append(item);
           });
 

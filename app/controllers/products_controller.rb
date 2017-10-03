@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
     params[:theme] = params[:theme].presence || []
     params[:size] = params[:size].presence || []
 
-    @products = Variant.includes(:images, product: [:variants]).themed_by(params[:theme]).sized_by(params[:size]).where(@where).where(products: { state: :active }, state: [:active, :out]).order('products.created_at DESC')
+    @products = Variant.includes(:images, :product).themed_by(params[:theme]).sized_by(params[:size]).where(@where).where(products: { state: :active }, state: [:active, :out]).order('products.created_at DESC')
     render :all
   end
 
@@ -76,20 +76,19 @@ class ProductsController < ApplicationController
   def latest
     authorize Product
 
-    @products = Variant.includes(:images, product: [:variants]).where(products: { latest: true, state: :active })
+    @products = Variant.includes(:images, :product).where(products: { latest: true, state: :active })
   end
 
   def sale
     authorize Product
 
-    @products = Variant.includes(:images, product: [:variants]).where(products: { sale: true, state: :active })
+    @products = Variant.includes(:images, :product).where(products: { sale: true, state: :active })
   end
 
   def kits
     authorize Product
 
-    @products = Kit.includes(:images, :products).where.not(kitables: { id: nil }).where(products: { state: :active }, latest: true, state: :active).where.not(images: { id: nil })
-
+    @products = Kit.includes(:images, :kitables).where.not(kitables: { id: nil }).where(latest: true, state: :active).where.not(images: { id: nil })
   end
 
   def variants

@@ -8,7 +8,7 @@ class KitsController < ApplicationController
 
   def show
     authorize @kit
-    @products = @kit.kitables.order(id: :asc).includes(:product).map(&:product)
+    @variants = @kit.kitables.order(id: :asc).includes(variant: [:product]).map(&:variant)
   end
 
   def new
@@ -36,6 +36,8 @@ class KitsController < ApplicationController
 
   def update
     authorize @kit
+
+    @kit.kitables.destroy_all
 
     if @kit.update(kit_params)
       redirect_to [:kits], notice: 'Kit was successfully updated.'

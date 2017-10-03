@@ -18,6 +18,6 @@
 
   .page_kit_products
     .products
-      - @products.each_with_index do |product, i|
+      - @variants.each_with_index do |variant, i|
         .products_item.lv2 class="i_#{i % 2}"
-          == render 'products/item', product: product
+          == render 'products/item', product: variant.product, variant: variant

@@ -53,14 +53,7 @@ $(function(){
 
   _evf.on('change', function() {
     var _this = $(this);
-
     $('.form_actions input', _this).trigger('click');
-
-    // _evf.trigger('submit.rails');
-    // _evf.submit();
-
-    // return false;
-
   });
 
   var _v = $('.variants.live');
@@ -92,6 +85,13 @@ $(function(){
             }
           });
         }
+      } else {
+        _variants.each(function(i) {
+          var _tv = _variants.eq(i);
+          if(_tv.data('id') == _v.data('variant_active')) {
+            _variant = _tv;
+          }
+        });
       }
 
       // TODO: rewrite this selectors

@@ -162,11 +162,26 @@
 
 
           &_item {
-            align-items: flex-start;
-            display: flex;
+            cursor: pointer;
             width: 250px;
             padding-right: $gutter * 2;
             margin-bottom: $base-rhythm-line;
+
+            .frame {
+              align-items: flex-start;
+              display: flex;
+              padding: $base-rhythm-line / 2;
+              border: 2px solid transparent;
+            }
+
+            &.selected {
+
+              .frame {
+                background-color: rgba($sand-color, 1);
+                padding: $base-rhythm-line / 2;
+                border: 2px solid $primary-color;
+              }
+            }
 
             .img {
               flex-shrink: 0;
@@ -177,6 +192,10 @@
 
             .data {
               @include font-size(1.5, 2);
+
+              @include mq($m) {
+                @include font-size(2, 3);
+              }
             }
 
           }

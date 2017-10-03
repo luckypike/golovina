@@ -1,8 +1,8 @@
 .products_list
-  - products.sort_by(&:entity_created_at).reverse.each_with_index do |entity, i|
+  - products.sort_by(&:created_at).reverse.each_with_index do |entity, i|
     - product = entity.is_a?(Variant) ? entity.product : entity
     - url = polymorphic_path(product)
-    - url = polymorphic_path(product, anchor: entity.id) if entity.is_a?(Variant) && entity.product.variants.size > 1
+    - url = polymorphic_path(product, anchor: entity.id) if entity.is_a?(Variant)
 
     .products_list_item class="i_#{i % 6}"
       = link_to '', url, class: :fake

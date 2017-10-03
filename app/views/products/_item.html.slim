@@ -1,6 +1,7 @@
+  - variant ||= product.variants.first
   .product
     .product_images.swiper-container.lv3
-      - if product.undef? && policy(product).edit?
+      / - if product.undef? && policy(product).edit?
         .images_list_add_images
           = link_to 'Добавить фотографии', [:variants, product], class: :btn
       .images_list.swiper-wrapper
@@ -28,7 +29,7 @@
             = link_to 'Редактировать товар', [:edit, product], class: :btn_gr
             =< link_to 'Размеры и цвета', [:variants, product], class: :btn_gr
 
-        .variants.live.lv3
+        .variants.live.lv3 data-variant_active=variant.id
           .variants_list
             - product.variants.where(state: [:active, :out]).each do |variant|
               .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json]) data-label=variant.color.title data-oos=variant.out?.to_s

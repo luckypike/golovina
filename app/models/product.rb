@@ -3,9 +3,6 @@ class Product < ApplicationRecord
 
   after_save :sync_variants
 
-  has_many :kitables, dependent: :destroy
-  has_many :kits, through: :kitables
-
   belongs_to :category
 
   has_many :themable, dependent: :destroy
