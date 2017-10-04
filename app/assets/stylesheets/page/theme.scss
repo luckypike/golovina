@@ -419,6 +419,26 @@
       z-index: 2;
       text-align: center;
 
+      .price {
+        > div {
+          display: inline;
+        }
+
+        &_last {
+          // @include font-size-bigger;
+
+          margin-right: $gutter / 2;
+
+          &.red {
+            color: rgb(204, 12, 47);
+          }
+        }
+
+        &_old {
+          text-decoration: line-through;
+        }
+      }
+
       @include mq($s) {
         @include font-size-small;
 
