@@ -88,7 +88,7 @@ $(function(){
       } else {
         _variants.each(function(i) {
           var _tv = _variants.eq(i);
-          if(_tv.data('id') == _v.data('variant_active')) {
+          if(_tv.data('id') == _vv.data('variant_active')) {
             _variant = _tv;
           }
         });
