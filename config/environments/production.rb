@@ -105,4 +105,14 @@ Rails.application.configure do
     'X-XSS-Protection' => '1; mode=block',
     'X-Content-Type-Options' => 'nosniff'
   }
+
+  config.middleware.use ExceptionNotification::Rack,
+    email: {
+      email_prefix: "[ERROR][mint] ",
+      sender_address: %{"Luckybot" <#{Rails.application.secrets[:mail_username]}>},
+      exception_recipients: %w{ab+tech@luckypike.com}
+    }
 end
+
+
+
