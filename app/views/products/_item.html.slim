@@ -1,35 +1,17 @@
-  - variant ||= product.variants.first
-  .product
-    .product_images.swiper-container.lv3
-      / - if product.undef? && policy(product).edit?
-        .images_list_add_images
-          = link_to 'Добавить фотографии', [:variants, product], class: :btn
-      .images_list.swiper-wrapper
+- variant ||= product.variants.first
 
+.product
+  .product_images
+    .images_list
+
+  .product_data_wrapper
     .product_data class=product.state
-      .data
+      .title_and_color.lv3
         .title.lv4
           h1
             = product.title_safe
 
-        .price.lv3
-          - if product.price_last
-            .price_last.red
-              = number_to_rub product.price_last
-
-            .price_old
-              = number_to_rub product.price
-
-          - else
-            .price_last
-              = number_to_rub product.price
-
-        - if policy(product).edit?
-          .edit
-            = link_to 'Редактировать товар', [:edit, product], class: :btn_gr
-            =< link_to 'Размеры и цвета', [:variants, product], class: :btn_gr
-
-        .variants.live.lv3 data-variant_active=variant.id
+        .variants.live data-variant_active=variant.id
           .variants_list
             - product.variants.where(state: [:active, :out]).each do |variant|
               .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json]) data-label=variant.color.title data-oos=variant.out?.to_s
@@ -37,11 +19,12 @@
 
           .variants_title
 
+      .images.swiper-container.lv4
+        .images_list.swiper-wrapper.images_list_swiper
 
+
+      .rest_of
         .sizes.live.lv3 data-sizes="#{product.variants.select(&:sizes).map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json}"
-          / .sizes_title
-            | Подберите свой размер
-
           .sizes_list
             - Rails.application.secrets[:sizes].each do |size|
               .sizes_list_item data-size=size class="size_#{size}"
@@ -49,18 +32,43 @@
                   line x1="0" y1="40" x2="40" y2="0"
                 = size if size > 0
 
-        .buy
-          = link_to 'Добавить в корзину', [:cart, :variants], class: [:btn, :cart, :inactive], method: :post, remote: true, data: { disable_with: 'Добавляем..' }
-          = link_to [:wishlist, :variants], class: [:wishlist], method: :post, remote: true do
-            = inline_svg 'icons/wishlist.svg'
+          / .sizes_title
+            | Помощь с размером
+
+        .price_and_buy
+          .price
+            - if product.price_last
+              .price_last.red
+                = number_to_rub product.price_last
+
+              .price_old
+                = number_to_rub product.price
+
+            - else
+              .price_last
+                = number_to_rub product.price
+
+          .buy
+            = link_to 'Купить', [:cart, :variants], class: [:btn, :cart, :inactive], method: :post, remote: true, data: { disable_with: 'Покупка..' }
+            = link_to 'Оплатить', [:cart], class: [:btn, :purchase]
+            / = link_to [:wishlist, :variants], class: [:wishlist], method: :post, remote: true do
+              = inline_svg 'icons/wishlist.svg'
 
         .after_add
           ' Товар добавлен в корзину.
-          = link_to 'Оформить заказ', [:cart], class: [:btn, :btn_gr]
 
 
         .out_of_stock
           | Товар в этом цвете временно отсутствует.
+
+
+      .data
+        - if policy(product).edit?
+          .edit
+            = link_to 'Редактировать', [:edit, product], class: :btn_gr
+            =< link_to 'Размеры и цвета', [:variants, product], class: :btn_gr
+
+
 
       .acc
         - if product.desc.present?
@@ -68,6 +76,8 @@
             .title
               .title_label
                 = t('simple_form.labels.defaults.desc')
+
+              = inline_svg 'icons/varr.svg'
 
             .content
               = markdown product.desc
@@ -78,17 +88,11 @@
               .title_label
                 = t('simple_form.labels.defaults.comp')
 
+              = inline_svg 'icons/varr.svg'
+
             .content
               = markdown product.comp
 
-
-        / .acc_item
-          .title
-            .title_label
-              | Таблица размеров
-
-          .content
-            | Таблица соответствия размеров
 
         .acc_item
           .title
@@ -100,6 +104,8 @@
                 | Завтра
               - else
                 | Сегодня
+
+            = inline_svg 'icons/varr.svg'
 
           .content
             .delivery_fast

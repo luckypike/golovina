@@ -305,6 +305,8 @@
 
 .product {
   &_images {
+    display: none;
+
     .images {
       &_list {
 
@@ -382,16 +384,55 @@
   }
 
   &_data {
-    .data {
-      display: flex;
-      flex-wrap: wrap;
+    &_wrapper {
 
-      > div {
-        width: 100%;
+    }
+
+    .title_and_color {
+      .title {
+        text-align: center;
+      }
+    }
+
+    .images {
+      .swiper-pagination {
+        position: absolute;
+        right: $gutter;
+        left: auto;
+        top: $base-rhythm-line;
+        width: auto;
+        bottom: auto;
       }
 
-      .variants {
-        order: -1;
+      &_list {
+        .image {
+          @include aspect-ratio(4, 5);
+
+          background: $sand-color;
+        }
+      }
+    }
+
+    // .data {
+    //   display: flex;
+    //   flex-wrap: wrap;
+
+    //   > div {
+    //     width: 100%;
+    //   }
+    // }
+
+    .price_and_buy {
+      display: flex;
+
+      .price {
+        line-height: 2rem;
+        flex-grow: 1;
+      }
+
+      .buy {
+        flex-shrink: 0;
+        margin-left: auto;
       }
     }
 
@@ -418,8 +459,6 @@
     }
 
     .variants {
-      margin-top: -$base-rhythm-line;
-
       &_title {
         margin-top: $base-rhythm-line;
         text-align: center;
@@ -433,7 +472,7 @@
         &_item {
           border: 1px solid $separator-color;
           cursor: pointer;
-          padding: 3px;
+          padding: 2px;
           margin-right: $gutter / 2;
 
           .icon {
@@ -441,8 +480,14 @@
               color: $separator-color;
               size: cover;
             };
-            height: $base-rhythm-line * 4;
-            width: $base-rhythm-line * 4;
+
+            height: $base-rhythm-line * 3.25;
+            width: $base-rhythm-line * 3.25;
+
+            @include mq($s) {
+              height: $base-rhythm-line * 4.25;
+              width: $base-rhythm-line * 4.25;
+            }
           }
 
           &:last-child {
@@ -459,21 +504,30 @@
     .sizes {
       &_title {
         margin-bottom: $base-rhythm-line * 2;
+        text-align: center;
       }
 
       &_list {
         display: flex;
+        justify-content: center;
         user-select: none;
 
         &_item {
           border: 1px solid $separator-color;
           cursor: pointer;
-          line-height: 38px;
-          width: $base-rhythm-line * 5;
-          height: $base-rhythm-line * 5;
+          line-height: 30px;
+          width: $base-rhythm-line * 4;
+          height: $base-rhythm-line * 4;
           text-align: center;
           margin-right: $gutter / 2;
           transition: color 0.2s, border 0.2s;
+          position: relative;
+
+          @include mq($s) {
+            line-height: 38px;
+            height: $base-rhythm-line * 5;
+            width: $base-rhythm-line * 5;
+          }
 
 
           .cross_line {
@@ -505,7 +559,7 @@
             cursor: default;
             border-color: $separator-color;
 
-            position: relative;
+
 
             .cross_line {
               opacity: 1;
@@ -533,9 +587,7 @@
     }
 
     .buy {
-      display: flex;
       max-width: 380px;
-
       .wishlist {
         border: 1px solid $separator-color;
         margin-left: $gutter / 2;
@@ -564,31 +616,16 @@
       }
 
       .cart {
-        padding-left: 0;
-        padding-right: 0;
-        flex-grow: 1;
+        transition: opacity 0.3s;
 
         &.inactive {
-          color: $separator-color;
-          background-color: rgba($separator-color, 0.13);
+          opacity: 0.4
         }
       }
-
-
-    }
-
-    .after_add {
-      margin-top: $base-rhythm-line;
-
-      a {
-        margin-top: $base-rhythm-line;
-      }
-      // display: none;
     }
 
     .out_of_stock {
       visibility: hidden;
-      // margin-top: $space-s;
       color: red;
 
       &.active {
@@ -605,7 +642,6 @@
     }
 
     .edit {
-      // margin-top: $base-rhythm-line;
       margin-bottom: $base-rhythm-line * 2;
 
       .btn_gr {
@@ -623,7 +659,6 @@
         padding: $base-rhythm-line / 2 $gutter / 2;
         user-select: none;
       }
-
     }
 
     .acc {
@@ -648,6 +683,23 @@
 
             @include mq($l) {
               line-height: 20px;
+            }
+          }
+
+          .varr_icon {
+            display: block;
+            width: 10px;
+            height: 24px;
+            margin-left: $gutter / 2;
+            flex-shrink: 0;
+            margin-left: auto;
+
+            polyline {
+              fill: none;
+              stroke-width: 1px;
+              stroke: $primary-color;
+              stroke-linecap: butt;
+              stroke-linejoin: miter;
             }
           }
 
@@ -710,17 +762,38 @@
 
     &_images {
       @include column-width(6, 12);
+
+      display: block;
     }
 
     &_data {
-      @include column-width(4, 12);
-      @include column-shift(1, left, 12);
-      @include column-shift(1, right, 12);
+      &_wrapper {
+        @include column-width(4, 12);
+        @include column-shift(1, left, 12);
+        @include column-shift(1, right, 12);
+      }
+      .images {
+        display: none;
+      }
 
-      .data {
+      .title_and_color {
+        .title {
+          text-align: left;
+        }
+
         .variants {
-          order: 0;
+          &_title {
+            text-align: left;
+          }
 
+          &_list {
+            justify-content: flex-start;
+          }
+        }
+      }
+
+      .rest_of {
+        .sizes {
           &_title {
             text-align: left;
           }

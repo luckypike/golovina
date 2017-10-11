@@ -229,6 +229,10 @@
 
               .images {
                 &_list {
+                  @include mq($m) {
+                    display: flex;
+
+                  }
                   cursor: pointer;
                 }
               }

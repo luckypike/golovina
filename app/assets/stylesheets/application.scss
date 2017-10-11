@@ -83,29 +83,32 @@ html {
 
 button.btn,
 .btn {
-  @include font-size(1.5, 4);
+  // @include font-size(1.5, 4);
+  @include font-size(1.5, 3.75);
 
   font-family: inherit;
   font-weight: inherit;
   appearance: none;
-  background: $sand-color;
+  // background: $sand-color;
+  border: 1px solid $highlight-color;
   cursor: pointer;
   color: $primary-color;
   display: inline-block;
-  padding: $base-rhythm-line / 2 $gutter * 2;
+  padding: 0 $gutter;
   user-select: none;
   text-align: center;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  min-width: 10rem;
+  min-width: 8rem;
   transition: background 0.3s, color 0.3s;
+
 
   &:hover {
     // background: $sand-hover-color;
   }
 
   &_gr {
-    @include font-size(1.5, 3.75);
+    // @include font-size(1.5, 3.75);
 
     background-color: transparent;
     border: 1px solid $sand-color;

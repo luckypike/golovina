@@ -63,7 +63,7 @@ $(function(){
 
     _v.each(function() {
       var _vv = $(this);
-      var _s = _vv.next();
+      var _s = _vv.parent().next().next().find('.sizes');
       var _b = _s.next();
       var _oos = _b.next().next();
       var _variants = $('.variants_list_item', _vv);
@@ -98,6 +98,8 @@ $(function(){
 
       _b.on('set_variant', function() {
         $('.after_add', _b.parent()).hide();
+        $('.purchase', _b).hide();
+        $('.cart', _b).show();
         if(_b.data('wishlist') == undefined) {
           _b.data('wishlist', $('.wishlist', _b).attr('href'));
         }
@@ -108,6 +110,8 @@ $(function(){
 
       _b.on('set_size', function() {
         $('.after_add', _b.parent()).hide();
+        $('.purchase', _b).hide();
+        $('.cart', _b).show();
         if(_b.data('cart') == undefined) {
           _b.data('cart', $('.cart', _b).attr('href'));
         }
@@ -123,13 +127,19 @@ $(function(){
         if($(this).is('.inactive')) {
           return false;
         }
+
+        $(this).addClass('inactive');
       }).on('ajax:success', function(event) {
         var detail = event.detail;
         var data = detail[0], status = detail[1],  xhr = detail[2];
 
+        $(this).removeClass('inactive');
+
         if(parseInt(data) > 0) {
+          $(this).hide().next().show();
           $('.header .cart').removeClass('nil').addClass('active').find('.counter .d').html(parseInt(data));
           $('.after_add', _b.parent()).slideDown();
+          // _b.text(_b.data('cart_text'));
         } else {
           $('.header .cart').addClass('nil').removeClass('active');
         }
@@ -214,9 +224,11 @@ $(function(){
           history.replaceState(undefined, undefined, '#' + _this.data('id'));
         }
 
-        var _il = _this.closest('.product').find('.product_images .images_list');
+        var _ils = _this.closest('.product').find('.images_list');
+        var _il = _this.closest('.product').find('.images_list_swiper');
         var _pip = _il.parent();
         _pip.data('loading', true);
+
         var swiper = _pip.data('swiper');
         if(swiper) {
           swiper.destroy(true, true);
@@ -226,9 +238,9 @@ $(function(){
 
 
         $.getJSON(_this.data('url'), function(data) {
-          _il.html('');
+          _ils.html('');
           $.each(data.images, function(i, image) {
-            _il.append('<div class="images_list_item swiper-slide"><div class="image"><img src="' + image.photo.thumb.url + '"></div></div>');
+            _ils.append('<div class="images_list_item swiper-slide"><div class="image"><img src="' + image.photo.thumb.url + '"></div></div>');
           });
 
           if(data.wishlist) {
@@ -242,11 +254,11 @@ $(function(){
           if(_il.css('display') == 'flex') {
             var swiper = new Swiper (_pip, {
               pagination: $('.swiper-pagination', _pip),
-              paginationClickable: true,
-              paginationBulletRender: function(swiper, index, className) {
-                console.log();
-                var url = $(swiper.slides[index]).find('img').attr('src');
-                return '<div class="' + className + '"><div class="img" style="background-image: url(' + url + ')"></div></div>';
+              paginationType: 'fraction',
+              paginationFractionRender(swiper, currentClassName, totalClassName) {
+                return '<span class="' + currentClassName + '"></span>' +
+                       '/' +
+                       '<span class="' + totalClassName + '"></span>';
               },
             });
             _pip.data('has_swiper', true);
@@ -275,30 +287,30 @@ $(function(){
   var _pi = $('.product_images');
   var _window = $(window);
 
-  _pi.on('swiper', function() {
-    var _this = $(this);
-    var _il = $('.images_list', this);
+  // _pi.on('swiper', function() {
+  //   var _this = $(this);
+  //   var _il = $('.images_list', this);
 
-    if(!_this.data('loading')) {
-      if(_il.css('display') == 'flex') {
-        if(!_this.data('has_swiper')) {
-          var swiper = new Swiper (_this, {
+  //   if(!_this.data('loading')) {
+  //     if(_il.css('display') == 'flex') {
+  //       if(!_this.data('has_swiper')) {
+  //         var swiper = new Swiper (_this, {
 
-          });
+  //         });
 
-          _this.data('swiper'. swiper);
+  //         _this.data('swiper'. swiper);
 
-          _this.data('has_swiper', true);
-        }
-      } else {
-        if(_this.data('has_swiper')) {
-          var swiper = _this.data('swiper');
-          swiper.destroy(true, true);
-          _this.data('has_swiper', false);
-        }
-      }
-    }
-  });
+  //         _this.data('has_swiper', true);
+  //       }
+  //     } else {
+  //       if(_this.data('has_swiper')) {
+  //         var swiper = _this.data('swiper');
+  //         swiper.destroy(true, true);
+  //         _this.data('has_swiper', false);
+  //       }
+  //     }
+  //   }
+  // });
 
 
   _window.on('resize', function() {
@@ -320,54 +332,4 @@ $(function(){
     $('.delivery_fast .text_item.' + $(this).attr('rel')).addClass('active');
   });
 
-  // var _pd = $('.page_product .product_data');
-  // var _window = $(window);
-
-  // if(_pd.length) {
-  //   _window.on('scroll', function() {
-  //     _pd.trigger('move');
-  //   }).trigger('scroll');
-
-  //   _pd.on('move', function() {
-  //     var _this = $(this);
-  //     _this.css({
-  //       top: _window.scrollTop()
-  //     });
-  //   });
-  // }
-
-
-
-
-
-
-
-
-  // $('.products_list_item').on('click', '.a, .pre .image', function(e) {
-  //   var _this = $(this);
-  //   var _pi = _this.parent().parent();
-  //   var _pi = _this.parent().parent();
-  //   var _pi = _this.parent().parent();
-  //   var _pi = _this.parent().parent();
-  //   // if(_this.is('.a')) _pi = _this.parent();
-
-  //   var source = $("#products-pre-template").html();
-  //   var template = Handlebars.compile(source);
-
-  //   if(_pi.is('.o')) {
-  //     _pi.removeClass('o').next().removeClass('ao');
-  //   } else {
-  //     _pi.addClass('o');
-  //     var _n = _pi.next();
-  //     if(_n.length > 0) {
-  //       _n.addClass('ao');
-  //     }
-
-  //     $.getJSON(_pi.data('src'), function(product) {
-  //       $('.pre', _pi).html(template(product));
-  //     });
-  //   }
-
-  //   return false;
-  // });
 });
