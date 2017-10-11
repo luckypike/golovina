@@ -1,4 +1,10 @@
 ru:
+  kit_products:
+    one: "%{count} товар"
+    few: "%{count} товара"
+    many: "%{count} товаров"
+    other: '%{count} товара'
+
   helpers:
     submit:
       create: "Добавить"

@@ -5,6 +5,42 @@ $(function() {
     swiper.slideNext();
   });
 
+  $('.kits_list_item').on('click', function(){
+    var _kpw = $(this).next();
+    var _kp = _kpw.find('.kit_products');
+    // console.log(_kli);
+
+
+    if(_kpw.is(':visible')) {
+      _kpw.slideUp(400, function() {
+        var swiper = _kp.data('swiper');
+
+        if(swiper) {
+          swiper.destroy(true, true);
+        }
+      });
+
+    } else {
+      _kpw.slideToggle(400, function() {
+        if($(window).width() < 960) {
+          var swiper = new Swiper (_kp, {
+            freeMode: false,
+            slidesPerView: 2,
+          });
+          _kp.data('swiper', swiper);
+        }
+      });
+    }
+
+
+
+
+    // $('.kit_products_list', _kp);
+  });
+
+  // var swiper = new Swiper ('.kit_products', {
+  // });
+
 
   $('.as_variants_choose_list').on('click', '.as_variants_choose_list_item', function() {
     var _this = $(this);

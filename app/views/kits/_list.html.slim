@@ -1,0 +1,51 @@
+.kits_list
+  - kits.sort_by(&:created_at).reverse.each_with_index do |kit, i|
+    - images = kit.images.sort_by{ |i| [(i.weight.zero? ? 99 : i.weight), i.created_at] }.take(2)
+
+    .kits_list_item_wrapper
+      .kits_list_item class="i_#{i % 2}"
+        .image_0
+          .img
+            = image_tag images[0].photo.thumb.url
+
+        .title
+          span
+            = kit.title_safe.truncate(80)
+
+        .count
+          .toggle
+            => t(:kit_products, count: kit.variants.size)
+            | в образе
+
+          .btn
+            | Посмотреть
+
+        .image_1
+          .img
+            = image_tag images[1].photo.thumb.url if images[1]
+
+      .kit_products_wrapper
+        .kit_products.swiper-container
+          .kit_products_list.swiper-wrapper
+           - kit.variants.each_with_index do |variant, i|
+              .kit_products_list_item.swiper-slide
+                = link_to '', variant.product, class: :fake
+
+                .product_title
+                  = variant.product.title_safe
+
+                .image
+                  = image_tag variant.images.sort_by{ |i| [(i.weight.zero? ? 99 : i.weight), i.created_at] }.first.photo.thumb.url
+
+                .price_and_buy
+                  .price
+                    - if variant.product.price_last
+                      .price_last.red
+                        = number_to_rub variant.product.price_last
+
+                      .price_old
+                        = number_to_rub variant.product.price
+
+                    - else
+                      .price_last
+                        = number_to_rub variant.product.price
