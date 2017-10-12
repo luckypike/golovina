@@ -7,11 +7,7 @@
       - @kits.each do |kit|
         .kits_item
           strong
-            = link_to kit do
+            = link_to [:edit, kit] do
               | ##{kit.id}
               =<> kit.title_safe
 
-          span.actions
-            | (
-            => link_to 'редактировать', [:edit, kit]
-            | )

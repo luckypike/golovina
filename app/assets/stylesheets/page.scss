@@ -165,7 +165,7 @@
       display: inline-block;
       padding-right: 12px;
       position: relative;
-      z-index: 2;
+      z-index: 7;
 
       svg {
         position: absolute;
@@ -198,7 +198,7 @@
       // transform: translateY(-$base-rhythm-line * 2);
       transition: 0.3s opacity, 0.2s transform, 0s visibility 0.3s;
       min-width: $gutter * 8.5;
-      z-index: 1;
+      z-index: 6;
 
       &_l {
         &_i {
