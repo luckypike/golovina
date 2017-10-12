@@ -61,6 +61,10 @@ $(function(){
   if(_v.length) {
     var hash = location.hash;
 
+    $('.another_variants').on('click', function() {
+      $(this).parent().next().slideToggle();
+    });
+
     _v.each(function() {
       var _vv = $(this);
       var _s = _vv.parent().next().next().find('.sizes');

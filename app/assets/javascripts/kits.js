@@ -25,7 +25,7 @@ $(function() {
         if($(window).width() < 960) {
           var swiper = new Swiper (_kp, {
             freeMode: false,
-            slidesPerView: 2,
+            slidesPerView: 'auto',
           });
           _kp.data('swiper', swiper);
         }

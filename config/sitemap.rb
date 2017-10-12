@@ -26,10 +26,6 @@ SitemapGenerator::Sitemap.create do
     add polymorphic_path(product), lastmod: product.updated_at
   end
 
-  Kit.find_each do |kit|
-    add polymorphic_path(kit), lastmod: kit.updated_at
-  end
-
   Category.find_each do |category|
     add category_products_path(slug: category.slug), lastmod: Time.now
   end

@@ -391,6 +391,35 @@
     .title_and_color {
       .title {
         text-align: center;
+        margin-bottom: $base-rhythm-line;
+      }
+
+      .another_variants {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        margin-bottom: $base-rhythm-line;
+
+        span {
+
+        }
+
+        .varr_icon {
+          display: block;
+          width: 10px;
+          height: 24px;
+          margin-left: $gutter / 2;
+          flex-shrink: 0;
+          // margin-left: auto;
+
+          polyline {
+            fill: none;
+            stroke-width: 1px;
+            stroke: $primary-color;
+            stroke-linecap: butt;
+            stroke-linejoin: miter;
+          }
+        }
       }
     }
 
@@ -412,15 +441,6 @@
         }
       }
     }
-
-    // .data {
-    //   display: flex;
-    //   flex-wrap: wrap;
-
-    //   > div {
-    //     width: 100%;
-    //   }
-    // }
 
     .price_and_buy {
       display: flex;
@@ -460,6 +480,8 @@
     }
 
     .variants {
+      display: none;
+
       &_title {
         margin-top: $base-rhythm-line;
         text-align: center;
@@ -780,9 +802,15 @@
       .title_and_color {
         .title {
           text-align: left;
+
+          .another_variants {
+            display: none;
+          }
         }
 
         .variants {
+          display: block;
+
           &_title {
             text-align: left;
           }
