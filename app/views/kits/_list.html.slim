@@ -33,7 +33,7 @@
           .kit_products_list.swiper-wrapper
            - kit.variants.each_with_index do |variant, i|
               .kit_products_list_item.swiper-slide
-                = link_to '', variant.product, class: :fake
+                = link_to '', [variant.product, anchor: variant.id], class: :fake
 
                 .product_title
                   = variant.product.title_safe
