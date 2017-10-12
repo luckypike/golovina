@@ -76,13 +76,13 @@ class ProductsController < ApplicationController
   def latest
     authorize Product
 
-    @products = Variant.includes(:images, :product).where(products: { latest: true, state: :active })
+    @products = Variant.includes(:images, :product).where(products: { latest: true, state: :active }, state: [:active, :out])
   end
 
   def sale
     authorize Product
 
-    @products = Variant.includes(:images, :product).where(products: { sale: true, state: :active })
+    @products = Variant.includes(:images, :product).where(products: { sale: true, state: :active }, state: [:active, :out])
   end
 
   def kits
