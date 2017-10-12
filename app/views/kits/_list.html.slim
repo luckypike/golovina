@@ -24,6 +24,10 @@
           .img
             = image_tag images[1].photo.thumb.url if images[1]
 
+        - if policy(kit).edit?
+          .control
+            = link_to '', [:edit, kit], class: :edit
+
       .kit_products_wrapper
         .kit_products.swiper-container
           .kit_products_list.swiper-wrapper

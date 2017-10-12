@@ -382,7 +382,7 @@
         padding: $base-rhythm-line;
         position: absolute;
         left: 0;
-        bottom: 0;
+        top: 0;
         z-index: 5;
 
         a {
@@ -590,6 +590,36 @@
       }
     }
 
+    .control {
+      top: 0;
+      left: 0;
+      padding: $base-rhythm-line;
+      position: absolute;
+      width: auto;
+      z-index: 5;
+
+      a {
+        background-color: rgba($primary-color, 0.5);
+        display: block;
+        width: 24px;
+        height: 24px;
+
+        &.edit {
+          background-image: image_url('icons/edit_white.svg');
+          background-size: 24px 24px;
+        }
+      }
+    }
+
+    &.i_1 {
+
+      .control {
+        left: auto;
+        right: 0;
+      }
+    }
+
+
     position: relative;
 
     @include column-pane;
@@ -648,6 +678,12 @@
     }
 
     @include mq($m) {
+      &.i_0 {
+        .control {
+          left: 1rem;
+        }
+      }
+      
       &_wrapper {
         margin-bottom: $space-m2 * 2;
 
@@ -687,7 +723,6 @@
       .image_0 {
         @include column-width(6, 12);
         @include page-static-gutter;
-
         margin-bottom: 0;
       }
 
@@ -746,8 +781,16 @@
 
     &.i_1 {
       .title { order: -4; }
-      .image_0 { order: -3; }
-      .image_1 { order: -2; }
+      .image_1 { 
+        @include column-width(3, 4);
+
+        order: -3; 
+      }
+      .image_0 { 
+        @include column-width(1, 2);
+
+        order: -2; 
+      }
       .count { order: -1; }
 
       @include mq($m) {
@@ -755,6 +798,8 @@
           @include column-width(6, 12);
           @include column-shift(0, left, 12);
           @include column-shift(0, right, 12);
+
+          order: -2;
         }
 
         .image_0 {
@@ -762,6 +807,8 @@
           @include column-width(4, 12);
           @include column-shift(1, left, 12);
           @include column-shift(1, right, 12);
+
+          order: -3;
         }
 
         .count {

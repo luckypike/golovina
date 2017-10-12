@@ -13,7 +13,7 @@
 
         - if policy(product).edit?
           .control
-            = link_to '', [:edit, product], class: :edit
+            = link_to '', ['edit', product], class: :edit
 
 
       - if entity.is_a?(Variant)
