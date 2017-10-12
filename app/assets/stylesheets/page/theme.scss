@@ -680,10 +680,10 @@
     @include mq($m) {
       &.i_0 {
         .control {
-          left: 1rem;
+          left: $gutter;
         }
       }
-      
+
       &_wrapper {
         margin-bottom: $space-m2 * 2;
 
@@ -765,6 +765,11 @@
     }
 
     @include mq($l) {
+      &.i_0 {
+        .control {
+          left: 0;
+        }
+      }
       .image_0 {
         padding: 0;
       }
