@@ -259,7 +259,7 @@ $(function(){
             var swiper = new Swiper (_pip, {
               pagination: $('.swiper-pagination', _pip),
               paginationType: 'fraction',
-              paginationFractionRender(swiper, currentClassName, totalClassName) {
+              paginationFractionRender: function(swiper, currentClassName, totalClassName) {
                 return '<span class="' + currentClassName + '"></span>' +
                        '/' +
                        '<span class="' + totalClassName + '"></span>';
