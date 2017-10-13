@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
+  rescue_from Pundit::NotAuthorizedError, with: :not_authenticated
+
   protect_from_forgery with: :exception
 
   before_action :set_cats
@@ -19,6 +21,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def not_authenticated
+    session[:return_to_url] = request.original_fullpath
+    redirect_to login_path, alert: t(:login_first)
+  end
+
   def set_user
     unless user_signed_in?
       user = User.create(email: "guest_#{Devise.friendly_token.first(10)}@mint-store.ru")
