@@ -9,8 +9,9 @@
             = image_tag images[0].photo.thumb.url
 
         .title
-          span
-            = kit.title_safe.truncate(80)
+          .rotate
+            span
+              = kit.title_safe.truncate(80)
 
         .count
           .toggle
