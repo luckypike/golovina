@@ -1,6 +1,7 @@
 .kits_list
   - kits.sort_by(&:created_at).reverse.each_with_index do |kit, i|
     - images = kit.images.sort_by{ |i| [(i.weight.zero? ? 99 : i.weight), i.created_at] }.take(2)
+    - variants = kit.variants.where(state: [:active, :out]).select{ |v| v.product.active? }
 
     .kits_list_item_wrapper
       .kits_list_item class="i_#{i % 2}"
@@ -14,7 +15,7 @@
 
         .count
           .toggle
-            => t(:kit_products, count: kit.variants.size)
+            => t(:kit_products, count: variants.size)
             | в образе
 
           .btn
@@ -31,7 +32,7 @@
       .kit_products_wrapper
         .kit_products.swiper-container
           .kit_products_list.swiper-wrapper
-           - kit.variants.each_with_index do |variant, i|
+           - variants.each_with_index do |variant, i|
               .kit_products_list_item.swiper-slide
                 = link_to '', [variant.product, anchor: variant.id], class: :fake
 
