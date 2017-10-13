@@ -1,6 +1,8 @@
 class Theme < ApplicationRecord
   enum state: { inactive: 0, active: 1 }
 
+  default_scope { active }
+
   extend FriendlyId
 
   validates_presence_of :slug
