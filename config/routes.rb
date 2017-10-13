@@ -17,8 +17,7 @@ Rails.application.routes.draw do
 
     namespace 'customers', module: nil do
       get '', to: 'customers#index'
-      get 'delivery', to: 'customers#delivery'
-      get 'payment', to: 'customers#payment'
+      get 'info', to: 'customers#info'
       get 'return', to: 'customers#return'
     end
   end

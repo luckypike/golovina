@@ -119,6 +119,9 @@ button.btn,
   }
 }
 
+a.bordered {
+  border-bottom: 1px solid $separator-color;
+}
 // body.dragging, body.dragging * {
 //   cursor: move !important;
 // }
