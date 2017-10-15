@@ -656,7 +656,7 @@
             display: block;
             height: 42px;
             overflow: hidden;
-            padding: 0.5 * $space-s 0 0 $space-s; 
+            padding: 0.5 * $space-s 0 0 $space-s;
             position: absolute;
             text-align: center;
             transform: rotate(-90deg) translate(0%, 0%);
@@ -811,20 +811,20 @@
 
     &.i_1 {
       .title { order: -4; }
-      .image_1 { 
+      .image_0 {
         @include column-width(3, 4);
 
-        order: -3; 
+        order: -3;
       }
-      .image_0 { 
+      .image_1 {
         @include column-width(1, 2);
 
-        order: -2; 
+        order: -2;
       }
       .count { order: -1; }
 
       @include mq($m) {
-        .image_1 {
+        .image_0 {
           @include column-width(6, 12);
           @include column-shift(0, left, 12);
           @include column-shift(0, right, 12);
@@ -832,7 +832,7 @@
           order: -2;
         }
 
-        .image_0 {
+        .image_1 {
           align-self: center;
           @include column-width(4, 12);
           @include column-shift(1, left, 12);
