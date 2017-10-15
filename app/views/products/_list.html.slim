@@ -9,7 +9,7 @@
 
       .vispart
         .image
-          = image_tag entity.images.sort_by{ |i| [(i.weight.zero? ? 99 : i.weight), i.created_at] }.first.photo.thumb.url, alt: product.title_safe if entity.images.size > 0
+          = image_tag entity.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.first.photo.thumb.url, alt: product.title_safe if entity.images.size > 0
 
         - if policy(product).edit?
           .control

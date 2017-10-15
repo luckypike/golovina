@@ -41,7 +41,7 @@
                   = variant.product.title_safe
 
                 .image
-                  = image_tag variant.images.sort_by{ |i| [(i.weight.zero? ? 99 : i.weight), i.created_at] }.first.photo.thumb.url
+                  = image_tag variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.first.photo.thumb.url
 
                 .price_and_buy
                   .price
