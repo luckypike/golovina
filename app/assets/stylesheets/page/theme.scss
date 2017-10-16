@@ -640,9 +640,9 @@
 
     .title {
       @include column-width(1, 4);
+      position: relative;
 
       .rotate {
-        position: relative;
         width: 100%;
         height: 100%;
 
