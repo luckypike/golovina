@@ -111,7 +111,7 @@ header.header class="#{menu_index? ? :index : nil }"
               = active_link_to 'Оплата и доставка', customers_info_path
 
             .section_list_item.l2
-              = active_link_to 'Возврат', customers_return_path
+              = active_link_to 'Возврат и обмен', customers_return_path
 
       .header_menu_section
         - if signed_in? && !current_user.is_guest?
