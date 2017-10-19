@@ -463,13 +463,12 @@
     }
 
     &.i_0 {
-      @include column-width(6, 12);
+      @include column-width(7, 12);
     }
 
     &.i_1 {
       @include column-width(4, 12);
       @include column-shift(1, left, 12);
-      @include column-shift(1, right, 12);
 
       align-self: flex-end;
 
@@ -486,11 +485,10 @@
 
     &.i_3 {
       @include column-width(4, 12);
-      @include column-shift(1, left, 12);
     }
 
     &.i_4 {
-      @include column-width(6, 12);
+      @include column-width(7, 12);
       @include column-shift(1, left, 12);
     }
   }
