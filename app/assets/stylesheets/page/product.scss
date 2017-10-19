@@ -389,6 +389,11 @@
     }
 
     .title_and_color {
+
+      &.lv3 {
+        margin-bottom: $base-rhythm-line;
+      }
+
       .title {
         text-align: center;
         margin-bottom: $base-rhythm-line;
@@ -398,7 +403,7 @@
         cursor: pointer;
         display: flex;
         justify-content: center;
-        margin-bottom: $base-rhythm-line;
+        margin: 2 * $base-rhythm-line 0;
 
         span {
 
@@ -419,6 +424,12 @@
             stroke-linecap: butt;
             stroke-linejoin: miter;
           }
+        }
+      }
+
+      @include mq($s) {
+        &.lv3 {
+          margin-bottom: 3 * $base-rhythm-line;
         }
       }
     }
@@ -780,7 +791,7 @@
   @include mq($m) {
     @include column-pane;
 
-    align-items: flex-start;
+    align-items: stretch;
     padding: 0 $gutter;
 
     &_images {
@@ -790,6 +801,7 @@
     }
 
     &_data {
+
       &_wrapper {
         @include column-width(4, 12);
         @include column-shift(1, left, 12);
