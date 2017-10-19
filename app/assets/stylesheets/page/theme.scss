@@ -427,8 +427,6 @@
         &_last {
           // @include font-size-bigger;
 
-          margin-right: $gutter / 2;
-
           &.red {
             color: rgb(204, 12, 47);
           }
@@ -436,6 +434,7 @@
 
         &_old {
           text-decoration: line-through;
+           margin-left: $gutter / 2;
         }
       }
 
@@ -464,6 +463,10 @@
 
     &.i_0 {
       @include column-width(7, 12);
+
+      @include mq($l) {
+        @include column-width(6, 12);
+      }
     }
 
     &.i_1 {
@@ -474,6 +477,10 @@
 
       &.ao {
         @include column-shift(7, left, 12);
+      }
+
+      @include mq($l) {
+        @include column-shift(1, right, 12);
       }
     }
 
@@ -568,14 +575,13 @@
               &_last {
                 // @include font-size-bigger;
 
-                margin-right: $gutter / 2;
-
                 &.red {
                   color: rgb(204, 12, 47);
                 }
               }
 
               &_old {
+                margin-left: $gutter / 2;
                 text-decoration: line-through;
               }
             }
