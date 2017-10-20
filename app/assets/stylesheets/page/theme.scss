@@ -534,6 +534,20 @@
 
         }
 
+        &_link {
+          text-align: center;
+
+          .btn {
+            @include font-size(1.25);
+
+            letter-spacing: 0.1em;
+            margin: $base-rhythm-line 0;
+            text-transform: uppercase;
+            padding: 0 $gutter / 2;
+            min-width: 0;
+          }
+        }
+
         &_list {
           display: flex;
 
@@ -620,6 +634,14 @@
       .control {
         left: auto;
         right: 0;
+
+        @include mq($m) {
+          right: $gutter;
+        }
+
+        @include mq($l) {
+          right: 0;
+        }
       }
     }
 

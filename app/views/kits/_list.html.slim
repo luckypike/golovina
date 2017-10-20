@@ -1,7 +1,7 @@
 .kits_list
   - kits.sort_by(&:created_at).reverse.each_with_index do |kit, i|
     - images = kit.images.sort_by{ |i| [(i.weight.zero? ? 99 : i.weight), i.created_at] }.take(2)
-    - variants = kit.variants.where(state: [:active, :out]).select{ |v| v.product.active? }
+    - variants = kit.variants.select{ |v| (v.active? || v.out?) && v.product.active? }
 
     .kits_list_item_wrapper
       .kits_list_item class="i_#{i % 2}"
@@ -55,3 +55,7 @@
                     - else
                       .price_last
                         = number_to_rub variant.product.price
+
+        .kit_products_link
+          = link_to 'Купить образ', kit, class: :btn
+        
