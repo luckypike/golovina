@@ -8,6 +8,7 @@
     "jquery-mask-plugin": "^1.14.11",
     "reset-scss": "^1.0.0",
     "selectize": "^0.12.4",
+    "sticky-kit": "^1.1.3",
     "swiper": "^3.4.2",
     "vivus": "^0.4.1"
   },

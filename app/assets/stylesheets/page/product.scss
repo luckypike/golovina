@@ -478,14 +478,13 @@
       &_last {
         @include font-size-bigger;
 
-        margin-right: $gutter;
-
         &.red {
           color: rgb(204, 12, 47);
         }
       }
 
       &_old {
+        margin-left: $gutter;
         text-decoration: line-through;
       }
     }

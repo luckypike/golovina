@@ -22,6 +22,8 @@
 //= require selectize/dist/js/standalone/selectize
 //= require jquery-mask-plugin/dist/jquery.mask.min
 
+//= require sticky-kit/dist/sticky-kit.min
+
 //= require_tree .
 
 

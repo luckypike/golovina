@@ -328,8 +328,6 @@ $(function(){
   $('.product_data .acc .title').on('click', function() {
     $('.product_data .acc .content').not($(this).next()).slideUp();
     $(this).next().slideToggle();
-    // console.log($(this).next());
-    // console.log($(this).next().outerHeight());
     $('.product_data').height(_pheight + 200);
     $(document.body).trigger("sticky_kit:recalc");
   });
