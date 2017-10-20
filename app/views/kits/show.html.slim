@@ -1,19 +1,36 @@
-- title [@kit.theme.title, @kit.title_safe]
+- title @kit.title_safe
+- images = @kit.images.sort_by{ |i| [(i.weight.zero? ? 99 : i.weight), i.created_at] }.take(2)
+- variants = @kit.variants.where(state: [:active, :out]).select{ |v| v.product.active? }
 
 / - set_meta_tags og: { image: @kit.images.select(&:photo).map{ |i| i.photo.url } }
 
 .page.page_common.page_kit
   .page_kit_intro.lv2
       .images.lv3
-        - @kit.images.sort_by{ |i| [(i.weight.zero? ? 99 : i.weight), i.created_at] }.each do |image|
-          .images_item.lv3
+        .image_0
+          .img
+            = image_tag images[0].photo.thumb.url
+
+        .title
+          .rotate
+            span
+              = title
+
+        .count
+          .toggle
+            => t(:kit_products, count: variants.size)
+            | в образе
+
+        .image_1
+          .img
+            = image_tag images[1].photo.thumb.url if images[1]
+          / .images_item.lv3
             .img
               = image_tag image.photo.large.url
 
-  - if policy(@kit).edit?
-    .page_kit_edit.lv2
-      .edit
-        = link_to 'Редактировать образ', [:edit, @kit], class: :btn_gr
+      - if policy(@kit).edit?
+        .control
+          = link_to '', [:edit, @kit], class: :edit
 
 
   .page_kit_products

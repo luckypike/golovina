@@ -1,8 +1,4 @@
 class KitPolicy < ApplicationPolicy
-  def show?
-    user&.is_editor?
-  end
-
   def index?
     update?
   end

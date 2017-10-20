@@ -230,12 +230,22 @@ $(function(){
 
         var _ils = _this.closest('.product').find('.images_list');
         var _il = _this.closest('.product').find('.images_list_swiper');
+        var _il_l = _this.closest('.product').find('.images_list_swiper_l');
+
         var _pip = _il.parent();
         _pip.data('loading', true);
+
+        var _pip_l = _il_l.parent();
+        _pip_l.data('loading', true);
 
         var swiper = _pip.data('swiper');
         if(swiper) {
           swiper.destroy(true, true);
+        }
+
+        var swiper_l = _pip_l.data('swiper');
+        if(swiper_l) {
+          swiper_l.destroy(true, true);
         }
 
         _b.trigger('set_variant');
@@ -254,24 +264,20 @@ $(function(){
           }
 
           _pip.append('<div class="swiper-pagination"></div>');
+          _pip_l.append('<div class="swiper-pagination"></div>');
 
           if(_il.css('display') == 'flex') {
-            var swiper = new Swiper (_pip, {
-              pagination: $('.swiper-pagination', _pip),
-              paginationType: 'fraction',
-              paginationFractionRender: function(swiper, currentClassName, totalClassName) {
-                return '<span class="' + currentClassName + '"></span>' +
-                       '/' +
-                       '<span class="' + totalClassName + '"></span>';
-              },
-            });
-            _pip.data('has_swiper', true);
-            _pip.data('swiper', swiper);
+            var swiper = swiper_create(_pip);
+          }
+
+          if($('.page_common').hasClass('page_kit')) {
+            var swiper_l = swiper_create(_pip_l);
           }
 
           _pip.data('loading', false);
+          _pip_l.data('loading', false);
         }).done(function() {
-          $('.product_data').stick_in_parent();
+          $('.page_product .product_data').stick_in_parent();
         });
       });
 
@@ -292,6 +298,22 @@ $(function(){
 
   var _pi = $('.product_images');
   var _window = $(window);
+
+  function swiper_create(swpr_cntnr) {
+    var swpr = new Swiper (swpr_cntnr, {
+      pagination: $('.swiper-pagination', swpr_cntnr),
+      paginationType: 'fraction',
+      paginationFractionRender: function(swiper, currentClassName, totalClassName) {
+        return '<span class="' + currentClassName + '"></span>' +
+                '/' +
+                '<span class="' + totalClassName + '"></span>';
+      },
+    });
+    swpr_cntnr.data('has_swiper', true);
+    swpr_cntnr.data('swiper', swpr);
+
+    return swpr;
+  }
 
   // _pi.on('swiper', function() {
   //   var _this = $(this);
@@ -328,8 +350,10 @@ $(function(){
   $('.product_data .acc .title').on('click', function() {
     $('.product_data .acc .content').not($(this).next()).slideUp();
     $(this).next().slideToggle();
-    $('.product_data').height(_pheight + 200);
-    $(document.body).trigger("sticky_kit:recalc");
+    if($('.page_common').hasClass('page_product')) {
+      $('.product_data').height(_pheight + 200);
+      $(document.body).trigger("sticky_kit:recalc");
+    }
   });
 
   $('.delivery_fast .tabs_item').on('click', function() {

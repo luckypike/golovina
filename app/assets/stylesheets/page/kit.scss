@@ -1,10 +1,162 @@
 &_kit {
   &_intro {
+    position: relative;
+
     .images {
-      &_item {
+      position: relative;
+
+      @include column-pane;
+
+      .image_0, .image_1 {
+        margin-bottom: $space-s;
+
         .img {
           @include aspect-ratio(4, 5);
+
+          background: $sand-color;
         }
+      }
+
+      .image_0 {
+        @include column-width(3, 4);
+      }
+
+      .title {
+        @include column-width(1, 4);
+        position: relative;
+
+        .rotate {
+          width: 100%;
+          height: 100%;
+
+          span {
+            display: none;
+
+            @include mq(0 ($s - 1)) {
+
+              @include font-size-small;
+              box-sizing: content-box;
+              display: block;
+              height: 42px;
+              overflow: hidden;
+              padding: 0.5 * $space-s 0 0 $space-s;
+              position: absolute;
+              text-align: center;
+              transform: rotate(-90deg) translate(0%, 0%);
+              transform-origin: left top;
+              top: 100%;
+              width: 270px;
+            }
+          }
+        }
+      }
+
+      .count {
+        align-self: center;
+        text-align: center;
+        padding: 0 $gutter;
+
+        .toggle {
+          @include font-size-small;
+        }
+
+        .btn {
+          @include font-size(1.25);
+
+          letter-spacing: 0.1em;
+          margin-top: $base-rhythm-line;
+          text-transform: uppercase;
+          padding: 0 $gutter / 2;
+          min-width: 0;
+        }
+      }
+
+      .image_1, .count {
+        @include column-width(2, 4);
+      }
+
+      @include mq($m) {
+        .image_0 {
+          @include column-width(6, 12);
+          @include page-static-gutter;
+          margin-bottom: 0;
+        }
+
+        .image_1 {
+          align-self: center;
+          margin-bottom: 0;
+
+          @include column-width(4, 12);
+          @include column-shift(1, left, 12);
+          @include column-shift(1, right, 12);
+        }
+
+        .count {
+          position: absolute;
+          left: 50%;
+          width: 50%;
+          top: 88%;
+
+          @include mq($l) {
+            top: 85%;
+          }
+        }
+
+        .title {
+          position: absolute;
+          left: 50%;
+          width: 50%;
+          bottom: 87%;
+
+          .rotate {
+
+            span {
+              letter-spacing: 0.2em;
+              text-transform: uppercase;
+
+              display: block;
+              margin-left: 1 / 6 * 100%;
+              margin-right: 1 / 6 * 100%;
+              // margin-right: $gutter;
+            }
+          }
+        }
+      }
+    }
+
+    .control {
+      padding: $base-rhythm-line;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 5;
+
+      a {
+        background-color: rgba($primary-color, 0.5);
+        display: block;
+        width: 24px;
+        height: 24px;
+
+        &.edit {
+          background-image: image_url('icons/edit_white.svg');
+          background-size: 24px 24px;
+        }
+      }
+
+      @include mq($m) {
+        left: $gutter;
+      }
+
+      @include mq($l) {
+        left: $gutter / 2;
+      }
+    }
+
+    &.lv2 {
+      margin-bottom: $base-rhythm-line;
+
+      @include mq($s) {
+        margin-bottom: 6 * $base-rhythm-line;
       }
     }
   }
@@ -204,15 +356,24 @@
     }
   }
 
+  &_products {
+
+    .swiper-pagination {
+      position: absolute;
+      right: $gutter;
+      left: auto;
+      top: $base-rhythm-line;
+      width: auto;
+      bottom: auto;
+    }
+  }
+
   @include mq($m) {
     &_intro {
       .images {
         @include column-pane;
-        padding: 0 $gutter / 2;
 
         &_item {
-          @include column-width(6, 12);
-          padding: 0 $gutter / 2;
 
           margin-bottom: 0;
         }
