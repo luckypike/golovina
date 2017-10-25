@@ -1,5 +1,6 @@
 $(function(){
   var filters = $('.fd').data('cur');
+  var _pheight;
 
   $('.fd_i').on('click', '.t', function() {
     var _fdi = $(this).parent();
@@ -278,6 +279,7 @@ $(function(){
           _pip_l.data('loading', false);
         }).done(function() {
           $('.page_product .product_data').stick_in_parent();
+          _pheight = $('.product_data').outerHeight();
         });
       });
 
@@ -345,8 +347,6 @@ $(function(){
     _pi.trigger('swiper');
   }).trigger('resize');
 
-
-  var _pheight = $('.product_data').outerHeight();
   $('.product_data .acc .title').on('click', function() {
     $('.product_data .acc .content').not($(this).next()).slideUp();
     $(this).next().slideToggle();
