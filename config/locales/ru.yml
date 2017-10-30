@@ -24,6 +24,9 @@ ru:
   catalog: Каталог
   catalog_all: Все товары
 
+  menu:
+    return: Обмен и возврат
+
 
   activerecord:
     errors:
