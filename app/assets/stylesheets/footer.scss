@@ -4,14 +4,14 @@
 
   &_top {
     position: fixed;
-    left: $gutter;
-    bottom: $space-s;
-    width: 2rem;
+    right: $gutter;
+    bottom: $space-m;
 
 
     .top {
       cursor: pointer;
-      height: 2rem;
+      width: 2.5rem;
+      height: 2.5rem;
       background: {
         image: image_url('icons/top.svg');
       }
@@ -29,11 +29,12 @@
     }
 
     @include mq($m) {
-      left: $gutter * 2;
+      right: $gutter * 2;
+      bottom: $space-m2;
     }
 
     @include mq($l) {
-      left: $gutter * 4;
+      right: $gutter * 4;
     }
   }
 
