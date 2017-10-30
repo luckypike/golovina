@@ -654,7 +654,7 @@
       }
 
       .cart {
-        transition: opacity 0.3s;
+        transition: background 0.3s, color 0.3s, opacity 0.3s;
 
         &.inactive {
           opacity: 0.4
@@ -718,6 +718,11 @@
             line-height: 16px;
             // border-radius: 10px;
             padding: 0 $gutter / 2 2px;
+            transition: opacity 0.2s;
+
+            &.hdd {
+              opacity: 0;
+            }
 
             @include mq($l) {
               line-height: 20px;
@@ -755,6 +760,7 @@
 
               &_item {
                 margin-right: $gutter * 2;
+                cursor: pointer;
 
                 &:last-child {
                   margin-right: 0;
