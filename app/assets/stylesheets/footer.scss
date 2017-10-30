@@ -2,6 +2,42 @@
   padding: 0 $gutter;
   margin-bottom: $space-s;
 
+  &_top {
+    position: fixed;
+    right: $gutter;
+    bottom: $space-m;
+
+
+    .top {
+      cursor: pointer;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: {
+        image: image_url('icons/top.svg');
+      }
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0s 0.2s;
+  }
+
+    &.shw {
+      .top {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.2s;
+      }
+    }
+
+    @include mq($m) {
+      right: $gutter * 2;
+      bottom: $space-m2;
+    }
+
+    @include mq($xl) {
+      right: $gutter * 4;
+    }
+  }
+
   &_like {
     margin-left: auto;
     width: 10rem;

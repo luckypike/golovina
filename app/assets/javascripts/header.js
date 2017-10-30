@@ -31,7 +31,12 @@ $(function() {
     } else {
       _h.removeClass('hide_logo no_themes');
     }
+    $('.footer_top').toggleClass('shw', _window.scrollTop() > _window.height() / 2);
   }).trigger('scroll');
+
+  $('.footer_top').on('click', function() {
+    $("html, body").stop().animate({ scrollTop: 0 }, 500, 'swing');
+  });
 
   var _ca = $('.cart a', _h);
 
@@ -59,9 +64,6 @@ $(function() {
         return false;
       }
     }
-
-
-
   }).trigger('click1');
 
   $('.header_cart .close').on('click', function() {
