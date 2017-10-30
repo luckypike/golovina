@@ -649,7 +649,7 @@
       }
 
       .cart {
-        transition: opacity 0.3s;
+        transition: background 0.3s, color 0.3s, opacity 0.3s;
 
         &.inactive {
           opacity: 0.4
