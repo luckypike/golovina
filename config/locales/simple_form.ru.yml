@@ -54,6 +54,7 @@ ru:
 
       user:
         name: Имя
+        s_name: Фамилия
         phone: Телефон
         code: Код
         email: Эл. почта

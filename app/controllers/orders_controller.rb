@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
       params[:user][:email] = @user.email if params[:user][:email].empty?
 
 
-      if @user.update(phone: params[:user][:phone], email: params[:user][:email], name: params[:user][:name])
+      if @user.update(phone: params[:user][:phone], email: params[:user][:email], name: params[:user][:name], s_name: params[:user][:s_name])
       else
         render json: { error: @user.errors, status: :unprocessable_entity }
       end
