@@ -33,7 +33,7 @@
       bottom: $space-m2;
     }
 
-    @include mq($l) {
+    @include mq($xl) {
       right: $gutter * 4;
     }
   }
