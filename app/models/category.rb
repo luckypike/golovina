@@ -13,7 +13,7 @@ class Category < ApplicationRecord
   has_many :products
 
   belongs_to :parent_category, class_name: 'Category', optional: true
-  has_many :categories, class_name: "Category", foreign_key: "parent_category_id"
+  has_many :categories, -> { order(weight: :asc) }, class_name: "Category", foreign_key: "parent_category_id"
 
   def normalize_friendly_id(input)
     input.to_s.to_slug.normalize(transliterations: :russian).to_s
