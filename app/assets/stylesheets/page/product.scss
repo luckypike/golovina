@@ -385,7 +385,12 @@
 
   &_data {
     &_wrapper {
+      .rest_of {
 
+        .hide_sizes {
+          display: none;
+        }
+      }
     }
 
     .title_and_color {

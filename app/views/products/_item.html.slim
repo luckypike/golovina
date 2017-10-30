@@ -1,4 +1,7 @@
 - variant ||= product.variants.first
+- parent_cat = [41, 42, 43, 21, 22]
+- if parent_cat.include?(product.category_id) then s = 'hide_sizes'
+
 
 .product
   .product_images
@@ -29,9 +32,9 @@
       .images.swiper-container.lv4
         .images_list.swiper-wrapper.images_list_swiper
 
-
+      /   = debug product.category_id
       .rest_of
-        .sizes.live.lv3 data-sizes="#{product.variants.select(&:sizes).map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json}"
+        .sizes.live.lv3 class=s data-sizes="#{product.variants.select(&:sizes).map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json}"
           .sizes_list
             - Rails.application.secrets[:sizes].each do |size|
               .sizes_list_item data-size=size class="size_#{size}"
