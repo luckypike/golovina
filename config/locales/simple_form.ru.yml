@@ -62,6 +62,10 @@ ru:
       order:
         address: Адрес доставки
 
+      theme:
+        title: Название
+        image: Изображение
+
 
     hints:
       user:
