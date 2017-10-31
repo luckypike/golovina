@@ -1,9 +1,10 @@
-.page.page_common
-  h1 Editing theme
+.page.page_common.page_theme_form
+  h1 
+    | Редактировать настроение ##{@theme.id}
 
   == render 'form'
 
-  = link_to 'Show', @theme
-  '  |
-  = link_to 'Back', themes_path
+  / = link_to 'Show', @theme
+  / '  |
+  / = link_to 'Back', themes_path
 

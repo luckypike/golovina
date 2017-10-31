@@ -25,6 +25,7 @@ class ThemesController < ApplicationController
   end
 
   def edit
+    authorize @theme
   end
 
   def create
@@ -38,6 +39,7 @@ class ThemesController < ApplicationController
   end
 
   def update
+    authorize @theme
     if @theme.update(theme_params)
       redirect_to @theme, notice: 'Theme was successfully updated.'
     else

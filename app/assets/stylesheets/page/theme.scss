@@ -173,6 +173,12 @@
   @include mq($xl) {
     padding-top: $base-rhythm-line * 23;
   }
+
+  &_form {
+    .form {
+      max-width: $s;
+    }
+  }
 }
 
 
@@ -247,6 +253,7 @@
 
     }
 
+
     .btn_gr {
       padding: $base-rhythm-line / 2 0;
       width: 100%;
@@ -269,6 +276,10 @@
     }
   }
 
+  .control {
+    @include control
+  }
+
   @each $category in business active party special walk holiday young warm {
     &.#{$category} {
       .image {
@@ -276,6 +287,17 @@
           background-image: image_url('pages/index/#{$category}.jpg');
         }
       }
+    }
+  }
+
+  &.i_1 {
+
+    .control {
+      @include control-right;
+
+      @include mq($m) {
+        right: 0;
+      } 
     }
   }
 
@@ -384,23 +406,7 @@
       position: relative;
 
       .control {
-        padding: $base-rhythm-line;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 5;
-
-        a {
-          background-color: rgba($primary-color, 0.5);
-          display: block;
-          width: 24px;
-          height: 24px;
-
-          &.edit {
-            background-image: image_url('icons/edit_white.svg');
-            background-size: 24px 24px;
-          }
-        }
+        @include control
       }
     }
 
@@ -614,39 +620,13 @@
     }
 
     .control {
-      top: 0;
-      left: 0;
-      padding: $base-rhythm-line;
-      position: absolute;
-      width: auto;
-      z-index: 5;
-
-      a {
-        background-color: rgba($primary-color, 0.5);
-        display: block;
-        width: 24px;
-        height: 24px;
-
-        &.edit {
-          background-image: image_url('icons/edit_white.svg');
-          background-size: 24px 24px;
-        }
-      }
+      @include control
     }
 
     &.i_1 {
 
       .control {
-        left: auto;
-        right: 0;
-
-        @include mq($m) {
-          right: $gutter;
-        }
-
-        @include mq($l) {
-          right: 0;
-        }
+        @include control-right
       }
     }
 

@@ -22,6 +22,40 @@ $default-total-columns: 16;
   padding: $top $gutter $bottom;
 }
 
+@mixin control {
+  padding: $base-rhythm-line;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: auto;
+  z-index: 5;
+
+  a {
+    background-color: rgba($primary-color, 0.5);
+    display: block;
+    width: 24px;
+    height: 24px;
+
+    &.edit {
+      background-image: image_url('icons/edit_white.svg');
+      background-size: 24px 24px;
+    }
+  }
+}
+
+@mixin control-right {
+  left: auto;
+  right: 0;
+
+  @include mq($m) {
+    right: $gutter;
+  }
+
+  @include mq($l) {
+    right: 0;
+  }
+}
+
 @mixin aspect-ratio($width, $height) {
   position: relative;
 

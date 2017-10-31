@@ -6,6 +6,7 @@
       .image.lv3
         .img
 
+
       .text.mb
         .short.lv4
           = @theme.title
@@ -15,6 +16,10 @@
 
         .desc
           = description @theme.desc
+
+      - if policy(@theme).edit?
+        .control
+          = link_to '', [:edit, @theme], class: :edit
 
   .page_theme_products.lv2
     - if @kits.empty?

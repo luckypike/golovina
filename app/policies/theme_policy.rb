@@ -6,4 +6,12 @@ class ThemePolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def update?
+    user&.is_editor?
+  end
+
+  def edit?
+    update?
+  end
 end
