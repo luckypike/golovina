@@ -1,4 +1,6 @@
 class Theme < ApplicationRecord
+  mount_uploader :image, ThemeUploader
+  
   enum state: { inactive: 0, active: 1 }
 
   default_scope { active }

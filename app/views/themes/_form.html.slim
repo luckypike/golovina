@@ -4,6 +4,13 @@
 
     .form_inputs
       = f.input :title
+      - if @theme.image?
+        = image_tag @theme.image.preview.url
+        = f.label :remove_image do 
+          = f.check_box :remove_image
+          | Удалить изображение
+
+      = f.input :image
       = f.input :slug
       = f.input :desc
 
