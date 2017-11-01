@@ -4,6 +4,7 @@
 
     .form_inputs
       = f.input :title
+      
       - if @theme.image?
         = image_tag @theme.image.preview.url
         = f.label :remove_image do 

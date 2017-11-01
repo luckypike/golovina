@@ -28,6 +28,8 @@ class KitsController < ApplicationController
     authorize @kit
 
     if @kit.save
+      @theme = Theme.find(@kit.theme_id)
+      @theme.update_column(:recency, DateTime.now)
       redirect_to [:kits], notice: 'Kit was successfully created.'
     else
       render :new
@@ -40,6 +42,13 @@ class KitsController < ApplicationController
     @kit.kitables.destroy_all
 
     if @kit.update(kit_params)
+      @theme = Theme.find(@kit.theme_id)
+      @last_kit = Kit.where(state: '1', theme_id: @kit.theme_id).last
+      if @last_kit.presence 
+        @theme.update_column(:recency, @last_kit[:created_at])
+      else 
+        @theme.update_column(:recency, @theme[:created_at])
+      end
       redirect_to [:kits], notice: 'Kit was successfully updated.'
     else
       # @kit.images.build if @kit.images.size == 0
