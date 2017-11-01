@@ -11,7 +11,7 @@
     - @themes.sort_by(&:weight).each_with_index do |theme, i|
       .theme_intro.lv2 class=[theme.slug, "i_#{i % 2}"]
         .image.lv3
-          .img
+          = image_tag theme.image
 
         .text.mb
           = link_to theme do

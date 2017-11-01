@@ -4,7 +4,7 @@
   .page_theme_intro
     .theme_intro class=[@theme.slug, "i_#{@theme.weight % 2}"]
       .image.lv3
-        .img
+        = image_tag @theme.image
 
       .text.mb
         .short.lv4
@@ -33,7 +33,7 @@
     - @themes[(@themes.index(@theme) + 1)..-1].each_with_index do |theme, i|
       .theme_intro.lv2 class=[theme.slug, "i_#{(i + @themes.index(@theme) + 1) % 2}"]
         .image.lv3
-          .img
+          = image_tag theme.image
 
         .text.mb
           = link_to theme do
