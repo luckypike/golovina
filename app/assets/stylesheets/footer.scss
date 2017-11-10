@@ -4,8 +4,9 @@
 
   &_top {
     position: fixed;
-    right: $gutter;
-    bottom: $space-m;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    bottom: $space-s;
 
 
     .top {
