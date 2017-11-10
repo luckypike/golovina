@@ -41,7 +41,7 @@ class ThemesController < ApplicationController
   def update
     authorize @theme
     if @theme.update(theme_params)
-      @last_kit = Kit.where(state: '1', theme_id: @theme.id).last
+      @last_kit = @theme.kits.active.last
       if @last_kit.presence 
         @theme.update_column(:recency, @last_kit[:created_at])
       else 
