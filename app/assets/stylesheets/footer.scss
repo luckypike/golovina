@@ -30,12 +30,12 @@
     }
 
     @include mq($m) {
-      right: $gutter * 2;
+      // right: $gutter * 2;
       bottom: $space-m2;
     }
 
     @include mq($xl) {
-      right: $gutter * 4;
+      // right: $gutter * 4;
     }
   }
 
