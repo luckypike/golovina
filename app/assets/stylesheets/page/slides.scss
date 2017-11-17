@@ -1,0 +1,50 @@
+.slides_admin {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -$gutter;
+  margin-right: -$gutter;
+  margin-top: $gutter;
+
+  .slide_admin {
+    margin-bottom: $gutter;
+    padding-left: $gutter;
+    padding-right: $gutter;
+
+    &_name {
+      @include font-size(2.5, 3);
+      margin-bottom: $gutter;
+    }
+
+    &_img {
+      display: inline-block;
+      position: relative;
+
+      &_edit {
+        top: 0px;
+        position: absolute;
+
+        a {
+          background-color: #fff;
+
+          &:hover {
+            background: $sand-color;
+          }
+        }
+      }
+
+      &_delete {
+        bottom: 0;
+        right: 0;
+        position: absolute;
+
+        a {
+          background-color: #fff;
+
+          &:hover {
+            background: $sand-color;
+          }
+        }
+      }
+    }
+  }
+}

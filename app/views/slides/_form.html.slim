@@ -1,0 +1,20 @@
+.form
+  = simple_form_for(@slide) do |f|
+    = f.error_notification
+
+    .form_inputs
+      = f.input :name
+      = f.input :link
+      = f.input :link_name
+
+      - if @slide.image.presence
+        = image_tag @slide.image.preview.url
+      = f.file_field :image
+
+      = f.input :left_offset
+      = f.input :top_offset
+
+      = f.input :weight
+
+    .form-actions
+     = f.button :submit

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031104017) do
+ActiveRecord::Schema.define(version: 20171117102434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,18 @@ ActiveRecord::Schema.define(version: 20171031104017) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_similarables_on_product_id"
     t.index ["similar_product_id"], name: "index_similarables_on_similar_product_id"
+  end
+
+  create_table "slides", force: :cascade do |t|
+    t.string "name"
+    t.string "link"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "link_name"
+    t.integer "weight"
+    t.integer "left_offset"
+    t.integer "top_offset"
   end
 
   create_table "themables", force: :cascade do |t|

@@ -94,4 +94,6 @@ Rails.application.routes.draw do
       post :checkout
     end
   end
+
+  resources :slides, except: [:show]
 end

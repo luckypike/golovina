@@ -1,6 +1,8 @@
 class StaticController < ApplicationController
   def index
     authorize :static, :index?
+
+    @slides = Slide.all.order('weight')
   end
 
   def contacts

@@ -1,0 +1,18 @@
+.page.page_common
+
+  h1 Редактирование слайдов
+
+  = link_to 'Добавить новый', new_slide_path, class: :btn
+
+  .slides_admin
+    - @slides.each do |slide|
+      .slide_admin
+        .slide_admin_name
+          = slide.name
+        .slide_admin_img
+          = image_tag slide.image.preview
+
+          .slide_admin_img_edit
+            = link_to 'Изменить', edit_slide_path(slide), class: :btn
+          .slide_admin_img_delete
+            = link_to 'Удалить', slide, class: :btn, data: { confirm: 'Are you sure?' }, method: :delete
