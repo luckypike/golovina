@@ -6,6 +6,7 @@
     position: relative;
 
     .ss {
+      display: none;
       position: absolute;
       left: 0;
       top: 0;
@@ -45,40 +46,16 @@
         }
       }
 
-      &_0 {
-        background: {
-          image: image_url('pages/index/ss_0_s.jpg');
-        }
+      &.aspect {
+        display: block;
 
-        @include mq($m) {
-          background: {
-            image: image_url('pages/index/ss_0_l.jpg');
-          }
+        @include mq($s) {
+          display: none;
         }
       }
 
-      &_1 {
-        background: {
-          image: image_url('pages/index/ss_1_s.jpg');
-        }
-
-        @include mq($m) {
-          background: {
-            image: image_url('pages/index/ss_1_l.jpg');
-          }
-        }
-      }
-
-      &_2 {
-        background: {
-          image: image_url('pages/index/ss_2_s.jpg');
-        }
-
-        @include mq($m) {
-          background: {
-            image: image_url('pages/index/ss_2_l.jpg');
-          }
-        }
+      @include mq($s) {
+        display: block;
       }
 
     }
@@ -129,24 +106,26 @@
 
       svg {
         display: block;
+        fill: #fff;
         // margin-bottom: $space-m * 2;
 
-        .a, .b {
-          fill: none;
-          stroke-linecap: round;
-          stroke-linejoin: round;
-          stroke-width: 2px;
-          vector-effect: non-scaling-stroke;
-        }
+        // .a, .b {
+        //   fill: #fff;
+        // }
+        //   stroke-linecap: round;
+        //   stroke-linejoin: round;
+        //   stroke-width: 2px;
+        //   vector-effect: non-scaling-stroke;
+        // }
 
-        .a {
-          // stroke: #4b4a4b;
-          stroke: #fff;
-        }
+        // .a {
+        //   // stroke: #4b4a4b;
+        //   stroke: #fff;
+        // }
 
-        .b {
-          stroke: #52b478;
-        }
+        // .b {
+        //   stroke: #52b478;
+        // }
       }
     }
 
@@ -188,7 +167,7 @@
 
 
           .what {
-            @include font-size(4.25, 5);
+            @include font-size(7, 6);
 
             min-height: $base-rhythm-line * 10;
 
@@ -200,7 +179,7 @@
 
             font-weight: 300;
             color: #fff;
-            font-family: 'Cormorant', serif;
+            font-family: 'MadelynFill', serif;
             margin-bottom: $space-s;
           }
 

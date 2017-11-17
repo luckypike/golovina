@@ -66,6 +66,10 @@ ru:
         title: Название
         image: Изображение
 
+      slide:
+        name: Название
+        link: Ссылка
+        link_name: Текст ссылки
 
     hints:
       user:
