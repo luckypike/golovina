@@ -20,6 +20,19 @@ module CarrierWave
         img
       end
     end
+
+    def optimize_slide(quality)
+      manipulate! do |img|
+        return img unless img.mime_type.match /image\/jpeg/
+        img.strip
+        img.combine_options do |c|
+          c.quality quality.to_s
+          c.depth "7"
+          c.interlace "plane"
+        end
+        img
+      end
+    end
   end
 end
 

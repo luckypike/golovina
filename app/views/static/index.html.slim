@@ -6,7 +6,7 @@
   .page_static_index_swiper.lv1
     .ss
       - @slides.each_with_index do |slide, index|
-        div class="ss_#{index}" style="background-image: url('#{slide.image.url}')"
+        div class="ss_#{index}" style="background-image: url('#{slide.image.large.url}')"
 
     .ss.aspect
       - @slides.each_with_index do |slide, index|
