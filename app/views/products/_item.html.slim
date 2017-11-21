@@ -11,8 +11,13 @@
     .product_data class=product.state
       .title_and_color.lv3
         .title
-          h1
-            = product.title_safe
+          / = debug @variants
+          - if (@variants.present?)
+            h2
+              = product.title_safe
+          - else
+            h1
+              = product.title_safe
 
           - if product.variants.where(state: [:active, :out]).size > 1
             .another_variants
@@ -68,7 +73,7 @@
 
 
         .out_of_stock
-          | Товар в этом цвете временно отсутствует.
+          | Скоро в наличии.
 
 
       .data

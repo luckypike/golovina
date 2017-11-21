@@ -664,7 +664,7 @@
 
     .out_of_stock {
       visibility: hidden;
-      color: red;
+      // color: red;
 
       &.active {
         visibility: visible;
