@@ -166,7 +166,7 @@
 
 
           .what {
-            @include font-size(7, 6);
+            @include font-size(4.25, 5);
 
             min-height: $base-rhythm-line * 10;
 
@@ -178,7 +178,7 @@
 
             font-weight: 300;
             color: #fff;
-            font-family: 'MadelynFill', serif;
+            font-family: 'Cormorant', serif;
             margin-bottom: $space-s;
           }
 
