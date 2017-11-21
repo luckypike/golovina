@@ -15,7 +15,11 @@ class ThemeUploader < CarrierWave::Uploader::Base
   end
 
   process resize_to_limit: [5000, 5000]
-  
+
+  version :large do
+    process resize_to_fill: [1600, 2000]
+  end
+
   version :preview do
     process resize_to_fill: [240, 300]
   end
