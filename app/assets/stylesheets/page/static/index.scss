@@ -149,6 +149,16 @@
           position: center;
         }
 
+        &[data-swiper-slide-index="0"] {
+          .text {
+            transition: transform 1.1s;
+          }
+
+          .text.inact {
+            transform: translate(300%, 0);
+          }
+        }
+
         .text {
           position: absolute;
           left: 50%;

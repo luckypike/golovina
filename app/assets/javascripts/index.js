@@ -20,7 +20,7 @@ $(function() {
       effect: 'slide',
       pagination: '.swiper-pagination-index',
       paginationClickable: true,
-      autoplay: 4000,
+      autoplay: 5000,
       // paginationBulletRender: function(swiper, index, className) {
       //   return '<div class="' + className + '">' + $(swiper.slides[index + 1]).data('title') + '</div>';
       // },
@@ -58,12 +58,14 @@ $(function() {
       },
     });
 
-    var mint = new Vivus('mint_ani', {
-      type: 'scenario',
-      onReady: function() {
-        $('.text', _psis).removeClass('inact');
-      }
-    });
+    // var mint = new Vivus('mint_ani', {
+    //   type: 'scenario',
+    //   onReady: function() {
+    //     $('.text', _psis).removeClass('inact');
+    //   }
+    // });
+
+    setTimeout(function() {  $('.text', _psis).removeClass('inact');}, 1100);
 
     _sc.on('recalc', function() {
       _sc.height(_window.outerHeight());
