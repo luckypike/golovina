@@ -7,7 +7,7 @@
 
 @mixin font-headers {
   font-weight: 300;
-  font-family: 'Cormorant', serif;
+  font-family: 'MadelynFill', serif;
 }
 
 @mixin font-main {
@@ -16,7 +16,7 @@
 }
 
 @mixin font-size-h1() {
-  @include font-size(3, 3);
+  @include font-size(5.625, 6);
 
 
   @include breakpoint($s) {
@@ -30,7 +30,7 @@
 }
 
 @mixin font-size-h2() {
-  @include font-size(3, 4);
+  @include font-size(4.25, 5);
 
   @include breakpoint($s) {
     @include font-size(4.25, 5);
@@ -80,7 +80,9 @@
 }
 
 h1, h2, h3 {
-  font-weight: 300;
+  @include font-headers;
+
+  // font-weight: 400;
 }
 
 h1, .h1 {

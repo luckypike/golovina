@@ -181,7 +181,6 @@
   }
 }
 
-
 .theme_intro {
   display: block;
   position: relative;
@@ -224,7 +223,7 @@
       @include font-size-h1;
       @include font-headers;
 
-      display: none;
+      // display: none;
       transition: transform 0.5s;
       transform-origin: left bottom;
     }
@@ -246,10 +245,12 @@
     }
 
     .desc {
-      @include font-headers;
-      @include font-size-h3;
+      // @include font-headers;
+      // @include font-size-h2;
+      display: none;
+      @include font-size(2, 4);
 
-      font-style: italic;
+      // font-style: italic;
 
     }
 
@@ -297,7 +298,7 @@
 
       @include mq($m) {
         right: 0;
-      } 
+      }
     }
   }
 
@@ -328,6 +329,7 @@
       }
 
       .desc {
+        display: block;
         margin-top: $space-s2;
         padding-left: $gutter * 2;
         margin-left: 2 / 6 * 100%;
@@ -377,6 +379,22 @@
 
   @include mq($l) {
     padding: 0;
+  }
+}
+
+&_static_index_themes,
+&_themes {
+  .theme_intro {
+    .text {
+      .title {
+        @include font-size-h2;
+        @include font-headers;
+
+        // display: none;
+        transition: transform 0.5s;
+        transform-origin: left bottom;
+      }
+    }
   }
 }
 
@@ -662,7 +680,9 @@
 
           @include mq(0 ($s - 1)) {
 
-            @include font-size-small;
+            @include font-size-h3;
+            @include font-headers;
+            @include font-size(3.5, 3);
             box-sizing: content-box;
             display: block;
             height: 42px;
@@ -792,7 +812,7 @@
             margin-left: 1 / 6 * 100%;
             margin-right: 1 / 6 * 100%;
 
-            @include font-size-h3
+
           }
         }
       }

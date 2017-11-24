@@ -2,14 +2,6 @@
   padding-left: $gutter;
   padding-right: $gutter;
 
-  .page_common_intro {
-    h1 {
-      @include font-main;
-
-      font-weight: 300;
-    }
-  }
-
   &_all {
     .products {
       &_new {
