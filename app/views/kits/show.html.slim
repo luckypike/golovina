@@ -5,32 +5,42 @@
 / - set_meta_tags og: { image: @kit.images.select(&:photo).map{ |i| i.photo.url } }
 
 .page.page_common.page_kit
+  h1
+    = title
   .page_kit_intro.lv2
-      .images.lv3
-        .image_0
+    .images.lv3
+      .image_0
+        .img
+          = image_tag images[0].photo.thumb.url
+
+      / .title
+      /   .rotate
+      /     span
+      /       = title
+
+      .count
+        .toggle
+          => t(:kit_products, count: variants.size)
+          | в образе
+
+      .image_1
+        .img
+          = image_tag images[1].photo.thumb.url if images[1]
+        / .images_item.lv3
           .img
-            = image_tag images[0].photo.thumb.url
+            = image_tag image.photo.large.url
 
-        .title
-          .rotate
-            span
-              = title
+    - if policy(@kit).edit?
+      .control
+        = link_to '', [:edit, @kit], class: :edit
 
-        .count
-          .toggle
-            => t(:kit_products, count: variants.size)
-            | в образе
-
-        .image_1
-          .img
-            = image_tag images[1].photo.thumb.url if images[1]
-          / .images_item.lv3
-            .img
-              = image_tag image.photo.large.url
-
-      - if policy(@kit).edit?
-        .control
-          = link_to '', [:edit, @kit], class: :edit
+  .images_m
+    .swiper-container
+      .images_list.swiper-wrapper.images_list_swiper
+        - @kit.images.each do |slide|
+          .images_list_item.swiper-slide
+            .image
+              = image_tag slide.photo.thumb.url
 
 
   .page_kit_products

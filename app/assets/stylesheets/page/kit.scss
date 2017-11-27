@@ -1,11 +1,15 @@
 &_kit {
+  h1 {
+    text-align: center;
+    margin-bottom: 2 * $gutter;
+  }
+
   &_intro {
     position: relative;
 
     .images {
+      display: none;
       position: relative;
-
-      @include column-pane;
 
       .image_0, .image_1 {
         margin-bottom: $space-s;
@@ -73,6 +77,12 @@
 
       .image_1, .count {
         @include column-width(2, 4);
+      }
+
+      @include mq($s) {
+        display: block;
+
+        @include column-pane;
       }
 
       @include mq($m) {
@@ -156,6 +166,34 @@
       @include mq($s) {
         margin-bottom: 6 * $base-rhythm-line;
       }
+    }
+  }
+
+  .images_m {
+    margin: $gutter -1rem $gutter;
+
+    .image {
+      @include aspect-ratio(4, 5);
+
+      background: $sand-color;
+    }
+
+    .swiper-pagination-bullets {
+      .swiper-pagination-bullet {
+        border: 1px solid #fff;
+        background: transparent;
+        margin: 0 7px;
+        height: 10px;
+        opacity: 1;
+        width: 10px;
+      }
+      .swiper-pagination-bullet-active {
+        background: #fff;
+      }
+    }
+
+    @include mq($s) {
+      display: none;
     }
   }
 

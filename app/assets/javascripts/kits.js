@@ -105,6 +105,23 @@ $(function() {
     }
   }).trigger('redraw');
 
+  var kwspr = $('.images_m .swiper-container');
+
+  if(kwspr.length > 0) {
+    kwspr.append('<div class="swiper-pagination"></div>');
+
+    var kswpr = new Swiper (kwspr, {
+      pagination: $('.swiper-pagination'),
+      paginationType: 'bullets',
+      loop: true,
+      autoplay: 4000,
+      speed: 1100,
+    });
+
+    return kwspr;
+  }
+
+
   $('.as_variants_choose_text input').on('keyup', function() {
     $(this).closest('.as_variants_choose').trigger('redraw');
   });
@@ -278,8 +295,8 @@ $(function() {
     }
     else {
       i++;
+      if(i > Object.keys(sim).length - 1) i = 0;
       similar_product(self, i, sim);
-      if(i == Object.keys(sim).length - 1) i = -1;
     }
     return false;
   });

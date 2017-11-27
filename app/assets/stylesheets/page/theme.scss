@@ -324,7 +324,10 @@
       transform: translateY(-50%);
 
       .title {
-        @include font-size(9, 8);
+        @include font-size-h1;
+        @include font-headers;
+        // @include font-size(9, 8);
+        margin-left: calc(2 / 6 * 100% + #{$gutter * 2});
         display: block;
       }
 
@@ -360,6 +363,7 @@
         left: 0;
 
         .title {
+          margin-left: 0;
           width: 7 / 12 * 100%;
         }
 
@@ -707,7 +711,7 @@
 
           @include mq(0 ($s - 1)) {
 
-            @include font-size-h3;
+            @include font-size-h2;
             @include font-headers;
 
             box-sizing: content-box;
@@ -835,6 +839,9 @@
         .rotate {
 
           span {
+            @include font-size-h2;
+            @include font-headers;
+
             display: block;
             margin-left: 1 / 6 * 100%;
             margin-right: 1 / 6 * 100%;
