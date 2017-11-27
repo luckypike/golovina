@@ -265,6 +265,39 @@ $(function() {
     });
   });
 
+  sim = '';
+  i = 0;
+  $('.price .more').on('click', function(){
+    var self = $(this);
+    if(sim.length == 0) {
+      $.getJSON('/catalog/' + self.data('id') + '/info')
+      .done(function(data) {
+        sim = data;
+        similar_product(self, i , sim);
+      });
+    }
+    else {
+      i++;
+      similar_product(self, i, sim);
+      if(i == Object.keys(sim).length - 1) i = -1;
+    }
+    return false;
+  });
+
+  function similar_product(self, i, sim) {
+    parent = self.closest('.kit_products_list_item');
+
+    parent.fadeOut('fast', function(){
+      self.text('Еще');
+
+      parent.find('.fake').attr('href', sim[i]['link']);
+      parent.find('.product_title').text(sim[i]['title']);
+      parent.find('.image img').attr('src', sim[i]['thumb']);
+      parent.find('.out').remove();
+      parent.fadeIn('fast');
+    });
+  }
+
   // if(_dzp.length == 1) {
   //   var drake = dragula({
   //     containers: [_dzp[0]],

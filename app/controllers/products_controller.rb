@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish, :info]
 
   def index
     authorize Product
@@ -115,6 +115,18 @@ class ProductsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def info
+    authorize @product
+
+    info = {}
+    @product.similar_products.each_with_index do |similar, i|
+      @improduct = Product.find(similar.id)
+      info[i] = {'id' => similar.id, 'link' => url_for([@improduct, anchor: @improduct.variants.first.id]), 'title' => similar.title, 'price' => similar.price, 'thumb' => similar.photo.thumb.url}
+    end
+
+    render json: info
   end
 
   def destroy

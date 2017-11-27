@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   end
 
   resources :variants, only: [:index, :create, :update, :destroy] do
+
     member do
       get :images
     end
@@ -47,6 +48,7 @@ Rails.application.routes.draw do
       post :wishlist
       post :cart
     end
+
   end
 
   resources :categories, except: [:show]
@@ -58,6 +60,7 @@ Rails.application.routes.draw do
       post :publish
       post :archive
       get :variants
+      get :info
     end
 
     collection do

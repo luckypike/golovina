@@ -59,6 +59,10 @@ class ProductPolicy < ApplicationPolicy
     update?
   end
 
+  def info?
+    true
+  end
+
   def publish?
     update?
   end

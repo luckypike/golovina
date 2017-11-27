@@ -611,6 +611,18 @@
             .price {
               text-align: center;
 
+              .more {
+                @include font-size(1.25);
+
+                letter-spacing: 0.1em;
+                margin: $base-rhythm-line 0;
+                text-transform: uppercase;
+                padding: 0 $gutter / 2;
+                position: relative;
+                min-width: 0;
+                z-index: 3;
+              }
+
               > div {
                 display: inline;
               }
@@ -631,6 +643,21 @@
 
             .image {
               @include aspect-ratio(4, 5);
+
+              .out {
+                align-items: center;
+                background: rgba(255, 255, 255, 0.8);
+                display: flex;
+                justify-content: center;
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                z-index: 1;
+
+                .msg {
+                  text-align: center;
+                }
+              }
             }
           }
         }
@@ -682,10 +709,10 @@
 
             @include font-size-h3;
             @include font-headers;
-            @include font-size(3.5, 3);
+
             box-sizing: content-box;
             display: block;
-            height: 42px;
+            height: 74px;
             overflow: hidden;
             padding: 0.5 * $space-s 0 0 $space-s;
             position: absolute;
