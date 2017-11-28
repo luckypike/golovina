@@ -2,7 +2,7 @@
 
 .page.page_common.page_theme.barba_container namespace='theme'
   .page_theme_intro
-    .theme_intro class=[@theme.slug, "i_#{@theme.weight % 2}"]
+    .theme_intro class=@theme.slug
       .image.lv3
         = image_tag @theme.image.large
 
@@ -50,4 +50,3 @@
         - if policy(theme).edit?
           .control
             = link_to '', [:edit, theme], class: :edit
-
