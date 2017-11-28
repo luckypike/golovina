@@ -1,6 +1,6 @@
 - title @kit.title_safe
 - images = @kit.images.sort_by{ |i| [(i.weight.zero? ? 99 : i.weight), i.created_at] }.take(2)
-- variants = @kit.variants.where(state: [:active, :out]).select{ |v| v.product.active? }
+- variants = @kit.variants.select{ |v| (v.active? || v.out?) && v.product.active? }
 
 / - set_meta_tags og: { image: @kit.images.select(&:photo).map{ |i| i.photo.url } }
 
@@ -45,6 +45,6 @@
 
   .page_kit_products
     .products
-      - @variants.each_with_index do |variant, i|
+      - variants.each_with_index do |variant, i|
         .products_item.lv2 class="i_#{i % 2}"
           == render 'products/item', product: variant.product, variant: variant
