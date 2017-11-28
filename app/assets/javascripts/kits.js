@@ -7,6 +7,7 @@ $(function() {
 
   $('.kits_list_item').on('click', function(e){
     if(!$(e.target).hasClass('edit')) {
+      var _this = $(this);
       var _kpw = $(this).next();
       var _kp = _kpw.find('.kit_products');
     // console.log(_kli);
@@ -22,6 +23,8 @@ $(function() {
         });
 
       } else {
+        $("html, body").stop().animate({ scrollTop: (_this.offset().top + _this.height() / 2) }, 500, 'swing');
+
         _kpw.slideToggle(400, function() {
           if($(window).width() < 960) {
             var swiper = new Swiper (_kp, {
@@ -334,4 +337,3 @@ $(function() {
   // }
 
 });
-
