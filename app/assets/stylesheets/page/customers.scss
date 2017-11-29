@@ -11,7 +11,7 @@
       margin-bottom: $base-rhythm-line * 1.5;
 
       @include mq($s){
-        margin-bottom: $base-rhythm-line * 2;        
+        margin-bottom: $base-rhythm-line * 2;
       }
 
     }
@@ -21,6 +21,8 @@
 
       .lv4 {
         display: flex;
+        text-transform: uppercase;
+        letter-spacing: 2px;
 
         .varr_icon {
           display: block;
@@ -38,13 +40,9 @@
             stroke-linecap: butt;
             stroke-linejoin: miter;
           }
-
-          @include mq($s) {
-            height: 32px;
-          }
         }
       }
-      
+
       .content {
         display: none;
         padding-bottom: $base-rhythm-line * 2;

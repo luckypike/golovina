@@ -378,6 +378,23 @@ $(function(){
           $('.product_data').height(_pheight + 200);
           $(document.body).trigger("sticky_kit:recalc");
         }
+        if($(this).hasClass('wear')) {
+          _kp = $(this).next().find('.kits_wear');
+
+          // if(_kp.is(':visible')) {
+          //   var swiper = _kp.data('swiper');
+
+          //   if(swiper) {
+          //     swiper.destroy(true, true);
+          //   }
+          // }
+
+          var swiper = new Swiper (_kp, {
+            freeMode: false,
+            slidesPerView: 'auto',
+          });
+          _kp.data('swiper', swiper);
+        }
       });
     });
 
