@@ -287,7 +287,7 @@ $(function() {
 
   sim = '';
   i = 0;
-  $('.price .more').on('click', function(){
+  $('.kit_products_list_item .more').on('click', function(){
     var self = $(this);
     if(sim.length == 0) {
       $.getJSON('/catalog/' + self.data('id') + '/info')

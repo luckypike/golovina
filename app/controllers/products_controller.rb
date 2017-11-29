@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish, :info]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish, :info, :similar]
 
   def index
     authorize Product
@@ -127,6 +127,16 @@ class ProductsController < ApplicationController
     end
 
     render json: info
+  end
+
+  def similar
+    authorize @product
+
+    @variants = @product.variants
+
+    @simproduct = Product.find(params[:simid])
+
+    render 'products/_item', layout: false, locals: {product: @simproduct}
   end
 
   def destroy
