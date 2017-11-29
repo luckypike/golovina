@@ -10,6 +10,37 @@
         width: 3 / 4 * 100%;
         margin-left: 1 / 4 * 100%;
       }
+
+      @include  mq($m) {
+        &.i_0 {
+          width: 100%;
+          margin-right: 0;
+
+          .image {
+            width: calc(6 / 12 * 100% - #{$gutter} / 2);
+          }
+
+          .text {
+            left: calc(6 / 12 * 100% - #{$gutter} / 2);
+            width: 5 / 12 * 100%;
+          }
+        }
+
+        &.i_1 {
+          width: 100%;
+          margin-left: 0;
+
+          .image {
+            margin-left: calc(6 / 12 * 100% + #{$gutter} / 2);
+            width: calc(6 / 12 * 100% - #{$gutter} / 2);
+          }
+
+          .text {
+            padding-left: 0;
+            width: 5 / 12 * 100%;
+          }
+        }
+      }
     }
   }
 }

@@ -2,16 +2,18 @@
 - parent_cat = [41, 42, 43, 45, 21, 22]
 - if parent_cat.include?(product.category_id) then s = 'hide_sizes'
 
-.product
+.product class="variant_#{variant.state}"
   .product_images
     .swiper-container
+      - if variant.out?
+        .out
+          .msg Временно отсутствует
       .images_list.swiper-wrapper.images_list_swiper_l
 
   .product_data_wrapper
     .product_data class=product.state
       .title_and_color.lv3
         .title
-          / = debug @variants
           - if (@variants.present?)
             h2
               = product.title_safe
@@ -34,6 +36,9 @@
           .variants_title
 
       .images.swiper-container.lv4
+        - if variant.out?
+          .out
+            .msg Временно отсутствует
         .images_list.swiper-wrapper.images_list_swiper
 
       /   = debug product.category_id
@@ -48,7 +53,6 @@
 
           / .sizes_title
             | Помощь с размером
-
         .price_and_buy
           .price
             - if product.price_last
@@ -154,3 +158,5 @@
 
             p Возврат и обмен товара осуществляется в течение 7 дней с момента получения заказа, если он не был в употреблении, сохранен товарный вид, потребительские свойства, пломбы, фабричные ярлыки. В противном случае обмену и возврату товар не подлежит. #{link_to 'Подробнее', customers_return_path, class: 'bordered'}
 
+      - if variant.out?
+          = link_to 'Подобрать похожий', '#', class: [:btn, :more], :data => { :id => variant.product.id , :similar => variant.product.similar_products.active.map{ |s| s.id }.to_json }

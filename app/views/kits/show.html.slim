@@ -46,5 +46,5 @@
   .page_kit_products
     .products
       - variants.each_with_index do |variant, i|
-        .products_item.lv2 class="i_#{i % 2}"
+        .products_item.lv2 class="i_#{i % 2}" class="variant_#{variant.state}"
           == render 'products/item', product: variant.product, variant: variant

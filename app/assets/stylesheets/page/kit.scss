@@ -402,6 +402,29 @@
       width: auto;
       bottom: auto;
     }
+
+    .products_item {
+
+      .more {
+        display: block;
+        margin-top: $gutter;
+
+        @include mq($s) {
+          display: inline-block;
+        }
+      }
+
+      &.variant_out {
+        .out {
+          display: flex;
+        }
+
+        .rest_of,
+        .acc {
+          display: none;
+        }
+      }
+    }
   }
 
   @include mq($m) {
@@ -422,6 +445,8 @@
         &_item {
           .product {
             &_images {
+              @include aspect-ratio(4,5);
+
               margin-bottom: 0;
 
               .images {
@@ -431,6 +456,23 @@
 
                   }
                   cursor: pointer;
+                }
+              }
+
+              .out {
+                align-items: center;
+                background: rgba(255, 255, 255, 0.8);
+                display: flex;
+                justify-content: center;
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                z-index: 2;
+
+                .msg {
+                  @include font-size(3, 4);
+
+                  text-align: center;
                 }
               }
             }
