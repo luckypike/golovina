@@ -63,6 +63,10 @@ class ProductPolicy < ApplicationPolicy
     true
   end
 
+  def similar?
+    true
+  end
+
   def publish?
     update?
   end
