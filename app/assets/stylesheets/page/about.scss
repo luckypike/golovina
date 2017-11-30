@@ -1,7 +1,200 @@
 .page_about {
+  padding-left: $gutter;
+  padding-right: $gutter;
+  padding-bottom: $space-m;
+
+  & > div {
+    margin-bottom: 3 * $gutter;
+  }
+
+  .quote {
+    @include font-size(3, 4);
+    font-family: 'MadelynFill', sans-serif;
+  }
+
+  &_sketch {
+    @include aspect-ratio(2, 1);
+
+    background: {
+      image: image_url('pages/about/about_sketch.jpg');
+      size: cover;
+    }
+    margin-bottom: 3 * $gutter;
+
+  }
+
   &_intro {
-    max-width: $xl;
-    margin: 0 auto 3rem;
-    padding: 0 $gutter;
+    text-align: center;
+
+    @include mq($s) {
+      @include column-width(6, 12);
+
+      margin-left: 3/12 * 100%;
+    }
+  }
+
+  .page_common_text {
+
+    @include mq($s) {
+      p {
+        width: 50%;
+        padding: 0 12px;
+      }
+      @include column-width(8, 12);
+
+      display: flex;
+      margin-left: 2/12 * 100%;
+    }
+  }
+
+  &_events {
+
+    &_list {
+
+      &_item {
+        margin-bottom: 1.25 * $gutter;
+
+        .event_image {
+          @include aspect-ratio(4, 5);
+
+          margin-bottom: .5 * $gutter;
+        }
+
+        .event_date {
+          color: #999;
+        }
+
+        &:nth-child(2) {
+
+          .event_image {
+            @include aspect-ratio(5, 4);
+          }
+        }
+
+        .btn {
+          margin-top: 1.25 * $gutter;
+        }
+      }
+
+      @include mq($s) {
+        display: flex;
+
+        &_item {
+          @include column-width(4, 12);
+          margin: 0 1/12 * 100%;
+          padding: 0 $gutter;
+        }
+      }
+    }
+  }
+
+  &_slider {
+    margin: 0 -$gutter;
+
+    .swiper-container {
+      .swiper-slide {
+
+        &-wrapper {
+          @include aspect-ratio(3, 2);
+        }
+
+        @include mq($s) {
+          @include column-width(8, 12);
+
+          // margin: 0 $gutter;
+          margin-left: 1/24 * 100%;
+          margin-right: 1/24 * 100%;
+
+          &-wrapper {
+            margin: 0 $gutter;
+
+            &:before {
+              background: rgba(255, 255, 255, 0.8);
+              position: relative;
+              transition: background .6s;
+              z-index: 1;
+            }
+          }
+
+          &.swiper-slide-active {
+
+            .swiper-slide-wrapper {
+
+              &:before {
+                background: rgba(255, 255, 255, 0);
+              }
+            }
+          }
+        }
+      }
+
+      .swiper-pagination {
+        position: static;
+
+        &-bullet {
+          border: 1px solid #000;
+          background: transparent;
+          opacity: 1;
+
+          &-active {
+            background: #000;
+          }
+        }
+      }
+    }
+
+  }
+
+  &_territory {
+    text-align: center;
+
+    .address {
+      margin-top: .75 * $gutter;
+    }
+  }
+
+  &_owner {
+    &_wrapper {
+      .image {
+        @include aspect-ratio(4, 5);
+
+        background: {
+          image: image_url('pages/about/mint_owner.jpg');
+          size: cover;
+        }
+      }
+
+      .text {
+        padding-top: $gutter;
+
+        .quote {
+          margin-bottom: 1.5 * $gutter;
+        }
+      }
+    }
+
+    @include mq($s) {
+      @include column-width(10, 12);
+      margin-left: 1/12 * 100%;
+
+      &_wrapper {
+        display: flex;
+        margin: 0 -$gutter;
+
+        & > div {
+          padding: 0 $gutter;
+          width: 50%;
+        }
+
+        .text {
+           padding-top: 3 * $gutter;
+
+          .desc {
+            @include column-width(4, 5);
+            margin-left: 1/5 * 100%;
+          }
+        }
+      }
+    }
   }
 }

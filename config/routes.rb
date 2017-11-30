@@ -22,8 +22,6 @@ Rails.application.routes.draw do
     end
   end
 
-
-
   get :contacts, to: 'static#contacts'
 
   get 'robots.:format', to: 'static#robots'
