@@ -15,6 +15,7 @@
 
           &_list {
             display: flex;
+            padding: 0 $gutter / 2;
 
             &_item {
               padding: 0 $gutter / 2;
@@ -22,12 +23,12 @@
               width: 45%;
 
               &:first-child {
-                margin-left: $gutter / 2;
+                // margin-left: $gutter / 2;
                 // padding-left: $gutter;
               }
 
               &:last-child {
-                margin-right: $gutter / 2;
+                margin-right: $gutter;
                 // padding-right: $gutter;
               }
 
@@ -117,6 +118,7 @@
 
             &_list {
               flex-wrap: wrap;
+              padding: 0 0;
 
               &_item {
                 margin-bottom: 1.5 * $gutter;

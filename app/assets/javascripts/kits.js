@@ -118,7 +118,7 @@ $(function() {
       paginationType: 'bullets',
       loop: true,
       autoplay: 4000,
-      speed: 1100,
+      speed: 500,
     });
 
     return kwspr;
