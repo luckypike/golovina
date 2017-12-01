@@ -1,17 +1,84 @@
 &_themes {
   &_themes {
     .theme_intro {
+      &_wrapper {
+        position: relative;
+        cursor: pointer;
+      }
+
+      &_kits {
+        display: none;
+        margin-left: -$gutter;
+        margin-right: -$gutter;
+
+        .theme_kits {
+          padding-top: $gutter ;
+
+          &_list {
+            display: flex;
+
+            &_item {
+              padding: 0 $gutter / 2;
+              position: relative;
+              width: 45%;
+
+              &:first-child {
+                margin-left: $gutter / 2;
+                // padding-left: $gutter;
+              }
+
+              &:last-child {
+                margin-right: $gutter / 2;
+                // padding-right: $gutter;
+              }
+
+              .fake {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                z-index: 2;
+              }
+
+              .kit_image {
+                @include aspect-ratio(4, 5);
+              }
+            }
+          }
+        }
+      }
+
       &.i_0 {
-        margin-right: 1 / 4 * 100%;
-        width: 3 / 4 * 100%;
+        // margin-right: 1 / 4 * 100%;
+        // width: 3 / 4 * 100%;
       }
 
       &.i_1 {
-        width: 3 / 4 * 100%;
-        margin-left: 1 / 4 * 100%;
+        // width: 3 / 4 * 100%;
+        // margin-left: 1 / 4 * 100%;
       }
 
-      @include  mq($m) {
+      @include mq($m) {
+
+        &_kits {
+          .theme_kits_wrapper {
+            // overflow: hidden;
+          }
+
+          .theme_kits {
+            // margin-left: -$gutter / 2;
+            // margin-right: -$gutter / 2;
+
+            &_list {
+
+              &_item {
+                width: 23%;
+              }
+            }
+          }
+        }
+
         &.i_0 {
           width: 100%;
           margin-right: 0;
@@ -38,6 +105,22 @@
           .text {
             padding-left: 0;
             width: 5 / 12 * 100%;
+          }
+        }
+      }
+
+      @include  mq($l) {
+        &_kits {
+          .theme_kits {
+
+            &_list {
+              flex-wrap: wrap;
+
+              &_item {
+                margin-bottom: 1.5 * $gutter;
+                width: 25%;
+              }
+            }
           }
         }
       }

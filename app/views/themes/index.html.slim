@@ -10,24 +10,41 @@
   .page_themes_themes
     - @themes.sort_by(&:weight).each_with_index do |theme, i|
       .theme_intro.lv2 class=[theme.slug, "i_#{i % 2}"]
-        .image.lv3
-          = image_tag theme.image.large
+        .theme_intro_wrapper
+          .image.lv3
+            = image_tag theme.image.large
 
-        .text.mb
-          = link_to theme do
-            .short.lv4
-              = theme.title
+          .text.mb
+            = link_to theme do
+              .short.lv4
+                = theme.title
 
-            .title
-              = theme.title_long
+              .title
+                = theme.title_long
 
-            .desc
-              = theme.desc
+              .desc
+                = theme.desc
 
-            .more
-              .btn
-                | Выбирай настроение
+              .more
+                .btn
+                  | Выбирай настроение
 
-        - if policy(theme).edit?
-        .control
-          = link_to '', [:edit, theme], class: :edit
+          - if policy(theme).edit?
+          .control
+            = link_to '', [:edit, theme], class: :edit
+
+        .theme_intro_kits
+          .theme_kits_wrapper
+            .theme_kits.swiper-container
+              .theme_kits_list.swiper-wrapper
+                - theme.kits.active.each do |kit|
+                  .theme_kits_list_item.swiper-slide
+                    = link_to '', [kit], class: :fake
+
+                    .kit_image
+                      = image_tag kit.images.first.photo.thumb.url
+
+                    .theme_kits_title
+                      = kit.title_safe
+                  / = debug kit.images.first.photo.url
+            / = debug kit.id
