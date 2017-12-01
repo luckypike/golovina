@@ -63,6 +63,13 @@
           @include aspect-ratio(4, 5);
 
           margin-bottom: .5 * $gutter;
+
+          .img {
+            background: {
+              image: image_url('pages/about/about_event_1.jpg');
+              size: cover;
+            }
+          }
         }
 
         .event_date {
@@ -74,7 +81,14 @@
           margin-left: 1/4 * 100%;
 
           .event_image {
-            @include aspect-ratio(5, 4);
+            @include aspect-ratio(4, 5);
+
+            .img {
+              background: {
+                image: image_url('pages/about/about_event_2.jpg');
+                size: cover;
+              }
+            }
           }
         }
 
@@ -93,6 +107,10 @@
 
           &:nth-child(2) {
             margin: 0 1/12 * 100%;
+
+            .event_image {
+              @include aspect-ratio(5, 4);
+            }
           }
         }
       }

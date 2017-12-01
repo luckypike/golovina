@@ -196,18 +196,15 @@
 
   .image {
     @include aspect-ratio(4, 5);
-
+    margin-left: -$gutter;
+    margin-right: -$gutter;
     overflow: hidden;
 
-    .img {
-      // transition: transform 1.6s;
-
-      background: {
-        color: #f1f1f1;
-        size: cover;
-        position: top center;
-      }
-    }
+    // img {
+    //   // transition: transform 1.6s;
+    //   bottom: auto;
+    //   height: auto;
+    // }
   }
 
   .text {
@@ -310,6 +307,8 @@
 
     .image {
       width: 8 / 12 * 100%;
+      margin-left: 0;
+      margin-right: 0;
 
       &:before {
         opacity: 0;

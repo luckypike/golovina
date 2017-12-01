@@ -7,7 +7,6 @@
       }
 
       &_kits {
-        display: none;
         margin-left: -$gutter;
         margin-right: -$gutter;
 
@@ -111,6 +110,9 @@
 
       @include  mq($l) {
         &_kits {
+          margin-left: -$gutter / 2;
+          margin-right: -$gutter / 2;
+
           .theme_kits {
 
             &_list {
@@ -119,6 +121,16 @@
               &_item {
                 margin-bottom: 1.5 * $gutter;
                 width: 25%;
+
+                &:first-child {
+                  margin-left: 0;
+                  // padding-left: $gutter;
+                }
+
+                &:last-child {
+                  margin-right: 0;
+                  // padding-right: $gutter;
+                }
               }
             }
           }

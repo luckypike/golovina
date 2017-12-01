@@ -3,7 +3,7 @@
 - keywords ['мята', 'минт стор', 'mintstore', 'mint store']
 
 .page.page_static_index.barba_container  data-namespace='index'
-  .page_static_index_swiper.lv1
+  .page_static_index_swiper
     .ss
       - @slides.each_with_index do |slide, index|
         div class="ss_#{index}" style="background-image: url('#{slide.image.large.url}')"
@@ -38,7 +38,7 @@
               .action
                 = link_to slide.link_name, slide.link, class: [:btn, :btn_gr]
 
-  .page_static_index_themes
+  / s.page_static_index_themes
     - @themes.sort_by(&:weight).each_with_index do |theme, i|
       .theme_intro.lv2 class=[theme.slug, "i_#{i % 2}"]
         .image.lv3

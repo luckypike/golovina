@@ -1,9 +1,10 @@
-footer.footer
-  .footer_top
-    .top
+- if !current_page?(controller: 'static', action: 'index')
+  footer.footer
+    .footer_top
+      .top
 
-  - unless controller_name == 'cart'
-    .footer_like
-      = link_to 'L..IKE', 'https://luckypike.com', target: '_blank'
+    - unless controller_name == 'cart'
+      .footer_like
+        = link_to 'L..IKE', 'https://luckypike.com', target: '_blank'
 
-== render '/shared/c'
+  == render '/shared/c'

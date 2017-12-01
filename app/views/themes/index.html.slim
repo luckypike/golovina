@@ -30,8 +30,8 @@
                   | Выбирай настроение
 
           - if policy(theme).edit?
-          .control
-            = link_to '', [:edit, theme], class: :edit
+            .control
+              = link_to '', [:edit, theme], class: :edit
 
         .theme_intro_kits
           .theme_kits_wrapper
@@ -44,7 +44,7 @@
                     .kit_image
                       = image_tag kit.images.first.photo.thumb.url
 
-                    .theme_kits_title
-                      = kit.title_safe
+                    / .theme_kits_title
+                      / = kit.title_safe
                   / = debug kit.images.first.photo.url
             / = debug kit.id
