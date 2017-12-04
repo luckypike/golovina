@@ -349,7 +349,7 @@
 
       .title {
         // @include font-size-h1;
-        @include font-headers
+        @include font-headers;
         text-transform: uppercase;
         letter-spacing: 2px;
         @include font-size(5.625, 6);
