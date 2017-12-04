@@ -326,9 +326,11 @@
       transform: translateY(-50%);
 
       .title {
-        @include font-size-h1;
+        // @include font-size-h1;
         @include font-headers;
-        // @include font-size(9, 8);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        @include font-size(5.625, 6);
         // margin-left: calc(2 / 6 * 100% + #{$gutter * 2});
         display: block;
       }
@@ -615,6 +617,7 @@
             }
 
             .price {
+              @include font-size(1.125, 1.5);
               text-align: center;
 
               .more {
@@ -644,6 +647,10 @@
               &_old {
                 margin-left: $gutter / 2;
                 text-decoration: line-through;
+              }
+
+              @include mq($s) {
+                @include font-size-small;
               }
             }
 
@@ -752,7 +759,7 @@
         margin-top: $base-rhythm-line;
         text-transform: uppercase;
         padding: 0 $gutter / 2;
-        min-width: 0;
+        min-width: 100px;
       }
     }
 

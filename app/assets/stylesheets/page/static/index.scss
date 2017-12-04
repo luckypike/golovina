@@ -176,19 +176,21 @@
 
 
           .what {
-            @include font-size(4.25, 5);
+            @include font-size(3, 4);
 
-            min-height: $base-rhythm-line * 10;
+            min-height: $base-rhythm-line * 8;
 
             @include breakpoint($s) {
-              @include font-size(5.625, 6);
+              // @include font-size(5.625, 6);
 
-              min-height: $base-rhythm-line * 12;
+              min-height: $base-rhythm-line * 6;
             }
 
             font-weight: 300;
             color: #fff;
-            font-family: 'Cormorant', serif;
+            // font-family: 'Cormorant', serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             margin-bottom: $space-s;
           }
 
