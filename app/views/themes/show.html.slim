@@ -2,12 +2,16 @@
 
 .page.page_common.page_theme.barba_container namespace='theme'
   .page_theme_intro
+    .fake_text
+      .title
+        = @theme.title_long
+
     .theme_intro class=@theme.slug
       .image.lv3
         = image_tag @theme.image.large
 
       .text.mb
-        .short.lv4
+        .short
           = @theme.title
 
         .title

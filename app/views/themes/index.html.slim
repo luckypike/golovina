@@ -10,13 +10,18 @@
   .page_themes_themes
     - @themes.sort_by(&:weight).each_with_index do |theme, i|
       .theme_intro.lv2 class=[theme.slug, "i_#{i % 2}"]
+        .fake_text
+          .title
+            = theme.title_long
+
         .theme_intro_wrapper
+
           .image.lv3
             = image_tag theme.image.large
 
           .text.mb
             = link_to theme do
-              .short.lv4
+              .short
                 = theme.title
 
               .title

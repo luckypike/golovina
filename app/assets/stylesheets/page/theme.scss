@@ -4,6 +4,23 @@
   &_intro {
     margin-bottom: $space-m;
 
+    .fake_text {
+      .title {
+        @include font-size-h1;
+        @include font-headers;
+        @include lv4;
+
+        margin-bottom: $base-rhythm-line * $base-line-height;
+        text-align: center;
+        transition: transform 0.5s;
+        transform-origin: left bottom;
+
+        @include mq($m) {
+          display: none;
+        }
+      }
+    }
+
     @include mq($m) {
       padding: 0 $gutter;
     }
@@ -220,9 +237,15 @@
       @include font-size-h1;
       @include font-headers;
 
-      // display: none;
+      display: none;
       transition: transform 0.5s;
       transform-origin: left bottom;
+      margin-top: $base-rhythm-line * $base-line-height / 2;
+
+      @include mq($m) {
+        display: block;
+        margin-top: $base-rhythm-line * ($base-line-height + 1) / 2;
+      }
     }
 
     .short {
@@ -327,6 +350,7 @@
       .title {
         @include font-size-h1;
         @include font-headers;
+
         // @include font-size(9, 8);
         // margin-left: calc(2 / 6 * 100% + #{$gutter * 2});
         display: block;
@@ -395,9 +419,32 @@
         @include font-size-h2;
         @include font-headers;
 
-        // display: none;
+        display: none;
         transition: transform 0.5s;
         transform-origin: left bottom;
+        margin-top: $base-rhythm-line * $base-line-height / 2;
+
+        @include mq($m) {
+          display: block;
+          margin-top: $base-rhythm-line * ($base-line-height + 1) / 2;
+        }
+      }
+    }
+
+    .fake_text {
+      .title {
+        @include font-size-h2;
+        @include font-headers;
+        @include lv4;
+
+        margin-bottom: $base-rhythm-line * $base-line-height;
+        text-align: center;
+        transition: transform 0.5s;
+        transform-origin: left bottom;
+
+        @include mq($m) {
+          display: none;
+        }
       }
     }
   }
