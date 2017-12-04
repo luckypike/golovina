@@ -1,4 +1,8 @@
 $(function() {
+  if(window.location.hash.length > 0 && window.location.hash.substring(1) == 'kit') {
+    $("html, body").stop().animate({ scrollTop: $('.kits_list').offset().top - 50}, 500, 'swing');
+  }
+
   $('.kit .product .product_images .images_list').on('click', function() {
     var _this = $(this);
     var swiper = _this.parent().data('swiper');
@@ -6,7 +10,9 @@ $(function() {
   });
 
   $('.kits_list_item').on('click', function(e){
-    if(!$(e.target).hasClass('edit')) {
+    console.log(e.target);
+    if(!$(e.target).hasClass('edit') && !$(e.target).hasClass('buy_kit')) {
+      console.log('tt');
       var _this = $(this);
       var _kpw = $(this).next();
       var _kp = _kpw.find('.kit_products');
