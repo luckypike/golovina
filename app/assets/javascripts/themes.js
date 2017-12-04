@@ -16,13 +16,11 @@ $(function() {
       var _tkw = $(this).next();
       var _tk = _tkw.find('.theme_kits');
 
-      if($(window).width() < 1280) {
-        var swiper = new Swiper (_tk, {
-          freeMode: false,
-          slidesPerView: 'auto',
-        });
-        _tk.data('swiper', swiper);
-      }
+      var swiper = new Swiper (_tk, {
+        freeMode: false,
+        slidesPerView: 'auto',
+      });
+      _tk.data('swiper', swiper);
     });
   }
 });

@@ -44,7 +44,5 @@
                     .kit_image
                       = image_tag kit.images.first.photo.thumb.url
 
-                    / .theme_kits_title
-                      / = kit.title_safe
-                  / = debug kit.images.first.photo.url
-            / = debug kit.id
+                    .kit_price
+                      = number_to_rub kit.variants.map(&:product).sum(&:price)

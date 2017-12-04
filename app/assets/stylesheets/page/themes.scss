@@ -44,6 +44,17 @@
               .kit_image {
                 @include aspect-ratio(4, 5);
               }
+
+              .kit_price {
+                @include font-size(1.125, 1.5);
+
+                text-align: center;
+                margin-top: $base-rhythm-line / 2;
+
+                @include mq($s) {
+                  @include font-size-small;
+                }
+              }
             }
           }
         }
@@ -117,21 +128,17 @@
           .theme_kits {
 
             &_list {
-              flex-wrap: wrap;
               padding: 0 0;
 
               &_item {
                 margin-bottom: 1.5 * $gutter;
-                width: 25%;
 
                 &:first-child {
                   margin-left: 0;
-                  // padding-left: $gutter;
                 }
 
                 &:last-child {
                   margin-right: 0;
-                  // padding-right: $gutter;
                 }
               }
             }
