@@ -49,4 +49,4 @@
                       = image_tag kit.images.first.photo.thumb.url
 
                     .kit_price
-                      = number_to_rub kit.variants.map(&:product).sum(&:price)
+                      = number_to_rub kit.variants.active.map(&:product).sum(&:price)

@@ -4,23 +4,6 @@
   &_intro {
     margin-bottom: $space-m;
 
-    .fake_text {
-      .title {
-        @include font-size-h1;
-        @include font-headers;
-        @include lv4;
-
-        margin-bottom: $base-rhythm-line * $base-line-height;
-        text-align: center;
-        transition: transform 0.5s;
-        transform-origin: left bottom;
-
-        @include mq($m) {
-          display: none;
-        }
-      }
-    }
-
     @include mq($m) {
       padding: 0 $gutter;
     }
@@ -412,6 +395,23 @@
   }
 }
 
+.fake_text {
+  .title {
+    @include font-size-h2;
+    @include font-headers;
+    @include lv4;
+
+    margin-bottom: $base-rhythm-line * $base-line-height;
+    text-align: center;
+    transition: transform 0.5s;
+    transform-origin: left bottom;
+
+    @include mq($m) {
+      display: none;
+    }
+  }
+}
+
 &_static_index_themes,
 &_themes {
   .theme_intro {
@@ -428,23 +428,6 @@
         @include mq($m) {
           display: block;
           margin-top: $base-rhythm-line * ($base-line-height + 1) / 2;
-        }
-      }
-    }
-
-    .fake_text {
-      .title {
-        @include font-size-h2;
-        @include font-headers;
-        @include lv4;
-
-        margin-bottom: $base-rhythm-line * $base-line-height;
-        text-align: center;
-        transition: transform 0.5s;
-        transform-origin: left bottom;
-
-        @include mq($m) {
-          display: none;
         }
       }
     }
