@@ -145,10 +145,16 @@
 
       @include  mq($l) {
         &_kits {
-          margin-left: -$gutter / 2;
-          margin-right: -$gutter / 2;
+          overflow: hidden;
+          margin-left: 0;
+          margin-right: 0;
 
           .theme_kits {
+
+            &_wrapper {
+              margin-left: -$gutter / 2;
+              margin-right: -$gutter / 2;
+            }
 
             &_list {
               padding: 0 0;
