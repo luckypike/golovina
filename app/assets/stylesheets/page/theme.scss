@@ -502,6 +502,7 @@
       text-align: center;
 
       .price {
+        @include font-size(1.375, 2);
         > div {
           display: inline;
         }
@@ -662,7 +663,7 @@
             }
 
             .price {
-              @include font-size(1.125, 1.5);
+              @include font-size(1.375, 2);
               text-align: center;
 
               .more {
