@@ -1,0 +1,50 @@
+.page_about_collection {
+  & > div {
+    margin-bottom: 3 * $gutter;
+  }
+
+  &_wrapper {
+    position: relative;
+  }
+
+  &_sketch {
+    background: {
+        image: image_url('pages/about/golovina_about.jpg');
+        size: cover;
+    }
+    margin-left: -$gutter;
+    margin-right: -$gutter;
+    padding: 0 $gutter;
+    @include aspect-ratio(2, 2);
+  }
+
+  &_intro {
+    bottom: 0;
+    color: #fff;
+    position: absolute;
+    padding-bottom: $gutter;
+
+    @include mq($s) {
+      @include column-width(6, 12);
+      @include column-shift(1, left, 12);
+
+      padding-bottom: 3 * $gutter;
+      padding-left: $gutter;
+      padding-right: $gutter;
+
+      .quote {
+        @include font-size(4.25, 5);
+      }
+
+    }
+  }
+
+  &_desc {
+    @include mq($s) {
+      .quote {
+        @include column-width(5, 12);
+        @include column-shift(1, left, 12);
+      }
+    }
+  }
+}
