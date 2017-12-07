@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
     namespace 'about', module: nil do
       get '', to: 'about#index'
+      get '/golovina', to: 'about#collection'
     end
 
     namespace 'customers', module: nil do

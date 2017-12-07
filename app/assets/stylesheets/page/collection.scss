@@ -1,0 +1,295 @@
+.header {
+  &.about {
+    svg,
+    rect,
+    .cls-1 {
+      fill: $op-color;
+      transition: fill .3s;
+    }
+
+    .a,
+    .b {
+      stroke: $op-color;
+      transition: stroke .3s;
+    }
+    &.about_act {
+      svg,
+      rect,
+      .cls-1 {
+        fill: $primary-color;
+      }
+
+      .a,
+      .b {
+        stroke: $primary-color;
+      }
+    }
+  }
+}
+.page_about_collection {
+
+  & > div {
+    margin-bottom: 3 * $gutter;
+  }
+
+  &_wrapper {
+    .page_about {
+      position: relative;
+    }
+  }
+
+  &_sketch {
+    background: {
+      image: image_url('pages/about/golovina_cover.jpg');
+      size: cover;
+      position: right;
+    }
+    @include aspect-ratio(3, 4);
+
+    @include mq($s) {
+      @include aspect-ratio(2, 2);
+    }
+
+    @include mq($m) {
+      @include aspect-ratio(5, 3);
+    }
+  }
+
+  &_intro {
+    bottom: 0;
+    color: #fff;
+    position: absolute;
+    padding-bottom: $gutter;
+
+    .about_logo {
+      @include column-width(6, 12);
+      margin-bottom: $gutter * 1.5;
+    }
+
+    @include mq($s) {
+      @include column-width(6, 12);
+      @include column-shift(1, left, 12);
+
+      padding-bottom: 3 * $gutter;
+
+      .quote {
+        @include font-size(4.25, 5);
+      }
+    }
+
+    @include mq($m) {
+      .quote {
+        @include font-size(5, 7);
+      }
+    }
+  }
+
+  &_desc {
+    @include mq($s) {
+      display:  grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: $gutter * 2;
+
+      .quote {
+        grid-column: 2 / span 5;
+      }
+
+      .text {
+        grid-column: 7 / span 5;
+      }
+    }
+  }
+
+  &_content {
+
+    .collection {
+      display: grid;
+      grid-row-gap: $gutter * 1.5;
+
+      &_desc {
+        .desc {
+          padding-top: $gutter * 0.75;
+        }
+      }
+
+      &_slider {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: $gutter * 2;
+        position: relative;
+        margin-left: - $gutter;
+        margin-right: - $gutter;
+        // padding: 0 $gutter;
+
+        .collection_images {
+          position: relative;
+          z-index: 2;
+          padding-top: $gutter;
+
+          .swiper-container {
+            .swiper-slide {
+              &-wrapper {
+                @include aspect-ratio(4, 6);
+                margin-right: 1/4 * 100%;
+                margin-left: $gutter;
+              }
+            }
+          }
+        }
+
+        .collection_thumbs {
+          position: absolute;
+          text-align: center;
+          width: 100%;
+          z-index: 1;
+
+          .swiper-container {
+            .swiper-slide {
+
+              &-wrapper {
+                @include aspect-ratio(3, 2);
+                background: {
+                  size: cover;
+                  position: center;
+                }
+              }
+            }
+          }
+
+          .swiper-pagination {
+            display: none;
+            position: static;
+
+            &-bullet {
+              border: 1px solid #000;
+              background: transparent;
+              opacity: 1;
+
+              &-active {
+                background: #000;
+              }
+            }
+          }
+        }
+      }
+
+      &_text {
+        p {
+          margin-bottom: $gutter * 0.5;
+        }
+      }
+    }
+    @include mq($s) {
+
+      .collection {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-column-gap: $gutter * 2;
+        grid-row-gap: $gutter * 1.5;
+
+        &_desc {
+          grid-column: 2 / span 10;
+        }
+
+        &_slider {
+          grid-column: 2 / span 10;
+          grid-template-columns: repeat(10, 1fr);
+          margin: 0;
+          padding: 0;
+
+          .collection_images {
+            grid-column: 1 / span 5;
+            padding-top: 0;
+
+            .swiper-container {
+              .swiper-slide {
+                &-wrapper {
+                  margin-right: 0;
+                  margin-left: 0;
+                }
+              }
+            }
+          }
+
+          .collection_thumbs {
+            margin-left: 0;
+            margin-right: 0;
+            grid-column: 7 / span 4;
+            position: static;
+
+            .swiper-container {
+              .swiper-slide {
+                &-wrapper {
+                  @include aspect-ratio(4, 5);
+                }
+              }
+            }
+
+            .swiper-pagination {
+              display: block;
+            }
+          }
+
+          .btn {
+            display: none;
+          }
+        }
+
+        &_text {
+          grid-column: 5 / span 7;
+        }
+      }
+    }
+  }
+
+  &_pip {
+    display: flex;
+    flex-direction: column-reverse;
+
+    .text {
+      margin-bottom: $gutter * 1.5;
+      padding-top: 3 * $gutter;
+    }
+    .pip {
+      grid-column: 7 / span 5;
+      display:  grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: $gutter * 2;
+      padding-bottom: $gutter * 1.5;
+      position: relative;
+
+      &_image_1 {
+        @include aspect-ratio(4, 6);
+
+        background: {
+          image: image_url('pages/about/golovina_footer_1.jpg');
+          size: cover;
+        }
+        grid-column: 1 / span 4;
+      }
+
+      &_image_2 {
+        @include aspect-ratio(4, 6);
+
+        background: {
+          image: image_url('pages/about/golovina_footer_2.jpg');
+          size: cover;
+        }
+        bottom: 0;
+        grid-column: 4 / span 2;
+        position: absolute;
+        width: 100%;
+      }
+    }
+
+    @include mq($s) {
+      display:  grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: $gutter * 2;
+
+      .text {
+        grid-column: 2 / span 5;
+      }
+    }
+  }
+}
