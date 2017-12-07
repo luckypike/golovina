@@ -20,25 +20,36 @@
         h1 Свидание с гармонией
         .desc Дебютная коллекция
 
-      .collection_image
-
       .collection_slider
-        .swiper-container
-          .swiper-wrapper
-            .swiper-slide
-              .swiper-slide-wrapper
-                = image_tag 'pages/about/slide_col.jpg'
-            .swiper-slide
-              .swiper-slide-wrapper
-                = image_tag 'pages/about/slide_col.jpg'
-            .swiper-slide
-              .swiper-slide-wrapper
-                = image_tag 'pages/about/slide_col.jpg'
-            .swiper-slide
-              .swiper-slide-wrapper
-                = image_tag 'pages/about/slide_col.jpg'
+        .collection_images
+          .swiper-container.swiper-container-image
+            .swiper-wrapper
+              .swiper-slide
+                .swiper-slide-wrapper
+                  = image_tag 'pages/about/collection_slide_1.jpg'
+              .swiper-slide
+                .swiper-slide-wrapper
+                  = image_tag 'pages/about/collection_slide_2.jpg'
+              .swiper-slide
+                .swiper-slide-wrapper
+                  = image_tag 'pages/about/collection_slide_3.jpg'
+              .swiper-slide
+                .swiper-slide-wrapper
+                  = image_tag 'pages/about/collection_slide_4.jpg'
 
-        = link_to 'Смотреть коллекцию', '#', class: [:btn]
+        .collection_thumbs
+          .swiper-container.swiper-container-thumbs
+            .swiper-wrapper
+              .swiper-slide
+                .swiper-slide-wrapper style="background-image: url(#{asset_path 'pages/about/collection_thumb_1.jpg'})"
+              .swiper-slide
+                .swiper-slide-wrapper style="background-image: url(#{asset_path 'pages/about/collection_thumb_2.jpg'})"
+              .swiper-slide
+                .swiper-slide-wrapper style="background-image: url(#{asset_path 'pages/about/collection_thumb_3.jpg'})"
+              .swiper-slide
+                .swiper-slide-wrapper style="background-image: url(#{asset_path 'pages/about/collection_thumb_4.jpg'})"
+
+        / = link_to 'Смотреть коллекцию', '#', class: [:btn]
 
       .collection_text
         p Источником вдохновения для дебютной коллекции послужила природа и все ее оттенки, а именно: оттенки коры деревьев, оттенки земли, песка, камней, травы. Имея такую благородную гамму не хотелось загромождать вещь, хотелось создать очень сдержанные и минималистичные модели.

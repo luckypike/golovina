@@ -1,12 +1,28 @@
 .header {
   &.about {
-    svg {
-      fill: #fff;
+    svg,
+    rect,
+    .cls-1 {
+      fill: $op-color;
+      transition: fill .3s;
     }
 
     .a,
     .b {
-      stroke: #fff;
+      stroke: $op-color;
+      transition: stroke .3s;
+    }
+    &.about_act {
+      svg,
+      rect,
+      .cls-1 {
+        fill: $primary-color;
+      }
+
+      .a,
+      .b {
+        stroke: $primary-color;
+      }
     }
   }
 }
@@ -24,8 +40,9 @@
 
   &_sketch {
     background: {
-      image: image_url('pages/about/golovina_about.jpg');
+      image: image_url('pages/about/golovina_cover.jpg');
       size: cover;
+      position: right;
     }
     @include aspect-ratio(3, 4);
 
@@ -46,6 +63,7 @@
 
     .about_logo {
       @include column-width(6, 12);
+      margin-bottom: $gutter * 1.5;
     }
 
     @include mq($s) {
@@ -94,45 +112,70 @@
         }
       }
 
-      &_image {
-        @include aspect-ratio(4, 6);
+      &_slider {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: $gutter * 2;
+        position: relative;
+        margin-left: - $gutter;
+        margin-right: - $gutter;
+        // padding: 0 $gutter;
 
-        background: {
-          image: image_url('pages/about/collection_content.jpg');
-          size: cover;
+        .collection_images {
+          position: relative;
+          z-index: 2;
+          padding-top: $gutter;
+
+          .swiper-container {
+            .swiper-slide {
+              &-wrapper {
+                @include aspect-ratio(4, 6);
+                margin-right: 1/4 * 100%;
+                margin-left: $gutter;
+              }
+            }
+          }
+        }
+
+        .collection_thumbs {
+          position: absolute;
+          text-align: center;
+          width: 100%;
+          z-index: 1;
+
+          .swiper-container {
+            .swiper-slide {
+
+              &-wrapper {
+                @include aspect-ratio(3, 2);
+                background: {
+                  size: cover;
+                  position: center;
+                }
+              }
+            }
+          }
+
+          .swiper-pagination {
+            display: none;
+            position: static;
+
+            &-bullet {
+              border: 1px solid #000;
+              background: transparent;
+              opacity: 1;
+
+              &-active {
+                background: #000;
+              }
+            }
+          }
         }
       }
 
-      &_slider {
-        margin-left: - $gutter;
-        margin-right: - $gutter;
-        text-align: center;
-
-        .swiper-container {
-          .swiper-slide {
-
-            &-wrapper {
-              @include aspect-ratio(4, 5);
-            }
-          }
-        }
-
-        .swiper-pagination {
-          position: static;
-
-          &-bullet {
-            border: 1px solid #000;
-            background: transparent;
-            opacity: 1;
-
-            &-active {
-              background: #000;
-            }
-          }
-        }
-
-        .btn {
-          margin-top: $gutter * 3 ;
+      &_text {
+        p {
+          margin-bottom: $gutter * 0.5;
         }
       }
     }
@@ -148,14 +191,48 @@
           grid-column: 2 / span 10;
         }
 
-        &_image {
-          grid-column: 2 / span 5;
-        }
-
         &_slider {
-          margin-left: 0;
-          margin-right: 0;
-          grid-column: 8 / span 4;
+          grid-column: 2 / span 10;
+          grid-template-columns: repeat(10, 1fr);
+          margin: 0;
+          padding: 0;
+
+          .collection_images {
+            grid-column: 1 / span 5;
+            padding-top: 0;
+
+            .swiper-container {
+              .swiper-slide {
+                &-wrapper {
+                  margin-right: 0;
+                  margin-left: 0;
+                }
+              }
+            }
+          }
+
+          .collection_thumbs {
+            margin-left: 0;
+            margin-right: 0;
+            grid-column: 7 / span 4;
+            position: static;
+
+            .swiper-container {
+              .swiper-slide {
+                &-wrapper {
+                  @include aspect-ratio(4, 5);
+                }
+              }
+            }
+
+            .swiper-pagination {
+              display: block;
+            }
+          }
+
+          .btn {
+            display: none;
+          }
         }
 
         &_text {
@@ -166,17 +243,42 @@
   }
 
   &_pip {
+    display: flex;
+    flex-direction: column-reverse;
+
     .text {
       margin-bottom: $gutter * 1.5;
+      padding-top: 3 * $gutter;
     }
     .pip {
+      grid-column: 7 / span 5;
+      display:  grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: $gutter * 2;
+      padding-bottom: $gutter * 1.5;
+      position: relative;
+
       &_image_1 {
         @include aspect-ratio(4, 6);
 
         background: {
-          image: image_url('pages/about/pip_1.jpg');
+          image: image_url('pages/about/golovina_footer_1.jpg');
           size: cover;
         }
+        grid-column: 1 / span 4;
+      }
+
+      &_image_2 {
+        @include aspect-ratio(4, 6);
+
+        background: {
+          image: image_url('pages/about/golovina_footer_2.jpg');
+          size: cover;
+        }
+        bottom: 0;
+        grid-column: 4 / span 2;
+        position: absolute;
+        width: 100%;
       }
     }
 
@@ -187,33 +289,6 @@
 
       .text {
         grid-column: 2 / span 5;
-        padding-top: 3 * $gutter;
-      }
-
-      .pip {
-        grid-column: 7 / span 5;
-        display:  grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-gap: $gutter * 2;
-        padding-bottom: $gutter * 1.5;
-        position: relative;
-
-        &_image_1 {
-          grid-column: 1 / span 4;
-        }
-
-        &_image_2 {
-          @include aspect-ratio(4, 6);
-
-          background: {
-            image: image_url('pages/about/pip_2.jpg');
-            size: cover;
-          }
-          bottom: 0;
-          grid-column: 4 / span 2;
-          position: absolute;
-          width: 100%;
-        }
       }
     }
   }

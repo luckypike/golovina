@@ -8,7 +8,7 @@
   }
 
   .quote {
-    @include font-size(3, 4);
+    @include font-size(3.5, 4.5);
     font-family: 'MadelynFill', sans-serif;
 
     @include mq($s) {
