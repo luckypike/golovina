@@ -2,6 +2,16 @@ $(function(){
   if($('.page_about_slider').length > 0) {
     _as = $('.swiper-container');
 
+    swiper_create(_as);
+  }
+
+  if($('.collection_slider').length > 0) {
+    _as = $('.swiper-container');
+
+    swiper_create(_as);
+  }
+
+  function swiper_create(swpr_cntnr) {
     _as.append('<div class="swiper-pagination"></div>');
 
     var swiper = new Swiper (_as, {
@@ -16,6 +26,9 @@ $(function(){
                 '/' +
                 '<span class="' + totalClassName + '"></span>';
       },
+      paginationClickable: true,
     });
+
+    return swiper;
   }
 });

@@ -11,6 +11,10 @@
     @include font-size(3, 4);
     font-family: 'MadelynFill', sans-serif;
 
+    @include mq($s) {
+      @include font-size(4.25, 5);
+    }
+
     @include mq($m) {
       @include font-size(5, 7);
     }

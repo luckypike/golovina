@@ -1,21 +1,41 @@
+.header {
+  &.about {
+    svg {
+      fill: #fff;
+    }
+
+    .a,
+    .b {
+      stroke: #fff;
+    }
+  }
+}
 .page_about_collection {
+
   & > div {
     margin-bottom: 3 * $gutter;
   }
 
   &_wrapper {
-    position: relative;
+    .page_about {
+      position: relative;
+    }
   }
 
   &_sketch {
     background: {
-        image: image_url('pages/about/golovina_about.jpg');
-        size: cover;
+      image: image_url('pages/about/golovina_about.jpg');
+      size: cover;
     }
-    margin-left: -$gutter;
-    margin-right: -$gutter;
-    padding: 0 $gutter;
-    @include aspect-ratio(2, 2);
+    @include aspect-ratio(3, 4);
+
+    @include mq($s) {
+      @include aspect-ratio(2, 2);
+    }
+
+    @include mq($m) {
+      @include aspect-ratio(5, 3);
+    }
   }
 
   &_intro {
@@ -24,26 +44,176 @@
     position: absolute;
     padding-bottom: $gutter;
 
+    .about_logo {
+      @include column-width(6, 12);
+    }
+
     @include mq($s) {
       @include column-width(6, 12);
       @include column-shift(1, left, 12);
 
       padding-bottom: 3 * $gutter;
-      padding-left: $gutter;
-      padding-right: $gutter;
 
       .quote {
         @include font-size(4.25, 5);
       }
+    }
 
+    @include mq($m) {
+      .quote {
+        @include font-size(5, 7);
+      }
     }
   }
 
   &_desc {
     @include mq($s) {
+      display:  grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: $gutter * 2;
+
       .quote {
-        @include column-width(5, 12);
-        @include column-shift(1, left, 12);
+        grid-column: 2 / span 5;
+      }
+
+      .text {
+        grid-column: 7 / span 5;
+      }
+    }
+  }
+
+  &_content {
+
+    .collection {
+      display: grid;
+      grid-row-gap: $gutter * 1.5;
+
+      &_desc {
+        .desc {
+          padding-top: $gutter * 0.75;
+        }
+      }
+
+      &_image {
+        @include aspect-ratio(4, 6);
+
+        background: {
+          image: image_url('pages/about/collection_content.jpg');
+          size: cover;
+        }
+      }
+
+      &_slider {
+        margin-left: - $gutter;
+        margin-right: - $gutter;
+        text-align: center;
+
+        .swiper-container {
+          .swiper-slide {
+
+            &-wrapper {
+              @include aspect-ratio(4, 5);
+            }
+          }
+        }
+
+        .swiper-pagination {
+          position: static;
+
+          &-bullet {
+            border: 1px solid #000;
+            background: transparent;
+            opacity: 1;
+
+            &-active {
+              background: #000;
+            }
+          }
+        }
+
+        .btn {
+          margin-top: $gutter * 3 ;
+        }
+      }
+    }
+    @include mq($s) {
+
+      .collection {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-column-gap: $gutter * 2;
+        grid-row-gap: $gutter * 1.5;
+
+        &_desc {
+          grid-column: 2 / span 10;
+        }
+
+        &_image {
+          grid-column: 2 / span 5;
+        }
+
+        &_slider {
+          margin-left: 0;
+          margin-right: 0;
+          grid-column: 8 / span 4;
+        }
+
+        &_text {
+          grid-column: 5 / span 7;
+        }
+      }
+    }
+  }
+
+  &_pip {
+    .text {
+      margin-bottom: $gutter * 1.5;
+    }
+    .pip {
+      &_image_1 {
+        @include aspect-ratio(4, 6);
+
+        background: {
+          image: image_url('pages/about/pip_1.jpg');
+          size: cover;
+        }
+      }
+    }
+
+    @include mq($s) {
+      display:  grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: $gutter * 2;
+
+      .text {
+        grid-column: 2 / span 5;
+        padding-top: 3 * $gutter;
+      }
+
+      .pip {
+        grid-column: 7 / span 5;
+        display:  grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-gap: $gutter * 2;
+        padding-bottom: $gutter * 1.5;
+        position: relative;
+
+        &_image_1 {
+          grid-column: 1 / span 4;
+        }
+
+        &_image_2 {
+          @include aspect-ratio(4, 6);
+
+          background: {
+            image: image_url('pages/about/pip_2.jpg');
+            size: cover;
+          }
+          bottom: 0;
+          grid-column: 4 / span 2;
+          position: absolute;
+          width: 100%;
+        }
       }
     }
   }
