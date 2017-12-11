@@ -50,6 +50,9 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
         line x1="1" y1="15" x2="15" y2="1"
     .header_menu_container
       .header_menu_section
+        = active_link_to 'Golovina', [:about, :golovina], class: :l1
+
+      .header_menu_section
         .section
           .section_title.l1
             span NEW
