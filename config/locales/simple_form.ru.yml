@@ -70,6 +70,7 @@ ru:
         name: Название
         link: Ссылка
         link_name: Текст ссылки
+        logo: Логотип
 
     hints:
       user:

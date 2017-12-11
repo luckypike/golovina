@@ -683,6 +683,17 @@
     }
   }
 
+  &.no_t {
+    .header_themes {
+      display: none;
+    }
+
+    .header_logo {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
   &.index {
     background: none;
 

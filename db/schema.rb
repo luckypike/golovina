@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171117102434) do
+ActiveRecord::Schema.define(version: 20171211143611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20171117102434) do
     t.integer "weight"
     t.integer "left_offset"
     t.integer "top_offset"
+    t.integer "logo", default: 0
   end
 
   create_table "themables", force: :cascade do |t|

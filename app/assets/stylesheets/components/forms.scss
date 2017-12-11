@@ -44,6 +44,16 @@
         }
       }
 
+      &.radio_buttons {
+        .radio {
+          label {
+            input {
+              margin-right: $gutter / 2;
+            }
+          }
+        }
+      }
+
       &.boolean {
         label {
           input {

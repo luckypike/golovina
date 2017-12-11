@@ -6,6 +6,7 @@
       = f.input :name
       = f.input :link
       = f.input :link_name
+      = f.input :logo, as: :radio_buttons, collection: [[0, 'Мята'], [1, 'Golovina белый'], [2, 'Golovina черный']], label_method: :last, value_method: :first
 
       - if @slide.image.presence
         = image_tag @slide.image.preview.url
