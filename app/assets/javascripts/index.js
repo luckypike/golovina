@@ -27,12 +27,20 @@ $(function() {
       autoplayDisableOnInteraction: false,
       onSlideChangeStart: function(swiper) {
         swiper.params.speed = 1400;
-        // console.log(swiper.touches);
 
         var _ss = $('.ss_' + swiper.realIndex);
+        if($(swiper.slides[swiper.activeIndex]).data('logo') == 2) {
+          $('.header').removeClass('index');
+          _psis.addClass('gol_f');
+        } else {
+          $('.header').addClass('index');
+          _psis.removeClass('gol_f');
+        }
+
         $('.ss > div').not(_ss).removeClass('active');
         _ss.addClass('active');
       },
+
       onTransitionStart: function(swiper) {
         // console.log(swiper);
         // console.log(swiper.params);

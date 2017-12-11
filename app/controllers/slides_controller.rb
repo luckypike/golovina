@@ -58,6 +58,6 @@ class SlidesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def slide_params
-      params.require(:slide).permit(:name, :link, :link_name, :image, :left_offset, :top_offset, :weight)
+      params.require(:slide).permit(:name, :link, :link_name, :logo, :image, :left_offset, :top_offset, :weight)
     end
 end
