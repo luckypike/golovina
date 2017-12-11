@@ -5,7 +5,6 @@ $(function(){
     swiper_create(_as);
   }
 
-  console.log('asd');
   var _window = $(window);
   var _pacw = $('.page_about_collection_wrapper');
 
@@ -55,11 +54,9 @@ $(function(){
       paginationClickable: true,
     });
 
-    // swiper_create(_as);
+    col_image.params.control = col_thumbs;
+    col_thumbs.params.control = col_image;
   }
-
-  col_image.params.control = col_thumbs;
-  col_thumbs.params.control = col_image;
 
   function swiper_create(swpr_cntnr) {
     _as.append('<div class="swiper-pagination"></div>');
