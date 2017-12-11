@@ -30,7 +30,7 @@ class SlideUploader < CarrierWave::Uploader::Base
   end
 
   version :mobile do
-    process resize_to_fill: [1500, 1500]
+    process resize_to_fill: [3000, 2000]
     process optimize_slide: [50]
   end
 
