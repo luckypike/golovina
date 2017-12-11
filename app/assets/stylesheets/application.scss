@@ -119,6 +119,10 @@ button.btn,
     background: $sand-color;
   }
 
+  &_inac {
+    opacity: 0.6;
+  }
+
   &_gr {
     // @include font-size(1.5, 3.75);
 
