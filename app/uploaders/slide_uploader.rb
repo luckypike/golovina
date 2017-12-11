@@ -35,7 +35,7 @@ class SlideUploader < CarrierWave::Uploader::Base
   end
 
   version :large do
-    process resize_to_limit: [2000, 2500]
+    process resize_to_limit: [3000, 2000]
     process optimize_slide: [50]
   end
 
