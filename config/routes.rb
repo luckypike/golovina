@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     namespace 'about', module: nil do
       get '', to: 'about#index'
       get '/golovina', to: 'about#collection'
+      get '/golovina/lookbook', to: 'about#lookbook'
+      get '/golovina/brand', to: 'about#brand'
     end
 
     namespace 'customers', module: nil do

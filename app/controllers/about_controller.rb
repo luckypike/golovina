@@ -6,4 +6,12 @@ class AboutController < ApplicationController
   def collection
     authorize :static, :index?
   end
+
+  def lookbook
+    authorize :static, :index?
+  end
+
+  def brand
+    authorize :static, :index?
+  end
 end

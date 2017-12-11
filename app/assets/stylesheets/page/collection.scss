@@ -35,6 +35,11 @@
   &_wrapper {
     .page_about {
       position: relative;
+      padding-bottom: 0;
+
+      @include mq($s) {
+        padding-bottom: 3 * $gutter;
+      }
     }
   }
 
@@ -44,31 +49,50 @@
       size: cover;
       position: right;
     }
+    height: 80vh;
+
     @include aspect-ratio(3, 4);
 
     @include mq($s) {
       @include aspect-ratio(2, 2);
+
     }
 
     @include mq($m) {
       @include aspect-ratio(5, 3);
     }
+
+    @include mq($l) {
+      @include aspect-ratio(7, 3);
+    }
   }
 
   &_intro {
     bottom: 0;
-    color: #fff;
-    position: absolute;
-    padding-bottom: $gutter;
+    color: $primary-color;
+    margin-bottom: 0;
+    position: relative;
 
     .about_logo {
       @include column-width(6, 12);
-      margin-bottom: $gutter * 1.5;
+      padding-bottom: $gutter * 1.5;
+      transform: translate(0, -100%);
+      position: absolute;
+    }
+
+    .quote {
+      margin-top: $gutter;
     }
 
     @include mq($s) {
-      @include column-width(6, 12);
-      @include column-shift(1, left, 12);
+      .about_logo {
+        @include column-width(4, 12);
+      }
+
+      color: #fff;
+      position: absolute;
+      @include column-width(10, 12);
+      // @include column-shift(1, left, 12);
 
       padding-bottom: 3 * $gutter;
 
@@ -78,217 +102,162 @@
     }
 
     @include mq($m) {
+      @include column-width(10, 12);
+      // @include column-shift(2, left, 12);
+
       .quote {
-        @include font-size(5, 7);
+        @include font-size(5.625, 6);
+      }
+    }
+  }
+
+  &_about {
+    @include mq($s) {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: $gutter;
+
+      .text {
+        grid-column: 2 / span 10;
+      }
+    }
+
+    @include mq($m) {
+      .text {
+        grid-column: 3 / span 8;
       }
     }
   }
 
   &_desc {
+    display: grid;
+    grid-gap: $gutter;
+
+    .collection_img {
+      @include aspect-ratio(4, 6);
+
+      &.img_i_0 {
+        background: {
+          image: image_url('pages/about/golovina/golovina_about_2.jpg');
+          size: cover;
+        }
+      }
+
+      &.img_i_1 {
+        background: {
+          image: image_url('pages/about/golovina/golovina_about_1.jpg');
+          size: cover;
+        }
+      }
+
+      &.img_i_2 {
+        background: {
+          image: image_url('pages/about/golovina/golovina_about_3.jpg');
+          size: cover;
+        }
+      }
+    }
+
+    .collection_text {
+      p {
+        margin-bottom: $base-rhythm-line * $base-line-height / 2;
+
+        @include mq($s) {
+          margin-bottom: $base-rhythm-line * ($base-line-height + 1) / 2;
+        }
+      }
+    }
+
     @include mq($s) {
-      display:  grid;
       grid-template-columns: repeat(12, 1fr);
-      grid-gap: $gutter * 2;
+      grid-gap: $gutter;
 
-      .quote {
-        grid-column: 2 / span 5;
-      }
-
-      .text {
-        grid-column: 7 / span 5;
-      }
-    }
-  }
-
-  &_content {
-
-    .collection {
-      display: grid;
-      grid-row-gap: $gutter * 1.5;
-
-      &_desc {
-        .desc {
-          padding-top: $gutter * 0.75;
+      .collection_img {
+        grid-column: span 6;
+        &.img_i_1 {
+          order: 2;
+        }
+        &.img_i_2 {
+          order: 3;
         }
       }
 
-      &_slider {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        grid-gap: $gutter * 2;
-        position: relative;
-        margin-left: - $gutter;
-        margin-right: - $gutter;
-        // padding: 0 $gutter;
+      .collection_text {
+        align-self: center;
+        grid-column: span 6;
+        padding-left: $gutter;
 
-        .collection_images {
-          position: relative;
-          z-index: 2;
-          padding-top: $gutter;
-
-          .swiper-container {
-            .swiper-slide {
-              &-wrapper {
-                @include aspect-ratio(4, 6);
-                margin-right: 1/4 * 100%;
-                margin-left: $gutter;
-              }
-            }
-          }
+        &.text_i_1 {
+          order: 1;
+          padding-left: 0;
+          padding-right: $gutter;
         }
 
-        .collection_thumbs {
-          position: absolute;
-          text-align: center;
-          width: 100%;
-          z-index: 1;
-
-          .swiper-container {
-            .swiper-slide {
-
-              &-wrapper {
-                @include aspect-ratio(3, 2);
-                background: {
-                  size: cover;
-                  position: center;
-                }
-              }
-            }
-          }
-
-          .swiper-pagination {
-            display: none;
-            position: static;
-
-            &-bullet {
-              border: 1px solid #000;
-              background: transparent;
-              opacity: 1;
-
-              &-active {
-                background: #000;
-              }
-            }
-          }
-        }
-      }
-
-      &_text {
-        p {
-          margin-bottom: $gutter * 0.5;
+        &.text_i_2 {
+          order: 4;
         }
       }
     }
-    @include mq($s) {
 
-      .collection {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        grid-column-gap: $gutter * 2;
-        grid-row-gap: $gutter * 1.5;
+    @include mq($l) {
+      grid-gap: $gutter;
 
-        &_desc {
-          grid-column: 2 / span 10;
+      .collection_img {
+        &.img_i_1 {
+          grid-column: 7 / span 6;
         }
+      }
 
-        &_slider {
-          grid-column: 2 / span 10;
-          grid-template-columns: repeat(10, 1fr);
-          margin: 0;
-          padding: 0;
+      .collection_text {
+        padding: 0;
+        grid-column: 8 / span 5;
 
-          .collection_images {
-            grid-column: 1 / span 5;
-            padding-top: 0;
-
-            .swiper-container {
-              .swiper-slide {
-                &-wrapper {
-                  margin-right: 0;
-                  margin-left: 0;
-                }
-              }
-            }
-          }
-
-          .collection_thumbs {
-            margin-left: 0;
-            margin-right: 0;
-            grid-column: 7 / span 4;
-            position: static;
-
-            .swiper-container {
-              .swiper-slide {
-                &-wrapper {
-                  @include aspect-ratio(4, 5);
-                }
-              }
-            }
-
-            .swiper-pagination {
-              display: block;
-            }
-          }
-
-          .btn {
-            display: none;
-          }
-        }
-
-        &_text {
-          grid-column: 5 / span 7;
+        &.text_i_1 {
+          grid-column: span 5;
         }
       }
     }
   }
 
-  &_pip {
-    display: flex;
-    flex-direction: column-reverse;
+  &_debut {
+    display: grid;
+    grid-gap: $gutter;
 
-    .text {
-      margin-bottom: $gutter * 1.5;
-      padding-top: 3 * $gutter;
+    .collection_img {
+      @include aspect-ratio(4, 6);
+      order: 1;
     }
-    .pip {
-      grid-column: 7 / span 5;
-      display:  grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-gap: $gutter * 2;
-      padding-bottom: $gutter * 1.5;
-      position: relative;
 
-      &_image_1 {
-        @include aspect-ratio(4, 6);
+    .collection_text {
+      order: 2;
 
-        background: {
-          image: image_url('pages/about/golovina_footer_1.jpg');
-          size: cover;
-        }
-        grid-column: 1 / span 4;
-      }
-
-      &_image_2 {
-        @include aspect-ratio(4, 6);
-
-        background: {
-          image: image_url('pages/about/golovina_footer_2.jpg');
-          size: cover;
-        }
-        bottom: 0;
-        grid-column: 4 / span 2;
-        position: absolute;
-        width: 100%;
+      .desc {
+        margin: 0.5 * $gutter 0;
       }
     }
 
     @include mq($s) {
-      display:  grid;
       grid-template-columns: repeat(12, 1fr);
-      grid-gap: $gutter * 2;
+      grid-gap: $gutter;
 
-      .text {
-        grid-column: 2 / span 5;
+      .collection_img {
+        grid-column: span 6;
+        order: 2;
+      }
+
+      .collection_text {
+        grid-column: span 6;
+        align-self: center;
+        padding-left: $gutter;
+        order: 1;
+      }
+    }
+
+    @include mq($l) {
+      grid-gap: $gutter;
+
+      .collection_text {
+        padding-left: 0;
       }
     }
   }

@@ -14,6 +14,15 @@ $(function(){
     }).trigger('scroll');
   }
 
+  if($('.lookbook_intro_text').length > 0) {
+    var _lit = $('.lookbook_intro_text');
+
+    $('.spoil_btn').click(function(){
+      $('.spoil').slideToggle();
+      $('.spoil_btn').toggleText('Скрыть', 'Читать далее');
+    })
+  }
+
   if($('.collection_images').length > 0) {
     _as = $('.swiper-container-image');
 
@@ -77,5 +86,15 @@ $(function(){
     });
 
     return swiper;
+  }
+});
+
+jQuery.fn.extend({
+  toggleText: function(stateOne, stateTwo) {
+      return this.each(function() {
+          stateTwo = stateTwo || '';
+          $(this).text() !== stateTwo && stateOne ? $(this).text(stateTwo)
+                                                  : $(this).text(stateOne);
+      });
   }
 });
