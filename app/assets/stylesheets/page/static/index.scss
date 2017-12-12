@@ -59,6 +59,14 @@
       }
     }
 
+    &.white.gol_f {
+      .ss {
+        &:after {
+          background-color: rgba(#000, 0);
+        }
+      }
+    }
+
     .social_networks {
       display: none;
       position: absolute;
@@ -184,7 +192,6 @@
         }
 
         &.logo_2 {
-          background-color: $op-color;
 
           .text {
             .what {

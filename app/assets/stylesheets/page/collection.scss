@@ -1,6 +1,6 @@
 .header {
   &.about {
-    svg,
+    .header_logo svg,
     rect,
     .cls-1 {
       fill: $op-color;
@@ -13,7 +13,7 @@
       transition: stroke .3s;
     }
     &.about_act {
-      svg,
+      .header_logo svg,
       rect,
       .cls-1 {
         fill: $primary-color;
@@ -248,7 +248,7 @@
       .collection_text {
         grid-column: span 6;
         align-self: center;
-        padding-left: $gutter;
+        padding-right: $gutter;
         order: 1;
       }
     }
@@ -257,7 +257,7 @@
       grid-gap: $gutter;
 
       .collection_text {
-        padding-left: 0;
+        padding: 0;
       }
     }
   }

@@ -28,6 +28,9 @@ $(function() {
       onSlideChangeStart: function(swiper) {
         swiper.params.speed = 1400;
 
+        if(swiper.realIndex == 0) _psis.addClass('white');
+        else _psis.removeClass('white');
+
         var _ss = $('.ss_' + swiper.realIndex);
         if($(swiper.slides[swiper.activeIndex]).data('logo') == 2) {
           $('.header').removeClass('index');
