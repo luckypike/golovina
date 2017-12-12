@@ -139,21 +139,21 @@
       &.img_i_0 {
         background: {
           image: image_url('pages/about/golovina/golovina_about_2.jpg');
-          size: cover;
+          size: contain;
         }
       }
 
       &.img_i_1 {
         background: {
           image: image_url('pages/about/golovina/golovina_about_1.jpg');
-          size: cover;
+          size: contain;
         }
       }
 
       &.img_i_2 {
         background: {
           image: image_url('pages/about/golovina/golovina_about_3.jpg');
-          size: cover;
+          size: contain;
         }
       }
     }

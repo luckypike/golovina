@@ -20,16 +20,14 @@
 
       p Начну с того, что раньше у меня не было четкого представления о моем стиле, поэтому я влюблялась практически во всё, что продавалось в моем магазине, то, что проходило «отбор».
 
-      p
-        .btn.btn_inac Скоро
-      / = link_to 'Читать', '/about/golovina/brand', class: :btn
+      = link_to 'Читать', [:about, :golovina, :brand], class: :btn
 
   .page_about_collection_debut
 
     .collection_text
       h2 Свидание с гармонией
       .desc Источником вдохновения для дебютной коллекции послужила природа. Ведь не зря говорят, что природа — лучший художник!
-      = link_to 'Смотреть Lookbook', '/about/golovina/lookbook', class: :btn
+      = link_to 'Смотреть Lookbook', [:about, :golovina, :lookbook], class: :btn
 
     .collection_img
       = image_tag 'pages/about/collection_slide_1.jpg'

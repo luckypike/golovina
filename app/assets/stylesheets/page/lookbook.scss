@@ -5,23 +5,22 @@
       overflow: hidden;
 
       p {
-        margin-top: $base-rhythm-line * $base-line-height / 2;
         margin-bottom: $base-rhythm-line * $base-line-height / 2;
 
         @include mq($s) {
-          margin-top: $base-rhythm-line * $base-line-height / 2;
           margin-bottom: $base-rhythm-line * ($base-line-height + 1) / 2;
         }
       }
 
-      p.spoil {
+      .spoil {
         display: none;
+        margin-bottom: 0;
       }
 
       .spoil_btn {
         border-bottom: 1px solid #dfdfdf;
         display: inline-block;
-        margin-bottom: $gutter;
+        margin-bottom: 0;
       }
     }
 
@@ -30,7 +29,7 @@
       &_text {
         padding: 0;
 
-        p.spoil {
+        .spoil {
           display: block;
         }
 

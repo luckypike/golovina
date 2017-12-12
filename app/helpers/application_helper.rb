@@ -3,6 +3,10 @@ module ApplicationHelper
     %w(static).include?(controller_name) && %w(index).include?(action_name)
   end
 
+  def about?
+    %w(about).include?(controller_name)
+  end
+
   def lipsum_index
     'Что ни вечер, то прогулка по городу или посиделки на верандах, что ни выходной, то поход в музей или dfgf.'
   end

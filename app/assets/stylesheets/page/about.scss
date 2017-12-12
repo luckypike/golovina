@@ -7,6 +7,25 @@
     margin-bottom: 3 * $gutter;
   }
 
+  & > .page_about_intro {
+    max-width: $xl;
+    padding: 0 $gutter;
+    // margin-top: $space-s;
+
+    h1 {
+      margin-bottom: 0;
+      text-align: center;
+    }
+
+    @include breakpoint($s) {
+      margin: 0 auto $space-s;
+    }
+
+    @include breakpoint($l) {
+      margin: 0 auto $space-s2;
+    }
+  }
+
   .quote {
     @include font-size(3.5, 4.5);
     font-family: 'MadelynFill', sans-serif;
@@ -33,12 +52,6 @@
 
   &_intro {
     text-align: center;
-
-    @include mq($s) {
-      @include column-width(6, 12);
-
-      margin-left: 3/12 * 100%;
-    }
   }
 
   .page_common_text {
@@ -231,7 +244,14 @@
     }
   }
 
+  @include mq($m) {
+    padding-left: 2 * $gutter;
+    padding-right: 2 * $gutter;
+  }
+
   @include mq($l) {
+    padding-left: $gutter;
+    padding-right: $gutter;
     width: 12 / 16 * 100%;
     margin-left: 2 / 16 * 100%;
   }

@@ -235,9 +235,10 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
 
   .header_wishlist
 
-  .header_themes
-    .themes_list
-      - @themes.each do |theme|
-        .themes_list_item
-          = active_link_to theme do
+  - if !about?
+    .header_themes
+      .themes_list
+        - @themes.each do |theme|
+          .themes_list_item
+            = active_link_to theme do
               = theme.title
