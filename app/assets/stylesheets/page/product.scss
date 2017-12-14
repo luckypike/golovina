@@ -308,24 +308,7 @@
   .out {
     display: none;
   }
-  &.variant_out {
-    .out {
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.8);
-      justify-content: center;
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      z-index: 2;
-
-      .msg {
-        @include font-size(3, 4);
-
-        text-align: center;
-      }
-    }
-  }
+  
   &_images {
     display: none;
 
