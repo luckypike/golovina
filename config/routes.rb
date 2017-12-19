@@ -71,6 +71,7 @@ Rails.application.routes.draw do
       get :control
       get :all
       get :latest
+      get :golovina
       get :kits
       get :sale
       get ':slug', to: 'products#category', as: :category, constraints: lambda { |request| Category.find_by_slug(request.params[:slug]).present? }

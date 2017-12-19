@@ -43,6 +43,10 @@ class ProductPolicy < ApplicationPolicy
     category?
   end
 
+  def golovina?
+    category?
+  end
+
   def kits?
     category?
   end

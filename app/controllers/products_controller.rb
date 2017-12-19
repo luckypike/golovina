@@ -85,6 +85,12 @@ class ProductsController < ApplicationController
     @products = Variant.includes(:images, :product).where(products: { sale: true, state: :active }, state: [:active, :out])
   end
 
+  def golovina
+    authorize Product
+
+    @products = Variant.includes(:images, :product).where(products: { brand: 1, state: :active }, state: [:active, :out])
+  end
+
   def kits
     authorize Product
 
@@ -159,6 +165,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:title, :state, :latest, :sale, :created_at, :kind_id, :category_id, :price, :price_last, :comp, :desc, { images: []}, theme_ids: [], similar_product_ids: [], variants_attributes: [:id, :color_id, :_destroy, sizes: []])
+    params.require(:product).permit(:title, :state, :latest, :sale, :brand, :created_at, :kind_id, :category_id, :price, :price_last, :comp, :desc, { images: []}, theme_ids: [], similar_product_ids: [], variants_attributes: [:id, :color_id, :_destroy, sizes: []])
   end
 end
