@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         get '', to:  'about#collection'
         get 'lookbook', to: 'about#lookbook'
         get 'brand', to: 'about#brand'
+        get 'xmas', to: 'about#xmas'
       end
     end
 

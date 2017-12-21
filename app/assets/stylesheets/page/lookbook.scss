@@ -77,7 +77,7 @@
     &.forest {
       .sketch {
         background: {
-          image: image_url('pages/about/back_1_1.jpg');
+          image: image_url('pages/about/golovina/lookbook/back_1_1.jpg');
           size: cover;
         }
       }
@@ -86,7 +86,7 @@
     &.sand {
       .sketch {
         background: {
-          image: image_url('pages/about/back_1_2.jpg');
+          image: image_url('pages/about/golovina/lookbook/back_1_2.jpg');
           size: cover;
         }
       }
@@ -95,7 +95,7 @@
     &.wood {
       .sketch {
         background: {
-          image: image_url('pages/about/back_1_3.jpg');
+          image: image_url('pages/about/golovina/lookbook/back_1_3.jpg');
           size: cover;
         }
       }
@@ -104,7 +104,7 @@
     &.brick {
       .sketch {
         background: {
-          image: image_url('pages/about/back_1_4.jpg');
+          image: image_url('pages/about/golovina/lookbook/back_1_4.jpg');
           size: cover;
         }
       }
@@ -165,6 +165,7 @@
           &.right_top {
             margin-top: 75%;
           }
+
           &.right_bottom {
             margin-bottom: -75%;
           }
@@ -174,6 +175,9 @@
             margin-bottom: -75%;
           }
 
+          &.left_top {
+            margin-top: -75%;
+          }
           &.left_bottom {
             margin-bottom: 75%;
           }

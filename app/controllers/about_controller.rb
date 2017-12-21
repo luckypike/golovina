@@ -11,6 +11,10 @@ class AboutController < ApplicationController
     authorize :static, :index?
   end
 
+  def xmas
+    authorize :static, :index?
+  end
+
   def brand
     authorize :static, :index?
   end
