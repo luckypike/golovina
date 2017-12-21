@@ -133,6 +133,32 @@
     display: grid;
     grid-gap: $gutter;
 
+    &.brand {
+
+      .collection_img {
+        &.img_i_0 {
+          background: {
+            image: image_url('pages/about/golovina/golovina_about_2.jpg');
+            size: contain;
+          }
+        }
+
+        &.img_i_1 {
+          background: {
+            image: image_url('pages/about/golovina/golovina_brand_02.jpg');
+            size: contain;
+          }
+        }
+
+        &.img_i_2 {
+          background: {
+            image: image_url('pages/about/golovina/golovina_brand_03.jpg');
+            size: contain;
+          }
+        }
+      }
+    }
+
     .collection_img {
       @include aspect-ratio(4, 6);
 
