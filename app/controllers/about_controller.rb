@@ -18,4 +18,8 @@ class AboutController < ApplicationController
   def brand
     authorize :static, :index?
   end
+
+  def open
+    authorize :static, :index?
+  end
 end

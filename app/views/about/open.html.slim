@@ -1,0 +1,36 @@
+.page.page_common
+  .page_event
+    .page_event_intro.lv2
+      .page_event_intro_date
+        .date_wrapper
+          .day 14
+          .month декабря
+
+      .page_event_intro_header
+        h1
+          = title 'Открытие новой территории Мяta'
+
+    .page_event_announcement
+        p 14 декабря 2017 состоялось открытие новой Территории Мяta. Мария Головина представила дебютную эксклюзивную коллекцию «Свидание с гармонией». Новая, роскошная территория, полная красивых новогодних нарядов, вино, Jazz, торт, разговоры о подарках и о тенденциях красоты.
+
+    .page_event_slider
+      .swiper-container.swiper-container-image
+        .swiper-wrapper
+
+          - slides = File.join("**", "uploads/event", "**")
+          - Dir.glob(slides).each do |slide|
+            .swiper-slide
+              .swiper-slide-wrapper
+                = image_tag(slide.gsub('public', ''))
+
+        .swiper-pagination.swiper-pagination-index
+
+    .page_event_thumbs_slider
+      .swiper-container.swiper-container-image
+        .swiper-wrapper
+
+          - slides = File.join("**", "uploads/event", "**")
+          - Dir.glob(slides).each do |slide|
+            .swiper-slide
+              .swiper-slide-wrapper
+                = image_tag(slide.sub('public', ''))
