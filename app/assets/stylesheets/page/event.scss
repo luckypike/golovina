@@ -3,7 +3,7 @@
 
   &_intro {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-gap: $gutter;
 
     &.lv2 {
@@ -24,7 +24,7 @@
     }
 
     &_header {
-      grid-column: span 3;
+      grid-column: span 4;
       text-align: center;
     }
 
@@ -57,7 +57,32 @@
       margin-left: 2/12 * 100%;
     }
   }
+
+  &_highlight {
+    @include aspect-ratio(6, 4);
+    margin-left: -$gutter;
+    margin-right: -$gutter;
+
+    .row {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      height: 100%;
+
+      img {
+        display: inline-block;
+        height: 100%;
+        width: auto;
+      }
+    }
+
+    @include mq($s) {
+      display: none;
+    }
+  }
+
   &_slider {
+    display: none;
     margin-left: -$gutter;
     margin-right: -$gutter;
 
@@ -65,7 +90,7 @@
       .swiper-slide {
 
         &-wrapper {
-          @include aspect-ratio(4, 5);
+          @include aspect-ratio(4, 6);
 
           img {
             margin: 0 auto;
@@ -76,10 +101,10 @@
           }
         }
       }
-
     }
 
     @include mq($s) {
+      display: block;
       margin: 0;
 
       .swiper-container {

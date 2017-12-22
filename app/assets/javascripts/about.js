@@ -23,16 +23,18 @@ $(function(){
     })
   }
 
-  if($('.page_event_slider').length > 0) {
+  if($('.page_event_slider').length > 0 && $(window).width() > 767) {
     _as = $('.page_event_slider .swiper-container-image');
 
     var col_image = new Swiper (_as, {
       freeMode: false,
-      slidesPerView: 'auto',
       centeredSlides: true,
       speed: 600,
       pagination: $('.swiper-pagination', col_image),
       paginationType: 'fraction',
+      preloadImages: false,
+      lazyLoading: true,
+      lazyLoadingInPrevNext: true,
       paginationFractionRender: function(swiper, currentClassName, totalClassName) {
         return '<span class="' + currentClassName + '"></span>' +
                 '/' +
