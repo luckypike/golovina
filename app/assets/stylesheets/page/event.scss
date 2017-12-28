@@ -72,7 +72,12 @@
       img {
         display: inline-block;
         height: 100%;
+        margin-right: $gutter;
         width: auto;
+
+        &:last-child {
+          margin-right: 0;
+        }
       }
     }
 
