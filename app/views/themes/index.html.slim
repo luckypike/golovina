@@ -8,7 +8,7 @@
       = title 'Все настроения'
 
   .page_themes_themes
-    - @themes.sort_by(&:weight).each_with_index do |theme, i|
+    - @themes.each_with_index do |theme, i|
       .theme_intro.lv2 class=[theme.slug, "i_#{i % 2}"]
         .fake_text
           .title
