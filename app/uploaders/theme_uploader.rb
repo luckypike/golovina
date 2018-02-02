@@ -18,10 +18,12 @@ class ThemeUploader < CarrierWave::Uploader::Base
 
   version :large do
     process resize_to_fill: [1600, 2000]
+    process :optimize
   end
 
   version :preview do
     process resize_to_fill: [240, 300]
+    process :optimize
   end
 
 end
