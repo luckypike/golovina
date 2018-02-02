@@ -40,7 +40,10 @@
           = image_tag theme.image.large
 
         .text.mb
-          = link_to theme do
+          = link_to theme_path(theme, anchor: 'kit') do
+            .short
+              = theme.title
+
             .title
               = theme.title_long
 
@@ -48,7 +51,7 @@
               = theme.desc
 
             .more
-              .btn.btn_gr
+              .btn
                 | Выбирай настроение
 
         - if policy(theme).edit?
