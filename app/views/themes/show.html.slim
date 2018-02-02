@@ -37,7 +37,7 @@
     - @themes[(@themes.index(@theme) + 1)..-1].each_with_index do |theme, i|
       .theme_intro.lv2 class=[theme.slug, "i_#{(i + @themes.index(@theme) + 1) % 2}"]
         .image.lv3
-          = image_tag theme.image
+          = image_tag theme.image.large
 
         .text.mb
           = link_to theme do
