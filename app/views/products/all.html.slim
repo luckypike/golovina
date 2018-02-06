@@ -7,7 +7,7 @@
   .fd_w
     .fd_ph
     .fd.lv3 data-url=url_for(@category ? [:category, :products] : [:all, :products]) data-cur={ category: params[:category], theme: params[:theme].map(&:to_i), color: params[:color], size: params[:size].map(&:to_i) }.to_json
-      .fd_i
+      / .fd_i
         .t
           | Настроение
           = inline_svg 'icons/varr.svg'
