@@ -308,7 +308,7 @@
   .out {
     display: none;
   }
-  
+
   &_images {
     display: none;
 
@@ -707,6 +707,7 @@
     .acc {
       &_item {
         border-bottom: 1px solid $separator-color;
+        cursor: pointer;
         padding: $base-rhythm-line 0;
 
         .title {

@@ -100,7 +100,7 @@
             .content
               = markdown product.desc
 
-        -if variant.kits.active.present?
+        - if product.kits.active.present?
           .acc_item
             .title.wear
               .title_label
@@ -112,7 +112,7 @@
               .kits_wear_wrapper
                 .kits_wear.swiper-container
                   .kits_wear_list.swiper-wrapper
-                    - variant.kits.active.each_with_index do |kit, i|
+                    - product.kits.active.each_with_index do |kit, i|
                       .kits_wear_list_item.swiper-slide
                         = link_to '', [kit], class: :fake
 
@@ -120,7 +120,7 @@
                           = image_tag kit.images.first.photo.thumb.url
 
                         .kit_wear_title
-                          = kit.title_safe
+                          = kit.theme.title
 
         - if product.comp.present?
           .acc_item

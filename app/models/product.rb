@@ -17,6 +17,8 @@ class Product < ApplicationRecord
   has_many :similarables, dependent: :destroy
   has_many :similar_products, class_name: 'Product', through: :similarables
 
+  has_many :kits, through: :variants
+
   validates_presence_of :price, :state, :title
 
   def title_safe
