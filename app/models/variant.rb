@@ -5,6 +5,7 @@ class Variant < ApplicationRecord
   scope :sized_by, ->(sizes) { where('variants.sizes ?| array[:sizes]', { sizes: sizes.map(&:to_s) }) if sizes.present? }
 
   before_validation :sync_themes_and_category
+  after_save :check_product
 
   belongs_to :product
   belongs_to :color
@@ -40,5 +41,9 @@ class Variant < ApplicationRecord
 
   def in_wishlist user
     Wishlist.where(user: user, variant: self).any?
+  end
+
+  def check_product
+    product.check_empty
   end
 end

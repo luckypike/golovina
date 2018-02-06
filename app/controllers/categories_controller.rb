@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 
   def index
     authorize Category
-    @categories = Category.all
+    @categories = Category.order(weight: :asc).all
   end
 
   def show

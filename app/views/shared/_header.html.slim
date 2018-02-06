@@ -90,7 +90,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
                   = inline_svg 'icons/varr.svg'
 
                 .section_list
-                  - category.categories.each do |category_category|
+                  - category.categories.reject(&:empty).each do |category_category|
                     .section_list_item
                       = active_link_to category_category.title, category_products_path(slug: category_category.slug)
 

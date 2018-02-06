@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   enum state: { undef: 0, active: 1, archived: 2 }
 
   after_save :sync_variants
+  after_save :check_category
 
   belongs_to :category
 
@@ -42,9 +43,20 @@ class Product < ApplicationRecord
 
   def sync_variants
     self.variants.each do |variant|
-      variant.themes = self.themes.map(&:id)
-      variant.category = self.category
-      variant.save
+      variant.update_attribute(:themes, self.themes.map(&:id))
+      variant.update_attribute(:category, self.category)
+    end
+  end
+
+  def check_category
+    category.check_empty
+  end
+
+  def check_empty
+    if variants.where(state: [:active, :out]).size == 0
+      archived!
+    else
+      active!
     end
   end
 
