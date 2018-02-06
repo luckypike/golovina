@@ -6,8 +6,8 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'rails'
-gem 'pg'
+gem 'rails', '~> 5.1'
+gem 'pg', '< 1.0'
 gem 'puma'
 gem 'sass-rails', github: "rails/sass-rails"
 gem 'autoprefixer-rails', github: "ai/autoprefixer-rails"
