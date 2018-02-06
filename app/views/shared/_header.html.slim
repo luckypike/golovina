@@ -76,6 +76,27 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
               .section_list_item.l2
                 = active_link_to theme.title, theme
 
+      - men = @categories.select{ |c| c.id == Rails.application.secrets.men }.first
+      - if men && men.show?
+        .header_menu_section
+          .section
+            .section_title.l1
+              span
+                = men.title
+              = inline_svg 'icons/varr.svg'
+
+            .section_list
+              - men.categories.each do |category|
+                .section
+                  .section_title.l2
+                    = category.title
+                    = inline_svg 'icons/varr.svg'
+
+                  .section_list
+                    - category.categories.reject(&:empty).each do |category_category|
+                      .section_list_item
+                        = active_link_to category_category.title, category_products_path(slug: category_category.slug)
+
       .header_menu_section
         .section
           .section_title.l1
@@ -83,7 +104,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
             = inline_svg 'icons/varr.svg'
 
           .section_list
-            - @categories.reject{ |c| c.parent_category }.each do |category|
+            - @categories.reject{ |c| c.parent_category || c.id == Rails.application.secrets.men }.each do |category|
               .section
                 .section_title.l2
                   = category.title

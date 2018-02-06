@@ -19,16 +19,20 @@ class Category < ApplicationRecord
     input.to_s.to_slug.normalize(transliterations: :russian).to_s
   end
 
+  def show?
+    active? && !empty
+  end
+
   def check_empty
-    p products.active
-    if ((categories.size > 0 && categories.active.size == 0) || categories.size == 0) && products.active.size == 0
+    if ((categories.size > 0 && categories.select(&:show?).size == 0) || categories.size == 0) && products.active.size == 0
       update_attribute(:empty, true)
     else
-      p 'WWWW'
       update_attribute(:empty, false)
     end
 
-    # p categories.active.size
+    if parent_category
+      parent_category.check_empty
+    end
   end
 
   class << self
