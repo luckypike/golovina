@@ -9,8 +9,8 @@ end
 gem 'rails', '~> 5.1'
 gem 'pg', '< 1.0'
 gem 'puma'
-gem 'sass-rails', github: "rails/sass-rails"
-gem 'autoprefixer-rails', github: "ai/autoprefixer-rails"
+gem 'sass-rails', github: 'rails/sass-rails'
+gem 'autoprefixer-rails', github: 'ai/autoprefixer-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
@@ -42,6 +42,9 @@ gem 'active_link_to'
 
 gem 'rails-i18n'
 gem 'enum_help'
+
+gem 'webpacker', github: 'rails/webpacker'
+gem 'react-rails', github: 'reactjs/react-rails'
 
 gem 'jbuilder'
 
