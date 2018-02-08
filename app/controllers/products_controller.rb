@@ -61,16 +61,38 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new()
-    @product.variants.build
+    @product = Product.new
+    # @product.variants.build
     if params[:category_id] && category = Category.friendly.find(params[:category_id])
       @product.category = category
     end
     authorize @product
   end
 
+  def create
+    @product = Product.new(product_params)
+    authorize @product
+
+    if @product.save
+      redirect_to [:edit, @product], notice: 'Товар был создан, нужно добавить цвета и размеры чтобы он появился в каталоге!'
+    else
+      render :new
+    end
+  end
+
   def edit
     authorize @product
+    @product.variants.build if @product.variants.empty?
+  end
+
+  def update
+    authorize @product
+
+    if @product.update(product_params)
+      redirect_to @product, notice: 'Product was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def latest
@@ -102,26 +124,9 @@ class ProductsController < ApplicationController
     @variant = Variant.new(product: @product)
   end
 
-  def create
-    @product = Product.new(product_params)
-    authorize @product
 
-    if @product.save
-      redirect_to [:variants, @product], notice: 'Product was successfully created.'
-    else
-      render :new
-    end
-  end
 
-  def update
-    authorize @product
 
-    if @product.update(product_params)
-      redirect_to @product, notice: 'Product was successfully updated.'
-    else
-      render :edit
-    end
-  end
 
   def info
     authorize @product
@@ -165,6 +170,13 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:title, :state, :latest, :sale, :brand, :created_at, :kind_id, :category_id, :price, :price_last, :comp, :desc, { images: []}, theme_ids: [], similar_product_ids: [], variants_attributes: [:id, :color_id, :_destroy, sizes: []])
+    if params[:product][:variants_attributes].present?
+      params[:product][:variants_attributes].each do |_, va|
+        if va[:image_ids].present? && va[:image_ids].is_a?(String)
+          va[:image_ids] = JSON.parse(va[:image_ids])
+        end
+      end
+    end
+    params.require(:product).permit(:title, :category_id, :latest, :sale, :brand, :price, :price_last, :comp, :desc, similar_product_ids: [], variants_attributes: [:id, :color_id, :_destroy, :state, image_ids: [], sizes: [], images_attributes: [:id, :weight]])
   end
 end

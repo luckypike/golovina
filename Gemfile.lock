@@ -121,6 +121,7 @@ GEM
       mime-types (>= 1.16)
     childprocess (0.8.0)
       ffi (~> 1.0, >= 1.0.11)
+    cocoon (1.2.11)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     crass (1.0.3)
@@ -318,6 +319,7 @@ DEPENDENCIES
   capistrano-rbenv
   capybara
   carrierwave
+  cocoon
   devise
   enum_help
   exception_notification

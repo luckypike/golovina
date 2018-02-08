@@ -13,20 +13,21 @@
         = fi.input :weight
 
 
-      .dz_preview data-max=@kit.images.map(&:weight).max.to_i
-        - @kit.images.order(id: :asc).each do |image|
-          .dz_preview_item data-id=image.id
-            .pos data-pos=image.weight
-              = hidden_field_tag "kit[images_attributes][#{image.id}][weight]", image.weight, { id: nil, class: 'pos_value' }
-              = hidden_field_tag "kit[images_attributes][#{image.id}][id]", image.id, { id: nil }
-              .l
-                = image.weight if image.weight > 0
+      .dz_preview_kit.dz_frm
+        .dz_preview data-max=@kit.images.map(&:weight).max.to_i
+          - @kit.images.order(id: :asc).each do |image|
+            .dz_preview_item data-id=image.id
+              .pos data-pos=image.weight
+                = hidden_field_tag "kit[images_attributes][#{image.id}][weight]", image.weight, { id: nil, class: 'pos_value' }
+                = hidden_field_tag "kit[images_attributes][#{image.id}][id]", image.id, { id: nil }
+                .l
+                  = image.weight if image.weight > 0
 
-            = image_tag image.photo.preview.url
-            .control
-              = link_to '', image, method: :delete, class: :destroy, remote: true
+              = image_tag image.photo.preview.url
+              .control
+                = link_to '', image, method: :delete, class: :destroy, remote: true
 
-      = button_tag 'Добавить фото', type: :button, class: [:dz_clickable, :btn]
+        = button_tag 'Добавить фото', type: :button, class: [:dz_clickable, :btn]
 
 
       = f.association :variants, collection: f.object.variants, input_html: { class: :as_variants }

@@ -1,5 +1,24 @@
 .page.page_common.page_product_form
-  h1 Добавить товар
+  .page_common_intro.lv3
+    h1 Добавить новый товар
 
-  == render 'form'
+  .form
+    = simple_form_for @product do |f|
+      = f.error_notification
 
+      .form_inputs
+        = f.input :title
+        = f.association :category, collection: Category.tree
+
+        = f.input :latest
+        = f.input :sale
+        = f.input :brand, as: :boolean, checked_value: 1, unchecked_value: 0
+
+        = f.input :price
+        = f.input :price_last
+
+        = f.input :desc
+        = f.input :comp
+
+      .form_actions
+        = f.button :submit, 'Добавить цвета, размеры и фото'

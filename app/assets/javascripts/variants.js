@@ -1,74 +1,48 @@
-Dropzone.autoDiscover = false;
-
 $(function() {
-  // Dropzone.prototype.defaultOptions['headers'] = 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content');
 
+  $('.dz_form_variant').mint_dropzone_variant();
 
-  $('.edit_variant .dropzone').each(function() {
-    var _this = $(this);
-    var dz = new Dropzone(_this.get(0), {
-      url: _this.data('url'),
-      paramName: 'image[photo]',
-      params: _this.data('params'),
-      dictDefaultMessage: "Перетащите сюда фотографии товаров",
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      }
+  $('.form_inputs_variants')
+    .on('cocoon:before-insert', function(e, variant_to_be_added) {
+      variant_to_be_added.mint_dropzone_variant();
     });
 
-    dz.on('success', function(file, data) {
-      // var _this = $(this);
-      // console.log(file);
-      // console.log(response);
-      _this.prev().append('<div class="form_photos_list_item"><a rel="nofollow" data-method="delete" href="' + data.url + '">Удалить</a><img src="' + data.image.photo.drag.url + '"></div>');
-    });
-  });
 
-  $('.page_product_form_variants_variant .toggle').on('click', function() {
-    $(this).next().toggle();
-  });
-
-  $('.page_product_form_variants_variant').each(function() {
-    var _this = $(this);
-    if(_this.find('.error_notification').length) {
-      $('.form', _this).show();
-    }
-  });
-
-  $('form.edit_variant').on('ajax:success', function(event) {
-    var detail = event.detail;
-    var data = detail[0], status = detail[1],  xhr = detail[2];
-    var _form = $(this).find('.form_inputs');
-    _form.find('h3').text($('.variant_color select option:selected', _form).text());
-  });
-
-  $('.form_photos_list').on('change', '.image_weight', function() {
-    $.ajax({
-      url: $('.form_photos_list').data('weight'),
-      type: 'post',
-      data: {
-        id: $(this).data('id'),
-        weight: $(this).val(),
-      },
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-
-    return false;
-  });
-
-  // var drake = dragula({
-  //   direction: 'horizontal',
-  // });
-
-  // drake.on('drop', function(el, target, source, sibling) {
-  //   console.log(el);
-  // });
-
-  // var _fpl = $('.form_photos_list');
-
-  // if(_fpl.length) {
-  //   drake.containers.push(_fpl[0]);
-  // }
 });
+
+
+(function($){
+  $.fn.mint_dropzone_variant = function() {
+    return this.each(function() {
+      var _this = $(this);
+      var _images = _this.find('.dz_images');
+        var dz = new Dropzone(_this.get(0), {
+        url: _this.data('url'),
+        dragenter: function () {},
+        dragleave: function () {},
+        init: function () { setupDragon(this) },
+
+        paramName: 'image[photo]',
+        params: _this.data('params'),
+        previewsContainer: $('.dz_preview', this).get(0),
+        previewTemplate: '<div class="dz_preview_item"></div>',
+        clickable: $('.dz_clickable', this).get(0),
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      dz.on('success', function(file, data) {
+        var images = JSON.parse(_images.val());
+        images.push(data.image.id);
+        _images.val(JSON.stringify(images));
+        console.log(file.previewElement);
+
+        $(file.previewElement).data('id', data.image.id)
+        $(file.previewElement).append('<div class="pos" data-pos="' + data.image.weight + '"><input type="hidden" name="kit[images_attributes][' + data.image.id + '][weight]" value="0" class="pos_value"><input type="hidden" name="kit[images_attributes][' + data.image.id + '][id]" value="' + data.image.id + '"><div class="l"></div></div><img src="' + data.image.photo.preview.url + '"><div class="control"><a rel="nofollow" data-remote="true" data-method="delete" href="' + data.url + '" class="destroy"></a></div>');
+      });
+    });
+
+    // return this;
+  };
+}(jQuery));

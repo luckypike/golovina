@@ -44,9 +44,9 @@ class KitsController < ApplicationController
     if @kit.update(kit_params)
       @theme = Theme.find(@kit.theme_id)
       @last_kit = Kit.where(state: '1', theme_id: @kit.theme_id).last
-      if @last_kit.presence 
+      if @last_kit.presence
         @theme.update_column(:recency, @last_kit[:created_at])
-      else 
+      else
         @theme.update_column(:recency, @theme[:created_at])
       end
       redirect_to [:kits], notice: 'Kit was successfully updated.'

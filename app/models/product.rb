@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   enum state: { undef: 0, active: 1, archived: 2 }
 
   after_save :sync_variants
-  after_save :check_category
+  # after_save :check_category
 
   belongs_to :category
 
@@ -10,7 +10,7 @@ class Product < ApplicationRecord
   has_many :themes, through: :themable
 
   has_many :variants, inverse_of: :product, dependent: :destroy
-  accepts_nested_attributes_for :variants, allow_destroy: true
+  accepts_nested_attributes_for :variants, reject_if: :all_blank, allow_destroy: true
 
   has_many :images, through: :variants
 
@@ -19,7 +19,7 @@ class Product < ApplicationRecord
 
   has_many :kits, through: :variants
 
-  validates_presence_of :price, :state, :title
+  validates_presence_of :price, :title
 
   def title_safe
     title_temp = (self.title.presence || self.id.to_s).strip
@@ -50,18 +50,18 @@ class Product < ApplicationRecord
     end
   end
 
-  def check_category
-    category.check_empty
-  end
+  # def state
+  # end
 
-  def check_empty
-    if variants.where(state: [:active, :out]).size == 0
-      archived!
-    else
-      active!
-    end
-  end
+  # def check_category
+  #   category.check_empty
+  # end
 
-  class << self
-  end
+  # def check_empty
+  #   if variants.where(state: [:active, :out]).size == 0
+  #     archived!
+  #   else
+  #     active!
+  #   end
+  # end
 end

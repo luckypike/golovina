@@ -1,5 +1,8 @@
 .page.page_common.page_products_all
-  .page_products_all_list
+  = link_to 'Новый товар', [:new, :product], class: :btn
+
+  = react_component 'ControlIndex', { path: control_products_path, url: control_products_path(format: :json) }
+  / .page_products_all_list
     .products
       .products_new.lv2
         = link_to 'Новый товар', [:new, :product], class: :btn
@@ -28,4 +31,3 @@
 
             - category_category_category.products.each do |product|
               = render 'control_item', product: product
-

@@ -3,7 +3,7 @@ class ImagesController < ApplicationController
     image = Image.new(image_params)
     authorize image
 
-    sleep 1
+    # sleep 1
 
     if image.save
       # head :ok

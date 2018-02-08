@@ -27,6 +27,14 @@ ru:
   menu:
     return: Обмен и возврат
 
+  cocoon:
+    defaults:
+      add: Добавить запись
+      remove: Удалить запись
+
+    variants:
+      add: Добавить цвет
+      remove: Удалить цвет
 
   activerecord:
     errors:

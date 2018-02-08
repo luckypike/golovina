@@ -1,0 +1,39 @@
+.input_nested_fields.dz_form_variant.dz_frm data-url=images_path data-params={ 'image[imagable_type]': 'Variant', 'image[imagable_id]': nil }.to_json
+  = f.association :color, collection: Color.tree
+  = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes].map{ |s| [I18n.t("sizes.size_#{s}"), s.to_s] }
+  = f.input :state, as: :radio_buttons
+
+  .dz_preview data-max=f.object.images.map(&:weight).max.to_i
+    = f.association :images, as: :text, input_html: { class: :dz_images }
+
+    = button_tag 'Добавить фото', type: :button, class: [:dz_clickable]
+
+    = f.simple_fields_for :images do |imf|
+      .dz_preview_item data-id=imf.object.id
+        = imf.input :id, as: :hidden
+        = imf.input :weight, as: :hidden, input_html: { class: [:pos_value] }
+        .pos data-pos=imf.object.weight
+          .l
+            = imf.object.weight if imf.object.weight > 0
+
+        = image_tag imf.object.photo.preview.url
+        .control
+          = link_to '', imf.object, method: :delete, class: :destroy, remote: true
+
+
+  / .dz_preview data-max=f.object.images.map(&:weight).max.to_i
+    - f.object.images.order(id: :asc).each do |image|
+      .dz_preview_item data-id=image.id
+        .pos data-pos=image.weight
+          = hidden_field_tag "product[variants_attributes][images_attributes][#{image.id}][weight]", image.weight, { id: nil, class: 'pos_value' }
+          = hidden_field_tag "product[variants_attributes][images_attributes][#{image.id}][id]", image.id, { id: nil }
+          .l
+            = image.weight if image.weight > 0
+
+        = image_tag image.photo.preview.url
+        .control
+          = link_to '', image, method: :delete, class: :destroy, remote: true
+
+
+
+  = link_to_remove_association f, { wrapper_class: 'input_nested_fields', class: [:rm] }

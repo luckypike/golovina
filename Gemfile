@@ -20,6 +20,7 @@ gem 'uglifier'
 gem 'slim-rails'
 
 gem 'simple_form'
+gem 'cocoon'
 
 gem 'friendly_id'
 gem 'babosa'

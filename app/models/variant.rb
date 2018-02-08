@@ -4,14 +4,17 @@ class Variant < ApplicationRecord
   scope :themed_by, ->(themes) { where('variants.themes @> any(array[?]::jsonb[])', themes.map(&:to_s)) if themes.present? }
   scope :sized_by, ->(sizes) { where('variants.sizes ?| array[:sizes]', { sizes: sizes.map(&:to_s) }) if sizes.present? }
 
+  before_validation :parse_image_ids
+  before_validation :set_size
   before_validation :sync_themes_and_category
-  after_save :check_product
+  # after_save :check_product
 
   belongs_to :product
   belongs_to :color
   belongs_to :category
 
-  has_many :images, -> { order(weight: :asc, created_at: :asc) }, as: :imagable, dependent: :destroy
+  has_many :images, as: :imagable, dependent: :destroy
+  accepts_nested_attributes_for :images
 
   validates_uniqueness_of :color_id, scope: [:product_id]
 
@@ -21,10 +24,15 @@ class Variant < ApplicationRecord
   has_many :kitables, dependent: :destroy
   has_many :kits, through: :kitables
 
+  validates_presence_of :sizes, :state
 
   def sync_themes_and_category
     self.themes = product.themes.map(&:id)
     self.category = product.category
+  end
+
+  def parse_image_ids
+    p self
   end
 
   def entity_created_at
@@ -41,6 +49,14 @@ class Variant < ApplicationRecord
 
   def in_wishlist user
     Wishlist.where(user: user, variant: self).any?
+  end
+
+  def sizes_clean
+    sizes.reject(&:blank?)
+  end
+
+  def set_size
+    self.sizes = nil if sizes_clean.size == 0
   end
 
   def check_product

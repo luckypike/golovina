@@ -1,11 +1,38 @@
 .page.page_common.page_product_form
-  h1
-    | Редактировать товар ##{@product.id}
+  .page_common_intro.lv3
+    h1 Редактировать товар ##{@product.id}
 
-  == render 'form'
+  .form
+    = simple_form_for @product do |f|
+      = f.error_notification
+
+      .form_inputs
+        .form_inputs_variants
+          = f.simple_fields_for :variants do |v|
+            = render 'variant_fields', f: v
+
+          .form_inputs_variants_add
+            = link_to_add_association f, :variants
+
+        = f.input :title
+        = f.association :category, collection: Category.tree
+
+        = f.input :latest
+        = f.input :sale
+        = f.input :brand, as: :boolean, checked_value: 1, unchecked_value: 0
+
+        = f.input :price
+        = f.input :price_last
+
+        = f.input :desc
+        = f.input :comp
+
+
+
+        / = f.association :similar_products, collection: Product.order(title: :asc), label_method: :title_safe, input_html: { class: :as_selectize }
+
+      .form_actions
+        = f.button :submit
 
   / br
   / = link_to t('Удалить товар'), @product, method: :delete, class: :btn
-
-
-

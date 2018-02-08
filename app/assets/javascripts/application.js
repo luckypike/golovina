@@ -12,9 +12,7 @@
 //
 //= require rails-ujs
 //= require jquery
-
-//= require vivus
-
+//= require cocoon
 //= require dropzone/dist/dropzone
 
 //= require swiper/dist/js/swiper.jquery
@@ -26,6 +24,7 @@
 
 //= require_tree .
 
+Dropzone.autoDiscover = false;
 
 function setupDragon(uploader) {
     /* A little closure for handling proper

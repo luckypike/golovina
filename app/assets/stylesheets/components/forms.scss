@@ -77,6 +77,7 @@
       }
 
       &.product_variants_sizes,
+      &.product_variants_state,
       &.variant_sizes,
       &.product_themes {
         display: flex;
@@ -87,6 +88,7 @@
           width: 100%;
         }
 
+        .radio,
         .checkbox {
           margin-right: $gutter;
           white-space: nowrap;
@@ -110,8 +112,30 @@
           border-color: red;
         }
       }
+    }
+
+    &_variants {
+      margin-bottom: $space-m;
+
+      .input_nested_fields {
+        padding: $space-s $gutter;
+        border: 1px solid $separator-color;
+        margin-bottom: $space-s;
+
+        .remove_fields {
+          color: red;
+          font-weight: $bold;
+          border-bottom: 1px dashed red;
+        }
 
 
+      }
+
+      .add_fields {
+        color: #000;
+        font-weight: $bold;
+        border-bottom: 1px dashed #000;
+      }
     }
 
     .thumb {
@@ -119,6 +143,116 @@
         display: block;
         max-width: 250px;
       }
+    }
+  }
+}
+
+.dz_form_variant {
+  &.dz-drag-hover {
+    background-color: yellow;
+  }
+}
+
+.dz_preview {
+  display: flex;
+  flex-wrap: wrap;
+
+  .product_variants_images {
+    display: none;
+  }
+
+  .dz_clickable {
+    font-size: 11px;
+    cursor: pointer;
+
+    width: 76px;
+    height: 94px;
+    margin-right: $gutter / 2;
+    background-color: $sand-color;
+    margin-bottom: $base-rhythm-line;
+    padding: 2px;
+  }
+
+  &_item {
+    // border: 1px solid $separator_color;
+    width: 76px;
+    height: 94px;
+    background-color: $sand-color;
+    margin-right: $gutter / 2;
+    margin-bottom: $base-rhythm-line;
+    padding: 2px;
+    position: relative;
+
+    .hidden {
+      display: none;
+    }
+
+    .move {
+      position: absolute;
+      left: $base-rhythm-line;
+      top: $base-rhythm-line;
+      z-index: 5;
+      background-color: rgba($primary-color, 0.5);
+      display: block;
+      width: 24px;
+      height: 24px;
+
+    }
+
+    .pos {
+      color: $op-color;
+      font-weight: $bold;
+      position: absolute;
+      right: $base-rhythm-line;
+      top: $base-rhythm-line;
+      z-index: 1;
+      background-color: rgba($primary-color, 0.7);
+      display: block;
+      width: 24px;
+      height: 24px;
+      text-align: center;
+      line-height: 24px;
+      border-radius: 50%;
+    }
+
+    .control {
+      display: flex;
+      padding: $base-rhythm-line;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 5;
+
+      a, .a {
+        background-color: rgba($primary-color, 0.5);
+        display: block;
+        width: 24px;
+        height: 24px;
+
+        &.destroy {
+          background-image: image_url('icons/delete_white.svg');
+          background-size: 24px 24px;
+        }
+      }
+    }
+
+    // .destroy {
+    //   position: absolute;
+    //   right: $gutter;
+    //   top: $base-rhythm-line;
+    //   line-height: 24px;
+    //   width: 24px;
+    //   background: rgba(#000, 0.5);
+    //   border-radius: 2px;
+    //   text-align: center;
+    //   color: #fff;
+
+    // }
+
+    img {
+      display: block;
+      width: 72px;
+      height: 90px;
     }
   }
 }
