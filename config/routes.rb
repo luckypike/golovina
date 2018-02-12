@@ -64,7 +64,6 @@ Rails.application.routes.draw do
     member do
       post :publish
       post :archive
-      # get :variants
       get :info
       get 'similar/:simid', to: 'products#similar', as: 'similar'
     end

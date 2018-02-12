@@ -22,6 +22,23 @@ $default-total-columns: 16;
   padding: $top $gutter $bottom;
 }
 
+@mixin promo {
+  @include font-size(1.375, 2);
+
+  color: $op-color;
+  padding: $gutter / 4;
+  position: absolute;
+  bottom: 0;
+  text-transform: uppercase;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @include mq($s) {
+    @include font-size-small;
+    padding: $gutter / 2;
+  }
+}
+
 @mixin control {
   padding: $base-rhythm-line;
   position: absolute;

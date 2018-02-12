@@ -47,7 +47,7 @@ ru:
         image: Картинка
 
       variant:
-        out_of_stock: Нет в наличии
+        out_of_stock: Скоро в продаже
 
       category:
         title: Название

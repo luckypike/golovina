@@ -462,6 +462,21 @@
       .control {
         @include control
       }
+
+      .promo {
+        @include promo;
+      }
+
+      .control + .brand {
+        top: 2.5rem;
+      }
+
+      .brand {
+        @include promo;
+        top: 0;
+        left: 0;
+        transform: translateX(0);
+      }
     }
 
 
