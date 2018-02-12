@@ -22,9 +22,9 @@ SitemapGenerator::Sitemap.create do
   # Add all articles:
   #
 
-  Product.where(state: [:active, :archived]).find_each do |product|
-    add polymorphic_path(product), lastmod: product.updated_at
-  end
+  # Product.where(state: [:active, :archived]).find_each do |product|
+    # add polymorphic_path(product), lastmod: product.updated_at
+  # end
 
   Category.find_each do |category|
     add category_products_path(slug: category.slug), lastmod: Time.now
