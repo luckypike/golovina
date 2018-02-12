@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
     params[:theme] = params[:theme].presence || []
     params[:size] = params[:size].presence || []
 
-    @products = Variant.includes(:images, :product).themed_by(params[:theme]).sized_by(params[:size]).where(@where).where(products: { state: :active }, state: [:active, :out]).order('products.created_at DESC')
+    @products = Variant.includes(:images, :product).themed_by(params[:theme]).sized_by(params[:size]).where(@where).where(state: [:active, :out]).order('products.created_at DESC')
     render :all
   end
 
@@ -31,7 +31,6 @@ class ProductsController < ApplicationController
 
     @where = {
       category: @category.categories.map(&:id) <<  + @category.id,
-      products: { state: :active }
     }
 
     self.all
@@ -98,19 +97,19 @@ class ProductsController < ApplicationController
   def latest
     authorize Product
 
-    @products = Variant.includes(:images, :product).where(products: { latest: true, state: :active }, state: [:active, :out])
+    @products = Variant.includes(:images, :product).where(products: { latest: true}, state: [:active, :out])
   end
 
   def sale
     authorize Product
 
-    @products = Variant.includes(:images, :product).where(products: { sale: true, state: :active }, state: [:active, :out])
+    @products = Variant.includes(:images, :product).where(products: { sale: true}, state: [:active, :out])
   end
 
   def golovina
     authorize Product
 
-    @products = Variant.includes(:images, :product).where(products: { brand: 1, state: :active }, state: [:active, :out])
+    @products = Variant.includes(:images, :product).where(products: { brand: 1}, state: [:active, :out])
   end
 
   def kits

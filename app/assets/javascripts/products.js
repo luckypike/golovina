@@ -339,6 +339,10 @@ $(function(){
             _this.closest('.product').find('.wishlist').removeClass('in_wl');
           }
 
+          if(data.variant_state) {
+            _this.closest('.product').find('.product_data').addClass(data.variant_state);
+          }
+
           _pip.append('<div class="swiper-pagination"></div>');
           _pip_l.append('<div class="swiper-pagination"></div>');
 

@@ -11,7 +11,7 @@
       .images_list.swiper-wrapper.images_list_swiper_l
 
   .product_data_wrapper
-    .product_data class=product.state
+    .product_data
       .title_and_color.lv3
         .title
           - if (@variants.present?)
@@ -84,9 +84,6 @@
         - if policy(product).edit?
           .edit
             = link_to 'Редактировать', [:edit, product], class: :btn_gr
-            =< link_to 'Размеры и цвета', [:variants, product], class: :btn_gr
-
-
 
       .acc
         - if product.desc.present?
@@ -181,5 +178,5 @@
 
             p Возврат и обмен товара осуществляется в течение 7 дней с момента получения заказа, если он не был в употреблении, сохранен товарный вид, потребительские свойства, пломбы, фабричные ярлыки. В противном случае обмену и возврату товар не подлежит. #{link_to 'Подробнее', customers_return_path, class: 'bordered'}
 
-      - if variant.out? && variant.product.similar_products.active.present?
+      - if variant.out? && variant.product.similar_products.present?
           = link_to 'Подобрать похожий', '#', class: [:btn, :more], :data => { :id => variant.product.id , :similar => variant.product.similar_products.active.map{ |s| s.id }.to_json }

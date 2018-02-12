@@ -42,7 +42,7 @@
             .theme_kits.swiper-container
               .theme_kits_list.swiper-wrapper
                 - theme.kits.active.each do |kit|
-                  - if kit.variants.active.map(&:product).each{|product| product.active!}.sum(&:price_sell) > 0
+                  - if kit.variants.active.map(&:product).sum(&:price_sell) > 0
                     .theme_kits_list_item.swiper-slide
                       = link_to '', [kit], class: :fake
 
@@ -50,4 +50,4 @@
                         = image_tag kit.images.first.photo.thumb.url
 
                       .kit_price
-                        = number_to_rub kit.variants.active.map(&:product).each{|product| product.active!}.sum(&:price_sell)
+                        = number_to_rub kit.variants.active.map(&:product).sum(&:price_sell)

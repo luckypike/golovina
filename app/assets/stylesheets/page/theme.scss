@@ -685,6 +685,7 @@
 
             .image {
               @include aspect-ratio(4, 5);
+              background: $sand-color;
 
               .out {
                 align-items: center;

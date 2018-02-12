@@ -1,6 +1,6 @@
 - title @kit.title_safe
 - images = @kit.images.sort_by{ |i| [(i.weight.zero? ? 99 : i.weight), i.created_at] }.take(2)
-- variants = @kit.variants.select{ |v| (v.active? || v.out?) && v.product.active? }
+- variants = @kit.variants.select{ |v| (v.active? || v.out?)}.reject{|v| current_user && current_user.is_editor? ? false : v.images.size == 0}
 
 / - set_meta_tags og: { image: @kit.images.select(&:photo).map{ |i| i.photo.url } }
 
