@@ -305,12 +305,12 @@
 
 .product {
 
-  .out {
-    display: none;
-  }
-
   &_images {
     display: none;
+
+    .out {
+      display: none;
+    }
 
     .images {
       &_list {

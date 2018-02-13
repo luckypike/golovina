@@ -29,7 +29,7 @@
 
         .variants.live data-variant_active=variant.id
           .variants_list
-            - product.variants.where(state: [:active, :out]).each do |variant|
+            - product.variants.where(state: [:active, :out]).reject{|v| current_user && current_user.is_editor? ? false : v.images.size == 0}.each do |variant|
               .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json]) data-label=variant.color.title data-oos=variant.out?.to_s
                 .icon class=variant.color.slug style="background-color: #{variant.color.color}; #{variant.color.image? ? "background-image: url(#{variant.color.image.url})" : ''}"
 
