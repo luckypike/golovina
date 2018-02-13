@@ -12,7 +12,7 @@
             = link_to '', ['edit', variant.product], class: :edit
 
         .brand
-          - if variant.product.brand.blank?
+          - if variant.product.brand == 1
             .label
               = t('simple_form.labels.product.brand')
 
