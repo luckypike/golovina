@@ -499,6 +499,19 @@
       z-index: 2;
       text-align: center;
 
+      .label {
+        background: $primary-color;
+        color: $op-color;
+        display: inline;
+        margin-right: 5px;
+        padding: 0 $gutter / 4;
+        text-transform: uppercase;
+
+        &.sale {
+          background: red;
+        }
+      }
+
       .price {
         @include font-size(1.375, 2);
         > div {

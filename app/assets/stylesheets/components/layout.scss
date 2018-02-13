@@ -26,12 +26,12 @@ $default-total-columns: 16;
   @include font-size(1.375, 2);
 
   color: $op-color;
-  padding: $gutter / 4;
+  padding: $gutter / 2;
   position: absolute;
   bottom: 0;
   text-transform: uppercase;
-  left: 50%;
-  transform: translateX(-50%);
+  // left: 50%;
+  // transform: translateX(-50%);
 
   @include mq($s) {
     @include font-size-small;

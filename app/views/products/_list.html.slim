@@ -11,25 +11,23 @@
           .control
             = link_to '', ['edit', variant.product], class: :edit
 
-        .brand
-          - if variant.product.brand == 1
+        - if variant.product.brand == 1
+          .brand
             .label
               = t('simple_form.labels.product.brand')
 
-        .promo
-          - if variant.out_of_stock
-            .label
-              = t('simple_form.labels.variant.out_of_stock')
-          - else
-            - if variant.product.latest
-              .label
-                = t('simple_form.labels.product.latest')
-            - else
-              - if variant.product.sale
-                .label
-                  = t('simple_form.labels.product.sale')
-
       .title_and_price
+        - if variant.out_of_stock
+          .label.out_of_stock
+            = t('simple_form.labels.variant.out_of_stock')
+        - else
+          - if variant.product.latest
+            .label.latest
+              = t('simple_form.labels.product.latest')
+          - else
+            - if variant.product.sale
+              .label.sale
+                = t('simple_form.labels.product.sale')
         = variant.product.title_safe
         .price
           - if variant.product.price_last

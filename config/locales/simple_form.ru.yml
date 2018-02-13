@@ -47,7 +47,7 @@ ru:
         image: Картинка
 
       variant:
-        out_of_stock: Скоро в продаже
+        out_of_stock: Скоро
 
       category:
         title: Название
