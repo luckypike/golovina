@@ -508,7 +508,11 @@
         text-transform: uppercase;
 
         &.sale {
-          background: red;
+          background: rgb(204, 12, 47);
+        }
+
+        &.out_of_stock {
+          background: $highlight-color;
         }
       }
 

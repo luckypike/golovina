@@ -11,7 +11,7 @@
           .control
             = link_to '', ['edit', variant.product], class: :edit
 
-        - if variant.product.brand == 1
+        / - if variant.product.brand == 1
           .brand
             .label
               = t('simple_form.labels.product.brand')
