@@ -23,8 +23,8 @@ $(function(){
     })
   }
 
-  if($('.page_event_slider').length > 0 && $(window).width() > 767) {
-    _as = $('.page_event_slider .swiper-container-image');
+  if($('.page_event_slider.event_slider_0').length > 0 && $(window).width() > 767) {
+    _as = $('.page_event_slider.event_slider_0 .swiper-container-image');
 
     var col_image = new Swiper (_as, {
       freeMode: false,
@@ -43,8 +43,44 @@ $(function(){
     });
   }
 
-  if($('.page_event_thumbs_slider').length > 0 && $(window).width() > 767) {
-    _as = $('.page_event_thumbs_slider .swiper-container-image');
+  if($('.page_event_thumbs_slider.event_thimbs_slider_0').length > 0 && $(window).width() > 767) {
+    _as = $('.page_event_thumbs_slider.event_thimbs_slider_0 .swiper-container-image');
+
+    var col_thumbs = new Swiper (_as, {
+      freeMode: false,
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      speed: 600,
+      pagination: $('.swiper-pagination', _as),
+      slideToClickedSlide: true,
+    });
+
+    col_image.params.control = col_thumbs;
+    col_thumbs.params.control = col_image;
+  }
+
+  if($('.page_event_slider.event_slider_1').length > 0 && $(window).width() > 767) {
+    _as = $('.page_event_slider.event_slider_1 .swiper-container-image');
+
+    var col_image = new Swiper (_as, {
+      freeMode: false,
+      centeredSlides: true,
+      speed: 600,
+      pagination: $('.swiper-pagination', col_image),
+      paginationType: 'fraction',
+      preloadImages: false,
+      lazyLoading: true,
+      lazyLoadingInPrevNext: true,
+      paginationFractionRender: function(swiper, currentClassName, totalClassName) {
+        return '<span class="' + currentClassName + '"></span>' +
+                '/' +
+                '<span class="' + totalClassName + '"></span>';
+      },
+    });
+  }
+
+  if($('.page_event_thumbs_slider.event_thimbs_slider_1').length > 0 && $(window).width() > 767) {
+    _as = $('.page_event_thumbs_slider.event_thimbs_slider_1 .swiper-container-image');
 
     var col_thumbs = new Swiper (_as, {
       freeMode: false,

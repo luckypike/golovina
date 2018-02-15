@@ -3,6 +3,53 @@
     .page_event_intro.lv2
       .page_event_intro_date
         .date_wrapper
+          .day 8
+          .month февраля
+
+      .page_event_intro_header
+        h1#beauty
+          = title 'The beauty of love'
+
+    .page_event_announcement
+        p В пространстве нашей территории прошёл первый девичник, посвящённый дню всех влюблённых.
+        p Шампанское с клубникой, Музыка и разговоры о модных тенденциях в макияже 2018. Научили девушек подчеркивать свою естественную красоту и крутить локоны.
+
+    .page_event_highlight
+      .highlight_wrapper
+        .row
+          - slides = File.join("**", "uploads/event_beauty/m", "*.jpg")
+          - Dir.glob(slides).sort.each do |slide|
+            = image_tag slide.gsub('public', '')
+
+
+    .page_event_slider.event_slider_1
+      .swiper-container.swiper-container-image
+        .swiper-wrapper
+          - slides = File.join("**", "uploads/event_beauty", "*.jpg")
+          - Dir.glob(slides).sort.each do |slide|
+            .swiper-slide
+              .swiper-slide-wrapper
+                img.swiper-lazy data-src=slide.gsub('public', '')
+
+              .swiper-lazy-preloader
+
+        .swiper-pagination.swiper-pagination-index
+
+    .page_event_thumbs_slider.event_thimbs_slider_1
+      .swiper-container.swiper-container-image
+        .swiper-wrapper
+          - slides = File.join("**", "uploads/event_beauty/tn", "*.jpg")
+          - Dir.glob(slides).sort.each do |slide|
+            .swiper-slide
+
+              .swiper-slide-wrapper
+                = image_tag slide.gsub('public', '')
+
+
+  .page_event
+    .page_event_intro.lv2
+      .page_event_intro_date
+        .date_wrapper
           .day 14
           .month декабря
 
@@ -16,12 +63,12 @@
     .page_event_highlight
       .highlight_wrapper
         .row
-          - slides = File.join("**", "uploads/event", "*.jpg")
+          - slides = File.join("**", "uploads/event/m", "*.jpg")
           - Dir.glob(slides).sort.each do |slide|
             = image_tag slide.gsub('public', '')
 
 
-    .page_event_slider
+    .page_event_slider.event_slider_0
       .swiper-container.swiper-container-image
         .swiper-wrapper
           - slides = File.join("**", "uploads/event", "*.jpg")
@@ -34,7 +81,7 @@
 
         .swiper-pagination.swiper-pagination-index
 
-    .page_event_thumbs_slider
+    .page_event_thumbs_slider.event_thimbs_slider_0
       .swiper-container.swiper-container-image
         .swiper-wrapper
           - slides = File.join("**", "uploads/event/tn", "*.jpg")
