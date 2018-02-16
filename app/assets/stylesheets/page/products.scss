@@ -105,6 +105,8 @@
 
         &.opened {
           display: block;
+          margin-left: $gutter;
+          margin-bottom: $gutter;
         }
       }
 
@@ -121,6 +123,10 @@
               color: $separator-color;
               size: cover;
               position: top center;
+            }
+
+            .control {
+              @include control
             }
           }
 

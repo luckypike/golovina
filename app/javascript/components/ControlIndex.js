@@ -18,13 +18,16 @@ class ControlVariants extends React.Component {
 
   render () {
     const variants = this.props.variants;
-    console.log(variants);
+    // console.log(variants);
 
     return (
       <div className="variants">
         {variants.map((variant) =>
           <div className="variants_item" key={variant.id}>
             <div className="image">
+              <div className="control">
+                <a className="edit" href={variant.edit}/>
+              </div>
               {variant.image &&
                 <img src={variant.image} />
               }
@@ -93,9 +96,9 @@ class ControlCategoriesListItem extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state);
+    // console.log(this.state);
     if(this.state.active && !prevState.active) {
-      console.log('QQQQ');
+      // console.log('QQQQ');
       this.fetchVariants();
     }
   }
@@ -148,11 +151,11 @@ class ControlIndex extends React.Component {
       <Router>
         <React.Fragment>
           <div className="tabs">
-            <NavLink exact to={this.props.path} className="tabs_item">
+            <NavLink exact to={this.props.path} className="tabs_item btn">
               Активные
             </NavLink>
 
-            <NavLink exact to={this.props.path + '/archive'} className="tabs_item">
+            <NavLink exact to={this.props.path + '/archive'} className="tabs_item btn">
               Архив
             </NavLink>
           </div>
