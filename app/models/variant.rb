@@ -8,6 +8,7 @@ class Variant < ApplicationRecord
   before_validation :set_size
   before_validation :sync_themes_and_category
   after_save :check_category
+  after_save :check_category_variants
 
   belongs_to :product
   belongs_to :color
@@ -60,6 +61,6 @@ class Variant < ApplicationRecord
   end
 
   def check_category
-    product.category.check_empty
+    product.category.check_variants
   end
 end
