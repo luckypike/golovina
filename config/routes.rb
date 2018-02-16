@@ -62,14 +62,14 @@ Rails.application.routes.draw do
 
   resources :products, path: :catalog do
     member do
-      post :publish
-      post :archive
+      # post :publish
+      # post :archive
       get :info
       get 'similar/:simid', to: 'products#similar', as: 'similar'
     end
 
     collection do
-      get :control
+      get 'control(/*other)', to: 'products#control', as: :control
       get :all
       get :latest
       get :golovina
