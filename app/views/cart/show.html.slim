@@ -27,7 +27,10 @@
 
               .size
                 ' Размер:
-                = t("sizes.size_#{item.size}")
+                - if item.variant.product.category.get_ancestor == Rails.application.secrets[:men]
+                  = t("sizes_men.size_#{item.size}")
+                - else
+                  = t("sizes.size_#{item.size}")
 
               .quantity
                 ' Количество:

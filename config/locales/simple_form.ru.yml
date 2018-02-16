@@ -109,10 +109,10 @@ ru:
 
   sizes_men:
     size_0: ONE SIZE
-    size_s: 's'
-    size_m: 'm'
-    size_l: 'l'
-    size_xl: 'xl'
+    size_46: 'S'
+    size_48: 'M'
+    size_50: 'L'
+    size_52: 'XL'
 
   enums:
     category:
