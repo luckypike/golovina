@@ -52,7 +52,9 @@ class ProductsController < ApplicationController
 
   def control
     authorize Product
-    @categories = Category.includes(:products).all
+    @variants = Product.includes(variants: [:images, :color]).where(category_id: params[:category_id], variants: { state: [:active, :out]}).order(created_at: :desc).map(&:variants).flatten
+
+    # @categories = Category.includes(:products).all
   end
 
   def show
