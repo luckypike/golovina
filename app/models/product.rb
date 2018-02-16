@@ -53,10 +53,6 @@ class Product < ApplicationRecord
   # def state
   # end
 
-  # def check_category
-  #   category.check_empty
-  # end
-
   # def check_empty
   #   if variants.where(state: [:active, :out]).size == 0
   #     archived!

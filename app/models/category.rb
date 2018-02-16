@@ -11,6 +11,7 @@ class Category < ApplicationRecord
   friendly_id :title, use: :slugged
 
   has_many :products
+  has_many :variants, through: :products
 
   belongs_to :parent_category, class_name: 'Category', optional: true
   has_many :categories, -> { order(weight: :asc) }, class_name: "Category", foreign_key: "parent_category_id"
@@ -24,7 +25,7 @@ class Category < ApplicationRecord
   end
 
   def check_empty
-    if ((categories.size > 0 && categories.select(&:show?).size == 0) || categories.size == 0) && products.active.size == 0
+    if ((categories.size > 0 && categories.select(&:show?).size == 0) || categories.size == 0) && variants.size == 0
       update_attribute(:empty, true)
     else
       update_attribute(:empty, false)

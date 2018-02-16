@@ -7,7 +7,7 @@ class Variant < ApplicationRecord
   before_validation :parse_image_ids
   before_validation :set_size
   before_validation :sync_themes_and_category
-  # after_save :check_product
+  after_save :check_category
 
   belongs_to :product
   belongs_to :color
@@ -59,7 +59,7 @@ class Variant < ApplicationRecord
     self.sizes = nil if sizes_clean.size == 0
   end
 
-  def check_product
-    product.check_empty
+  def check_category
+    product.category.check_empty
   end
 end
