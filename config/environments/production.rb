@@ -113,9 +113,6 @@ Rails.application.configure do
     email: {
       email_prefix: "[ERROR][mint] ",
       sender_address: %{"Luckybot" <#{Rails.application.secrets[:mail_username]}>},
-      exception_recipients: %w{ab+tech@luckypike.com}
+      exception_recipients: %w{log@luckypike.com}
     }
 end
-
-
-
