@@ -24,18 +24,6 @@ class Category < ApplicationRecord
     active? && !variants_counter.blank? && variants_counter > 0
   end
 
-  # def check_empty
-  #   if ((categories.size > 0 && categories.select(&:show?).size == 0) || categories.size == 0) && variants.size == 0
-  #     update_attribute(:empty, true)
-  #   else
-  #     update_attribute(:empty, false)
-  #   end
-  #
-  #   if parent_category
-  #     parent_category.check_empty
-  #   end
-  # end
-
   def variants_count
     variants_counter.presence || (categories.map(&:variants_count).sum + variants.where(state: [:active, :out]).size)
   end
@@ -47,6 +35,10 @@ class Category < ApplicationRecord
     if parent_category
       parent_category.check_variants
     end
+  end
+
+  def get_ancestor
+    parent_category ? parent_category.get_ancestor : id
   end
 
   class << self

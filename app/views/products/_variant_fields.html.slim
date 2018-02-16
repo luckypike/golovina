@@ -1,6 +1,9 @@
 .input_nested_fields.dz_form_variant.dz_frm data-url=images_path data-params={ 'image[imagable_type]': 'Variant', 'image[imagable_id]': nil }.to_json
   = f.association :color, collection: Color.tree
-  = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes].map{ |s| [I18n.t("sizes.size_#{s}"), s.to_s] }
+  - if @product.category.get_ancestor == 47
+    = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes_men].map{ |s| [I18n.t("sizes_men.size_#{s}"), s.to_s] }
+  - else
+    = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes].map{ |s| [I18n.t("sizes.size_#{s}"), s.to_s] }
   = f.input :state, as: :radio_buttons
 
   .dz_preview data-max=f.object.images.map(&:weight).max.to_i

@@ -107,6 +107,13 @@ ru:
     size_44: '44'
     size_46: '46'
 
+  sizes_men:
+    size_0: ONE SIZE
+    size_s: 's'
+    size_m: 'm'
+    size_l: 'l'
+    size_xl: 'xl'
+
   enums:
     category:
       state:
