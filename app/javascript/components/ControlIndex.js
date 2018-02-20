@@ -47,12 +47,19 @@ class ControlCategories extends React.Component {
     super(props);
 
     this.state ={
-      categories: null
+      categories: null,
+      archive: !this.props.match.isExact
     }
   }
 
   componentDidMount() {
     this.fetchCategories();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      archive: !nextProps.match.isExact
+    });
   }
 
   fetchCategories() {
@@ -72,7 +79,7 @@ class ControlCategories extends React.Component {
     return (
       <div className="control_categories">
         {categories.filter(category => category.parent_category_id == null).map((category) =>
-          <ControlCategoriesListItem variants_path={this.props.variants_path} categories_all={categories} category={category}  key={category.id} />
+          <ControlCategoriesListItem variants_path={this.props.variants_path} categories_all={categories} category={category}  key={category.id} archive={this.state.archive}/>
         )}
       </div>
     )
@@ -91,21 +98,22 @@ class ControlCategoriesListItem extends React.Component {
     }
   }
 
-  componentDidMount() {
-
-  }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log(this.state);
     if(this.state.active && !prevState.active) {
       // console.log('QQQQ');
       this.fetchVariants();
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      active: false
+    });
+  }
+
   fetchVariants() {
-    console.log(this.props);
-    axios.get(this.props.variants_path, { params: { category_id: this.props.category.id } })
+    axios.get(this.props.variants_path, { params: { category_id: this.props.category.id, archive: this.props.archive} })
     .then(res => {
       this.setState({
         variants: res.data.variants
@@ -123,16 +131,23 @@ class ControlCategoriesListItem extends React.Component {
     const categories = this.props.categories_all.filter(category => category.parent_category_id == this.props.category.id);
     const variants = this.state.variants;
 
+    let categoryTitle = null;
+    if (this.props.archive) {
+      categoryTitle = this.props.category.title + ' (' + this.props.category.archived + ')'
+    } else {
+      categoryTitle = this.props.category.title + ' (' + this.props.category.variants_count + ')'
+    }
+
     return (
       <div className="control_categories_item">
         <div className="title" onClick={this.handleClick}>
-          {this.props.category.title} ({this.props.category.variants_count})
+          {categoryTitle}
         </div>
 
         {categories.length > 0 &&
           <div className={classNames('categories', { opened: this.state.active })}>
             {categories.map((category) =>
-              <ControlCategoriesListItem variants_path={this.props.variants_path} categories_all={this.props.categories_all} category={category} key={category.id} />
+              <ControlCategoriesListItem variants_path={this.props.variants_path} categories_all={this.props.categories_all} category={category} key={category.id} archive={this.props.archive}/>
             )}
           </div>
         }

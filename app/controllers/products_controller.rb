@@ -52,7 +52,14 @@ class ProductsController < ApplicationController
 
   def control
     authorize Product
-    @variants = Product.includes(variants: [:images, :color]).where(category_id: params[:category_id], variants: { state: [:active, :out]}).order(created_at: :desc).map(&:variants).flatten
+    @variants = Product.includes(variants: [:images, :color]).where(category_id: params[:category_id])
+    # params[:archive] ? @variants.where(variants: { state: [:archive]}) : @variants.where(variants: { state: [:active, :out]})
+    if params[:archive] == 'true'
+      @variants = @variants.where(variants: { state: [:archived]})
+    else
+      @variants = @variants.where(variants: { state: [:active, :out]})
+    end
+    @variants = @variants.order(created_at: :desc).map(&:variants).flatten
 
     # @categories = Category.includes(:products).all
   end
@@ -82,6 +89,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    session[:id] =  params[:ref] if params[:ref]
     authorize @product
     @product.variants.build if @product.variants.empty?
   end
@@ -89,8 +97,13 @@ class ProductsController < ApplicationController
   def update
     authorize @product
 
+    p session[:id]
     if @product.update(product_params)
-      redirect_to @product, notice: 'Product was successfully updated.'
+      if session[:id]
+        redirect_to session[:id], notice: 'Product was successfully updated.'
+      else
+        redirect_to @product, notice: 'Product was successfully updated.'
+      end
     else
       render :edit
     end

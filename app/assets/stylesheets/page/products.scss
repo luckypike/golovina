@@ -79,6 +79,7 @@
   .control {
     .tabs {
       display: flex;
+      margin-bottom: $gutter;
 
       &_item {
         display: block;
@@ -95,7 +96,9 @@
   &_categories {
     &_item {
       .title {
+        @include font-size(2, 3.5);
         cursor: pointer;
+
       }
 
       .categories {
@@ -103,10 +106,32 @@
         // padding-left: $gutter;
         // margin-bottom: $space-s;
 
+        .control_categories_item {
+          .title {
+            @include font-size(1.5, 2.5);
+          }
+        }
+
         &.opened {
+          border-left: 1px solid $separator-color;
           display: block;
-          margin-left: $gutter;
+          padding-left: $gutter;
           margin-bottom: $gutter;
+
+          .control_categories_item {
+            &>.title {
+              position: relative;
+
+              &:before {
+                border-top: 1px solid $separator-color;
+                content: '';
+                left: -$gutter;
+                position: absolute;
+                top: 50%;
+                width: 0.75 * $gutter;
+              }
+            }
+          }
         }
       }
 
@@ -116,6 +141,8 @@
         grid-gap: $gutter;
 
         &_item {
+          padding: $gutter 0;
+
           .image {
             @include aspect-ratio(4, 5);
 

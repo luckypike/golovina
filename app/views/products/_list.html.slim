@@ -9,7 +9,7 @@
 
         - if policy(variant.product).edit?
           .control
-            = link_to '', ['edit', variant.product], class: :edit
+            = link_to '', ['edit', variant.product, ref: request.path], class: :edit
 
         / - if variant.product.brand == 1
           .brand

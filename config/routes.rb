@@ -69,7 +69,8 @@ Rails.application.routes.draw do
     end
 
     collection do
-      get 'control(/*other)', to: 'products#control', as: :control
+      get 'control', to: 'products#control', as: :control
+      get 'control/archive', to: 'products#control'
       get :all
       get :latest
       get :golovina
