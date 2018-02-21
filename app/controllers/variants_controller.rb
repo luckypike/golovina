@@ -63,7 +63,7 @@ class VariantsController < ApplicationController
   def images
     authorize @variant
 
-    render json: { images: @variant.images, wishlist: @variant.in_wishlist(current_user), out_of_stock: @variant.out_of_stock, variant_state: @variant.state }
+    render json: { images: @variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }, wishlist: @variant.in_wishlist(current_user), out_of_stock: @variant.out_of_stock, variant_state: @variant.state }
   end
 
   def create
