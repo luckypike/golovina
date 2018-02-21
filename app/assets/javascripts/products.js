@@ -330,7 +330,7 @@ $(function(){
         $.getJSON(_this.data('url'), function(data) {
           _ils.html('');
           $.each(data.images, function(i, image) {
-            _ils.append('<div class="images_list_item swiper-slide"><div class="image"><img src="' + image.photo.thumb.url + '"></div></div>');
+            _ils.append('<div class="images_list_item swiper-slide"><div class="image"><img src="' + image.photo.large.url + '"></div></div>');
           });
 
           if(data.wishlist) {
