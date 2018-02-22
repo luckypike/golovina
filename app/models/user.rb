@@ -32,8 +32,15 @@ class User < ApplicationRecord
 
   def clear_phone
     if self.phone.present?
-      self.phone.sub!('/^8/', '+7')
-      self.phone.gsub!(/[\D]/, '')
+      self.phone = User.prepare_phone(self.phone)
+    end
+  end
+
+  class << self
+    def prepare_phone text
+      text ||= ''
+      text = text.sub('/^8/', '+7').gsub(/[\D]/, '')
+      text.size == 11 && text[1] != '8' ? text : false
     end
   end
 end

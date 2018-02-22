@@ -19,6 +19,7 @@
         margin-bottom: $base-rhythm-line / 2;
       }
 
+      &_error,
       .error {
         color: red;
         font-weight: bold;
@@ -36,7 +37,7 @@
         font-size: inherit;
         font-weight: inherit;
         line-height: inherit;
-        padding: 0  $gutter;
+        padding: $base-rhythm-line  $gutter;
         width: 100%;
 
         &:focus {
@@ -105,6 +106,7 @@
 
       &.field_with_errors {
         input[type=text],
+        input[type=tel],
         input[type=email],
         input[type=password],
         input[type=number],

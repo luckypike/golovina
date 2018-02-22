@@ -1,8 +1,4 @@
 $(function() {
-
-  $('.as_cleave_phone').mask('+7 000 000-00-00');
-
-
   $('.cart_destroy').on('ajax:success', function(event) {
     var _this = $(this);
     var detail = event.detail;

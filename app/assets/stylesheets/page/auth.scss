@@ -10,6 +10,10 @@
 
       &.login_with_code {
         display: none;
+
+        .user_phone {
+          display: none;
+        }
       }
     }
   }

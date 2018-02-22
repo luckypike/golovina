@@ -23,5 +23,19 @@ $(function() {
     // var tel = _this.closest('form').find('.as_cleave_phone').val().replace(/\D/g,'');
     // event.detail[1].data = 'phone=' + tel;
     // console.log(event.detail[1].data);
+  }).on('ajax:error', function(event){
+    var _this = $(this);
+    var detail = event.detail;
+    var data = detail[0], status = detail[1],  xhr = detail[2];
+
+    var _err = $('.user_phone .input_error', _this);
+    if(_err.length > 0) {
+      _err.text(data.message);
+    } else {
+      $('.user_phone', _this).append('<div class="input_error">' + data.message + '</div>').addClass('field_with_errors');
+    }
+
+    //
+
   });
 });

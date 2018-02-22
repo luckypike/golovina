@@ -19,6 +19,7 @@
 
 //= require selectize/dist/js/standalone/selectize
 //= require jquery-mask-plugin/dist/jquery.mask.min
+//= require cleave.js/dist/cleave.min.js
 
 //= require sticky-kit/dist/sticky-kit.min
 
@@ -50,3 +51,18 @@ function setupDragon(uploader) {
     uploader.on('dragenter', dragon.enter);
     uploader.on('dragleave', dragon.leave);
 }
+
+
+// $('.as_cleave_phone').mask('+7 000 000-00-00');
+
+$(function() {
+  $('.as_cleave_phone').toArray().forEach(function(field){
+    console.log(field);
+    new Cleave(field, {
+      numericOnly: true,
+      prefix: '+7',
+      delimiters: [' ', ' ', '-', '-'],
+      blocks: [2, 3, 3, 2, 2]
+    });
+  });
+});

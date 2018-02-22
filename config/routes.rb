@@ -27,6 +27,12 @@ Rails.application.routes.draw do
       get 'info', to: 'customers#info'
       get 'return', to: 'customers#return'
     end
+
+    resources :users, only: [] do
+      member do
+        get :orders
+      end
+    end
   end
 
   get :contacts, to: 'static#contacts'
@@ -78,7 +84,6 @@ Rails.application.routes.draw do
       get :sale
       get ':slug', to: 'products#category', as: :category, constraints: lambda { |request| Category.find_by_slug(request.params[:slug]).present? }
     end
-
   end
 
   # resources :products, path: :catalog do
