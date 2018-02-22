@@ -27,141 +27,12 @@
       visibility: hidden;
       transform: translateY(8rem);
       opacity: 0;
-
       transition: opacity 1s, transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
 
       &.vis {
         visibility: visible;
         transform: none;
-
         opacity: 1;
-      }
-    }
-  }
-
-  &_footer {
-    .inst {
-      @include font-size-small;
-
-      margin-bottom: $space-m;
-      text-align: center;
-      position: relative;
-
-      > a {
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-      }
-
-      .name {
-        @include font-headers;
-        @include font-size-h3;
-
-        background: {
-          image: image_url('icons/instagram.svg');
-          size: $base-rhythm-line * 4;
-          position: center $base-rhythm-line / 2;
-        }
-
-
-        font-style: italic;
-        text-transform: lowercase;
-
-        margin: $base-rhythm-line auto 0;
-        padding: $base-rhythm-line * 5 0 $base-rhythm-line;
-
-        @include mq($s) {
-          margin: $base-rhythm-line * 2 auto 0;
-        }
-      }
-    }
-
-    .next {
-      .theme {
-        position: relative;
-
-        .image {
-          @include aspect-ratio(5, 4);
-
-          background: {
-            color: #f1f1f1;
-            size: cover;
-            position: top center;
-          }
-
-          &:before {
-            background: $primary-color;
-            opacity: 0.3;
-          }
-
-          @each $category in business active party special walk holiday young warm {
-            &.#{$category} {
-              background-image: image_url('pages/index/#{$category}.jpg');
-            }
-          }
-        }
-
-        .title {
-          @include font-size-h1;
-
-          color: $op-color;
-          position: absolute;
-          left: 15%;
-          top: 50%;
-          transform: translateY(-50%);
-          font-weight: 300;
-          font-family: 'Cormorant', serif;
-        }
-
-        > a {
-          display: block;
-          position: absolute;
-          left: 0;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 1;
-        }
-      }
-    }
-
-    @include mq($s) {
-      display: flex;
-
-      .inst {
-        @include column-width(6, 12);
-
-        align-self: center;
-        margin-bottom: 0;
-      }
-
-      .next {
-        @include column-width(6, 12);
-      }
-    }
-
-    @include mq($m) {
-      .next {
-        .theme {
-          .image {
-            width: 4 / 6 * 100%;
-
-            &:before {
-              // background: $primary-color;
-              opacity: 0;
-            }
-          }
-
-          .title {
-            color: $primary-color;
-            left: 40%;
-          }
-        }
-
       }
     }
   }
@@ -185,78 +56,19 @@
   display: block;
   position: relative;
 
-  // > a {
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 80%;
-  //   z-index: 2;
-  // }
-
   .image {
     @include aspect-ratio(4, 5);
     margin-left: -$gutter;
     margin-right: -$gutter;
     overflow: hidden;
-
-    // img {
-    //   // transition: transform 1.6s;
-    //   bottom: auto;
-    //   height: auto;
-    // }
   }
 
   .text {
-    .more {
-      margin-top: $base-rhythm-line * $base-line-height;
-
-      @include mq($s) {
-        margin-top: $base-rhythm-line * ($base-line-height + 1);
-      }
-    }
-
-    .title {
-      @include font-size-h1;
-      @include font-headers;
-
-      display: none;
-      transition: transform 0.5s;
-      transform-origin: left bottom;
-      margin-top: $base-rhythm-line * $base-line-height / 2;
-
-      @include mq($m) {
-        display: block;
-        margin-top: $base-rhythm-line * ($base-line-height + 1) / 2;
-      }
-    }
-
-    .short {
-      @include font-size-small();
-
-      background: $sand-color;
-      display: inline-block;
-      padding: 0 $gutter / 2;
-
-      @include mq($m) {
-        @include font-size(2.25, 4);
-      }
-
-      // letter-spacing: 0.2em;
-      // text-transform: uppercase;
-
-    }
-
     .desc {
-      // @include font-headers;
-      // @include font-size-h2;
-      display: none;
       @include font-size(2, 4);
 
-      // font-style: italic;
-
+      display: none;
     }
-
 
     .btn_gr {
       padding: $base-rhythm-line / 2 0;
@@ -284,18 +96,7 @@
     @include control
   }
 
-  @each $category in business active party special walk holiday young warm {
-    &.#{$category} {
-      .image {
-        .img {
-          background-image: image_url('pages/index/#{$category}.jpg');
-        }
-      }
-    }
-  }
-
   &.i_1 {
-
     .control {
       @include control-right;
 
@@ -305,10 +106,49 @@
     }
   }
 
-  @include mq($m) {
-    > a {
-      // width: 8 / 12 * 100%;
+  @include mq(0 $m - 1) {
+    .text {
+      position: absolute;
+      left: 0;
+      bottom: 0;
       height: 100%;
+      width: 100%;
+
+      color: $op-color;
+      text-align: center;
+
+      > a {
+        position: absolute;
+        height: 100%;
+        // width: 100%;
+        left: -$gutter;
+        right: -$gutter;
+        top: 0;
+        background: linear-gradient(to top, rgba(#000000, 0.3), rgba(#000000, 0) 96px);
+
+        display: flex;
+        flex-direction: column;
+        padding-bottom: $space-s;
+
+        .short {
+          margin-top: auto;
+        }
+      }
+
+
+      .short {
+        @include font-size-h1;
+      }
+
+      .more {
+        display: none;
+      }
+    }
+  }
+
+  @include mq($m) {
+    &_wrapper {
+      // margin-bottom: $base-rhythm-line * ($base-line-height + 1) * 2;
     }
 
     .image {
@@ -331,29 +171,39 @@
       transform: translateY(-50%);
 
       .title {
-        // @include font-size-h1;
-        @include font-headers;
+        // @include font-headers;
+        @include font-size(3, 4);
+
         text-transform: uppercase;
-        letter-spacing: 2px;
-        @include font-size(5.625, 6);
-        // margin-left: calc(2 / 6 * 100% + #{$gutter * 2});
-        display: block;
+        letter-spacing: 0.2em;
+
+        transition: transform 0.5s;
+        transform-origin: left bottom;
+        margin-top: $base-rhythm-line * ($base-line-height + 1) / 2;
       }
 
       .desc {
         display: block;
         margin-top: $space-s2;
-        // padding-left: $gutter * 2;
-        // margin-left: 2 / 6 * 100%;
       }
 
       .short {
-        // margin-left: calc(2 / 6 * 100% + #{$gutter * 2});
+        @include font-size(2.25, 4);
+
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+
+        background: $sand-color;
+        display: inline-block;
+        padding: 0 $gutter / 2;
       }
 
       .more {
-        // padding-left: $gutter * 2;
-        // margin-left: 2 / 6 * 100%;
+        margin-top: $base-rhythm-line * $base-line-height;
+
+        @include mq($s) {
+          margin-top: $base-rhythm-line * ($base-line-height + 1);
+        }
       }
     }
 
@@ -361,11 +211,6 @@
       .image {
         width: 8 / 12 * 100%;
         margin-left: 4 / 12 * 100%;
-      }
-
-      > a {
-        // width: 8 / 12 * 100%;
-        // margin-left: 4 / 12 * 100%;
       }
 
       .text {
@@ -395,44 +240,27 @@
   }
 }
 
-.fake_text {
-  .title {
-    @include font-size-h2;
-    @include font-headers;
-    @include lv4;
-
-    margin-bottom: $base-rhythm-line * $base-line-height;
-    text-align: center;
-    transition: transform 0.5s;
-    transform-origin: left bottom;
-
-    @include mq($m) {
-      display: none;
-    }
-  }
-}
-
-&_static_index_themes,
-&_themes {
-  .theme_intro {
-    .text {
-      .title {
-        @include font-size-h2;
-        @include font-headers;
-
-        display: none;
-        transition: transform 0.5s;
-        transform-origin: left bottom;
-        margin-top: $base-rhythm-line * $base-line-height / 2;
-
-        @include mq($m) {
-          display: block;
-          margin-top: $base-rhythm-line * ($base-line-height + 1) / 2;
-        }
-      }
-    }
-  }
-}
+// &_static_index_themes,
+// &_themes {
+//   .theme_intro {
+//     .text {
+//       .title {
+//         @include font-size-h2;
+//         @include font-headers;
+//
+//         // display: none;
+//         transition: transform 0.5s;
+//         transform-origin: left bottom;
+//         margin-top: $base-rhythm-line * $base-line-height / 2;
+//
+//         @include mq($m) {
+//           display: block;
+//           margin-top: $base-rhythm-line * ($base-line-height + 1) / 2;
+//         }
+//       }
+//     }
+//   }
+// }
 
 .products_list {
   display: flex;

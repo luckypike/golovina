@@ -9,13 +9,9 @@
 
   .page_themes_themes
     - @themes.each_with_index do |theme, i|
-      .theme_intro.lv2 class=[theme.slug, "i_#{i % 2}"]
-        .fake_text
-          .title
-            = theme.title_long
-
+      .theme_intro.lv3 class=[theme.slug, "i_#{i % 2}"]
         .theme_intro_wrapper
-          .image.lv3
+          .image
             = image_tag theme.image.large
 
           .text.mb
@@ -30,8 +26,7 @@
                 = theme.desc
 
               .more
-                .btn
-                  | Выбирай настроение
+                .btn Посмотреть настроение
 
           - if policy(theme).edit?
             .control
@@ -47,7 +42,7 @@
                       = link_to '', [kit], class: :fake
 
                       .kit_image
-                        = image_tag kit.images.first.photo.thumb.url
+                        = image_tag kit.images.first.photo.thumb.url if kit.images.size > 0
 
                       .kit_price
-                        = number_to_rub kit.variants.active.map(&:product).sum(&:price_sell)
+                        = kit.title_safe
