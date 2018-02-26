@@ -34,8 +34,8 @@ class SessionsController < ApplicationController
 
   def auth
     authorize :static, :index?
-    
-    user = User.find_by(User.prepare_phone(params[:user][:phone]), code: params[:user][:code])
+
+    user = User.find_by(phone: User.prepare_phone(params[:user][:phone]), code: params[:user][:code])
     if user
       if current_user && current_user.is_guest?
         Cart.where(user: current_user).update_all(user_id: user.id)
