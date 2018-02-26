@@ -1,3 +1,18 @@
 .page.page_common.page_user_orders
   .page_common_intro.lv3
     h1 Ваши заказы
+
+
+  .page_user_orders_list
+    .orders_list
+      - @orders.each do |order|
+        .orders_list_item
+          .number
+            = order.number
+
+          - if order.can_paid?
+            .amount
+              = order.amount
+
+            .pay
+              = link_to 'Оплатить', [:pay, order]

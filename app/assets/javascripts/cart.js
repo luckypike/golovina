@@ -27,8 +27,8 @@ $(function() {
         var text = e[0];
         _f.append('<div class="input_error">' + text + '</div>');
         // $('.form_errors', _this)
-        console.log(i);
-        console.log(e[0]);
+        // console.log(i);
+        // console.log(e[0]);
 
         // for (var i = 0, len = e.length; i < len; i++) {
         //   console.log(e[i].error);
@@ -47,10 +47,11 @@ $(function() {
       // }
 
     } else {
-      $('.page_cart_items').slideUp(400, function() {
-        $(this).remove();
-        $('.page_cart_title').after('<div class="page_cart_success">Заказ сформирован и отправлен нашим менеджерам. Мы свяжемся с вами в ближайшее время.</div>');
-      });
+      window.location = xhr.getResponseHeader('Location');
+      // $('.page_cart_items').slideUp(400, function() {
+      //   $(this).remove();
+      //   $('.page_cart_title').after('<div class="page_cart_success">Заказ сформирован и отправлен нашим менеджерам. Мы свяжемся с вами в ближайшее время.</div>');
+      // });
     }
   });
 });

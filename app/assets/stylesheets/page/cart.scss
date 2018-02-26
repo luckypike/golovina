@@ -59,13 +59,13 @@
       }
 
       &_form {
-        margin-bottom: $space-m2;
+        padding-bottom: $space-m2;
 
         .form {
           &_actions {
             .btn {
-              background: $primary_color;
-              color: $op_color;
+              // background: $primary_color;
+              // color: $op_color;
             }
           }
 

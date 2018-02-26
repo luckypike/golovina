@@ -47,9 +47,9 @@
 
         .summary_list
           .summary_list_item.lv3
-            | Товары на сумму: #{number_to_rub(@items.map{ |i| i.variant.product.price }.sum)}
+            | Товаров на сумму: #{number_to_rub(@items.map{ |i| i.variant.product.price_sell * i.quantity }.sum)}
 
-          .summary_test.lv3
+          / .summary_test.lv3
             | Интернет-магазин работает в тестовом режиме. К сожалению, временно невозможно оплатить заказ. Мы предлагаем вам зарезервировать нужные вам товары, а наш менеджер свяжется с вами для подтверждения заказа и поможет оформить доставку и оплату.
 
           .summary_form
@@ -63,9 +63,10 @@
                         = ff.input :phone, input_html: { class: :as_cleave_phone, value: '' }
                         = ff.input :email, required: false, input_html: { value: nil }
 
+                    / = f.input :delivery
                     = f.input :address
 
                   .form_errors
 
                   .form_actions
-                    = f.button :submit, data: { disable_with: 'Оформляем..' }
+                    = f.button :submit, data: { disable_with: 'Подождите..' }

@@ -97,6 +97,8 @@ Rails.application.routes.draw do
   #   end
   # end
 
+  get 'account/orders', to: 'users#account'
+
   get 'wishlist', to: 'wishlists#show'
   # get 'cart', to: 'cart#show'
   namespace 'cart', module: nil do
@@ -105,8 +107,13 @@ Rails.application.routes.draw do
   end
 
   resources :orders, only: [:index] do
+    collection do
+      post :paid
+    end
+
     member do
       post :checkout
+      get :pay
     end
   end
 

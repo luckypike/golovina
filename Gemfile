@@ -43,6 +43,9 @@ gem 'active_link_to'
 
 gem 'rails-i18n'
 gem 'enum_help'
+gem 'stateful_enum'
+
+gem 'delayed_job_active_record'
 
 gem 'webpacker', github: 'rails/webpacker'
 gem 'react-rails', github: 'reactjs/react-rails'
@@ -50,6 +53,8 @@ gem 'react-rails', github: 'reactjs/react-rails'
 gem 'jbuilder'
 
 gem 'sitemap_generator'
+
+gem 'whenever', require: false
 
 gem 'capistrano'
 gem 'capistrano-rails'

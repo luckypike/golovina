@@ -9,6 +9,8 @@ require 'capistrano/passenger'
 
 require 'capistrano/sitemap_generator'
 
+require 'whenever/capistrano'
+
 require 'capistrano/rbenv'
 set :rbenv_type, :user
 set :rbenv_ruby, '2.4.1'

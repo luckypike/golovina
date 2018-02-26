@@ -1,13 +1,15 @@
 require 'sms'
 
 class OrdersController < ApplicationController
+  before_action :set_order, only: [:checkout, :pay]
+  skip_before_action :verify_authenticity_token, only: [:paid]
+
   def index
     authorize Order
     @orders = Order.where(state: [:active, :archived]).order(id: :desc)
   end
 
   def checkout
-    @order = Order.find(params[:id])
     authorize @order
 
     @user = current_user
@@ -27,17 +29,41 @@ class OrdersController < ApplicationController
         @order.order_items.build(variant: item.variant, quantity: item.quantity, size: item.size, price: item.variant.product.price_sell)
         item.destroy
       end
-      @order.save
 
-      @order.active!
+      @order.save
+      @order.activate!
       @order.update_attribute(:address, params[:order][:address])
-      OrderMailer.checkout(@order).deliver_now
 
       if Rails.env.production?
         Sms.message(@order.user.phone, @order.sms_message)
       else
-        OrderMailer.sms_test(@order).deliver_now
+        OrderMailer.sms_test(@order).deliver_later
       end
+
+      head :ok, location: [:pay, @order]
     end
   end
+
+  def pay
+    authorize @order
+    render layout: false
+  end
+
+  def paid
+    authorize Order
+
+    if Digest::MD5.hexdigest(params.slice(:id, :sum, :clientid, :orderid).values.push(Rails.application.secrets[:payment_key]).join('')) == params[:key]
+      order = Order.find(params[:orderid])
+      order.update(payment_id: params[:id], payment_amount: params[:sum])
+      order.pay!
+
+      render inline: ('OK ' + Digest::MD5.hexdigest(params[:id] + Rails.application.secrets[:payment_key]))
+    end
+  end
+
+  private
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
 end

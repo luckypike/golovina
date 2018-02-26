@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :wishlists
   has_many :carts
+  has_many :orders
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -40,7 +41,7 @@ class User < ApplicationRecord
     def prepare_phone text
       text ||= ''
       text = text.sub('/^8/', '+7').gsub(/[\D]/, '')
-      text.size == 11 && text[1] != '8' ? text : false
+      text.size == 11 && text[1] == '9' ? text : false
     end
   end
 end

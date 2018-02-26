@@ -3,6 +3,10 @@ class UserPolicy < ApplicationPolicy
     user == record
   end
 
+  def account?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope
