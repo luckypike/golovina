@@ -6,7 +6,8 @@ class OrdersController < ApplicationController
 
   def index
     authorize Order
-    @orders = Order.where(state: [:paid]).order(id: :desc)
+    @orders = Order.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).where.not(state: [:undef]).order(created_at: :desc)
+    @orders = @orders.where(state: params[:state]) if params[:state]
   end
 
   def checkout

@@ -31,6 +31,8 @@
     .state_tabs {
       @include font-size-small;
 
+      margin-bottom: $space-s;
+
       &_item {
         margin-right: $gutter;
 
@@ -38,6 +40,11 @@
           color: $highlight-color;
         }
       }
+
+      @include mq($l) {
+        max-width: 8 / 12 * 100%;
+        margin-left: 2 / 12 * 100%;
+      }      
     }
 
     .orders {

@@ -99,15 +99,34 @@ class OrdersList extends React.Component {
 
     this.state = {
       orders: null,
+      state: null
     }
   }
 
   componentDidMount() {
-    this.fetchOrders();
+    this.setActiveState(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setActiveState(nextProps);
+  }
+
+  setActiveState(props) {
+    let query = qs.parse(props.location.search.substring(1));
+
+    if(query.state == undefined || query.state == '') {
+      query.state = null;
+    }
+
+    this.setState({
+      state: query.state
+    }, function() {
+      this.fetchOrders();
+    });
   }
 
   fetchOrders() {
-    axios.get(this.props.url)
+    axios.get(this.props.url, { params: { state: this.state.state } })
     .then(res => {
       this.setState({
         orders: res.data.orders
@@ -122,6 +141,14 @@ class OrdersList extends React.Component {
 
     return (
       <React.Fragment>
+        <div className="state_tabs">
+          <StateTab pathname={this.props.path} active={null} state={this.state.state} label={'Все'}  />
+          <StateTab pathname={this.props.path} active={'active'} state={this.state.state} label={'В оплате'} />
+          <StateTab pathname={this.props.path} active={'paid'} state={this.state.state} label={'Оплачены'} />
+          <StateTab pathname={this.props.path} active={'archived'} state={this.state.state} label={'Архив'} />
+          <StateTab pathname={this.props.path} active={'declined'} state={this.state.state} label={'Отменены'} />
+        </div>
+
         <div className="orders_list">
           {orders.map((order) =>
             <OrdersListItem key={order.id} order={order} />
@@ -141,43 +168,35 @@ class StateTab extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.setActiveState(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setActiveState(nextProps);
+  }
+
+  setActiveState(props) {
+    this.setState({
+      active: props.state == props.active
+    })
+  }
+
   render () {
     return (
-      <Link to={this.props.to}>ЙЙЙ</Link>
+      <Link to={{ pathname: this.props.pathname, search: qs.stringify({ state: this.props.active }) }} className={classNames('state_tabs_item', { 'active': this.state.active })}>
+        {this.props.label}
+      </Link>
     );
   }
 }
 
 class Orders extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      state: null,
-    }
-  }
-
-  checkState = (match, location) => {
-    let query = qs.parse(location.search.substring(1));
-    console.log(this);
-
-    // const eventID = parseInt(match.params.eventID)
-    // return !isNaN(eventID) && eventID % 2 === 1
-    return false;
-  }
-
   render () {
     return (
       <Router>
         <Route path={this.props.path} render={props => (
-          <React.Fragment>
-            <div className="state_tabs">
-              <StateTab to={{ pathname: this.props.path }} state={null} />
-              <StateTab to={{ pathname: this.props.path, search: qs.stringify({ state: 'active' }) }} state={'active'} active_state={this.state.state} />
-            </div>
-
-            <OrdersList {...props} {...this.props} state={this.state.state} />
-          </React.Fragment>
+          <OrdersList {...props} {...this.props} />
         )}/>
       </Router>
     );
