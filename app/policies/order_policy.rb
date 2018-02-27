@@ -12,7 +12,7 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def pay?
-    record.user == user
+    record.user == user && record.can_paid?
   end
 
   class Scope < Scope

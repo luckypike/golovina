@@ -32,9 +32,12 @@ $gutter: 1rem;
 $bold: 500;
 
 $primary-color: #282828;
+$grey-color: #858585;
 $op-color: #fff;
 $separator-color: #dfdfdf;
 $highlight-color: #9caa73;
+
+$red-color: #cc0c2f;
 
 $sand-color: #F7F8F5;
 // $sand-hover-color: #D2C1AE;
@@ -113,6 +116,15 @@ button.btn,
   text-transform: uppercase;
   min-width: 8rem;
   transition: background 0.3s, color 0.3s;
+
+  &_sm {
+    @include font-size(1.25);
+
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0 $gutter / 2;
+    min-width: auto;
+  }
 
 
   &:hover {

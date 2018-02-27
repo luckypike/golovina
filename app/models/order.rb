@@ -45,7 +45,7 @@ class Order < ApplicationRecord
   end
 
   def can_paid?
-    amount > 0
+    amount > 0 && active?
   end
 
   def sms_message

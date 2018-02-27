@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def orders
     authorize @user
-    @orders = @user.orders
+    @orders = @user.orders.where.not(state: [:undef]).order(created_at: :desc)
   end
 
   def account

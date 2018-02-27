@@ -103,6 +103,26 @@
     }
   }
 
+  &_grey {
+    margin-top: $base-rhythm-line * 8 + $space-s;
+    background-color: #f9f9f9;
+
+    .page {
+      padding-top: $space-m;
+      padding-bottom: $space-m2 * 2;
+      margin-bottom: -$space-m * 2;
+    }
+
+    @include mq($s) {
+      margin-top: $base-rhythm-line * 16 + $space-s2;
+    }
+
+    @include mq($xl) {
+      margin-top: $base-rhythm-line * 23 + $space-m2;
+    }
+  }
+
+
   @include mq($s) {
     padding-top: $base-rhythm-line * 16 + $space-s2;
   }

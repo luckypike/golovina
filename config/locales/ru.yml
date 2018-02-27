@@ -1,4 +1,11 @@
 ru:
+  order:
+    state:
+      paid: Оплачен
+      archived: Доставлен
+      active: Ожидает оплаты
+      declined: Отменен
+
   kit_products:
     one: "%{count} товар"
     few: "%{count} товара"

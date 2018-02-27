@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 
   def index
     authorize Order
-    @orders = Order.where(state: [:active, :archived]).order(id: :desc)
+    @orders = Order.where(state: [:paid]).order(id: :desc)
   end
 
   def checkout
