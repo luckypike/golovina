@@ -634,10 +634,10 @@
       max-width: 380px;
 
       .wishlist {
-        border: 1px solid $highlight-color;
+        // border: 1px solid $highlight-color;
         display: block;
         margin-right: $gutter / 2;
-        padding: 3px;
+        padding: 4px;
 
         &_icon {
           display: block;
