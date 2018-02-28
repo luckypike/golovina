@@ -74,10 +74,10 @@
                 = number_to_rub product.price
 
           .buy
+            = link_to [:wishlist, :variants], class: [:wishlist], method: :post, remote: true do
+              = inline_svg 'icons/wishlist.svg'
             = link_to 'Купить', [:cart, :variants], class: [:btn, :cart, :inactive], method: :post, remote: true, data: { disable_with: 'Покупка..' }
             = link_to 'Оплатить', [:cart], class: [:btn, :purchase]
-            / = link_to [:wishlist, :variants], class: [:wishlist], method: :post, remote: true do
-              = inline_svg 'icons/wishlist.svg'
 
         .after_add
           ' Товар добавлен в корзину.

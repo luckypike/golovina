@@ -630,11 +630,14 @@
     }
 
     .buy {
+      display: flex;
       max-width: 380px;
+
       .wishlist {
-        border: 1px solid $separator-color;
-        margin-left: $gutter / 2;
-        padding: calc(#{$base-rhythm-line} - 1px);
+        border: 1px solid $highlight-color;
+        display: block;
+        margin-right: $gutter / 2;
+        padding: 3px;
 
         &_icon {
           display: block;
