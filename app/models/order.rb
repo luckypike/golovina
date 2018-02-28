@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   enum state: { undef: 0, active: 1, paid: 2, archived: 3, declined: 4 } do
     event :activate do
       after do
-        OrderMailer.activate(self).deliver_later
+        # OrderMailer.activate(self).deliver_later
       end
 
       transition :undef => :active
@@ -10,6 +10,12 @@ class Order < ApplicationRecord
 
     event :pay do
       after do
+        if Rails.env.production?
+          Sms.message(@order.user.phone, @order.sms_message)
+        else
+          OrderMailer.sms_test(@order).deliver_later
+        end
+
         OrderMailer.pay(self).deliver_later
       end
 
@@ -49,6 +55,6 @@ class Order < ApplicationRecord
   end
 
   def sms_message
-    "Заказ № #{self.number} на сумму #{number_to_rub(self.amount).gsub('&nbsp;', ' ')} принят. Ожидайте, пожалуйста, звонка."
+    "Заказ #{self.number} (#{number_to_rub(self.amount).gsub('&nbsp;', ' ')}) оплачен. Ожидайте, пожалуйста, звонка."
   end
 end

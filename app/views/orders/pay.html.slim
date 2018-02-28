@@ -4,8 +4,7 @@ css:
   }
 
 = form_tag Rails.application.secrets[:payment_gateway], method: :post, id: :payment_gateway do |f|
-  = text_field_tag(:sum, @order.amount)
-  / = text_field_tag(:sum, 1)
+  = text_field_tag(:sum, current_user.is_editor? ? 1 : @order.amount)
   = text_field_tag(:clientid, @order.user.phone)
   = text_field_tag(:orderid, @order.id)
   = text_field_tag(:client_phone, @order.user.phone)

@@ -35,12 +35,6 @@ class OrdersController < ApplicationController
       @order.activate!
       @order.update_attribute(:address, params[:order][:address])
 
-      if Rails.env.production?
-        Sms.message(@order.user.phone, @order.sms_message)
-      else
-        OrderMailer.sms_test(@order).deliver_later
-      end
-
       head :ok, location: [:pay, @order]
     end
   end
