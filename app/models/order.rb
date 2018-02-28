@@ -11,9 +11,9 @@ class Order < ApplicationRecord
     event :pay do
       after do
         if Rails.env.production?
-          Sms.message(@order.user.phone, @order.sms_message)
+          Sms.message(user.phone, sms_message)
         else
-          OrderMailer.sms_test(@order).deliver_later
+          OrderMailer.sms_test(self).deliver_later
         end
 
         OrderMailer.pay(self).deliver_later
