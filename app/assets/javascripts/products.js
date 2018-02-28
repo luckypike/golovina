@@ -357,7 +357,9 @@ $(function(){
           _pip.data('loading', false);
           _pip_l.data('loading', false);
         }).done(function() {
-          $('.page_product .product_data').stick_in_parent();
+          $('.page_product .product_data').stick_in_parent({
+            offset_top: 64
+          });
           _pheight = $('.product_data').outerHeight();
         });
       });

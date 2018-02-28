@@ -288,7 +288,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
 
   .header_wishlist
 
-  - if !about?
+  / - if !about?
     .header_themes
       .themes_list
         - @themes.each do |theme|
