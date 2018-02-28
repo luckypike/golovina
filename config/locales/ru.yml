@@ -2,8 +2,8 @@ ru:
   order:
     state:
       paid: Оплачен
-      archived: Доставлен
-      active: Ожидает оплаты
+      archived: Архив
+      active: Новый
       declined: Отменен
 
   kit_products:

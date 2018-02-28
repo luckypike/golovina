@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 
   def orders
     authorize @user
-    @orders = @user.orders.where.not(state: [:undef]).order(created_at: :desc)
+    @orders = @user.orders.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).where.not(state: [:undef]).order(created_at: :desc)
+    @orders = @orders.where(state: params[:state]) if params[:state]
   end
 
   def account

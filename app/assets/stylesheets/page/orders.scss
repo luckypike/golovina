@@ -32,9 +32,12 @@
       @include font-size-small;
 
       margin-bottom: $space-s;
+      display: flex;
+      flex-wrap: wrap;
 
       &_item {
         margin-right: $gutter;
+        white-space: nowrap;
 
         &.active {
           color: $highlight-color;
@@ -44,7 +47,7 @@
       @include mq($l) {
         max-width: 8 / 12 * 100%;
         margin-left: 2 / 12 * 100%;
-      }      
+      }
     }
 
     .orders {

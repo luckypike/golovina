@@ -185,7 +185,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
 
             .section_list
               .section_list_item.l2
-                = active_link_to 'Заказы', [:orders]
+                = active_link_to "Заказы (#{Order.paid.size})", [:orders, state: :paid]
 
               .section_list_item.l2
                 = active_link_to 'Товары', [:control, :products]

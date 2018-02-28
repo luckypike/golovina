@@ -143,7 +143,7 @@ class OrdersList extends React.Component {
       <React.Fragment>
         <div className="state_tabs">
           <StateTab pathname={this.props.path} active={null} state={this.state.state} label={'Все'}  />
-          <StateTab pathname={this.props.path} active={'active'} state={this.state.state} label={'В оплате'} />
+          <StateTab pathname={this.props.path} active={'active'} state={this.state.state} label={'Новые'} />
           <StateTab pathname={this.props.path} active={'paid'} state={this.state.state} label={'Оплачены'} />
           <StateTab pathname={this.props.path} active={'archived'} state={this.state.state} label={'Архив'} />
           <StateTab pathname={this.props.path} active={'declined'} state={this.state.state} label={'Отменены'} />
