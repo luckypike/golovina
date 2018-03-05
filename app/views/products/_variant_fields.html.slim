@@ -2,6 +2,8 @@
   = f.association :color, collection: Color.tree
   - if @product.category.get_ancestor == Rails.application.secrets[:men]
     = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes_men].map{ |s| [I18n.t("sizes_men.size_#{s}"), s.to_s] }
+  - elsif @product.category.get_ancestor == Rails.application.secrets[:shoes]
+    = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes_shoes].map{ |s| [I18n.t("sizes_shoes.size_#{s}"), s.to_s] }
   - else
     = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes].map{ |s| [I18n.t("sizes.size_#{s}"), s.to_s] }
   = f.input :state, as: :radio_buttons

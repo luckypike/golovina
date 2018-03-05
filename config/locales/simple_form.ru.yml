@@ -115,6 +115,14 @@ ru:
     size_50: 'L'
     size_52: 'XL'
 
+  sizes_shoes:
+    size_36: '36'
+    size_37: '37'
+    size_38: '38'
+    size_39: '39'
+    size_40: '40'
+    size_41: '41'
+
   enums:
     category:
       state:
