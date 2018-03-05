@@ -1,7 +1,7 @@
 require 'sms'
 
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:checkout, :pay]
+  before_action :set_order, only: [:checkout, :pay, :archive]
   skip_before_action :verify_authenticity_token, only: [:paid]
 
   def index
@@ -42,6 +42,12 @@ class OrdersController < ApplicationController
   def pay
     authorize @order
     render layout: false
+  end
+
+  def archive
+    authorize @order
+    @order.archive!
+    head :ok
   end
 
   def paid

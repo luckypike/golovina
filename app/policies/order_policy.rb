@@ -15,6 +15,10 @@ class OrderPolicy < ApplicationPolicy
     record.user == user && record.can_paid?
   end
 
+  def archive?
+    user&.is_editor? && record.can_archive?
+  end
+
   class Scope < Scope
     def resolve
       scope

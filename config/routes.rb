@@ -112,6 +112,7 @@ Rails.application.routes.draw do
     end
 
     member do
+      post :archive
       post :checkout
       get :pay
     end

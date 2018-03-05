@@ -21,8 +21,6 @@ class OrdersListItem extends React.Component {
   }
 
   toggleItem = () => {
-    console.log('Toggle');
-
     this.setState(prevState => ({
       open: !prevState.open
     }));
@@ -30,6 +28,17 @@ class OrdersListItem extends React.Component {
 
   payAction = (e) => {
     e.stopPropagation();
+  }
+
+  archiveAction = (url, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    axios.post(url, { authenticity_token: this.props.authenticity_token })
+    .then(res => {
+      if(res.status == 200) {
+        this.props.fetchOrders();
+      }
+    });
   }
 
   render () {
@@ -55,6 +64,9 @@ class OrdersListItem extends React.Component {
           <div className="fr_actions">
             {order.can_pay &&
               <a onClick={this.payAction} href={order.pay_path} className="btn btn_sm">Оплатить</a>
+            }
+            {order.archive_path &&
+              <a onClick={(e) => this.archiveAction(order.archive_path, e)} href='#' className="btn btn_sm">Завершить</a>
             }
           </div>
         </div>
@@ -101,6 +113,8 @@ class OrdersList extends React.Component {
       orders: null,
       state: null
     }
+
+    this.fetchOrders = this.fetchOrders.bind(this);
   }
 
   componentDidMount() {
@@ -151,7 +165,7 @@ class OrdersList extends React.Component {
 
         <div className="orders_list">
           {orders.map((order) =>
-            <OrdersListItem key={order.id} order={order} />
+            <OrdersListItem key={order.id} order={order} fetchOrders={this.fetchOrders} authenticity_token={this.props.authenticity_token} />
           )}
         </div>
       </React.Fragment>

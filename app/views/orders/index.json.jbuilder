@@ -5,9 +5,14 @@ json.orders @orders do |order|
   json.name [order.user.name, order.user.s_name].join(' ').strip
   json.phone order.user.phone
   json.state_human t("order.state.#{order.state}")
+
   if policy(order).pay?
     json.can_pay true
     json.pay_path pay_order_path(order)
+  end
+
+  if policy(order).archive?
+    json.archive_path archive_order_path(order)
   end
 
   json.items order.order_items do |item|
