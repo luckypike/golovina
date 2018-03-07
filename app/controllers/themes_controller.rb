@@ -42,9 +42,9 @@ class ThemesController < ApplicationController
     authorize @theme
     if @theme.update(theme_params)
       @last_kit = @theme.kits.active.last
-      if @last_kit.presence 
+      if @last_kit.presence
         @theme.update_column(:recency, @last_kit[:created_at])
-      else 
+      else
         @theme.update_column(:recency, @theme[:created_at])
       end
       redirect_to @theme, notice: 'Theme was successfully updated.'
@@ -66,6 +66,6 @@ class ThemesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def theme_params
-      params.require(:theme).permit(:title, :slug, :desc, :image, :recency)
+      params.require(:theme).permit(:title, :title_long, :slug, :desc, :image, :recency)
     end
 end
