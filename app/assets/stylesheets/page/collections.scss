@@ -1,0 +1,59 @@
+.page_collections_list {
+  &_kit {
+    margin-bottom: ($space-m);
+
+    &_items {
+      display: flex;
+      flex-wrap: wrap;
+      // max-width: $xl;
+      padding: 0 $gutter / 2;
+
+      @include mq($m) {
+        padding: 0 $gutter * 1.5;
+      }
+
+      @include mq($l) {
+        padding: 0 $gutter / 2;
+        width: 12 / 16 * 100%;
+        margin-left: 2 / 16 * 100%;
+      }
+
+      > div {
+        padding: $gutter / 2;
+
+        img {
+          display: block;
+          width: 100%;
+        }
+      }
+
+      .vert {
+        width: 50%;
+      }
+
+      .hor {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.ci {
+  &_1_6_2,
+  &_1_5_1,
+  &_1_1_4 {
+    margin-left: 50%;
+  }
+
+  &_1_7_3,
+  &_1_4_4 {
+    margin-top: -30%;
+  }
+
+  &_1_4_3,
+  &_1_7_2,
+  &_1_3_2,
+  &_1_2_2 {
+    margin-top: 30%;
+  }
+}

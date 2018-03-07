@@ -28,6 +28,8 @@ Rails.application.routes.draw do
       get 'return', to: 'customers#return'
     end
 
+    resources :collections
+
     resources :users, only: [] do
       member do
         get :orders, format: :json
