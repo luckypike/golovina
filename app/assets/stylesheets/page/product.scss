@@ -253,6 +253,8 @@
 
   .product {
     &_images {
+
+
       @include mq($m) {
         .images_list {
           display: block;
@@ -261,6 +263,12 @@
             height: auto;
             margin-bottom: $base-rhythm-line * 4;
           }
+        }
+      }
+
+      @include mq($l) {
+        .images_list {
+          cursor: pointer;
         }
       }
     }
@@ -299,6 +307,32 @@
   @include mq($m) {
     .product {
       // margin-top: $space-s2;
+    }
+  }
+
+
+  &.full {
+    @include mq($l) {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: $gutter * 2;
+      padding-right: $gutter * 2;
+      width: 100%;
+
+      .product {
+        flex-wrap: nowrap;
+
+        &_images {
+          flex-grow: 1;
+        }
+
+        &_data_wrapper {
+          width: 320px;
+          // margin-right: ;
+          flex-shrink: 0;
+          margin-left: $gutter * 4;
+        }
+      }
     }
   }
 }
