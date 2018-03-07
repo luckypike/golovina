@@ -42,8 +42,9 @@
               .what
                 = slide.name
 
-              .action
-                = link_to slide.link_name, slide.link, class: [:btn, :btn_gr]
+              - if slide.link.present?
+                .action
+                  = link_to slide.link_name, slide.link, class: [:btn, :btn_gr]
 
   / s.page_static_index_themes
     - @themes.sort_by(&:weight).each_with_index do |theme, i|
