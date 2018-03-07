@@ -171,14 +171,21 @@
 
       &.img_i_1 {
         background: {
-          image: image_url('pages/about/collection_slide_1.jpg');
+          image: image_url('pages/about/golovina/collections/1.jpg');
           size: contain;
         }
       }
 
       &.img_i_2 {
         background: {
-          image: image_url('pages/about/golovina/xmas/xmas_1_1.jpg');
+          image: image_url('pages/about/golovina/collections/pre_2.jpg');
+          size: contain;
+        }
+      }
+
+      &.img_i_3 {
+        background: {
+          image: image_url('pages/about/golovina/collections/pre_1.jpg');
           size: contain;
         }
       }
@@ -200,27 +207,40 @@
 
       .collection_img {
         grid-column: span 6;
+
         &.img_i_1 {
           order: 2;
         }
+
         &.img_i_2 {
           order: 3;
+        }
+
+        &.img_i_3 {
+          order: 6;
         }
       }
 
       .collection_text {
         align-self: center;
         grid-column: span 6;
-        padding-left: $gutter;
+        padding-right: 20%;
+        padding-left: $gutter * 2;
 
         &.text_i_1 {
           order: 1;
           padding-left: 0;
-          padding-right: $gutter;
+          // padding-right: $gutter;
         }
 
         &.text_i_2 {
           order: 4;
+        }
+
+        &.text_i_3 {
+          order: 5;
+          padding-left: 0;
+          padding-right: 20%;
         }
       }
     }
@@ -229,6 +249,7 @@
       grid-gap: $gutter;
 
       .collection_img {
+        &.img_i_3, 
         &.img_i_1 {
           grid-column: 7 / span 6;
         }
@@ -238,7 +259,8 @@
         padding: 0;
         grid-column: 8 / span 5;
 
-        &.text_i_1 {
+        &.text_i_1,
+        &.text_i_3 {
           grid-column: span 5;
         }
       }

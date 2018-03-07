@@ -25,11 +25,14 @@
     .collection_img.img_i_1
 
     .collection_text.text_i_1
-      h2 Свидание с гармонией
+      - c = Collection.find(1)
 
-      p Источником вдохновения для дебютной коллекции послужила природа. Ведь не зря говорят, что природа — лучший художник!
+      h2
+        = c.title
 
-      = link_to 'Смотреть Lookbook', [:about, :golovina, :lookbook], class: :btn
+      p
+
+      = link_to 'Смотреть Lookbook', c, class: :btn
 
     .collection_img.img_i_2
 
@@ -39,3 +42,12 @@
       p Я всегда с нетерпением жду 31 декабря, когда дела все сделаны, подарки куплены, порхаешь такая вся красивая и беззаботная, как птичка, в ожидании новогодней ночи.
 
       = link_to 'Смотреть Lookbook', [:about, :golovina, :xmas], class: :btn
+
+    .collection_img.img_i_3
+
+    .collection_text.text_i_3
+      h2 Свидание с гармонией
+
+      p Источником вдохновения для дебютной коллекции послужила природа. Ведь не зря говорят, что природа — лучший художник!
+
+      = link_to 'Смотреть Lookbook', [:about, :golovina, :lookbook], class: :btn
