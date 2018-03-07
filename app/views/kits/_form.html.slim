@@ -13,7 +13,7 @@
         = fi.input :weight
 
 
-      .dz_preview_kit.dz_frm
+      .dz_preview_kit
         .dz_preview data-max=@kit.images.map(&:weight).max.to_i
           - @kit.images.order(id: :asc).each do |image|
             .dz_preview_item data-id=image.id
