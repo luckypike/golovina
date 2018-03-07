@@ -9,7 +9,7 @@
     - @photos.sort_by{|i, _| i.to_i }.each do |i, kit|
       .page_collections_list_kit
         .page_collections_list_kit_items
-          - kit.images.each do |image|
+          - kit.images.sort_by{|i| i[:id].to_i }.each do |image|
             - path = "/uploads/collections/#{@collection.id}/#{i}_#{image[:id]}.jpg"
 
             div class="#{image[:pos]} ci_#{@collection.id}_#{i}_#{image[:id]}"
