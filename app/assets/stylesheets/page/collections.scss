@@ -15,6 +15,33 @@
   &_list {
     &_kit {
       margin-bottom: ($space-m);
+      position: relative;
+      overflow: hidden;
+
+      &.has_cover {
+        padding-top: $space-m;
+
+        @include mq($m) {
+          padding-top: $space-m2;
+        }
+      }
+
+      &_cover {
+        @include aspect-ratio(3, 2);
+
+        background-position: center;
+        background-size: cover;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        width: 100%;
+        // height: 280px;
+
+        @include mq($l) {
+          @include aspect-ratio-modify(2, 1);
+        }
+      }
 
       &_items {
         display: flex;
