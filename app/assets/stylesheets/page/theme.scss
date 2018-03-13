@@ -463,9 +463,10 @@
 .kits_list {
   &_item {
     cursor: pointer;
+    padding-bottom: $base-rhythm-line * 4;
 
     &_wrapper {
-      margin-bottom: $space-s;
+      margin-bottom: $space-s2;
 
       .kit_products {
         &_wrapper {
@@ -582,11 +583,48 @@
       }
     }
 
+    .btm {
+      position: absolute;
+      bottom: 0;
+      width: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      padding-right: 1.75rem;
+
+      &:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: block;
+        width: 1.5rem;
+        height: 1.5rem;
+        background: {
+          image: image_url('icons/top.svg');
+          position: center;
+          repeat: no-repeat;
+          size: $base-rhythm-line * 4;
+
+        }
+
+        transform: rotateZ(180deg);
+        // transform-origin: 0 0 ;
+
+      }
+
+      // text-align: right;
+    }
+
     .control {
       @include control
     }
 
     &.i_1 {
+      // .btm {
+      //   left: 0;
+      //   right: auto;
+      // }
+
 
       .control {
         @include control-right
@@ -610,6 +648,10 @@
 
     .image_0 {
       @include column-width(3, 4);
+    }
+
+    .image_1 {
+      margin-bottom: 0;
     }
 
     .title {
@@ -654,18 +696,18 @@
       padding: 0 $gutter;
 
       .toggle {
-        @include font-size-small;
+        // @include font-size(1.5);
       }
 
-      .btn {
-        @include font-size(1.25);
-
-        letter-spacing: 0.1em;
-        margin-top: $base-rhythm-line;
-        text-transform: uppercase;
-        padding: 0 $gutter / 2;
-        min-width: 100px;
-      }
+      // .btn {
+      //   @include font-size(1.25);
+      //
+      //   // letter-spacing: 0.1em;
+      //   margin-top: $base-rhythm-line;
+      //   // text-transform: uppercase;
+      //   padding: 0 $gutter / 2;
+      //   min-width: 100px;
+      // }
     }
 
     @include mq($s) {
@@ -677,6 +719,12 @@
 
     @include mq($m) {
       &.i_0 {
+        // .btm {
+        //   left: $gutter;
+        //   text-align: left;
+        //   width: auto;
+        // }
+
         .control {
           left: $gutter;
         }

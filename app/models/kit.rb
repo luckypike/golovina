@@ -18,7 +18,11 @@ class Kit < ApplicationRecord
   end
 
   def price
-    products.map(&:price).sum
+    variants.map(&:product).flatten.map(&:price).sum
+  end
+
+  def price_sell
+    variants.map(&:product).flatten.map(&:price_sell).sum
   end
 
   def entity_created_at

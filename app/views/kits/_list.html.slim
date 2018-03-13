@@ -18,17 +18,18 @@
         .count
           .toggle
             => t(:kit_products, count: variants.size)
-            | в образе
-
-          .btn
-            | Посмотреть
+            | в образе на сумму #{number_to_rub(kit.price_sell)}
 
           .kit_products_link
-            = link_to 'Купить', kit, class: [:btn, :buy_kit]
+            = link_to 'Подробнее', kit, class: [:btn, :buy_kit]
 
         .image_1
           .img
             = image_tag images[1].photo.thumb.url if images[1]
+
+
+        .btm
+          = t(:kit_products, count: variants.size)
 
         - if policy(kit).edit?
           .control
