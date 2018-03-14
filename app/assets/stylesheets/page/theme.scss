@@ -467,11 +467,12 @@
     position: relative;
 
     &_wrapper {
-      margin-bottom: $space-s2;
+      margin-bottom: $base-rhythm-line * 2;
 
       .kit_products {
         &_wrapper {
           display: none;
+          padding: $base-rhythm-line 0;
           margin-left: -$gutter / 2;
           margin-right: -$gutter / 2;
 
@@ -586,7 +587,7 @@
 
     .btm {
       position: absolute;
-      bottom: $base-rhythm-line;
+      bottom: 0;
       width: auto;
       left: 50%;
       transform: translateX(-50%);
@@ -712,7 +713,7 @@
 
     @include mq($s) {
       &_wrapper {
-        margin-bottom: $space-m2;
+        // margin-bottom: $space-s2;
       }
 
     }
@@ -747,7 +748,7 @@
 
         .kit_products {
           &_wrapper {
-            padding-top: $space-m2;
+            padding: $space-m2 0 0;
             margin-left: 0;
             margin-right: 0;
           }
