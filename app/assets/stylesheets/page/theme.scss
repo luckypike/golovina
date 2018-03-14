@@ -604,10 +604,22 @@
           position: center;
           repeat: no-repeat;
           size: $base-rhythm-line * 4;
-
         }
 
         transform: rotateZ(180deg);
+      }
+
+      @include mq($l) {
+        padding-right: 2.25rem;
+
+        &:after {
+          width: 2rem;
+          height: 2rem;
+
+          background: {
+            size: $base-rhythm-line * 5;
+          }
+        }
       }
     }
 
@@ -686,7 +698,7 @@
       padding: 0 $gutter;
 
       .toggle {
-        max-width: 130px;
+        max-width: 120px;
         margin: auto;
       }
     }
@@ -702,16 +714,21 @@
       padding-bottom: 0;
 
       &.i_0 {
-        // .btm {
-        //   left: $gutter;
-        //   text-align: left;
-        //   width: auto;
-        // }
+        .btm {
+          left: 25%;
+        }
 
         .control {
           left: $gutter;
         }
       }
+
+      &.i_1 {
+        .btm {
+          left: 75%;
+        }
+      }
+
 
       .btm {
         bottom: $base-rhythm-line * -5;
@@ -770,6 +787,10 @@
         left: 50%;
         width: 50%;
         top: 88%;
+
+        .toggle {
+          max-width: 135px;
+        }
 
         @include mq($l) {
           top: 85%;
