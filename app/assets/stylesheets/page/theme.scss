@@ -464,6 +464,7 @@
   &_item {
     cursor: pointer;
     padding-bottom: $base-rhythm-line * 5;
+    position: relative;
 
     &_wrapper {
       margin-bottom: $space-s2;
@@ -606,7 +607,8 @@
           size: $base-rhythm-line * 4;
         }
 
-        transform: rotateZ(180deg);
+        transform: rotateX(180deg);
+        transition: transform 0.3s;
       }
 
       @include mq($l) {
@@ -633,8 +635,13 @@
       }
     }
 
-
-    position: relative;
+    &.active {
+      .btm {
+        &:after {
+          transform: none;
+        }
+      }
+    }
 
     @include column-pane;
 
