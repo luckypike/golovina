@@ -463,7 +463,7 @@
 .kits_list {
   &_item {
     cursor: pointer;
-    padding-bottom: $base-rhythm-line * 4;
+    padding-bottom: $base-rhythm-line * 5;
 
     &_wrapper {
       margin-bottom: $space-s2;
@@ -585,7 +585,7 @@
 
     .btm {
       position: absolute;
-      bottom: 0;
+      bottom: $base-rhythm-line;
       width: auto;
       left: 50%;
       transform: translateX(-50%);
@@ -608,11 +608,7 @@
         }
 
         transform: rotateZ(180deg);
-        // transform-origin: 0 0 ;
-
       }
-
-      // text-align: right;
     }
 
     .control {
@@ -620,12 +616,6 @@
     }
 
     &.i_1 {
-      // .btm {
-      //   left: 0;
-      //   right: auto;
-      // }
-
-
       .control {
         @include control-right
       }
@@ -696,18 +686,9 @@
       padding: 0 $gutter;
 
       .toggle {
-        // @include font-size(1.5);
+        max-width: 130px;
+        margin: auto;
       }
-
-      // .btn {
-      //   @include font-size(1.25);
-      //
-      //   // letter-spacing: 0.1em;
-      //   margin-top: $base-rhythm-line;
-      //   // text-transform: uppercase;
-      //   padding: 0 $gutter / 2;
-      //   min-width: 100px;
-      // }
     }
 
     @include mq($s) {
@@ -718,6 +699,8 @@
     }
 
     @include mq($m) {
+      padding-bottom: 0;
+
       &.i_0 {
         // .btm {
         //   left: $gutter;
@@ -730,16 +713,17 @@
         }
       }
 
+      .btm {
+        bottom: $base-rhythm-line * -5;
+      }
+
       &_wrapper {
         margin-bottom: $space-m2 * 2;
-
+        // padding-bottom: 0;
 
         .kit_products {
           &_wrapper {
             padding-top: $space-m2;
-            // padding-left: $gutter;
-            // padding-right: $gutter;
-
             margin-left: 0;
             margin-right: 0;
           }
