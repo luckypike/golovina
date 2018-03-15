@@ -36,13 +36,13 @@
           .theme_kits_wrapper
             .theme_kits.swiper-container
               .theme_kits_list.swiper-wrapper
-                - theme.kits.active.each do |kit|
-                  - if kit.variants.active.map(&:product).sum(&:price_sell) > 0
+                - theme.kits.sort_by(&:created_at).reverse.each do |kit|
+                  - if kit.variants.map(&:product).sum(&:price_sell) > 0
                     .theme_kits_list_item.swiper-slide
                       = link_to '', [kit], class: :fake
 
                       .kit_image
-                        = image_tag kit.images.first.photo.thumb.url if kit.images.size > 0
+                        = image_tag kit.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.first.photo.thumb.url if kit.images.size > 0
 
                       .kit_price
                         = kit.title_safe
