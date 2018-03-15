@@ -7,6 +7,8 @@ class ThemesController < ApplicationController
 
   def index
     authorize Theme
+
+    @themes = Theme.all.includes(kits: [{ variants: [:product, :images] }, :images]).where(kits: { state: :active })
     # redirect_to Theme.order(weight: :asc).first
   end
 
