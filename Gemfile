@@ -47,8 +47,8 @@ gem 'stateful_enum'
 
 gem 'delayed_job_active_record'
 
-gem 'webpacker', github: 'rails/webpacker'
-gem 'react-rails', github: 'reactjs/react-rails'
+gem 'webpacker'
+gem 'react-rails'
 
 gem 'jbuilder'
 
