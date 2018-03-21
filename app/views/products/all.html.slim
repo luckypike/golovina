@@ -1,3 +1,5 @@
+- description @products.first(5).map(&:title).join(', ')
+- set_meta_tags og: { image: @products.first.images.select(&:photo).first(1).map{ |i| i.photo.url }, title: :title, description: :description }
 
 .page.page_common.page_products
   .page_common_intro.lv3
