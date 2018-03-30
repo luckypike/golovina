@@ -3,7 +3,7 @@ class SizesController < ApplicationController
 
   def index
     authorize Size
-    @sizes = Size.all
+    @sizes = Size.order(:id).all
   end
 
   def new

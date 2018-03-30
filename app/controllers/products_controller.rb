@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish, :info, :similar]
-  before_action :set_product_sizes, only: [:edit, :show]
 
   def index
     authorize Product
@@ -92,6 +91,7 @@ class ProductsController < ApplicationController
   def edit
     session[:id] =  params[:ref] if params[:ref]
     authorize @product
+    @sizes = @product.avail_sizes
     @product.variants.build if @product.variants.empty?
   end
 
@@ -181,16 +181,6 @@ class ProductsController < ApplicationController
   private
   def set_product
     @product = Product.find(params[:id])
-  end
-
-  def set_product_sizes
-    if @product.category.get_ancestor == Rails.application.secrets[:men]
-      @sizes = Size.where(sizes_group_id: 2).map{|s| [s.id, s.size]}.to_h
-    elsif @product.category.get_ancestor == Rails.application.secrets[:shoes]
-      @sizes = Size.where(sizes_group_id: 3).map{|s| [s.id, s.size]}.to_h
-    else
-      @sizes = Size.where(sizes_group_id: 1).map{|s| [s.id, s.size]}.to_h
-    end
   end
 
   def product_params

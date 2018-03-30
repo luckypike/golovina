@@ -43,6 +43,16 @@ class Product < ApplicationRecord
     variants.first.sizes
   end
 
+  def avail_sizes
+    if self.category.get_ancestor == Rails.application.secrets[:men]
+      Size.where(sizes_group_id: 2).map{|s| [s.id, s.size]}.to_h
+    elsif self.category.get_ancestor == Rails.application.secrets[:shoes]
+      Size.where(sizes_group_id: 3).map{|s| [s.id, s.size]}.to_h
+    else
+      Size.where(sizes_group_id: 1).map{|s| [s.id, s.size]}.to_h
+    end
+  end
+
   def sync_variants
     self.variants.each do |variant|
       variant.update_attribute(:themes, self.themes.map(&:id))

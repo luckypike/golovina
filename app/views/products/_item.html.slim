@@ -45,7 +45,7 @@
       .rest_of
         .sizes.live.lv3 class=s data-sizes="#{product.variants.select(&:sizes).map{ |v| [v.id, v.sizes_active.map(&:to_i) ] }.to_h.to_json}"
           .sizes_list
-            - @sizes.each do |id, size|
+            - product.avail_sizes.each do |id, size|
               .sizes_list_item data-size=id class="size_#{id}"
                 svg.cross_line viewBox="0 0 40 40"
                   line x1="0" y1="40" x2="40" y2="0"

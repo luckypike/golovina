@@ -1,6 +1,6 @@
 class KitsController < ApplicationController
   before_action :set_kit, only: [:show, :edit, :update, :destroy]
-
+  
   def index
     authorize Kit
     @kits = Kit.order(created_at: :desc)
