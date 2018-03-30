@@ -62,6 +62,8 @@
 
         .toggle {
           @include font-size-small;
+
+          margin-top: $base-rhythm-line;
         }
 
         .btn {

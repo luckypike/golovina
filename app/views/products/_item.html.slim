@@ -49,7 +49,7 @@
               .sizes_list_item data-size=id class="size_#{id}"
                 svg.cross_line viewBox="0 0 40 40"
                   line x1="0" y1="40" x2="40" y2="0"
-                = size
+                = size if size != 'One Size'
 
           / .sizes_title
             | Помощь с размером
