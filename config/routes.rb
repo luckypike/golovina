@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :sizes
+  resources :sizes_groups
   root 'static#index'
 
   scope format: false do

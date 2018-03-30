@@ -27,6 +27,10 @@ class OrdersListItem extends React.Component {
   }
 
   payAction = (e) => {
+    if (!this.props.order.purchasable) {
+      this.toggleItem();
+      e.preventDefault();
+    }
     e.stopPropagation();
   }
 
@@ -44,6 +48,9 @@ class OrdersListItem extends React.Component {
   render () {
     const order = this.props.order;
 
+    let can_pay_classes = "btn btn_sm";
+    if (!order.purchasable) can_pay_classes = "btn btn_sm btn_inac"
+    
     return (
       <div className="orders_list_item" onClick={this.toggleItem}>
         <div className="fr">
@@ -63,7 +70,7 @@ class OrdersListItem extends React.Component {
 
           <div className="fr_actions">
             {order.can_pay &&
-              <a onClick={this.payAction} href={order.pay_path} className="btn btn_sm">Оплатить</a>
+              <a onClick={this.payAction} href={order.pay_path} className={can_pay_classes}>Оплатить</a>
             }
             {order.archive_path &&
               <a onClick={(e) => this.archiveAction(order.archive_path, e)} href='#' className="btn btn_sm">Завершить</a>
@@ -79,23 +86,7 @@ class OrdersListItem extends React.Component {
           </div>
           <div className="sr_products">
             {order.items.map((item) =>
-              <div key={item.id} className="sr_products_item">
-                <div className="sr_products_item_image">
-                  {item.image &&
-                    <img src={item.image} />
-                  }
-                </div>
-
-                <div className="sr_products_item_data">
-                  <p className="title">{item.title}</p>
-                  <p>Цвет: <span>{item.color}</span></p>
-                  <p>Размер: <span>{item.size}</span></p>
-                  <p>Количество: <span>{item.quantity}</span></p>
-                  <p>
-                    Цена: <span dangerouslySetInnerHTML={{ __html: item.price }} />
-                  </p>
-                </div>
-              </div>
+              <OrderItem item={item} key={item.id}/>
             )}
           </div>
         </div>
@@ -104,6 +95,37 @@ class OrdersListItem extends React.Component {
   }
 }
 
+class OrderItem extends React.Component {
+  render() {
+    let avail_quantity = '';
+    if (this.props.item.quantity > this.props.item.avail_quantity) {
+      avail_quantity = <div className="error">Доступно для заказа: {this.props.item.avail_quantity}</div>;
+    } else {
+      avail_quantity = '';
+    }
+
+    return (
+      <div className="sr_products_item">
+        <div className="sr_products_item_image">
+          {this.props.item.image &&
+            <img src={this.props.item.image} />
+          }
+        </div>
+
+        <div className="sr_products_item_data">
+          <p className="title">{this.props.item.title}</p>
+          <p>Цвет: <span>{this.props.item.color}</span></p>
+          <p>Размер: <span>{this.props.item.size}</span></p>
+          <p>Количество: <span>{this.props.item.quantity}</span></p>
+          {avail_quantity}
+          <p>
+            Цена: <span dangerouslySetInnerHTML={{ __html: this.props.item.price }} />
+          </p>
+        </div>
+      </div>
+    );
+  }
+}
 
 class OrdersList extends React.Component {
   constructor(props) {

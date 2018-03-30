@@ -74,6 +74,13 @@ ru:
         link_name: Текст ссылки
         logo: Логотип
 
+      sizes_group:
+        title: Название
+
+      size:
+        size: Размер
+        sizes_group: Группа размеров
+
     hints:
       user:
         # phone: Номер мобильного телефона в формате +7 999 222 11-11

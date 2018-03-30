@@ -46,6 +46,18 @@ $(function() {
       //   }
       // }
 
+    }
+    else if(data.status == 'unpurchasable') {
+      var _this = $('.page_cart_items');
+
+      $('.error', _this).remove();
+
+      $.each(data.error, function(i, e) {
+
+        var _f = $('.items_item:eq(' + i + ')');
+        $('.quantity', _f).append('<div class="error">Доступно для заказа: ' + e.quantity + '</div>');
+
+      });
     } else {
       window.location = xhr.getResponseHeader('Location');
       // $('.page_cart_items').slideUp(400, function() {

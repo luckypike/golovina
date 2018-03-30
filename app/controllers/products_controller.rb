@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish, :info, :similar]
+  before_action :set_product_sizes, only: [:edit, :show]
 
   def index
     authorize Product
@@ -97,7 +98,6 @@ class ProductsController < ApplicationController
   def update
     authorize @product
 
-    p session[:id]
     if @product.update(product_params)
       if session[:id]
         redirect_to session[:id], notice: 'Product was successfully updated.'
@@ -183,14 +183,28 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def set_product_sizes
+    if @product.category.get_ancestor == Rails.application.secrets[:men]
+      @sizes = Size.where(sizes_group_id: 2).map{|s| [s.id, s.size]}.to_h
+    elsif @product.category.get_ancestor == Rails.application.secrets[:shoes]
+      @sizes = Size.where(sizes_group_id: 3).map{|s| [s.id, s.size]}.to_h
+    else
+      @sizes = Size.where(sizes_group_id: 1).map{|s| [s.id, s.size]}.to_h
+    end
+  end
+
   def product_params
+    size_keys = []
     if params[:product][:variants_attributes].present?
       params[:product][:variants_attributes].each do |_, va|
+        if va[:sizes].present?
+          size_keys = va.try(:fetch, :sizes, {}).keys
+        end
         if va[:image_ids].present? && va[:image_ids].is_a?(String)
           va[:image_ids] = JSON.parse(va[:image_ids])
         end
       end
     end
-    params.require(:product).permit(:title, :category_id, :latest, :sale, :brand, :price, :price_last, :comp, :desc, similar_product_ids: [], variants_attributes: [:id, :color_id, :_destroy, :state, image_ids: [], sizes: [], images_attributes: [:id, :weight]])
+    params.require(:product).permit(:title, :category_id, :latest, :sale, :brand, :price, :price_last, :comp, :desc, similar_product_ids: [], variants_attributes: [:id, :color_id, :_destroy, :state, image_ids: [], sizes: size_keys, images_attributes: [:id, :weight]])
   end
 end

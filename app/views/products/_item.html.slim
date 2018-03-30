@@ -43,26 +43,13 @@
 
 
       .rest_of
-        .sizes.live.lv3 class=s data-sizes="#{product.variants.select(&:sizes).map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json}"
+        .sizes.live.lv3 class=s data-sizes="#{product.variants.select(&:sizes).map{ |v| [v.id, v.sizes_active.map(&:to_i) ] }.to_h.to_json}"
           .sizes_list
-            - if product.category.get_ancestor == Rails.application.secrets[:men]
-              - Rails.application.secrets[:sizes_men].each do |size|
-                .sizes_list_item data-size=size class="size_#{size}"
-                  svg.cross_line viewBox="0 0 40 40"
-                    line x1="0" y1="40" x2="40" y2="0"
-                  = t("sizes_men.size_#{size}") if size > 0
-            - elsif product.category.get_ancestor == Rails.application.secrets[:shoes]
-              - Rails.application.secrets[:sizes_shoes].each do |size|
-                .sizes_list_item data-size=size class="size_#{size}"
-                  svg.cross_line viewBox="0 0 40 40"
-                    line x1="0" y1="40" x2="40" y2="0"
-                  = t("sizes_shoes.size_#{size}") if size > 0
-            - else
-              - Rails.application.secrets[:sizes].each do |size|
-                .sizes_list_item data-size=size class="size_#{size}"
-                  svg.cross_line viewBox="0 0 40 40"
-                    line x1="0" y1="40" x2="40" y2="0"
-                  = size if size > 0
+            - @sizes.each do |id, size|
+              .sizes_list_item data-size=id class="size_#{id}"
+                svg.cross_line viewBox="0 0 40 40"
+                  line x1="0" y1="40" x2="40" y2="0"
+                = size
 
           / .sizes_title
             | Помощь с размером

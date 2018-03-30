@@ -1,0 +1,17 @@
+.page.page_common
+  .page_common_intro.lv3
+
+    h1 Доступные размеры
+
+    .page_sizes_list
+      .sizes_list
+
+        - @sizes.each do |size|
+          .sizes_list_item
+            .title = size.sizes_group.title
+            .sizes = size.size
+            .edit = link_to 'Редактировать', edit_size_path(size), class: 'btn btn_sm'
+            .desroy = link_to 'Удалить', size, data: { confirm: 'Are you sure?' }, method: :delete,  class: 'btn btn_sm'
+
+        = link_to 'Добавить размер', new_size_path, class: :btn
+        = link_to 'К группам размеров', sizes_groups_path

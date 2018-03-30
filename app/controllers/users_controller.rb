@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:orders]
+  before_action :set_sizes, only: [:orders]
 
   def orders
     authorize @user

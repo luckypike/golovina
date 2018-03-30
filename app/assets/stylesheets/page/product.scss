@@ -623,7 +623,7 @@
             }
           }
 
-          &.size_0 {
+          &.size_0, &.size_1, &.size_6 {
             color: $op-color;
             display: none;
             background: {
@@ -655,7 +655,7 @@
           &_item {
             display: none;
 
-            &.size_0 {
+            &.size_0, &.size_1, &.size_6 {
               display: block;
             }
           }

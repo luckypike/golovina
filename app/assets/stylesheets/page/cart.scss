@@ -45,6 +45,11 @@
           }
         }
 
+        .error {
+          color: red;
+          font-weight: $bold;
+        }
+
         @include mq($m) {
 
         }

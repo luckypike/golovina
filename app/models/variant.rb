@@ -56,7 +56,19 @@ class Variant < ApplicationRecord
   end
 
   def set_size
-    self.sizes = nil if sizes_clean.size == 0
+    # self.sizes = nil if sizes_clean.size == 0
+  end
+
+  def sizes_active
+    sizes.select{|s, q| q.to_i > 0}.keys
+  end
+
+  def purchasable size, quantity
+    sizes[size.to_s].to_i >= quantity ? true : false
+  end
+
+  def avail_quantity size
+    sizes[size.to_s].to_i
   end
 
   def check_category

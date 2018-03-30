@@ -21,7 +21,7 @@ json.orders @orders do |order|
     json.price number_to_rub(item.variant.product.price_sell)
     json.quantity item.quantity
     json.color item.variant.color.title
-    json.size item.size_human
+    json.size @sizes[item.size]
     json.image item.variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.first.photo.preview.url if item.variant.images.size > 0
   end
 end

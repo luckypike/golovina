@@ -17,6 +17,11 @@ class Order < ApplicationRecord
         end
 
         OrderMailer.pay(self).deliver_later
+
+        self.order_items.each do |item|
+          item.variant.sizes[item.size.to_s] = item.variant.sizes[item.size.to_s].to_i - item.quantity
+          item.variant.save
+        end
       end
 
       transition :active => :paid
@@ -52,6 +57,10 @@ class Order < ApplicationRecord
 
   def can_paid?
     amount > 0 && active?
+  end
+
+  def purchasable
+    self.order_items.all?{|item| item.variant.purchasable(item.size, item.quantity)} ? true : false
   end
 
   def sms_message
