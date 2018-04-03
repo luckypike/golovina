@@ -4,7 +4,7 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def show?
-    !record.undef? || user&.is_editor?
+    record.purchasable || user&.is_editor?
   end
 
   def wishlist?

@@ -23,6 +23,7 @@ ru:
         color: Цвет
         sizes: Размеры
         weight: Вес
+        out_of_stock: Нет в наличии
 
       product:
         title: Название

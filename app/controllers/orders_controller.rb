@@ -53,7 +53,7 @@ class OrdersController < ApplicationController
     authorize @order
 
     if !@order.purchasable
-      redirect_to [:orders, current_user], notice: 'Неверный заказ' and return
+      redirect_to orders_user_path(current_user, :order => @order.id), notice: 'Неверный заказ' and return
     end
 
     render layout: false

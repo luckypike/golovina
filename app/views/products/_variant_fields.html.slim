@@ -7,9 +7,11 @@
   - else
     = f.simple_fields_for :sizes, OpenStruct.new() do |ff|
       - @sizes.each do |id, size|
-        = ff.input id.to_s, label: "Количество размера \"#{size}\""
+        = ff.input id.to_s, label: "Количество размера \"#{size}\"", input_html: { value: '0' }
 
   = f.input :state, as: :radio_buttons
+
+  = f.input :out_of_stock
 
   .dz_preview data-max=f.object.images.map(&:weight).max.to_i
     = f.association :images, as: :text, input_html: { class: :dz_images }

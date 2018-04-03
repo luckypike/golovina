@@ -20,6 +20,15 @@ class OrdersListItem extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if(this.props) {
+      let query = qs.parse(this.props.location.search.substring(1));
+      if(query.order && query.order == this.props.order.id) {
+        this.toggleItem();
+      }
+    }
+  }
+
   toggleItem = () => {
     this.setState(prevState => ({
       open: !prevState.open
@@ -50,7 +59,7 @@ class OrdersListItem extends React.Component {
 
     let can_pay_classes = "btn btn_sm";
     if (!order.purchasable) can_pay_classes = "btn btn_sm btn_inac"
-    
+
     return (
       <div className="orders_list_item" onClick={this.toggleItem}>
         <div className="fr">
@@ -187,7 +196,7 @@ class OrdersList extends React.Component {
 
         <div className="orders_list">
           {orders.map((order) =>
-            <OrdersListItem key={order.id} order={order} fetchOrders={this.fetchOrders} authenticity_token={this.props.authenticity_token} />
+            <OrdersListItem key={order.id} order={order} fetchOrders={this.fetchOrders} authenticity_token={this.props.authenticity_token} location={this.props.location} />
           )}
         </div>
       </React.Fragment>

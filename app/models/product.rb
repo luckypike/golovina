@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  enum state: { undef: 0, active: 1, archived: 2 }
+  # enum state: { undef: 0, active: 1, archived: 2 }
 
   # after_save :sync_variants
   # after_save :check_category
@@ -58,6 +58,10 @@ class Product < ApplicationRecord
       variant.update_attribute(:themes, self.themes.map(&:id))
       variant.update_attribute(:category, self.category)
     end
+  end
+
+  def purchasable
+    self.variants.any?{|variant| variant.available} ? true : false
   end
 
   # def state

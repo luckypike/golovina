@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
     params[:theme] = params[:theme].presence || []
     params[:size] = params[:size].presence || []
 
-    @products = Variant.includes(:images, :product).themed_by(params[:theme]).sized_by(params[:size]).where(@where).where(state: [:active, :out]).order('products.created_at DESC')
+    @products = Variant.includes(:images, :product).themed_by(params[:theme]).sized_by(params[:size]).where(@where).where(state: [:active]).order('products.created_at DESC')
     render :all
   end
 
@@ -57,7 +57,7 @@ class ProductsController < ApplicationController
     if params[:archive] == 'true'
       @variants = @variants.where(variants: { state: [:archived]})
     else
-      @variants = @variants.where(variants: { state: [:active, :out]})
+      @variants = @variants.where(variants: { state: [:active]})
     end
     @variants = @variants.order(created_at: :desc).map(&:variants).flatten
 
@@ -112,19 +112,19 @@ class ProductsController < ApplicationController
   def latest
     authorize Product
 
-    @products = Variant.includes(:images, :product).where(products: { latest: true}, state: [:active, :out])
+    @products = Variant.includes(:images, :product).where(products: { latest: true}, state: [:active])
   end
 
   def sale
     authorize Product
 
-    @products = Variant.includes(:images, :product).where(products: { sale: true}, state: [:active, :out])
+    @products = Variant.includes(:images, :product).where(products: { sale: true}, state: [:active])
   end
 
   def golovina
     authorize Product
 
-    @products = Variant.includes(:images, :product).where(products: { brand: 1}, state: [:active, :out])
+    @products = Variant.includes(:images, :product).where(products: { brand: 1}, state: [:active])
   end
 
   def kits
@@ -195,6 +195,6 @@ class ProductsController < ApplicationController
         end
       end
     end
-    params.require(:product).permit(:title, :category_id, :latest, :sale, :brand, :price, :price_last, :comp, :desc, similar_product_ids: [], variants_attributes: [:id, :color_id, :_destroy, :state, image_ids: [], sizes: size_keys, images_attributes: [:id, :weight]])
+    params.require(:product).permit(:title, :category_id, :latest, :sale, :brand, :price, :price_last, :comp, :desc, similar_product_ids: [], variants_attributes: [:id, :color_id, :_destroy, :state, :out_of_stock, image_ids: [], sizes: size_keys, images_attributes: [:id, :weight]])
   end
 end

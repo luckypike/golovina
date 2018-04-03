@@ -1,7 +1,7 @@
 - title [@product.category.title, @product.title_safe]
 - description number_to_rub(@product.price_sell)
 
-- set_meta_tags noindex: true if @product.archived?
+- set_meta_tags noindex: true if !@product.purchasable
 - set_meta_tags og: { image: @product.images.order(weight: :asc).select(&:photo).map{ |i| asset_url(i.photo.url) }, title: @product.title_safe }
 
 .page.page_common.page_product
