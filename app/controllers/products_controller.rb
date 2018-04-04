@@ -66,6 +66,12 @@ class ProductsController < ApplicationController
 
   def show
     authorize @product
+
+    if !@product.purchasable
+      if !current_user || !current_user.is_editor?
+        render 'static/gone', status: :gone, locals: {title: @product.title}
+      end
+    end
   end
 
   def new

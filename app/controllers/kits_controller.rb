@@ -1,6 +1,6 @@
 class KitsController < ApplicationController
   before_action :set_kit, only: [:show, :edit, :update, :destroy]
-  
+
   def index
     authorize Kit
     @kits = Kit.order(created_at: :desc)
@@ -8,6 +8,13 @@ class KitsController < ApplicationController
 
   def show
     authorize @kit
+
+    if !@kit.purchasable
+      if !current_user || !current_user.is_editor?
+        render 'static/gone', status: :not_found, locals: {title: @kit.title}
+      end
+    end
+
     @variants = @kit.kitables.order(id: :asc).includes(variant: [:product]).map(&:variant)
   end
 

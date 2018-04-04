@@ -179,4 +179,4 @@
             p Возврат и обмен товара осуществляется в течение 7 дней с момента получения заказа, если он не был в употреблении, сохранен товарный вид, потребительские свойства, пломбы, фабричные ярлыки. В противном случае обмену и возврату товар не подлежит. #{link_to 'Подробнее', customers_return_path, class: 'bordered'}
 
       - if variant.out_of_stock? && variant.product.similar_products.present?
-          = link_to 'Подобрать похожий', '#', class: [:btn, :more], :data => { :id => variant.product.id , :similar => variant.product.similar_products.purchasable.map{ |s| s.id }.to_json }
+          = link_to 'Подобрать похожий', '#', class: [:btn, :more], :data => { :id => variant.product.id , :similar => variant.product.similar_products.select{|s| s.purchasable}.map{ |s| s.id }.to_json }

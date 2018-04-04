@@ -61,7 +61,7 @@ class Product < ApplicationRecord
   end
 
   def purchasable
-    self.variants.any?{|variant| variant.available} ? true : false
+    self.variants.active.any?{|variant| variant.available} ? true : false
   end
 
   # def state

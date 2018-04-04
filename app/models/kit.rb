@@ -37,6 +37,10 @@ class Kit < ApplicationRecord
     true
   end
 
+  def purchasable
+    self.variants.active.any?{|variant| variant.available} ? true : false
+  end
+
   private
   def at_least_one_photo
     if images.size != 1
