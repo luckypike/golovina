@@ -26,7 +26,7 @@ namespace :variants do
           new_sizes[id] = 0
           new_sizes[id] = 1 if v_sizes.include?(size)
         end
-        
+
         variant.sizes = new_sizes.as_json
         variant.save
       end
@@ -49,4 +49,9 @@ namespace :variants do
     end
   end
 
+  task save: :environment do
+    Variant.all.each do |variant|
+      variant.save
+    end
+  end
 end
