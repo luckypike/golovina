@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  # enum state: { undef: 0, active: 1, archived: 2 }
+  enum state: { undef: 0, active: 1, archived: 2 }
 
   # after_save :sync_variants
   # after_save :check_category
