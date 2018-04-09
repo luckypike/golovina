@@ -37,7 +37,7 @@ class Variant < ApplicationRecord
   end
 
   def entity_created_at
-      product.created_at
+    product.created_at
   end
 
   def photo
@@ -62,6 +62,10 @@ class Variant < ApplicationRecord
 
   def sizes_active
     sizes.select{|s, q| q.to_i > 0}.keys
+  end
+
+  def pinned?
+    product.pinned
   end
 
   def purchasable size, quantity

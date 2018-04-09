@@ -33,6 +33,7 @@ ru:
         sale: SALE
         similar_products: Похожие товары
         brand: Golovina
+        pinned: Закреплен
 
       kit:
         title: Название образа

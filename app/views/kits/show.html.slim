@@ -44,6 +44,6 @@
 
   .page_kit_products
     .products
-      - variants.each_with_index do |variant, i|
+      - variants.sort_by{|v| v.pinned? ? 0 : 1}.each_with_index do |variant, i|
         .products_item.lv2 class="i_#{i % 2}" class="variant_#{variant.state}"
           == render 'products/item', product: variant.product, variant: variant

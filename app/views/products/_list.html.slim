@@ -1,5 +1,5 @@
 .products_list
-  - products.sort_by(&:created_at).reverse.reject{|p| current_user && current_user.is_editor? ? false : p.images.size == 0}.each_with_index do |variant, i|
+  - products.sort_by(&:created_at).reverse.sort_by{|p| p.pinned? ? 0 : 1}.reject{|p| current_user && current_user.is_editor? ? false : p.images.size == 0}.each_with_index do |variant, i|
     .products_list_item class="i_#{i % 6}"
       = link_to '', [variant.product, anchor: variant.id], class: :fake
 
