@@ -68,6 +68,10 @@ class Variant < ApplicationRecord
     product.pinned
   end
 
+  def in_order?
+    OrderItem.where(variant_id: self).any?
+  end
+
   def purchasable size, quantity
     sizes[size.to_s].to_i >= quantity ? true : false
   end

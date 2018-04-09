@@ -64,6 +64,10 @@ class Product < ApplicationRecord
     self.variants.active.any?{|variant| variant.available} ? true : false
   end
 
+  def in_order?
+    variants.any?{|variant| variant.in_order?}
+  end
+
   # def state
   # end
 

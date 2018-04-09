@@ -36,5 +36,9 @@
       .form_actions
         = f.button :submit
 
+        / = link_to [@product, :destroy], 'Удалить'
+        = link_to 'Удалить', @product, data: { confirm: 'Are you sure?' }, method: :delete,  class: 'btn'
+
+
   / br
   / = link_to t('Удалить товар'), @product, method: :delete, class: :btn

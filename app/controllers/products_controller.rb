@@ -172,8 +172,13 @@ class ProductsController < ApplicationController
 
   def destroy
     authorize @product
-    @product.destroy
-    redirect_to [:control, :products], notice: 'Product was successfully destroyed.'
+
+    if !@product.in_order?
+      @product.destroy
+      redirect_to control_products_path()
+    else
+      redirect_to [:edit, @product], notice: 'Product can\'t be deleted.'
+    end
   end
 
   def publish

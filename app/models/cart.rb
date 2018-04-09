@@ -1,6 +1,6 @@
 class Cart < ApplicationRecord
   belongs_to :user
-  belongs_to :variant
+  belongs_to :variant, dependent: :destroy
 
   validates_presence_of :quantity, :size
 
@@ -12,5 +12,5 @@ class Cart < ApplicationRecord
     else
       I18n.t("sizes.size_#{size}")
     end
-  end  
+  end
 end
