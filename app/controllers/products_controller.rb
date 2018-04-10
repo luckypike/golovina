@@ -177,7 +177,7 @@ class ProductsController < ApplicationController
       @product.destroy
       redirect_to control_products_path()
     else
-      redirect_to [:edit, @product], notice: 'Product can\'t be deleted.'
+      redirect_to [:edit, @product], notice: 'Товар нельзя удалить, так как он присутствует в сформированных заказках.'
     end
   end
 

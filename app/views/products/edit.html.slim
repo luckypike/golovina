@@ -3,6 +3,10 @@
     h1 Редактировать товар ##{@product.id}
 
   .form
+    - flash.each do |key, message|
+      .error_notification
+        = message
+
     = simple_form_for @product do |f|
       = f.error_notification
 
@@ -37,7 +41,7 @@
         = f.button :submit
 
         / = link_to [@product, :destroy], 'Удалить'
-        = link_to 'Удалить', @product, data: { confirm: 'Are you sure?' }, method: :delete,  class: 'btn'
+        = link_to 'Удалить', @product, data: { confirm: 'Вы уверены?' }, method: :delete,  class: 'btn'
 
 
   / br
