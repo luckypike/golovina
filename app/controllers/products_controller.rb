@@ -97,7 +97,6 @@ class ProductsController < ApplicationController
   def edit
     session[:id] =  params[:ref] if params[:ref]
     authorize @product
-    @sizes = @product.avail_sizes
     @product.variants.build if @product.variants.empty?
   end
 

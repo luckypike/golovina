@@ -1,13 +1,9 @@
 .input_nested_fields.dz_form_variant.dz_frm data-url=images_path data-params={ 'image[imagable_type]': 'Variant', 'image[imagable_id]': nil }.to_json
   = f.association :color, collection: Color.tree
-  - if !f.object.sizes.blank?
-    = f.simple_fields_for :sizes, OpenStruct.new(f.object.sizes) do |ff|
-      - @sizes.each do |id, size|
-        = ff.input id.to_s, label: "Количество размера \"#{size}\""
-  - else
-    = f.simple_fields_for :sizes, OpenStruct.new() do |ff|
-      - @sizes.each do |id, size|
-        = ff.input id.to_s, label: "Количество размера \"#{size}\"", input_html: { value: '0' }
+
+  = f.simple_fields_for :sizes, OpenStruct.new(f.object.sizes) do |ff|
+    - f.object.product.avail_sizes.each do |id, size|
+      = ff.input id.to_s, label: "Количество размера \"#{size}\"", input_html: { value: ff.object[id.to_s].presence || '0' }
 
   = f.input :state, as: :radio_buttons
 
