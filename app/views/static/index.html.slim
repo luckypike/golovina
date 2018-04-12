@@ -8,7 +8,7 @@
   .page_static_index_swiper
     .ss
       - @slides.each_with_index do |slide, index|
-        div class="ss_#{index}" style="background-image: url('#{slide.image.large.url}')"
+        div class="ss_#{index}" style="background-image: url('#{slide.image.large.url}');background-position-x: #{slide.left_offset}%; background-position-y: #{slide.top_offset}%"
 
     .ss.aspect
       - @slides.each_with_index do |slide, index|
