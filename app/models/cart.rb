@@ -1,6 +1,6 @@
 class Cart < ApplicationRecord
   belongs_to :user
-  belongs_to :variant, dependent: :destroy
+  belongs_to :variant
 
   validates_presence_of :quantity, :size
 
