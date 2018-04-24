@@ -1,4 +1,4 @@
-namespace :cards do
+namespace :discount do
   task index: :environment do
     # doc = File.open(Rails.application.secrets[:trudvsem_xml])
     if File.exist?(Rails.application.secrets[:cards_csv])
@@ -11,8 +11,11 @@ namespace :cards do
 
         user = User.find_by(phone: row[2].gsub(/[^0-9]/, ''))
         discount = Discount.where(id: row[0]).first_or_create
+        p user
         discount.user = user
+        p row[2].gsub(/[^0-9]/, '')
         discount.phone = row[2].gsub(/[^0-9]/, '')
+        p row[1]
         discount.name = row[1]
         discount.size = 5
         # theme.title = v['title']
