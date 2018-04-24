@@ -1,4 +1,8 @@
 &_contacts {
+  @include mq($m) {
+    @include font-size(2.25, 4);
+  }
+
   .contacts_view {
     margin-bottom: $gutter;
 
