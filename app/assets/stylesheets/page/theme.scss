@@ -343,7 +343,7 @@
       text-align: center;
 
       .label {
-        background: rgba(40, 40, 40, .5);
+        background: $highlight-color;
         color: $op-color;
         display: inline;
         margin-right: 5px;
@@ -355,7 +355,7 @@
         }
 
         &.out_of_stock {
-          background: $highlight-color;
+          background: rgba(40, 40, 40, .5);
         }
       }
 
