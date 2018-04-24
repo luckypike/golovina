@@ -1,5 +1,6 @@
 @import "page/about";
 @import "page/collection";
+@import "page/collections";
 @import "page/lookbook";
 @import "page/xmas";
 @import "page/event";
@@ -154,6 +155,10 @@
   @import "page/customers";
 
   @import "page/slides";
+
+  @import "page/sizes_groups";
+  @import "page/sizes";
+  @import "page/contacts";
 }
 
 .link_fake {

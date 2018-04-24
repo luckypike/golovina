@@ -1,7 +1,8 @@
 require 'sms'
 
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:checkout, :pay]
+  before_action :set_sizes, only: [:index]
+  before_action :set_order, only: [:checkout, :pay, :archive]
   skip_before_action :verify_authenticity_token, only: [:paid]
 
   def index
@@ -13,6 +14,15 @@ class OrdersController < ApplicationController
   def checkout
     authorize @order
 
+    errors = {}
+    @cart.each_with_index do |item, index|
+      if !item.variant.purchasable(item.size, item.quantity)
+        errors[index] = {quantity: item.variant.avail_quantity(item.size)}
+      end
+    end
+
+    render json: { error: errors, status: :unpurchasable } and return if !errors.blank?
+
     @user = current_user
 
     if params[:user]
@@ -21,7 +31,7 @@ class OrdersController < ApplicationController
 
       if @user.update(phone: params[:user][:phone], email: params[:user][:email], name: params[:user][:name], s_name: params[:user][:s_name])
       else
-        render json: { error: @user.errors, status: :unprocessable_entity }
+        render json: { error: @user.errors, status: :unprocessable_entity } and return
       end
     end
 
@@ -35,19 +45,24 @@ class OrdersController < ApplicationController
       @order.activate!
       @order.update_attribute(:address, params[:order][:address])
 
-      if Rails.env.production?
-        Sms.message(@order.user.phone, @order.sms_message)
-      else
-        OrderMailer.sms_test(@order).deliver_later
-      end
-
       head :ok, location: [:pay, @order]
     end
   end
 
   def pay
     authorize @order
+
+    if !@order.purchasable
+      redirect_to orders_user_path(current_user, :order => @order.id), notice: 'Неверный заказ' and return
+    end
+
     render layout: false
+  end
+
+  def archive
+    authorize @order
+    @order.archive!
+    head :ok
   end
 
   def paid

@@ -7,10 +7,10 @@ ru:
       declined: Отменен
 
   kit_products:
-    one: "%{count} товар"
-    few: "%{count} товара"
-    many: "%{count} товаров"
-    other: '%{count} товара'
+    one: "%{count} позиция"
+    few: "%{count} позиции"
+    many: "%{count} позиций"
+    other: '%{count} позиции'
 
   helpers:
     submit:

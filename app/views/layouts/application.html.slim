@@ -1,10 +1,10 @@
 doctype html
 html
   head
-    = display_meta_tags site: 'Мята', reverse: true, separator: '—', og: { title: :title, site_name: 'Интернет-магазин одежды «Мята»' }
+    = display_meta_tags site: 'Мята', reverse: true, separator: '—', og: { title: :title, description: :description, site_name: 'Мята' }
 
     = csrf_meta_tags
-    = favicon_link_tag
+    = favicon_link_tag '/favicon.ico'
 
     = tag('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' })
     = tag('meta', { name: 'yandex-verification', content: '67fd84d3a4242f7f' })

@@ -1,10 +1,13 @@
 .input_nested_fields.dz_form_variant.dz_frm data-url=images_path data-params={ 'image[imagable_type]': 'Variant', 'image[imagable_id]': nil }.to_json
   = f.association :color, collection: Color.tree
-  - if @product.category.get_ancestor == Rails.application.secrets[:men]
-    = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes_men].map{ |s| [I18n.t("sizes_men.size_#{s}"), s.to_s] }
-  - else
-    = f.input :sizes, as: :check_boxes, collection: Rails.application.secrets[:sizes].map{ |s| [I18n.t("sizes.size_#{s}"), s.to_s] }
+
+  = f.simple_fields_for :sizes, OpenStruct.new(f.object.sizes) do |ff|
+    - f.object.product.avail_sizes.each do |id, size|
+      = ff.input id.to_s, label: "Количество размера \"#{size}\"", input_html: { value: ff.object[id.to_s].presence || '0' }
+
   = f.input :state, as: :radio_buttons
+
+  = f.input :out_of_stock
 
   .dz_preview data-max=f.object.images.map(&:weight).max.to_i
     = f.association :images, as: :text, input_html: { class: :dz_images }

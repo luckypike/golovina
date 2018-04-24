@@ -1,0 +1,23 @@
+- set_meta_tags site: 'Golovina', title: ['Коллекции', @collection.title]
+
+.page.page_collection
+  .page_common_intro.lv3
+    h1
+      = @collection.title
+
+  .page_common_text.lv3
+    = markdown @collection.text
+
+  .page_collection_list
+    - @photos.sort_by{|i, _| i.to_i }.each do |i, kit|
+      - cover = File.exist?(File.join('public', 'uploads', 'collections', @collection.id.to_s, 'covers', "#{i}.jpg"))
+      .page_collection_list_kit class=(cover ? :has_cover : nil)
+        - if cover
+          .page_collection_list_kit_cover style="background-image: url('#{File.join("/uploads/collections/#{@collection.id}/covers/#{i}.jpg")}')"
+
+        .page_collection_list_kit_items
+          - kit.images.sort_by{|i| i[:id].to_i }.each do |image|
+            - path = "/uploads/collections/#{@collection.id}/#{i}_#{image[:id]}.jpg"
+
+            div class="#{image[:pos]} ci_#{@collection.id}_#{i}_#{image[:id]}"
+              = image_tag path

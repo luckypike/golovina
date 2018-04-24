@@ -126,7 +126,7 @@
       color: $op-color;
       text-align: center;
 
-      > a {
+      > a, > .a {
         position: absolute;
         height: 100%;
         // width: 100%;
@@ -343,7 +343,7 @@
       text-align: center;
 
       .label {
-        background: rgba(40, 40, 40, .5);
+        background: $highlight-color;
         color: $op-color;
         display: inline;
         margin-right: 5px;
@@ -355,7 +355,7 @@
         }
 
         &.out_of_stock {
-          background: $highlight-color;
+          background: rgba(40, 40, 40, .5);
         }
       }
 
@@ -463,13 +463,16 @@
 .kits_list {
   &_item {
     cursor: pointer;
+    padding-bottom: $base-rhythm-line * 5;
+    position: relative;
 
     &_wrapper {
-      margin-bottom: $space-s;
+      margin-bottom: $base-rhythm-line * 2;
 
       .kit_products {
         &_wrapper {
           display: none;
+          padding: $base-rhythm-line 0;
           margin-left: -$gutter / 2;
           margin-right: -$gutter / 2;
 
@@ -582,19 +585,64 @@
       }
     }
 
+    .btm {
+      position: absolute;
+      bottom: 0;
+      width: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      padding-right: 1.75rem;
+
+      &:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: block;
+        width: 1.5rem;
+        height: 1.5rem;
+        background: {
+          image: image_url('icons/top.svg');
+          position: center;
+          repeat: no-repeat;
+          size: $base-rhythm-line * 4;
+        }
+
+        transform: rotateX(180deg);
+        transition: transform 0.3s;
+      }
+
+      @include mq($l) {
+        padding-right: 2.25rem;
+
+        &:after {
+          width: 2rem;
+          height: 2rem;
+
+          background: {
+            size: $base-rhythm-line * 5;
+          }
+        }
+      }
+    }
+
     .control {
       @include control
     }
 
     &.i_1 {
-
       .control {
         @include control-right
       }
     }
 
-
-    position: relative;
+    &.active {
+      .btm {
+        &:after {
+          transform: none;
+        }
+      }
+    }
 
     @include column-pane;
 
@@ -610,6 +658,10 @@
 
     .image_0 {
       @include column-width(3, 4);
+    }
+
+    .image_1 {
+      margin-bottom: 0;
     }
 
     .title {
@@ -654,44 +706,49 @@
       padding: 0 $gutter;
 
       .toggle {
-        @include font-size-small;
-      }
-
-      .btn {
-        @include font-size(1.25);
-
-        letter-spacing: 0.1em;
-        margin-top: $base-rhythm-line;
-        text-transform: uppercase;
-        padding: 0 $gutter / 2;
-        min-width: 100px;
+        max-width: 120px;
+        margin: auto;
       }
     }
 
     @include mq($s) {
       &_wrapper {
-        margin-bottom: $space-m2;
+        // margin-bottom: $space-s2;
       }
 
     }
 
     @include mq($m) {
+      padding-bottom: 0;
+
       &.i_0 {
+        .btm {
+          left: 25%;
+        }
+
         .control {
           left: $gutter;
         }
       }
 
+      &.i_1 {
+        .btm {
+          left: 75%;
+        }
+      }
+
+
+      .btm {
+        bottom: $base-rhythm-line * -5;
+      }
+
       &_wrapper {
         margin-bottom: $space-m2 * 2;
-
+        // padding-bottom: 0;
 
         .kit_products {
           &_wrapper {
-            padding-top: $space-m2;
-            // padding-left: $gutter;
-            // padding-right: $gutter;
-
+            padding: $space-m2 0 0;
             margin-left: 0;
             margin-right: 0;
           }
@@ -738,6 +795,10 @@
         left: 50%;
         width: 50%;
         top: 88%;
+
+        .toggle {
+          max-width: 135px;
+        }
 
         @include mq($l) {
           top: 85%;

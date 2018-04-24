@@ -5,8 +5,8 @@
 .product class="variant_#{variant.state}"
   .product_images
     .swiper-container
-      - if variant.out?
-        .out
+      - if variant.out_of_stock?
+        .outt
           .msg Временно отсутствует
       .images_list.swiper-wrapper.images_list_swiper_l
 
@@ -21,7 +21,7 @@
             h1
               = product.title_safe
 
-          - if product.variants.where(state: [:active, :out]).size > 1
+          - if product.variants.where(state: [:active]).size > 1
             .another_variants
               span Другие цвета
               = inline_svg 'icons/varr.svg'
@@ -29,34 +29,27 @@
 
         .variants.live data-variant_active=variant.id
           .variants_list
-            - product.variants.where(state: [:active, :out]).reject{|v| current_user && current_user.is_editor? ? false : v.images.size == 0}.each do |variant|
-              .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json]) data-label=variant.color.title data-oos=variant.out?.to_s
+            - product.variants.where(state: [:active]).reject{|v| current_user && current_user.is_editor? ? false : v.images.size == 0}.each do |variant|
+              .variants_list_item data-id=variant.id data-url=url_for([:images, variant, format: :json]) data-label=variant.color.title data-oos=variant.out_of_stock.to_s
                 .icon class=variant.color.slug style="background-color: #{variant.color.color}; #{variant.color.image? ? "background-image: url(#{variant.color.image.url})" : ''}"
 
           .variants_title
 
       .images.swiper-container.lv4
-        - if variant.out?
-          .out
+        - if variant.out_of_stock?
+          .outt
             .msg Временно отсутствует
         .images_list.swiper-wrapper.images_list_swiper
 
 
       .rest_of
-        .sizes.live.lv3 class=s data-sizes="#{product.variants.select(&:sizes).map{ |v| [v.id, v.sizes.reject(&:blank?).map(&:to_i) ] }.to_h.to_json}"
+        .sizes.live.lv3 class=s data-sizes="#{product.variants.select(&:sizes).map{ |v| [v.id, v.sizes_active.map(&:to_i) ] }.to_h.to_json}"
           .sizes_list
-            - if product.category.get_ancestor == Rails.application.secrets[:men]
-              - Rails.application.secrets[:sizes_men].each do |size|
-                .sizes_list_item data-size=size class="size_#{size}"
-                  svg.cross_line viewBox="0 0 40 40"
-                    line x1="0" y1="40" x2="40" y2="0"
-                  = t("sizes_men.size_#{size}") if size > 0
-            - else
-              - Rails.application.secrets[:sizes].each do |size|
-                .sizes_list_item data-size=size class="size_#{size}"
-                  svg.cross_line viewBox="0 0 40 40"
-                    line x1="0" y1="40" x2="40" y2="0"
-                  = size if size > 0
+            - product.avail_sizes.each do |id, size|
+              .sizes_list_item data-size=id class="size_#{id}"
+                svg.cross_line viewBox="0 0 40 40"
+                  line x1="0" y1="40" x2="40" y2="0"
+                = size if size != 'One Size'
 
           / .sizes_title
             | Помощь с размером
@@ -74,10 +67,10 @@
                 = number_to_rub product.price
 
           .buy
+            = link_to [:wishlist, :variants], class: [:wishlist], method: :post, remote: true do
+              = inline_svg 'icons/wishlist.svg'
             = link_to 'Купить', [:cart, :variants], class: [:btn, :cart, :inactive], method: :post, remote: true, data: { disable_with: 'Покупка..' }
             = link_to 'Оплатить', [:cart], class: [:btn, :purchase]
-            / = link_to [:wishlist, :variants], class: [:wishlist], method: :post, remote: true do
-              = inline_svg 'icons/wishlist.svg'
 
         .after_add
           ' Товар добавлен в корзину.
@@ -185,5 +178,5 @@
 
             p Возврат и обмен товара осуществляется в течение 7 дней с момента получения заказа, если он не был в употреблении, сохранен товарный вид, потребительские свойства, пломбы, фабричные ярлыки. В противном случае обмену и возврату товар не подлежит. #{link_to 'Подробнее', customers_return_path, class: 'bordered'}
 
-      - if variant.out? && variant.product.similar_products.present?
-          = link_to 'Подобрать похожий', '#', class: [:btn, :more], :data => { :id => variant.product.id , :similar => variant.product.similar_products.active.map{ |s| s.id }.to_json }
+      - if variant.out_of_stock? && variant.product.similar_products.present?
+          = link_to 'Подобрать похожий', '#', class: [:btn, :more], :data => { :id => variant.product.id , :similar => variant.product.similar_products.select{|s| s.purchasable}.map{ |s| s.id }.to_json }

@@ -31,6 +31,11 @@ class User < ApplicationRecord
     is_admin? || [2, 3].include?(id)
   end
 
+  def is_tester?
+    p phone
+    Rails.application.secrets[:payment_test_phones].include?(phone)
+  end
+
   def clear_phone
     if self.phone.present?
       self.phone = User.prepare_phone(self.phone)

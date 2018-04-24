@@ -10,16 +10,13 @@ $(function() {
   });
 
   $('.kits_list_item').on('click', function(e){
-    console.log(e.target);
     if(!$(e.target).hasClass('edit') && !$(e.target).hasClass('buy_kit')) {
-      console.log('tt');
       var _this = $(this);
       var _kpw = $(this).next();
       var _kp = _kpw.find('.kit_products');
-    // console.log(_kli);
-
 
       if(_kpw.is(':visible')) {
+        _this.removeClass('active');
         _kpw.slideUp(400, function() {
           var swiper = _kp.data('swiper');
 
@@ -31,6 +28,7 @@ $(function() {
       } else {
         $("html, body").stop().animate({ scrollTop: (_this.offset().top + _this.height() / 2) }, 500, 'swing');
 
+        _this.addClass('active');
         _kpw.slideToggle(400, function() {
           if($(window).width() < 960) {
             var swiper = new Swiper (_kp, {

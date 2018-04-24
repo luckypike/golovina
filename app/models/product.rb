@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  enum state: { undef: 0, active: 1, archived: 2 }
+  # enum state: { undef: 0, active: 1, archived: 2 }
 
   # after_save :sync_variants
   # after_save :check_category
@@ -43,11 +43,29 @@ class Product < ApplicationRecord
     variants.first.sizes
   end
 
+  def avail_sizes
+    if self.category.get_ancestor == Rails.application.secrets[:men]
+      Size.where(sizes_group_id: 2).map{|s| [s.id, s.size]}.to_h
+    elsif self.category.get_ancestor == Rails.application.secrets[:shoes]
+      Size.where(sizes_group_id: 3).map{|s| [s.id, s.size]}.to_h
+    else
+      Size.where(sizes_group_id: 1).map{|s| [s.id, s.size]}.to_h
+    end
+  end
+
   def sync_variants
     self.variants.each do |variant|
       variant.update_attribute(:themes, self.themes.map(&:id))
       variant.update_attribute(:category, self.category)
     end
+  end
+
+  def purchasable
+    self.variants.active.any?{|variant| variant.available} ? true : false
+  end
+
+  def in_order?
+    variants.any?{|variant| variant.in_order?}
   end
 
   # def state

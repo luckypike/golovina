@@ -18,7 +18,11 @@ class Kit < ApplicationRecord
   end
 
   def price
-    products.map(&:price).sum
+    variants.map(&:product).flatten.map(&:price).sum
+  end
+
+  def price_sell
+    variants.active.map(&:product).flatten.map(&:price_sell).sum
   end
 
   def entity_created_at
@@ -31,6 +35,10 @@ class Kit < ApplicationRecord
 
   def active?
     true
+  end
+
+  def purchasable
+    self.variants.active.any?{|variant| variant.available} ? true : false
   end
 
   private

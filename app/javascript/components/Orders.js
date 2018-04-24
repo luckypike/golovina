@@ -20,20 +20,45 @@ class OrdersListItem extends React.Component {
     }
   }
 
-  toggleItem = () => {
-    console.log('Toggle');
+  componentDidMount() {
+    if(this.props) {
+      let query = qs.parse(this.props.location.search.substring(1));
+      if(query.order && query.order == this.props.order.id) {
+        this.toggleItem();
+      }
+    }
+  }
 
+  toggleItem = () => {
     this.setState(prevState => ({
       open: !prevState.open
     }));
   }
 
   payAction = (e) => {
+    if (!this.props.order.purchasable) {
+      this.toggleItem();
+      e.preventDefault();
+    }
     e.stopPropagation();
+  }
+
+  archiveAction = (url, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    axios.post(url, { authenticity_token: this.props.authenticity_token })
+    .then(res => {
+      if(res.status == 200) {
+        this.props.fetchOrders();
+      }
+    });
   }
 
   render () {
     const order = this.props.order;
+
+    let can_pay_classes = "btn btn_sm";
+    if (!order.purchasable) can_pay_classes = "btn btn_sm btn_inac"
 
     return (
       <div className="orders_list_item" onClick={this.toggleItem}>
@@ -54,7 +79,10 @@ class OrdersListItem extends React.Component {
 
           <div className="fr_actions">
             {order.can_pay &&
-              <a onClick={this.payAction} href={order.pay_path} className="btn btn_sm">Оплатить</a>
+              <a onClick={this.payAction} href={order.pay_path} className={can_pay_classes}>Оплатить</a>
+            }
+            {order.archive_path &&
+              <a onClick={(e) => this.archiveAction(order.archive_path, e)} href='#' className="btn btn_sm">Завершить</a>
             }
           </div>
         </div>
@@ -67,23 +95,7 @@ class OrdersListItem extends React.Component {
           </div>
           <div className="sr_products">
             {order.items.map((item) =>
-              <div key={item.id} className="sr_products_item">
-                <div className="sr_products_item_image">
-                  {item.image &&
-                    <img src={item.image} />
-                  }
-                </div>
-
-                <div className="sr_products_item_data">
-                  <p className="title">{item.title}</p>
-                  <p>Цвет: <span>{item.color}</span></p>
-                  <p>Размер: <span>{item.size}</span></p>
-                  <p>Количество: <span>{item.quantity}</span></p>
-                  <p>
-                    Цена: <span dangerouslySetInnerHTML={{ __html: item.price }} />
-                  </p>
-                </div>
-              </div>
+              <OrderItem item={item} key={item.id}/>
             )}
           </div>
         </div>
@@ -92,6 +104,37 @@ class OrdersListItem extends React.Component {
   }
 }
 
+class OrderItem extends React.Component {
+  render() {
+    let avail_quantity = '';
+    if (this.props.item.quantity > this.props.item.avail_quantity) {
+      avail_quantity = <div className="error">Доступно для заказа: {this.props.item.avail_quantity}</div>;
+    } else {
+      avail_quantity = '';
+    }
+
+    return (
+      <div className="sr_products_item">
+        <div className="sr_products_item_image">
+          {this.props.item.image &&
+            <img src={this.props.item.image} />
+          }
+        </div>
+
+        <div className="sr_products_item_data">
+          <p className="title">{this.props.item.title}</p>
+          <p>Цвет: <span>{this.props.item.color}</span></p>
+          <p>Размер: <span>{this.props.item.size}</span></p>
+          <p>Количество: <span>{this.props.item.quantity}</span></p>
+          {avail_quantity}
+          <p>
+            Цена: <span dangerouslySetInnerHTML={{ __html: this.props.item.price }} />
+          </p>
+        </div>
+      </div>
+    );
+  }
+}
 
 class OrdersList extends React.Component {
   constructor(props) {
@@ -101,6 +144,8 @@ class OrdersList extends React.Component {
       orders: null,
       state: null
     }
+
+    this.fetchOrders = this.fetchOrders.bind(this);
   }
 
   componentDidMount() {
@@ -151,7 +196,7 @@ class OrdersList extends React.Component {
 
         <div className="orders_list">
           {orders.map((order) =>
-            <OrdersListItem key={order.id} order={order} />
+            <OrdersListItem key={order.id} order={order} fetchOrders={this.fetchOrders} authenticity_token={this.props.authenticity_token} location={this.props.location} />
           )}
         </div>
       </React.Fragment>

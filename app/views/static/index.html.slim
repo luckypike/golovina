@@ -1,12 +1,14 @@
-- set_meta_tags title: 'Мята —  территория красоты, интернет-магазин одежды', site: nil
-- description 'Мультибрендовый интернет-магазин российских дизайнеров, а так же европейских, украинских и азиатских марок.'
-- keywords ['мята', 'минт стор', 'mintstore', 'mint store']
+- set_meta_tags title: 'Мята — территория красоты и стиля', site: nil
+- description 'Интернет-магазин женской одежды, обуви и аксессуаров. Вещи от российских и европейских дизайнеров, а также наш собственный бренд «Golovina».'
+- keywords ['мята', 'минт стор', 'mintstore', 'mint store', 'golovina', 'головина']
+
+- set_meta_tags og: { image: @slides.map{ |i| asset_url(i.image.large.url) } }
 
 .page.page_static_index.barba_container  data-namespace='index'
   .page_static_index_swiper
     .ss
       - @slides.each_with_index do |slide, index|
-        div class="ss_#{index}" style="background-image: url('#{slide.image.large.url}')"
+        div class="ss_#{index}" style="background-image: url('#{slide.image.large.url}');background-position-x: #{slide.left_offset}%; background-position-y: #{slide.top_offset}%"
 
     .ss.aspect
       - @slides.each_with_index do |slide, index|
@@ -42,8 +44,9 @@
               .what
                 = slide.name
 
-              .action
-                = link_to slide.link_name, slide.link, class: [:btn, :btn_gr]
+              - if slide.link.present?
+                .action
+                  = link_to slide.link_name, slide.link, class: [:btn, :btn_gr]
 
   / s.page_static_index_themes
     - @themes.sort_by(&:weight).each_with_index do |theme, i|

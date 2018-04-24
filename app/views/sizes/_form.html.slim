@@ -1,0 +1,9 @@
+= simple_form_for(@size) do |f|
+  = f.error_notification
+
+  .form_inputs
+    = f.input :size
+    = f.association :sizes_group
+
+  .form_actions
+    = f.button :submit

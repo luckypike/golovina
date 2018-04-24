@@ -25,7 +25,7 @@ class Category < ApplicationRecord
   end
 
   def variants_count
-    variants_counter.presence || (categories.map(&:variants_count).sum + variants.where(state: [:active, :out]).size)
+    variants_counter.presence || (categories.map(&:variants_count).sum + variants.where(state: [:active]).size)
   end
 
   def check_variants

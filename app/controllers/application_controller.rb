@@ -34,4 +34,8 @@ class ApplicationController < ActionController::Base
       sign_in(user)
     end
   end
+
+  def set_sizes
+    @sizes = Size.all.map{|s| [s.id, s.size]}.to_h
+  end
 end

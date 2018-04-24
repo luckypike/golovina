@@ -23,6 +23,7 @@ ru:
         color: Цвет
         sizes: Размеры
         weight: Вес
+        out_of_stock: Нет в наличии
 
       product:
         title: Название
@@ -32,6 +33,7 @@ ru:
         sale: SALE
         similar_products: Похожие товары
         brand: Golovina
+        pinned: Закреплен
 
       kit:
         title: Название образа
@@ -74,6 +76,13 @@ ru:
         link_name: Текст ссылки
         logo: Логотип
 
+      sizes_group:
+        title: Название
+
+      size:
+        size: Размер
+        sizes_group: Группа размеров
+
     hints:
       user:
         # phone: Номер мобильного телефона в формате +7 999 222 11-11
@@ -114,6 +123,14 @@ ru:
     size_48: 'M'
     size_50: 'L'
     size_52: 'XL'
+
+  sizes_shoes:
+    size_36: '36'
+    size_37: '37'
+    size_38: '38'
+    size_39: '39'
+    size_40: '40'
+    size_41: '41'
 
   enums:
     category:

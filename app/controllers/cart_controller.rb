@@ -1,5 +1,6 @@
 class CartController < ApplicationController
   before_action :set_user, only: [:show]
+  before_action :set_sizes, only: [:show]
 
   def show
     authorize :cart

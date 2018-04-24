@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :sizes
+  resources :sizes_groups
   root 'static#index'
 
   scope format: false do
@@ -27,6 +29,8 @@ Rails.application.routes.draw do
       get 'info', to: 'customers#info'
       get 'return', to: 'customers#return'
     end
+
+    resources :collections
 
     resources :users, only: [] do
       member do
@@ -112,6 +116,7 @@ Rails.application.routes.draw do
     end
 
     member do
+      post :archive
       post :checkout
       get :pay
     end

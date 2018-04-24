@@ -5,4 +5,4 @@
 
 
     .page_orders_list
-      = react_component('Orders', { path: orders_path(), url: orders_path(format: :json) })
+      = react_component('Orders', { path: orders_path(), url: orders_path(format: :json), authenticity_token: form_authenticity_token })

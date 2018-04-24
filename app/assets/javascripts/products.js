@@ -253,12 +253,12 @@ $(function(){
 
         _oos.removeClass('active');
 
-        if($.inArray(0, sizes) >= 0) {
+        if($.inArray(1, sizes) >= 0 || $.inArray(6, sizes) >= 0) {
           _s.addClass('one_size');
 
           _sizes.each(function() {
             var _cs = $(this);
-            if(parseInt(_cs.data('size')) == 0) {
+            if(parseInt(_cs.data('size')) == 1 || parseInt(_cs.data('size')) == 6) {
               if(_this.data('oos') == true) {
                 _cs.removeClass('active').addClass('inactive');
                 _s.removeData('active_size');
@@ -357,7 +357,9 @@ $(function(){
           _pip.data('loading', false);
           _pip_l.data('loading', false);
         }).done(function() {
-          $('.page_product .product_data').stick_in_parent();
+          $('.page_product .product_data').stick_in_parent({
+            offset_top: 64
+          });
           _pheight = $('.product_data').outerHeight();
         });
       });

@@ -1,0 +1,2 @@
+class SizesGroup < ApplicationRecord
+end

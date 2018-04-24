@@ -2,23 +2,20 @@
 
 .page.page_common.page_theme.barba_container namespace='theme'
   .page_theme_intro
-    .fake_text
-      .title
-        = @theme.title_long
-
     .theme_intro class=@theme.slug
       .image.lv3
         = image_tag @theme.image.large
 
       .text.mb
-        .short
-          = @theme.title
+        .a
+          .short
+            = @theme.title
 
-        .title
-          = @theme.title_long
+          .title
+            = @theme.title_long
 
-        .desc
-          = description @theme.desc
+          .desc
+            = description @theme.desc
 
       - if policy(@theme).edit?
         .control

@@ -148,6 +148,11 @@
                     color: $primary-color;
                   }
 
+                  .error {
+                    color: red;
+                    font-weight: $bold;
+                  }
+
                   span {
                     color: $primary-color;
                   }
