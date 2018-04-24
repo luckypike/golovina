@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< Updated upstream
 ActiveRecord::Schema.define(version: 20180226145324) do
+=======
+ActiveRecord::Schema.define(version: 20180423135921) do
+>>>>>>> Stashed changes
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +70,16 @@ ActiveRecord::Schema.define(version: 20180226145324) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "discounts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.string "phone"
+    t.integer "size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_discounts_on_user_id"
   end
 
   create_table "images", force: :cascade do |t|
@@ -239,6 +253,7 @@ ActiveRecord::Schema.define(version: 20180226145324) do
 
   add_foreign_key "carts", "users"
   add_foreign_key "carts", "variants"
+  add_foreign_key "discounts", "users"
   add_foreign_key "kitables", "variants"
   add_foreign_key "kits", "themes"
   add_foreign_key "order_items", "orders"
