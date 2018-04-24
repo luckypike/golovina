@@ -1,0 +1,63 @@
+&_contacts {
+  .contacts_view {
+    margin-bottom: $gutter;
+
+    .image {
+      @include aspect-ratio(3, 4);
+
+      &:nth-child(2) {
+        display: none;
+      }
+    }
+
+    @include mq($m) {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: $gutter;
+
+      .image {
+
+        grid-column: 6 span;
+      }
+
+      .image:nth-child(2) {
+        display: block;
+        grid-column: 8 / 4 span;
+
+        img {
+          height: auto;
+          bottom: 0;
+          top: auto;
+        }
+      }
+    }
+  }
+
+  .social_networks {
+    display: flex;
+
+    a {
+      display: block;
+      padding: $space-s / 4;
+
+      svg {
+        width: $space-s2 / 2;
+        height: $space-s2 / 2;
+        display: block;
+
+        .a {
+          fill-rule: evenodd;
+          transition: fill 0.3s;
+        }
+      }
+    }
+
+    @include mq($s) {
+      padding: 0 $space-s2 / 2;
+    }
+
+    @include mq($xl) {
+      padding: 0;
+    }
+  }
+}
