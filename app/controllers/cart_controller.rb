@@ -18,16 +18,20 @@ class CartController < ApplicationController
     authorize :cart
 
     if params[:phone].present?
-      phone = params[:phone].gsub('+7', '8').gsub(/\D/, '')
-      discount = Discount.find_by phone: phone
+      phone = params[:phone].gsub('+7', '7').gsub(/\D/, '')
+      existing_user = User.find_by(phone: phone)
+      discount = Discount.find_by(phone: phone)
 
-      discount.present? ? current_user.discount = discount : current_user.discount = nil
+      if existing_user.present?
+        render layout: false
+      else
+        discount.present? ? current_user.discount = discount : current_user.discount = nil
 
-
-      @user = current_user
-      @items = Cart.where(user: current_user)
-      @sum = @items.map{ |i| (i.variant.product.discount_price(@user.get_discount)) * i.quantity }.sum
-      render json: {total: "Товаров на сумму: #{number_to_rub(@sum)}"}
+        @user = current_user
+        @items = Cart.where(user: current_user)
+        @sum = @items.map{ |i| (i.variant.product.discount_price(@user.get_discount)) * i.quantity }.sum
+        render json: {total: "Товаров на сумму: #{number_to_rub(@sum)}"}
+      end
     else
       render layout: false
     end
