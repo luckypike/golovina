@@ -107,6 +107,7 @@ Rails.application.routes.draw do
   # get 'cart', to: 'cart#show'
   namespace 'cart', module: nil do
     get '', to: 'cart#show'
+    get '/discount', to: 'cart#discount'
     delete ':id/destroy', to: 'cart#destroy', as: :destroy
   end
 

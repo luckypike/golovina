@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 20180423135921) do
     t.index ["parent_category_id"], name: "index_categories_on_parent_category_id"
   end
 
+  create_table "collections", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_collections_on_slug", unique: true
+  end
+
   create_table "colors", force: :cascade do |t|
     t.string "title"
     t.string "slug"
@@ -72,7 +81,7 @@ ActiveRecord::Schema.define(version: 20180423135921) do
     t.bigint "user_id"
     t.string "name"
     t.string "phone"
-    t.integer "size"
+    t.float "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_discounts_on_user_id"
@@ -149,6 +158,7 @@ ActiveRecord::Schema.define(version: 20180423135921) do
     t.integer "brand"
     t.boolean "state_auto", default: false
     t.boolean "trash", default: false
+    t.boolean "pinned", default: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["colors"], name: "index_products_on_colors", using: :gin
     t.index ["kind_id"], name: "index_products_on_kind_id"
@@ -161,6 +171,20 @@ ActiveRecord::Schema.define(version: 20180423135921) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_similarables_on_product_id"
     t.index ["similar_product_id"], name: "index_similarables_on_similar_product_id"
+  end
+
+  create_table "sizes", force: :cascade do |t|
+    t.string "size"
+    t.bigint "sizes_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sizes_group_id"], name: "index_sizes_on_sizes_group_id"
+  end
+
+  create_table "sizes_groups", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "slides", force: :cascade do |t|
@@ -257,6 +281,7 @@ ActiveRecord::Schema.define(version: 20180423135921) do
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "similarables", "products"
+  add_foreign_key "sizes", "sizes_groups"
   add_foreign_key "themables", "products"
   add_foreign_key "themables", "themes"
   add_foreign_key "variants", "categories"

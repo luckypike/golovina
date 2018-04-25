@@ -52,7 +52,7 @@ class Order < ApplicationRecord
   end
 
   def amount
-    @amount ||= order_items.map(&:price).sum
+    @amount ||= order_items.map(&:item_price).sum
   end
 
   def can_paid?

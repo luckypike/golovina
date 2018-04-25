@@ -5,7 +5,7 @@ class CreateDiscounts < ActiveRecord::Migration[5.1]
       t.references :user, foreign_key: true
       t.string :name
       t.string :phone
-      t.integer :size
+      t.float :size
 
       t.timestamps
     end

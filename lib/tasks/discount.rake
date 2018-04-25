@@ -7,26 +7,20 @@ namespace :discount do
 
       csv_text = File.read(Rails.application.secrets[:cards_csv])
       csv = CSV.parse(csv_text, :encoding => 'ISO-8859-1')
-      csv.first(3).each do |row|
+      csv.each do |row|
 
-        user = User.find_by(phone: row[2].gsub(/[^0-9]/, ''))
-        discount = Discount.where(id: row[0]).first_or_create
-        p user
-        discount.user = user
-        p row[2].gsub(/[^0-9]/, '')
-        discount.phone = row[2].gsub(/[^0-9]/, '')
-        p row[1]
-        discount.name = row[1]
-        discount.size = 5
-        # theme.title = v['title']
-        # theme.title_long = v['title_long']
-        # theme.desc = v['desc']
-        # theme.weight = v['weight']
-        # theme.state = v['state']
-        # discount.save
-        p discount
-        p row
-        p row[2].gsub(/[^0-9]/, '') if !row[2].blank?
+        if !row[2].nil? && !row[2].gsub(/[^0-9]/, '').blank?
+          user = User.find_by(phone: row[2].gsub(/[^0-9]/, ''))
+          discount = Discount.where(id: row[0]).first_or_create
+          discount.user = user
+          discount.phone = row[2].gsub(/[^0-9]/, '')
+          discount.name = row[1]
+          discount.size = 0.05
+          discount.size = 0.1 if row[0].to_i > 99
+          discount.size = 0.2 if row[0].to_i > 199
+          discount.save
+          p row[2].gsub(/[^0-9]/, '').blank?
+        end
       end
     end
   end

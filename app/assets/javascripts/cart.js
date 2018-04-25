@@ -1,4 +1,20 @@
 $(function() {
+
+  $('.summary_form input.tel').on('input', function(){
+    // console.log($(this).val().length)
+    if($(this).val().length == 16) {
+      $.ajax({
+        method: "GET",
+        url: "cart/discount",
+        data: { phone: $(this).val() }
+      })
+        .done(function(data) {
+          $('.summary_list_item').text(data.total);
+          // console.log(data.total);
+        });
+    }
+  });
+
   $('.cart_destroy').on('ajax:success', function(event) {
     var _this = $(this);
     var detail = event.detail;

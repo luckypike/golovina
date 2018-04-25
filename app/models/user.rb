@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :carts
   has_many :orders
 
+  has_one :discount
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -40,6 +42,10 @@ class User < ApplicationRecord
     if self.phone.present?
       self.phone = User.prepare_phone(self.phone)
     end
+  end
+
+  def get_discount
+    self.discount.present? ? self.discount.size : 0
   end
 
   class << self
