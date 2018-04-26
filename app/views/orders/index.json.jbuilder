@@ -18,7 +18,7 @@ json.orders @orders do |order|
   json.items order.order_items do |item|
     json.id item.id
     json.title item.variant.product.title_safe
-    json.price number_to_rub(item.variant.product.price_sell)
+    json.price number_to_rub(item.item_price)
     json.quantity item.quantity
     json.color item.variant.color.title
     json.size @sizes[item.size]

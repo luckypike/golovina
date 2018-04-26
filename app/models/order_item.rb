@@ -3,7 +3,7 @@ class OrderItem < ApplicationRecord
   belongs_to :variant
 
   def item_price
-    price * quantity
+    price.present? ? price * quantity : variant.product.price_sell * quantity
   end
 
   def size_human
