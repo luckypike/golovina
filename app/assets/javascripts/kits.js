@@ -190,37 +190,31 @@ $(function() {
     var _t = $(event.target);
 
     var pos = parseInt(_pos.data('pos'));
+    
+    if(!isNaN(pos)) {
+      if(pos > 0) {
+        console.log('>')
+         $('.pos', _pv).each(function(i, el) {
+          var _el = $(el);
+          var cpos = _el.data('pos');
+          if(cpos > pos) {
+            _el.data('pos', cpos - 1);
+          }
+        });
 
-    // if() {
-    //   var pos = 100;
-    // } else {
-    //
-    // }
+        _pv.data('max', _pv.data('max') - 1);
 
+        pos = 0;
+      } else if(!_t.is('a.destroy')) {
+        pos = _pv.data('max');
+        pos = pos + 1;
+        _pv.data('max', pos);
+      }
 
+      _pos.data('pos', pos);
 
-
-    if(pos > 0) {
-       $('.pos', _pv).each(function(i, el) {
-        var _el = $(el);
-        var cpos = _el.data('pos');
-        if(cpos > pos) {
-          _el.data('pos', cpos - 1);
-        }
-      });
-
-      _pv.data('max', _pv.data('max') - 1);
-
-      pos = 0;
-    } else if(!_t.is('a.destroy')) {
-      pos = _pv.data('max');
-      pos = pos + 1;
-      _pv.data('max', pos);
+      _dzp.trigger('redraw');
     }
-
-    _pos.data('pos', pos);
-
-    _dzp.trigger('redraw');
   });
 
   _dzp.on('redraw', function() {

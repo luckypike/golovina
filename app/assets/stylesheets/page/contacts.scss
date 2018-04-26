@@ -6,33 +6,31 @@
   .contacts_view {
     margin-bottom: $gutter;
 
-    .image {
-      @include aspect-ratio(3, 4);
+    .contacts_image {
+      .image {
+        @include aspect-ratio(4, 3);
+      }
 
       &:nth-child(2) {
         display: none;
       }
     }
 
+
     @include mq($m) {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       grid-gap: $gutter;
 
-      .image {
+      .contacts_image {
 
         grid-column: 6 span;
       }
 
-      .image:nth-child(2) {
+      .contacts_image:nth-child(2) {
         display: block;
         grid-column: 8 / 4 span;
-
-        img {
-          height: auto;
-          bottom: 0;
-          top: auto;
-        }
+        align-self: end;
       }
     }
   }

@@ -1,7 +1,6 @@
 $(function() {
 
   $('.summary_form input.tel').on('input', function(){
-    // console.log($(this).val().length)
     if($(this).val().length == 16) {
       $.ajax({
         method: "GET",
@@ -11,7 +10,6 @@ $(function() {
         .done(function(data) {
           $('.summary_list_item').text(data.total);
           $('.summary_list_item').append('<div class="discount">С учетом скидки ' + data.discount + '</div>');
-          // console.log(data.total);
         });
     }
   });
