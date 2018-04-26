@@ -30,7 +30,7 @@ class CartController < ApplicationController
         @user = current_user
         @items = Cart.where(user: current_user)
         @sum = @items.map{ |i| (i.variant.product.discount_price(@user.get_discount)) * i.quantity }.sum
-        render json: {total: "Товаров на сумму: #{number_to_rub(@sum)}"}
+        render json: {total: "Товаров на сумму: #{number_to_rub(@sum)}", discount: number_to_percentage(@user.discount.size * 100, precision: 0)}
       end
     else
       render layout: false

@@ -10,6 +10,7 @@ $(function() {
       })
         .done(function(data) {
           $('.summary_list_item').text(data.total);
+          $('.summary_list_item').append('<div class="discount">С учетом скидки ' + data.discount + '</div>');
           // console.log(data.total);
         });
     }
