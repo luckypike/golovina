@@ -1,0 +1,32 @@
+&_discounts {
+  &_list {
+
+    .discounts {
+      &_list {
+        &_item {
+          background-color: #fff;
+          margin-bottom: $base-rhythm-line * 2;
+          cursor: pointer;
+
+          @include mq($s) {
+            display: flex;
+
+            .phone, .discount, .edit, .destroy {
+              width: 25%;
+              flex-shrink: 0;
+            }
+          }
+        }
+
+        .btn {
+          margin-right: $gutter;
+        }
+
+        @include mq($l) {
+          max-width: 8 / 12 * 100%;
+          margin-left: 2 / 12 * 100%;
+        }
+      }
+    }
+  }
+}

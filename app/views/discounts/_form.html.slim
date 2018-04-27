@@ -1,0 +1,11 @@
+= simple_form_for(@discount) do |f|
+  = f.error_notification
+
+  .form_inputs
+    = f.input :name
+    = f.input :phone, input_html: { class: :as_cleave_phone, value: @discount.phone }
+    = f.input :size, collection: {'5%' => '0,05', '10%' => 0.1, '20%' => 0.2}
+    = f.association :user, :as => :hidden
+
+  .form_actions
+    = f.button :submit

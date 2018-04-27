@@ -18,7 +18,7 @@ class CartController < ApplicationController
     authorize :cart
 
     if params[:phone].present?
-      phone = params[:phone].gsub('+7', '7').gsub(/\D/, '')
+      phone = params[:phone]
       existing_user = User.find_by(phone: phone)
       discount = Discount.find_by(phone: phone)
 
@@ -30,7 +30,8 @@ class CartController < ApplicationController
         @user = current_user
         @items = Cart.where(user: current_user)
         @sum = @items.map{ |i| (i.variant.product.discount_price(@user.get_discount)) * i.quantity }.sum
-        render json: {total: "Товаров на сумму: #{number_to_rub(@sum)}", discount: number_to_percentage(@user.discount.size * 100, precision: 0)}
+        !current_user.discount.nil? ? @discount_size = number_to_percentage(current_user.discount.size * 100, precision: 0) : @discount_size = nil
+        render json: {total: "Товаров на сумму: #{number_to_rub(@sum)}", discount: @discount_size}
       end
     else
       render layout: false

@@ -1,0 +1,16 @@
+.page.page_common
+  .page_common_intro.lv3
+
+    h1 Скидочные карты
+
+    .page_discounts_list
+      .discounts_list
+
+        - @discounts.each do |discount|
+          .discounts_list_item
+            .phone = discount.phone
+            .discount = number_to_percentage(discount.size * 100, precision: 0)
+            .edit = link_to 'Редактировать', edit_discount_path(discount), class: 'btn btn_sm'
+            .desroy = link_to 'Удалить', discount, data: { confirm: 'Are you sure?' }, method: :delete,  class: 'btn btn_sm'
+
+        = link_to 'Добавить карту', new_discount_path, class: :btn
