@@ -1,4 +1,10 @@
 $(function() {
+  $('.product_variants_created_at .datetime').flatpickr({
+    locale: "ru",
+    // dateFormat: "d.m.Y H:i",
+    time_24hr: true,
+    enableTime: true
+  });
 
   $('.dz_form_variant').mint_dropzone_variant();
 
@@ -6,8 +12,6 @@ $(function() {
     .on('cocoon:before-insert', function(e, variant_to_be_added) {
       variant_to_be_added.mint_dropzone_variant();
     });
-
-
 });
 
 

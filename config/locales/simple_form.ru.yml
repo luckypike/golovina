@@ -24,6 +24,7 @@ ru:
         sizes: Размеры
         weight: Вес
         out_of_stock: Нет в наличии
+        created_at: Создан
 
       product:
         title: Название

@@ -23,6 +23,9 @@
 
 //= require sticky-kit/dist/sticky-kit.min
 
+//= require flatpickr/dist/flatpickr
+//= require flatpickr/dist/l10n/ru
+
 //= require_tree .
 
 Dropzone.autoDiscover = false;

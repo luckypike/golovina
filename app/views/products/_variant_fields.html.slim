@@ -9,6 +9,8 @@
 
   = f.input :out_of_stock
 
+  = f.input :created_at, html5: true
+
   .dz_preview data-max=f.object.images.map(&:weight).max.to_i
     = f.association :images, as: :text, input_html: { class: :dz_images }
 
@@ -25,6 +27,8 @@
         = image_tag imf.object.photo.preview.url
         .control
           = link_to '', imf.object, method: :delete, class: :destroy, remote: true
+
+
 
 
   / .dz_preview data-max=f.object.images.map(&:weight).max.to_i
