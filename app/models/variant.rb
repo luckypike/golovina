@@ -2,12 +2,13 @@ class Variant < ApplicationRecord
   enum state: { active: 1, archived: 2}
 
   scope :themed_by, ->(themes) { where('variants.themes @> any(array[?]::jsonb[])', themes.map(&:to_s)) if themes.present? }
-  scope :sized_by, ->(sizes) { where('variants.sizes ?| array[:sizes]', { sizes: sizes.map(&:to_s) }) if sizes.present? }
+  scope :sized_by, ->(sizes) { where('variants.sizes_cache ?| array[:sizes]', { sizes: sizes.map(&:to_s) }) if sizes.present? }
 
   before_validation :parse_image_ids
   before_validation :set_size
   before_validation :sync_themes_and_category
   before_save :check_availability
+  before_save :cache_sizes
   after_save :check_category
 
   belongs_to :product
@@ -86,6 +87,10 @@ class Variant < ApplicationRecord
 
   def check_category
     product.category.check_variants
+  end
+
+  def cache_sizes
+    self.sizes_cache = sizes_active
   end
 
   def check_availability
