@@ -18,7 +18,7 @@
         .count
           .toggle
             => t(:kit_products, count: variants.size)
-            | в образе на сумму #{number_to_rub(kit.price_sell)}
+            | в образе
 
           .kit_products_link
             = link_to 'Подробнее', kit, class: [:btn, :buy_kit]
