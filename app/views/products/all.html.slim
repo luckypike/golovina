@@ -48,15 +48,15 @@
             .f_l_i data-f='size' data-v=-1
               | Все
 
-            - if @category.get_ancestor == Rails.application.secrets[:men]
+            - if @category.present? && @category.get_ancestor == Rails.application.secrets[:men]
               - Size.where(:sizes_group_id => 2).each do |item|
                 .f_l_i data-f='size' data-v=item.id
                   = item.size
-            - elsif @category.get_ancestor == Rails.application.secrets[:shoes]
+            - elsif @category.present? && @category.get_ancestor == Rails.application.secrets[:shoes]
               - Size.where(:sizes_group_id => 3).each do |item|
                 .f_l_i data-f='size' data-v=item.id
                   = item.size
-            - else @category.get_ancestor == Rails.application.secrets[:men]
+            - else
               - Size.where(:sizes_group_id => 1).each do |item|
                 .f_l_i data-f='size' data-v=item.id
                   = item.size
