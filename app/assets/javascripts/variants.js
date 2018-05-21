@@ -3,7 +3,8 @@ $(function() {
     locale: "ru",
     // dateFormat: "d.m.Y H:i",
     time_24hr: true,
-    enableTime: true
+    enableTime: true,
+    disableMobile: true,
   });
 
   $('.dz_form_variant').mint_dropzone_variant();
