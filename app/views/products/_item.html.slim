@@ -1,4 +1,4 @@
-- variant ||= product.variants.first
+- variant ||= product.variants.active.first
 - parent_cat = [41, 42, 43, 45, 21, 22]
 - if parent_cat.include?(product.category_id) then s = 'hide_sizes'
 
