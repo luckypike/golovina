@@ -190,10 +190,8 @@ $(function() {
     var _t = $(event.target);
 
     var pos = parseInt(_pos.data('pos'));
-    
     if(!isNaN(pos)) {
       if(pos > 0) {
-        console.log('>')
          $('.pos', _pv).each(function(i, el) {
           var _el = $(el);
           var cpos = _el.data('pos');

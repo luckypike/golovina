@@ -39,13 +39,12 @@ $(function() {
 
       dz.on('success', function(file, data) {
         var images = JSON.parse(_images.val());
-        var _index = $(file.previewElement).closest('.dz_frm').find('.dz_preview_item').length - 1;
         var variant = $(file.previewElement).closest('.dz_frm').find('.remove_fields').prev().attr('id').match(/\d+/)[0];
         images.push(data.image.id);
         _images.val(JSON.stringify(images));
 
         $(file.previewElement).data('id', data.image.id)
-        $(file.previewElement).append('<div class="pos" data-pos="' + data.image.weight + '"><input type="hidden" name="product[variants_attributes][' + variant + '][images_attributes][' + _index + '][weight]" value="0" class="pos_value"><input type="hidden" name="product[variants_attributes][' + variant + '][images_attributes][' + _index + '][id]" value="' + data.image.id + '"><div class="l"></div></div><img src="' + data.image.photo.preview.url + '"><div class="control"><a rel="nofollow" data-remote="true" data-method="delete" href="' + data.url + '" class="destroy"></a></div>');
+        $(file.previewElement).append('<div class="pos" data-pos="' + data.image.weight + '"><input type="hidden" name="product[variants_attributes][' + variant + '][images_attributes][' + data.image.id + '][weight]" value="0" class="pos_value"><input type="hidden" name="product[variants_attributes][' + variant + '][images_attributes][' + data.image.id + '][id]" value="' + data.image.id + '"><div class="l"></div></div><img src="' + data.image.photo.preview.url + '"><div class="control"><a rel="nofollow" data-remote="true" data-method="delete" href="' + data.url + '" class="destroy"></a></div>');
       });
     });
 
