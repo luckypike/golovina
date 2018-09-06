@@ -12,7 +12,7 @@
       .theme_intro.lv3 class=[theme.slug, "i_#{i % 2}"]
         .theme_intro_wrapper
           .image
-            = image_tag theme.image.large
+            = image_tag theme.image.large.url
 
           .text.mb
             = link_to theme_path(theme, anchor: 'kit') do
