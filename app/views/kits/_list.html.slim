@@ -54,15 +54,15 @@
                 .price_and_buy
                   .price
                     - if variant.active?
-                      - if variant.product.price_last
+                      - if variant.variant_price_last
                         .price_last.red
-                          = number_to_rub variant.product.price_last
+                          = number_to_rub variant.variant_price_last
 
                         .price_old
-                          = number_to_rub variant.product.price
+                          = number_to_rub variant.variant_price
 
                       - else
                         .price_last
-                          = number_to_rub variant.product.price
+                          = number_to_rub variant.variant_price
                     - else
                       = link_to 'Похожий', '#', class: [:btn, :more], :data => { :id => variant.product.id }
