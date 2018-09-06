@@ -5,6 +5,11 @@
     - f.object.product.avail_sizes.each do |id, size|
       = ff.input id.to_s, label: "Количество размера \"#{size}\"", input_html: { value: ff.object[id.to_s].presence || '0' }
 
+  = f.input :price
+  = f.input :price_last
+
+  = f.input :desc
+
   = f.input :state, as: :radio_buttons
 
   = f.input :out_of_stock

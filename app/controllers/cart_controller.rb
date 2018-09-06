@@ -11,7 +11,7 @@ class CartController < ApplicationController
     @items = Cart.where(user: current_user)
     @order = Order.where(state: :undef, user: current_user).first_or_create!
     @user = current_user
-    @sum = @items.map{ |i| (i.variant.product.discount_price(@user.get_discount)) * i.quantity }.sum
+    @sum = @items.map{ |i| (i.variant.discount_price(@user.get_discount)) * i.quantity }.sum
   end
 
   def discount
@@ -29,7 +29,7 @@ class CartController < ApplicationController
 
         @user = current_user
         @items = Cart.where(user: current_user)
-        @sum = @items.map{ |i| (i.variant.product.discount_price(@user.get_discount)) * i.quantity }.sum
+        @sum = @items.map{ |i| (i.variant.discount_price(@user.get_discount)) * i.quantity }.sum
         !current_user.discount.nil? ? @discount_size = number_to_percentage(current_user.discount.size * 100, precision: 0) : @discount_size = nil
         render json: {total: "Товаров на сумму: #{number_to_rub(@sum)}", discount: @discount_size}
       end

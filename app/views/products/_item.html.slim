@@ -56,14 +56,14 @@
         .price_and_buy
           .price
             - if product.price_last
-              .price_last.red
+              .price_last.red data-prices="#{product.variants.select(&:variant_price_last).map{ |v| [v.id, number_to_rub(v.variant_price_last) ] }.to_h.to_json}"
                 = number_to_rub product.price_last
 
-              .price_old
+              .price_old data-prices="#{product.variants.select(&:variant_price).map{ |v| [v.id, number_to_rub(v.variant_price) ] }.to_h.to_json}"
                 = number_to_rub product.price
 
             - else
-              .price_last
+              .price_last data-prices="#{product.variants.select(&:variant_price).map{ |v| [v.id, number_to_rub(v.variant_price) ] }.to_h.to_json}"
                 = number_to_rub product.price
 
           .buy
@@ -94,8 +94,11 @@
 
               = inline_svg 'icons/varr.svg'
 
-            .content
-              = markdown product.desc
+            .content.desc data-content="#{product.variants.select(&:variant_desc).map{ |v| [v.id, v.variant_desc ] }.to_h.to_json}"
+              - if variant.desc.present?
+                = markdown variant.desc
+              - else
+                = markdown product.desc
 
         - kits = product.kits.active.select(&:theme)
         - if kits.size > 0

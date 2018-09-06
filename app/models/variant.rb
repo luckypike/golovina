@@ -28,9 +28,32 @@ class Variant < ApplicationRecord
 
   validates_presence_of :sizes, :state
 
+  include ActionView::Helpers::NumberHelper
+  include ProductsHelper
+
   def sync_themes_and_category
     self.themes = product.themes.map(&:id)
     self.category = product.category
+  end
+
+  def variant_price
+    price? ? price : product.price
+  end
+
+  def variant_price_last
+    price_last? ? price_last : product.price_last
+  end
+
+  def variant_desc
+    desc? ? desc : product.desc
+  end
+
+  def price_sell
+    self.variant_price_last.presence || self.variant_price
+  end
+
+  def discount_price(discount)
+    self.price_sell - self.price_sell * discount
   end
 
   def parse_image_ids
