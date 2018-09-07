@@ -4,7 +4,7 @@
   .page_theme_intro
     .theme_intro class=@theme.slug
       .image.lv3
-        / = image_tag @theme.image.large.url
+        = image_tag @theme.image.large.url
 
       .text.mb
         .a
@@ -27,14 +27,14 @@
         | В этом настроении на текущий момент нет образов
 
     - else
-      / = render 'kits/list', kits: @kits
+      = render 'kits/list', kits: @kits
 
 
   .page_theme_themes
     - @themes[(@themes.index(@theme) + 1)..-1].each_with_index do |theme, i|
       .theme_intro.lv2 class=[theme.slug, "i_#{(i + @themes.index(@theme) + 1) % 2}"]
         .image.lv3
-          = image_tag theme.image.large.url if theme.image.present?
+          = image_tag theme.image.large.url
 
         .text.mb
           = link_to theme_path(theme, anchor: 'kit') do
