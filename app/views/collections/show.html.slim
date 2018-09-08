@@ -17,7 +17,7 @@
 
         .page_collection_list_kit_items
           - kit.images.sort_by{|i| i[:id].to_i }.each do |image|
-            - path = "/uploads/collections/#{@collection.id}/#{i}_#{image[:id]}.jpg"
+            - path = "/uploads/collections/#{@collection.id}/#{i}_#{image[:id]}.jpg" + (@collection.v.present? ? "?v#{@collection.v}" : '')
 
             div class="#{image[:pos]} ci_#{@collection.id}_#{i}_#{image[:id]}"
               = image_tag path
