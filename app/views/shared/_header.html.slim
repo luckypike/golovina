@@ -85,7 +85,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
           .section_list
             - @categories.reject{ |c| c.parent_category || c.id == Rails.application.secrets.men }.each do |category|
               .section
-                - if category.categories.size > 0
+                - if category.categories.active.size > 0
                   .section_title.l2
                     = category.title
                     = inline_svg 'icons/varr.svg'
