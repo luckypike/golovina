@@ -29,7 +29,7 @@
       svg {
         display: block;
         fill: #212121;
-        width: 90px;
+        width: 106px;
         height: 36px;
 
         .a, .b {
@@ -693,16 +693,16 @@
     }
   }
 
-  &.no_t {
-    .header_themes {
-      display: none;
-    }
-
-    .header_logo {
-      visibility: hidden;
-      opacity: 0;
-    }
-  }
+  // &.no_t {
+  //   .header_themes {
+  //     display: none;
+  //   }
+  //
+  //   .header_logo {
+  //     visibility: hidden;
+  //     opacity: 0;
+  //   }
+  // }
 
   &.index {
     background: none;
@@ -712,14 +712,12 @@
     }
 
     .header_logo {
-      visibility: hidden;
-      opacity: 0;
-      transition: 0.25s opacity, 0s visibility 0.25s;
+      // visibility: hidden;
+      // opacity: 0;
+      // transition: 0.25s opacity, 0s visibility 0.25s;
 
       svg {
-        .a {
-          stroke: $op-color;
-        }
+        fill: $op-color;
       }
     }
 
@@ -991,6 +989,7 @@
     height: $base-rhythm-line * 15;
 
     &_nav {
+      top: $base-rhythm-line * 8;
       left: $gutter * 4;
     }
 
