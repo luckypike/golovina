@@ -5,8 +5,6 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
         rect x=0 y=8 width=24 height=1
         rect x=0 y=15 width=24 height=1
 
-      / .t Menu
-
   .header_logo
     = link_to root_path do
       svg viewBox="0 0 106 36"
@@ -19,9 +17,6 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
         path d="M61.28,22.13A12.68,12.68,0,0,1,59,24c-.24.12-.44.09-.53,0,0-.78.27-1.31.31-2.17-1.29-.36-.78.39-1.78,1.12a12.67,12.67,0,0,1-3.27,1.29c0-.21.08-.22.36-1.16.21-1.57-1.32-1.78-1.84-1.79a2.62,2.62,0,0,0-1.27.29,2,2,0,0,0-.89,1.25c-.18.63,0,1.88,1,2.08a4.2,4.2,0,0,0,2-.11,34.54,34.54,0,0,0,4.45-1c.92,1.68,1.69,1.24,3.19.16a16.38,16.38,0,0,0,2.41-2.21C62.51,21.24,61.82,21.6,61.28,22.13Zm-8.41,1.48c-.39.41-.47.44-.54.47a1.72,1.72,0,0,1-1.16.12,1.12,1.12,0,0,1-.47-1A1.37,1.37,0,0,1,52.12,22C53.24,22,53.77,22.69,52.87,23.61Z"
 
   .header_caw
-    / .phone
-      .pa
-        = inline_svg 'icons/iphone.svg'
 
     .wishlist
       = link_to [:wishlist], data: { src: polymorphic_path([:wishlist], format: :json) } do
@@ -38,34 +33,14 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
             text.d x='32' y='19'
               = @cart.map(&:quantity).sum
 
-  / .header_contact
-    = link_to '', 'whatsapp://send?phone=' + Rails.application.secrets[:phone], class: :whatsapp
-    = link_to '', 'viber://add?number=' + Rails.application.secrets[:phone], class: :viber
-    = link_to Rails.application.secrets[:phone_human], 'tel://' + Rails.application.secrets[:phone], class: :call
-    .close
-      svg viewBox="0 0 16 16"
-        line x1="1" y1="1" x2="15" y2="15"
-        line x1="1" y1="15" x2="15" y2="1"
 
   .header_menu
     .header_menu_close
       svg viewBox="0 0 16 16"
         line x1="1" y1="1" x2="15" y2="15"
         line x1="1" y1="15" x2="15" y2="1"
+
     .header_menu_container
-      / .header_menu_section
-        .section
-          .section_title.l1
-            span NEW
-            = inline_svg 'icons/varr.svg'
-
-          .section_list
-            .section_list_item.l2
-              = active_link_to 'Образы', [:kits, :products]
-
-            .section_list_item.l2
-              = active_link_to 'Позиции', [:latest, :products]
-
       .header_menu_section
         .section
           .section_title.l1
@@ -154,7 +129,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
             .section_list_item
               = active_link_to 'Мои ванильные сны', [:about, :golovina, :xmas]
 
-      .header_menu_section
+      / .header_menu_section
         = active_link_to 'О бренде', [:about], class: :l1
 
       .header_menu_section
@@ -212,69 +187,6 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
               .section_list_item.l2
                 = active_link_to 'Слайды', [:slides]
 
-
-      / .header_menu_item class=(controller_name == 'themes' ? :opened: nil)
-        .title
-          = active_link_to 'Настроения', [:themes], class: :subs
-
-        .sub
-          .sub_item
-            = active_link_to 'Посмотреть всё', [:themes], active: :exact
-
-          - @themes.each do |theme|
-            .sub_item
-              = active_link_to theme.title, theme
-
-
-      / .header_menu_item.sep.sep_after
-        = active_link_to 'New', [:latest, :products]
-
-
-      / - @categories.reject{ |c| c.parent_category }.each do |category|
-        .header_menu_item class=((controller_name == 'products' && action_name = 'category' && category.categories.map(&:slug).include?(params[:slug])) ? :opened: nil)
-          .title
-            = active_link_to category.title, category_products_path(slug: category.slug)
-
-          .sub
-            - category.categories.each do |category_category|
-              .sub_item
-                = active_link_to category_category.title, category_products_path(slug: category_category.slug)
-
-      / .header_menu_item
-        = active_link_to 'Посмотреть всё', category_products_path(slug: :all)
-
-      / .header_menu_item.sep
-        = active_link_to 'Sale', [:sale, :products]
-
-      / .header_menu_item.sep class=(controller_name == 'customers' ? :opened: nil)
-        .title
-          = active_link_to 'Покупателям', [:customers], active: :exact
-
-        .sub
-          .sub_item
-            = active_link_to 'Доставка', customers_delivery_path
-
-          .sub_item
-            = active_link_to 'Оплата', customers_payment_path
-
-          .sub_item
-            = active_link_to 'Возврат', customers_return_path
-
-      / .header_menu_item.sep
-        - if signed_in?
-          = active_link_to t(:logout), destroy_user_session_path, method: :delete
-        - else
-          = active_link_to t(:login), new_user_session_path
-
-
-    / .header_menu_social
-      .social_networks
-        = link_to Rails.application.secrets[:instagram], class: :instagram
-          = inline_svg 'icons/instagram.svg'
-
-        = link_to Rails.application.secrets[:vk], class: :vk
-          = inline_svg 'icons/vk.svg'
-
   .header_overlay
 
   .header_cart
@@ -297,11 +209,3 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
       = link_to 'Корзина', [:cart], class: :btn
 
   .header_wishlist
-
-  / - if !about?
-    .header_themes
-      .themes_list
-        - @themes.each do |theme|
-          .themes_list_item
-            = active_link_to theme do
-              = theme.title
