@@ -306,8 +306,6 @@
       }
 
       .l2 {
-        padding-top: $base-rhythm-line;
-
         letter-spacing: 0.2em;
         text-transform: uppercase;
         @include font-size(1.25, 3);
@@ -367,6 +365,10 @@
         &_list {
           display: none;
           padding-bottom: $base-rhythm-line;
+
+          &_item {
+            padding-top: $base-rhythm-line / 2;
+          }
 
           &.ll2 {
             @include font-size-small;
