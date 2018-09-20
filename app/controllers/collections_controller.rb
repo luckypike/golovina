@@ -7,8 +7,8 @@ class CollectionsController < ApplicationController
     @photos = Rails.cache.fetch("#{@collection.id}/photos", expires_in: 12.hours) do
       photos = {}
 
-      Dir.glob(File.join('public', 'uploads', 'collections', @collection.id.to_s, "*.jpg")).each do |file|
-        k, i = File.basename(file, '.jpg').split('_')
+      Dir.glob(File.join('public', 'uploads', 'collections', @collection.id.to_s, "*.jpg"), File::FNM_CASEFOLD).each do |file|
+        k, i = File.basename(file.downcase, '.jpg').split('_')
         photos[k] ||= OpenStruct.new
         photos[k].images ||= []
 
@@ -66,6 +66,6 @@ class CollectionsController < ApplicationController
   end
 
   def collection_params
-    params.require(:collection).permit(:title, :slug, :text)
+    params.require(:collection).permit(:title, :slug, :text, :weight)
   end
 end

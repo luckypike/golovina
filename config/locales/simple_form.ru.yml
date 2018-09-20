@@ -22,7 +22,7 @@ ru:
         category: Категория
         color: Цвет
         sizes: Размеры
-        weight: Вес
+        weight: Порядок
         out_of_stock: Нет в наличии
         created_at: Создан
 

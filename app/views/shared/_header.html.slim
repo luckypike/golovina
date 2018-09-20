@@ -119,7 +119,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
             = inline_svg 'icons/varr.svg'
 
           .section_list
-            - Collection.order(created_at: :desc).each do |collection|
+            - Collection.order(weight: :asc, id: :desc).each do |collection|
               .section_list_item
                 = active_link_to collection.title, collection
 
