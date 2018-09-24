@@ -256,7 +256,7 @@
   }
 
   &_menu {
-    @include font-size(1.5, 3);
+    @include font-size(1.5, 2);
 
     letter-spacing: 0.1em;
 
@@ -298,18 +298,7 @@
         }
       }
 
-      .l1 {
-        @include font-size(1.5, 3);
 
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-      }
-
-      .l2 {
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        @include font-size(1.25, 3);
-      }
 
 
       &:after {
@@ -322,16 +311,11 @@
       }
 
       .section {
-
-
-        // padding: $base-rhythm-line 0;
-
         &_title {
           display: flex;
           width: 100%;
           cursor: pointer;
-
-
+          padding-top: $base-rhythm-line;
 
           .varr_icon {
             display: block;
@@ -350,16 +334,6 @@
 
 
           }
-
-          // @include mq($xl) {
-          //   span {
-          //     flex-grow: 1;
-          //   }
-
-          //   .varr_icon {
-          //     margin-left: auto;
-          //   }
-          // }
         }
 
         &_list {
@@ -367,7 +341,7 @@
           padding-bottom: $base-rhythm-line;
 
           &_item {
-            padding-top: $base-rhythm-line / 2;
+            padding-top: $base-rhythm-line;
           }
 
           &.ll2 {
@@ -378,6 +352,21 @@
             display: block;
           }
         }
+      }
+
+      .l1 {
+        @include font-size(1.5, 3);
+
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        padding-top: $base-rhythm-line / 2;
+      }
+
+      .l2 {
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        @include font-size(1.25, 3);
+        padding-top: $base-rhythm-line / 2;
       }
     }
 
