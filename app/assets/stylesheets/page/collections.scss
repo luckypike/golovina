@@ -16,7 +16,7 @@
     &_kit {
       margin-bottom: ($space-m);
       position: relative;
-      overflow: hidden;
+      // overflow: hidden;
 
       &.has_cover {
         padding-top: $space-m;
@@ -173,6 +173,43 @@
     &_1_9,
     &_1_7,
     &_1_5 {
+      margin-top: -30%;
+    }
+  }
+
+  &_5 {
+    &_5_1,
+    &_2_2,
+    &_1_2 {
+      margin-top: 30%;
+    }
+
+    &_5_9 {
+      margin-bottom: $space-m * 2;
+    }
+
+    &_5_7,
+    &_5_8,
+    &_5_9,
+    &_2_12,
+    &_2_13,
+    &_2_14 {
+      transform: translateY($space-m);
+      // margin-bottom: ($space-m);
+    }
+
+    &_5_8,
+    &_5_6,
+    &_5_4,
+    &_2_13,
+    &_2_11,
+    &_2_9,
+    &_2_7,
+    &_2_5,
+    &_2_3,
+    &_1_7,
+    &_1_5,
+    &_1_3 {
       margin-top: -30%;
     }
   }
