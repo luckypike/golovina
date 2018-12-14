@@ -1,0 +1,39 @@
+.page.page_common.page_post
+
+  .page_common_intro
+
+    h1
+      =@post.title
+
+  .post_grid
+
+    .post_grid_images
+      .images_m
+        .swiper-container
+          .images_list.swiper-wrapper.images_list_swiper
+            - @post.images.each do |slide|
+              .images_list_item.swiper-slide
+                .image
+                  = image_tag slide.photo.url
+
+      .images
+        - @post.images.each do |slide|
+          .images_item
+            .img
+              = image_tag slide.photo.url
+
+    .post_grid_text
+      = markdown @post.text
+
+
+  .post_collection.swiper-container
+    .post_collection_list.swiper-wrapper
+      - @collections.each do |collection|
+        .page_collection_list_item.swiper-slide
+          = link_to '', [collection], class: :fake
+
+          .page_collection_list_item_image
+            .img style="background-image: url('#{File.join("/uploads/collections/#{collection.id}/1_2.jpg")}')"
+
+          .page_collection_list_item_title
+            = collection.title

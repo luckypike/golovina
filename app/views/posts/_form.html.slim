@@ -1,0 +1,27 @@
+.form
+  = simple_form_for(@post) do |f|
+    = f.error_notification
+
+    .form_inputs
+      = f.input :title
+      = f.input :text
+      = f.association :images, as: :text, input_html: { class: :dz_images }
+
+      .dz_preview_kit
+        .dz_preview data-max=@post.images.map(&:weight).max.to_i
+          - @post.images.order(id: :asc).each do |image|
+            .dz_preview_item data-id=image.id
+              .pos data-pos=image.weight
+                = hidden_field_tag "post[images_attributes][#{image.id}][weight]", image.weight, { id: nil, class: 'pos_value' }
+                = hidden_field_tag "post[images_attributes][#{image.id}][id]", image.id, { id: nil }
+                .l
+                  = image.weight if image.weight > 0
+
+              = image_tag image.photo.preview.url
+              .control
+                = link_to '', image, method: :delete, class: :destroy, remote: true
+
+        = button_tag 'Добавить фото', type: :button, class: [:dz_clickable, :btn]
+
+    .form_actions
+      = f.button :submit

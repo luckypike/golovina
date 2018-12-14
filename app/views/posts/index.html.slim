@@ -1,0 +1,9 @@
+.page.page_common.page_posts
+  .page_posts_list
+    .post_add
+      = link_to 'Добавить', [:new, :post], class: :btn
+
+    .posts_list
+      - @posts.each do |post|
+        .posts_list_item
+          = link_to post.title, [:edit, post]

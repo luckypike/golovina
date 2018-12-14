@@ -31,11 +31,11 @@ $(function() {
         _this.addClass('active');
         _kpw.slideToggle(400, function() {
           if($(window).width() < 960) {
-            var swiper = new Swiper (_kp, {
-              freeMode: false,
-              slidesPerView: 'auto',
-            });
-            _kp.data('swiper', swiper);
+            // var swiper = new Swiper (_kp, {
+            //   freeMode: false,
+            //   slidesPerView: 'auto',
+            // });
+            // _kp.data('swiper', swiper);
           }
         });
       }
