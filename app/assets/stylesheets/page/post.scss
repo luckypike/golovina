@@ -8,7 +8,10 @@
   }
 
   .page_common_intro {
-    max-width: 50%;
+
+    @include mq($s) {
+      max-width: 50%;
+    }
     // margin: 0 auto $gutter * 2;
   }
 
