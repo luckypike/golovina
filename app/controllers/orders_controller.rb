@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
 
     unless @order.user.reload.is_guest?
       @cart.each do |item|
-        @order.order_items.build(variant: item.variant, quantity: item.quantity, size: item.size, price: item.variant.product.discount_price(@user.get_discount))
+        @order.order_items.build(variant: item.variant, quantity: item.quantity, size: item.size, price: item.variant.discount_price(@user.get_discount))
         item.destroy
       end
 
