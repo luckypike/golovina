@@ -1,4 +1,8 @@
 .input_nested_fields.dz_form_variant.dz_frm data-url=images_path data-params={ 'image[imagable_type]': 'Variant', 'image[imagable_id]': nil }.to_json
+  = f.input :latest
+  = f.input :sale
+  = f.input :pinned, as: :boolean
+
   = f.association :color, collection: Color.tree
 
   = f.simple_fields_for :sizes, OpenStruct.new(f.object.sizes) do |ff|
@@ -9,6 +13,8 @@
   = f.input :price_last
 
   = f.input :desc
+
+  = f.input :comp
 
   = f.input :state, as: :radio_buttons
 

@@ -146,6 +146,7 @@ $(function(){
       var _s = _vv.parent().next().next().find('.sizes');
       var _price = _vv.parent().next().next().find('.price');
       var _desc = _vv.parent().next().next().next().next().find('.desc');
+      var _comp = _vv.parent().next().next().next().next().find('.comp');
       var _b = _s.next();
       var _oos = _b.next().next();
       var _variants = $('.variants_list_item', _vv);
@@ -250,6 +251,8 @@ $(function(){
         });
 
         if (_desc.length) _desc.html(_desc.data('content')[_this.data('id')]);
+
+        if (_comp.length) _comp.html(_comp.data('content')[_this.data('id')]);
 
         var sizes = _s.data('sizes')[_this.data('id')];
         var label = _this.data('label');

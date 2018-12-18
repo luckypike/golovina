@@ -131,8 +131,11 @@
 
               = inline_svg 'icons/varr.svg'
 
-            .content
-              = markdown product.comp
+            .content.comp data-content="#{product.variants.select(&:variant_comp).map{ |v| [v.id, v.variant_comp ] }.to_h.to_json}"
+              - if variant.comp.present?
+                = markdown variant.comp
+              - else
+                = markdown product.comp
 
 
         .acc_item

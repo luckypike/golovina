@@ -25,16 +25,16 @@ ru:
         weight: Порядок
         out_of_stock: Нет в наличии
         created_at: Создан
+        latest: NEW
+        sale: SALE
+        pinned: Закреплен
 
       product:
         title: Название
         kind: Тип
         themes: Стили
-        latest: NEW
-        sale: SALE
         similar_products: Похожие товары
         brand: Golovina
-        pinned: Закреплен
 
       kit:
         title: Название образа
@@ -50,7 +50,9 @@ ru:
         image: Картинка
 
       variant:
-        out_of_stock: Скоро
+        latest: NEW
+        sale: SALE
+        pinned: Закреплен
 
       category:
         title: Название

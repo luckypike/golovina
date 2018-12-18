@@ -48,6 +48,10 @@ class Variant < ApplicationRecord
     desc? ? desc : product.desc
   end
 
+  def variant_comp
+    comp? ? comp : product.comp
+  end
+
   def price_sell
     self.variant_price_last.presence || self.variant_price
   end
@@ -86,10 +90,6 @@ class Variant < ApplicationRecord
 
   def sizes_active
     sizes.select{|s, q| q.to_i > 0}.keys
-  end
-
-  def pinned?
-    product.pinned
   end
 
   def in_order?

@@ -205,6 +205,6 @@ class ProductsController < ApplicationController
         end
       end
     end
-    params.require(:product).permit(:title, :category_id, :latest, :sale, :brand, :pinned, :price, :price_last, :comp, :desc, similar_product_ids: [], variants_attributes: [:created_at, :id, :color_id, :_destroy, :state, :out_of_stock, :desc, :price, :price_last, image_ids: [], sizes: size_keys, images_attributes: [:id, :weight]])
+    params.require(:product).permit(:title, :category_id, :latest, :sale, :brand, :pinned, :price, :price_last, :comp, :desc, similar_product_ids: [], variants_attributes: [:created_at, :id, :color_id, :_destroy, :state, :out_of_stock, :desc, :latest, :sale, :pinned, :comp, :price, :price_last, image_ids: [], sizes: size_keys, images_attributes: [:id, :weight]])
   end
 end

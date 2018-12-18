@@ -12,26 +12,14 @@
 
       .form_inputs
         .form_inputs_variants
+          = f.input :title
+          = f.association :category, collection: Category.tree
+
           = f.simple_fields_for :variants do |v|
             = render 'variant_fields', f: v
 
           .form_inputs_variants_add
             = link_to_add_association f, :variants
-
-        = f.input :title
-        = f.association :category, collection: Category.tree
-
-        = f.input :latest
-        = f.input :sale
-        = f.input :brand, as: :boolean, checked_value: 1, unchecked_value: 0
-
-        = f.input :pinned, as: :boolean
-
-        = f.input :price
-        = f.input :price_last
-
-        = f.input :desc
-        = f.input :comp
 
 
 

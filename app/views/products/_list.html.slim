@@ -1,5 +1,5 @@
 .products_list
-  - products.sort_by(&:created_at).reverse.sort_by{|p| p.pinned? ? 0 : 1}.reject{|p| current_user && current_user.is_editor? ? false : p.images.size == 0}.each_with_index do |variant, i|
+  - products.sort_by(&:created_at).reverse.sort_by{|p| p.pinned ? 0 : 1}.reject{|p| current_user && current_user.is_editor? ? false : p.images.size == 0}.each_with_index do |variant, i|
     .products_list_item class="i_#{i % 6}"
       = link_to '', [variant.product, anchor: variant.id], class: :fake
 
@@ -21,13 +21,13 @@
           .label.out_of_stock
             = t('simple_form.labels.variant.out_of_stock')
         - else
-          - if variant.product.latest
+          - if variant.latest
             .label.latest
-              = t('simple_form.labels.product.latest')
+              = t('simple_form.labels.variant.latest')
           - else
-            - if variant.product.sale
+            - if variant.sale
               .label.sale
-                = t('simple_form.labels.product.sale')
+                = t('simple_form.labels.variant.sale')
         = variant.product.title_safe
         .price
           - if variant.variant_price_last
