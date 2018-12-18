@@ -10,17 +10,17 @@
         = f.input :title
         = f.association :category, collection: Category.tree
 
-        = f.input :latest
-        = f.input :sale
-        = f.input :brand, as: :boolean, checked_value: 1, unchecked_value: 0
-
-        = f.input :pinned, as: :boolean
-
-        = f.input :price
-        = f.input :price_last
-
-        = f.input :desc
-        = f.input :comp
+        / = f.input :latest
+        / = f.input :sale
+        / = f.input :brand, as: :boolean, checked_value: 1, unchecked_value: 0
+        /
+        / = f.input :pinned, as: :boolean
+        /
+        / = f.input :price
+        / = f.input :price_last
+        /
+        / = f.input :desc
+        / = f.input :comp
 
       .form_actions
         = f.button :submit, 'Добавить цвета, размеры и фото'

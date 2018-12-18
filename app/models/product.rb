@@ -19,7 +19,7 @@ class Product < ApplicationRecord
 
   has_many :kits, through: :variants
 
-  validates_presence_of :price, :title
+  validates_presence_of :title
 
   def title_safe
     title_temp = (self.title.presence || self.id.to_s).strip
