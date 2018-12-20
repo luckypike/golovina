@@ -129,8 +129,8 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
             .section_list_item
               = active_link_to 'Свидание с гармонией Fall/Winter 2017-18', [:about, :golovina, :lookbook]
 
-      / .header_menu_section
-        = active_link_to 'О бренде', [:about], class: :l1
+      .header_menu_section
+        = active_link_to 'О бренде', post_path(1), class: :l1
 
       .header_menu_section
         = active_link_to 'Места продаж', [:contacts], class: :l1
