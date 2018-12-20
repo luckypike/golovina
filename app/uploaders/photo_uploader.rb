@@ -50,6 +50,11 @@ class PhotoUploader < CarrierWave::Uploader::Base
     process :optimize
   end
 
+  version :post do
+    process resize_to_fill: [2000, 3000]
+    process :optimize
+  end
+
 
 
   # version :cart do

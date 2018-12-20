@@ -11,16 +11,16 @@
       .images_m
         .swiper-container
           .images_list.swiper-wrapper.images_list_swiper
-            - @post.images.each do |slide|
+            - @post.images.order(:weight).each do |slide|
               .images_list_item.swiper-slide
                 .image
-                  = image_tag slide.photo.url
+                  = image_tag slide.photo.post.url
 
       .images
-        - @post.images.each do |slide|
+        - @post.images.order(:weight).each do |slide|
           .images_item
             .img
-              = image_tag slide.photo.url
+              = image_tag slide.photo.post.url
 
     .post_grid_text
       = markdown @post.text

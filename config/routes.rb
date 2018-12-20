@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :posts
   resources :sizes
   resources :sizes_groups
   root 'static#index'
+
 
   scope format: false do
     devise_for :users, path: '', path_names: { sign_out: 'logout'}
@@ -112,6 +112,10 @@ Rails.application.routes.draw do
     get '/discount', to: 'cart#discount'
     delete ':id/destroy', to: 'cart#destroy', as: :destroy
   end
+
+  get 'posts', to: redirect('/posts/1')
+
+  resources :posts
 
   resources :orders, only: [:index] do
     collection do
