@@ -522,14 +522,19 @@
       &_last {
         @include font-size-bigger;
 
-        &.red {
+        &.active {
           color: rgb(204, 12, 47);
         }
       }
 
       &_old {
-        margin-left: $gutter;
-        text-decoration: line-through;
+        &:not(.active) {
+          @include font-size-bigger;
+        }
+        &.active {
+          margin-left: $gutter;
+          text-decoration: line-through;
+        }
       }
     }
 

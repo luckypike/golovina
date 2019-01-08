@@ -55,16 +55,11 @@
             | Помощь с размером
         .price_and_buy
           .price
-            - if product.price_last
-              .price_last.red data-prices="#{product.variants.select(&:variant_price_last).map{ |v| [v.id, number_to_rub(v.variant_price_last) ] }.to_h.to_json}"
-                = number_to_rub product.price_last
+            .price_last data-prices="#{product.variants.select(&:variant_price_last).map{ |v| [v.id, number_to_rub(v.variant_price_last) ] }.to_h.to_json}"
+              = variant.variant_price_last
 
-              .price_old data-prices="#{product.variants.select(&:variant_price).map{ |v| [v.id, number_to_rub(v.variant_price) ] }.to_h.to_json}"
-                = number_to_rub product.price
-
-            - else
-              .price_last data-prices="#{product.variants.select(&:variant_price).map{ |v| [v.id, number_to_rub(v.variant_price) ] }.to_h.to_json}"
-                = number_to_rub product.price
+            .price_old data-prices="#{product.variants.select(&:variant_price).map{ |v| [v.id, number_to_rub(v.variant_price) ] }.to_h.to_json}"
+              = variant.variant_price
 
           .buy
             = link_to [:wishlist, :variants], class: [:wishlist], method: :post, remote: true do
