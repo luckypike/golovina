@@ -64,7 +64,7 @@
           .buy
             = link_to [:wishlist, :variants], class: [:wishlist], method: :post, remote: true do
               = inline_svg 'icons/wishlist.svg'
-            = link_to 'Купить', [:cart, :variants], class: [:btn, :cart, :inactive], method: :post, remote: true, data: { disable_with: 'Покупка..' }
+            = link_to 'Добавить в корзину', [:cart, :variants], class: [:btn, :cart, :inactive], method: :post, remote: true, data: { disable_with: 'Покупка..' }
             = link_to 'Оплатить', [:cart], class: [:btn, :purchase]
 
         .after_add
@@ -149,7 +149,7 @@
           .content
             .delivery_fast
               .tabs
-                .tabs_item.active rel="nn"
+                / .tabs_item.active rel="nn"
                   | Н. Новгород
 
                 .tabs_item rel="msk"
@@ -159,11 +159,11 @@
                   | Россия
 
               .text
-                .text_item.nn.active
+                / .text_item.nn.active
                   | Стоимость доставки с примеркой по Нижнему Новгороду 199&nbsp;₽ в день заказа. #{link_to 'Подробнее', [:customers, :info], class: :bordered }
 
                 .text_item.msk
-                  | Стоимость доставки от 450&nbsp;₽. (возможность примерки не предусмотрена). #{link_to 'Подробнее', [:customers, :info], class: :bordered }
+                  | Стоимость доставки от 450&nbsp;₽. (возможность примерки предусмотрена). #{link_to 'Подробнее', [:customers, :info], class: :bordered }
 
                 .text_item.rus
                   | Стоимость доставки от&nbsp;500&nbsp;₽ (зависит от вашего региона). #{link_to 'Подробнее', [:customers, :info], class: :bordered }

@@ -670,7 +670,11 @@
 
     .buy {
       display: flex;
-      max-width: 380px;
+      max-width: 190px;
+
+      @include mq($l) {
+        max-width: 380px;
+      }
 
       .wishlist {
         // border: 1px solid $highlight-color;
