@@ -152,7 +152,7 @@
                 / .tabs_item.active rel="nn"
                   | Н. Новгород
 
-                .tabs_item rel="msk"
+                .tabs_item.active rel="msk"
                   | Москва
 
                 .tabs_item rel="rus"
@@ -162,8 +162,8 @@
                 / .text_item.nn.active
                   | Стоимость доставки с примеркой по Нижнему Новгороду 199&nbsp;₽ в день заказа. #{link_to 'Подробнее', [:customers, :info], class: :bordered }
 
-                .text_item.msk
-                  | Стоимость доставки от 450&nbsp;₽. (возможность примерки предусмотрена). #{link_to 'Подробнее', [:customers, :info], class: :bordered }
+                .text_item.msk.active
+                  | Стоимость доставки от 450&nbsp;₽. (возможность примерки не предусмотрена). #{link_to 'Подробнее', [:customers, :info], class: :bordered }
 
                 .text_item.rus
                   | Стоимость доставки от&nbsp;500&nbsp;₽ (зависит от вашего региона). #{link_to 'Подробнее', [:customers, :info], class: :bordered }

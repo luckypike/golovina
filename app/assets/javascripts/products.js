@@ -107,7 +107,7 @@ $(function(){
     $('.delivery_fast .text_item').removeClass('active');
     $('.delivery_fast .text_item.' + $(this).attr('rel')).addClass('active');
 
-    $(this).closest('.acc_item').find('.title_desc').toggleClass('hdd', $(this).attr('rel') != 'nn');
+    $(this).closest('.acc_item').find('.title_desc').toggleClass('hdd', $(this).attr('rel') != 'msk');
   });
 
 
