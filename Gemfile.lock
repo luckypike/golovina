@@ -179,7 +179,7 @@ GEM
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    pg (0.21.0)
+    pg (1.1.4)
     public_suffix (3.0.3)
     puma (3.12.0)
     pundit (2.0.0)
@@ -341,8 +341,8 @@ DEPENDENCIES
   listen
   meta-tags
   mini_magick
-  pg (< 1.0)
-  puma
+  pg (~> 1)
+  puma (~> 3)
   pundit
   rails (~> 5.1)
   rails-i18n
@@ -362,5 +362,8 @@ DEPENDENCIES
   webpacker
   whenever
 
+RUBY VERSION
+   ruby 2.6.0p0
+
 BUNDLED WITH
-   1.17.1
+   1.17.2

@@ -107,7 +107,7 @@ $(function(){
     $('.delivery_fast .text_item').removeClass('active');
     $('.delivery_fast .text_item.' + $(this).attr('rel')).addClass('active');
 
-    $(this).closest('.acc_item').find('.title_desc').toggleClass('hdd', $(this).attr('rel') != 'nn');
+    $(this).closest('.acc_item').find('.title_desc').toggleClass('hdd', $(this).attr('rel') != 'msk');
   });
 
 
@@ -247,8 +247,16 @@ $(function(){
         _vv.data('active_variant', _this.data('id'));
 
         _price.children().each(function(index){
-          $(this).html($(this).data('prices')[_this.data('id')]);
+          $(this).show().addClass('active').html($(this).data('prices')[_this.data('id')]);
         });
+
+        if ($(_price.children()[0]).data('prices')[_this.data('id')] !== undefined) {
+          $(_price.children()[0]).addClass('active');
+        }
+        else {
+          $(_price.children()[0]).hide();
+          $(_price.children()[1]).removeClass('active');
+        }
 
         if (_desc.length) _desc.html(_desc.data('content')[_this.data('id')]);
 

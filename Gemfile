@@ -1,14 +1,11 @@
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
+ruby '2.6.0'
 
 gem 'rails', '~> 5.1'
-gem 'pg', '< 1.0'
-gem 'puma'
+gem 'pg', '~> 1'
+gem 'puma', '~> 3'
 gem 'sass-rails', github: 'rails/sass-rails'
 gem 'autoprefixer-rails', github: 'ai/autoprefixer-rails'
 
