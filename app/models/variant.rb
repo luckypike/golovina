@@ -37,7 +37,7 @@ class Variant < ApplicationRecord
   end
 
   def variant_price
-    price? ? price : product.price
+    price? ? price : (product.price? ? product.price : 0)
   end
 
   def variant_price_last

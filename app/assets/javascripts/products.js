@@ -247,7 +247,10 @@ $(function(){
         _vv.data('active_variant', _this.data('id'));
 
         _price.children().each(function(index){
-          $(this).show().addClass('active').html($(this).data('prices')[_this.data('id')]);
+          if ($(this).data('prices')[_this.data('id')] != '0 ₽') {
+            $(this).show().addClass('active').html($(this).data('prices')[_this.data('id')]);
+          }
+          else $(this).hide();
         });
 
         if ($(_price.children()[0]).data('prices')[_this.data('id')] !== undefined) {

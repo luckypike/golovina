@@ -1,5 +1,5 @@
 - title [@product.category.title, @product.title_safe]
-- description number_to_rub(@product.price_sell)
+- description number_to_rub(@product.variants.any?{|v| v.price_sell > 0} ? @product.variants.select{|v| v.price_sell > 0}.first.price_sell : 0)
 
 - set_meta_tags noindex: true if !@product.purchasable
 - set_meta_tags og: { image: @product.images.order(weight: :asc).select(&:photo).map{ |i| asset_url(i.photo.url) }, title: @product.title_safe }
