@@ -26,7 +26,7 @@ class Variant < ApplicationRecord
   has_many :kitables, dependent: :destroy
   has_many :kits, through: :kitables
 
-  validates_presence_of :sizes, :state
+  validates_presence_of :price, :sizes, :state
 
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
