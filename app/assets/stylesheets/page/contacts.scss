@@ -40,12 +40,13 @@
 
     a {
       display: block;
-      padding: $space-s / 4;
+      padding: $space-s / 4 0;
 
       svg {
         width: $space-s2 / 2;
         height: $space-s2 / 2;
-        display: block;
+        display: inline-block;
+        transform: translateY(2px);
 
         .a {
           fill-rule: evenodd;

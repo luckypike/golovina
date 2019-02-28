@@ -21,10 +21,6 @@
       | E-mail: shop@mint-store.ru
 
   .social_networks
-    = link_to Rails.application.secrets[:instagram], class: :instagram
+    = link_to Rails.application.secrets[:instagram], class: :instagram, target: '_blank'
       = inline_svg 'icons/instagram.svg'
-
-    = link_to Rails.application.secrets[:vk], class: :vk
-      = inline_svg 'icons/vk.svg'
-
-  /   p Магазин «Мяtа» в Москве: Большая Новодмитровская улица, 36 с 9
+      ' @golovina.brand
