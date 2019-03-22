@@ -6,8 +6,8 @@ ruby '2.6.0'
 gem 'rails', '~> 5.1'
 gem 'pg', '~> 1'
 gem 'puma', '~> 3'
-gem 'sass-rails', github: 'rails/sass-rails'
-gem 'autoprefixer-rails', github: 'ai/autoprefixer-rails'
+gem 'sass-rails'
+gem 'autoprefixer-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
@@ -50,6 +50,7 @@ gem 'react-rails'
 gem 'jbuilder'
 
 gem 'sitemap_generator'
+gem 'fog-aws'
 
 gem 'whenever', require: false
 

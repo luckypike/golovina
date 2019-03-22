@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    = display_meta_tags site: 'Golovina', reverse: true, separator: '—', og: { title: :title, description: :description, site_name: 'Golovina' }
+
+    = csrf_meta_tags
+    = favicon_link_tag '/favicon.ico'
+
+    = tag('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' })
+    = tag('meta', { name: 'yandex-verification', content: '67fd84d3a4242f7f' })
+
+  body
+    = react_component 'Header', { white: current_page?(controller: :static, action: :index) }, { prerender: Rails.env.production? }
+
+    = yield
+
+    = javascript_pack_tag 'app', async: true
+    = stylesheet_pack_tag 'app'
+
+    = stylesheet_link_tag 'https://use.typekit.net/crp6yvg.css'

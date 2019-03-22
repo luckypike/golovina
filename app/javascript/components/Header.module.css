@@ -1,0 +1,137 @@
+.root {
+  height: calc(var(--yr) * 16);
+  position: absolute;
+  left: 0;
+  padding-top: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  transition: height 0.2s;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  bottom: 0.875rem;
+  transform: translateX(-50%);
+  z-index: 2;
+  transition-duration: 0.4s;
+  transition-property: transform opacity;
+
+  & a {
+    display: block;
+  }
+
+  & svg {
+    display: block;
+    fill: #212121;
+    width: 106px;
+    height: 36px;
+  }
+}
+
+.burger {
+  position: fixed;
+  left: var(--xr);
+  top: calc(var(--yr) * 2);
+  padding: calc(var(--yr) * 3);
+  margin-left:  calc(var(--yr) * 3 * -1);
+  user-select: none;
+  z-index: 3;
+  transition: top 0.2s;
+
+  cursor: pointer;
+  user-select: none;
+
+  & svg {
+    display: block;
+    width: calc(var(--yr) * 6);
+    height: calc(var(--yr) * 6);
+
+    & rect {
+      fill: var(--pr_color);
+      transition: 0.2s fill;
+    }
+  }
+}
+
+.caw {
+  position: absolute;
+  display: flex;
+  right: 0;
+  top: calc(var(--yr) * 2);
+}
+
+
+.wishlist {
+  display: block;
+  padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
+
+  & svg {
+    display: block;
+    width: calc(var(--yr) * 6);
+    height: calc(var(--yr) * 6);
+
+    & :global {
+      & .a {
+        fill: none;
+        stroke: var(--pr_color);
+        stroke-miterlimit: 10;
+      }
+    }
+  }
+}
+
+.cart {
+  display: block;
+
+
+  & svg {
+    display: block;
+    width: calc(var(--yr) * 12);
+    height: calc(var(--yr) * 12);
+
+    & :global {
+      & .a, & .b {
+        fill: none;
+        stroke: var(--pr_color);
+      }
+
+      & .a {
+        stroke-linejoin: round;
+      }
+
+      & .b {
+        stroke-miterlimit: 10;
+      }
+
+      & .c {
+        fill: #282828;
+      }
+
+      & .d {
+        font-size: 10px;
+        fill: #fff;
+        letter-spacing: -0.06em;
+        text-anchor: middle;
+      }
+
+      & .e {
+        letter-spacing: -0.06em;
+      }
+    }
+  }
+
+
+  /* &.nil {
+    opacity: 0.3;
+
+    .counter {
+      opacity: 0;
+    }
+
+    > a {
+      cursor: default;
+    }
+  } */
+}

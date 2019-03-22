@@ -4,7 +4,9 @@
 
 - set_meta_tags og: { image: @slides.map{ |i| asset_url(i.image.large.url) } }
 
-.page.page_static_index.barba_container  data-namespace='index'
+= react_component 'Index', {  }, { prerender: Rails.env.production? }
+
+/ .page.page_static_index.barba_container  data-namespace='index'
   .page_static_index_swiper
     .ss
       - @slides.each_with_index do |slide, index|
@@ -15,7 +17,7 @@
         div class="ss_#{index}" style="background-image: url('#{slide.image.mobile.url}'); background-position-x: #{slide.left_offset}%"
 
     .social_networks
-      = link_to Rails.application.secrets[:instagram], class: :instagram, target: '_blank'
+      = link_to Rails.application.credentials[Rails.env.to_sym][:instagram], class: :instagram, target: '_blank'
         = inline_svg 'icons/instagram.svg'
 
     .swiper-pagination.swiper-pagination-index
