@@ -81,19 +81,19 @@
             = link_to 'Редактировать', [:edit, product], class: :btn_gr
 
       .acc
-        - if product.desc.present?
-          .acc_item
-            .title
-              .title_label
-                = t('simple_form.labels.defaults.desc')
+        / - if variant.desc.present?
+        .acc_item
+          .title
+            .title_label
+              = t('simple_form.labels.defaults.desc')
 
-              = inline_svg 'icons/varr.svg'
+            = inline_svg 'icons/varr.svg'
 
-            .content.desc data-content="#{product.variants.select(&:variant_desc).map{ |v| [v.id, v.variant_desc ] }.to_h.to_json}"
-              - if variant.desc.present?
-                = markdown variant.desc
-              - else
-                = markdown product.desc
+          .content.desc data-content="#{product.variants.select(&:variant_desc).map{ |v| [v.id, v.variant_desc ] }.to_h.to_json}"
+            - if variant.desc.present?
+              = markdown variant.desc
+            - else
+              = markdown product.desc if product.desc.present?
 
         - kits = product.kits.active.select(&:theme)
         - if kits.size > 0
@@ -118,19 +118,19 @@
                         .kit_wear_title
                           = kit.theme.title
 
-        - if product.comp.present?
-          .acc_item
-            .title
-              .title_label
-                = t('simple_form.labels.defaults.comp')
+        / - if product.comp.present?
+        .acc_item
+          .title
+            .title_label
+              = t('simple_form.labels.defaults.comp')
 
-              = inline_svg 'icons/varr.svg'
+            = inline_svg 'icons/varr.svg'
 
-            .content.comp data-content="#{product.variants.select(&:variant_comp).map{ |v| [v.id, v.variant_comp ] }.to_h.to_json}"
-              - if variant.comp.present?
-                = markdown variant.comp
-              - else
-                = markdown product.comp
+          .content.comp data-content="#{product.variants.select(&:variant_comp).map{ |v| [v.id, v.variant_comp ] }.to_h.to_json}"
+            - if variant.comp.present?
+              = markdown variant.comp
+            - else
+              = markdown product.comp if product.comp.present?
 
 
         .acc_item

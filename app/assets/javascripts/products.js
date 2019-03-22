@@ -261,7 +261,21 @@ $(function(){
           $(_price.children()[1]).removeClass('active');
         }
 
+        if ((_desc.data('content')[_this.data('id')]) !== undefined) {
+          _desc.parent().show();
+        }
+        else {
+          _desc.parent().hide();
+        }
+
         if (_desc.length) _desc.html(_desc.data('content')[_this.data('id')]);
+
+        if ((_comp.data('content')[_this.data('id')]) !== undefined) {
+          _comp.parent().show();
+        }
+        else {
+          _comp.parent().hide();
+        }
 
         if (_comp.length) _comp.html(_comp.data('content')[_this.data('id')]);
 
