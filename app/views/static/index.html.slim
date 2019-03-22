@@ -4,7 +4,14 @@
 
 - set_meta_tags og: { image: @slides.map{ |i| asset_url(i.image.large.url) } }
 
-= react_component 'Index', {  }, { prerender: Rails.env.production? }
+= react_component \
+  'Index',
+  { \
+    slides: @slides.map{ |slide| { name: slide.name, link: slide.link, image: slide.image.large.url, link_name: slide.link_name } }, \
+  },
+  { \
+    prerender: Rails.env.production? \
+  }
 
 / .page.page_static_index.barba_container  data-namespace='index'
   .page_static_index_swiper

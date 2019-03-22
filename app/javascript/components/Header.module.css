@@ -66,6 +66,7 @@
 .wishlist {
   display: block;
   padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
+  opacity: 0.3;
 
   & svg {
     display: block;
@@ -84,7 +85,11 @@
 
 .cart {
   display: block;
+  opacity: 0.3;
 
+  &.active {
+    opacity: 1;
+  }
 
   & svg {
     display: block;
@@ -121,17 +126,56 @@
       }
     }
   }
+}
 
+.counter {
+  opacity: 0;
 
-  /* &.nil {
-    opacity: 0.3;
+  &.active {
+    opacity: 1;
+  }
+}
 
-    .counter {
-      opacity: 0;
+.white {
+  & .burger {
+    & svg {
+      & rect {
+        fill: white;
+      }
     }
+  }
 
-    > a {
-      cursor: default;
+  & .logo {
+    & svg {
+      fill: white;
     }
-  } */
+  }
+
+  & .wishlist {
+    & svg {
+      & :global {
+        & .a {
+          stroke: white;
+        }
+      }
+    }
+  }
+}
+
+.cart {
+  & svg {
+    & :global {
+      & .a, & .b {
+        stroke: white;
+      }
+
+      & .c {
+        fill: white;
+      }
+
+      & .d {
+        fill: var(--pr_color);
+      }
+    }
+  }
 }

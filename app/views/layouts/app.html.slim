@@ -10,7 +10,15 @@ html
     = tag('meta', { name: 'yandex-verification', content: '67fd84d3a4242f7f' })
 
   body
-    = react_component 'Header', { white: current_page?(controller: :static, action: :index) }, { prerender: Rails.env.production? }
+    = react_component( \
+      'Header',
+      { \
+        white: current_page?(controller: :static, action: :index),
+        cart: @cart.map(&:quantity).sum \
+      }, { \
+        prerender: Rails.env.production? \
+      } \
+    )
 
     = yield
 
