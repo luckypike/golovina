@@ -1,0 +1,48 @@
+.root {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: white;
+  z-index: 5;
+  visibility: hidden;
+  opacity: 0;
+  padding: 4rem 7rem 2rem calc(var(--xr) * 2);
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+
+.section {
+  margin-bottom: calc(var(--yr) * 1);
+
+  &:not(:last-child) {
+    padding-bottom: calc(var(--yr) * 1);
+    border-bottom: 1px solid var(--sep_color);
+  }
+
+  & > .title {
+    font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+    /* line-height: calc(var(--yr) * var(--lh)); */
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: var(--yr) 0;
+  }
+}
+
+.subs {
+  font-size: calc(var(--yr) * calc(var(--fs) - 1));
+  /* line-height: calc(var(--yr) * var(--lh)); */
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.sub {
+  &:not(:last-child) {
+    margin-bottom: var(--yr);
+  }
+}

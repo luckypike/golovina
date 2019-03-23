@@ -13,6 +13,8 @@ html
     = react_component( \
       'Header',
       { \
+        categories: Category.active.order(:weight).map{ |category| category.slice(:title, :parent_category_id, :id, :slug) },
+        themes: Theme.active.order(:weight).map{ |theme| theme.slice(:title, :id, :slug) },
         white: current_page?(controller: :static, action: :index),
         cart: @cart.map(&:quantity).sum \
       }, { \

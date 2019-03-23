@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
+import listToTree from 'list-to-tree-lite'
+
+import Nav from './Nav'
 
 import styles from './Header.module.css'
 
@@ -7,7 +10,7 @@ import Logo from '!svg-react-loader?!../images/golovina.svg'
 
 class Header extends Component {
   render () {
-    const { white, cart } = this.props
+    const { white, cart, categories, themes } = this.props
 
     return (
       <header className={classNames(styles.root, { [styles.white]: white })}>
@@ -16,6 +19,10 @@ class Header extends Component {
             <rect height="1" width="24" x="0" y="8" />
             <rect height="1" width="24" x="0" y="15" />
           </svg>
+        </div>
+
+        <div className={styles.nav}>
+          <Nav categories={listToTree(categories, { parentKey: 'parent_category_id' })} themes={themes} />
         </div>
 
         <div className={styles.logo}>
