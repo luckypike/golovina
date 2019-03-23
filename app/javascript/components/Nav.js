@@ -23,13 +23,23 @@ class Nav extends Component {
     return (
       <nav className={classNames(styles.root, { [styles.active]: active })}>
         <Section id="categories" title="Онлайн магазин" onToggle={this.toggleSection} section={section}>
+          <div className={styles.sub}>
+            <a href="/catalog/latest">New</a>
+          </div>
+
           {categories.map(category =>
             <div className={styles.sub} key={category.id}>
-              <a href="#">
-                {category.title}
-              </a>
+              <a href="#">{category.title}</a>
             </div>
           )}
+
+          <div className={styles.sub}>
+            <a href="/catalog/sale">Sale</a>
+          </div>
+
+          <div className={styles.sub}>
+            <a href="/catalog/all">Посмотреть всё</a>
+          </div>
         </Section>
 
         <Section id="themes" title="Образы" onToggle={this.toggleSection} section={section}>

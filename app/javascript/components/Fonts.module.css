@@ -1,0 +1,13 @@
+h1, .h1 {
+  font-size: calc(var(--yr) * calc(var(--fs) + 0.5));
+  line-height: calc(var(--yr) * var(--lh));
+  font-weight: var(--fw_light);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 calc(var(--yr) * 6);
+
+  @media (--m) {
+    font-size: calc(var(--yr) * calc(var(--fs) + 2.5));
+    line-height: calc(var(--yr) * calc(var(--lh) + 2));
+  }
+}

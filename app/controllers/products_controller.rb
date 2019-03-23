@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish, :info, :similar]
 
+  layout 'app', only: :latest
+
   def index
     authorize Product
     redirect_to [:all, :products]
@@ -117,7 +119,12 @@ class ProductsController < ApplicationController
   def latest
     authorize Product
 
-    @products = Variant.includes(:images, :product).where(latest: true, state: [:active])
+    respond_to do |format|
+      format.html
+      format.json do
+        @variants = Variant.includes(:images, :product).where(latest: true, state: [:active])
+      end
+    end
   end
 
   def sale
