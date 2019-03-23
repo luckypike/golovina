@@ -7,6 +7,10 @@
   width: 100%;
   z-index: 10;
   transition: height 0.2s;
+
+  @media (--s) {
+    height: calc(var(--yr) * 24);
+  }
 }
 
 .logo {
@@ -39,9 +43,16 @@
   user-select: none;
   z-index: 3;
   transition: top 0.2s;
-
   cursor: pointer;
   user-select: none;
+
+  @media (--s) {
+    top: calc(var(--yr) * 10);
+  }
+
+  @media (--m) {
+    left: calc(var(--xr) * 2);
+  }
 
   & svg {
     display: block;
@@ -59,7 +70,12 @@
   position: absolute;
   display: flex;
   right: 0;
-  top: calc(var(--yr) * 2);
+  bottom: calc(var(--yr) * 2);
+
+  @media (--m) {
+    right: calc(var(--xr) * 1);
+  }
+
 }
 
 
@@ -160,22 +176,74 @@
       }
     }
   }
+
+  & .cart {
+    & svg {
+      & :global {
+        & .a, & .b {
+          stroke: white;
+        }
+
+        & .c {
+          fill: white;
+        }
+
+        & .d {
+          fill: var(--pr_color);
+        }
+      }
+    }
+  }
 }
 
-.cart {
+.nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: white;
+  z-index: 5;
+  visibility: hidden;
+  opacity: 0;
+  padding: 4rem 7rem 2rem calc(var(--xr) * 2);
+  transform: translateX(-50%);
+  visibility: hidden;
+  transition-duration: 0.4s;
+  transition-property: transform opacity;
+  z-index: 4;
+  overflow: hidden;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (--s) {
+    width: 20rem;
+  }
+}
+
+.close {
+  position: fixed;
+  right: calc(var(--xr) * 1.5);
+  top: calc(var(--yr) * 2);
+  padding: 16px 8px;
+  cursor: pointer;
+  z-index: 3;
+
+  @media (--s) {
+    position: absolute;
+  }
+
   & svg {
-    & :global {
-      & .a, & .b {
-        stroke: white;
-      }
+    display: block;
+    width: 16px;
+    height: 16px;
 
-      & .c {
-        fill: white;
-      }
-
-      & .d {
-        fill: var(--pr_color);
-      }
+    & line {
+      stroke: var(--pr_color);
     }
   }
 }

@@ -9,20 +9,36 @@ import styles from './Header.module.css'
 import Logo from '!svg-react-loader?!../images/golovina.svg'
 
 class Header extends Component {
+  state = {
+    active: false
+  }
+
   render () {
-    const { white, cart, categories, themes } = this.props
+    const { active } = this.state
+    const { white, cart, categories, themes, collections } = this.props
 
     return (
       <header className={classNames(styles.root, { [styles.white]: white })}>
-        <div className={styles.burger}>
+        <div className={styles.burger} onClick={() => this.setState({ active: true })}>
           <svg viewBox="0 0 24 24">
             <rect height="1" width="24" x="0" y="8" />
             <rect height="1" width="24" x="0" y="15" />
           </svg>
         </div>
 
-        <div className={styles.nav}>
-          <Nav categories={listToTree(categories, { parentKey: 'parent_category_id' })} themes={themes} />
+        <div className={classNames(styles.nav, { [styles.active]: active })}>
+          <div className={styles.close} onClick={() => this.setState({ active: false })}>
+            <svg viewBox="0 0 16 16">
+              <line x1="1" y1="1" x2="15" y2="15" />
+              <line x1="1" y1="15" x2="15" y2="1" />
+            </svg>
+          </div>
+
+          <Nav
+            categories={listToTree(categories, { parentKey: 'parent_category_id' })}
+            themes={themes}
+            collections={collections}
+          />
         </div>
 
         <div className={styles.logo}>
@@ -59,7 +75,8 @@ class Header extends Component {
 }
 
 Header.defaultProps = {
-  white: false
+  white: false,
+  cart: 0
 }
 
 export default Header

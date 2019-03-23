@@ -18,14 +18,16 @@ class Nav extends Component {
 
   render() {
     const { active, section } = this.state
-    const { categories, themes } = this.props
+    const { categories, themes, collections } = this.props
 
     return (
       <nav className={classNames(styles.root, { [styles.active]: active })}>
         <Section id="categories" title="Онлайн магазин" onToggle={this.toggleSection} section={section}>
           {categories.map(category =>
             <div className={styles.sub} key={category.id}>
-              {category.title}
+              <a href="#">
+                {category.title}
+              </a>
             </div>
           )}
         </Section>
@@ -33,27 +35,86 @@ class Nav extends Component {
         <Section id="themes" title="Образы" onToggle={this.toggleSection} section={section}>
           {themes.map(theme =>
             <div className={styles.sub} key={theme.id}>
-              {theme.title}
+              <a href="#">
+                {theme.title}
+              </a>
             </div>
           )}
         </Section>
+
+        <Section id="collections" title="Коллекции" onToggle={this.toggleSection} section={section}>
+          {collections.map(collection =>
+            <div className={classNames(styles.sub, styles.collection)} key={collection.id}>
+              <a href="#">
+                {collection.title}
+              </a>
+            </div>
+          )}
+        </Section>
+
+        <div className={classNames(styles.section)}>
+          <div className={styles.title}>
+            <a href="/posts/1">
+              О бренде
+            </a>
+          </div>
+        </div>
+
+        <div className={classNames(styles.section)}>
+          <div className={styles.title}>
+            <a href="/contacts">
+              Места продаж
+            </a>
+          </div>
+        </div>
+
+        <Section id="customers" title="Покупателям" onToggle={this.toggleSection} section={section}>
+          <div className={styles.sub}>
+            <a href="/customers/info">Оплата и доставка</a>
+          </div>
+
+          <div className={styles.sub}>
+            <a href="/customers/return">Обмен и возврат</a>
+          </div>
+        </Section>
+
+        <div className={classNames(styles.section)}>
+          <div className={styles.title}>
+            <a href="/login">
+              Войти
+            </a>
+          </div>
+        </div>
       </nav>
     )
   }
 }
 
+function Arr(props) {
+  return (
+    <svg viewBox="0 0 10 24" className={styles.arr}>
+      <polyline points="1 10 5 14 9 10" />
+    </svg>
+  )
+}
+
 class Section extends Component {
+  isActive() {
+    return this.props.section == this.props.id
+  }
+
   render() {
     const { title, children, id, section } = this.props
 
     return (
-      <div className={classNames(styles.section)}>
+      <div className={classNames(styles.section, { [styles.active]: this.isActive() })}>
         <div className={styles.title} onClick={() => this.props.onToggle(id)}>
           {title}
+          <Arr />
         </div>
 
         {children &&
-          <AnimateHeight className={styles.subs} height={section == id ? 'auto' : 0}>
+          <AnimateHeight className={styles.subs} duration={500} height={this.isActive() ? 'auto' : 0}>
             {children}
           </AnimateHeight>
         }

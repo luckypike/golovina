@@ -1,19 +1,5 @@
 .root {
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  background: white;
-  z-index: 5;
-  visibility: hidden;
-  opacity: 0;
-  padding: 4rem 7rem 2rem calc(var(--xr) * 2);
 
-  &.active {
-    visibility: visible;
-    opacity: 1;
-  }
 }
 
 
@@ -26,23 +12,52 @@
   }
 
   & > .title {
+    display: flex;
+    width: 100%;
+    cursor: pointer;
     font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
-    /* line-height: calc(var(--yr) * var(--lh)); */
     text-transform: uppercase;
     letter-spacing: 0.2em;
     padding: var(--yr) 0;
+  }
+
+  &.active {
+    & .arr {
+      transform: scaleY(-1);
+    }
   }
 }
 
 .subs {
   font-size: calc(var(--yr) * calc(var(--fs) - 1));
-  /* line-height: calc(var(--yr) * var(--lh)); */
   text-transform: uppercase;
   letter-spacing: 0.2em;
 }
 
 .sub {
-  &:not(:last-child) {
-    margin-bottom: var(--yr);
+  margin-bottom: var(--yr);
+}
+
+.collection {
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+  line-height: calc(var(--yr) * calc(var(--lh) - 1));
+  text-transform: none;
+  letter-spacing: 0.05em;
+  margin-bottom: calc(var(--yr) * 2);  
+}
+
+.arr {
+  display: block;
+  width: 10px;
+  height: 24px;
+  margin-left: calc(var(--xr) / 2);
+  flex-shrink: 0;
+
+  & polyline {
+    fill: none;
+    stroke-width: 1px;
+    stroke: var(--pr_color);
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
   }
 }

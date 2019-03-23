@@ -19,5 +19,6 @@ body {
 }
 
 a {
+  color: var(--pr_color);
   text-decoration: none;
 }
