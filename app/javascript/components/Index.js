@@ -11,6 +11,7 @@ class Index extends Component {
   componentDidMount() {
     this.glide = new Glide(this.mount.current, {
       type: 'carousel',
+      gap: 0,
     })
     this.glide.mount()
   }
@@ -25,6 +26,8 @@ class Index extends Component {
             <div className={classNames('glide__slides', styles.slides)}>
               {slides.map((slide, _) =>
                 <div key={_} className={classNames('glide__slide', styles.slide)}>
+                  <div className={styles.image} style={{ backgroundImage: `url(${slide.image})` }} />
+
                   <div className={styles.text}>
                     <div className={styles.title}>
                       {slide.name}
