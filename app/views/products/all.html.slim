@@ -1,7 +1,9 @@
-- description @products.first(5).map(&:title).join(', ')
-- set_meta_tags og: { image: (@products.map(&:images).flatten.select(&:photo).first(3).map{ |i| asset_url(i.photo.url) } rescue nil), title: :title, description: :description, canonical: (@category ? category_products_url(slug: @category.slug) : all_products_url) }
+= react_component 'Products/All'
 
-.page.page_common.page_products
+/ - description @variants.first(5).map(&:title).join(', ')
+/ - set_meta_tags og: { image: (@variants.map(&:images).flatten.select(&:photo).first(3).map{ |i| asset_url(i.photo.url) } rescue nil), title: :title, description: :description, canonical: (@category ? category_products_url(slug: @category.slug) : all_products_url) }
+
+/ .page.page_common.page_products
   .page_common_intro.lv3
     h1
       = title(@category ? @category.title : t(:catalog_all))

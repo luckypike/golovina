@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish, :info, :similar]
 
-  layout 'app', only: :latest
+  layout 'app', only: [:all, :latest]
 
   def index
     authorize Product
@@ -14,18 +14,23 @@ class ProductsController < ApplicationController
 
   def all
     authorize Product
-    @where ||= {}
 
-    %w(category color).each do |f|
-      params[f] = params[f].present? ? params[f].map(&:to_i) : []
-      @where[f] = params[f] if params[f].present?
+    respond_to do |format|
+      format.html
+      format.json do
+        @where ||= {}
+
+        %w(category color).each do |f|
+          params[f] = params[f].present? ? params[f].map(&:to_i) : []
+          @where[f] = params[f] if params[f].present?
+        end
+
+        params[:theme] = params[:theme].presence || []
+        params[:size] = params[:size].presence || []
+
+        @variants = Variant.includes(:images, :product).themed_by(params[:theme]).sized_by(params[:size]).where(@where).where(state: [:active]).order('products.created_at DESC')
+      end
     end
-
-    params[:theme] = params[:theme].presence || []
-    params[:size] = params[:size].presence || []
-
-    @products = Variant.includes(:images, :product).themed_by(params[:theme]).sized_by(params[:size]).where(@where).where(state: [:active]).order('products.created_at DESC')
-    render :all
   end
 
   def category
