@@ -11,3 +11,16 @@ h1, .h1 {
     line-height: calc(var(--yr) * calc(var(--lh) + 2));
   }
 }
+
+
+h2, .h2 {
+  font-size: calc(var(--yr) * calc(var(--fs)));
+  line-height: calc(var(--yr) * calc(var(--lh) - 1));
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  @media (--m) {
+    font-size: calc(var(--yr) * calc(var(--fs) + 2.5));
+    line-height: calc(var(--yr) * calc(var(--lh) + 2));
+  }
+}

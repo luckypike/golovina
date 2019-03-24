@@ -1,6 +1,11 @@
 .root {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  grid-row-gap: calc(var(--yr) * 6);
+
+  @media (--s) {
+    grid-row-gap: calc(var(--yr) * 8);
+  }
 }
 
 .image {
@@ -12,6 +17,7 @@
 
 .item {
   grid-column: span 6;
+  display: block;
 
   &.i0 {
     grid-column: 1 / span 7;
@@ -33,4 +39,31 @@
   &.i4 {
     grid-column: 6 / span 7;
   }
+}
+
+.desc {
+  margin-top: calc(var(--yr) * 1);
+  padding: 0 var(--yr);
+  text-align: center;
+
+  @media (--s) {
+    margin-top: calc(var(--yr) * 2);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+}
+
+.title {
+  font-size: calc(var(--yr) * calc(var(--fs) - 1.25));
+  line-height: calc(var(--yr) * calc(var(--lh) - 3));
+
+  @media (--s) {
+    font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+    line-height: calc(var(--yr) * calc(var(--lh) - 1));
+  }
+}
+
+.price {
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.75));
+  line-height: calc(var(--yr) * calc(var(--lh) - 2));
 }
