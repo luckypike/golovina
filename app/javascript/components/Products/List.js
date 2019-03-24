@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 
+import Price from './Price'
+
 import styles from './List.module.css'
 
 class List extends Component {
@@ -21,7 +23,7 @@ class List extends Component {
               </div>
 
               <div className={styles.price}>
-                {variant.price} ₽
+                <Price value={variant.price} />
               </div>
             </div>
           </a>
