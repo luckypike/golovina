@@ -11,15 +11,32 @@ import Logo from '!svg-react-loader?!../images/golovina.svg'
 
 class Header extends Component {
   state = {
-    active: false
+    active: false,
+    scrolling: false
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
+
+  handleScroll = event => {
+    if(window.scrollY === 0 && this.state.scrolling === true) {
+      this.setState({ scrolling: false })
+    } else if(window.scrollY !== 0 && this.state.scrolling !== true) {
+      this.setState({ scrolling: true })
+    }
   }
 
   render () {
-    const { active } = this.state
+    const { active, scrolling } = this.state
     const { white, cart, wishlist, root, user, categories, themes, collections } = this.props
 
     return (
-      <header className={classNames(styles.root, { [styles.white]: white })}>
+      <header className={classNames(styles.root, { [styles.white]: white, [styles.scrolling]: scrolling })}>
         <div className={styles.burger} onClick={() => this.setState({ active: true })}>
           <svg viewBox="0 0 24 24">
             <rect height="1" width="24" x="0" y="8" />

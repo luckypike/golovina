@@ -21,11 +21,19 @@
 
   &.i0 {
     grid-column: 1 / span 7;
+
+    @media (--l) {
+      grid-column: 1 / span 6;
+    }
   }
 
   &.i1 {
     align-self: end;
     grid-column: 9 / span 4;
+
+    @media (--l) {
+      grid-column: 8 / span 4;
+    }
   }
 
   &.i2, &.i5 {

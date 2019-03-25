@@ -9,6 +9,7 @@ h1, .h1 {
   @media (--m) {
     font-size: calc(var(--yr) * calc(var(--fs) + 2.5));
     line-height: calc(var(--yr) * calc(var(--lh) + 2));
+    margin: 0 0 calc(var(--yr) * 8);
   }
 }
 
