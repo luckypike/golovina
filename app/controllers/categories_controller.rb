@@ -37,9 +37,9 @@ class CategoriesController < ApplicationController
     authorize @category
 
     if @category.update(category_params)
-      redirect_to categories_path, notice: 'Category was successfully updated.'
+      head :ok, location: categories_path
     else
-      render :edit
+      render json: @category.errors, status: :unprocessable_entity
     end
   end
 
@@ -56,6 +56,6 @@ class CategoriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def category_params
-      params.require(:category).permit(:title, :slug, :state, :weight, :parent_category_id, :desc)
+      params.require(:category).permit(:title, :slug, :state)
     end
 end

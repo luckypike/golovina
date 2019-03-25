@@ -1,3 +1,3 @@
 - title @category.title
 
-= react_component 'Categories/Form'
+= react_component 'Categories/Form', { id: @category.id, title: @category.title, values: { title: @category.title, slug: @category.slug, state: @category.state }}
