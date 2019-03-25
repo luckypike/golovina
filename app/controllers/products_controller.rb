@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish, :info, :similar]
 
-  layout 'app', only: [:index, :latest]
+  layout 'app', only: [:index, :latest, :category]
 
   def index
     authorize Product
@@ -19,33 +19,22 @@ class ProductsController < ApplicationController
         params[:theme] = params[:theme].presence || []
         params[:size] = params[:size].presence || []
 
-        @variants = Variant.includes(:images, :product).themed_by(params[:theme]).sized_by(params[:size]).where(@where).where(state: [:active]).order('products.created_at DESC')
+        @variants = Variant.active.includes(:images, :product).themed_by(params[:theme]).sized_by(params[:size]).where(@where).order('products.created_at DESC')
       end
     end
   end
 
   def category
+    authorize Product
+
     @category = Category.friendly.find(params[:slug])
 
-    @where = {
-      category: @category.categories.map(&:id) <<  + @category.id,
-    }
-
-    self.all
-
-    # %w(theme size).each do |f|
-    #
-    #   where[f.pluralize] = params[f] if params[f].present? && f != 'theme'
-    # end
-
-    # %w(category color).each do |f|
-    #   params[f] = params[f].present? ? params[f].map(&:to_i) : []
-    #   where[f] = params[f] if params[f].present?
-    # end
-
-
-
-
+    respond_to do |format|
+      format.html
+      format.json do
+        @variants = @category.variants.active.includes(:images, :product)
+      end
+    end
   end
 
   def control
@@ -118,7 +107,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @variants = Variant.includes(:images, :product).where(latest: true, state: [:active])
+        @variants = Variant.active.includes(:images, :product).where(latest: true)
       end
     end
   end

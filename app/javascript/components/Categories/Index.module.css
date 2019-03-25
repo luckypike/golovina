@@ -32,6 +32,10 @@
   }
 }
 
+.inactive {
+  opacity: 0.5;
+}
+
 .variants {
   composes: at from '../Fonts';
 }

@@ -43,7 +43,11 @@ Rails.application.routes.draw do
 
   get 'robots.:format', to: 'static#robots'
 
-  resources :themes, path: :styles, except: [:destroy]
+  resources :themes, path: :styles, except: [:destroy] do
+    collection do
+      get :latest
+    end
+  end
 
   resources :kits
 
@@ -81,12 +85,12 @@ Rails.application.routes.draw do
     end
 
     collection do
-      get 'control', to: 'products#control', as: :control
-      get 'control/archive', to: 'products#control'
-      get :all
+      # get 'control', to: 'products#control', as: :control
+      # get 'control/archive', to: 'products#control'
+      # get :all
       get :latest
-      get :golovina
-      get :kits
+      # get :golovina
+      # get :kits
       get :sale
       get ':slug', to: 'products#category', as: :category, constraints: lambda { |request| Category.find_by_slug(request.params[:slug]).present? }
     end

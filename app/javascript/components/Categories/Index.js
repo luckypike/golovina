@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import classNames from 'classnames'
 import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc'
 
 import { path } from '../Routes'
@@ -43,14 +44,14 @@ class Index extends Component {
 const DragHandle = sortableHandle(() => <div className={styles.drag} />)
 
 const Item = SortableElement(({ category }) =>
-  <a href={path('edit_category_path', { id: category.id })} className={styles.category}>
+  <a href={path('edit_category_path', { id: category.id })} className={classNames(styles.category, styles[category.state])}>
     <DragHandle />
     <div>
       {category.title}
     </div>
 
     <div className={styles.variants}>
-      Товаров: {category.variants}
+      активно: {category.variants.active}, всего: {category.variants.total}
     </div>
   </a>
 )

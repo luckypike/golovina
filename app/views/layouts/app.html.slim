@@ -13,7 +13,7 @@ html
     = react_component( \
       'Header',
       { \
-        categories: Category.active.order(:weight).map{ |category| category.slice(:title, :parent_category_id, :id, :slug) },
+        categories: Category.active.where.not(variants_counter: 0).order(weight: :asc).map{ |category| category.slice(:title, :id, :slug) },
         themes: Theme.active.order(:weight).map{ |theme| theme.slice(:title, :id, :slug) },
         collections: Collection.order(weight: :asc, id: :desc).map{ |collection| collection.slice(:title, :id, :slug) },
         root: current_page?(controller: :static, action: :index),

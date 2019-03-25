@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import AnimateHeight from 'react-animate-height'
 
+import { path } from './Routes'
+
 import styles from './Nav.module.css'
 
 class Nav extends Component {
@@ -29,7 +31,7 @@ class Nav extends Component {
 
           {categories.map(category =>
             <div className={styles.sub} key={category.id}>
-              <a href="#">{category.title}</a>
+              <a href={path('category_products_path', { slug: category.slug })}>{category.title}</a>
             </div>
           )}
 
