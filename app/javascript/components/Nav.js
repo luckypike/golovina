@@ -103,7 +103,7 @@ class Nav extends Component {
         </div>
 
         {user && user['is_editor?'] &&
-          <Section id="control" title="Управлние" onToggle={this.toggleSection} section={section}>
+          <Section id="control" title="Управление" onToggle={this.toggleSection} section={section}>
             <div className={styles.sub}>
               <a href="/categories">Категории</a>
             </div>

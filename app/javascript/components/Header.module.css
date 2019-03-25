@@ -236,7 +236,7 @@
   visibility: hidden;
   opacity: 0;
   padding: 4rem 7rem 2rem calc(var(--xr) * 2);
-  transform: translateX(-50%);
+  transform: translateX(-3rem);
   visibility: hidden;
   transition-duration: 0.4s;
   transition-property: transform opacity;
