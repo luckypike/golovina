@@ -1,4 +1,8 @@
-.page.page_common.page_categories
+- title 'Все категории'
+
+= react_component 'Categories/Index'
+
+/ .page.page_common.page_categories
   .page_categories_list
     .categories_add
       = link_to 'Добавить', [:new, :category], class: :btn
@@ -17,14 +21,14 @@
     ul.categories_sort
       - @categories.reject{ |c| c.parent_category }.each do |category|
         li
-          = link_to category.title, [:edit, category]
+          = link_to category.title + " #{category.id} " + "#{category.products.size}", [:edit, category]
 
         - category.categories.each do |category_category|
           ul
             li
-              = link_to category_category.title, [:edit, category_category]
+              = link_to category_category.title + " #{category_category.id} " + "#{category_category.products.size}", [:edit, category_category]
 
             - category_category.categories.each do |ccc|
               ul
                 li
-                  = link_to ccc.title, [:edit, ccc]
+                  = link_to ccc.title + " #{ccc.id} " + "#{ccc.products.size}", [:edit, ccc]

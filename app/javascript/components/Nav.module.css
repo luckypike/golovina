@@ -16,6 +16,7 @@
     width: 100%;
     cursor: pointer;
     font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+    line-height: calc(var(--yr) * var(--lh));
     text-transform: uppercase;
     letter-spacing: 0.2em;
     padding: var(--yr) 0;
@@ -30,6 +31,7 @@
 
 .subs {
   font-size: calc(var(--yr) * calc(var(--fs) - 1));
+  line-height: calc(var(--yr) * var(--lh));
   text-transform: uppercase;
   letter-spacing: 0.2em;
 }

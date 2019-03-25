@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_123220) do
+ActiveRecord::Schema.define(version: 2019_03_25_102150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -262,7 +262,6 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "themes"
-    t.bigint "category_id"
     t.boolean "out_of_stock", default: false
     t.integer "state", default: 1
     t.jsonb "sizes_cache"
@@ -273,7 +272,6 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
     t.boolean "latest", default: false
     t.boolean "pinned", default: false
     t.text "comp"
-    t.index ["category_id"], name: "index_variants_on_category_id"
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["product_id", "color_id"], name: "index_variants_on_product_id_and_color_id", unique: true
     t.index ["product_id"], name: "index_variants_on_product_id"
@@ -301,7 +299,6 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
   add_foreign_key "sizes", "sizes_groups"
   add_foreign_key "themables", "products"
   add_foreign_key "themables", "themes"
-  add_foreign_key "variants", "categories"
   add_foreign_key "variants", "colors"
   add_foreign_key "variants", "products"
   add_foreign_key "wishlists", "users"

@@ -1,9 +1,12 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
+  layout 'app'
+
   def index
     authorize Category
-    @categories = Category.order(weight: :asc).all
+
+    @categories = Category.includes(:variants).order(weight: :asc).all
   end
 
   def show
