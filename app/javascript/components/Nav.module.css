@@ -43,7 +43,7 @@
   line-height: calc(var(--yr) * calc(var(--lh) - 1));
   text-transform: none;
   letter-spacing: 0.05em;
-  margin-bottom: calc(var(--yr) * 2);  
+  margin-bottom: calc(var(--yr) * 2);
 }
 
 .arr {
@@ -60,4 +60,8 @@
     stroke-linecap: butt;
     stroke-linejoin: miter;
   }
+}
+
+.logout {
+  margin-left: auto;
 }

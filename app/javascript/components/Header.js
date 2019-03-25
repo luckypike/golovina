@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import listToTree from 'list-to-tree-lite'
 
+import { path } from './Routes'
 import Nav from './Nav'
 
 import styles from './Header.module.css'
@@ -15,7 +16,7 @@ class Header extends Component {
 
   render () {
     const { active } = this.state
-    const { white, cart, categories, themes, collections } = this.props
+    const { white, cart, wishlist, root, user, categories, themes, collections } = this.props
 
     return (
       <header className={classNames(styles.root, { [styles.white]: white })}>
@@ -38,21 +39,30 @@ class Header extends Component {
             categories={listToTree(categories, { parentKey: 'parent_category_id' })}
             themes={themes}
             collections={collections}
+            user={user}
           />
         </div>
 
         <div className={styles.logo}>
-          <Logo />
+          {!root &&
+            <a href={path('root_path')}>
+              <Logo />
+            </a>
+          }
+
+          {root &&
+            <Logo />
+          }
         </div>
 
         <div className={styles.caw}>
-          <a href="#" className={styles.wishlist}>
+          <a href={path('wishlist_path')} className={classNames(styles.wishlist, { [styles.active]: wishlist > 0 })}>
             <svg viewBox="0 0 24 24">
               <path className="a" d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>
             </svg>
           </a>
 
-          <a href="#" className={classNames(styles.cart, { [styles.active]: cart > 0 })}>
+          <a href={path('cart_path')} className={classNames(styles.cart, { [styles.active]: cart > 0 })}>
             <svg viewBox="0 0 48 48">
               <g>
                 <path className="a" d="M29.18,21.76H18.82l-.82,9H30Z" />
@@ -64,7 +74,6 @@ class Header extends Component {
                 <text className="d" x="32" y="19">
                   {cart}
                 </text>
-
               </g>
             </svg>
           </a>
@@ -76,7 +85,9 @@ class Header extends Component {
 
 Header.defaultProps = {
   white: false,
-  cart: 0
+  cart: 0,
+  wishlist: 0,
+  root: true
 }
 
 export default Header

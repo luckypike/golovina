@@ -18,7 +18,7 @@ class Nav extends Component {
 
   render() {
     const { active, section } = this.state
-    const { categories, themes, collections } = this.props
+    const { user, categories, themes, collections } = this.props
 
     return (
       <nav className={classNames(styles.root, { [styles.active]: active })}>
@@ -38,7 +38,7 @@ class Nav extends Component {
           </div>
 
           <div className={styles.sub}>
-            <a href="/catalog/all">Посмотреть всё</a>
+            <a href="/catalog">Посмотреть всё</a>
           </div>
         </Section>
 
@@ -91,10 +91,24 @@ class Nav extends Component {
         <div className={classNames(styles.section)}>
           <div className={styles.title}>
             <a href="/login">
-              Войти
+              {user ? 'Ваши заказы' : 'Войти'}
             </a>
+
+            {user &&
+              <a className={styles.logout} href="/logout">
+                Выйти
+              </a>
+            }
           </div>
         </div>
+
+        {user && user['is_editor?'] &&
+          <Section id="control" title="Управлние" onToggle={this.toggleSection} section={section}>
+            <div className={styles.sub}>
+              <a href="/categories">Категории</a>
+            </div>
+          </Section>
+        }
       </nav>
     )
   }

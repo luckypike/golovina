@@ -1,18 +1,9 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish, :info, :similar]
 
-  layout 'app', only: [:all, :latest]
+  layout 'app', only: [:index, :latest]
 
   def index
-    authorize Product
-    redirect_to [:all, :products]
-    #
-    # where = {}
-    # @products = Variant.includes(:images, product: [:variants]).where(where).order('products.created_at DESC')
-    # render :category
-  end
-
-  def all
     authorize Product
 
     respond_to do |format|

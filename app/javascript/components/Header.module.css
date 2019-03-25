@@ -84,6 +84,10 @@
   padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
   opacity: 0.3;
 
+  &.active {
+    opacity: 1;
+  }
+
   & svg {
     display: block;
     width: calc(var(--yr) * 6);

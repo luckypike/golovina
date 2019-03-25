@@ -6,9 +6,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :set_cats
+  before_action :set_current
   before_action :set_cart
+  before_action :set_wishlist
 
   after_action :verify_authorized, unless: :devise_controller?
+
+  private
+  def set_current
+    Current.user = current_user
+  end
 
   def set_cats
     @themes = Theme.active.order(weight: :asc)
@@ -20,7 +27,9 @@ class ApplicationController < ActionController::Base
     @cart = Cart.where(user: current_user)
   end
 
-  private
+  def set_wishlist
+    @wishlist = Wishlist.where(user: current_user)
+  end
 
   def not_authenticated
     session[:return_to_url] = request.original_fullpath

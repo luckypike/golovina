@@ -16,7 +16,10 @@ html
         categories: Category.active.order(:weight).map{ |category| category.slice(:title, :parent_category_id, :id, :slug) },
         themes: Theme.active.order(:weight).map{ |theme| theme.slice(:title, :id, :slug) },
         collections: Collection.order(weight: :asc, id: :desc).map{ |collection| collection.slice(:title, :id, :slug) },
+        root: current_page?(controller: :static, action: :index),
         white: current_page?(controller: :static, action: :index),
+        user: (Current.user.slice(:id, :is_editor?) rescue nil),
+        wishlist: @wishlist.size,
         cart: @cart.map(&:quantity).sum \
       }, { \
         prerender: Rails.env.production? \
