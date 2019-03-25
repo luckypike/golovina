@@ -6,6 +6,8 @@ class SessionsController < ApplicationController
   def login
     authorize :static, :index?
 
+    redirect_to [:orders, Current.user] if Current.user
+
     @user = User.new
   end
 
