@@ -19,6 +19,8 @@ class ApplicationController < ActionController::Base
     @themes = Theme.active.order(weight: :asc)
     @categories = Category.active.where.not(variants_counter: 0).order(weight: :asc)
     @colors = Color.includes(:parent_color).order(title: :asc)
+    @cart = Cart.where(user: Current.user)
+    @wishlist = Wishlist.includes(:variant).where(user: Current.user, variants: { state: [:active] })
   end
 
   def not_authenticated

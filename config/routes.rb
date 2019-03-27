@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'static#index'
 
+  get :wishlist, to: 'wishlists#show'
+
   resources :variants, except: [:show] do
     member do
       post :wishlist
@@ -114,7 +116,7 @@ Rails.application.routes.draw do
 
   get 'account/orders', to: 'users#account'
 
-  get 'wishlist', to: 'wishlists#show'
+
   # get 'cart', to: 'cart#show'
   namespace 'cart', module: nil do
     get '', to: 'cart#show'
