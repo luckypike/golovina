@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:edit, :update, :destroy]
 
   layout 'app'
 
@@ -10,7 +10,15 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @category = Category.friendly.find(params[:slug])
     authorize @category
+
+    respond_to do |format|
+      format.html
+      format.json do
+        @variants = @category.variants.active.includes(:images, :product)
+      end
+    end
   end
 
   def new

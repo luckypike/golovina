@@ -13,7 +13,7 @@ class Latest extends Component {
   }
 
   componentDidMount = async () => {
-    const res = await axios.get(path('latest_products_path', { format: 'json' }))
+    const res = await axios.get(path('catalog_latest_path', { format: 'json' }))
     this.setState({ ...res.data })
   }
 

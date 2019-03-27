@@ -13,7 +13,7 @@ class All extends Component {
   }
 
   componentDidMount = async () => {
-    const res = await axios.get(path('products_path', { format: 'json' }))
+    const res = await axios.get(path('catalog_path', { format: 'json' }))
     this.setState({ ...res.data })
   }
 

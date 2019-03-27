@@ -3,17 +3,17 @@ import axios from 'axios'
 
 import { path } from '../Routes'
 
-import List from './List'
+import List from '../Variants/List'
 
 import page from '../Page'
 
-class Category extends Component {
+class Show extends Component {
   state = {
     variants: null
   }
 
   componentDidMount = async () => {
-    const res = await axios.get(path('category_products_path', { slug: this.props.category.slug, format: 'json' }))
+    const res = await axios.get(path('catalog_category_path', { slug: this.props.category.slug, format: 'json' }))
     this.setState({ ...res.data })
   }
 
@@ -39,4 +39,4 @@ class Category extends Component {
   }
 }
 
-export default Category
+export default Show

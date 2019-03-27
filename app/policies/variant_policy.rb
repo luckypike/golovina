@@ -3,6 +3,18 @@ class VariantPolicy < ApplicationPolicy
     true
   end
 
+  def all?
+    true
+  end
+
+  def latest?
+    all?
+  end
+
+  def sale?
+    all?
+  end
+
   def index?
     user&.is_editor?
   end

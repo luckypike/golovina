@@ -2,6 +2,8 @@ class VariantsController < ApplicationController
   before_action :set_variant, only: [:update, :destroy, :images]
   before_action :set_user, only: [:wishlist, :cart]
 
+  layout 'app'
+
   def index
     authorize Variant
 
@@ -47,6 +49,49 @@ class VariantsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to product_path(variant.product, anchor: variant.id) }
       format.js { render plain: Cart.where(user: current_user).map(&:quantity).sum }
+    end
+  end
+
+  def all
+    authorize Variant
+
+    respond_to do |format|
+      format.html
+      format.json do
+        # @where ||= {}
+        #
+        # %w(category color).each do |f|
+        #   params[f] = params[f].present? ? params[f].map(&:to_i) : []
+        #   @where[f] = params[f] if params[f].present?
+        # end
+        #
+        # params[:theme] = params[:theme].presence || []
+        # params[:size] = params[:size].presence || []
+
+        @variants = Variant.active.includes(:images, :product).order(created_at: :desc)
+      end
+    end
+  end
+
+  def latest
+    authorize Variant
+
+    respond_to do |format|
+      format.html
+      format.json do
+        @variants = Variant.active.includes(:images, :product).where(latest: true)
+      end
+    end
+  end
+
+  def sale
+    authorize Variant
+
+    respond_to do |format|
+      format.html
+      format.json do
+        @variants = Variant.active.includes(:images, :product).where(sale: true)
+      end
     end
   end
 

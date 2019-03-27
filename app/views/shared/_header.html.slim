@@ -49,18 +49,18 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
 
           .section_list
             .section_list_item.l2
-              = active_link_to 'New', [:latest, :products]
+              = active_link_to 'New', [:catalog, :latest]
 
             - @categories.reject{ |c| c.parent_category || c.id == Rails.application.secrets.men }.each do |category|
               .section
                 .section_list_item.l2
-                  = active_link_to category.title, category_products_path(slug: category.slug)
+                  = active_link_to category.title, catalog_category_path(slug: category.slug)
 
             .section_list_item.l2
-              = active_link_to 'Sale', [:sale, :products]
+              = active_link_to 'Sale', [:catalog, :sale]
 
             .section_list_item.l2
-              = active_link_to 'Посмотреть все', [:products], active: :exact
+              = active_link_to 'Посмотреть все', [:variants], active: :exact
 
       .header_menu_section
         .section

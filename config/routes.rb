@@ -1,7 +1,26 @@
 Rails.application.routes.draw do
+  root 'static#index'
+
+  resources :variants, except: [:show] do
+    member do
+      post :wishlist
+      post :cart
+    end
+  end
+
+  resources :categories, except: [:show]
+
+  scope path: :catalog, as: :catalog do
+    get '', to: 'variants#all'
+    get :latest, controller: :variants
+    get :sale, controller: :variants
+    get ':slug', to: 'categories#show', as: :category
+    get ':slug/:id', to: 'variants#show', as: :variant
+  end
+
   resources :sizes
   resources :sizes_groups
-  root 'static#index'
+
 
 
   scope format: false do
@@ -57,44 +76,30 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :variants, only: [:index, :create, :update, :destroy] do
-
-    member do
-      get :images
-    end
-
-    collection do
-      post :wishlist
-      post :cart
-    end
-
-  end
-
-  resources :categories, except: [:show]
 
   resources :colors, except: [:show]
 
   resources :discounts
 
-  resources :products, path: :catalog do
-    member do
-      # post :publish
-      # post :archive
-      get :info
-      get 'similar/:simid', to: 'products#similar', as: 'similar'
-    end
-
-    collection do
-      # get 'control', to: 'products#control', as: :control
-      # get 'control/archive', to: 'products#control'
-      # get :all
-      get :latest
-      # get :golovina
-      # get :kits
-      get :sale
-      get ':slug', to: 'products#category', as: :category, constraints: lambda { |request| Category.find_by_slug(request.params[:slug]).present? }
-    end
-  end
+  # resources :products, path: :catalog do
+  #   member do
+  #     # post :publish
+  #     # post :archive
+  #     get :info
+  #     get 'similar/:simid', to: 'products#similar', as: 'similar'
+  #   end
+  #
+  #   collection do
+  #     # get 'control', to: 'products#control', as: :control
+  #     # get 'control/archive', to: 'products#control'
+  #     # get :all
+  #     get :latest
+  #     # get :golovina
+  #     # get :kits
+  #     get :sale
+  #     get ':slug', to: 'products#category', as: :category, constraints: lambda { |request| Category.find_by_slug(request.params[:slug]).present? }
+  #   end
+  # end
 
   # resources :products, path: :catalog do
   #   resources :variants, only: [:create]
