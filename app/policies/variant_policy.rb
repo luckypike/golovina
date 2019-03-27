@@ -15,6 +15,10 @@ class VariantPolicy < ApplicationPolicy
     all?
   end
 
+  def show?
+    true
+  end
+
   def index?
     user&.is_editor?
   end
