@@ -1,0 +1,16 @@
+.variants {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 1rem;
+}
+
+.item {
+  padding: 1rem 0;
+}
+
+.image {
+  position: relative;
+  background-color: #dfdfdf;
+  background-size: cover;
+  background-position: top center;
+}

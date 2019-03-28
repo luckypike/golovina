@@ -1,19 +1,20 @@
 class Variant < ApplicationRecord
   enum state: { active: 1, archived: 2}
 
+  default_scope { includes(:images, { product: :category }) }
+
   scope :themed_by, ->(themes) { where('variants.themes @> any(array[?]::jsonb[])', themes.map(&:to_s)) if themes.present? }
   scope :sized_by, ->(sizes) { where('variants.sizes_cache ?| array[:sizes]', { sizes: sizes.map(&:to_s) }) if sizes.present? }
 
   before_validation :parse_image_ids
   before_validation :set_size
-  before_validation :sync_themes_and_category
+  # before_validation :sync_themes_and_category
   before_save :check_availability
   before_save :cache_sizes
   after_save :check_category
 
   belongs_to :product
   belongs_to :color
-  belongs_to :category
 
   has_many :images, as: :imagable, dependent: :destroy
   accepts_nested_attributes_for :images
@@ -32,8 +33,8 @@ class Variant < ApplicationRecord
   include ProductsHelper
 
   def sync_themes_and_category
-    self.themes = product.themes.map(&:id)
-    self.category = product.category
+    # self.themes = product.themes.map(&:id)
+    # self.category = product.category
   end
 
   def variant_price
@@ -109,7 +110,7 @@ class Variant < ApplicationRecord
   end
 
   def check_category
-    product.category.check_variants
+    product.category.check
   end
 
   def cache_sizes

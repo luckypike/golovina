@@ -13,10 +13,14 @@ class VariantsController < ApplicationController
       @selected = Variant.includes(:product, :images, :color).where(id: params[:selected])
     end
 
-    @variants = Variant.includes(:product, :images, :color).where.not(id: @selected.map(&:id)).order(created_at: :desc).limit(params[:q].present? ? nil : 12).select{ |v| v.title.downcase.include? params[:q].downcase }
-
+    if params[:category_id].present?
+      @variants = Variant.includes(:product, :images, :color).where.not(id: @selected.map(&:id)).where(products: {category_id: params[:category_id]}).order(created_at: :desc)
+    else
+      @variants = Variant.includes(:product, :images, :color).where.not(id: @selected.map(&:id)).order(created_at: :desc).limit(params[:q].present? ? nil : 12)
+    end
 
     respond_to do |format|
+      format.html
       format.json
     end
   end
@@ -52,6 +56,22 @@ class VariantsController < ApplicationController
     end
   end
 
+  def show
+    @category = Category.friendly.find(params[:slug])
+    @variant = @category.variants.find_by_id!(params[:id])
+    @sizes = Size.all
+
+    authorize @variant
+
+    respond_to do |format|
+      format.html
+
+      format.json do
+        @variant = @category.variants.find_by_id(params[:id])
+      end
+    end
+  end
+
   def all
     authorize Variant
 
@@ -68,7 +88,7 @@ class VariantsController < ApplicationController
         # params[:theme] = params[:theme].presence || []
         # params[:size] = params[:size].presence || []
 
-        @variants = Variant.active.includes(:images, :product).order(created_at: :desc)
+        @variants = Variant.active.order(created_at: :desc)
       end
     end
   end
@@ -79,7 +99,7 @@ class VariantsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @variants = Variant.active.includes(:images, :product).where(latest: true)
+        @variants = Variant.active.where(latest: true)
       end
     end
   end
@@ -90,7 +110,7 @@ class VariantsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @variants = Variant.active.includes(:images, :product).where(sale: true)
+        @variants = Variant.active.where(sale: true)
       end
     end
   end

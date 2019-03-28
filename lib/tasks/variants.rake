@@ -54,4 +54,16 @@ namespace :variants do
       variant.save
     end
   end
+
+  task update: :environment do
+    Variant.all.each do |variant|
+
+      variant.desc = variant.product.desc if !variant.desc && variant.product.desc
+      variant.comp = variant.product.comp if !variant.comp && variant.product.comp
+      variant.price = variant.product.price if !variant.price && variant.product.price
+      variant.price_last = variant.product.price_last if !variant.price_last && variant.product.price_last if
+
+      variant.save
+    end
+  end
 end

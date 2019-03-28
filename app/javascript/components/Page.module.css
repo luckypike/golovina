@@ -10,6 +10,10 @@
   }
 
   @media (--l) {
+    padding: calc(var(--yr) * 40) calc(2 / 16 * 100%) calc(var(--yr) * 16);
+  }
+
+  @media (--xl) {
     padding: calc(var(--yr) * 62) calc(2 / 16 * 100%) calc(var(--yr) * 16);
   }
 }

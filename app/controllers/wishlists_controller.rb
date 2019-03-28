@@ -1,6 +1,14 @@
 class WishlistsController < ApplicationController
+  layout 'app'
+
   def show
-    authorize :wishlist, :show?
-    @items = Wishlist.where(user: current_user)
+    authorize Wishlist
+
+    respond_to do |format|
+      format.html
+      format.json do
+        @variants = Wishlist.includes(:variant).where(user: Current.user, variants: { state: [:active] }).map(&:variant)
+      end
+    end
   end
 end

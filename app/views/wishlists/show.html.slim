@@ -1,18 +1,3 @@
-.page.page_common.page_wishlist
-  .page_common_intro.lv3
-    h1
-      = title 'Избранное'
+- title 'Избранное'
 
-  .page_wishlist_items
-    .items
-      - @items.each do |item|
-        .items_item.lv3
-          = link_to [item.variant.product, anchor: item.variant.id] do
-            .image.lv4
-              = image_tag item.variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.first.photo.preview.url
-
-            .title.lv4
-              = item.variant.product.title
-
-            .price
-              = number_to_rub item.variant.variant_price
+= react_component 'Wishlists/Show'

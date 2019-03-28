@@ -13,8 +13,8 @@ body {
   line-height: calc(var(--yr) * var(--lh));
 
   @media (--s) {
-    font-size: calc(var(--yr) * calc(var(--fs) + 0.5));
-    line-height: calc(var(--yr) * calc(var(--lh) + 2));
+    /* font-size: calc(var(--yr) * calc(var(--fs) + 0.5)); */
+    /* line-height: calc(var(--yr) * calc(var(--lh) + 2)); */
   }
 }
 
