@@ -40,6 +40,10 @@
 .variants {
   margin-bottom: calc(var(--yr) * 6);
   display: flex;
+
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * 8);
+  }
 }
 
 .variant {
@@ -72,6 +76,13 @@
 .sizes {
   display: flex;
   justify-content: center;
+  margin-bottom: calc(var(--yr) * 8);
+
+
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * 10);
+    justify-content: flex-start;
+  }
 }
 
 .size {
@@ -154,6 +165,11 @@
 
 .buy {
   display: flex;
+  margin-bottom: calc(var(--yr) * 6);
+
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * 8);
+  }
 }
 
 .price {
@@ -187,6 +203,7 @@
   }
 
   & svg {
+    display: block;
     width: calc(var(--yr) * 6);
     height: calc(var(--yr) * 6);
 
@@ -199,9 +216,21 @@
 }
 
 .cart {
+  position: relative;
+}
 
-  & button {
+.warning {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  color: var(--red_color);
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
 
+  &.active {
+    opacity: 1;
+    visibility: visible;
   }
-
 }

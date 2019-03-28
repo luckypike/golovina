@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-  before_action :set_cats, if: -> { request.path_parameters[:format] != 'json' }
   before_action :set_current
+  before_action :set_cats, if: -> { request.path_parameters[:format] != 'json' }
 
   after_action :verify_authorized, unless: :devise_controller?
 

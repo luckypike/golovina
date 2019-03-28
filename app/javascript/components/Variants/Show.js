@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import axios from 'axios'
 import classNames from 'classnames'
 
+import Acc from './Show/Acc'
 import Price from './Price'
 import { path, Routes } from '../Routes'
 
@@ -25,15 +26,13 @@ class Show extends Component {
 class Variant extends Component {
   state = {
     variants: null,
-    size: false
+    size: false,
+    send: false,
+    section: null
   }
 
   componentDidMount() {
     this._loadAsyncData()
-  }
-
-  componentWillUnmount() {
-    if(this._asyncRequest) this._asyncRequest.cancel()
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -61,11 +60,8 @@ class Variant extends Component {
   }
 
   _loadAsyncData = async () => {
-    this._asyncRequest = axios.CancelToken.source()
-
     const res = await axios.get(path('catalog_variant_path', { ...this.props, format: 'json' }))
     this.setState({ ...res.data })
-    this._asyncRequest = null
   }
 
   selectSize = availability => {
@@ -75,17 +71,20 @@ class Variant extends Component {
   }
 
   handleWishlistClick = async () => {
-    this._asyncRequest = axios.CancelToken.source()
-
-    const res = await axios.post(path('wishlist_variant_path', { id: this.state.variant.id }), { authenticity_token: document.querySelector('[name="csrf-token"]').content }, { cancelToken: this._asyncRequest.token })
-    this._asyncRequest = null
+    const res = await axios.post(path('wishlist_variant_path', { id: this.state.variant.id }), { authenticity_token: document.querySelector('[name="csrf-token"]').content })
     this.setState(state => ({
       variant: { ...state.variant, ...res.data }
     }))
   }
 
+  toggleSection = (section) => {
+    this.setState(state => ({
+      section: state.section == section ? null : section
+    }))
+  }  
+
   render () {
-    const { variant, variants, size } = this.state
+    const { variant, variants, size, send, section } = this.state
     if(!variant) return null
 
     return (
@@ -111,8 +110,8 @@ class Variant extends Component {
           }
 
           <div className={styles.images}>
-            {variant.images.map(image =>
-              <div className={styles.image}>
+            {variant.images.map((image, i) =>
+              <div className={styles.image} key={i}>
                 <img src={image.large} />
               </div>
             )}
@@ -121,7 +120,7 @@ class Variant extends Component {
           <div className={styles.rest}>
             <div className={styles.sizes}>
               {variant.availabilities.map(availability =>
-                <div className={classNames(styles.size, { [styles.unavailable]: availability.count < 1, [styles.active]: availability.size.id == size })} onClick={() => this.selectSize(availability)}>
+                <div key={availability.size.id} className={classNames(styles.size, { [styles.unavailable]: availability.count < 1, [styles.active]: availability.size.id == size })} onClick={() => this.selectSize(availability)}>
                   {availability.size.title}
                 </div>
               )}
@@ -139,14 +138,36 @@ class Variant extends Component {
               </div>
 
               <div className={styles.cart}>
-                <button className={buttons.main}>
+                <div className={classNames(styles.warning, { [styles.active]: !size })}>
+                  Выберите размер
+                </div>
+                <button className={buttons.main} disabled={!size || send}>
                   В корзину
                 </button>
               </div>
             </div>
 
-            {size}
-            DATA
+            <div className={styles.acc}>
+              {variant.desc &&
+                <Acc id="desc" title="Описание" onToggle={this.toggleSection} section={section}>
+                  {variant.desc}
+                </Acc>
+              }
+
+              {variant.comp &&
+                <Acc id="comp" title="Как ухаживать" onToggle={this.toggleSection} section={section}>
+                  {variant.comp}
+                </Acc>
+              }
+
+              <Acc id="delivery" title="Оплата и доставка" onToggle={this.toggleSection} section={section}>
+                Стоимость доставки от 450 ₽. (возможность примерки не предусмотрена). Подробнее
+              </Acc>
+
+              <Acc id="return" title="Обмен и возврат" onToggle={this.toggleSection} section={section}>
+                Возврат и обмен товара осуществляется в течение 7 дней с момента получения заказа, если он не был в употреблении, сохранен товарный вид, потребительские свойства, пломбы, фабричные ярлыки. В противном случае обмену и возврату товар не подлежит. Подробнее
+              </Acc>
+            </div>
           </div>
         </div>
       </>

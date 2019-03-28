@@ -9,6 +9,7 @@ class Variant < ApplicationRecord
   after_save :check_category
 
   belongs_to :product
+  has_one :category, through: :product
   belongs_to :color
   has_many :availabilities
   has_many :sizes, through: :availabilities
@@ -91,6 +92,6 @@ class Variant < ApplicationRecord
   end
 
   def cache_sizes
-    self.sizes_cache = sizes_active
+    self.sizes_cache = sizes.map(&:id)
   end
 end

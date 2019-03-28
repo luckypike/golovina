@@ -1,5 +1,6 @@
 json.variants @variant.product.variants.active.includes(:color, { availabilities: :size }) do |variant|
   json.partial! 'variants/variant', variant: variant
+  json.extract! variant, :desc, :comp
 
   json.availabilities variant.availabilities do |availability|
     json.extract! availability, :count
