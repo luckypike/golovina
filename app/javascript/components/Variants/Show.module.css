@@ -37,39 +37,21 @@
   }
 }
 
-.variants {
-  margin-bottom: calc(var(--yr) * 6);
-  display: flex;
+.cc {
+  display: none;
 
   @media (--m) {
-    margin-bottom: calc(var(--yr) * 8);
+    display: block;
   }
 }
 
-.variant {
-  padding: 2px;
-  box-shadow: 0 0 0 1px var(--sep_color);
-  user-select: none;
-  cursor: pointer;
-  transition: background 0.2s, box-shadow 0.4s;
+.variants {
+  margin-bottom: calc(var(--yr) * 4);
+  margin-top: calc(var(--yr) * -4);
 
-  &:not(:last-child) {
-    margin-right: calc(var(--yr) * 2);
-  }
 
-  &.active {
-    box-shadow: 0 0 0 2px var(--pr_color);
-  }
-
-  & img {
-    display: block;
-    width: calc(var(--yr) * 6);
-    height: calc(var(--yr) * 6);
-
-    @media (--s) {
-      width: calc(var(--yr) * 8);
-      height: calc(var(--yr) * 8);
-    }
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * 8);
   }
 }
 

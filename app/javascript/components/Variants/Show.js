@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import axios from 'axios'
 import classNames from 'classnames'
 import Glide from '@glidejs/glide'
 
 import Acc from './Show/Acc'
+import Variants from './Show/Variants'
 import Price from './Price'
 import { path, Routes } from '../Routes'
 
@@ -75,7 +76,6 @@ class Variant extends Component {
   updateDimensions = () =>  {
     if(window.getComputedStyle(this.slides.current).getPropertyValue('display') == 'flex') {
       if(!this.glide) {
-        console.log("INIT GLIDE")
         this.glide = new Glide(this.mount.current, {
           rewind: false,
           gap: 0,
@@ -84,7 +84,6 @@ class Variant extends Component {
       }
     } else {
       if(this.glide) {
-        console.log("DESTROY GLIDE")
         this.glide.destroy()
         this.glide = null
       }
@@ -121,20 +120,12 @@ class Variant extends Component {
             <h1>
               {variant.product.title}
             </h1>
-            <div>
+            <div className={styles.cc}>
               {variant.color.title}
             </div>
           </div>
 
-          {variants.length > 1 &&
-            <div className={styles.variants}>
-              {variants.map(variant =>
-                <NavLink to={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} className={classNames(styles.variant, { [styles.active]: variant.id == this.state.variant.id })}>
-                  <img src={variant.color.image_url} />
-                </NavLink>
-              )}
-            </div>
-          }
+          <Variants variants={variants} variant={variant} className={styles.variants} />
 
           <div className={classNames('glide', styles.images)} ref={this.mount}>
             <div className="glide__track" data-glide-el="track">

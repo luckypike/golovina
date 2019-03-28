@@ -1,0 +1,77 @@
+.root {
+  &.active {
+    & .arr {
+      transform: scaleY(-1);
+    }
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+
+  @media (--s) {
+    display: none;
+  }
+}
+
+
+.arr {
+  display: block;
+  width: 10px;
+  height: 24px;
+  margin-left: calc(var(--xr) / 2);
+  flex-shrink: 0;
+
+  & polyline {
+    fill: none;
+    stroke-width: 1px;
+    stroke: var(--pr_color);
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+  }
+}
+
+.content {
+  @media (--m) {
+    height: auto !important;
+    overflow: auto !important;
+
+    & > div {
+      display: block !important;
+    }
+  }
+}
+
+.variants {
+  display: flex;
+}
+
+.variant {
+  padding: 2px;
+  box-shadow: inset 0 0 0 1px var(--sep_color);
+  user-select: none;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.4s;
+
+  &:not(:last-child) {
+    margin-right: calc(var(--yr) * 2);
+  }
+
+  &.active {
+    box-shadow: inset 0 0 0 2px var(--pr_color);
+  }
+
+  & img {
+    display: block;
+    width: calc(var(--yr) * 6);
+    height: calc(var(--yr) * 6);
+
+    @media (--s) {
+      width: calc(var(--yr) * 8);
+      height: calc(var(--yr) * 8);
+    }
+  }
+}
