@@ -12,6 +12,7 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   transition: background 0.3s;
+  user-select: none;
 
   &:hover {
     background: color-mod(white shade(4%));

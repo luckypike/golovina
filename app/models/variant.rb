@@ -75,7 +75,7 @@ class Variant < ApplicationRecord
   end
 
   def in_wishlist user
-    Wishlist.where(user: user, variant: self).any?
+    wishlists.where(user: user).any?
   end
 
   def in_order?

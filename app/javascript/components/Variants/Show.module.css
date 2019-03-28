@@ -175,6 +175,16 @@
 .wishlist {
   padding: var(--yr);
   margin-right: var(--yr);
+  user-select: none;
+  cursor: pointer;
+
+  &.active {
+    & svg {
+      & path {
+        fill: var(--pr_color);
+      }
+    }
+  }
 
   & svg {
     width: calc(var(--yr) * 6);
@@ -189,6 +199,7 @@
 }
 
 .cart {
+
   & button {
 
   }

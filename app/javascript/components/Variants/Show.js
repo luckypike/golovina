@@ -74,6 +74,16 @@ class Variant extends Component {
     }
   }
 
+  handleWishlistClick = async () => {
+    this._asyncRequest = axios.CancelToken.source()
+
+    const res = await axios.post(path('wishlist_variant_path', { id: this.state.variant.id }), { authenticity_token: document.querySelector('[name="csrf-token"]').content }, { cancelToken: this._asyncRequest.token })
+    this._asyncRequest = null
+    this.setState(state => ({
+      variant: { ...state.variant, ...res.data }
+    }))
+  }
+
   render () {
     const { variant, variants, size } = this.state
     if(!variant) return null
@@ -122,7 +132,7 @@ class Variant extends Component {
                 <Price sell={variant.price_sell} origin={variant.price} originClass={styles.origin} sellClass={styles.sell} />
               </div>
 
-              <div className={styles.wishlist}>
+              <div className={classNames(styles.wishlist, { [styles.active]: variant.in_wishlist })} onClick={this.handleWishlistClick}>
                 <svg viewBox="0 0 24 24">
                   <path d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>
                 </svg>
