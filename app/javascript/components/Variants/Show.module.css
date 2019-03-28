@@ -123,23 +123,21 @@
   /* margin-top: calc(var(--yr) * 6); */
 }
 
-.image {
-  position: relative;
-  background-color: #f9f9f9;
+.images {
   margin-bottom: calc(var(--yr) * 3);
+}
 
-  &::before {
+.slides {
+  @media (--m) {
     display: block;
-    content: '';
-    padding-top: calc(5 / 4 * 100%)
   }
+}
 
-  & img {
-    left: 0;
-    top: 0;
-    position: absolute;
-    display: block;
-    max-width: 100%;
+.slide {
+  composes: image from './List.module.css';
+
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * 8);
   }
 }
 

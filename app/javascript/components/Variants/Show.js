@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import axios from 'axios'
 import classNames from 'classnames'
+import Glide from '@glidejs/glide'
 
 import Acc from './Show/Acc'
 import Price from './Price'
@@ -31,7 +32,11 @@ class Variant extends Component {
     section: null
   }
 
+  mount = React.createRef()
+  slides = React.createRef()
+
   componentDidMount() {
+    window.addEventListener('resize', this.updateDimensions)
     this._loadAsyncData()
   }
 
@@ -42,7 +47,10 @@ class Variant extends Component {
     // }
     if((prevState.id != this.state.id || !this.state.variant) && this.state.variants) {
       const variant = this.state.variants.find(variant => variant.id == this.state.id)
-      this.setState({ variant })
+      this.setState({ variant }, () => {
+        this.updateDimensions()
+      })
+
       if(!variant.availabilities.find(availability => availability.size.id == this.state.size)) {
         this.setState({ size: null })
       }
@@ -64,6 +72,25 @@ class Variant extends Component {
     this.setState({ ...res.data })
   }
 
+  updateDimensions = () =>  {
+    if(window.getComputedStyle(this.slides.current).getPropertyValue('display') == 'flex') {
+      if(!this.glide) {
+        console.log("INIT GLIDE")
+        this.glide = new Glide(this.mount.current, {
+          rewind: false,
+          gap: 0,
+        })
+        this.glide.mount()
+      }
+    } else {
+      if(this.glide) {
+        console.log("DESTROY GLIDE")
+        this.glide.destroy()
+        this.glide = null
+      }
+    }
+  }
+
   selectSize = availability => {
     if(availability.count > 0) {
       this.setState({ size: availability.size.id })
@@ -81,7 +108,7 @@ class Variant extends Component {
     this.setState(state => ({
       section: state.section == section ? null : section
     }))
-  }  
+  }
 
   render () {
     const { variant, variants, size, send, section } = this.state
@@ -109,12 +136,16 @@ class Variant extends Component {
             </div>
           }
 
-          <div className={styles.images}>
-            {variant.images.map((image, i) =>
-              <div className={styles.image} key={i}>
-                <img src={image.large} />
+          <div className={classNames('glide', styles.images)} ref={this.mount}>
+            <div className="glide__track" data-glide-el="track">
+              <div ref={this.slides} className={classNames('glide__slides', styles.slides)}>
+                {variant.images.map((image, i) =>
+                  <div className={classNames('glide__slide', styles.slide)} key={i}>
+                    <img src={image.large} />
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
 
           <div className={styles.rest}>
