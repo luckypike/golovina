@@ -3,18 +3,15 @@ class Variant < ApplicationRecord
 
   default_scope { includes(:images, { product: :category }) }
 
-  scope :themed_by, ->(themes) { where('variants.themes @> any(array[?]::jsonb[])', themes.map(&:to_s)) if themes.present? }
-  scope :sized_by, ->(sizes) { where('variants.sizes_cache ?| array[:sizes]', { sizes: sizes.map(&:to_s) }) if sizes.present? }
-
   before_validation :parse_image_ids
-  before_validation :set_size
-  # before_validation :sync_themes_and_category
-  before_save :check_availability
+
   before_save :cache_sizes
   after_save :check_category
 
   belongs_to :product
   belongs_to :color
+  has_many :availabilities
+  has_many :sizes, through: :availabilities
 
   has_many :images, as: :imagable, dependent: :destroy
   accepts_nested_attributes_for :images
@@ -81,18 +78,6 @@ class Variant < ApplicationRecord
     Wishlist.where(user: user, variant: self).any?
   end
 
-  def sizes_clean
-    sizes.reject(&:blank?)
-  end
-
-  def set_size
-    # self.sizes = nil if sizes_clean.size == 0
-  end
-
-  def sizes_active
-    sizes.select{|s, q| q.to_i > 0}.keys
-  end
-
   def in_order?
     OrderItem.where(variant_id: self).any?
   end
@@ -101,23 +86,11 @@ class Variant < ApplicationRecord
     sizes[size.to_s].to_i >= quantity ? true : false
   end
 
-  def available
-    sizes.any?{|s, q| sizes[s.to_s].to_i != 0} ? true : false
-  end
-
-  def avail_quantity size
-    sizes[size.to_s].to_i
-  end
-
   def check_category
     product.category.check
   end
 
   def cache_sizes
     self.sizes_cache = sizes_active
-  end
-
-  def check_availability
-    self.out_of_stock = !self.available
   end
 end

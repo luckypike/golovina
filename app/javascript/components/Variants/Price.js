@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import classNames from 'classnames'
+
+import styles from './Price.module.css'
 
 class Price extends Component {
   toValue = source => {
@@ -14,12 +17,20 @@ class Price extends Component {
   }
 
   render () {
-    const { value, prev } = this.props
+    const { sell, origin } = this.props
 
     return (
-      <>
-        {this.toValue(value)}
-      </>
+      <div className={styles.root}>
+        <div className={classNames(styles.sell, this.props.sellClass, { [styles.last]: origin && sell != origin })}>
+          {this.toValue(sell)}
+        </div>
+
+        {origin && sell != origin &&
+          <div className={classNames(styles.origin, this.props.originClass)}>
+            {this.toValue(origin)}
+          </div>
+        }
+      </div>
     )
   }
 }

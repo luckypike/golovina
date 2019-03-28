@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import axios from 'axios'
+import classNames from 'classnames'
 
+import Price from './Price'
 import { path, Routes } from '../Routes'
 
 import page from '../Page'
 import styles from './Show.module.css'
+import buttons from '../Buttons.module.css'
 
 class Show extends Component {
   render () {
@@ -39,9 +42,11 @@ class Variant extends Component {
     //   console.log(this.state.variants)
     // }
     if((prevState.id != this.state.id || !this.state.variant) && this.state.variants) {
-      console.log('SET VARIANT')
       const variant = this.state.variants.find(variant => variant.id == this.state.id)
       this.setState({ variant })
+      if(!variant.availabilities.find(availability => availability.size.id == this.state.size)) {
+        this.setState({ size: null })
+      }
     }
   }
 
@@ -63,6 +68,12 @@ class Variant extends Component {
     this._asyncRequest = null
   }
 
+  selectSize = availability => {
+    if(availability.count > 0) {
+      this.setState({ size: availability.size.id })
+    }
+  }
+
   render () {
     const { variant, variants, size } = this.state
     if(!variant) return null
@@ -82,7 +93,7 @@ class Variant extends Component {
           {variants.length > 1 &&
             <div className={styles.variants}>
               {variants.map(variant =>
-                <NavLink to={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} className={styles.variant}>
+                <NavLink to={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} className={classNames(styles.variant, { [styles.active]: variant.id == this.state.variant.id })}>
                   <img src={variant.color.image_url} />
                 </NavLink>
               )}
@@ -99,11 +110,29 @@ class Variant extends Component {
 
           <div className={styles.rest}>
             <div className={styles.sizes}>
-              {variant.sizes.map(size =>
-                <div className={styles.size} onClick={() => this.setState({ size: size.id })}>
-                  {size.title}
+              {variant.availabilities.map(availability =>
+                <div className={classNames(styles.size, { [styles.unavailable]: availability.count < 1, [styles.active]: availability.size.id == size })} onClick={() => this.selectSize(availability)}>
+                  {availability.size.title}
                 </div>
               )}
+            </div>
+
+            <div className={styles.buy}>
+              <div className={styles.price}>
+                <Price sell={variant.price_sell} origin={variant.price} originClass={styles.origin} sellClass={styles.sell} />
+              </div>
+
+              <div className={styles.wishlist}>
+                <svg viewBox="0 0 24 24">
+                  <path d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>
+                </svg>
+              </div>
+
+              <div className={styles.cart}>
+                <button className={buttons.main}>
+                  В корзину
+                </button>
+              </div>
             </div>
 
             {size}

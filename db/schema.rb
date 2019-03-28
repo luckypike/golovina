@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_26_092031) do
+ActiveRecord::Schema.define(version: 2019_03_28_094615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "availabilities", force: :cascade do |t|
+    t.bigint "variant_id"
+    t.bigint "size_id"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["size_id"], name: "index_availabilities_on_size_id"
+    t.index ["variant_id"], name: "index_availabilities_on_variant_id"
+  end
 
   create_table "carts", force: :cascade do |t|
     t.bigint "user_id"
@@ -258,7 +268,6 @@ ActiveRecord::Schema.define(version: 2019_03_26_092031) do
   create_table "variants", force: :cascade do |t|
     t.bigint "product_id"
     t.bigint "color_id"
-    t.jsonb "sizes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "out_of_stock", default: false
@@ -285,6 +294,8 @@ ActiveRecord::Schema.define(version: 2019_03_26_092031) do
     t.index ["variant_id"], name: "index_wishlists_on_variant_id"
   end
 
+  add_foreign_key "availabilities", "sizes"
+  add_foreign_key "availabilities", "variants"
   add_foreign_key "carts", "users"
   add_foreign_key "carts", "variants"
   add_foreign_key "discounts", "users"

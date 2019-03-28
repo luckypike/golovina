@@ -86,4 +86,8 @@
 .price {
   font-size: calc(var(--yr) * calc(var(--fs) - 0.75));
   line-height: calc(var(--yr) * calc(var(--lh) - 2));
+
+  & > div {
+    justify-content: center;
+  }
 }

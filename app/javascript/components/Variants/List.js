@@ -24,7 +24,7 @@ class List extends Component {
               </div>
 
               <div className={styles.price}>
-                <Price value={variant.price} />
+                <Price sell={variant.price_sell} origin={variant.price} />
               </div>
             </div>
           </a>

@@ -47,9 +47,14 @@
   box-shadow: 0 0 0 1px var(--sep_color);
   user-select: none;
   cursor: pointer;
+  transition: background 0.2s, box-shadow 0.4s;
 
   &:not(:last-child) {
     margin-right: calc(var(--yr) * 2);
+  }
+
+  &.active {
+    box-shadow: 0 0 0 2px var(--pr_color);
   }
 
   & img {
@@ -66,17 +71,31 @@
 
 .sizes {
   display: flex;
+  justify-content: center;
 }
 
 .size {
   box-shadow: 0 0 0 1px var(--sep_color);
   user-select: none;
+  background-color: white;
   cursor: pointer;
   text-align: center;
   width: calc(var(--yr) * 7);
   height: calc(var(--yr) * 7);
   line-height: calc(var(--yr) * 7);
   overflow: hidden;
+  transition: background 0.2s, box-shadow 0.4s;
+
+  &:hover {
+    &:not(.unavailable) {
+      background-color: color-mod(white shade(4%));
+    }
+  }
+
+  &.active {
+    background-color: color-mod(white shade(4%));
+    box-shadow: 0 0 0 2px var(--pr_color);
+  }
 
   @media (--s) {
     width: calc(var(--yr) * 9);
@@ -96,6 +115,7 @@
 .image {
   position: relative;
   background-color: #f9f9f9;
+  margin-bottom: calc(var(--yr) * 3);
 
   &::before {
     display: block;
@@ -110,4 +130,67 @@
     display: block;
     max-width: 100%;
   }
+}
+
+.unavailable {
+  color: var(--sep_color);
+  box-shadow: 0 0 0 1px var(--sep_color);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 1px;
+    background: var(--sep_color);
+    width: 100%;
+    margin-left: -50%;
+    transform-origin: center;
+    transform: rotateZ(-45deg);
+    box-shadow: 0 0 0 1px white;
+  }
+}
+
+.buy {
+  display: flex;
+}
+
+.price {
+  margin-right: auto;
+  padding-right: 0.75rem;
+
+  & .sell {
+    font-size: calc(var(--yr) * calc(var(--fs) + 2.5));
+    line-height: calc(var(--yr) * calc(var(--lh) + 2));
+  }
+
+  & .origin {
+    @media (--s) {
+      font-size: calc(var(--yr) * calc(var(--fs) + 0.5));
+    }
+  }
+}
+
+.wishlist {
+  padding: var(--yr);
+  margin-right: var(--yr);
+
+  & svg {
+    width: calc(var(--yr) * 6);
+    height: calc(var(--yr) * 6);
+
+    & path {
+      fill: none;
+      stroke: var(--pr_color);
+      stroke-miterlimit: 10;
+    }
+  }
+}
+
+.cart {
+  & button {
+
+  }
+
 }

@@ -1,4 +1,4 @@
-json.extract! variant, :id, :price, :price_last
+json.extract! variant, :id, :price, :price_last, :price_sell
 
 json.category do
   json.extract! variant.product.category, :id, :title, :slug
