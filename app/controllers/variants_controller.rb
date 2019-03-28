@@ -55,6 +55,7 @@ class VariantsController < ApplicationController
   def show
     @category = Category.friendly.find(params[:slug])
     @variant = @category.variants.unscoped.find_by_id(params[:id])
+    @sizes = Size.all
 
     authorize @variant
 

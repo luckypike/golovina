@@ -21,7 +21,8 @@ class Show extends Component {
 
 class Variant extends Component {
   state = {
-    variant: null
+    variants: null,
+    size: false
   }
 
   componentDidMount() {
@@ -33,7 +34,15 @@ class Variant extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.id !== this.state.id) this._loadAsyncData()
+    // if(prevState.id !== this.state.id) {
+    //   console.log(this.state.id)
+    //   console.log(this.state.variants)
+    // }
+    if((prevState.id != this.state.id || !this.state.variant) && this.state.variants) {
+      console.log('SET VARIANT')
+      const variant = this.state.variants.find(variant => variant.id == this.state.id)
+      this.setState({ variant })
+    }
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -55,7 +64,7 @@ class Variant extends Component {
   }
 
   render () {
-    const { variant, variants } = this.state
+    const { variant, variants, size } = this.state
     if(!variant) return null
 
     return (
@@ -89,6 +98,15 @@ class Variant extends Component {
           </div>
 
           <div className={styles.rest}>
+            <div className={styles.sizes}>
+              {variant.sizes.map(size =>
+                <div className={styles.size} onClick={() => this.setState({ size: size.id })}>
+                  {size.title}
+                </div>
+              )}
+            </div>
+
+            {size}
             DATA
           </div>
         </div>
