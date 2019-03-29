@@ -1,4 +1,8 @@
 class ThemePolicy < ApplicationPolicy
+  def latest?
+    show?
+  end
+
   def index?
     show?
   end

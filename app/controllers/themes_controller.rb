@@ -1,8 +1,12 @@
 class ThemesController < ApplicationController
   before_action :set_theme, only: [:edit, :update, :destroy, :show]
 
-  def colors
+  layout 'app', only: [:index, :latest, :show]
 
+  def latest
+    authorize Theme
+
+    @kits = Kit.active.latest.includes(:images, { variants: [:images, :product] }).where.not(kitables: { id: nil }).where.not(images: { id: nil })
   end
 
   def index
@@ -15,7 +19,9 @@ class ThemesController < ApplicationController
   def show
     authorize @theme
 
-    @kits = Kit.includes(:images, :variants).where.not(kitables: { id: nil }).where(variants: { state: [:active] }, theme: @theme, state: :active).where.not(images: { id: nil })
+    @kits = Kit.active.latest.includes(:images, { variants: [:images, :product] }).where(theme: @theme).where.not(kitables: { id: nil }).where.not(images: { id: nil })
+
+    # @kits = Kit.includes(:images, :variants).where.not(kitables: { id: nil }).where(variants: { state: [:active] }, theme: @theme, state: :active).where.not(images: { id: nil })
     # excluded_products = kits.map(&:variants).flatten.map(&:id)
 
     # variants = Variant.includes(:images, :kitables, :product).themed_by([@theme.id]).where(state: [:active, :out], products: { state: :active }).where.not(images: { id: nil }, id: excluded_products)

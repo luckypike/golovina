@@ -29,7 +29,7 @@ class Variants extends Component {
           <div className={styles.variants}>
             {variants.map(variant =>
               <NavLink key={variant.id} to={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} className={classNames(styles.variant, { [styles.active]: variant.id == this.props.variant.id })}>
-                <img src={variant.color.image_url} />
+                <div style={{ backgroundColor: (variant.color.color ? variant.color.color : null), backgroundImage: (variant.color.image_url ? `url(${variant.color.image_url})` : null) }} />
               </NavLink>
             )}
           </div>

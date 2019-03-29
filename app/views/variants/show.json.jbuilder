@@ -13,6 +13,6 @@ json.variants @variant.product.variants.active.includes(:color, { availabilities
   json.in_wishlist variant.in_wishlist(Current.user)
 
   json.color do
-    json.extract! variant.color, :id, :title, :image_url
+    json.extract! variant.color, :id, :title, :image_url, :color
   end
 end
