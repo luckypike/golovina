@@ -1,4 +1,5 @@
 .main {
+  display: inline-block;
   font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
   line-height: calc(var(--yr) * var(--lh));
   cursor: pointer;

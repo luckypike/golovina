@@ -29,6 +29,7 @@ class Variant extends Component {
   state = {
     variants: null,
     size: false,
+    add: false,
     send: false,
     section: null
   }
@@ -103,6 +104,22 @@ class Variant extends Component {
     }))
   }
 
+  handleCartClick = async () => {
+    if(this.state.size && !this.state.send) {
+      this.setState({ send: true })
+
+      const res = await axios.post(
+        path('cart_variant_path', { id: this.state.variant.id }),
+        {
+          size: this.state.size,
+          authenticity_token: document.querySelector('[name="csrf-token"]').content
+        }
+      )
+
+      this.setState({ add: true, send: false })
+    }
+  }
+
   toggleSection = (section) => {
     this.setState(state => ({
       section: state.section == section ? null : section
@@ -110,7 +127,7 @@ class Variant extends Component {
   }
 
   render () {
-    const { variant, variants, size, send, section } = this.state
+    const { variant, variants, size, send, section, add } = this.state
     if(!variant) return null
 
     return (
@@ -163,9 +180,18 @@ class Variant extends Component {
                 <div className={classNames(styles.warning, { [styles.active]: !size })}>
                   Выберите размер
                 </div>
-                <button className={buttons.main} disabled={!size || send}>
-                  В корзину
-                </button>
+
+                {add &&
+                  <a className={buttons.main} href={path('cart_path')}>
+                    Оплатить
+                  </a>
+                }
+
+                {!add &&
+                  <button className={buttons.main} disabled={!size || send} onClick={this.handleCartClick}>
+                    {!send ? 'В корзину' : 'Покупка...'}
+                  </button>
+                }
               </div>
             </div>
 

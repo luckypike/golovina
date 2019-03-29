@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_29_105801) do
+ActiveRecord::Schema.define(version: 2019_03_29_140331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,9 +29,10 @@ ActiveRecord::Schema.define(version: 2019_03_29_105801) do
     t.bigint "user_id"
     t.bigint "variant_id"
     t.integer "quantity", default: 1
-    t.integer "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "size_id"
+    t.index ["size_id"], name: "index_carts_on_size_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
     t.index ["variant_id"], name: "index_carts_on_variant_id"
   end
@@ -295,6 +296,7 @@ ActiveRecord::Schema.define(version: 2019_03_29_105801) do
 
   add_foreign_key "availabilities", "sizes"
   add_foreign_key "availabilities", "variants"
+  add_foreign_key "carts", "sizes"
   add_foreign_key "carts", "users"
   add_foreign_key "carts", "variants"
   add_foreign_key "discounts", "users"

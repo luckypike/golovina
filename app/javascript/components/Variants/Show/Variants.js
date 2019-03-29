@@ -16,7 +16,7 @@ class Variants extends Component {
     const { variant, variants } = this.props
     const { active } = this.state
 
-    if(!variants) return null
+    if(!variants || variants.length < 2) return null
 
     return (
       <div className={classNames(styles.root, this.props.className, { [styles.active]: active })}>

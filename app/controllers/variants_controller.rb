@@ -36,16 +36,13 @@ class VariantsController < ApplicationController
   def cart
     sleep 1
 
-    if @variant.sizes_active.include?(params[:size]) && @variant.active?
-      cart = Cart.find_or_initialize_by(user: current_user, variant: variant, size: params[:size])
-      cart.quantity += 1 if cart.persisted?
-      cart.save
+    if @variant.sizes.find_by_id!(params[:size]) && @variant.active?
+      @cart = Cart.find_or_initialize_by(user: current_user, variant: @variant, size: Size.find(params[:size]))
+      @cart.quantity += 1 if @cart.persisted?
+      @cart.save
     end
 
-    respond_to do |format|
-      format.html { redirect_to product_path(variant.product, anchor: variant.id) }
-      format.js { render plain: Cart.where(user: current_user).map(&:quantity).sum }
-    end
+    render json: @cart.slice(:id, :quantity)
   end
 
   def show
