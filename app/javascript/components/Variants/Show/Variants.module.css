@@ -1,59 +1,20 @@
 .root {
-  &.active {
-    & .arr {
-      transform: scaleY(-1);
-    }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: var(--xr);
+
+  @media (--m) {
+    grid-template-columns: auto 1fr;
   }
 }
 
 .title {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  cursor: pointer;
-
-  @media (--s) {
-    display: none;
-  }
-}
-
-
-.arr {
-  display: block;
-  width: 10px;
-  height: 24px;
-  margin-left: calc(var(--xr) / 2);
-  flex-shrink: 0;
-
-  & polyline {
-    fill: none;
-    stroke-width: 1px;
-    stroke: var(--pr_color);
-    stroke-linecap: butt;
-    stroke-linejoin: miter;
-  }
-}
-
-.content {
-  @media (--m) {
-    height: auto !important;
-    overflow: auto !important;
-
-    & > div {
-      display: block !important;
-    }
-  }
+  align-self: center;
 }
 
 .variants {
   display: flex;
-  justify-content: center;
-  padding: calc(var(--yr) / 2);
-  padding-top: calc(var(--yr) * 2);
-
-  @media (--m) {
-    justify-content: flex-start;
-  }
+  justify-content: flex-end;
 }
 
 .variant {

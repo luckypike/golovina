@@ -137,9 +137,6 @@ class Variant extends Component {
             <h1>
               {variant.product.title}
             </h1>
-            <div className={styles.cc}>
-              {variant.color.title}
-            </div>
           </div>
 
           <Variants variants={variants} variant={variant} className={styles.variants} />
@@ -207,6 +204,10 @@ class Variant extends Component {
                   {variant.comp}
                 </Acc>
               }
+
+              <Acc id="guide" title="Таблица размеров" onToggle={this.toggleSection} section={section}>
+                ssafdsf
+              </Acc>
 
               <Acc id="delivery" title="Оплата и доставка" onToggle={this.toggleSection} section={section}>
                 Стоимость доставки от 450 ₽. (возможность примерки не предусмотрена). Подробнее

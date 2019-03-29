@@ -37,21 +37,11 @@
   }
 }
 
-.cc {
-  display: none;
-
-  @media (--m) {
-    display: block;
-  }
-}
-
 .variants {
-  margin-bottom: calc(var(--yr) * 4);
-  margin-top: calc(var(--yr) * -4);
-
+  margin: calc(var(--yr) * -4) 0 calc(var(--yr) * 4);
 
   @media (--m) {
-    margin-bottom: calc(var(--yr) * 8);
+    margin: 0 0 calc(var(--yr) * 8);
   }
 }
 
