@@ -44,6 +44,7 @@ class Nav extends Component {
           </div>
         </Section>
 
+        {/*
         <Section id="themes" title="Образы" onToggle={this.toggleSection} section={section}>
           <div className={styles.sub}>
             <a href={path('latest_themes_path')}>New</a>
@@ -61,6 +62,7 @@ class Nav extends Component {
             <a href={path('themes_path')}>Посмотреть всё</a>
           </div>
         </Section>
+        */}
 
         <Section id="collections" title="Коллекции" onToggle={this.toggleSection} section={section}>
           {collections.map(collection =>
