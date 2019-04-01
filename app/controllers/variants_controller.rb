@@ -1,5 +1,5 @@
 class VariantsController < ApplicationController
-  before_action :set_variant, only: [:update, :destroy, :images]
+  before_action :set_variant, only: [:edit, :update, :destroy, :images]
   before_action :set_user, only: [:wishlist, :cart]
 
   layout 'app'
@@ -115,13 +115,25 @@ class VariantsController < ApplicationController
     end
   end
 
+  def edit
+    authorize @variant
+
+    respond_to do |format|
+      format.html
+      format.json do
+        @colors = Color.all
+      end
+    end
+  end
+
   def update
     authorize @variant
 
     if @variant.update(variant_params)
       head :ok
     else
-      render text: "\"#{@variant.errors.full_messages.first}\"", status: 422
+      render json: @variant.errors, status: :unprocessable_entity
+      # render text: "\"#{@variant.errors.full_messages.first}\"", status: 422
     end
   end
 
@@ -157,6 +169,6 @@ class VariantsController < ApplicationController
   end
 
   def variant_params
-    params.require(:variant).permit(:product_id, :color_id, :out_of_stock, :state, :created_at, :desc, :price, :price_last, sizes: [])
+    params.require(:variant).permit(:color_id, :out_of_stock, :state, :created_at, :desc, :price, :price_last, sizes: [], product_attributes: [:id, :title, :category_id ])
   end
 end

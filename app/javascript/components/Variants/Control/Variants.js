@@ -19,7 +19,7 @@ class Variants extends Component {
           <div className={styles.item} key={variant.id}>
             <div className={styles.image}>
               <div className={styles.control}>
-                <a className={styles.edit} to={path('edit_variant_path', {id: variant.id})}/>
+                <a className={styles.edit} href={path('edit_variant_path', {id: variant.id})}/>
               </div>
               {variant.image &&
                 <img src={variant.image} />

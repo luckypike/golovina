@@ -9,6 +9,8 @@ class Variant < ApplicationRecord
   after_save :check_category
 
   belongs_to :product
+  accepts_nested_attributes_for :product
+
   belongs_to :color
   has_many :availabilities
   has_many :sizes, through: :availabilities
@@ -24,7 +26,7 @@ class Variant < ApplicationRecord
   has_many :kitables, dependent: :destroy
   has_many :kits, through: :kitables
 
-  validates_presence_of :price, :sizes, :state
+  # validates_presence_of :price, :sizes, :state
 
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
@@ -91,6 +93,6 @@ class Variant < ApplicationRecord
   end
 
   def cache_sizes
-    self.sizes_cache = sizes_active
+    # self.sizes_cache = sizes_active
   end
 end

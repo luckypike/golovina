@@ -35,3 +35,16 @@ h2, .h2 {
     line-height: calc(var(--yr) * var(--lh));
   }
 }
+
+.small {
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+  line-height: calc(var(--yr) * var(--lh));
+
+  @media (--s) {
+    font-size: calc(var(--yr) * var(--fs-s));
+    line-height: calc(var(--yr) * var(--lh));
+  }
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
