@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Glide from '@glidejs/glide'
 import classNames from 'classnames'
 
-import '@glidejs/glide/dist/css/glide.core'
 import styles from './Index.module.css'
 
 class Index extends Component {

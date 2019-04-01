@@ -21,6 +21,12 @@ Rails.application.routes.draw do
     get ':slug/:id', to: 'variants#show', as: :variant
   end
 
+  resources :themes, path: :styles, except: [:destroy] do
+    collection do
+      get :latest
+    end
+  end
+
   resources :sizes
   resources :sizes_groups
 
@@ -64,12 +70,6 @@ Rails.application.routes.draw do
   get :contacts, to: 'static#contacts'
 
   get 'robots.:format', to: 'static#robots'
-
-  resources :themes, path: :styles, except: [:destroy] do
-    collection do
-      get :latest
-    end
-  end
 
   resources :kits
 

@@ -1,8 +1,12 @@
-/ - set_meta_tags title: 'Все настроения', site: nil
+- title 'Все образы'
 - description 'Интернет-магазин одежды, организованный по понятным вам стилям.'
 - keywords ['офисный стиль', 'спортивный стиль', 'шерстяные вещи', 'платья']
 
-.page.page_themes.page_common
+= react_component 'Themes/Index'
+
+
+
+/ .page.page_themes.page_common
   .page_common_intro.lv3
     h1
       = title 'Все настроения'

@@ -38,40 +38,23 @@
 }
 
 .variants {
-  margin-bottom: calc(var(--yr) * 6);
-  display: flex;
-}
+  margin: calc(var(--yr) * -4) 0 calc(var(--yr) * 4);
 
-.variant {
-  padding: 2px;
-  box-shadow: 0 0 0 1px var(--sep_color);
-  user-select: none;
-  cursor: pointer;
-  transition: background 0.2s, box-shadow 0.4s;
-
-  &:not(:last-child) {
-    margin-right: calc(var(--yr) * 2);
-  }
-
-  &.active {
-    box-shadow: 0 0 0 2px var(--pr_color);
-  }
-
-  & img {
-    display: block;
-    width: calc(var(--yr) * 6);
-    height: calc(var(--yr) * 6);
-
-    @media (--s) {
-      width: calc(var(--yr) * 8);
-      height: calc(var(--yr) * 8);
-    }
+  @media (--m) {
+    margin: 0 0 calc(var(--yr) * 8);
   }
 }
 
 .sizes {
   display: flex;
   justify-content: center;
+  margin-bottom: calc(var(--yr) * 8);
+
+
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * 10);
+    justify-content: flex-start;
+  }
 }
 
 .size {
@@ -112,23 +95,21 @@
   /* margin-top: calc(var(--yr) * 6); */
 }
 
-.image {
-  position: relative;
-  background-color: #f9f9f9;
+.images {
   margin-bottom: calc(var(--yr) * 3);
+}
 
-  &::before {
+.slides {
+  @media (--m) {
     display: block;
-    content: '';
-    padding-top: calc(5 / 4 * 100%)
   }
+}
 
-  & img {
-    left: 0;
-    top: 0;
-    position: absolute;
-    display: block;
-    max-width: 100%;
+.slide {
+  composes: image from './List.module.css';
+
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * 8);
   }
 }
 
@@ -154,6 +135,11 @@
 
 .buy {
   display: flex;
+  margin-bottom: calc(var(--yr) * 6);
+
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * 8);
+  }
 }
 
 .price {
@@ -175,8 +161,19 @@
 .wishlist {
   padding: var(--yr);
   margin-right: var(--yr);
+  user-select: none;
+  cursor: pointer;
+
+  &.active {
+    & svg {
+      & path {
+        fill: var(--pr_color);
+      }
+    }
+  }
 
   & svg {
+    display: block;
     width: calc(var(--yr) * 6);
     height: calc(var(--yr) * 6);
 
@@ -189,8 +186,21 @@
 }
 
 .cart {
-  & button {
+  position: relative;
+}
 
+.warning {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  color: var(--red_color);
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
   }
-
 }

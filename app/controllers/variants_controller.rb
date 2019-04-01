@@ -133,7 +133,6 @@ class VariantsController < ApplicationController
       head :ok
     else
       render json: @variant.errors, status: :unprocessable_entity
-      # render text: "\"#{@variant.errors.full_messages.first}\"", status: 422
     end
   end
 

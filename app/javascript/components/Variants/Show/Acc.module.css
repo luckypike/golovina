@@ -1,0 +1,47 @@
+.root {
+  border-bottom: 1px solid var(--sep_color);
+  padding-bottom: var(--yr);
+  margin-bottom: var(--yr);
+
+  &.active {
+    & .arr {
+      transform: scaleY(-1);
+    }
+  }
+}
+
+.title {
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+  line-height: calc(var(--yr) * var(--lh));
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding: var(--yr) 0;
+}
+
+.content {
+
+  /* display: none; */
+}
+
+.ch {
+  padding-bottom: calc(var(--yr) * 3);
+}
+
+.arr {
+  display: block;
+  width: 10px;
+  height: 24px;
+  margin-left: auto;
+  flex-shrink: 0;
+
+  & polyline {
+    fill: none;
+    stroke-width: 1px;
+    stroke: var(--pr_color);
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+  }
+}

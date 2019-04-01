@@ -12,14 +12,14 @@
       .items
         - @items.each do |item|
           .items_item.lv3
-            = link_to [item.variant.product, anchor: item.variant.id], class: :image
+            = link_to catalog_variant_path(slug: item.variant.category.slug, id: item.variant.id), class: :image
               - if item.variant.images.size > 0
                 .img
-                  = image_tag root_url + item.variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.first.photo.preview.url
+                  = image_tag item.variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.first.photo.preview.url
 
             .data
               .title
-                = link_to item.variant.product.title_safe, [item.variant.product, anchor: item.variant.id]
+                = link_to item.variant.product.title_safe, catalog_variant_path(slug: item.variant.category.slug, id: item.variant.id)
 
               .color
                 ' Цвет:

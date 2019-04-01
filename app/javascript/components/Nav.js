@@ -40,19 +40,29 @@ class Nav extends Component {
           </div>
 
           <div className={styles.sub}>
-            <a href="/catalog">Посмотреть всё</a>
+            <a href={path('catalog_path')}>Посмотреть всё</a>
           </div>
         </Section>
 
+        {/*
         <Section id="themes" title="Образы" onToggle={this.toggleSection} section={section}>
+          <div className={styles.sub}>
+            <a href={path('latest_themes_path')}>New</a>
+          </div>
+
           {themes.map(theme =>
             <div className={styles.sub} key={theme.id}>
-              <a href="#">
+              <a href={path('theme_path', { id: theme.slug })}>
                 {theme.title}
               </a>
             </div>
           )}
+
+          <div className={styles.sub}>
+            <a href={path('themes_path')}>Посмотреть всё</a>
+          </div>
         </Section>
+        */}
 
         <Section id="collections" title="Коллекции" onToggle={this.toggleSection} section={section}>
           {collections.map(collection =>

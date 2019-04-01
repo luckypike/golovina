@@ -9,7 +9,7 @@ class Variant < ApplicationRecord
   after_save :check_category
 
   belongs_to :product
-  accepts_nested_attributes_for :product
+  accepts_nested_attributes_for :product, update_only: true
 
   belongs_to :color
   has_many :availabilities

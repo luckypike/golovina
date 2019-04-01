@@ -1,6 +1,9 @@
 - title @theme.title
 
-.page.page_common.page_theme.barba_container namespace='theme'
+= react_component 'Themes/Show', { theme: @theme.slice(:id, :title, :slug) }
+
+
+/ .page.page_common.page_theme.barba_container namespace='theme'
   .page_theme_intro
     .theme_intro class=@theme.slug
       .image.lv3
