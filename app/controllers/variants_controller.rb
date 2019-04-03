@@ -122,6 +122,8 @@ class VariantsController < ApplicationController
       format.html
       format.json do
         @colors = Color.all
+        @stores = Store.all
+        @sizes = Size.where(sizes_group_id: 1)
       end
     end
   end
@@ -168,6 +170,6 @@ class VariantsController < ApplicationController
   end
 
   def variant_params
-    params.require(:variant).permit(:color_id, :out_of_stock, :state, :created_at, :desc, :price, :price_last, sizes: [], product_attributes: [:id, :title, :category_id ])
+    params.require(:variant).permit(:color_id, :out_of_stock, :state, :created_at, :desc, :price, :price_last, sizes: [], product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :count, :_destroy])
   end
 end

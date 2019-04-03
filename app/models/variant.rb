@@ -14,6 +14,7 @@ class Variant < ApplicationRecord
   belongs_to :color
   has_many :availabilities
   has_many :sizes, through: :availabilities
+  accepts_nested_attributes_for :availabilities, allow_destroy: true
 
   has_many :images, as: :imagable, dependent: :destroy
   accepts_nested_attributes_for :images

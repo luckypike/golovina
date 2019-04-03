@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_29_140331) do
+ActiveRecord::Schema.define(version: 2019_04_01_135442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(version: 2019_03_29_140331) do
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "store_id"
     t.index ["size_id"], name: "index_availabilities_on_size_id"
+    t.index ["store_id"], name: "index_availabilities_on_store_id"
     t.index ["variant_id"], name: "index_availabilities_on_variant_id"
   end
 
@@ -217,6 +219,11 @@ ActiveRecord::Schema.define(version: 2019_03_29_140331) do
     t.integer "left_offset"
     t.integer "top_offset"
     t.integer "logo", default: 0
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "title"
+    t.text "address"
   end
 
   create_table "themables", force: :cascade do |t|
