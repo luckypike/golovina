@@ -11,6 +11,7 @@ class Variant < ApplicationRecord
   belongs_to :product
   accepts_nested_attributes_for :product, update_only: true
 
+  has_one :category, through: :product
   belongs_to :color
   has_many :availabilities
   has_many :sizes, through: :availabilities
@@ -78,7 +79,7 @@ class Variant < ApplicationRecord
   end
 
   def in_wishlist user
-    Wishlist.where(user: user, variant: self).any?
+    wishlists.where(user: user).any?
   end
 
   def in_order?
@@ -94,6 +95,6 @@ class Variant < ApplicationRecord
   end
 
   def cache_sizes
-    # self.sizes_cache = sizes_active
+    self.sizes_cache = sizes.map(&:id)
   end
 end

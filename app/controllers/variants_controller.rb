@@ -1,6 +1,7 @@
 class VariantsController < ApplicationController
-  before_action :set_variant, only: [:edit, :update, :destroy, :images]
   before_action :set_user, only: [:wishlist, :cart]
+  before_action :set_variant, only: [:wishlist, :cart, :edit, :update, :destroy, :images]
+  before_action :authorize_variant, only: [:wishlist, :cart, :edit, :update]
 
   layout 'app'
 
@@ -26,40 +27,27 @@ class VariantsController < ApplicationController
   end
 
   def wishlist
-    variant = Variant.includes(:product).find(params[:variant_id])
-    authorize variant
+    @wishlist = Wishlist.find_or_initialize_by(user: current_user, variant: @variant)
+    @wishlist.persisted? ? @wishlist.destroy : @wishlist.save
 
-    wishlist = Wishlist.find_or_initialize_by(user: current_user, variant: variant)
-    wishlist.persisted? ? wishlist.destroy : wishlist.save
-
-    respond_to do |format|
-      format.html { redirect_to product_path(variant.product, anchor: variant.id) }
-      format.js { render plain: wishlist.persisted? }
-    end
+    render json: { in_wishlist: @wishlist.persisted? }
   end
 
   def cart
-    variant = Variant.includes(:product).find(params[:variant_id])
-    authorize variant
-
     sleep 1
 
-    if variant.sizes_active.include?(params[:size]) && variant.active?
-      cart = Cart.find_or_initialize_by(user: current_user, variant: variant, size: params[:size])
-      cart.quantity += 1 if cart.persisted?
-      cart.save
+    if @variant.sizes.find_by_id!(params[:size]) && @variant.active?
+      @cart = Cart.find_or_initialize_by(user: current_user, variant: @variant, size: Size.find(params[:size]))
+      @cart.quantity += 1 if @cart.persisted?
+      @cart.save
     end
 
-    respond_to do |format|
-      format.html { redirect_to product_path(variant.product, anchor: variant.id) }
-      format.js { render plain: Cart.where(user: current_user).map(&:quantity).sum }
-    end
+    render json: @cart.slice(:id, :quantity)
   end
 
   def show
     @category = Category.friendly.find(params[:slug])
     @variant = @category.variants.find_by_id!(params[:id])
-    @sizes = Size.all
 
     authorize @variant
 
@@ -116,8 +104,6 @@ class VariantsController < ApplicationController
   end
 
   def edit
-    authorize @variant
-
     respond_to do |format|
       format.html
       format.json do
@@ -129,8 +115,6 @@ class VariantsController < ApplicationController
   end
 
   def update
-    authorize @variant
-
     if @variant.update(variant_params)
       head :ok
     else
@@ -165,6 +149,10 @@ class VariantsController < ApplicationController
   end
 
   private
+  def authorize_variant
+    authorize @variant
+  end
+
   def set_variant
     @variant = Variant.find(params[:id])
   end
