@@ -1,5 +1,10 @@
 json.variant do
   json.partial! 'variant', variant: @variant
+
+  json.availabilities_attributes @variant.availabilities do |availability|
+    json.extract! availability, :id, :variant_id, :size_id, :count, :store_id
+    json._destroy false
+  end
 end
 
 json.colors @colors do |color|

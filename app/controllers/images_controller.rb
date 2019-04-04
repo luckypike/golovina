@@ -7,7 +7,13 @@ class ImagesController < ApplicationController
 
     if image.save
       # head :ok
-      render json: { image: image, url: image_path(image) }
+      render json: { image: image, url: image_path(image), photo: {
+          id: image.id,
+          preview: image.photo.preview.url,
+          thumb: image.photo.thumb.url,
+          large: image.photo.large.url,
+        }
+      }
     else
       render text: "\"#{image.errors.full_messages.first}\"", status: 422
     end
@@ -24,19 +30,12 @@ class ImagesController < ApplicationController
   def destroy
     image = Image.find(params[:id])
     authorize image
-    image.destroy
 
-
-    respond_to do |format|
-      format.html {
-        redirect_to [:variants, image.imagable.product]
-      }
-      format.json {
-        render json: image
-      }
-      format.js {
-        head :ok
-      }
+    if image.destroy
+      head :ok
+      # render json: { image: image, url: image_path(image) }
+    else
+      render text: "\"#{image.errors.full_messages.first}\"", status: 422
     end
   end
 

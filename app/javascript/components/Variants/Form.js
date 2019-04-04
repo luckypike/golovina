@@ -6,6 +6,7 @@ import update from 'immutability-helper'
 import { path } from '../Routes'
 
 import ProductForm from './ProductForm'
+import Images from '../Images/Images'
 
 import buttons from '../Buttons.module.css'
 import page from '../Page.module.css'
@@ -99,10 +100,13 @@ class Form extends React.Component {
               )}
             </div>
 
+            <Images images={values.images} onImagesChange={this.handleImagesChange}/>
+
             <div>
               <input className={buttons.main} type="submit" value="Сохранить" />
             </div>
           </form>
+
         </div>
       </div>
     )
@@ -210,6 +214,14 @@ class Form extends React.Component {
         }
       }))
     }
+  }
+
+  handleImagesChange = (images) => {
+    this.setState(state => ({
+      values: { ...state.values,
+        image_ids: images.map(i => i.id)
+      }
+    }))
   }
 }
 

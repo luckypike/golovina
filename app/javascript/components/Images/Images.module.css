@@ -1,0 +1,59 @@
+.images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  width: 76px;
+  height: 94px;
+  background-color: var(--sand_color);
+  margin-right: calc(var(--xr) / 2);
+  margin-bottom: calc(var(--yr) * 2);
+  padding: 2px;
+  position: relative;
+
+  & img {
+    display: block;
+    width: 72px;
+    height: 90px;
+  }
+}
+
+.control {
+  display: flex;
+  padding: calc(var(--yr) * 2);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 5;
+
+  & a, & .a {
+    background-color: color-mod(var(--pr_color), alpha(50%));
+    cursor: pointer;
+    display: block;
+    width: 24px;
+    height: 24px;
+
+    &.destroy {
+      background-image: url('../../images/delete_white.svg');
+      background-size: 24px 24px;
+    }
+  }
+}
+
+.zone {
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 76px;
+  height: 94px;
+  margin-right: var(--xr) / 2;
+  background-color: var(--sand_color);
+  margin-bottom: calc(var(--yr) * 2);
+  padding: 2px;
+/*
+  &:hover {
+    background-color: var(--highlight_color);
+  } */
+}
