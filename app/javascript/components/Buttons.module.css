@@ -20,6 +20,8 @@
   }
 
   &:hover {
-    background: color-mod(white shade(4%));
+    &:not(:disabled) {
+      background: color-mod(white shade(4%));
+    }
   }
 }

@@ -2,10 +2,12 @@
   --yr: 0.25rem;
   --xr: 1rem;
 
-  --pr_color: color-mod(black tint(13%));
-  --sep_color: #dfdfdf;
+  --pr_color: color-mod(black tint(8%));
+  --gr_color: color-mod(black tint(60%));
+  --sep_color: color-mod(black tint(87%));
   --red_color: #cc0c2f;
-  --highlight_color: #9caa73;
+  --hl_color: #9caa73;
+  --highlight_color: var(--hl_color);
 
   --fw_light: 300;
   --fw_normal: 400;

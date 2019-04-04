@@ -18,36 +18,28 @@
 }
 
 .variant {
-  padding: calc(var(--yr)  / 2);
-  box-shadow: 0 0 0 1px var(--sep_color);
+  padding: var(--yr);
   user-select: none;
   cursor: pointer;
-  transition: background 0.2s, box-shadow 0.4s;
-
-  width: calc(var(--yr) * 7);
-  height: calc(var(--yr) * 7);
-
-  @media (--s) {
-    width: calc(var(--yr) * 9);
-    height: calc(var(--yr) * 9);
-  }
+  transition: box-shadow 0.4s;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--sep_color);
+  width: calc(var(--yr) * 8);
+  height: calc(var(--yr) * 8);
 
   &:not(:last-child) {
     margin-right: calc(var(--yr) * 2);
   }
 
   &.active {
-    box-shadow: 0 0 0 2px var(--pr_color);
+    box-shadow: inset 0 0 0 1px var(--pr_color);
   }
 
   & > div {
+    border-radius: 50%;
+    overflow: hidden;
     display: block;
     width: calc(var(--yr) * 6);
     height: calc(var(--yr) * 6);
-
-    @media (--s) {
-      width: calc(var(--yr) * 8);
-      height: calc(var(--yr) * 8);
-    }
   }
 }

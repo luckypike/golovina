@@ -49,13 +49,15 @@ class Variant extends Component {
     // }
     if((prevState.id != this.state.id || !this.state.variant) && this.state.variants) {
       const variant = this.state.variants.find(variant => variant.id == this.state.id)
-      this.setState({ variant }, () => {
+      let size = null
+
+      // if(variant.availabilities.filter(availability => availability.active).length == 1) {
+      //   size = variant.availabilities.find(availability => availability.active).size.id
+      // }
+
+      this.setState({ variant, size }, () => {
         this.updateDimensions()
       })
-
-      if(!variant.availabilities.find(availability => availability.size.id == this.state.size)) {
-        this.setState({ size: null })
-      }
     }
   }
 
@@ -156,10 +158,14 @@ class Variant extends Component {
           <div className={styles.rest}>
             <div className={styles.sizes}>
               {variant.availabilities.map(availability =>
-                <div key={availability.size.id} className={classNames(styles.size, { [styles.unavailable]: availability.count < 1, [styles.active]: availability.size.id == size })} onClick={() => this.selectSize(availability)}>
+                <div key={availability.size.id} className={classNames(styles.size, styles[`size_${availability.size.id}`], { [styles.unavailable]: availability.count < 1, [styles.active]: availability.size.id == size })} onClick={() => this.selectSize(availability)}>
                   {availability.size.title}
                 </div>
               )}
+
+              <div className={classNames(styles.warning, { [styles.active]: !size })}>
+                Пожалуйста, выберите размер
+              </div>
             </div>
 
             <div className={styles.buy}>
@@ -174,10 +180,6 @@ class Variant extends Component {
               </div>
 
               <div className={styles.cart}>
-                <div className={classNames(styles.warning, { [styles.active]: !size })}>
-                  Выберите размер
-                </div>
-
                 {add &&
                   <a className={buttons.main} href={path('cart_path')}>
                     Оплатить
