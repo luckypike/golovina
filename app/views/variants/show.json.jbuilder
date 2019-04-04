@@ -2,11 +2,19 @@ json.variants @variant.product.variants.active.includes(:color, { availabilities
   json.partial! 'variants/variant', variant: variant
   json.extract! variant, :desc, :comp
 
-  json.availabilities variant.availabilities do |availability|
-    json.extract! availability, :count
+  json.availabilities variant.availabilities.group_by(&:size) do |size, availabilities|
     json.size do
-      json.id availability.size.id
-      json.title availability.size.size
+      count = availabilities.sum(&:count)
+      json.id size.id
+      json.title size.size
+      json.count count
+      json.active count > 0
+    end
+
+    json.availabilities availabilities do |availability|
+      json.extract! availability, :count
+      json.active availability.active?
+      json.store availability.store, :id, :title
     end
   end
 
