@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import Glide from '@glidejs/glide'
 
 import Acc from './Show/Acc'
+import Guide from './Show/Guide'
 import Variants from './Show/Variants'
 import Price from './Price'
 import { path, Routes } from '../Routes'
@@ -43,10 +44,6 @@ class Variant extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // if(prevState.id !== this.state.id) {
-    //   console.log(this.state.id)
-    //   console.log(this.state.variants)
-    // }
     if((prevState.id != this.state.id || !this.state.variant) && this.state.variants) {
       const variant = this.state.variants.find(variant => variant.id == this.state.id)
       let size = null
@@ -94,8 +91,8 @@ class Variant extends Component {
   }
 
   selectSize = availability => {
-    if(availability.count > 0) {
-      this.setState({ size: availability.size.id })
+    if(availability.active) {
+      this.setState({ size: availability.id })
     }
   }
 
@@ -139,6 +136,13 @@ class Variant extends Component {
             <h1>
               {variant.product.title}
             </h1>
+            {variant.can_edit &&
+              <p>
+                <a href={path('edit_variant_path', { id: variant.id })}>
+                  Редактировать
+                </a>
+              </p>
+            }
           </div>
 
           <Variants variants={variants} variant={variant} className={styles.variants} />
@@ -158,7 +162,7 @@ class Variant extends Component {
           <div className={styles.rest}>
             <div className={styles.sizes}>
               {variant.availabilities.map(availability =>
-                <div key={availability.size.id} className={classNames(styles.size, styles[`size_${availability.size.id}`], { [styles.unavailable]: availability.count < 1, [styles.active]: availability.size.id == size })} onClick={() => this.selectSize(availability)}>
+                <div key={availability.size.id} className={classNames(styles.size, styles[`size_${availability.size.id}`], { [styles.unavailable]: !availability.size.active, [styles.active]: availability.size.id == size })} onClick={() => this.selectSize(availability.size)}>
                   {availability.size.title}
                 </div>
               )}
@@ -208,7 +212,7 @@ class Variant extends Component {
               }
 
               <Acc id="guide" title="Таблица размеров" onToggle={this.toggleSection} section={section}>
-                ssafdsf
+                <Guide />
               </Acc>
 
               <Acc id="delivery" title="Оплата и доставка" onToggle={this.toggleSection} section={section}>

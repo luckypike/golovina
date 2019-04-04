@@ -18,8 +18,6 @@ class CreateAvailabilities < ActiveRecord::Migration[5.2]
       end
     end
 
-
-
     remove_column :variants, :sizes, :jsonb
   end
 end

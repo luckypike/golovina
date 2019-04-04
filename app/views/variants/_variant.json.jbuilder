@@ -1,5 +1,7 @@
 json.extract! variant, :id, :price, :price_last, :price_sell, :color_id
 
+json.can_edit policy(variant).edit?
+
 json.category do
   json.extract! variant.product.category, :id, :title, :slug
 end

@@ -4,5 +4,7 @@ class CreateStores < ActiveRecord::Migration[5.2]
       t.string :title
       t.text :address
     end
+
+    Store.create()
   end
 end

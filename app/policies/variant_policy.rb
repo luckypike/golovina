@@ -23,10 +23,6 @@ class VariantPolicy < ApplicationPolicy
     user&.is_editor?
   end
 
-  def create?
-    update?
-  end
-
   def update?
     user&.is_editor?
   end
