@@ -110,6 +110,7 @@ class VariantsController < ApplicationController
     @colors = Color.all
     @stores = Store.all
     @sizes = Size.where(sizes_group_id: 1)
+    @categories = Category.order(weight: :asc).all
   end
 
   def create
@@ -126,12 +127,13 @@ class VariantsController < ApplicationController
 
   def edit
     respond_to do |format|
-      format.html
-      format.json do
+      format.html do
         @colors = Color.all
         @stores = Store.all
         @sizes = Size.where(sizes_group_id: 1)
+        @categories = Category.order(weight: :asc).all
       end
+      format.json
     end
   end
 

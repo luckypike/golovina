@@ -36,6 +36,7 @@ class Form extends React.Component {
       colors: this.props.colors || [],
       stores: this.props.stores || [],
       sizes: this.props.sizes || [],
+      categories: this.props.categories || [],
     },
   }
 
@@ -48,7 +49,7 @@ class Form extends React.Component {
   render () {
     const { title, id } = this.props
     const { values, variant} = this.state
-    const { colors, stores, sizes } = this.state.dictionaries
+    const { colors, stores, sizes, categories } = this.state.dictionaries
 
     return (
       <div className={page.gray}>
@@ -57,7 +58,7 @@ class Form extends React.Component {
         </div>
 
         <div className={classNames(form.root, form.tight)}>
-          <ProductForm values={values.product_attributes} onChange={this.handleProductChange}/>
+          <ProductForm values={values.product_attributes} onChange={this.handleProductChange} categories={categories}/>
           <form className={styles.variant_form} onSubmit={this.handleSubmit}>
 
             <div className={form.input}>
@@ -243,13 +244,7 @@ class Form extends React.Component {
             availabilities_attributes: res.data.variant.availabilities_attributes,
             images: res.data.variant.images,
             image_ids: res.data.variant.images.map(i => i.id)
-          },
-          dictionaries: {
-            colors: res.data.colors,
-            stores: res.data.stores,
-            sizes: res.data.sizes,
-          },
-          active_sizes: res.data.variant.active_sizes,
+          }
         });
 
         this._asyncRequest = null;

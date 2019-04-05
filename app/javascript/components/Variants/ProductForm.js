@@ -12,12 +12,12 @@ class ProductForm extends React.Component {
       title: '',
       category_id: ''
     },
-    categories: [],
+    categories: this.props.categories,
   }
 
-  componentDidMount() {
-    this._loadAsyncData();
-  }
+  // componentDidMount() {
+  //   // this._loadAsyncData();
+  // }
 
   static getDerivedStateFromProps(props, state) {
     if(props.values && (!state.values.title && !state.values.category_id)) {
@@ -69,19 +69,6 @@ class ProductForm extends React.Component {
         </div>
       </form>
     )
-  }
-
-  _loadAsyncData() {
-    this._asyncRequest = axios.CancelToken.source();
-
-    axios.get(path('categories_path', { format: 'json' }), { authenticity_token: document.querySelector('[name="csrf-token"]').content})
-      .then(res => {
-        this.setState({
-          categories: res.data.categories,
-        });
-
-        this._asyncRequest = null;
-      });
   }
 
   handleInputChange = event => {
