@@ -66,9 +66,16 @@ class Nav extends Component {
 
         <Section id="collections" title="Коллекции" onToggle={this.toggleSection} section={section}>
           {collections.map(collection =>
-            <div className={classNames(styles.sub, styles.collection)} key={collection.id}>
+            <div className={classNames(styles.sub)} key={collection.id}>
               <a href="#">
-                {collection.title}
+                <div>
+                  {collection.title}
+                </div>
+                {collection.desc &&
+                  <div className={styles.collection}>
+                    {collection.desc}
+                  </div>
+                }
               </a>
             </div>
           )}
@@ -117,7 +124,11 @@ class Nav extends Component {
         {user && user['is_editor?'] &&
           <Section id="control" title="Управление" onToggle={this.toggleSection} section={section}>
             <div className={styles.sub}>
-              <a href="/categories">Категории</a>
+              <a href={path('categories_path')}>Категории</a>
+            </div>
+
+            <div className={styles.sub}>
+              <a href={path('collections_path')}>Коллекции</a>
             </div>
           </Section>
         }

@@ -66,6 +66,6 @@ class CollectionsController < ApplicationController
   end
 
   def collection_params
-    params.require(:collection).permit(:title, :slug, :text, :weight)
+    params.require(:collection).permit(:title, :slug, :desc, :text, :weight)
   end
 end

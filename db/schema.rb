@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_01_135442) do
+ActiveRecord::Schema.define(version: 2019_04_05_092335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_04_01_135442) do
     t.datetime "updated_at", null: false
     t.string "v"
     t.integer "weight", default: 0
+    t.string "desc"
     t.index ["slug"], name: "index_collections_on_slug", unique: true
   end
 
