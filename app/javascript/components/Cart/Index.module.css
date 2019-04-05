@@ -1,0 +1,54 @@
+.image {
+  composes: image from '../Variants/List.module.css';
+  grid-row: 1 / span 6;
+}
+
+.carts {
+  @media (--s) {
+    padding-left: calc(var(--xr));
+  }
+}
+
+.cart {
+  display: grid;
+  grid-column-gap: var(--xr);
+  grid-template-columns: 6rem 1fr;
+  grid-template-rows: repeat(5, auto) 1fr;
+
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * 8);
+  }
+}
+
+.title {
+  /* font-size: calc(var(--yr) * calc(var(--fs) - 0.5)); */
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.destroy {
+  color: var(--gr_color);
+  cursor: pointer;
+}
+
+.root {
+  display: grid;
+  grid-row-gap: calc(var(--yr) * 16);
+
+  @media (--s) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (--m) {
+    /* grid-template-columns: 2fr 1fr; */
+  }
+}
+
+.unavailable {
+  color: var(--red_color);
+  font-weight: var(--fw_bold);
+}
+
+.form {
+  max-width: 25rem;
+}

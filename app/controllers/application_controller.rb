@@ -30,13 +30,9 @@ class ApplicationController < ActionController::Base
 
   def set_user
     unless user_signed_in?
-      user = User.create(email: "guest_#{Devise.friendly_token.first(10)}@mint-store.ru")
+      user = User.create(email: "guest_#{Devise.friendly_token.first(10)}@golovina.store")
       user.save!(validate: false)
       sign_in(user)
     end
-  end
-
-  def set_sizes
-    @sizes = Size.all.map{|s| [s.id, s.size]}.to_h
   end
 end

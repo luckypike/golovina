@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_05_092335) do
+ActiveRecord::Schema.define(version: 2019_04_05_140517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,11 +136,12 @@ ActiveRecord::Schema.define(version: 2019_04_05_092335) do
     t.bigint "order_id"
     t.bigint "variant_id"
     t.integer "quantity"
-    t.integer "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "price"
+    t.bigint "size_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["size_id"], name: "index_order_items_on_size_id"
     t.index ["variant_id"], name: "index_order_items_on_variant_id"
   end
 
@@ -269,6 +270,7 @@ ActiveRecord::Schema.define(version: 2019_04_05_092335) do
     t.integer "code"
     t.datetime "code_last"
     t.string "s_name"
+    t.integer "state", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -311,6 +313,7 @@ ActiveRecord::Schema.define(version: 2019_04_05_092335) do
   add_foreign_key "kitables", "variants"
   add_foreign_key "kits", "themes"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "sizes"
   add_foreign_key "order_items", "variants"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"

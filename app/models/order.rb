@@ -2,10 +2,11 @@ class Order < ApplicationRecord
   enum state: { undef: 0, active: 1, paid: 2, archived: 3, declined: 4 } do
     event :activate do
       after do
+        user.common!
         # OrderMailer.activate(self).deliver_later
       end
 
-      transition :undef => :active
+      transition undef: :active
     end
 
     event :pay do
@@ -24,7 +25,7 @@ class Order < ApplicationRecord
         end
       end
 
-      transition :active => :paid
+      transition active: :paid
     end
 
     event :archive do
@@ -36,34 +37,44 @@ class Order < ApplicationRecord
     end
   end
 
-  belongs_to :user
+  belongs_to :user, default: -> { Current.user }
+  accepts_nested_attributes_for :user, update_only: true
 
   has_many :order_items, dependent: :destroy
+  accepts_nested_attributes_for :order_items
+
+  validates_presence_of :address
+  validate :quantity_cannot_be_greater_than_total
 
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
   include OrdersHelper
-
-
-  # accepts_nested_attributes_for :user
 
   def number
     self.id
   end
 
   def amount
-    @amount ||= order_items.map(&:item_price).sum
+    @amount ||= order_items.map(&:price_sell).sum
   end
 
-  def can_paid?
-    amount > 0 && active?
-  end
-
-  def purchasable
-    self.order_items.all?{|item| item.variant.purchasable(item.size, item.quantity)} ? true : false
+  # def can_paid?
+  #   amount > 0 && active?
+  # end
+  #
+  def purchasable?
+    active? && order_items.reject(&:available?).size == 0 && amount > 0
   end
 
   def sms_message
     "Заказ #{self.number} (#{number_to_rub(self.amount).gsub('&nbsp;', ' ')}) оплачен. Ожидайте, пожалуйста, звонка."
+  end
+
+  def quantity_cannot_be_greater_than_total
+    order_items.includes(variant: :availabilities).each do |order_item|
+      unless order_item.available?
+        errors.add(:order_items)
+      end
+    end
   end
 end

@@ -92,7 +92,7 @@ class Variant extends Component {
 
   selectSize = availability => {
     if(availability.active) {
-      this.setState({ size: availability.id })
+      this.setState({ size: availability.id, add: false })
     }
   }
 

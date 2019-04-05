@@ -1,7 +1,6 @@
 require 'sms'
 
 class OrdersController < ApplicationController
-  before_action :set_sizes, only: [:index]
   before_action :set_order, only: [:checkout, :pay, :archive]
   skip_before_action :verify_authenticity_token, only: [:paid]
 
@@ -11,48 +10,29 @@ class OrdersController < ApplicationController
     @orders = @orders.where(state: params[:state]) if params[:state]
   end
 
-  def checkout
-    authorize @order
+  def create
+    authorize Order
 
-    errors = {}
-    @cart.each_with_index do |item, index|
-      if !item.variant.purchasable(item.size, item.quantity)
-        errors[index] = {quantity: item.variant.avail_quantity(item.size)}
-      end
+    @order = Order.new(user: Current.user)
+    @order.assign_attributes(order_params)
+
+    Current.user.carts.each do |cart|
+      @order.order_items.build(variant: cart.variant, quantity: cart.quantity, size: cart.size)
     end
 
-    render json: { error: errors, status: :unpurchasable } and return if !errors.blank?
-
-    @user = current_user
-
-    if params[:user]
-      params[:user][:email] = @user.email if params[:user][:email].empty?
-
-
-      if @user.update(phone: params[:user][:phone], email: params[:user][:email], name: params[:user][:name], s_name: params[:user][:s_name])
-      else
-        render json: { error: @user.errors, status: :unprocessable_entity } and return
-      end
-    end
-
-    unless @order.user.reload.is_guest?
-      @cart.each do |item|
-        @order.order_items.build(variant: item.variant, quantity: item.quantity, size: item.size, price: item.variant.discount_price(@user.get_discount))
-        item.destroy
-      end
-
-      @order.save
+    if @order.save
       @order.activate!
-      @order.update_attribute(:address, params[:order][:address])
-
-      head :ok, location: [:pay, @order]
+      Current.user.carts.destroy_all
+      head :ok, location: pay_order_path(@order)
+    else
+      render json: @order.errors, status: :unprocessable_entity
     end
   end
 
   def pay
     authorize @order
 
-    if !@order.purchasable
+    unless @order.purchasable?
       redirect_to orders_user_path(current_user, :order => @order.id), notice: 'Неверный заказ' and return
     end
 
@@ -78,6 +58,15 @@ class OrdersController < ApplicationController
   end
 
   private
+  def order_params
+    params.require(:order).permit(
+      :address,
+      user_attributes: [
+        :name, :s_name, :phone, :email
+      ]
+    )
+  end
+
   def set_order
     @order = Order.find(params[:id])
   end

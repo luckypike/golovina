@@ -27,6 +27,11 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :cart do
+    get '', action: :index
+    delete ':id', action: :destroy, as: :destroy
+  end
+
   resources :sizes
   resources :sizes_groups
 
@@ -118,25 +123,17 @@ Rails.application.routes.draw do
   get 'account/orders', to: 'users#account'
 
 
-  # get 'cart', to: 'cart#show'
-  namespace 'cart', module: nil do
-    get '', to: 'cart#show'
-    get '/discount', to: 'cart#discount'
-    delete ':id/destroy', to: 'cart#destroy', as: :destroy
-  end
-
   get 'posts', to: redirect('/posts/1')
 
   resources :posts
 
-  resources :orders, only: [:index] do
+  resources :orders, only: [:index, :create] do
     collection do
       post :paid
     end
 
     member do
       post :archive
-      post :checkout
       get :pay
     end
   end
