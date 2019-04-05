@@ -1,3 +1,10 @@
+.variant_form {
+  background: white;
+  padding: calc(var(--yr) * 6) var(--xr);
+  border: 1px solid var(--sep_color);
+  margin-bottom: calc(var(--yr) * 6);
+}
+
 .sizes {
   composes: sizes from './Show.module.css';
 

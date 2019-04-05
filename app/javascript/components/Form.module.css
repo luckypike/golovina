@@ -2,8 +2,14 @@
 
 }
 
+.tight {
+  @media (--m) {
+    max-width: 42rem;
+  }
+}
+
 .input {
-  margin: 0 0 calc(var(--yr) * 2);
+  margin: 0 0 calc(var(--yr) * 4);
 
   & input[type=text],
   & input[type=email],
@@ -58,4 +64,41 @@
   composes: small from './Fonts.module.css';
 
   margin: 0 0 calc(var(--yr) * 1.5);
+}
+
+.checkbox {
+  composes: at from './Fonts.module.css';
+  composes: small from './Fonts.module.css';
+  /* display: inline-block; */
+
+  & label {
+    display: block;
+    padding: calc(var(--yr) * var(--s-s) / 2) 2em;
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  & input {
+    margin-right: calc(var(--yr) * 2);
+  }
+}
+
+.radio {
+  composes: at from './Fonts.module.css';
+  composes: small from './Fonts.module.css';
+
+  & .options {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  & input {
+    margin-right: calc(var(--xr) / 2);
+  }
+
+  & label {
+    display: block;
+    margin-right: var(--xr);
+  }
 }

@@ -47,9 +47,42 @@ class Form extends React.Component {
           <h1>Редактирование: {title}</h1>
         </div>
 
-        <div className={form.root}>
+        <div className={classNames(form.root, form.tight)}>
           <ProductForm values={values.product_attributes} onChange={this.handleProductChange}/>
-          <form onSubmit={this.handleSubmit}>
+          <form className={styles.variant_form} onSubmit={this.handleSubmit}>
+
+            <div className={form.input}>
+              <div className={form.input_input}>
+                <div className={form.checkbox}>
+                  <label>
+                    <input type="checkbox" name="latest" checked={values.latest} onChange={this.handleInputChange} />
+                      new
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className={form.input}>
+              <div className={form.input_input}>
+                <div className={form.checkbox}>
+                  <label>
+                    <input type="checkbox" name="sale" checked={values.sale} onChange={this.handleInputChange} />
+                      sale
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className={form.input}>
+              <div className={form.input_input}>
+                <div className={form.checkbox}>
+                  <label>
+                    <input type="checkbox" name="pinned" checked={values.pinned} onChange={this.handleInputChange} />
+                      Закреплен
+                  </label>
+                </div>
+              </div>
+            </div>
 
             <div className={form.input}>
               <div className={form.label}>
@@ -100,7 +133,74 @@ class Form extends React.Component {
               )}
             </div>
 
-            <Images images={values.images} onImagesChange={this.handleImagesChange}/>
+            <div className={form.input}>
+              <div className={form.label}>
+                Стоимость
+              </div>
+
+              <div className={form.input_input}>
+                <input type="text" value={values.price} name="price" onChange={this.handleInputChange} />
+              </div>
+            </div>
+
+            <div className={form.input}>
+              <div className={form.label}>
+                Стоимость со скидкой
+              </div>
+
+              <div className={form.input_input}>
+                <input type="text" value={values.price_last} name="price_last" onChange={this.handleInputChange} />
+              </div>
+            </div>
+
+            <div className={form.input}>
+              <div className={form.label}>
+                Описание
+              </div>
+
+              <div className={form.input_input}>
+                <textarea name="desc" value={values.desc} rows="2" onChange={this.handleInputChange} />
+              </div>
+            </div>
+
+            <div className={form.input}>
+              <div className={form.label}>
+                Как ухаживать
+              </div>
+
+              <div className={form.input_input}>
+                <textarea name="comp" value={values.comp} rows="2" onChange={this.handleInputChange} />
+              </div>
+            </div>
+
+            <div className={form.input}>
+              <div className={form.input_input}>
+                <div className={form.radio}>
+                  <div className={form.label}>
+                    Статус
+                  </div>
+
+                  <div className={form.options}>
+                    <label>
+                      <input type="radio" name="state" checked={'active' == values.state} value="active" onChange={this.handleInputChange} />
+                      Активный
+                    </label>
+
+                    <label>
+                      <input type="radio" name="state" checked={'archived' == values.state} value="archived" onChange={this.handleInputChange} />
+                      Архив
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={form.input}>
+              <div className={form.label}>
+                Изображения
+              </div>
+              <Images images={values.images} onImagesChange={this.handleImagesChange}/>
+            </div>
 
             <div>
               <input className={buttons.main} type="submit" value="Сохранить" />

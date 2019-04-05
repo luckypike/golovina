@@ -48,7 +48,8 @@
   align-items: center;
   width: 76px;
   height: 94px;
-  margin-right: var(--xr) / 2;
+  margin-right: calc(var(--xr) / 2);
+  border: 1px solid var(--sep_color);
   background-color: var(--sand_color);
   margin-bottom: calc(var(--yr) * 2);
   padding: 2px;

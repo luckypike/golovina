@@ -1,14 +1,15 @@
 .root {
   display: inline-block;
-  box-shadow: 0 0 0 2px inset var(--highlight_color);
-  border-radius: var(--yr);
   overflow: hidden;
   text-overflow: ellipsis;
-  position: relative;
   white-space: nowrap;
-  max-width: 200px;
-  padding: 0 3em 0 1em;
-  margin-top: var(--yr);
+  width: 76px;
+  height: 94px;
+  background-color: var(--gr_color);
+  margin-right: calc(var(--xr) / 2);
+  margin-bottom: calc(var(--yr) * 2);
+  padding: 2px;
+  position: relative;
 
 }
 
@@ -35,13 +36,13 @@
 .ring {
   position: absolute;
   top: 50%;
-  right: 0.5rem;
+  left: 50%;
   display: block;
   font-size: 0;
   color: #fff;
   width: 20px;
   height: 20px;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
 
   & div {
     display: inline-block;

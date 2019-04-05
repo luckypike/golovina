@@ -16,7 +16,6 @@ class Image extends React.Component {
   }
 
   componentDidMount() {
-    console.log('mount');
     if(!this.state.save) this._saveFile();
   }
 
@@ -39,7 +38,6 @@ class Image extends React.Component {
       })
       .then(response => {
         this.setState({ send: true });
-        console.log(response.data.image);
         if(this.props.onFileUpload) this.props.onFileUpload(response.data.photo);
       }).catch((error) => {
         this.setState({ error: true });
@@ -62,6 +60,8 @@ class Image extends React.Component {
 
   render() {
     const { upload, name, error, send } = this.state;
+
+    if (send) return null;
 
     return (
       <div className={classNames(styles.root, { [styles.error]: error, [styles.upload]: upload >= 100 && !send, [styles.send]: send })}>

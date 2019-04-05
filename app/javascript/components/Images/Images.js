@@ -40,15 +40,15 @@ class Images extends React.Component {
           )}
         </Dropzone>
 
-        {files.map((file, _) =>
-          <Image file={file} key={_} onFileUpload={this.handleFileUpload}/>
-        )}
-
         {images &&
           images.map(image =>
             <ImageItem key={image.id} image={image} onImagesChange={this.handleImagesChange} />
           )
         }
+
+        {files.map((file, _) =>
+          <Image file={file} key={_} onFileUpload={this.handleFileUpload}/>
+        )}
       </div>
     )
   }

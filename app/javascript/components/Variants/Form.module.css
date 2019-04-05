@@ -26,20 +26,16 @@
     &:focus {
       border-color: var(--highlight_color);
     }
-/*
-    &:hover {
-      box-shadow: inset 0 0 0 1px color-mod(var(--pr_color) a(40%));
-    }
 
     &.focus,
     &:focus {
       background-color: #f8f8f8;
-      box-shadow: 0 0 0 2px var(--hl_color) inset;
+      box-shadow: 0 0 0 2px var(--highlight_color) inset;
     }
 
     &:disabled {
       opacity: 0.5;
-    } */
+    }
   }
 
   textarea {

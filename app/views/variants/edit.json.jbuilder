@@ -1,5 +1,6 @@
 json.variant do
   json.partial! 'variant', variant: @variant
+  json.extract! @variant, :desc, :comp, :sale, :latest, :pinned, :state
 
   json.availabilities_attributes @variant.availabilities do |availability|
     json.extract! availability, :id, :variant_id, :size_id, :count, :store_id
