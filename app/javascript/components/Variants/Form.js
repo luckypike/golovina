@@ -15,11 +15,27 @@ import styles from './Variant.module.css'
 
 class Form extends React.Component {
   state = {
-    values: this.props,
+    variant: null,
+    values: {
+      color_id: '',
+      state: '',
+      created_at: null,
+      latest: false,
+      sale: false,
+      pinned: false,
+      desc: '',
+      comp: '',
+      price: '',
+      price_last: '',
+      product_attributes: null,
+      availabilities_attributes: [],
+      images: [],
+      image_ids: null
+    },
     dictionaries: {
-      colors: [],
-      stores: [],
-      sizes: [],
+      colors: this.props.colors || [],
+      stores: this.props.stores || [],
+      sizes: this.props.sizes || [],
     },
   }
 
@@ -31,20 +47,13 @@ class Form extends React.Component {
 
   render () {
     const { title, id } = this.props
-    const { values, active_sizes } = this.state
+    const { values, variant} = this.state
     const { colors, stores, sizes } = this.state.dictionaries
-
-    if (!values) return null;
-
-    if (values.availabilities_attributes) {
-      values.availabilities_attributes.filter(s => s.store_id == 1).map((size, key) => {
-      });
-    }
 
     return (
       <div className={page.gray}>
         <div className={page.title}>
-          <h1>Редактирование: {title}</h1>
+          <h1>{variant ? `Редактирование: ${title}` : 'Новый товар'}</h1>
         </div>
 
         <div className={classNames(form.root, form.tight)}>
@@ -203,7 +212,7 @@ class Form extends React.Component {
             </div>
 
             <div>
-              <input className={buttons.main} type="submit" value="Сохранить" />
+              <input className={buttons.main} type="submit" value="Сохранить" disabled={!this.canSubmit()} />
             </div>
           </form>
 
@@ -218,7 +227,23 @@ class Form extends React.Component {
     axios.get(path('edit_variant_path', {id: id, format: 'json' }), { authenticity_token: document.querySelector('[name="csrf-token"]').content})
       .then(res => {
         this.setState({
-          values: res.data.variant,
+          variant: res.data.variant,
+          values: {
+            color_id: res.data.variant.color_id,
+            state: res.data.variant.state,
+            created_at: res.data.variant.created_at,
+            latest: res.data.variant.latest,
+            sale: res.data.variant.sale,
+            pinned: res.data.variant.pinned,
+            desc: res.data.variant.desc,
+            comp: res.data.variant.comp,
+            price: res.data.variant.price,
+            price_last: res.data.variant.price_last,
+            product_attributes: res.data.variant.product_attributes,
+            availabilities_attributes: res.data.variant.availabilities_attributes,
+            images: res.data.variant.images,
+            image_ids: res.data.variant.images.map(i => i.id)
+          },
           dictionaries: {
             colors: res.data.colors,
             stores: res.data.stores,
@@ -264,13 +289,36 @@ class Form extends React.Component {
 
 
   handleSubmit = event => {
-    this._handleUpdate()
+    if (this.props.id) {
+      this._handleUpdate()
+    }
+    else {
+      this._handleCreate()
+    }
     event.preventDefault()
+  }
+
+  canSubmit = () => {
+    return (
+      this.state.values.product_attributes &&
+      this.state.values.color_id &&
+      this.state.values.price &&
+      this.state.values.state
+    );
   }
 
   _handleUpdate = async () => {
     const res = await axios.patch(
       path('variant_path', { id: this.props.id }),
+      { variant: this.state.values, authenticity_token: document.querySelector('[name="csrf-token"]').content }
+    )
+
+    if(res.headers.location) window.location = res.headers.location
+  }
+
+  _handleCreate = async () => {
+    const res = await axios.post(
+      path('variants_path'),
       { variant: this.state.values, authenticity_token: document.querySelector('[name="csrf-token"]').content }
     )
 

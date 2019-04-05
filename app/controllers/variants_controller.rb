@@ -106,6 +106,22 @@ class VariantsController < ApplicationController
   def new
     @variant = Variant.new
     authorize @variant
+
+    @colors = Color.all
+    @stores = Store.all
+    @sizes = Size.where(sizes_group_id: 1)
+  end
+
+  def create
+    @variant = Variant.new(variant_params)
+
+    authorize @variant
+
+    if @variant.save
+      head :created, location: catalog_variant_path(slug: @variant.product.category.slug, id: @variant.id)
+    else
+      render json: @variant.errors, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -121,7 +137,7 @@ class VariantsController < ApplicationController
 
   def update
     if @variant.update(variant_params)
-      head :ok
+      head :ok, location: catalog_variant_path(slug: @variant.product.category.slug, id: @variant.id)
     else
       render json: @variant.errors, status: :unprocessable_entity
     end
@@ -131,18 +147,6 @@ class VariantsController < ApplicationController
     authorize @variant
 
     render json: { images: @variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }, wishlist: @variant.in_wishlist(current_user), out_of_stock: @variant.out_of_stock, variant_state: @variant.state }
-  end
-
-  def create
-    @variant = Variant.new(variant_params)
-    authorize @variant
-
-    if @variant.save
-      redirect_to [:variants, @variant.product], notice: 'Variant was successfully created.'
-    else
-      @product = @variant.product
-      render 'products/variants'
-    end
   end
 
   def destroy
@@ -163,6 +167,6 @@ class VariantsController < ApplicationController
   end
 
   def variant_params
-    params.require(:variant).permit(:color_id, :out_of_stock, :state, :created_at, :latest, :sale, :pinned, :desc, :comp, :price, :price_last, :state, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :count, :_destroy], image_ids: [])
+    params.require(:variant).permit(:color_id, :out_of_stock, :state, :created_at, :latest, :sale, :pinned, :desc, :comp, :price, :price_last, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :count, :_destroy], image_ids: [])
   end
 end

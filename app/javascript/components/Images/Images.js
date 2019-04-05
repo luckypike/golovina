@@ -10,11 +10,12 @@ import styles from './Images.module.css'
 class Images extends React.Component {
   state = {
     files: [],
-    images: null
+    images: []
   }
 
+
   static getDerivedStateFromProps(props, state) {
-    if(props.images !== state.images && !state.images) {
+    if(props.images !== state.images && state.images.length == 0) {
       return {
         images: props.images,
       };

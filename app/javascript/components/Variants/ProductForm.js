@@ -8,12 +8,25 @@ import styles from '../Form.module.css'
 
 class ProductForm extends React.Component {
   state = {
-    values: this.props.values,
+    values: {
+      title: '',
+      category_id: ''
+    },
     categories: [],
   }
 
   componentDidMount() {
     this._loadAsyncData();
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if(props.values && (!state.values.title && !state.values.category_id)) {
+      return {
+        values: props.values
+      };
+    }
+
+    return null;
   }
 
   componentDidUpdate(prevProps, prevState) {
