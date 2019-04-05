@@ -37,6 +37,36 @@
   }
 }
 
+.edit {
+  margin-bottom: calc(var(--yr) * 2);
+
+  & .btn_gr {
+    /* @include font-size(1.25); */
+    font-size: 0.625rem;
+    line-height: 1.5rem;
+
+    background-color: transparent;
+    border: 1px solid var(--sand_color);
+
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    font-family: inherit;
+    font-weight: inherit;
+    appearance: none;
+    cursor: pointer;
+    color: var(--pr_color);
+    display: inline-block;
+    padding: var(--yr) calc(var(--xr) / 2);
+    user-select: none;
+    margin-right: calc(var(--yr) * 2);
+
+    &:hover {
+      background-color: var(--sand_color);
+    }
+  }
+}
+
 .variants {
   margin: calc(var(--yr) * -4) 0 calc(var(--yr) * 4);
 

@@ -28,7 +28,7 @@ class Variant < ApplicationRecord
   has_many :kitables, dependent: :destroy
   has_many :kits, through: :kitables
 
-  # validates_presence_of :price, :sizes, :state
+  validates_presence_of :price, :state
 
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
@@ -38,24 +38,24 @@ class Variant < ApplicationRecord
     # self.category = product.category
   end
 
-  def variant_price
-    price? ? price : (product.price? ? product.price : 0)
-  end
-
-  def variant_price_last
-    price_last? ? price_last : product.price_last
-  end
-
-  def variant_desc
-    desc? ? desc : product.desc
-  end
-
-  def variant_comp
-    comp? ? comp : product.comp
-  end
+  # def variant_price
+  #   price? ? price : (product.price? ? product.price : 0)
+  # end
+  #
+  # def variant_price_last
+  #   price_last? ? price_last : product.price_last
+  # end
+  #
+  # def variant_desc
+  #   desc? ? desc : product.desc
+  # end
+  #
+  # def variant_comp
+  #   comp? ? comp : product.comp
+  # end
 
   def price_sell
-    self.variant_price_last.presence || self.variant_price
+    price_last.presence || price
   end
 
   def discount_price(discount)
@@ -86,9 +86,9 @@ class Variant < ApplicationRecord
     OrderItem.where(variant_id: self).any?
   end
 
-  def purchasable size, quantity
-    sizes[size.to_s].to_i >= quantity ? true : false
-  end
+  # def purchasable size, quantity
+  #   sizes[size.to_s].to_i >= quantity ? true : false
+  # end
 
   def check_category
     product.category.check

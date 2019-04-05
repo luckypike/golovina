@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   has_many :themable, dependent: :destroy
   has_many :themes, through: :themable
 
-  has_many :variants, inverse_of: :product, dependent: :destroy
+  has_many :variants, dependent: :destroy
   accepts_nested_attributes_for :variants, reject_if: :all_blank, allow_destroy: true
 
   has_many :images, through: :variants

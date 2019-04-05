@@ -111,6 +111,8 @@ class VariantsController < ApplicationController
     @stores = Store.all
     @sizes = Size.where(sizes_group_id: 1)
     @categories = Category.order(weight: :asc).all
+
+    @product = params[:product_id].present? ? Product.select(:id, :category_id, :title).find(params[:product_id]) : nil
   end
 
   def create
@@ -118,7 +120,7 @@ class VariantsController < ApplicationController
 
     authorize @variant
 
-    if @variant.save
+    if @variant.save!
       head :created, location: catalog_variant_path(slug: @variant.product.category.slug, id: @variant.id)
     else
       render json: @variant.errors, status: :unprocessable_entity
@@ -169,6 +171,6 @@ class VariantsController < ApplicationController
   end
 
   def variant_params
-    params.require(:variant).permit(:color_id, :out_of_stock, :state, :created_at, :latest, :sale, :pinned, :desc, :comp, :price, :price_last, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :count, :_destroy], image_ids: [])
+    params.require(:variant).permit(:color_id, :out_of_stock, :state, :created_at, :latest, :sale, :pinned, :desc, :comp, :price, :price_last, :product_id, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :count, :_destroy], image_ids: [])
   end
 end

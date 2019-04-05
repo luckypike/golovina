@@ -27,7 +27,8 @@ class Form extends React.Component {
       comp: '',
       price: '',
       price_last: '',
-      product_attributes: null,
+      product_id: this.props.product ? this.props.product.id : [],
+      product_attributes: this.props.product || null,
       availabilities_attributes: [],
       images: [],
       image_ids: null
@@ -240,6 +241,7 @@ class Form extends React.Component {
             comp: res.data.variant.comp,
             price: res.data.variant.price,
             price_last: res.data.variant.price_last,
+            product_id: res.data.variant.product_attributes.id,
             product_attributes: res.data.variant.product_attributes,
             availabilities_attributes: res.data.variant.availabilities_attributes,
             images: res.data.variant.images,
@@ -322,7 +324,10 @@ class Form extends React.Component {
 
   handleProductChange = (product) => {
     this.setState(state => ({
-      values: { ...state.values, product_attributes: product }
+      values: { ...state.values,
+        product_attributes: product,
+        product_id: product.id,
+      }
     }))
   }
 

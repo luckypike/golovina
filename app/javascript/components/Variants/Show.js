@@ -137,11 +137,14 @@ class Variant extends Component {
               {variant.product.title}
             </h1>
             {variant.can_edit &&
-              <p>
-                <a href={path('edit_variant_path', { id: variant.id })}>
+              <div className={styles.edit}>
+                <a className={styles.btn_gr} href={path('edit_variant_path', { id: variant.id })}>
                   Редактировать
                 </a>
-              </p>
+                <a className={styles.btn_gr} href={path('new_variant_path') + `?product_id=${variant.product.id}`}>
+                  Добавить цвет
+                </a>
+              </div>
             }
           </div>
 
