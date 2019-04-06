@@ -14,6 +14,7 @@
     "dragula": "^3.7.2",
     "dropzone": "^5.1.1",
     "flatpickr": "^4.4.6",
+    "i18n-js": "^3.2.1",
     "immutability-helper": "^3.0.0",
     "jquery": "^3.2.1",
     "jquery-mask-plugin": "^1.14.11",

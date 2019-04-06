@@ -58,6 +58,10 @@ class Order < ApplicationRecord
     @amount ||= order_items.map(&:price_sell).sum
   end
 
+  def quantity
+    order_items.sum(&:quantity)
+  end
+
   # def can_paid?
   #   amount > 0 && active?
   # end

@@ -10,7 +10,7 @@ class Cart < ApplicationRecord
   end
 
   def available
-    variant.availabilities.active.where(size: size).sum(&:count)
+    variant.availabilities.active.where(size: size).sum(&:quantity)
   end
 
   def available?

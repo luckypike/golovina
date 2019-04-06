@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import classNames from 'classnames'
 
 import { path } from '../Routes'
 import List from '../Orders/List'
 
 import page from '../Page'
 
-import styles from './Orders.module.css'
+import styles from './Index.module.css'
 
-class Orders extends Component {
+class Index extends Component {
   state = {
     orders: null
   }
 
   componentDidMount = async () => {
-    const res = await axios.get(path('orders_user_path', { id: this.props.user.id, format: 'json' }))
+    const res = await axios.get(path('orders_path', { format: 'json' }))
     this.setState({ ...res.data })
   }
 
@@ -25,7 +24,7 @@ class Orders extends Component {
     return (
       <div className={page.gray}>
         <div className={page.title}>
-          <h1>Ваши заказы</h1>
+          <h1>Заказы</h1>
         </div>
 
         <div>
@@ -38,4 +37,4 @@ class Orders extends Component {
   }
 }
 
-export default Orders
+export default Index

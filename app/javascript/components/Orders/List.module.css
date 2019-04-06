@@ -1,0 +1,68 @@
+.root {
+  @media (--m) {
+    margin: 0 calc(2 / 12 * 100%);
+  }
+}
+
+.orders {
+
+}
+
+.order {
+  background-color: white;
+  padding: calc(var(--xr));
+
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * 4);
+  }
+}
+
+.handle {
+  cursor: pointer;
+
+  @media (--s) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.state {
+  composes: at from '../Fonts';
+  margin-right: 1em;
+  padding: 0 0.5em;
+
+  &.active {
+    background: color-mod(green a(0.05));
+    color: green;
+  }
+
+  &.archived {
+    background: color-mod(var(--gr_color) a(0.05));
+    color: var(--gr_color);
+  }
+
+  &.paid {
+    background: color-mod(yellow a(0.05));
+    color: orange;
+  }
+}
+
+.details {
+  composes: at from '../Fonts';
+}
+
+.number {
+  font-weight: var(--fw_bold);
+}
+
+.created_at {
+  margin-left: 2em;
+  color: var(--gr_color);
+}
+
+.items {}

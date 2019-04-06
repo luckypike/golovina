@@ -3,9 +3,9 @@ class Availability < ApplicationRecord
   belongs_to :size
   belongs_to :store
 
-  scope :active, -> { where.not(count: 0) }
+  scope :active, -> { where.not(quantity: 0) }
 
   def active?
-    count > 0
+    quantity > 0
   end
 end

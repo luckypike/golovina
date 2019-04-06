@@ -6,8 +6,13 @@ class UsersController < ApplicationController
   def orders
     authorize @user
 
-    @orders = @user.orders.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).where.not(state: [:undef]).order(created_at: :desc)
-    @orders = @orders.where(state: params[:state]) if params[:state]
+    respond_to do |format|
+      format.html
+      format.json do
+        @orders = @user.orders.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).where.not(state: [:undef]).order(created_at: :desc)
+        @orders = @orders.where(state: params[:state]) if params[:state]
+      end
+    end
   end
 
   def account

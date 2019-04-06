@@ -124,6 +124,10 @@ class Nav extends Component {
         {user && user['is_editor?'] &&
           <Section id="control" title="Управление" onToggle={this.toggleSection} section={section}>
             <div className={styles.sub}>
+              <a href={path('orders_path')}>Заказы</a>
+            </div>
+
+            <div className={styles.sub}>
               <a href={path('categories_path')}>Категории</a>
             </div>
 

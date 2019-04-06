@@ -39,6 +39,7 @@ gem 'pundit'
 gem 'active_link_to'
 
 gem 'rails-i18n'
+gem 'i18n-js'
 gem 'enum_help'
 gem 'stateful_enum'
 

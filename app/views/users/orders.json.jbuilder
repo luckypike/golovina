@@ -1,3 +1,3 @@
 json.orders @orders do |order|
-  json.extract! order, :id, :amount, :state, :address
+  json.partial! 'orders/order', order: order
 end

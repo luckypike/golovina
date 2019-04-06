@@ -4,10 +4,10 @@ class OrderItem < ApplicationRecord
   belongs_to :size
 
   def price_sell
-    price.present? ? price * quantity : variant.price_sell * quantity
+    price.present? ? price * quantity : variant.price_sell * quantity rescue 0
   end
 
   def available?
-    variant.availabilities.active.where(size: size).sum(&:count) >= quantity
+    variant.availabilities.active.where(size: size).sum(&:quantity) >= quantity
   end
 end

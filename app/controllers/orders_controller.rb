@@ -4,10 +4,18 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:checkout, :pay, :archive]
   skip_before_action :verify_authenticity_token, only: [:paid]
 
+  layout 'app'
+
   def index
     authorize Order
-    @orders = Order.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).where.not(state: [:undef]).order(created_at: :desc)
-    @orders = @orders.where(state: params[:state]) if params[:state]
+
+    respond_to do |format|
+      format.html
+      format.json do
+        @orders = Order.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).where.not(state: [:undef]).order(created_at: :desc)
+        @orders = @orders.where(state: params[:state]) if params[:state]
+      end
+    end
   end
 
   def create
