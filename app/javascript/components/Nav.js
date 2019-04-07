@@ -123,10 +123,10 @@ class Nav extends Component {
         <div className={classNames(styles.section)}>
           <div className={styles.title}>
             <a href="/login">
-              {user ? 'Ваши заказы' : 'Войти'}
+              {user && !user['guest?'] ? 'Ваши заказы' : 'Войти'}
             </a>
 
-            {user &&
+            {user && !user['guest?'] &&
               <a className={styles.logout} href={path('destroy_user_session_path')} onClick={this.handleLogout}>
                 Выйти
               </a>

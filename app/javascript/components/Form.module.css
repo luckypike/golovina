@@ -84,6 +84,11 @@
   }
 }
 
+.error {
+  color: var(--red_color);
+  composes: at from './Fonts.module.css';
+}
+
 .radio {
   composes: at from './Fonts.module.css';
   composes: small from './Fonts.module.css';

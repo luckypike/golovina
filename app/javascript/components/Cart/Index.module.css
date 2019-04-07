@@ -5,7 +5,7 @@
 
 .carts {
   @media (--s) {
-    padding-left: calc(var(--xr));
+    padding-right: calc(var(--xr) * 2);
   }
 }
 

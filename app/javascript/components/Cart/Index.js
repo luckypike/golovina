@@ -13,6 +13,7 @@ import buttons from '../Buttons.module.css'
 
 class Index extends Component {
   state = {
+    errors: {},
     carts: null,
   }
 
@@ -48,9 +49,11 @@ class Index extends Component {
         },
         authenticity_token: this.token
       }
-    )
+    ).catch(({ response }) => {
+      this.setState({ errors: response.data })
+    })
 
-    if(res.headers.location) window.location = res.headers.location
+    // if(res.headers.location) window.location = res.headers.location
   }
 
   handleDestroyClick = async cart => {
@@ -67,7 +70,7 @@ class Index extends Component {
   }
 
   render () {
-    const { carts, order, user, values, amount } = this.state
+    const { carts, order, user, values, amount, errors } = this.state
 
     return (
       <div className={page.gray}>
@@ -130,6 +133,15 @@ class Index extends Component {
                   <div className={form.input}>
                     <input type="text" name="name" value={values.name} onChange={this.handleInputChange} />
                   </div>
+
+                  {errors['user.name'] &&
+                    <div className={form.error}>
+                      <ul>
+                        {errors['user.name'].map((error, i) => <li key={i}>{error}</li>)}
+                      </ul>
+
+                    </div>
+                  }
                 </div>
 
                 <div className={form.item}>
@@ -148,6 +160,15 @@ class Index extends Component {
                   <div className={form.input}>
                     <input type="text" name="phone" value={values.phone} onChange={this.handleInputChange} />
                   </div>
+
+                  {errors['user.phone'] &&
+                    <div className={form.error}>
+                      <ul>
+                        {errors['user.phone'].map((error, i) => <li key={i} dangerouslySetInnerHTML={{ __html: error }} /> )}
+                      </ul>
+
+                    </div>
+                  }
                 </div>
 
                 <div className={form.item}>
@@ -166,6 +187,15 @@ class Index extends Component {
                   <div className={form.input}>
                     <textarea type="text" name="address" value={values.address} onChange={this.handleInputChange} />
                   </div>
+
+                  {errors.address &&
+                    <div className={form.error}>
+                      <ul>
+                        {errors.address.map((error, i) => <li key={i}>{error}</li>)}
+                      </ul>
+
+                    </div>
+                  }
                 </div>
 
                 {carts.filter(cart => !cart.available).length == 0 &&
