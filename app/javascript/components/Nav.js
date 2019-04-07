@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
+import axios from 'axios'
 import AnimateHeight from 'react-animate-height'
 
 import { path } from './Routes'
@@ -16,6 +17,18 @@ class Nav extends Component {
     this.setState(state => ({
       section: state.section == section ? null : section
     }))
+  }
+
+  handleLogout = async e => {
+    e.preventDefault()
+
+    try {
+      await axios.delete(path('destroy_user_session_path'), { params: { authenticity_token: document.querySelector('[name="csrf-token"]').content }})
+    } catch (err) {
+
+    }
+
+    window.location = path('root_path')
   }
 
   render() {
@@ -67,7 +80,7 @@ class Nav extends Component {
         <Section id="collections" title="Коллекции" onToggle={this.toggleSection} section={section}>
           {collections.map(collection =>
             <div className={classNames(styles.sub)} key={collection.id}>
-              <a href="#">
+              <a href={path('collection_path', { id: collection.slug })}>
                 <div>
                   {collection.title}
                 </div>
@@ -114,7 +127,7 @@ class Nav extends Component {
             </a>
 
             {user &&
-              <a className={styles.logout} href="/logout">
+              <a className={styles.logout} href={path('destroy_user_session_path')} onClick={this.handleLogout}>
                 Выйти
               </a>
             }

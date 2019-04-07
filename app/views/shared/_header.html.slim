@@ -62,7 +62,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
             .section_list_item.l2
               = active_link_to 'Посмотреть все', [:variants], active: :exact
 
-      .header_menu_section
+      / .header_menu_section
         .section
           .section_title.l1
             span Образы
@@ -139,7 +139,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
               = active_link_to t('menu.return'), customers_return_path
 
       .header_menu_section.orders_and_auth
-        - if signed_in? && !current_user.is_guest?
+        - if signed_in? && !current_user.guest?
           = active_link_to t(:your_orders), [:orders, current_user], class: :l1
           = active_link_to t(:logout), destroy_user_session_path, method: :delete, class: :l1
         - else
