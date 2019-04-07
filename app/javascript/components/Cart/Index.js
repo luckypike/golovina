@@ -53,7 +53,7 @@ class Index extends Component {
       this.setState({ errors: response.data })
     })
 
-    // if(res.headers.location) window.location = res.headers.location
+    if(res.headers.location) window.location = res.headers.location
   }
 
   handleDestroyClick = async cart => {
