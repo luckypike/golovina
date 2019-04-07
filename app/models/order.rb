@@ -3,7 +3,7 @@ class Order < ApplicationRecord
     event :activate do
       after do
         user.common!
-        # OrderMailer.activate(self).deliver_later
+        OrderMailer.activate(self).deliver if Rails.env.development?
       end
 
       transition undef: :active

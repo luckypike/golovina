@@ -32,22 +32,22 @@
   .order_items
     - @order.order_items.each do |item|
       div
-        = image_tag(root_url + item.variant.images.first.photo.preview.url)
+        = image_tag(item.variant.images.first.photo.preview.url)
         p
           strong
-            = item.variant.product.title_safe
+            = item.variant.product.title
           br
 
           ' Цвет:
           = item.variant.color.title
           br
 
-          ' Размер:
-          - if item.variant.product.category.get_ancestor == Rails.application.secrets[:men]
-            = t("sizes_men.size_#{item.size}")
-          - else
-            = t("sizes.size_#{item.size}")
-          br
+          / ' Размер:
+          / - if item.variant.product.category.get_ancestor == Rails.application.secrets[:men]
+          /   = t("sizes_men.size_#{item.size}")
+          / - else
+          /   = t("sizes.size_#{item.size}")
+          / br
 
           ' Количество:
           = item.quantity
@@ -55,4 +55,4 @@
           br
 
           ' Стоимость:
-          = number_to_rub item.price
+          = number_to_rub item.price_sell

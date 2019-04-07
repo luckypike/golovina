@@ -5,16 +5,16 @@ class OrderMailer < ApplicationMailer
 
   def activate order
     @order = order
-    mail(to: Rails.application.secrets[:order_mail], subject: Rails.application.secrets[:order_prefix] + " создан заказ № #{order.number}")
+    mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:prefix] + " создан заказ № #{order.number}")
   end
 
   def pay order
     @order = order
-    mail(to: Rails.application.secrets[:order_mail], subject: Rails.application.secrets[:order_prefix] + " оплачен заказ № #{order.number}")
+    mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:prefix] + " оплачен заказ № #{order.number}")
   end
 
   def sms_test order
     @order = order
-    mail(to: Rails.application.secrets[:order_mail], subject: 'Тестовая СМС')
+    mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: 'Тестовая СМС')
   end
 end

@@ -56,12 +56,12 @@ class OrdersController < ApplicationController
   def paid
     authorize Order
 
-    if Digest::MD5.hexdigest(params.slice(:id, :sum, :clientid, :orderid).values.push(Rails.application.secrets[:payment_key]).join('')) == params[:key]
+    if Digest::MD5.hexdigest(params.slice(:id, :sum, :clientid, :orderid).values.push(Rails.application.credentials.payment[:key]).join('')) == params[:key]
       order = Order.find(params[:orderid])
       order.update(payment_id: params[:id], payment_amount: params[:sum])
       order.pay!
 
-      render inline: ('OK ' + Digest::MD5.hexdigest(params[:id] + Rails.application.secrets[:payment_key]))
+      render inline: ('OK ' + Digest::MD5.hexdigest(order.id + Rails.application.credentials.payment[:key]))
     end
   end
 

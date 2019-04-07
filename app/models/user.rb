@@ -32,8 +32,8 @@ class User < ApplicationRecord
     is_admin? || [2, 3].include?(id)
   end
 
-  def is_tester?
-    Rails.application.secrets[:payment_test_phones].include?(phone)
+  def tester?
+    Rails.application.credentials.payment[:test_phones].include?(phone)
   end
 
   def clear_phone
