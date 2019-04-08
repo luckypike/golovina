@@ -33,27 +33,6 @@ class Variant < ApplicationRecord
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
 
-  def sync_themes_and_category
-    # self.themes = product.themes.map(&:id)
-    # self.category = product.category
-  end
-
-  # def variant_price
-  #   price? ? price : (product.price? ? product.price : 0)
-  # end
-  #
-  # def variant_price_last
-  #   price_last? ? price_last : product.price_last
-  # end
-  #
-  # def variant_desc
-  #   desc? ? desc : product.desc
-  # end
-  #
-  # def variant_comp
-  #   comp? ? comp : product.comp
-  # end
-
   def price_sell
     price_last.presence || price
   end
@@ -86,9 +65,16 @@ class Variant < ApplicationRecord
     OrderItem.where(variant_id: self).any?
   end
 
-  # def purchasable size, quantity
-  #   sizes[size.to_s].to_i >= quantity ? true : false
-  # end
+  def decrease quantity
+    availability = availabilities.where(store_id: 1).where('quantity > ?', 0).first
+    availability = availabilities.where.not(store_id: 1).where('quantity > ?', 0).first unless availability
+    if availability
+      availability.quantity -= quantity
+      availability.save
+    else
+
+    end
+  end
 
   def check_category
     Category.find(product.category_id_before_last_save).check if product.category_id_before_last_save

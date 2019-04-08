@@ -19,9 +19,8 @@ class Order < ApplicationRecord
 
         OrderMailer.pay(self).deliver_later
 
-        self.order_items.each do |item|
-          item.variant.sizes[item.size.to_s] = item.variant.sizes[item.size.to_s].to_i - item.quantity
-          item.variant.save
+        order_items.each do |item|
+          item.variant.decrease item.quantity
         end
       end
 
