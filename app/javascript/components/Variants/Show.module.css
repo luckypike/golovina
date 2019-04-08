@@ -92,6 +92,7 @@
   font-weight: var(--fw_light);
   user-select: none;
   background-color: white;
+  position: relative;
   cursor: pointer;
   text-align: center;
   min-width: calc(var(--yr) * 8);
