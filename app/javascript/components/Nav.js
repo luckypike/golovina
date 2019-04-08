@@ -141,11 +141,20 @@ class Nav extends Component {
             </div>
 
             <div className={styles.sub}>
-              <a href={path('categories_path')}>Категории</a>
+              <a href={path('collections_path')}>Коллекции</a>
             </div>
 
             <div className={styles.sub}>
-              <a href={path('collections_path')}>Коллекции</a>
+              <a href={path('categories_path')}>Категории</a>
+            </div>
+
+
+            <div className={styles.sub}>
+              <a href={path('colors_path')}>Цвета</a>
+            </div>
+
+            <div className={styles.sub}>
+              <a href={path('slides_path')}>Слайды</a>
             </div>
           </Section>
         }
