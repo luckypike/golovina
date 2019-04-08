@@ -135,7 +135,7 @@ class Form extends React.Component {
                         </div>
 
                         <div className={form.input_input}>
-                          <input type="text" value={size.count} name={`size[${size.size_id}]`} onChange={this.handleQuantityChange(store.id, size.size_id)} />
+                          <input type="text" value={size.quantity} name={`size[${size.size_id}]`} onChange={this.handleQuantityChange(store.id, size.size_id)} />
                         </div>
                       </div>
                     )
@@ -271,7 +271,7 @@ class Form extends React.Component {
 
     const availabilities = update(this.state.values.availabilities_attributes, {
       [key]: {
-        count: {
+        quantity: {
           $set: value
         }
       }
@@ -356,7 +356,7 @@ class Form extends React.Component {
             store_id: store,
             size_id: size,
             variant_id: this.props.id,
-            count: 0,
+            quantity: 0,
             _destroy: false
           }]
         }

@@ -171,6 +171,6 @@ class VariantsController < ApplicationController
   end
 
   def variant_params
-    params.require(:variant).permit(:color_id, :out_of_stock, :state, :created_at, :latest, :sale, :pinned, :desc, :comp, :price, :price_last, :product_id, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :count, :_destroy], image_ids: [])
+    params.require(:variant).permit(:color_id, :out_of_stock, :state, :created_at, :latest, :sale, :pinned, :desc, :comp, :price, :price_last, :product_id, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :quantity, :_destroy], image_ids: [])
   end
 end

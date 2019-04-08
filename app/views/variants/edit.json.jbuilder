@@ -9,7 +9,7 @@ json.variant do
   end
 
   json.availabilities_attributes @variant.availabilities do |availability|
-    json.extract! availability, :id, :variant_id, :size_id, :count, :store_id
+    json.extract! availability, :id, :variant_id, :size_id, :quantity, :store_id
     json._destroy false
   end
 end
