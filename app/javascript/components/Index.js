@@ -8,11 +8,19 @@ class Index extends Component {
   mount = React.createRef()
 
   componentDidMount() {
+    window.addEventListener('resize', this._updateDimensions)
+    this._updateDimensions()
+
     this.glide = new Glide(this.mount.current, {
       type: 'carousel',
       gap: 0,
     })
     this.glide.mount()
+  }
+
+  _updateDimensions() {
+    let vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
   }
 
   render () {
