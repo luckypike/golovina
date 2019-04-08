@@ -91,7 +91,7 @@ class Variant < ApplicationRecord
   # end
 
   def check_category
-    Category.find(product.category_id_before_last_save).check
+    Category.find(product.category_id_before_last_save).check if product.category_id_before_last_save
     product.category.check
   end
 
