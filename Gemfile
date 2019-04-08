@@ -62,6 +62,8 @@ gem 'capistrano-rbenv'
 
 gem 'exception_notification'
 
+gem 'bootsnap', '>= 1.1.0', require: false
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
