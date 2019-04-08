@@ -1,6 +1,8 @@
 class CollectionsController < ApplicationController
   before_action :set_collection, only: [:edit, :update, :destroy, :show]
 
+  layout 'app'
+
   def show
     authorize @collection
 
@@ -38,9 +40,9 @@ class CollectionsController < ApplicationController
     authorize @collection
 
     if @collection.save
-      redirect_to [:collections]
+      head :created, location: collections_path
     else
-      render :new
+      render json: @collection.errors, status: :unprocessable_entity
     end
   end
 
@@ -48,9 +50,9 @@ class CollectionsController < ApplicationController
     authorize @collection
 
     if @collection.update(collection_params)
-      redirect_to [:collections]
+      head :ok, location: collections_path
     else
-      render :edit
+      render json: @collection.errors, status: :unprocessable_entity
     end
   end
 
@@ -66,6 +68,6 @@ class CollectionsController < ApplicationController
   end
 
   def collection_params
-    params.require(:collection).permit(:title, :slug, :desc, :text, :weight)
+    params.require(:collection).permit(:title, :slug, :desc, :text, :weight, image_ids: [])
   end
 end

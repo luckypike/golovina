@@ -4,7 +4,6 @@
 }
 
 .item {
-  width: 76px;
   height: 94px;
   background-color: var(--sand_color);
   margin-right: calc(var(--xr) / 2);
@@ -14,7 +13,6 @@
 
   & img {
     display: block;
-    width: 72px;
     height: 90px;
   }
 }

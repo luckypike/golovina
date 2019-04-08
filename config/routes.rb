@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :sizes
   resources :sizes_groups
 
-
+  resources :collections
 
   scope format: false do
     devise_for :users, path: '', path_names: { sign_out: 'logout'}
@@ -62,8 +62,6 @@ Rails.application.routes.draw do
       get 'info', to: 'customers#info'
       get 'return', to: 'customers#return'
     end
-
-    resources :collections
 
     resources :users, only: [] do
       member do

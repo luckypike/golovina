@@ -1,9 +1,3 @@
-.page.page_common.page_collections
-  .page_collections_list
-    .collections_add
-      = link_to 'Добавить', [:new, :collection], class: :btn
+- title 'Все коллекции'
 
-    .collections_list
-      - @collections.each do |collection|
-        .collections_list_item
-          = link_to collection.title, [:edit, collection]
+= react_component 'Collections/Index'

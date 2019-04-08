@@ -36,7 +36,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :preview do
-    process resize_to_fill: [240, 300]
+    process smart_resize: [300, 240]
     process :optimize
   end
 
@@ -55,12 +55,24 @@ class PhotoUploader < CarrierWave::Uploader::Base
     process :optimize
   end
 
+  version :collection do
+    process resize_to_limit: [nil, 1800]
+  end
 
 
   # version :cart do
   #   process resize_to_fill: [320, 400]
   #   process :optimize
   # end
+
+  def smart_resize w, h
+    width, height = ::MiniMagick::Image.open(file.file)[:dimensions]
+    if width > height
+      resize_to_fill w, h
+    else
+      resize_to_fill h, w
+    end
+  end
 
   def extension_whitelist
     %w(jpg jpeg gif png)
