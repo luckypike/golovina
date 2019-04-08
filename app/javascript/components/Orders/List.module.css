@@ -19,6 +19,12 @@
 
 .handle {
   cursor: pointer;
+  user-select: none;
+
+  & .title {
+    display: flex;
+    align-items: center;
+  }
 
   @media (--s) {
     display: grid;
@@ -26,10 +32,7 @@
   }
 }
 
-.title {
-  display: flex;
-  align-items: center;
-}
+
 
 .state {
   composes: at from '../Fonts';
@@ -65,4 +68,44 @@
   color: var(--gr_color);
 }
 
-.items {}
+.pay {
+  margin-top: calc(var(--yr) * 4);
+}
+
+.items {
+  margin-top: calc(var(--yr) * 8);
+  composes: at from '../Fonts';
+
+  @media (--s) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: var(--xr);
+  }
+}
+
+.item {
+  display: grid;
+  grid-column-gap: var(--xr);
+  grid-template-columns: 6rem 1fr;
+  grid-template-rows: repeat(5, auto) 1fr;
+
+  & .title {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * 8);
+  }
+}
+
+.image {
+  align-self: flex-start;
+  composes: image from '../Variants/List.module.css';
+  grid-row: 1 / span 6;
+}
+
+.unavailable {
+  color: var(--red_color);
+  font-weight: var(--fw_bold);
+}

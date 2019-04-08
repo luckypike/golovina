@@ -67,7 +67,7 @@ class Order < ApplicationRecord
   # end
   #
   def purchasable?
-    active? && order_items.reject(&:available?).size == 0 && amount > 0
+    active? && order_items.reject(&:available?).size == 0 && amount > 0 && user == Current.user
   end
 
   def sms_message

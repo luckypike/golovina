@@ -7,7 +7,11 @@ class OrderItem < ApplicationRecord
     price.present? ? price * quantity : variant.price_sell * quantity rescue 0
   end
 
+  def available
+    variant.availabilities.active.where(size: size).sum(&:quantity)
+  end
+
   def available?
-    variant.availabilities.active.where(size: size).sum(&:quantity) >= quantity
+    available >= quantity
   end
 end
