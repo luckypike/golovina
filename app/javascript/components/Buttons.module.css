@@ -1,5 +1,6 @@
 .main {
   display: inline-block;
+  border-radius: 0;
   font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
   line-height: calc(var(--yr) * var(--lh));
   cursor: pointer;
