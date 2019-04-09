@@ -1,7 +1,7 @@
 class Variant < ApplicationRecord
   enum state: { active: 1, archived: 2}
 
-  default_scope { includes(:images, { product: :category }) }
+  default_scope { includes(:images, { product: :category }).order(pinned: :desc, created_at: :desc) }
 
   before_validation :parse_image_ids
 
