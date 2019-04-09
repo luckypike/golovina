@@ -12,7 +12,7 @@ class Availability < ApplicationRecord
   end
 
   def check_variant
-    if variant.availabilities.active.size < 1
+    if variant.availabilities.size < 1
       variant.archived!
     else
       variant.active!
