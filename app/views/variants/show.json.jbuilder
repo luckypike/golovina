@@ -7,6 +7,7 @@ json.variants @variant.product.variants.active.includes(:color, { availabilities
       quantity = availabilities.sum(&:quantity)
       json.id size.id
       json.title size.size
+      json.weight size.weight
       json.quantity quantity
       json.active quantity > 0
     end

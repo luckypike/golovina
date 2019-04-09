@@ -164,7 +164,7 @@ class Variant extends Component {
 
           <div className={styles.rest}>
             <div className={styles.sizes}>
-              {variant.availabilities.map(availability =>
+              {variant.availabilities.sort((a, b) => a.size.weight - b.size.weight).map(availability =>
                 <div key={availability.size.id} className={classNames(styles.size, styles[`size_${availability.size.id}`], { [styles.unavailable]: !availability.size.active, [styles.active]: availability.size.id == size })} onClick={() => this.selectSize(availability.size)}>
                   {availability.size.title}
                 </div>
