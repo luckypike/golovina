@@ -59,6 +59,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   version :collection do
     process resize_to_limit: [nil, 1800]
+    process :optimize
   end
 
 

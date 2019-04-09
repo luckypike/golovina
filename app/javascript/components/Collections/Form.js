@@ -16,6 +16,7 @@ class Form extends React.Component {
       title: this.props.values.title || '',
       slug: this.props.values.slug || '',
       text: this.props.values.text || '',
+      desc: this.props.values.desc || '',
     }
   }
 
@@ -87,6 +88,16 @@ class Form extends React.Component {
 
               <div className={form.input_input}>
                 <input type="text" value={values.slug} name="slug" onChange={this.handleInputChange} />
+              </div>
+            </div>
+
+            <div className={form.input}>
+              <div className={form.label}>
+                Название тест
+              </div>
+
+              <div className={form.input_input}>
+                <input type="text" value={values.desc} name="desc" onChange={this.handleInputChange} />
               </div>
             </div>
 

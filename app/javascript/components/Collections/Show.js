@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import classNames from 'classnames'
+import ReactMarkdown from 'react-markdown'
 
 import { path } from '../Routes'
 
@@ -15,7 +16,6 @@ class Show extends Component {
   }
 
   componentDidMount = async () => {
-    console.log('mount');
     const res = await axios.get(path('collection_path', { id: this.props.id, format: 'json' }))
     this.setState({ ...res.data })
   }
@@ -32,13 +32,15 @@ class Show extends Component {
             {collection.title}
           </h1>
         </div>
+
         <div className={styles.text}>
-          {collection.text}
+          <ReactMarkdown source={collection.text} />
         </div>
+
         <div className={styles.images}>
           {collection.images &&
             collection.images.map((image, index) =>
-              <div key={index} className={classNames([styles.image], {[styles.landscape]: image.width > image.height}, {[styles.single]: [2, 4].includes(index)})}>
+              <div key={index} className={classNames([styles.image], {[styles.landscape]: image.width > image.height}, {[styles.single]: [0, 4, 7, 8, 10, 14, 17, 20, 23, 26, 28, 34, 35, 36, 39, 40, 43, 44, 47].includes(index)})}>
                 <img src={image.collection} />
               </div>
             )

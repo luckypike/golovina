@@ -23,6 +23,7 @@
 
 .text {
   padding: 0 var(--xr);
+  margin-bottom: calc(var(--yr) * 8);
 
   @media (--m) {
     padding: 0 calc(var(--xr) * 2);
