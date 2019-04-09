@@ -29,6 +29,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  process :store_dimensions
+
   process resize_to_limit: [5000, 5000]
 
   version :drag do
@@ -76,6 +78,12 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   def extension_whitelist
     %w(jpg jpeg gif png)
+  end
+
+  def store_dimensions
+    if file && model
+      model.width, model.height = ::MiniMagick::Image.open(file.file)[:dimensions]
+    end
   end
 
   # Override the filename of the uploaded files:

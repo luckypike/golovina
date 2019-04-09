@@ -65,7 +65,7 @@ class Form extends React.Component {
     return (
       <div className={page.gray}>
         <div className={page.title}>
-          <h1>Редактирование: {title}</h1>
+          <h1>{this.props.title ? `Редактирование: ${title}` : 'Новая коллекция'}</h1>
         </div>
 
         <div className={form.root}>

@@ -1,7 +1,7 @@
 class CollectionsController < ApplicationController
   before_action :set_collection, only: [:edit, :update, :destroy, :show]
 
-  layout 'app'
+  layout 'app', except: [:show]
 
   def show
     authorize @collection
@@ -24,6 +24,15 @@ class CollectionsController < ApplicationController
 
       photos
     end
+
+    respond_to do |format|
+      format.html do
+        render 'show_comp', layout: 'layouts/app' if @collection.images.any?
+      end
+      format.json
+    end
+
+
   end
 
   def new
@@ -50,7 +59,7 @@ class CollectionsController < ApplicationController
     authorize @collection
 
     if @collection.update(collection_params)
-      head :ok, location: collections_path
+      head :ok, location: collection_path(@collection.id)
     else
       render json: @collection.errors, status: :unprocessable_entity
     end

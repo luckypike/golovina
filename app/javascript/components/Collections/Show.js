@@ -1,37 +1,47 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import classNames from 'classnames'
 
 import { path } from '../Routes'
 
 import List from '../Variants/List'
 
 import page from '../Page'
+import styles from './Show.module.css'
 
 class Show extends Component {
   state = {
-    variants: null
+    collection: null
   }
 
   componentDidMount = async () => {
-    const res = await axios.get(path('catalog_category_path', { slug: this.props.category.slug, format: 'json' }))
+    console.log('mount');
+    const res = await axios.get(path('collection_path', { id: this.props.id, format: 'json' }))
     this.setState({ ...res.data })
   }
 
   render () {
-    const { variants } = this.state
-    const { category } = this.props
+    const { collection } = this.state
+
+    if (!collection) return null
 
     return (
-      <div className={page.root}>
-        <div className={page.title}>
+      <div className={styles.root}>
+        <div className={styles.title}>
           <h1>
-            {category.title}
+            {collection.title}
           </h1>
         </div>
-
-        <div>
-          {variants &&
-            <List variants={variants} />
+        <div className={styles.text}>
+          {collection.text}
+        </div>
+        <div className={styles.images}>
+          {collection.images &&
+            collection.images.map((image, index) =>
+              <div key={index} className={classNames([styles.image], {[styles.landscape]: image.width > image.height}, {[styles.single]: [2, 4].includes(index)})}>
+                <img src={image.collection} />
+              </div>
+            )
           }
         </div>
       </div>
