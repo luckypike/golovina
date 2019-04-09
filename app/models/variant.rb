@@ -65,14 +65,25 @@ class Variant < ApplicationRecord
     OrderItem.where(variant_id: self).any?
   end
 
+  # TODO: переписать этот метод чтобы для более няшного кода
   def decrease quantity
     availability = availabilities.where(store_id: 1).where('quantity > ?', 0).first
     availability = availabilities.where.not(store_id: 1).where('quantity > ?', 0).first unless availability
-    if availability
-      availability.quantity -= quantity
-      availability.save
-    else
 
+    if availability
+      if quantity > availability.quantity
+        diff = quantity - availability.quantity
+        availability.quantity = 0
+        availability.save
+        availability = availabilities.where.not(store_id: 1).where('quantity > ?', 0).first
+        availability.quantity -= diff
+        availability.save
+      else
+        availability.quantity -= quantity
+        availability.save
+      end
+    else
+      # TODO: добавить действие если произошел казус что оба заказа оплачивали одновременно
     end
   end
 
