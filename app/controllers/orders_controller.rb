@@ -56,12 +56,21 @@ class OrdersController < ApplicationController
   def paid
     authorize Order
 
-    if Digest::MD5.hexdigest(params.slice(:id, :sum, :clientid, :orderid).values.push(Rails.application.credentials.payment[:key]).join('')) == params[:key]
+    if Digest::MD5.hexdigest(params.slice(:id, :sum, :clientid, :orderid).values.push(Rails.application.credentials[Rails.env.to_sym][:payment][:key]).join('')) == params[:key]
       order = Order.find(params[:orderid])
-      order.update(payment_id: params[:id], payment_amount: params[:sum])
-      order.pay!
 
-      render inline: ('OK ' + Digest::MD5.hexdigest(order.id + Rails.application.credentials.payment[:key]))
+      if order.active?
+        order.update(payment_id: params[:id], payment_amount: params[:sum])
+        order.pay!
+      end
+
+      if order.paid?
+        render inline: ('OK ' + Digest::MD5.hexdigest(params[:id] + Rails.application.credentials[Rails.env.to_sym][:payment][:key]))
+      else
+        head :ok
+      end
+    else
+      head :unprocessable_entity
     end
   end
 

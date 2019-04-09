@@ -20,6 +20,7 @@ class Order < ApplicationRecord
         OrderMailer.pay(self).deliver_later
 
         order_items.each do |item|
+          item.update(price: item.variant.price_sell)
           item.variant.decrease item.quantity
         end
       end

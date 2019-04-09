@@ -80,9 +80,17 @@ class Item extends Component {
                     Размер: {item.size.title}
                   </div>
 
-                  <div className={classNames(styles.quantity, { [styles.unavailable]: !item.available })}>
-                    Количество: {item.quantity} {!item.available ? ` (доступно: ${item.quantity_available})` : null}
-                  </div>
+                  {order.purchasable &&
+                    <div className={classNames(styles.quantity, { [styles.unavailable]: !item.available })}>
+                      Количество: {item.quantity} {!item.available ? ` (доступно: ${item.quantity_available})` : null}
+                    </div>
+                  }
+
+                  {!order.purchasable &&
+                    <div className={styles.quantity}>
+                      Количество: {item.quantity}
+                    </div>
+                  }
                 </div>
               )}
             </div>
