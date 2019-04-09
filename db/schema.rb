@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 2019_04_09_110555) do
   create_table "availabilities", force: :cascade do |t|
     t.bigint "variant_id"
     t.bigint "size_id"
-    t.integer "count"
+    t.bigint "store_id"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "store_id"
     t.index ["size_id"], name: "index_availabilities_on_size_id"
     t.index ["store_id"], name: "index_availabilities_on_store_id"
     t.index ["variant_id"], name: "index_availabilities_on_variant_id"
@@ -308,6 +308,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_110555) do
   end
 
   add_foreign_key "availabilities", "sizes"
+  add_foreign_key "availabilities", "stores"
   add_foreign_key "availabilities", "variants"
   add_foreign_key "carts", "sizes"
   add_foreign_key "carts", "users"

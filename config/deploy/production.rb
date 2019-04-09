@@ -1,1 +1,1 @@
-server 'mint-store.ru', user: 'deploy', roles: %w{app db web}
+server 'golovina.store', user: 'deploy', roles: %w{app db web}

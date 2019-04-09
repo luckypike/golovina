@@ -38,4 +38,4 @@ themes.each_pair do |slug, v|
   theme.save
 end
 
-User.create_with(email: 'we+mint@luckypike.com', password: 'mint11', password_confirmation: 'mint11').find_or_create_by(id: 1)
+User.create_with(email: 'we+golovina@luckypike.com', password: 'golovina11', password_confirmation: 'golovina11').find_or_create_by(id: 1)
