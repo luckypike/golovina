@@ -4,7 +4,7 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def show?
-    update?
+    true
   end
 
   def update?

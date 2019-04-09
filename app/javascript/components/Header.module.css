@@ -1,0 +1,278 @@
+.root {
+  height: calc(var(--yr) * 16);
+  position: absolute;
+  left: 0;
+  padding-top: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  transition: height 0.2s;
+
+  @media (--s) {
+    height: calc(var(--yr) * 24);
+  }
+
+  @media (--m) {
+    position: fixed;
+  }
+
+  @media (--xl) {
+    height: calc(var(--yr) * 30);
+  }
+
+  &.scrolling {
+    height: calc(var(--yr) * 16);
+
+    & .burger {
+      top: calc(var(--yr) * 2);
+    }
+  }
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  bottom: 0.875rem;
+  transform: translateX(-50%);
+  z-index: 2;
+  transition-duration: 0.4s;
+  transition-property: transform opacity;
+
+  & a {
+    display: block;
+  }
+
+  & svg {
+    display: block;
+    fill: #212121;
+    width: 106px;
+    height: 36px;
+  }
+}
+
+.burger {
+  position: fixed;
+  left: var(--xr);
+  top: calc(var(--yr) * 2);
+  padding: calc(var(--yr) * 3);
+  margin-left:  calc(var(--yr) * 3 * -1);
+  user-select: none;
+  z-index: 3;
+  transition: top 0.2s;
+  cursor: pointer;
+  user-select: none;
+
+  @media (--s) {
+    top: calc(var(--yr) * 10);
+  }
+
+  @media (--m) {
+    left: calc(var(--xr) * 2);
+  }
+
+  @media (--xl) {
+    top: calc(var(--yr) * 18);
+    left: calc(var(--xr) * 4);
+  }
+
+  & svg {
+    display: block;
+    width: calc(var(--yr) * 6);
+    height: calc(var(--yr) * 6);
+
+    & rect {
+      fill: var(--pr_color);
+      transition: 0.2s fill;
+    }
+  }
+}
+
+.caw {
+  position: absolute;
+  display: flex;
+  right: 0;
+  bottom: calc(var(--yr) * 2);
+
+  @media (--m) {
+    right: calc(var(--xr) * 1);
+  }
+
+  @media (--xl) {
+    right: calc(var(--xr) * 3);
+  }
+
+}
+
+
+.wishlist {
+  display: block;
+  padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
+  opacity: 0.3;
+
+  &.active {
+    opacity: 1;
+  }
+
+  & svg {
+    display: block;
+    width: calc(var(--yr) * 6);
+    height: calc(var(--yr) * 6);
+
+    & :global {
+      & .a {
+        fill: none;
+        stroke: var(--pr_color);
+        stroke-miterlimit: 10;
+      }
+    }
+  }
+}
+
+.cart {
+  display: block;
+  opacity: 0.3;
+
+  &.active {
+    opacity: 1;
+  }
+
+  & svg {
+    display: block;
+    width: calc(var(--yr) * 12);
+    height: calc(var(--yr) * 12);
+
+    & :global {
+      & .a, & .b {
+        fill: none;
+        stroke: var(--pr_color);
+      }
+
+      & .a {
+        stroke-linejoin: round;
+      }
+
+      & .b {
+        stroke-miterlimit: 10;
+      }
+
+      & .c {
+        fill: #282828;
+      }
+
+      & .d {
+        font-size: 10px;
+        fill: #fff;
+        letter-spacing: -0.06em;
+        text-anchor: middle;
+      }
+
+      & .e {
+        letter-spacing: -0.06em;
+      }
+    }
+  }
+}
+
+.counter {
+  opacity: 0;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.white {
+  & .burger {
+    & svg {
+      & rect {
+        fill: white;
+      }
+    }
+  }
+
+  & .logo {
+    & svg {
+      fill: white;
+    }
+  }
+
+  & .wishlist {
+    & svg {
+      & :global {
+        & .a {
+          stroke: white;
+        }
+      }
+    }
+  }
+
+  & .cart {
+    & svg {
+      & :global {
+        & .a, & .b {
+          stroke: white;
+        }
+
+        & .c {
+          fill: white;
+        }
+
+        & .d {
+          fill: var(--pr_color);
+        }
+      }
+    }
+  }
+}
+
+.nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: white;
+  z-index: 5;
+  visibility: hidden;
+  opacity: 0;
+  padding: 4rem 7rem 2rem calc(var(--xr) * 2);
+  transform: translateX(-3rem);
+  visibility: hidden;
+  transition-duration: 0.4s;
+  transition-property: transform opacity;
+  z-index: 4;
+  overflow: hidden;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (--s) {
+    width: 20rem;
+  }
+}
+
+.close {
+  position: fixed;
+  right: calc(var(--xr) * 1.5);
+  top: calc(var(--yr) * 2);
+  padding: 16px 8px;
+  cursor: pointer;
+  z-index: 3;
+
+  @media (--s) {
+    position: absolute;
+  }
+
+  & svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+
+    & line {
+      stroke: var(--pr_color);
+    }
+  }
+}

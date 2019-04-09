@@ -5,8 +5,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :fog
+  # storage :file
+  storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -29,6 +29,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  process :store_dimensions
+
   process resize_to_limit: [5000, 5000]
 
   version :drag do
@@ -36,7 +38,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :preview do
-    process resize_to_fill: [240, 300]
+    process smart_resize: [300, 240]
     process :optimize
   end
 
@@ -55,6 +57,9 @@ class PhotoUploader < CarrierWave::Uploader::Base
     process :optimize
   end
 
+  version :collection do
+    process resize_to_limit: [nil, 1800]
+  end
 
 
   # version :cart do
@@ -62,8 +67,23 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   process :optimize
   # end
 
+  def smart_resize w, h
+    width, height = ::MiniMagick::Image.open(file.file)[:dimensions]
+    if width > height
+      resize_to_fill w, h
+    else
+      resize_to_fill h, w
+    end
+  end
+
   def extension_whitelist
     %w(jpg jpeg gif png)
+  end
+
+  def store_dimensions
+    if file && model
+      model.width, model.height = ::MiniMagick::Image.open(file.file)[:dimensions]
+    end
   end
 
   # Override the filename of the uploaded files:

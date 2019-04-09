@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  enum state: { guest: 0, common: 1 }
+
   has_many :wishlists
   has_many :carts
   has_many :orders
@@ -15,14 +17,11 @@ class User < ApplicationRecord
 
   validates :phone, length: { is: 11 }
 
+  before_validation :clear_email, on: :update
   before_validation :clear_phone
 
   def remember_me
     true
-  end
-
-  def is_guest?
-    self.email.start_with?('guest_') && self.email.end_with?('@mint-store.ru') && self.phone.blank?
   end
 
   def is_admin?
@@ -33,15 +32,18 @@ class User < ApplicationRecord
     is_admin? || [2, 3].include?(id)
   end
 
-  def is_tester?
-    p phone
-    Rails.application.secrets[:payment_test_phones].include?(phone)
+  def tester?
+    Rails.application.credentials.payment[:test_phones].include?(phone)
   end
 
   def clear_phone
     if self.phone.present?
       self.phone = User.prepare_phone(self.phone)
     end
+  end
+
+  def clear_email
+    restore_attributes([:email]) if email.blank?
   end
 
   def get_discount

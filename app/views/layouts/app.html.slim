@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    = display_meta_tags site: 'Golovina', reverse: true, separator: '—', og: { title: :title, description: :description, site_name: 'Golovina' }
+
+    = csrf_meta_tags
+    = favicon_link_tag '/favicon.ico'
+
+    = tag('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' })
+    = tag('meta', { name: 'yandex-verification', content: '67fd84d3a4242f7f' })
+
+  body
+    = react_component( \
+      'Header',
+      { \
+        categories: Category.active.where.not(variants_counter: 0).order(weight: :asc).map{ |category| category.slice(:title, :id, :slug) },
+        themes: Theme.active.order(:weight).map{ |theme| theme.slice(:title, :id, :slug) },
+        collections: Collection.order(weight: :asc, id: :desc).map{ |collection| collection.slice(:title, :id, :slug, :desc) },
+        root: current_page?(controller: :static, action: :index),
+        white: current_page?(controller: :static, action: :index),
+        user: (Current.user.slice(:id, :is_editor?, :guest?) rescue nil),
+        wishlist: Wishlist.includes(:variant).where(user: Current.user, variants: { state: [:active] }).size,
+        cart: Cart.where(user: Current.user).map(&:quantity).sum \
+      }, { \
+        prerender: Rails.env.production? \
+      } \
+    )
+
+    = yield
+
+    = javascript_pack_tag 'app', async: true
+    = stylesheet_pack_tag 'app'
+
+    = stylesheet_link_tag 'https://use.typekit.net/crp6yvg.css'

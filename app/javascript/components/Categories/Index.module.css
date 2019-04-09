@@ -1,0 +1,41 @@
+.root {
+  @media (--s) {
+    margin: 0 calc(2 / 12 * 100%);
+  }
+}
+
+.drag {
+  position: absolute;
+  left: calc(var(--yr) * 4);
+  top: calc(var(--yr) * 4);
+  height: calc(var(--yr) * 6);
+  width: calc(var(--yr) * 6);
+  /* margin-top: calc(var(--yr) * -3); */
+  background-color: red;
+  cursor: row-resize;
+
+  @media (--s) {
+    top: calc(var(--yr) * 5);
+  }
+
+}
+
+.category {
+  display: block;
+  padding: calc(var(--yr) * 4);
+  background-color: white;
+  padding-left: calc(var(--yr) * 14);
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * 4);
+  }
+}
+
+.inactive {
+  opacity: 0.5;
+}
+
+.variants {
+  composes: at from '../Fonts';
+}

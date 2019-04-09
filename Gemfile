@@ -6,8 +6,8 @@ ruby '2.6.0'
 gem 'rails', '~> 5.1'
 gem 'pg', '~> 1'
 gem 'puma', '~> 3'
-gem 'sass-rails', github: 'rails/sass-rails'
-gem 'autoprefixer-rails', github: 'ai/autoprefixer-rails'
+gem 'sass-rails'
+gem 'autoprefixer-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
@@ -39,6 +39,7 @@ gem 'pundit'
 gem 'active_link_to'
 
 gem 'rails-i18n'
+gem 'i18n-js'
 gem 'enum_help'
 gem 'stateful_enum'
 
@@ -50,6 +51,7 @@ gem 'react-rails'
 gem 'jbuilder'
 
 gem 'sitemap_generator'
+gem 'fog-aws'
 
 gem 'whenever', require: false
 
@@ -59,6 +61,8 @@ gem 'capistrano-passenger'
 gem 'capistrano-rbenv'
 
 gem 'exception_notification'
+
+gem 'bootsnap', '>= 1.1.0', require: false
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
@@ -70,6 +74,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara'
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'selenium-webdriver'
   gem 'rspec-rails'
 end
@@ -82,6 +88,5 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen'
 
-  gem 'faker'
   gem 'letter_opener'
 end

@@ -1,0 +1,28 @@
+.main {
+  display: inline-block;
+  border-radius: 0;
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+  line-height: calc(var(--yr) * var(--lh));
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--sep_color);
+  border: 0;
+  background-color: white;
+  line-height: inherit;
+  padding: var(--yr) var(--xr);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  transition: background 0.3s;
+  user-select: none;
+
+  @media (--s) {
+    padding: 0 2em;
+  }
+
+  &:hover {
+    &:not(:disabled) {
+      background: color-mod(white shade(4%));
+    }
+  }
+}

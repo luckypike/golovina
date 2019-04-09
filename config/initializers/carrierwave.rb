@@ -1,3 +1,18 @@
+CarrierWave.configure do |config|
+  config.fog_provider = 'fog/aws'
+  config.fog_credentials = {
+    provider: 'AWS',
+    aws_access_key_id: Rails.application.credentials[Rails.env.to_sym][:aws][:access_key_id],
+    aws_secret_access_key: Rails.application.credentials[Rails.env.to_sym][:aws][:secret_access_key],
+    region: Rails.application.credentials[Rails.env.to_sym][:aws][:region],
+  }
+
+  config.fog_directory  = Rails.application.credentials[Rails.env.to_sym][:aws][:directory]
+  config.fog_public = true
+  config.fog_authenticated_url_expiration = 12.hours
+  config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" } # optional, defaults to {}
+end
+
 module CarrierWave
   module MiniMagick
     def quality(percentage)
@@ -35,5 +50,3 @@ module CarrierWave
     end
   end
 end
-
-

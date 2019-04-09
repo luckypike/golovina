@@ -1,0 +1,8 @@
+.row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * 1);
+  }
+}

@@ -1,4 +1,6 @@
 class StaticController < ApplicationController
+  layout 'app', only: [:index]
+
   def index
     authorize :static, :index?
 

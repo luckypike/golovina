@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: Rails.application.secrets[:mail_username]
+  default from: Rails.application.credentials[Rails.env.to_sym][:mail][:username]
   layout 'mailer'
 end

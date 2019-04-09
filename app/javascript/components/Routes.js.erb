@@ -1,0 +1,13 @@
+/* rails-erb-loader-dependencies ../config/routes.rb */
+
+import { generatePath } from 'react-router'
+
+const Routes = <%= Rails.application.routes.routes.reject{ |route| ['rails/info', 'rails/mailers', nil].include?(route.defaults[:controller])}.select(&:name).map{ |route| ["#{route.name}_path", route.path.spec.to_s.gsub('(.:format)', '.:format?').gsub(/\((\/:.+)\)/, '\1?')] }.to_h.to_json %>
+
+const path = (route, params = {}) => {
+  let r = Routes[route]
+  if(!r) return null
+  return generatePath(r, params)
+}
+
+export { Routes, path }

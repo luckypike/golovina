@@ -6,6 +6,8 @@ class SessionsController < ApplicationController
   def login
     authorize :static, :index?
 
+    redirect_to [:orders, Current.user] if Current.user && !Current.user.guest?
+
     @user = User.new
   end
 
@@ -37,7 +39,7 @@ class SessionsController < ApplicationController
 
     user = User.find_by(phone: User.prepare_phone(params[:user][:phone]), code: params[:user][:code])
     if user
-      if current_user && current_user.is_guest?
+      if Current.user && Current.user.guest?
         Cart.where(user: current_user).update_all(user_id: user.id)
       end
       sign_in(user)

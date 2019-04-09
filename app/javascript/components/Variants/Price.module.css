@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.origin {
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+  text-decoration: line-through;
+}
+
+.last {
+  color: var(--red_color);
+  margin-right: 0.75em;
+}

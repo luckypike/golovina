@@ -1,0 +1,43 @@
+.root {
+  padding: calc(var(--yr) * 22) var(--xr) calc(var(--yr) * 12);
+
+  @media (--s) {
+    padding: calc(var(--yr) * 40) var(--xr) calc(var(--yr) * 12);
+  }
+
+  @media (--m) {
+    padding: calc(var(--yr) * 40) calc(var(--xr) * 2) calc(var(--yr) * 12);
+  }
+
+  @media (--l) {
+    padding: calc(var(--yr) * 40) calc(2 / 16 * 100%) calc(var(--yr) * 16);
+  }
+
+  @media (--xl) {
+    padding: calc(var(--yr) * 62) calc(2 / 16 * 100%) calc(var(--yr) * 16);
+  }
+}
+
+.gray {
+  background-color: #f9f9f9;
+  padding: calc(var(--yr) * 12) var(--xr) calc(var(--yr) * 12);
+  margin-top: calc(var(--yr) * 22);
+
+  @media (--s) {
+    padding: calc(var(--yr) * 12) var(--xr) calc(var(--yr) * 12);
+    margin-top: calc(var(--yr) * 40);
+  }
+
+  @media (--m) {
+    padding: calc(var(--yr) * 12) calc(var(--xr) * 2) calc(var(--yr) * 12);
+  }
+
+  @media (--l) {
+    padding: calc(var(--yr) * 12) calc(2 / 16 * 100%) calc(var(--yr) * 16);
+    margin-top: calc(var(--yr) * 62);
+  }
+}
+
+.title {
+  text-align: center;
+}

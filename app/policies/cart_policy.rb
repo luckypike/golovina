@@ -1,13 +1,9 @@
-class CartPolicy < Struct.new(:user, :dashboard)
-  def show?
-    true
-  end
-
-  def discount?
-    show?
+class CartPolicy < ApplicationPolicy
+  def index?
+    user
   end
 
   def destroy?
-    show?
+    record.user == user
   end
 end

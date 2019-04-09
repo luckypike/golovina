@@ -1,13 +1,24 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:edit, :update, :destroy]
+
+  layout 'app'
 
   def index
     authorize Category
-    @categories = Category.order(weight: :asc).all
+
+    @categories = Category.includes(:variants).order(weight: :asc).all
   end
 
   def show
+    @category = Category.friendly.find(params[:slug])
     authorize @category
+
+    respond_to do |format|
+      format.html
+      format.json do
+        @variants = @category.variants.active.includes(:images, :product)
+      end
+    end
   end
 
   def new
@@ -34,9 +45,9 @@ class CategoriesController < ApplicationController
     authorize @category
 
     if @category.update(category_params)
-      redirect_to categories_path, notice: 'Category was successfully updated.'
+      head :ok, location: categories_path
     else
-      render :edit
+      render json: @category.errors, status: :unprocessable_entity
     end
   end
 
@@ -53,6 +64,6 @@ class CategoriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def category_params
-      params.require(:category).permit(:title, :slug, :state, :weight, :parent_category_id, :desc)
+      params.require(:category).permit(:title, :slug, :state)
     end
 end

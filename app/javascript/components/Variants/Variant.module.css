@@ -1,0 +1,47 @@
+.variant_form {
+  background: white;
+  padding: calc(var(--yr) * 6) var(--xr);
+  border: 1px solid var(--sep_color);
+  margin-bottom: calc(var(--yr) * 6);
+}
+
+.sizes {
+  composes: sizes from './Show.module.css';
+
+  justify-content: left;
+  margin-bottom: calc(var(--yr) * 2);
+}
+
+.size {
+  box-shadow: 0 0 0 1px var(--sep_color);
+  user-select: none;
+  background-color: white;
+  cursor: pointer;
+  text-align: center;
+  width: calc(var(--yr) * 7);
+  height: calc(var(--yr) * 7);
+  line-height: calc(var(--yr) * 7);
+  overflow: hidden;
+  transition: background 0.2s, box-shadow 0.4s;
+
+  &:hover {
+    &:not(.unavailable) {
+      background-color: color-mod(white shade(4%));
+    }
+  }
+
+  &.active {
+    background-color: color-mod(white shade(4%));
+    box-shadow: 0 0 0 2px var(--pr_color);
+  }
+
+  @media (--s) {
+    width: calc(var(--yr) * 9);
+    height: calc(var(--yr) * 9);
+    line-height: calc(var(--yr) * 9);
+  }
+
+  &:not(:last-child) {
+    margin-right: calc(var(--yr) * 2);
+  }
+}

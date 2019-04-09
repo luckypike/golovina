@@ -3,8 +3,8 @@ class OrderPolicy < ApplicationPolicy
     user&.is_editor?
   end
 
-  def checkout?
-    record.user == user
+  def create?
+    user
   end
 
   def paid?
@@ -12,7 +12,7 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def pay?
-    record.user == user && record.can_paid?
+    record.user == user && record.purchasable?
   end
 
   def archive?

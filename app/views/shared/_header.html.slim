@@ -49,30 +49,20 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
 
           .section_list
             .section_list_item.l2
-              = active_link_to 'New', [:latest, :products]
+              = active_link_to 'New', [:catalog, :latest]
 
             - @categories.reject{ |c| c.parent_category || c.id == Rails.application.secrets.men }.each do |category|
               .section
-                - if category.categories.active.size > 0
-                  .section_title.l2
-                    = category.title
-                    = inline_svg 'icons/varr.svg'
-
-                  .section_list
-                    - category.categories.select(&:show?).each do |category_category|
-                      .section_list_item
-                        = active_link_to category_category.title, category_products_path(slug: category_category.slug)
-                - else
-                  .section_list_item.l2
-                    = active_link_to category.title, category_products_path(slug: category.slug)
+                .section_list_item.l2
+                  = active_link_to category.title, catalog_category_path(slug: category.slug)
 
             .section_list_item.l2
-              = active_link_to 'Sale', [:sale, :products]
+              = active_link_to 'Sale', [:catalog, :sale]
 
             .section_list_item.l2
-              = active_link_to 'Посмотреть все', [:all, :products], active: :exact
+              = active_link_to 'Посмотреть все', [:variants], active: :exact
 
-      .header_menu_section
+      / .header_menu_section
         .section
           .section_title.l1
             span Образы
@@ -80,7 +70,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
 
           .section_list
             .section_list_item.l2
-              = active_link_to 'New', [:kits, :products]
+              = active_link_to 'New', [:latest, :themes]
 
             - @themes.each do |theme|
               .section_list_item.l2
@@ -149,7 +139,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
               = active_link_to t('menu.return'), customers_return_path
 
       .header_menu_section.orders_and_auth
-        - if signed_in? && !current_user.is_guest?
+        - if signed_in? && !current_user.guest?
           = active_link_to t(:your_orders), [:orders, current_user], class: :l1
           = active_link_to t(:logout), destroy_user_session_path, method: :delete, class: :l1
         - else
@@ -166,10 +156,10 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
               .section_list_item.l2
                 = active_link_to "Заказы (#{Order.paid.size})", [:orders, state: :paid]
 
-              .section_list_item.l2
+              / .section_list_item.l2
                 = active_link_to 'Товары', [:control, :products]
 
-              .section_list_item.l2
+              / .section_list_item.l2
                 = active_link_to 'Образы', [:kits]
 
               .section_list_item.l2
@@ -178,10 +168,10 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
               .section_list_item.l2
                 = active_link_to 'Цвета', [:colors]
 
-              .section_list_item.l2
+              / .section_list_item.l2
                 = active_link_to 'Размеры', [:sizes]
 
-              .section_list_item.l2
+              / .section_list_item.l2
                 = active_link_to 'Скидочные карты', [:discounts]
 
               .section_list_item.l2

@@ -1,0 +1,20 @@
+.root {
+  @media (--s) {
+    margin: 0 calc(2 / 12 * 100%);
+  }
+}
+
+.category {
+  display: block;
+  padding: calc(var(--yr) * 4) calc(var(--yr) * 14);
+  background-color: white;
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * 4);
+  }
+}
+
+.title {
+  cursor: pointer;
+}

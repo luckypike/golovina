@@ -23,7 +23,7 @@
 job_type :rake, 'export PATH="$HOME/.rbenv/bin:$PATH"; eval "$(rbenv init -)"; cd :path && :environment_variable=:environment bundle exec rake :task --silent :output'
 
 every :day, at: '00:20' do
-  command "$HOME/.rbenv/shims/backup perform -t mint"
+  command "$HOME/.rbenv/shims/backup perform -t golovina"
 end
 
 every 5.minutes do

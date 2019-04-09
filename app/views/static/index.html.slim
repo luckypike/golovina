@@ -4,58 +4,11 @@
 
 - set_meta_tags og: { image: @slides.map{ |i| asset_url(i.image.large.url) } }
 
-.page.page_static_index.barba_container  data-namespace='index'
-  .page_static_index_swiper
-    .ss
-      - @slides.each_with_index do |slide, index|
-        div class="ss_#{index}" style="background-image: url('#{slide.image.large.url}');background-position-x: #{slide.left_offset}%; background-position-y: #{slide.top_offset}%"
-
-    .ss.aspect
-      - @slides.each_with_index do |slide, index|
-        div class="ss_#{index}" style="background-image: url('#{slide.image.mobile.url}'); background-position-x: #{slide.left_offset}%"
-
-    .social_networks
-      = link_to Rails.application.secrets[:instagram], class: :instagram, target: '_blank'
-        = inline_svg 'icons/instagram.svg'
-
-    .swiper-pagination.swiper-pagination-index
-
-    .swiper-container
-      .swiper-wrapper
-        - @slides.each do |slide|
-          .swiper-slide class="logo_#{slide.logo}" data-logo=slide.logo
-            .text.inact
-              / .logo
-                - case slide.logo
-                - when 0
-                  = inline_svg 'mint.svg'
-                - when 1..2
-                  = inline_svg 'golovina.svg'
-
-              .what
-                = slide.name
-
-              - if slide.link.present?
-                .action
-                  = link_to slide.link_name, slide.link, class: [:btn, :btn_gr]
-
-  / s.page_static_index_themes
-    - @themes.sort_by(&:weight).each_with_index do |theme, i|
-      .theme_intro.lv2 class=[theme.slug, "i_#{i % 2}"]
-        .image.lv3
-          .img
-
-        .text.mb
-          = link_to theme do
-            .short.lv4
-              = theme.title
-
-            .title
-              = theme.title_long
-
-            .desc
-              = theme.desc
-
-            .more
-              .btn
-                | Выбирай настроение
+= react_component \
+  'Index',
+  { \
+    slides: @slides.map{ |slide| { name: slide.name, link: slide.link, image: slide.image.large.url, link_name: slide.link_name } }, \
+  },
+  { \
+    prerender: Rails.env.production? \
+  }

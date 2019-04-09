@@ -10,18 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_123220) do
+ActiveRecord::Schema.define(version: 2019_04_09_110555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "availabilities", force: :cascade do |t|
+    t.bigint "variant_id"
+    t.bigint "size_id"
+    t.bigint "store_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["size_id"], name: "index_availabilities_on_size_id"
+    t.index ["store_id"], name: "index_availabilities_on_store_id"
+    t.index ["variant_id"], name: "index_availabilities_on_variant_id"
+  end
 
   create_table "carts", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "variant_id"
     t.integer "quantity", default: 1
-    t.integer "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "size_id"
+    t.index ["size_id"], name: "index_carts_on_size_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
     t.index ["variant_id"], name: "index_carts_on_variant_id"
   end
@@ -48,6 +61,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
     t.datetime "updated_at", null: false
     t.string "v"
     t.integer "weight", default: 0
+    t.string "desc"
     t.index ["slug"], name: "index_collections_on_slug", unique: true
   end
 
@@ -97,6 +111,8 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
     t.datetime "updated_at", null: false
     t.string "uuid"
     t.integer "weight", default: 0
+    t.integer "height"
+    t.integer "width"
     t.index ["imagable_type", "imagable_id"], name: "index_images_on_imagable_type_and_imagable_id"
   end
 
@@ -113,7 +129,6 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "theme_id"
-    t.string "title"
     t.boolean "latest", default: false
     t.integer "state", default: 0
     t.index ["theme_id"], name: "index_kits_on_theme_id"
@@ -123,11 +138,12 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
     t.bigint "order_id"
     t.bigint "variant_id"
     t.integer "quantity"
-    t.integer "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "price"
+    t.bigint "size_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["size_id"], name: "index_order_items_on_size_id"
     t.index ["variant_id"], name: "index_order_items_on_variant_id"
   end
 
@@ -187,6 +203,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
     t.bigint "sizes_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "weight", default: 0
     t.index ["sizes_group_id"], name: "index_sizes_on_sizes_group_id"
   end
 
@@ -207,6 +224,11 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
     t.integer "left_offset"
     t.integer "top_offset"
     t.integer "logo", default: 0
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "title"
+    t.text "address"
   end
 
   create_table "themables", force: :cascade do |t|
@@ -251,6 +273,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
     t.integer "code"
     t.datetime "code_last"
     t.string "s_name"
+    t.integer "state", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -258,11 +281,8 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
   create_table "variants", force: :cascade do |t|
     t.bigint "product_id"
     t.bigint "color_id"
-    t.jsonb "sizes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "themes"
-    t.bigint "category_id"
     t.boolean "out_of_stock", default: false
     t.integer "state", default: 1
     t.jsonb "sizes_cache"
@@ -273,7 +293,6 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
     t.boolean "latest", default: false
     t.boolean "pinned", default: false
     t.text "comp"
-    t.index ["category_id"], name: "index_variants_on_category_id"
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["product_id", "color_id"], name: "index_variants_on_product_id_and_color_id", unique: true
     t.index ["product_id"], name: "index_variants_on_product_id"
@@ -288,12 +307,17 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
     t.index ["variant_id"], name: "index_wishlists_on_variant_id"
   end
 
+  add_foreign_key "availabilities", "sizes"
+  add_foreign_key "availabilities", "stores"
+  add_foreign_key "availabilities", "variants"
+  add_foreign_key "carts", "sizes"
   add_foreign_key "carts", "users"
   add_foreign_key "carts", "variants"
   add_foreign_key "discounts", "users"
   add_foreign_key "kitables", "variants"
   add_foreign_key "kits", "themes"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "sizes"
   add_foreign_key "order_items", "variants"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
@@ -301,7 +325,6 @@ ActiveRecord::Schema.define(version: 2018_12_18_123220) do
   add_foreign_key "sizes", "sizes_groups"
   add_foreign_key "themables", "products"
   add_foreign_key "themables", "themes"
-  add_foreign_key "variants", "categories"
   add_foreign_key "variants", "colors"
   add_foreign_key "variants", "products"
   add_foreign_key "wishlists", "users"

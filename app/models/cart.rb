@@ -1,16 +1,19 @@
 class Cart < ApplicationRecord
+  belongs_to :size
   belongs_to :user
   belongs_to :variant
 
-  validates_presence_of :quantity, :size
+  validates_presence_of :quantity
 
-  def size_human
-    if variant.product.category.get_ancestor == Rails.application.secrets[:men]
-      I18n.t("sizes_men.size_#{size}")
-    elsif variant.product.category.get_ancestor == Rails.application.secrets[:shoes]
-      I18n.t("sizes_shoes.size_#{size}")
-    else
-      I18n.t("sizes.size_#{size}")
-    end
+  def price_sell
+    variant.price_sell * quantity
+  end
+
+  def available
+    variant.availabilities.active.where(size: size).sum(&:quantity)
+  end
+
+  def available?
+    available >= quantity
   end
 end

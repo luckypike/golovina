@@ -1,4 +1,7 @@
-.page_grey
+- title 'Ваши заказы'
+= react_component 'Users/Orders', { user: (Current.user.slice(:id) rescue nil) }
+
+/ .page_grey
   .page.page_common.page_orders
     .page_common_intro.lv3
       h1 Ваши заказы

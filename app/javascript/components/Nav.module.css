@@ -1,0 +1,72 @@
+.root {
+
+}
+
+
+.section {
+  margin-bottom: calc(var(--yr) * 1);
+
+  &:not(:last-child) {
+    padding-bottom: calc(var(--yr) * 1);
+    border-bottom: 1px solid var(--sep_color);
+  }
+
+  & > .title {
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+    font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+    line-height: calc(var(--yr) * var(--lh));
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: var(--yr) 0;
+  }
+
+  &.active {
+    & .arr {
+      transform: scaleY(-1);
+    }
+  }
+}
+
+.subs {
+  font-size: calc(var(--yr) * calc(var(--fs) - 1));
+  line-height: calc(var(--yr) * var(--lh));
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.sub {
+  margin-bottom: var(--yr);
+  display: block;
+}
+
+.collection {
+  margin-top: calc(var(--yr) * -1);
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+  line-height: calc(var(--yr) * calc(var(--lh) - 1));
+  text-transform: none;
+  color: var(--gr_color);
+  letter-spacing: 0.05em;
+  margin-bottom: calc(var(--yr) * 2);
+}
+
+.arr {
+  display: block;
+  width: 10px;
+  height: 24px;
+  margin-left: calc(var(--xr) / 2);
+  flex-shrink: 0;
+
+  & polyline {
+    fill: none;
+    stroke-width: 1px;
+    stroke: var(--pr_color);
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+  }
+}
+
+.logout {
+  margin-left: auto;
+}

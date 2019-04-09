@@ -20,47 +20,7 @@ class Category < ApplicationRecord
     input.to_s.to_slug.normalize(transliterations: :russian).to_s
   end
 
-  def show?
-    active? && !variants_counter.blank? && variants_counter > 0
-  end
-
-  def variants_count
-    variants_counter.presence || (categories.map(&:variants_count).sum + variants.where(state: [:active]).size)
-  end
-
-  def check_variants
-    self.variants_counter = nil
-    update({variants_counter: variants_count})
-
-    if parent_category
-      parent_category.check_variants
-    end
-  end
-
-  def get_ancestor
-    parent_category ? parent_category.get_ancestor : id
-  end
-
-  class << self
-    def tree
-      tree = []
-      categories = where(parent_category: nil).order(id: :asc)
-      categories.each do |category|
-        tree << category
-        if category.categories.size > 0
-          category.categories.each do |cc|
-            cc.title = '- ' + cc.title
-            tree << cc
-            if cc.categories.size > 0
-              cc.categories.each do |ccc|
-                ccc.title = '— ' + ccc.title
-                tree << ccc
-              end
-            end
-          end
-        end
-      end
-      tree
-    end
+  def check
+    update_attribute(:variants_counter, variants.active.size)
   end
 end

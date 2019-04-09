@@ -1,7 +1,4 @@
 Rails.application.configure do
-  # Verifies that versions and hashed value of the package contents in the project's package.json
-  config.webpacker.check_yarn_integrity = true
-
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -16,12 +13,13 @@ Rails.application.configure do
   config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
-  if Rails.root.join('tmp/caching-dev.txt').exist?
+  # Run rails dev:cache to toggle caching.
+  if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
+      'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -32,15 +30,17 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { host: Rails.application.secrets[:host] }
+  config.action_mailer.default_url_options = { host: Rails.application.credentials[Rails.env.to_sym][:host] }
 
   config.action_mailer.delivery_method = :letter_opener
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+
+  # config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.yandex.ru',
     port: 587,
-    user_name: Rails.application.secrets[:mail_username],
-    password: Rails.application.secrets[:mail_password],
+    user_name: Rails.application.credentials[Rails.env.to_sym][:mail][:username],
+    password: Rails.application.credentials[Rails.env.to_sym][:mail][:password],
     authentication: 'plain',
     enable_starttls_auto: true
   }
@@ -52,6 +52,9 @@ Rails.application.configure do
 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
+
+  # Highlight code that triggered database queries in logs.
+  config.active_record.verbose_query_logs = true
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
