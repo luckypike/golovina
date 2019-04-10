@@ -66,14 +66,14 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { host: Rails.application.secrets[:host] }
+  config.action_mailer.default_url_options = { host: Rails.application.credentials[Rails.env.to_sym][:host] }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.yandex.ru',
     port: 587,
-    user_name: Rails.application.secrets[:mail_username],
-    password: Rails.application.secrets[:mail_password],
+    user_name: Rails.application.credentials[Rails.env.to_sym][:mail][:username],
+    password: Rails.application.credentials[Rails.env.to_sym][:mail][:password],
     authentication: 'plain',
     enable_starttls_auto: true
   }
@@ -108,8 +108,8 @@ Rails.application.configure do
 
   config.middleware.use ExceptionNotification::Rack,
     email: {
-      email_prefix: "[ERROR][mint] ",
-      sender_address: %{"Luckybot" <#{Rails.application.secrets[:mail_username]}>},
+      email_prefix: "[ERROR][golvina] ",
+      sender_address: %{"Luckybot" <#{Rails.application.credentials[Rails.env.to_sym][:mail][:username]}>},
       exception_recipients: %w{log@luckypike.com}
     }
 end
