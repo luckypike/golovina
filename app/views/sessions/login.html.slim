@@ -12,7 +12,7 @@
           = f.button :submit, 'Получить код', data: { disable_with: 'Высылаем код..' }
           br
           br
-          = link_to 'Войти с помощью электронной почты', new_user_session_path
+          = link_to 'Войти с помощью электронной почты', login_email_path
 
       = simple_form_for @user, url: [:login], html: { class: :login_with_code } do |f|
         .form_desc

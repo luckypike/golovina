@@ -3,6 +3,14 @@
 require 'sms'
 
 class SessionsController < ApplicationController
+  def email
+    authorize :static, :index?
+
+    sign_out
+
+    redirect_to new_user_session_path
+  end
+
   def login
     authorize :static, :index?
 

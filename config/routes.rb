@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     devise_for :users, path: '', path_names: { sign_out: 'logout'}
 
     namespace 'login', module: nil do
+      get :email, to: 'sessions#email'
       get '', to: 'sessions#login'
       post 'code', to: 'sessions#code'
       post '', to: 'sessions#auth'
