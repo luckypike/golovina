@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import classNames from 'classnames'
+import InputMask from 'react-input-mask';
 
 import { path } from '../Routes'
 import Price from '../Variants/Price'
@@ -158,7 +159,7 @@ class Index extends Component {
                     Телефон
                   </label>
                   <div className={form.input}>
-                    <input type="text" name="phone" value={values.phone} onChange={this.handleInputChange} />
+                    <InputMask type="text" name="phone" mask="+7 999 999 99 99" maskChar=" " value={values.phone} onChange={this.handleInputChange} />
                   </div>
 
                   {errors['user.phone'] &&

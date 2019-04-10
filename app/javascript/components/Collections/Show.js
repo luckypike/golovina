@@ -40,7 +40,7 @@ class Show extends Component {
         <div className={styles.images}>
           {collection.images &&
             collection.images.map((image, index) =>
-              <div key={index} className={classNames([styles.image], {[styles.landscape]: image.width > image.height}, {[styles.single]: [0, 4, 7, 8, 10, 14, 17, 20, 23, 26, 28, 34, 35, 36, 39, 40, 43, 44, 47].includes(index)})}>
+              <div key={index} className={classNames([styles.image], {[styles.landscape]: image.width > image.height}, {[styles.single]: [0, 4, 7, 8, 10, 14, 17, 20, 23, 27, 28, 34, 35, 36, 39, 40, 43, 44, 47].includes(index)})}>
                 <img src={image.collection} />
               </div>
             )
