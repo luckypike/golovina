@@ -108,7 +108,7 @@ Rails.application.configure do
 
   config.middleware.use ExceptionNotification::Rack,
     email: {
-      email_prefix: "[ERROR][golvina] ",
+      email_prefix: "[ERROR][golovina] ",
       sender_address: %{"Luckybot" <#{Rails.application.credentials[Rails.env.to_sym][:mail][:username]}>},
       exception_recipients: %w{log@luckypike.com}
     }
