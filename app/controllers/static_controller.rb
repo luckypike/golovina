@@ -1,5 +1,5 @@
 class StaticController < ApplicationController
-  layout 'app', only: [:index]
+  layout 'app', only: [:index, :contacts]
 
   def index
     authorize :static, :index?
@@ -9,6 +9,8 @@ class StaticController < ApplicationController
 
   def contacts
     authorize :static, :index?
+
+
   end
 
   def robots

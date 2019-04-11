@@ -50,6 +50,10 @@
 }
 
 .image {
+  &:first-child {
+    grid-column: span 12;
+  }
+
   grid-column: span 6;
 
   & img {
@@ -59,6 +63,10 @@
 
   @media (--s) {
     grid-column: span 5;
+
+    &:first-child {
+      grid-column: span 10;
+    }
   }
 }
 
