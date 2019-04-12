@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 
+import { YMaps} from 'react-yandex-maps';
+import { Map } from 'react-yandex-maps';
+import { Placemark } from 'react-yandex-maps';
+
 import page from '../Page'
 import styles from './Contacts.module.css'
 
@@ -18,7 +22,7 @@ class Contacts extends Component {
         </div>
 
         <div className={styles.intro}>
-          <div className={styles.img}></div>
+          <div className={styles.img} />
           <div className={styles.brand}>
             <div className={styles.icon}>
               <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,15 +44,50 @@ class Contacts extends Component {
         </div>
 
         <div className={styles.content}>
-          <div className={styles.store}>
-            <div className={styles.showcase}></div>
-            <div className={styles.info}>
+
+          <div className={styles.showcase}>
+            <div className={styles.img} />
+          </div>
+          <div className={styles.info}>
+            <div className={styles.info_wrapper}>
               <div className={styles.city}>Москва</div>
               <div className={styles.address}>
                 3-я улица Ямского поля, 9к5 <br/>
                 Телефон: +7 910 134-07-77
               </div>
               <div className={styles.schedule}>Ежедневно с 12:00 до 20:00</div>
+              <div className={styles.map}>
+                <YMaps>
+                  <div>
+                    <Map width={'100%'} defaultState={{ center: [55.7826, 37.5804], zoom: 16, width: 100 }}>
+                      <Placemark defaultGeometry={[55.7826, 37.5804]} />
+                    </Map>
+                  </div>
+                </YMaps>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.showcase}>
+            <div className={styles.img} />
+          </div>
+          <div className={styles.info}>
+            <div className={styles.info_wrapper}>
+              <div className={styles.city}>Нижний Новгород</div>
+              <div className={styles.address}>
+                Ошарская, 61 <br/>
+                Телефон: +7 910 134-07-77
+              </div>
+              <div className={styles.schedule}>Ежедневно с 12:00 до 20:00</div>
+              <div className={styles.map}>
+                <YMaps>
+                  <div>
+                    <Map width={'100%'} defaultState={{ center: [56.3112, 44.0157], zoom: 16, width: '600px'  }}>
+                      <Placemark defaultGeometry={[56.3112, 44.0157]} />
+                    </Map>
+                  </div>
+                </YMaps>
+              </div>
             </div>
           </div>
         </div>
