@@ -4,6 +4,10 @@
   }
 }
 
+.edit {
+  margin-bottom: calc(var(--yr) * 4);
+}
+
 .category {
   display: block;
   padding: calc(var(--yr) * 4) calc(var(--yr) * 14);

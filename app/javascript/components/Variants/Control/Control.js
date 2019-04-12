@@ -7,6 +7,7 @@ import List from '../List'
 import Categories from './Categories'
 
 import page from '../../Page'
+import buttons from '../../Buttons.module.css'
 import styles from './Control.module.css'
 
 class Control extends Component {
@@ -31,6 +32,10 @@ class Control extends Component {
         </div>
 
         <div className={styles.root}>
+          <div className={styles.edit}>
+            <a className={buttons.main} href={path('new_variant_path')}>Добавить товар</a>
+          </div>
+
           {categories.map((category) =>
             <Categories category={category} key={category.id}/>
           )}
