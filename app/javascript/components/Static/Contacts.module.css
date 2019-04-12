@@ -46,6 +46,7 @@
 }
 
 .icon {
+  display: block;
   margin: 0 auto calc(var(--yr) * 3);
   height: 72px;
   width: 72px;
@@ -66,6 +67,7 @@
 }
 
 .name {
+  display: block;
   color: var(--wht_color);
   font-size: calc(var(--yr) * 4);
   line-height: calc(var(--yr) * 6);

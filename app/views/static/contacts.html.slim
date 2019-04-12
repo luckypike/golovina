@@ -26,4 +26,4 @@
 /       = inline_svg 'icons/instagram.svg'
 /       ' @golovina.brand
 
-= react_component 'Static/Contacts', {mail: Rails.application.credentials[Rails.env.to_sym][:mail][:username]}
+= react_component 'Static/Contacts', {mail: Rails.application.credentials[Rails.env.to_sym][:mail][:username], instagram: Rails.application.credentials[Rails.env.to_sym][:instagram] }
