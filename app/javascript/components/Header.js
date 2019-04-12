@@ -37,6 +37,9 @@ class Header extends Component {
 
     return (
       <header className={classNames(styles.root, { [styles.white]: white, [styles.scrolling]: scrolling })}>
+
+        <div className={classNames(styles.overlay, {[styles.active]: active})} onClick={() => this.setState({ active: false })}></div>
+
         <div className={styles.burger} onClick={() => this.setState({ active: true })}>
           <svg viewBox="0 0 24 24">
             <rect height="1" width="24" x="0" y="8" />
