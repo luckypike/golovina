@@ -6141,6 +6141,11 @@ react-animate-height@^2.0.8:
     classnames "^2.2.5"
     prop-types "^15.6.1"
 
+react-display-name@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/react-display-name/-/react-display-name-0.2.4.tgz#e2a670b81d79a2204335510c01246f4c92ff12cf"
+  integrity sha512-zvU6iouW+SWwHTyThwxGICjJYCMZFk/6r/+jmOdC7ntQoPlS/Pqb81MkxaMf2bHTSq9TN3K3zX2/ayMW/jCtyA==
+
 react-dom@^16.8.4:
   version "16.8.5"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.5.tgz#b3e37d152b49e07faaa8de41fdf562be3463335e"
@@ -6236,6 +6241,15 @@ react-sortable-hoc@^1.8.3:
     "@babel/runtime" "^7.2.0"
     invariant "^2.2.4"
     prop-types "^15.5.7"
+
+react-yandex-maps@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-yandex-maps/-/react-yandex-maps-3.0.2.tgz#a0200b1f797fb2d946f2c4576e829584279c1191"
+  integrity sha512-LOknN+30yWcWmlOCzKqUWGvWQhZKMBw8t6MyijvfzzlFvgyOwW9JokQOm+qBHiejUBppeNsPuInD9qYRL2bIEg==
+  dependencies:
+    create-react-context "^0.2.2"
+    prop-types "^15.6.2"
+    react-display-name "^0.2.4"
 
 react@^16.8.4:
   version "16.8.5"

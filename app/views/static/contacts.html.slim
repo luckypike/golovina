@@ -1,27 +1,29 @@
-.page.page_common.page_contacts
-  .page_common_intro.lv2
-    h1
-      = title 'Контакты'
+/ .page.page_common.page_contacts
+/   .page_common_intro.lv2
+/     h1
+/       = title 'Контакты'
+/
+/   .page_common_text
+/
+/     .contacts_view
+/       .contacts_image
+/         .image
+/           = image_tag 'pages/contacts/contacts_1.jpg'
+/
+/       .contacts_image
+/         .image
+/           = image_tag 'pages/contacts/contacts_2.jpg'
+/
+/     p
+/       | Адрес: Нижний Новгород, ул. Ошарская 61
+/       br График работы: с 12:00 до 20:00.
+/       | Телефон: +7 910 134-07-77
+/       br
+/       | E-mail: shop@mint-store.ru
+/
+/   .social_networks
+/     = link_to Rails.application.secrets[:instagram], class: :instagram, target: '_blank'
+/       = inline_svg 'icons/instagram.svg'
+/       ' @golovina.brand
 
-  .page_common_text
-
-    .contacts_view
-      .contacts_image
-        .image
-          = image_tag 'pages/contacts/contacts_1.jpg'
-
-      .contacts_image
-        .image
-          = image_tag 'pages/contacts/contacts_2.jpg'
-
-    p
-      | Адрес: Нижний Новгород, ул. Ошарская 61
-      br График работы: с 12:00 до 20:00.
-      | Телефон: +7 910 134-07-77
-      br
-      | E-mail: shop@mint-store.ru
-
-  .social_networks
-    = link_to Rails.application.secrets[:instagram], class: :instagram, target: '_blank'
-      = inline_svg 'icons/instagram.svg'
-      ' @golovina.brand
+= react_component 'Static/Contacts', {mail: Rails.application.credentials[Rails.env.to_sym][:mail][:username]}
