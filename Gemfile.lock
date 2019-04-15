@@ -367,7 +367,7 @@ DEPENDENCIES
   pg (~> 1)
   puma (~> 3)
   pundit
-  rails (~> 5.1)
+  rails (~> 5.2.0)
   rails-i18n
   react-rails
   redcarpet
@@ -385,8 +385,5 @@ DEPENDENCIES
   webpacker
   whenever
 
-RUBY VERSION
-   ruby 2.6.0p0
-
 BUNDLED WITH
-   1.17.3
+   2.0.1
