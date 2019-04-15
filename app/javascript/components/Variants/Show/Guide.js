@@ -61,24 +61,6 @@ function Guide() {
 
       <div className={styles.row}>
         <div>
-          XS-S
-        </div>
-
-        <div>
-          84-88
-        </div>
-
-        <div>
-          64-68
-        </div>
-
-        <div>
-          92-96
-        </div>
-      </div>
-
-      <div className={styles.row}>
-        <div>
           M
         </div>
 
@@ -110,24 +92,6 @@ function Guide() {
 
         <div>
           104
-        </div>
-      </div>
-
-      <div className={styles.row}>
-        <div>
-          M-L
-        </div>
-
-        <div>
-          92-96
-        </div>
-
-        <div>
-          72-76
-        </div>
-
-        <div>
-          100-104
         </div>
       </div>
     </div>
