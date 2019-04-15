@@ -165,8 +165,7 @@
   position: absolute;
   top: 100%;
   left: 50%;
-  color: var(--red_color);
-  /* font-size: calc(var(--yr) * calc(var(--fs) - 0.5)); */
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
   opacity: 0;
   padding: calc(var(--yr) / 2);
   visibility: hidden;
@@ -175,6 +174,7 @@
   white-space: nowrap;
 
   @media (--m) {
+    font-size: calc(var(--yr) * var(--fs));
     left: 0;
     transform: none;
   }
