@@ -75,7 +75,7 @@ Rails.application.routes.draw do
 
   get 'robots.:format', to: 'static#robots'
 
-  resources :kits
+  resources :kits, only: :show
 
   resources :images, only: [:create, :show, :destroy] do
     collection do

@@ -9,13 +9,7 @@ class KitsController < ApplicationController
   def show
     authorize @kit
 
-    if !@kit.purchasable
-      if !current_user || !current_user.is_editor?
-        render 'static/gone', status: :not_found, locals: {title: @kit.title}
-      end
-    end
-
-    @variants = @kit.kitables.order(id: :asc).includes(variant: [:product]).map(&:variant)
+    render 'static/gone', status: :not_found, locals: { title: @kit.title }
   end
 
   def new
