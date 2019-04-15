@@ -12,7 +12,7 @@ class List extends Component {
 
     return (
       <div className={styles.root}>
-        {variants.filter(variant => variant.image).map((variant, _) =>
+        {variants.filter(variant => !variant.hide).map((variant, _) =>
           <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={classNames(styles.item, styles[`i${_ % 6}`])}>
             <div className={styles.image}>
               <img src={variant.image} />
