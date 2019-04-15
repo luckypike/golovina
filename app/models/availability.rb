@@ -8,7 +8,7 @@ class Availability < ApplicationRecord
   scope :active, -> { where.not(quantity: 0) }
 
   def active?
-    quantity > 0
+    quantity && quantity > 0
   end
 
   def check_variant
