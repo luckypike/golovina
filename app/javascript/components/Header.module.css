@@ -295,3 +295,28 @@
     transition: opacity .3s;
   }
 }
+
+.arrow {
+  visibility: hidden;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(var(--yr) * 4);
+  background: url(../images/icons/top.svg);
+  z-index: 1;
+  cursor: pointer;
+  width: calc(var(--yr) * 10);
+  height: calc(var(--yr) * 10);
+  transition: visibility 0s ease .3s, opacity .3s;
+  opacity: 0;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility .3s, opacity .3s;
+  }
+
+  @media(--m) {
+    bottom: calc(var(--yr) * 8);
+  }
+}

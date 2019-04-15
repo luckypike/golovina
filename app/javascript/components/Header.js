@@ -31,12 +31,20 @@ class Header extends Component {
     }
   }
 
+  handleScrollUp() {
+    const top = Math.max(document.body.scrollTop,document.documentElement.scrollTop)
+
+    if (top > 0) window.scroll({top: 0, left: 0, behavior: 'smooth' })
+  }
+
   render () {
     const { active, scrolling } = this.state
     const { white, cart, wishlist, root, user, categories, themes, collections } = this.props
 
     return (
       <header className={classNames(styles.root, { [styles.white]: white, [styles.scrolling]: scrolling })}>
+
+        <div className={classNames(styles.arrow, {[styles.active]: scrolling})} onClick={this.handleScrollUp}></div>
 
         <div className={classNames(styles.overlay, {[styles.active]: active})} onClick={() => this.setState({ active: false })}></div>
 
