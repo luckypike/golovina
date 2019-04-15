@@ -53,9 +53,9 @@ class Contacts extends Component {
               <div className={styles.city}>Москва</div>
               <div className={styles.address}>
                 3-я улица Ямского поля, 9к5 <br/>
-                Телефон: +7 910 134-07-77
+                Телефон: +7 985 800-07-48, +7 985 714-55-58
               </div>
-              <div className={styles.schedule}>Ежедневно с 12:00 до 20:00</div>
+              <div className={styles.schedule}>Ежедневно с 13:00 до 21:00</div>
               <div className={styles.map}>
                 <YMaps>
                   <div>
