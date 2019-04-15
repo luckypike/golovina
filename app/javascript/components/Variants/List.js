@@ -20,6 +20,19 @@ class List extends Component {
 
             <div className={styles.desc}>
               <div className={styles.title}>
+
+                {variant.latest &&
+                  <div className={classNames(styles.label, styles.latest)}>
+                    New
+                  </div>
+                }
+
+                {variant.sale &&
+                  <div className={classNames(styles.label, styles.sale)}>
+                    Sale
+                  </div>
+                }
+
                 {variant.title}
               </div>
 

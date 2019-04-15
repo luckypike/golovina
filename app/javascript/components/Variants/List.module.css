@@ -91,3 +91,19 @@
     justify-content: center;
   }
 }
+
+.label {
+  display: inline;
+  color: #fff;
+  margin-right: 5px;
+  padding:0 calc(1rem / 4);
+  text-transform: uppercase;
+
+  &.sale {
+    background: rgb(204, 12, 47);
+  }
+
+  &.latest {
+    background: #9caa73;
+  }
+}

@@ -1,4 +1,4 @@
-json.extract! variant, :id, :price, :price_last, :price_sell, :color_id
+json.extract! variant, :id, :price, :price_last, :price_sell, :color_id, :sale, :latest
 
 json.can_edit policy(variant).edit?
 
