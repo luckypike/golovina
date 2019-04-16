@@ -1,4 +1,5 @@
-json.variants @variant.product.variants.active.includes(:color, { availabilities: :size }) do |variant|
+json.variants @variant.product.variants.includes(:color, { availabilities: :size }) do |variant|
+  next if variant.archived? && !Current.user&.is_editor?
   json.partial! 'variants/variant', variant: variant
   json.extract! variant, :desc, :comp
 
