@@ -264,3 +264,53 @@
 .cart {
   position: relative;
 }
+
+.archived {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.color {
+  max-width: 120px;
+  margin-right: calc(var(--xr) / 2);
+  margin-bottom: calc(var(--yr) * 2);
+
+  & .item {
+    height: 154px;
+    background-color: var(--sand_color);
+    padding: 2px;
+    position: relative;
+
+    & img {
+      display: block;
+      height: 150px;
+    }
+  }
+
+  & .control {
+    display: flex;
+    padding: calc(var(--yr) * 2);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 5;
+
+    & a, & .a {
+      background-color: color-mod(var(--pr_color), alpha(50%));
+      cursor: pointer;
+      display: block;
+      width: 24px;
+      height: 24px;
+
+      &.edit {
+        background-image: url('../../images/edit_white.svg');
+        background-size: 24px 24px;
+        margin: 0;
+      }
+    }
+  }
+
+  & .name {
+    line-height: calc(var(--yr) * 6);
+  }
+}
