@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import axios from 'axios'
 import classNames from 'classnames'
 import Glide from '@glidejs/glide'
+import ReactMarkdown from 'react-markdown'
 
 import Acc from './Show/Acc'
 import Guide from './Show/Guide'
@@ -204,13 +205,13 @@ class Variant extends Component {
             <div className={styles.acc}>
               {variant.desc &&
                 <Acc id="desc" title="Описание" onToggle={this.toggleSection} section={section}>
-                  {variant.desc}
+                  <ReactMarkdown source={variant.desc} />
                 </Acc>
               }
 
               {variant.comp &&
                 <Acc id="comp" title="Как ухаживать" onToggle={this.toggleSection} section={section}>
-                  {variant.comp}
+                  <ReactMarkdown source={variant.comp} />
                 </Acc>
               }
 
