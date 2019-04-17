@@ -4,6 +4,9 @@ class Availability < ApplicationRecord
   belongs_to :store
 
   after_save :check_variant
+  after_initialize do
+    self.quantity = quantity.to_i
+  end
 
   scope :active, -> { where.not(quantity: 0) }
 

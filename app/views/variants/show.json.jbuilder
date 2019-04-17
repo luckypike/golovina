@@ -1,6 +1,7 @@
-json.variants @variant.product.variants.active.includes(:color, { availabilities: :size }) do |variant|
+json.variants @variant.product.variants.active.includes(:color, { availabilities: :size }).sort_by(&:state) do |variant|
   json.partial! 'variants/variant', variant: variant
   json.extract! variant, :desc, :comp
+  json.archived variant.archived?
 
   json.availabilities variant.availabilities.group_by(&:size) do |size, availabilities|
     json.size do
@@ -25,3 +26,9 @@ json.variants @variant.product.variants.active.includes(:color, { availabilities
     json.extract! variant.color, :id, :title, :image_url, :color
   end
 end
+
+json.archived @variant.product.variants.archived.includes(:color).sort_by(&:state) do |variant|
+  json.id variant.id
+  json.color variant.color.title
+  json.image variant.images.first.photo.thumb.url if variant.images
+end if Current.user&.is_editor?
