@@ -54,6 +54,10 @@ class Variant extends Component {
       // }
 
       this.setState({ variant, size }, () => {
+        if(this.glide) {
+          this.glide.destroy()
+          this.glide = null
+        }
         this.updateDimensions()
       })
     }
