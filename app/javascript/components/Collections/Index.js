@@ -41,7 +41,11 @@ class Index extends Component {
   }
 
   _onSortEnd = ({ oldIndex, newIndex }) => {
-    console.log(oldIndex, newIndex)
+    let collections = this.state.collections
+    collections.splice( oldIndex, 1, collections.splice(newIndex,1,collections[oldIndex])[0] );
+    this.setState({
+      collections: collections
+    })
   }
 }
 

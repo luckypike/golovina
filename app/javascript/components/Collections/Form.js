@@ -93,7 +93,7 @@ class Form extends React.Component {
 
             <div className={form.input}>
               <div className={form.label}>
-                Название тест
+                Описание
               </div>
 
               <div className={form.input_input}>
@@ -130,7 +130,8 @@ class Form extends React.Component {
   handleImagesChange = (images) => {
     this.setState(state => ({
       values: { ...state.values,
-        image_ids: images.map(i => i.id)
+        image_ids: images.map(i => i.id),
+        images_attributes: images.map((i, index) => ({id:i.id, weight: index+1}))
       }
     }))
   }
