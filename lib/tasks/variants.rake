@@ -58,12 +58,30 @@ namespace :variants do
   task update: :environment do
     Variant.all.each do |variant|
 
-      variant.desc = variant.product.desc if !variant.desc && variant.product.desc
-      variant.comp = variant.product.comp if !variant.comp && variant.product.comp
-      variant.price = variant.product.price if !variant.price && variant.product.price
-      variant.price_last = variant.product.price_last if !variant.price_last && variant.product.price_last
+      variant.desc = variant.product.desc if !variant.desc.present? && variant.product.desc
+      variant.comp = variant.product.comp if !variant.comp.present? && variant.product.comp
+      variant.price = variant.product.price if !variant.price.present? && variant.product.price
+      variant.price_last = variant.product.price_last if !variant.price_last.present? && variant.product.price_last
 
       variant.save
+    end
+  end
+
+  task updated_at: :environment do
+    Variant.all.each do |variant|
+      if variant.images.present?
+        variant.update_attribute(:updated_at, variant.images.last.updated_at)
+      end
+    end
+  end
+
+  task images: :environment do
+    Variant.where(state: :archived).each do |variant|
+      if (Time.now - variant.updated_at) / 86400 > 59
+        variant.images.each do |image|
+          image.destroy
+        end
+      end
     end
   end
 end
