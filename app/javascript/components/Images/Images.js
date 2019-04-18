@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import Dropzone from 'react-dropzone'
+import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc'
 
 import ImageItem from './ImageItem'
 import Image from './Image'
@@ -28,30 +29,20 @@ class Images extends React.Component {
     const { images, files} = this.state
 
     return (
-      <div className={styles.images}>
-
-        <Dropzone onDrop={this.onDrop}>
-          {({getRootProps, getInputProps}) => (
-            <>
-              <div className={styles.zone} {...getRootProps()}>
-                <input {...getInputProps()} />
-                <span className={styles.desc}>Добавить фото</span>
-              </div>
-            </>
-          )}
-        </Dropzone>
-
-        {images &&
-          images.map(image =>
-            <ImageItem key={image.id} image={image} onImagesChange={this.handleImagesChange} />
-          )
-        }
-
-        {files.map((file, _) =>
-          <Image file={file} key={_} onFileUpload={this.handleFileUpload}/>
-        )}
-      </div>
+      <List images={images} files={files} onImagesChange={this.handleImagesChange} onFileUpload={this.handleFileUpload} onDrop={this.onDrop} onSortEnd={this._onSortEnd} axis={'xy'} useDragHandle />
     )
+  }
+
+  _onSortEnd = ({ oldIndex, newIndex }) => {
+    let sort = this.state.images.slice();
+    sort.splice(oldIndex, 1);
+    sort.splice(newIndex, 0, this.state.images[oldIndex]);
+
+    this.setState({
+      images: sort
+    }, () => {
+      this.props.onImagesChange(sort)
+    });
   }
 
   handleImagesChange = (id) => {
@@ -73,9 +64,45 @@ class Images extends React.Component {
     }, () => {
       this.props.onImagesChange(this.state.images)
     });
-
-
   }
 }
+
+const DragHandle = sortableHandle(() => <div className={styles.drag} />)
+
+const Item = SortableElement(({ image, onImagesChange }) => {
+  return (
+    <div className={styles.item}>
+      <DragHandle />
+      <ImageItem image={image} onImagesChange={onImagesChange}></ImageItem>
+    </div>
+  )
+})
+
+const List = SortableContainer(({ images, files, onImagesChange, onFileUpload, onDrop }) => {
+  return (
+    <div className={styles.images}>
+      <Dropzone onDrop={onDrop}>
+        {({getRootProps, getInputProps}) => (
+          <>
+            <div className={styles.zone} {...getRootProps()}>
+              <input {...getInputProps()} />
+              <span className={styles.desc}>Добавить фото</span>
+            </div>
+          </>
+        )}
+      </Dropzone>
+
+      {images &&
+        images.map((image, index) => (
+          <Item key={image.id} index={index} image={image} onImagesChange={onImagesChange}/>
+        ))
+      }
+
+      {files.map((file, _) =>
+        <Image file={file} key={_} onFileUpload={onFileUpload}/>
+      )}
+    </div>
+  )
+})
 
 export default Images

@@ -31,7 +31,9 @@ class Form extends React.Component {
       product_attributes: this.props.product || null,
       availabilities_attributes: [],
       images: [],
-      image_ids: null
+      image_ids: null,
+      images_attributes: [],
+
     },
     dictionaries: {
       colors: this.props.colors || [],
@@ -66,7 +68,7 @@ class Form extends React.Component {
               <div className={form.input_input}>
                 <div className={form.checkbox}>
                   <label>
-                    <input type="checkbox" name="latest" checked={values.latest} onChange={this.handleInputChange} />
+                    <input disabled={values.sale} type="checkbox" name="latest" checked={values.latest} onChange={this.handleInputChange} />
                       new
                   </label>
                 </div>
@@ -77,7 +79,7 @@ class Form extends React.Component {
               <div className={form.input_input}>
                 <div className={form.checkbox}>
                   <label>
-                    <input type="checkbox" name="sale" checked={values.sale} onChange={this.handleInputChange} />
+                    <input disabled={values.latest} type="checkbox" name="sale" checked={values.sale} onChange={this.handleInputChange} />
                       sale
                   </label>
                 </div>
@@ -367,7 +369,8 @@ class Form extends React.Component {
   handleImagesChange = (images) => {
     this.setState(state => ({
       values: { ...state.values,
-        image_ids: images.map(i => i.id)
+        image_ids: images.map(i => i.id),
+        images_attributes: images.map((i, index) => ({id:i.id, weight: index+1}))
       }
     }))
   }

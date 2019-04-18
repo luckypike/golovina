@@ -33,7 +33,8 @@ class Variant extends Component {
     size: false,
     add: false,
     send: false,
-    section: null
+    section: null,
+    index: 1
   }
 
   mount = React.createRef()
@@ -83,7 +84,10 @@ class Variant extends Component {
       if(!this.glide) {
         this.glide = new Glide(this.mount.current, {
           rewind: false,
-          gap: 0,
+          gap: 0
+        })
+        this.glide.on('run', (move) => {
+          this.setState({ index: this.glide.index + 1 })
         })
         this.glide.mount()
       }
@@ -131,7 +135,7 @@ class Variant extends Component {
   }
 
   render () {
-    const { variant, variants, size, send, section, add, archived } = this.state
+    const { variant, variants, size, send, section, add, index, archived } = this.state
     if(!variant) return null
 
     return (
@@ -156,6 +160,9 @@ class Variant extends Component {
           <Variants variants={variants} variant={variant} className={styles.variants} />
 
           <div className={classNames('glide', styles.images)} ref={this.mount}>
+            {variant.images.length > 1 &&
+              <div className={styles.counter}>{index}/{variant.images.length}</div>
+            }
             <div className="glide__track" data-glide-el="track">
               <div ref={this.slides} className={classNames('glide__slides', styles.slides)}>
                 {variant.images.map((image, i) =>

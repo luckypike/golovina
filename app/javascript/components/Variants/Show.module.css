@@ -265,6 +265,19 @@
   position: relative;
 }
 
+.counter {
+  position: absolute;
+  z-index: 1;
+  right: var(--xr);
+  top: calc(var(--yr) * 4);
+  font-size: calc(var(--yr) * calc(var(--fs) + 0.5));
+  line-height: calc(var(--yr) * 4);
+
+  @media(--m) {
+    display: none;
+  }
+}
+
 .archived {
   display: flex;
   flex-wrap: wrap;

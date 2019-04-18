@@ -10,6 +10,7 @@
   margin-bottom: calc(var(--yr) * 2);
   padding: 2px;
   position: relative;
+  min-width: 76px;
 
   & img {
     display: block;
@@ -33,8 +34,29 @@
     height: 24px;
 
     &.destroy {
-      background-image: url('../../images/delete_white.svg');
+      background-image: url('../../images/icons/delete.svg');
       background-size: 24px 24px;
+    }
+
+    &.deleting {
+      position: relative;
+      background-image: none;
+
+      &:after {
+        content: '';
+        display: inline-block;
+        float: none;
+        border: 2px solid #FFF;
+        width: 14px;
+        height: 14px;
+        background: transparent;
+        border-bottom-color: transparent;
+        border-radius: 100%;
+        position: absolute;
+        animation: deleting .75s linear infinite;
+        left: 50%;
+        top: 50%;
+      }
     }
   }
 }
@@ -55,4 +77,33 @@
   &:hover {
     background-color: var(--highlight_color);
   } */
+}
+
+.drag {
+  background-image: url('../../images/icons/drag.svg');
+  background-size: 24px 24px;
+  position: absolute;
+  right: calc(var(--yr) * 2);
+  top: calc(var(--yr) * 2);
+  height: calc(var(--yr) * 6);
+  width: calc(var(--yr) * 6);
+  /* margin-top: calc(var(--yr) * -3); */
+  background-color: color-mod(var(--pr_color), alpha(50%));
+  cursor: row-resize;
+
+  @media (--s) {
+    top: calc(var(--yr) * 2);
+  }
+}
+
+@keyframes deleting {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
