@@ -30,5 +30,5 @@ end
 json.archived @variant.product.variants.archived.includes(:color).sort_by(&:state) do |variant|
   json.id variant.id
   json.color variant.color.title
-  json.image variant.images.first.photo.thumb.url if variant.images
+  json.image variant.images.present? ? variant.images.first.photo.thumb.url : nil
 end if Current.user&.is_editor?
