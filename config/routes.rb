@@ -122,7 +122,7 @@ Rails.application.routes.draw do
   get 'account/orders', to: 'users#account'
 
 
-  get 'posts', to: redirect('/posts/1')
+  # get 'posts', to: redirect('/posts/1')
 
   resources :posts
 
