@@ -29,37 +29,19 @@ class Images extends React.Component {
     const { images, files} = this.state
 
     return (
-      <div className={styles.images}>
-
-        <Dropzone onDrop={this.onDrop}>
-          {({getRootProps, getInputProps}) => (
-            <>
-              <div className={styles.zone} {...getRootProps()}>
-                <input {...getInputProps()} />
-                <span className={styles.desc}>Добавить фото</span>
-              </div>
-            </>
-          )}
-        </Dropzone>
-
-        {images &&
-          <List images={images} onImagesChange={this.handleImagesChange} onSortEnd={this._onSortEnd} axis={'x'} useDragHandle />
-        }
-
-        {files.map((file, _) =>
-          <Image file={file} key={_} onFileUpload={this.handleFileUpload}/>
-        )}
-      </div>
+      <List images={images} files={files} onImagesChange={this.handleImagesChange} onFileUpload={this.handleFileUpload} onDrop={this.onDrop} onSortEnd={this._onSortEnd} axis={'xy'} useDragHandle />
     )
   }
 
   _onSortEnd = ({ oldIndex, newIndex }) => {
-    let images = this.state.images
-    images.splice( oldIndex, 1, images.splice(newIndex,1,images[oldIndex])[0] );
+    let sort = this.state.images.slice();
+    sort.splice(oldIndex, 1);
+    sort.splice(newIndex, 0, this.state.images[oldIndex]);
+
     this.setState({
-      images: images
+      images: sort
     }, () => {
-      this.props.onImagesChange(this.state.images)
+      this.props.onImagesChange(sort)
     });
   }
 
@@ -96,12 +78,29 @@ const Item = SortableElement(({ image, onImagesChange }) => {
   )
 })
 
-const List = SortableContainer(({ images, onImagesChange }) => {
+const List = SortableContainer(({ images, files, onImagesChange, onFileUpload, onDrop }) => {
   return (
     <div className={styles.images}>
-      {images.map((image, index) => (
-        <Item key={image.id} index={index} image={image} onImagesChange={onImagesChange}/>
-      ))}
+      <Dropzone onDrop={onDrop}>
+        {({getRootProps, getInputProps}) => (
+          <>
+            <div className={styles.zone} {...getRootProps()}>
+              <input {...getInputProps()} />
+              <span className={styles.desc}>Добавить фото</span>
+            </div>
+          </>
+        )}
+      </Dropzone>
+
+      {images &&
+        images.map((image, index) => (
+          <Item key={image.id} index={index} image={image} onImagesChange={onImagesChange}/>
+        ))
+      }
+
+      {files.map((file, _) =>
+        <Image file={file} key={_} onFileUpload={onFileUpload}/>
+      )}
     </div>
   )
 })

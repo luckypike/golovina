@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <title>del_24x24</title>
+  <g>
+    <path d="M13.6,17.5H10.39a1,1,0,0,1-1-.9L8.5,8h7l-.91,8.6A1,1,0,0,1,13.6,17.5Z" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
+    <line x1="7.5" y1="8" x2="16.5" y2="8" style="fill: none;stroke: #fff;stroke-linecap: round;stroke-miterlimit: 10"/>
+    <path d="M12,6.5h0a1,1,0,0,1,1,1v0a0,0,0,0,1,0,0H11a0,0,0,0,1,0,0v0A1,1,0,0,1,12,6.5Z" style="fill: #fff"/>
+    <line x1="12" y1="10" x2="12" y2="14" style="fill: none;stroke: #fff;stroke-linecap: round;stroke-miterlimit: 10"/>
+    <line x1="13.5" y1="10" x2="13.5" y2="13" style="fill: #fff;stroke: #fff;stroke-linecap: round;stroke-miterlimit: 10"/>
+    <line x1="10.5" y1="10" x2="10.5" y2="13" style="fill: #fff;stroke: #fff;stroke-linecap: round;stroke-miterlimit: 10"/>
+  </g>
+</svg>
