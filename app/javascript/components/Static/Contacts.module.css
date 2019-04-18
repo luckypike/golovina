@@ -1,48 +1,19 @@
 .intro {
   position: relative;
-  background-color: #f9f9f9;
-  margin: 0 calc(var(--xr) * -1) calc(var(--yr) * 6);
-
-  &::before {
-    display: block;
-    content: '';
-    padding-top: calc(5 / 4 * 100%)
-  }
-
-  & .img {
-    background-image: url('../../images/contacts_intro.jpg');
-    background-size: cover;
-    background-position: center;
-    left: 0;
-    top: 0;
-    position: absolute;
-    display: block;
-    height: 100%;
-    width: 100%;
-  }
-
-  & .img::before {
-    display: block;
-    content: '';
-    background-color: color-mod(black, alpha(30%));
-    height: 100%;
-    width: 100%;
-  }
-
-  @media (--s) {
-    margin: 0 0 calc(var(--yr) * 16);
-
-    &::before {
-      padding-top: calc(1 / 2 * 100%)
-    }
-  }
 }
 
 .brand {
+  margin-top: calc(var(--yr) * var(--lh) * 6);
+  margin-bottom: calc(var(--yr) * var(--lh) * 4);
   position: absolute;
   top: 50%;
   transform: translate(0%, -50%);
   width: 100%;
+
+  @media(--s) {
+    margin-top: calc(var(--yr) * var(--lh) * 8);
+    margin-bottom: calc(var(--yr) * var(--lh) * 4);
+  }
 }
 
 .icon {
@@ -68,7 +39,7 @@
 
 .name {
   display: block;
-  color: var(--wht_color);
+  color: #000;
   font-size: calc(var(--yr) * 4);
   line-height: calc(var(--yr) * 6);
   text-align: center;
@@ -78,18 +49,6 @@
   @media (--s) {
     font-size: calc(var(--yr) * 6);
     line-height: calc(var(--yr) * 8);
-  }
-}
-
-.mail {
-  bottom: calc(var(--yr) * 6);
-  color: var(--wht_color);
-  position: absolute;
-  text-align: center;
-  width: 100%;
-
-  @media (--s) {
-    bottom: calc(var(--yr) * 8);
   }
 }
 
@@ -114,11 +73,15 @@
   &::before {
     display: block;
     content: '';
-    padding-top: calc(5 / 4 * 100%)
+    padding-top: calc(5 / 4 * 100%);
+
+    @media(--m) {
+      padding-top: calc(3 / 4 * 100%);
+    }
   }
 
   & .img {
-    background-image: url('../../images/contacts_intro.jpg');
+    background-image: url('../../images/contacts_moscow.jpg');
     background-size: cover;
     background-position: center;
     left: 0;
@@ -185,10 +148,11 @@
   }
 }
 
-.map {
-  margin: 0 calc(var(--xr) * -1);
+.way {
+  text-decoration: underline;
+}
 
-  @media (--s) {
-    margin: 0;
-  }
+.desc {
+  text-align: center;
+  padding-top: calc(var(--yr) * 4);
 }
