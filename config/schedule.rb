@@ -28,4 +28,5 @@ end
 
 every 5.minutes do
   rake 'jobs:workoff'
+  rake 'variants:images'
 end

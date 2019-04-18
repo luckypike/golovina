@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import axios from 'axios'
 import classNames from 'classnames'
 import Glide from '@glidejs/glide'
+import ReactMarkdown from 'react-markdown'
 
 import Acc from './Show/Acc'
 import Guide from './Show/Guide'
@@ -54,6 +55,10 @@ class Variant extends Component {
       // }
 
       this.setState({ variant, size }, () => {
+        if(this.glide) {
+          this.glide.destroy()
+          this.glide = null
+        }
         this.updateDimensions()
       })
     }
@@ -130,7 +135,7 @@ class Variant extends Component {
   }
 
   render () {
-    const { variant, variants, size, send, section, add, index } = this.state
+    const { variant, variants, size, send, section, add, index, archived } = this.state
     if(!variant) return null
 
     return (
@@ -211,13 +216,13 @@ class Variant extends Component {
             <div className={styles.acc}>
               {variant.desc &&
                 <Acc id="desc" title="Описание" onToggle={this.toggleSection} section={section}>
-                  {variant.desc}
+                  <ReactMarkdown source={variant.desc} />
                 </Acc>
               }
 
               {variant.comp &&
                 <Acc id="comp" title="Как ухаживать" onToggle={this.toggleSection} section={section}>
-                  {variant.comp}
+                  <ReactMarkdown source={variant.comp} />
                 </Acc>
               }
 
@@ -248,6 +253,26 @@ class Variant extends Component {
                   <a href={path('customers_return_path')}>Подробнее</a>
                 </p>
               </Acc>
+
+              {archived && archived.length > 0 &&
+                <Acc id="archived" title="Архив цветов" onToggle={this.toggleSection} section={section}>
+                  <div className={styles.archived}>
+                    {archived.map((item, _) =>
+                      <div className={styles.color}>
+                        <div className={styles.item}>
+                          <img src={item.image} />
+                          <div className={styles.control}>
+                            <a href={path('edit_variant_path', { id: item.id })} className={classNames([styles.a], [styles.edit])}></a>
+                          </div>
+                        </div>
+                        <div className={styles.name}>
+                          {item.color}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Acc>
+              }
             </div>
           </div>
         </div>

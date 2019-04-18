@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import Dropzone from 'react-dropzone'
+import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc'
 
 import ImageItem from './ImageItem'
 import Image from './Image'
@@ -42,9 +43,7 @@ class Images extends React.Component {
         </Dropzone>
 
         {images &&
-          images.map(image =>
-            <ImageItem key={image.id} image={image} onImagesChange={this.handleImagesChange} />
-          )
+          <List images={images} onImagesChange={this.handleImagesChange} onSortEnd={this._onSortEnd} axis={'x'} useDragHandle />
         }
 
         {files.map((file, _) =>
@@ -52,6 +51,16 @@ class Images extends React.Component {
         )}
       </div>
     )
+  }
+
+  _onSortEnd = ({ oldIndex, newIndex }) => {
+    let images = this.state.images
+    images.splice( oldIndex, 1, images.splice(newIndex,1,images[oldIndex])[0] );
+    this.setState({
+      images: images
+    }, () => {
+      this.props.onImagesChange(this.state.images)
+    });
   }
 
   handleImagesChange = (id) => {
@@ -73,9 +82,28 @@ class Images extends React.Component {
     }, () => {
       this.props.onImagesChange(this.state.images)
     });
-
-
   }
 }
+
+const DragHandle = sortableHandle(() => <div className={styles.drag} />)
+
+const Item = SortableElement(({ image, onImagesChange }) => {
+  return (
+    <div className={styles.item}>
+      <DragHandle />
+      <ImageItem image={image} onImagesChange={onImagesChange}></ImageItem>
+    </div>
+  )
+})
+
+const List = SortableContainer(({ images, onImagesChange }) => {
+  return (
+    <div className={styles.images}>
+      {images.map((image, index) => (
+        <Item key={image.id} index={index} image={image} onImagesChange={onImagesChange}/>
+      ))}
+    </div>
+  )
+})
 
 export default Images
