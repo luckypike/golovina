@@ -94,13 +94,15 @@ class Nav extends Component {
           )}
         </Section>
 
-        <div className={classNames(styles.section)}>
-          <div className={styles.title}>
-            <a href="/posts/1">
-              О бренде
-            </a>
+        <Section id="brand" title="О бренде" onToggle={this.toggleSection} section={section}>
+          <div className={styles.sub}>
+            <a href="/posts/1">Интервью</a>
           </div>
-        </div>
+
+          <div className={styles.sub}>
+            <a href="/posts/2">Показ коллекции</a>
+          </div>
+        </Section>
 
         <div className={classNames(styles.section)}>
           <div className={styles.title}>

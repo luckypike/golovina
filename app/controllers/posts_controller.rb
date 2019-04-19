@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  layout 'app', except: [:show]
+
   def index
     authorize Post
     @posts = Post.all
@@ -10,6 +12,13 @@ class PostsController < ApplicationController
     authorize @post
 
     @collections = Collection.limit(4)
+
+    respond_to do |format|
+      format.html do
+        render 'show_comp', layout: 'layouts/app' if @post.id != 1
+      end
+      format.json
+    end
   end
 
   def new
@@ -19,6 +28,11 @@ class PostsController < ApplicationController
 
   def edit
     authorize @post
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def create
@@ -26,28 +40,20 @@ class PostsController < ApplicationController
 
     authorize @post
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.save
+      head :created, location: post_path(@post.id)
+    else
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
 
   def update
     authorize @post
 
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.update(post_params)
+      head :ok, location: post_path(@post.id)
+    else
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
 

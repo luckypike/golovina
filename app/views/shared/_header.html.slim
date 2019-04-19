@@ -120,7 +120,17 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
               = active_link_to 'Свидание с гармонией Fall/Winter 2017-18', [:about, :golovina, :lookbook]
 
       .header_menu_section
-        = active_link_to 'О бренде', post_path(1), class: :l1
+        .section
+          .section_title.l1
+            span О бренде
+            = inline_svg 'icons/varr.svg'
+
+          .section_list
+            .section_list_item.l2
+              = active_link_to 'Интервью', post_path(1)
+
+            .section_list_item.l2
+              = active_link_to 'Показ коллекции', post_path(2)
 
       .header_menu_section
         = active_link_to 'Места продаж', [:contacts], class: :l1
