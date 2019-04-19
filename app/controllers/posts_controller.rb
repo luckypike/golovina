@@ -12,6 +12,13 @@ class PostsController < ApplicationController
     authorize @post
 
     @collections = Collection.limit(4)
+
+    respond_to do |format|
+      format.html do
+        render 'show_comp', layout: 'layouts/app' if @post.id != 1
+      end
+      format.json
+    end
   end
 
   def new
