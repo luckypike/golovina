@@ -1,3 +1,3 @@
 - title @variant.product.title
 
-= react_component 'Variants/Form', { id: @variant.id, title: @variant.product.title, colors: @colors.map{|c| {id: c.id, title: c.title}}, stores: @stores.map{|s| {id: s.id, title: s.title}}, sizes: @sizes.map{|s| {id: s.id, size: s.size}}, categories: @categories.map{|c| {id: c.id, title: c.title}} }
+= react_component 'Variants/Form', { id: @variant.id, title: @variant.product.title, colors: @colors.map{|c| {id: c.id, title: c.title}}, stores: @stores.map{|s| {id: s.id, title: s.title}}, sizes: @sizes.map{|s| {id: s.id, size: s.size, weight: s.weight}}, categories: @categories.map{|c| {id: c.id, title: c.title}} }

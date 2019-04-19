@@ -122,7 +122,7 @@ class Form extends React.Component {
                       </div>
 
                       <div className={styles.sizes}>
-                        {sizes.map((size, _) =>
+                        {sizes.sort((a, b) => a.size.weight - b.size.weight).map((size, _) =>
                           <div key={_} className={classNames([styles.size], {[styles.active]: values.availabilities_attributes.find(s => s.size_id == size.id && s.store_id == store.id && !s._destroy)})} onClick={() => this.handleSizesChange(store.id, size.id)}>{size.size}</div>
                         )}
                       </div>
@@ -130,7 +130,7 @@ class Form extends React.Component {
                   </div>
 
                   {values.availabilities_attributes && values.availabilities_attributes.filter(s => s.store_id == store.id )&&
-                    values.availabilities_attributes.filter(s => s.store_id == store.id && !s._destroy).map((size, key) =>
+                    values.availabilities_attributes.filter(s => s.store_id == store.id && !s._destroy).sort((a, b) => a.weight - b.weight).map((size, key) =>
                       <div key={key} className={form.input}>
                         <div className={form.label}>
                           Количество размера "{sizes.find(s => s.id == size.size_id).size}"
@@ -359,6 +359,7 @@ class Form extends React.Component {
             size_id: size,
             variant_id: this.props.id,
             quantity: 0,
+            weight: this.state.dictionaries.sizes.find(s => s.id == size).weight,
             _destroy: false
           }]
         }
