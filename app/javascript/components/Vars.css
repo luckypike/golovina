@@ -8,8 +8,10 @@
   --red_color: #cc0c2f;
   --wht_color: #fafafa;
 
+
   --highlight_color: #9caa73;
   --highlight_color: var(--hl_color);
+  --highlight_secondary_color: #ff5252;
   --sand_color: #F7F8F5;
 
   --fw_light: 300;

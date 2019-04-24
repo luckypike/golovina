@@ -4,6 +4,10 @@
   }
 }
 
+.states {
+  margin-bottom: calc(var(--yr) * 4);
+}
+
 .orders {
 
 }
@@ -28,11 +32,24 @@
 
   @media (--s) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 2fr 1fr;
   }
 }
 
+.states {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
 
+  @media (--s) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  & > div {
+    border-right: none;
+  }
+}
 
 .state {
   composes: at from '../Fonts';
@@ -53,6 +70,14 @@
     background: color-mod(yellow a(0.05));
     color: orange;
   }
+}
+
+.archived {
+ margin: calc(var(--yr) * 2) 0;
+
+ @media (--s) {
+   margin: 0;
+ }
 }
 
 .details {

@@ -25,4 +25,14 @@
       background: color-mod(white shade(4%));
     }
   }
+
+  &.active {
+    background-color: var(--red_color);
+    color: var(--wht_color);
+
+    &:hover {
+      background-color: var(--highlight_secondary_color);
+      color: var(--wht_color);
+    }
+  }
 }

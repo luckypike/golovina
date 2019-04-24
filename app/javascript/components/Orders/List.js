@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
+import axios from 'axios'
 
 import { path } from '../Routes'
 import I18n from '../I18n'
@@ -19,8 +20,8 @@ class Item extends Component {
 
     return (
       <div className={styles.order}>
-        <div className={styles.handle} onClick={() => this.setState(state => ({ toggle: !state.toggle }))}>
-          <div className={styles.title}>
+        <div className={styles.handle}>
+          <div className={styles.title} onClick={() => this.setState(state => ({ toggle: !state.toggle }))}>
             <div className={classNames(styles.state, styles[order.state])}>
               {I18n.t(`order.state.${order.state}`)}
             </div>
@@ -34,9 +35,17 @@ class Item extends Component {
             </div>
           </div>
 
-          <div className={styles.what}>
+          <div className={styles.what} onClick={() => this.setState(state => ({ toggle: !state.toggle }))}>
             {I18n.t('order.quantity', { count: order.quantity, amount: currency(order.amount) })}
           </div>
+
+          {order.state == 'paid' &&
+            <div className={styles.archived}>
+              <div className={buttons.main} onClick={() => this.handleUpdate(order.id)}>
+                В архив
+              </div>
+            </div>
+          }
         </div>
 
         {toggle &&
@@ -99,17 +108,33 @@ class Item extends Component {
       </div>
     )
   }
+
+  handleUpdate = (id) => {
+    axios.post(
+      path('archive_order_path', { id: id }),
+      { authenticity_token: document.querySelector('[name="csrf-token"]').content }
+    ).then(res => {
+      this.props.onOrderChange(id);
+    })
+  }
 }
 
 
 class List extends Component {
   render () {
-    const { orders } = this.props
+    const { orders, states } = this.props
 
     return (
       <div className={styles.root}>
+        <div className={styles.states}>
+          {states.map((status, _) =>
+            <div key={_} className={classNames(buttons.main, { [buttons.active]: this.props.status == status.key})} onClick={()=>this.props.onStateChange(status.key)}>
+              {status.title}
+            </div>
+          )}
+        </div>
         {orders.map(order =>
-          <Item key={order.id} order={order} />
+          <Item key={order.id} order={order} onOrderChange={this.props.onOrderChange}/>
         )}
       </div>
     )

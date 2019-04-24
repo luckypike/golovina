@@ -10,3 +10,5 @@ json.orders @orders do |order|
     json.available item.available?
   end
 end
+
+json.states Order.states.keys.reject{|k| k == 'undef'}.map{|o| {key: o, title: t("order.state.#{o}")}}
