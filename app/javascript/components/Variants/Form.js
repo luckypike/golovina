@@ -122,7 +122,7 @@ class Form extends React.Component {
                       </div>
 
                       <div className={styles.sizes}>
-                        {sizes.sort((a, b) => a.size.weight - b.size.weight).map((size, _) =>
+                        {sizes.sort((a, b) => a.weight - b.weight).map((size, _) =>
                           <div key={_} className={classNames([styles.size], {[styles.active]: values.availabilities_attributes.find(s => s.size_id == size.id && s.store_id == store.id && !s._destroy)})} onClick={() => this.handleSizesChange(store.id, size.id)}>{size.size}</div>
                         )}
                       </div>
