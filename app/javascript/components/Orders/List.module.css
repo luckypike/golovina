@@ -37,21 +37,34 @@
 }
 
 .states {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  text-align: center;
-
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  
   @media (--s) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-
-  & > div {
-    border-right: none;
+    justify-content: flex-start;
   }
 }
 
 .state {
+  cursor: pointer;
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+  line-height: calc(var(--yr) * var(--lh));
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  @media (--s) {
+    margin-left: 1em;
+    margin-right: 2em;
+  }
+
+  &.active {
+    border-bottom: 2px solid;
+    color: green;
+  }
+}
+
+.status {
   composes: at from '../Fonts';
   margin-right: 1em;
   padding: 0 0.5em;

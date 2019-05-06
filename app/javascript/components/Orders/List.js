@@ -22,7 +22,7 @@ class Item extends Component {
       <div className={styles.order}>
         <div className={styles.handle}>
           <div className={styles.title} onClick={() => this.setState(state => ({ toggle: !state.toggle }))}>
-            <div className={classNames(styles.state, styles[order.state])}>
+            <div className={classNames(styles.status, styles[order.state])}>
               {I18n.t(`order.state.${order.state}`)}
             </div>
 
@@ -126,13 +126,15 @@ class List extends Component {
 
     return (
       <div className={styles.root}>
-        <div className={styles.states}>
-          {states.map((status, _) =>
-            <div key={_} className={classNames(buttons.main, { [buttons.active]: this.props.status == status.key})} onClick={()=>this.props.onStateChange(status.key)}>
-              {status.title}
-            </div>
-          )}
-        </div>
+        {states &&
+          <div className={styles.states}>
+            {states.map((status, _) =>
+              <div key={_} className={classNames(styles.state, { [styles.active]: this.props.status == status.key})} onClick={()=>this.props.onStateChange(status.key)}>
+                {status.title}
+              </div>
+            )}
+          </div>
+        }
         {orders.map(order =>
           <Item key={order.id} order={order} onOrderChange={this.props.onOrderChange}/>
         )}
