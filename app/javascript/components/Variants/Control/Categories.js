@@ -22,7 +22,6 @@ class Categories extends Component {
   }
 
   fetchVariants() {
-    console.log(this.props.category.id);
     axios.get(path('variants_path', {format: 'json' }) + `?category_id=${this.props.category.id}`)
     .then(res => {
       this.setState({

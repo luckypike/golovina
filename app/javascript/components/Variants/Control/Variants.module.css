@@ -21,7 +21,7 @@
   z-index: 5;
 
   & > a {
-    background-color: color-mod(var(--pr_color), alpha(50%));
+    background-color: color-mod(var(--pr_color) alpha(50%));
     display: block;
     width: 24px;
     height: 24px;
