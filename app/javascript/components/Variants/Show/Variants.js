@@ -11,7 +11,7 @@ class Variants extends Component {
   render () {
     const { variant, variants } = this.props
 
-    if(!variants || variants.length < 2) return null
+    if(!variants || variants.length < 1) return null
 
     return (
       <div className={classNames(styles.root, this.props.className)}>
