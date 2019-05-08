@@ -15,6 +15,10 @@ class VariantPolicy < ApplicationPolicy
     all?
   end
 
+  def soon?
+    all?
+  end
+
   def show?
     true
   end

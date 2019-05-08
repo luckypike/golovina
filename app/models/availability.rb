@@ -9,6 +9,7 @@ class Availability < ApplicationRecord
   end
 
   scope :active, -> { where.not(quantity: 0) }
+  scope :inactive, -> { where(quantity: [0, nil]) }
 
   def active?
     quantity && quantity > 0
