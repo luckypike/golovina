@@ -1,4 +1,11 @@
-.page.page_common.page_auth
+- set_meta_tags title: t('login')
+- description 'Страница входа в магазин'
+- keywords ['войти', 'авторизация', 'golovina', 'головина']
+
+= react_component 'Sessions/Login'
+
+
+/ .page.page_common.page_auth
   .page_auth_form
     .form
       = simple_form_for @user, url: [:login, :code], remote: true, html: { class: :request_code }  do |f|

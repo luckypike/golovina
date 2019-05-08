@@ -3,20 +3,18 @@
 require 'sms'
 
 class SessionsController < ApplicationController
-  def email
-    authorize :static, :index?
+  before_action :authorize_session
 
+  layout 'app'
+
+  def email
     sign_out
 
     redirect_to new_user_session_path
   end
 
-  def login
-    authorize :static, :index?
-
+  def new
     redirect_to [:orders, Current.user] if Current.user && !Current.user.guest?
-
-    @user = User.new
   end
 
 
@@ -55,5 +53,10 @@ class SessionsController < ApplicationController
     else
       redirect_to [:login]
     end
+  end
+
+  private
+  def authorize_session
+    authorize :session
   end
 end

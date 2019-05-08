@@ -124,7 +124,7 @@ class Nav extends Component {
 
         <div className={classNames(styles.section)}>
           <div className={styles.title}>
-            <a href="/login">
+            <a href={path('new_user_session_path')}>
               {user && !user['guest?'] ? 'Ваши заказы' : 'Войти'}
             </a>
 
