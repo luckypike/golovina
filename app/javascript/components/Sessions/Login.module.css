@@ -76,3 +76,12 @@
 .desc {
   margin-bottom: calc(var(--yr) * 2);
 }
+
+.submit {
+  display: flex;
+}
+
+.recovery {
+  composes: at from '../Fonts';
+  margin-left: auto;
+}

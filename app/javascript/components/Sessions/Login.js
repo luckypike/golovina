@@ -17,11 +17,17 @@ class Login extends Component {
   }
 
   handleEmailSubmit = e => {
+    // this.state.values
+
     e.preventDefault()
   }
 
   handlePhoneSubmit = e => {
     e.preventDefault()
+  }
+
+  isRecovery() {
+    return this.state.section == 'recovery'
   }
 
   render () {
@@ -49,31 +55,57 @@ class Login extends Component {
           */}
 
           <div className={styles.form}>
-            <form onSubmit={this.handleEmailSubmit}>
-              <label className={form.el}>
-                <div className={form.label}>
-                  Почта
-                </div>
+            {!this.isRecovery() &&
+              <form onSubmit={this.handleEmailSubmit}>
+                <label className={form.el}>
+                  <div className={form.label}>
+                    Почта
+                  </div>
 
-                <div className={form.input}>
-                  <input type="text" value={values.email} name="email" onChange={this.handleInputChange} />
-                </div>
-              </label>
+                  <div className={form.input}>
+                    <input type="email" value={values.email} name="email" onChange={this.handleInputChange} />
+                  </div>
+                </label>
 
-              <label className={form.el}>
-                <div className={form.label}>
-                  Пароль
-                </div>
+                <label className={form.el}>
+                  <div className={form.label}>
+                    Пароль
+                  </div>
 
-                <div className={form.input}>
-                  <input type="password" value={values.password} name="password" onChange={this.handleInputChange} />
-                </div>
-              </label>
+                  <div className={form.input}>
+                    <input type="password" value={values.password} name="password" onChange={this.handleInputChange} />
+                  </div>
+                </label>
 
-              <div className={form.submit}>
-                <input className={buttons.main} type="submit" value="Войти" />
+                <div className={classNames(form.submit, styles.submit)}>
+                  <input className={buttons.main} type="submit" value="Войти" />
+
+                  <div className={styles.recovery}>
+                    <span onClick={() => this.setState({ section: 'recovery' })}>Забыли пароль?</span>
+                  </div>
+                </div>
+              </form>
+            }
+
+            {this.isRecovery() &&
+              <div className={styles.form}>
+                <form onSubmit={this.handleRecoverySubmit}>
+                  <label className={form.el}>
+                    <div className={form.label}>
+                      Почта
+                    </div>
+
+                    <div className={form.input}>
+                      <input type="email" value={values.email} name="email" onChange={this.handleInputChange} />
+                    </div>
+                  </label>
+
+                  <div className={classNames(form.submit, styles.submit)}>
+                    <input className={buttons.main} type="submit" value="Восстановить пароль" />
+                  </div>
+                </form>
               </div>
-            </form>
+            }
           </div>
 
           <div className={styles.sep}>Или</div>
