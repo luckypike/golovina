@@ -103,6 +103,18 @@ class VariantsController < ApplicationController
     end
   end
 
+  def soon
+    authorize Variant
+
+    respond_to do |format|
+      format.html
+      format.json do
+        @variants = Availability.includes(:variant).inactive.map(&:variant).uniq
+        pp @variants
+      end
+    end
+  end
+
   def new
     @variant = Variant.new
     authorize @variant
