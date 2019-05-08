@@ -110,7 +110,6 @@ class VariantsController < ApplicationController
       format.html
       format.json do
         @variants = Availability.includes(:variant).inactive.map(&:variant).uniq
-        pp @variants
       end
     end
   end

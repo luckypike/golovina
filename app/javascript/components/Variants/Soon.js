@@ -23,7 +23,7 @@ class Soon extends Component {
     return (
       <div className={page.root}>
         <div className={page.title}>
-          <h1>Soon</h1>
+          <h1>Скоро в наличии</h1>
         </div>
 
         <div>
