@@ -22,6 +22,7 @@ class Form extends React.Component {
       created_at: null,
       latest: false,
       sale: false,
+      soon: false,
       pinned: false,
       desc: '',
       comp: '',
@@ -81,6 +82,17 @@ class Form extends React.Component {
                   <label>
                     <input disabled={values.latest} type="checkbox" name="sale" checked={values.sale} onChange={this.handleInputChange} />
                       sale
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className={form.input}>
+              <div className={form.input_input}>
+                <div className={form.checkbox}>
+                  <label>
+                    <input type="checkbox" name="soon" checked={values.soon} onChange={this.handleInputChange} />
+                      Скоро в наличии
                   </label>
                 </div>
               </div>
@@ -187,28 +199,6 @@ class Form extends React.Component {
             </div>
 
             <div className={form.input}>
-              <div className={form.input_input}>
-                <div className={form.radio}>
-                  <div className={form.label}>
-                    Статус
-                  </div>
-
-                  <div className={form.options}>
-                    <label>
-                      <input type="radio" name="state" checked={'active' == values.state} value="active" onChange={this.handleInputChange} />
-                      Активный
-                    </label>
-
-                    <label>
-                      <input type="radio" name="state" checked={'archived' == values.state} value="archived" onChange={this.handleInputChange} />
-                      Архив
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className={form.input}>
               <div className={form.label}>
                 Изображения
               </div>
@@ -238,6 +228,7 @@ class Form extends React.Component {
             created_at: res.data.variant.created_at,
             latest: res.data.variant.latest,
             sale: res.data.variant.sale,
+            soon: res.data.variant.soon,
             pinned: res.data.variant.pinned,
             desc: res.data.variant.desc,
             comp: res.data.variant.comp,

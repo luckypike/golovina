@@ -5,6 +5,7 @@ class Variant < ApplicationRecord
 
   before_validation :parse_image_ids
 
+  after_save :check_soon
   before_save :cache_sizes
   after_save :check_category
 
@@ -13,7 +14,7 @@ class Variant < ApplicationRecord
 
   has_one :category, through: :product
   belongs_to :color
-  has_many :availabilities
+  has_many :availabilities, dependent: :destroy
   has_many :sizes, through: :availabilities
   accepts_nested_attributes_for :availabilities, allow_destroy: true
 
@@ -84,6 +85,14 @@ class Variant < ApplicationRecord
       end
     else
       # TODO: добавить действие если произошел казус что оба заказа оплачивали одновременно
+    end
+  end
+
+  def check_soon
+    if (soon_changed?(from: true, to: false) && availabilities.size < 1) || (soon == false && availabilities.size < 1)
+      update_column(:state, 2)
+    else
+      update_column(:state, 1)
     end
   end
 

@@ -1,6 +1,6 @@
 json.variant do
   json.partial! 'variant', variant: @variant
-  json.extract! @variant, :desc, :comp, :sale, :latest, :pinned, :state
+  json.extract! @variant, :desc, :comp, :sale, :latest, :soon, :pinned, :state
 
   json.product_attributes do
     json.id @variant.product.id
