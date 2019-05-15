@@ -1,28 +1,20 @@
 .root {
-  /* display: grid;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: var(--xr);
 
   @media (--m) {
     grid-template-columns: auto 1fr;
-  } */
+  }
 }
 
 .title {
-  text-align: center;
-
-  @media (--m) {
-    text-align: left;
-  }
+  align-self: center;
 }
 
 .variants {
   display: flex;
-  justify-content: center;
-
-  @media (--m) {
-    justify-content: flex-start;
-  }
+  justify-content: flex-end;
 }
 
 .variant {
