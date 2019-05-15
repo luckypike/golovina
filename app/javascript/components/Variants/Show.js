@@ -232,7 +232,7 @@ class Variant extends Component {
 
               <Acc id="delivery" title="Оплата и доставка" onToggle={this.toggleSection} section={section}>
                 <p>
-                  Доставка по Москве от 250 ₽ (возможность примерки не предусмотрена)
+                  Доставка по Москве от 250 ₽ (с возможностью примерки)
                 </p>
 
                 <p>
