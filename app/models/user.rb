@@ -13,11 +13,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates_uniqueness_of :phone
-  validates_presence_of :phone, :name
+  validates_presence_of :phone, :name, :email
 
   validates :phone, length: { is: 11 }
 
-  before_validation :clear_email, on: :update
+  # before_validation :clear_email, on: :update
   before_validation :clear_phone
 
   def remember_me
@@ -54,7 +54,7 @@ class User < ApplicationRecord
     def prepare_phone text
       text ||= ''
       text = text.sub('/^8/', '+7').gsub(/[\D]/, '')
-      text.size == 11 && text[1] == '9' ? text : false
+      text.size == 11 ? text : false
     end
   end
 end

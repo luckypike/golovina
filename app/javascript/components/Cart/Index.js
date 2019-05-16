@@ -159,7 +159,7 @@ class Index extends Component {
                     Телефон
                   </label>
                   <div className={form.input}>
-                    <InputMask type="text" name="phone" mask="+7 999 999 99 99" maskChar=" " value={values.phone} onChange={this.handleInputChange} />
+                    <InputMask type="text" name="phone" mask="+9 999 999 99 99" maskChar=" " value={values.phone} onChange={this.handleInputChange} />
                   </div>
 
                   {errors['user.phone'] &&
@@ -179,6 +179,15 @@ class Index extends Component {
                   <div className={form.input}>
                     <input type="text" name="email" value={values.email} onChange={this.handleInputChange} />
                   </div>
+
+                  {errors['user.email'] &&
+                    <div className={form.error}>
+                      <ul>
+                        {errors['user.email'].map((error, i) => <li key={i} dangerouslySetInnerHTML={{ __html: error }} /> )}
+                      </ul>
+
+                    </div>
+                  }
                 </div>
 
                 <div className={form.item}>

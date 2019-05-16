@@ -45,6 +45,9 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     post :recovery, controller: :sessions, as: :recovery_user_session
+    post :phone, controller: :sessions, as: :phone_user_session
+    post :code, controller: :sessions, as: :code_user_session
+    get :auth, controller: :sessions, as: :auth_user_session
   end
   # devise_for :users
 

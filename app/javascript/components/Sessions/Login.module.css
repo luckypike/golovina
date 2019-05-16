@@ -83,5 +83,6 @@
 
 .recovery {
   composes: at from '../Fonts';
+  cursor: pointer;
   margin-left: auto;
 }
