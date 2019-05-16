@@ -3,7 +3,6 @@ class Availability < ApplicationRecord
   belongs_to :size
   belongs_to :store
 
-  after_save :check_variant
   after_initialize do
     self.quantity = quantity.to_i
   end
@@ -13,13 +12,5 @@ class Availability < ApplicationRecord
 
   def active?
     quantity && quantity > 0
-  end
-
-  def check_variant
-    if variant.availabilities.size < 1
-      variant.archived!
-    else
-      variant.active!
-    end
   end
 end

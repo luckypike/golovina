@@ -1,11 +1,11 @@
 class Variant < ApplicationRecord
-  enum state: { active: 1, archived: 2}
+  enum state: { active: 1, archived: 2, soon: 3 }
 
   default_scope { includes(:images, { product: :category }).order(pinned: :desc, created_at: :desc) }
 
   before_validation :parse_image_ids
 
-  after_save :check_soon
+  after_save :check_state
   before_save :cache_sizes
   after_save :check_category
 
@@ -88,8 +88,10 @@ class Variant < ApplicationRecord
     end
   end
 
-  def check_soon
-    if (soon_changed?(from: true, to: false) && availabilities.size < 1) || (soon == false && availabilities.size < 1)
+  def check_state
+    if soon == true && availabilities.size < 1
+      update_column(:state, 3)
+    elsif soon == false && availabilities.size < 1
       update_column(:state, 2)
     else
       update_column(:state, 1)
