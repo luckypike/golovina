@@ -67,20 +67,20 @@ class Variant < ApplicationRecord
   end
 
   # TODO: переписать этот метод чтобы для более няшного кода
-  def decrease quantity
-    availability = availabilities.where(store_id: 1).where('quantity > ?', 0).first
-    availability = availabilities.where.not(store_id: 1).where('quantity > ?', 0).first unless availability
+  def decrease item
+    availability = availabilities.where(store_id: 1, size_id: item.size_id).where('quantity > ?', 0).first
+    availability = availabilities.where.not(store_id: 1).where(size_id: item.size_id).where('quantity > ?', 0).first unless availability
 
     if availability
-      if quantity > availability.quantity
-        diff = quantity - availability.quantity
+      if item.quantity > availability.quantity
+        diff = item.quantity - availability.quantity
         availability.quantity = 0
         availability.save
-        availability = availabilities.where.not(store_id: 1).where('quantity > ?', 0).first
+        availability = availabilities.where.not(store_id: 1).where(size_id: item.size_id).where('quantity > ?', 0).first
         availability.quantity -= diff
         availability.save
       else
-        availability.quantity -= quantity
+        availability.quantity -= item.quantity
         availability.save
       end
     else
