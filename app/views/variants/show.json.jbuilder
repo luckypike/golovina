@@ -1,6 +1,7 @@
-json.variants @variant.product.variants.active.includes(:color, { availabilities: :size }).sort_by(&:state) do |variant|
+json.variants @variant.product.variants.includes(:color, { availabilities: :size }).sort_by(&:state).select { |v| !v.archived? } do |variant|
   json.partial! 'variants/variant', variant: variant
   json.extract! variant, :desc, :comp
+  json.soon variant.availabilities.any? { |availability| availability.quantity < 1} && variant.soon? ? true : false
   json.archived variant.archived?
 
   json.availabilities variant.availabilities.group_by(&:size) do |size, availabilities|
