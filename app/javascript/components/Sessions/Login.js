@@ -152,7 +152,7 @@ class Login extends Component {
                   <input className={buttons.main} type="submit" value="Войти" />
 
                   <div className={styles.recovery}>
-                    <span onClick={() => this.setState({ section: 'recovery' })}>Забыли пароль?</span>
+                    <span id="recovery" onClick={() => this.setState({ section: 'recovery' })}>Забыли пароль?</span>
                   </div>
                 </div>
               </form>

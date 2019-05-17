@@ -53,11 +53,6 @@ gem 'fog-aws'
 
 gem 'whenever', require: false
 
-gem 'capistrano'
-gem 'capistrano-rails'
-gem 'capistrano-passenger'
-gem 'capistrano-rbenv'
-
 gem 'exception_notification'
 
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -68,14 +63,20 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara'
+
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rbenv'
+
+  gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'selenium-webdriver'
-  gem 'rspec-rails'
+  gem 'webdrivers'
+  gem 'rails-controller-testing'
 end
 
 group :development do
