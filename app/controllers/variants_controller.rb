@@ -109,7 +109,7 @@ class VariantsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @variants = Variant.soon.where(soon: true)
+        @variants = Variant.soon
       end
     end
   end
