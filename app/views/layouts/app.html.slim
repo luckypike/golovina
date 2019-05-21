@@ -31,6 +31,6 @@ html
     = javascript_pack_tag 'app', async: true
     = stylesheet_pack_tag 'app'
 
-    = stylesheet_link_tag 'https://use.typekit.net/crp6yvg.css' unless Rails.env.development?
+    = stylesheet_link_tag 'https://use.typekit.net/crp6yvg.css' unless Rails.env.test?
 
     == render '/shared/c'
