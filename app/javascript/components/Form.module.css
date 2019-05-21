@@ -3,8 +3,17 @@
 }
 
 .tight {
-  @media (--m) {
-    max-width: 42rem;
+  @media (--s) {
+    margin: 0 auto;
+    max-width: 32rem;
+  }
+}
+
+.el {
+  display: block;
+
+  &:not(:last-child) {
+    margin: 0 0 calc(var(--yr) * 8);
   }
 }
 
@@ -29,6 +38,7 @@
     line-height: inherit;
     padding: calc(var(--yr) * 2) var(--xr);
     width: 100%;
+    outline: none;
 
     &:focus {
       border-color: var(--highlight_color);
@@ -49,7 +59,7 @@
     } */
   }
 
-  textarea {
+  & textarea {
     resize: vertical;
     display: block;
   }
@@ -60,9 +70,7 @@
 }
 
 .label {
-  composes: at from './Fonts.module.css';
   composes: small from './Fonts.module.css';
-
   margin: 0 0 calc(var(--yr) * 1.5);
 }
 

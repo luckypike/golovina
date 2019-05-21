@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :set_current
   before_action :set_cats, if: -> { request.path_parameters[:format] != 'json' }
 
-  after_action :verify_authorized, unless: :devise_controller?
+  after_action :verify_authorized
 
   private
   def set_current
@@ -25,12 +25,12 @@ class ApplicationController < ActionController::Base
 
   def not_authenticated
     session[:return_to_url] = request.original_fullpath
-    redirect_to login_path, alert: t(:login_first)
+    redirect_to new_user_session_path, alert: t(:login_first)
   end
 
   def set_user
     unless user_signed_in?
-      user = User.create(email: "guest_#{Devise.friendly_token.first(10)}@golovina.store")
+      user = User.new(email: "guest_#{Devise.friendly_token.first(10)}@golovina.store")
       user.save!(validate: false)
       sign_in(user)
     end

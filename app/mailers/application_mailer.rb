@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: Rails.application.credentials[Rails.env.to_sym][:mail][:username]
+  default from: "Golovina <#{Rails.application.credentials[Rails.env.to_sym][:mail][:username]}>"
   layout 'mailer'
 end

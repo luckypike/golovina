@@ -15,19 +15,21 @@ class Index extends Component {
     window.addEventListener('resize', this._updateDimensions)
     this._updateDimensions()
 
-    this.glide = new Glide(this.mount.current, {
-      type: 'carousel',
-      autoplay: 4000,
-      animationDuration: 900,
-      hoverpause: true,
-      gap: 0,
-    })
+    if(this.props.slides.length > 0) {
+      this.glide = new Glide(this.mount.current, {
+        type: 'carousel',
+        autoplay: 4000,
+        animationDuration: 900,
+        hoverpause: true,
+        gap: 0,
+      })
 
-    this.glide.on('run', (move) => {
-      this.setState({ index: this.glide.index })
-    })
+      this.glide.on('run', (move) => {
+        this.setState({ index: this.glide.index })
+      })
 
-    this.glide.mount()
+      this.glide.mount()
+    }
   }
 
   _updateDimensions() {

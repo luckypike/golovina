@@ -6,6 +6,7 @@ html {
 }
 
 body {
+  color: var(--pr_color);
   hyphens: auto;
   font-family: 'futura-pt', sans-serif;
   /* font-weight: 400; */

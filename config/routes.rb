@@ -33,22 +33,38 @@ Rails.application.routes.draw do
     delete ':id', action: :destroy, as: :destroy
   end
 
+  devise_for :users,
+    path: '',
+    only: :sessions,
+    controllers: {
+      sessions: :sessions
+    },
+    path_names: {
+      sign_in: 'login', sign_out: 'logout'
+    }
+
+  devise_scope :user do
+    post :recovery, controller: :sessions, as: :recovery_user_session
+    post :phone, controller: :sessions, as: :phone_user_session
+    post :code, controller: :sessions, as: :code_user_session
+    get :auth, controller: :sessions, as: :auth_user_session
+  end
+  # devise_for :users
+
+  # namespace 'login', module: nil do
+  #   get :email, to: 'sessions#email'
+  #   get '', to: 'sessions#login'
+  #   post 'code', to: 'sessions#code'
+  #   post '', to: 'sessions#auth'
+  # end
+
+
   resources :sizes
   resources :sizes_groups
 
   resources :collections
 
   scope format: false do
-    devise_for :users, path: '', path_names: { sign_out: 'logout'}
-
-    namespace 'login', module: nil do
-      get :email, to: 'sessions#email'
-      get '', to: 'sessions#login'
-      post 'code', to: 'sessions#code'
-      post '', to: 'sessions#auth'
-    end
-
-
     namespace 'about', module: nil do
       get '', to: 'about#collection'
       # get 'open', to: 'about#open'

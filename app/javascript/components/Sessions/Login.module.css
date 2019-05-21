@@ -1,0 +1,88 @@
+.tabs {
+  display: flex;
+  composes: at from '../Fonts';
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: calc(var(--yr) * 16);
+}
+
+.tab {
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    background: #000;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, 0);
+    height: 0;
+    width: 60%;
+    transition: width 0.2s, height 0.2s, opacity 0.2s;
+  }
+
+  &:not(:last-child) {
+    margin-right: var(--xr);
+  }
+
+  &.active {
+    color: #000;
+
+    &::after {
+      height: 2px;
+      opacity: 1;
+      width: 100%;
+    }
+  }
+}
+
+.form {
+
+
+}
+
+.sep {
+  composes: at from '../Fonts';
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: calc(var(--yr) * 8) auto;
+  position: relative;
+  width: 4rem;
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 5rem;
+    border-top: 1px solid var(--sep_color);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 5rem;
+    border-top: 1px solid var(--sep_color);
+  }
+
+}
+
+.desc {
+  margin-bottom: calc(var(--yr) * 2);
+}
+
+.submit {
+  display: flex;
+}
+
+.recovery {
+  composes: at from '../Fonts';
+  cursor: pointer;
+  margin-left: auto;
+}

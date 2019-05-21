@@ -25,6 +25,7 @@ class Variant < ApplicationRecord
 
   has_many :wishlists, dependent: :destroy
   has_many :carts, dependent: :destroy
+  has_many :order_items, dependent: :destroy
 
   has_many :kitables, dependent: :destroy
   has_many :kits, through: :kitables
