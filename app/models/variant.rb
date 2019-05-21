@@ -89,12 +89,12 @@ class Variant < ApplicationRecord
   end
 
   def check_state
-    if soon == true && availabilities.map{ |a| a.quantity }.sum < 1
-      update_column(:state, 'soon')
-    elsif soon == false && availabilities.map{ |a| a.quantity }.sum < 1
-      update_column(:state, 'archived')
+    if soon && availabilities.all? { |a| !a.active? }
+      update_column(:state, :soon)
+    elsif !soon && availabilities.all? { |a| !a.active? }
+      update_column(:state, :archived)
     else
-      update_column(:state, 'active')
+      update_column(:state, :active)
     end
   end
 

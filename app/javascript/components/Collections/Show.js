@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import classNames from 'classnames'
 import ReactMarkdown from 'react-markdown'
+import 'lazysizes'
 
 import { path } from '../Routes'
 
@@ -41,7 +42,7 @@ class Show extends Component {
           {collection.images &&
             collection.images.map((image, index) =>
               <div key={index} className={classNames([styles.image], {[styles.landscape]: image.width > image.height}, {[styles.single]: [0, 4, 7, 8, 10, 14, 17, 20, 23, 27, 28, 34, 35, 36, 39, 40, 43, 44, 47].includes(index)})}>
-                <img src={image.collection} />
+                <img class="lazyload" data-src={image.collection} />
               </div>
             )
           }
