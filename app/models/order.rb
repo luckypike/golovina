@@ -21,7 +21,7 @@ class Order < ApplicationRecord
 
         order_items.each do |item|
           item.update(price: item.variant.price_sell)
-          item.variant.decrease item.quantity
+          item.variant.decrease item
         end
       end
 

@@ -4,6 +4,7 @@ class Availability < ApplicationRecord
   belongs_to :store
 
   after_save :check_variant
+
   after_initialize do
     self.quantity = quantity.to_i
   end
@@ -11,15 +12,11 @@ class Availability < ApplicationRecord
   scope :active, -> { where.not(quantity: 0) }
   scope :inactive, -> { where(quantity: [0, nil]) }
 
-  def active?
-    quantity && quantity > 0
+  def check_variant
+    variant.check_state
   end
 
-  def check_variant
-    if variant.availabilities.size < 1
-      variant.archived!
-    else
-      variant.active!
-    end
+  def active?
+    quantity && quantity > 0
   end
 end

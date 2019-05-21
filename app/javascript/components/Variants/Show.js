@@ -182,9 +182,11 @@ class Variant extends Component {
                 </div>
               )}
 
-              <div className={classNames(styles.warning, { [styles.active]: !size })}>
-                Пожалуйста, выберите размер
-              </div>
+              {!variant.soon &&
+                <div className={classNames(styles.warning, { [styles.active]: !size })}>
+                  Пожалуйста, выберите размер
+                </div>
+              }
             </div>
 
             <div className={styles.buy}>
@@ -205,9 +207,15 @@ class Variant extends Component {
                   </a>
                 }
 
-                {!add &&
+                {!add && !variant.soon &&
                   <button className={buttons.main} disabled={!size || send} onClick={this.handleCartClick}>
                     {!send ? 'В корзину' : 'Покупка...'}
+                  </button>
+                }
+
+                {variant.soon &&
+                  <button className={buttons.main} disabled>
+                    Скоро в наличии
                   </button>
                 }
               </div>

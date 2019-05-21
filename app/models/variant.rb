@@ -1,11 +1,11 @@
 class Variant < ApplicationRecord
-  enum state: { active: 1, archived: 2}
+  enum state: { active: 1, archived: 2, soon: 3 }
 
   default_scope { includes(:images, { product: :category }).order(pinned: :desc, created_at: :desc) }
 
   before_validation :parse_image_ids
 
-  after_save :check_soon
+  after_save :check_state
   before_save :cache_sizes
   after_save :check_category
 
@@ -68,20 +68,20 @@ class Variant < ApplicationRecord
   end
 
   # TODO: переписать этот метод чтобы для более няшного кода
-  def decrease quantity
-    availability = availabilities.where(store_id: 1).where('quantity > ?', 0).first
-    availability = availabilities.where.not(store_id: 1).where('quantity > ?', 0).first unless availability
+  def decrease item
+    availability = availabilities.where(store_id: 1, size_id: item.size_id).where('quantity > ?', 0).first
+    availability = availabilities.where.not(store_id: 1).where(size_id: item.size_id).where('quantity > ?', 0).first unless availability
 
     if availability
-      if quantity > availability.quantity
-        diff = quantity - availability.quantity
+      if item.quantity > availability.quantity
+        diff = item.quantity - availability.quantity
         availability.quantity = 0
         availability.save
-        availability = availabilities.where.not(store_id: 1).where('quantity > ?', 0).first
+        availability = availabilities.where.not(store_id: 1).where(size_id: item.size_id).where('quantity > ?', 0).first
         availability.quantity -= diff
         availability.save
       else
-        availability.quantity -= quantity
+        availability.quantity -= item.quantity
         availability.save
       end
     else
@@ -89,11 +89,13 @@ class Variant < ApplicationRecord
     end
   end
 
-  def check_soon
-    if (soon_changed?(from: true, to: false) && availabilities.size < 1) || (soon == false && availabilities.size < 1)
-      update_column(:state, 2)
+  def check_state
+    if soon && availabilities.all? { |a| !a.active? }
+      update_column(:state, :soon)
+    elsif !soon && availabilities.all? { |a| !a.active? }
+      update_column(:state, :archived)
     else
-      update_column(:state, 1)
+      update_column(:state, :active)
     end
   end
 
