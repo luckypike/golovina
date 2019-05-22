@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @variants = @category.variants.active.includes(:images, :product)
+        @variants = @category.variants.available.includes(:images, :product)
       end
     end
   end

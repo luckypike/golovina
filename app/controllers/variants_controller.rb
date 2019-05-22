@@ -76,7 +76,7 @@ class VariantsController < ApplicationController
         # params[:theme] = params[:theme].presence || []
         # params[:size] = params[:size].presence || []
 
-        @variants = Variant.active.order(created_at: :desc)
+        @variants = Variant.available.order(created_at: :desc)
       end
     end
   end
@@ -87,7 +87,7 @@ class VariantsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @variants = Variant.active.where(latest: true)
+        @variants = Variant.available.where(latest: true)
       end
     end
   end
@@ -98,7 +98,7 @@ class VariantsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @variants = Variant.active.where(sale: true)
+        @variants = Variant.available.where(sale: true)
       end
     end
   end
