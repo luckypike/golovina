@@ -1,13 +1,3 @@
-.page.page_common.page_kits
-  .page_kits_list
-    .kits
-      .kits_new.lv2
-        = link_to 'Новый образ', [:new, :kit], class: :btn
+- title 'Все образы'
 
-      - @kits.each do |kit|
-        .kits_item
-          strong
-            = link_to [:edit, kit] do
-              | ##{kit.id}
-              =<> kit.title_safe
-
+= react_component 'Kits/Control/Control'

@@ -1,9 +1,16 @@
 class KitsController < ApplicationController
   before_action :set_kit, only: [:show, :edit, :update, :destroy]
 
+  layout 'app'
+
   def index
     authorize Kit
     @kits = Kit.order(created_at: :desc)
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def show
