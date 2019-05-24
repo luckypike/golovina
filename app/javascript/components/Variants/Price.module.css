@@ -1,7 +1,5 @@
 .root {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+font-size: 12px;
 }
 
 .origin {

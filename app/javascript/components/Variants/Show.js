@@ -138,6 +138,8 @@ class Variant extends Component {
     const { variant, variants, size, send, section, add, index, archived } = this.state
     if(!variant) return null
 
+    console.log(variant);
+
     return (
       <>
         <div className={styles.root}>
