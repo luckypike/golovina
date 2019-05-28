@@ -19,17 +19,12 @@ class Form extends React.Component {
     },
     values: {
       title: null,
+      state: 'active',
       images: [],
       image_ids: null,
       images_attributes: [],
       variant_ids: [],
     },
-    // dictionaries: {
-    //   colors: this.props.colors || [],
-    //   stores: this.props.stores || [],
-    //   sizes: this.props.sizes || [],
-    //   categories: this.props.categories || [],
-    // },
   }
 
   componentDidMount() {
@@ -105,6 +100,28 @@ class Form extends React.Component {
               <Images images={values.images} onImagesChange={this.handleImagesChange}/>
             </div>
 
+            <div className={form.input}>
+              <div className={form.input_input}>
+                <div className={form.radio}>
+                  <div className={form.label}>
+                    Статус
+                  </div>
+
+                  <div className={form.options}>
+                    <label>
+                      <input type="radio" name="state" checked={'active' == values.state} value="active" onChange={this.handleInputChange} />
+                      Активный
+                    </label>
+
+                    <label>
+                      <input type="radio" name="state" checked={'archived' == values.state} value="archived" onChange={this.handleInputChange} />
+                      Архив
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div>
               <input className={buttons.main} type="submit" value="Сохранить" disabled={!this.canSubmit()} />
             </div>
@@ -124,6 +141,7 @@ class Form extends React.Component {
           kit: res.data.kit,
           values: {
             title: res.data.kit.title,
+            state: res.data.kit.state,
             images: res.data.kit.images,
             image_ids: res.data.kit.images.map(i => i.id),
             variant_ids: res.data.kit.variants.map(v => v.id)
@@ -227,7 +245,6 @@ class Form extends React.Component {
   }
 
   handleImagesChange = (images) => {
-    console.log('image change');
     this.setState(state => ({
       values: { ...state.values,
         image_ids: images.map(i => i.id),

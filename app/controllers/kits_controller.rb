@@ -58,8 +58,13 @@ class KitsController < ApplicationController
   end
 
   def destroy
-    @kit.destroy
-    redirect_to kits_url, notice: 'Kit was successfully destroyed.'
+    authorize @kit
+
+    if @kit.destroy
+      head :ok
+    else
+      render text: "\"#{image.errors.full_messages.first}\"", status: 422
+    end
   end
 
   private
