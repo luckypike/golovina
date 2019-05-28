@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get :wishlist, to: 'wishlists#show'
 
   resources :variants, except: [:show] do
+    collection do
+      get :list
+    end
     member do
       post :wishlist
       post :cart

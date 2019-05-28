@@ -4,7 +4,6 @@ class Kit < ApplicationRecord
   default_scope { order(created_at: :desc) }
   scope :latest, -> { where(latest: true) }
 
-  belongs_to :theme
   has_many :kitables, dependent: :destroy
   has_many :variants, through: :kitables
 
@@ -13,8 +12,8 @@ class Kit < ApplicationRecord
 
   validates_presence_of :state
 
-  def title
-    variants.map(&:product).map(&:title).to_sentence.downcase.upcase_first
+  def human_title
+    title.present? ? title : variants.map(&:product).map(&:title).to_sentence.downcase.upcase_first
   end
 
   def entity_created_at

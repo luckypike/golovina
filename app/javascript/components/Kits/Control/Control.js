@@ -13,8 +13,6 @@ class Control extends Component {
   }
 
   componentDidMount = async () => {
-    console.log('mount');
-    console.log(path('kits_path', { format: 'json' }));
     const res = await axios.get(path('kits_path', { format: 'json' }))
     this.setState({ ...res.data })
   }
@@ -32,10 +30,10 @@ class Control extends Component {
 
         <div className={styles.root}>
           <div className={styles.edit}>
-            <a className={buttons.main} href={path('new_variant_path')}>Добавить образ</a>
+            <a className={buttons.main} href={path('new_kit_path')}>Добавить образ</a>
           </div>
 
-          <div className={styles.variants}>
+          <div className={styles.kits}>
             {kits.map((kit) =>
               <div className={styles.item} key={kit.id}>
                 <div className={styles.image}>

@@ -10,12 +10,16 @@
 
 .category {
   display: block;
-  padding: calc(var(--yr) * 4) calc(var(--yr) * 14);
+  padding: calc(var(--yr) * 4) calc(var(--yr) * 4);
   background-color: white;
   position: relative;
 
   &:not(:last-child) {
     margin-bottom: calc(var(--yr) * 4);
+  }
+
+  @media (--s) {
+    padding: calc(var(--yr) * 4) calc(var(--yr) * 14);
   }
 }
 

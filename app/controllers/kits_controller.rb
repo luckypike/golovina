@@ -5,7 +5,7 @@ class KitsController < ApplicationController
 
   def index
     authorize Kit
-    @kits = Kit.order(created_at: :desc)
+    @kits = Kit.includes(:images, :variants).order(created_at: :desc)
 
     respond_to do |format|
       format.html
@@ -21,14 +21,17 @@ class KitsController < ApplicationController
 
   def new
     @kit = Kit.new(state: :active)
-    # @kit.images.build
 
     authorize @kit
   end
 
   def edit
-    # @kit.images.build if @kit.images.size == 0
     authorize @kit
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def create
@@ -36,9 +39,7 @@ class KitsController < ApplicationController
     authorize @kit
 
     if @kit.save
-      @theme = Theme.find(@kit.theme_id)
-      @theme.update_column(:recency, DateTime.now)
-      redirect_to [:kits], notice: 'Kit was successfully created.'
+      head :ok, location: kits_path()
     else
       render :new
     end
@@ -50,16 +51,8 @@ class KitsController < ApplicationController
     @kit.kitables.destroy_all
 
     if @kit.update(kit_params)
-      @theme = Theme.find(@kit.theme_id)
-      @last_kit = Kit.where(state: '1', theme_id: @kit.theme_id).last
-      if @last_kit.presence
-        @theme.update_column(:recency, @last_kit[:created_at])
-      else
-        @theme.update_column(:recency, @theme[:created_at])
-      end
-      redirect_to [:kits], notice: 'Kit was successfully updated.'
+      head :ok, location: kits_path()
     else
-      # @kit.images.build if @kit.images.size == 0
       render :edit
     end
   end
