@@ -44,7 +44,7 @@ h2, .h2 {
 
 .small {
   font-size: calc(var(--yr) * calc(var(--fs) - 1.25));
-  line-height: calc(var(--yr) * var(--lh) - 0.5));
+  line-height: calc(var(--yr) * calc(var(--lh) - 2));
 
   @media (--s) {
     font-size: calc(var(--yr) * var(--fs-s));
@@ -56,7 +56,10 @@ h2, .h2 {
 }
 
 .label {
-  composes: small;
-  line-height: 12px;
+  line-height: 32px;
   letter-spacing: 0.12em;
+
+  @media(--s) {
+    line-height: 20px;
+  }
 }

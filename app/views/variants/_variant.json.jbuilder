@@ -10,17 +10,12 @@ json.product do
   json.extract! variant.product, :id, :title
 end
 
-json.images variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] } do |image|
-  json.id image.id
-  json.preview image.photo.preview.url
-  json.thumb image.photo.thumb.url
-  json.large image.photo.large.url
-end
-
 json.hide variant.images.size < 1 && !Current.user&.is_editor?
 
 json.title variant.product.title.strip
-json.image variant.images.limit(2).each do |image|
+
+json.images variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.first(2).each do |image|
+  json.id image.id
   json.thumb image.photo.thumb.url if variant.images.size > 0
 end
 

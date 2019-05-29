@@ -1,13 +1,14 @@
 .root {
-font-size: 12px;
+  display: flex;
+  align-items: center;
+  composes: small from '../Fonts.module.css';
 }
 
 .origin {
-  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
   text-decoration: line-through;
+  color: var(--gr_color);
 }
 
 .last {
-  color: var(--red_color);
   margin-right: 0.75em;
 }
