@@ -5,10 +5,11 @@
   position: relative;
   background-color: #f9f9f9;
 
+
   &::before {
     display: block;
     content: '';
-    padding-top: calc(5 / 4 * 100%)
+    padding-top: calc(4 / 3 * 100%)
   }
 
   & img {
@@ -23,7 +24,7 @@
 .item {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: calc(var(--xr) * 2);
+  grid-gap: var(--yr);
   grid-row-gap: calc(var(--yr) * 2);
   margin-bottom: calc(var(--yr) * var(--lh) * 2);
 
