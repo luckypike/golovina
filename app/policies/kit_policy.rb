@@ -3,6 +3,10 @@ class KitPolicy < ApplicationPolicy
     update?
   end
 
+  def control?
+    update?
+  end
+
   def update?
     user&.is_editor?
   end

@@ -95,7 +95,11 @@ Rails.application.routes.draw do
 
   get 'robots.:format', to: 'static#robots'
 
-  resources :kits
+  resources :kits do
+    collection do
+      get :control
+    end
+  end
 
   resources :images, only: [:create, :show, :destroy] do
     collection do

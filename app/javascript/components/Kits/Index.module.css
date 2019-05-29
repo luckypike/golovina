@@ -1,0 +1,48 @@
+.kit {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+}
+
+.intro_image {
+  position: relative;
+  background-color: #f9f9f9;
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: calc(5 / 4 * 100%)
+  }
+
+  & img {
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: block;
+    max-width: 100%;
+  }
+}
+
+.info {
+
+}
+
+.title {
+  text-align: center;
+}
+
+.state {
+  font-size: 9px;
+  color: var(--gr_color);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.name {
+  font-size: 1rem;
+}
+
+.variants {
+  font-size: 9px;
+  color: var(--gr_color);
+}

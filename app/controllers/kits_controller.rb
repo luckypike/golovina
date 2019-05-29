@@ -3,9 +3,19 @@ class KitsController < ApplicationController
 
   layout 'app'
 
-  def index
+  def control
     authorize Kit
     @kits = Kit.includes(:images, :variants).order(created_at: :desc)
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
+
+  def index
+    authorize Kit
+    @kits = Kit.includes(:images, :variants).where(state: :active).order(created_at: :desc)
 
     respond_to do |format|
       format.html
@@ -39,7 +49,7 @@ class KitsController < ApplicationController
     authorize @kit
 
     if @kit.save
-      head :ok, location: kits_path()
+      head :ok, location: control_kits_path()
     else
       render :new
     end
@@ -51,7 +61,7 @@ class KitsController < ApplicationController
     @kit.kitables.destroy_all
 
     if @kit.update(kit_params)
-      head :ok, location: kits_path()
+      head :ok, location: control_kits_path()
     else
       render :edit
     end
