@@ -18,7 +18,7 @@ class Form extends React.Component {
     variant: null,
     values: {
       color_id: '',
-      state: '',
+      state: 'active',
       created_at: null,
       latest: false,
       sale: false,
