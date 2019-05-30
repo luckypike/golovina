@@ -155,7 +155,7 @@ class Nav extends Component {
             </div>
 
             <div className={styles.sub}>
-              <a href={path('kits_path')}>Kits</a>
+              <a href={path('control_kits_path')}>Образы</a>
             </div>
 
 

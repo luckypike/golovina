@@ -31,15 +31,26 @@ class Index extends Component {
           {kits &&
             <div className={styles.kits}>
               {kits.map((kit) =>
-                <div className={styles.kit}>
+                <div key={kit.id} className={styles.kit}>
                   <div className={styles.intro_image}>
-                    <img src={kit.images[0]} />
+                    {kit.images[0] &&
+                      <img src={kit.images[0]} />
+                    }
                   </div>
                   <div className={styles.info}>
                     <div className={styles.title}>
                       <div className={styles.state}>New</div>
                       <div className={styles.name}>{kit.title}</div>
                       <div className={styles.variants}>{kit.variants}</div>
+                    </div>
+
+                    <div className={styles.kit_images}>
+                      <div className={styles.image}>
+                        <img src={kit.images[1]} />
+                      </div>
+                      <div className={styles.image}>
+                        <img src={kit.images[2]} />
+                      </div>
                     </div>
                   </div>
                 </div>

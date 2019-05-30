@@ -59,7 +59,7 @@ class Control extends Component {
   _loadAsyncData() {
     this._asyncRequest = axios.CancelToken.source();
 
-    axios.get(path('kits_path', { format: 'json' })).then(res => {this.setState(state => ({
+    axios.get(path('control_kits_path', { format: 'json' })).then(res => {this.setState(state => ({
       kits: res.data.kits
     }))})
   }

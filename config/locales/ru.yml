@@ -12,6 +12,12 @@ ru:
     many: "%{count} позиций"
     other: '%{count} позиции'
 
+  kit_variants:
+    one: "%{count} товар в образе"
+    few: "%{count} товара в образе"
+    many: "%{count} товаров в образе"
+    other: '%{count} товаров в образе'
+
   helpers:
     submit:
       create: "Добавить"
