@@ -27,7 +27,7 @@ class CollectionsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        render 'show_comp', layout: 'layouts/app' if @collection.images.any?
+        render 'show_comp', layout: 'layouts/app' if @collection.images.any? 
       end
       format.json
     end
