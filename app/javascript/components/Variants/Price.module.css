@@ -1,7 +1,10 @@
 .root {
   display: flex;
-  align-items: center;
-  composes: small from '../Fonts.module.css';
+  justify-content: center;
+
+  @media(--m) {
+    justify-content: flex-start;
+  }
 }
 
 .origin {

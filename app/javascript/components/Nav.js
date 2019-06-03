@@ -171,8 +171,8 @@ class Nav extends Component {
 
 function Arr(props) {
   return (
-    <svg viewBox="0 2 10 20" className={styles.arr}>
-      <polyline points="1 10 5 14 9 10" />
+    <svg viewBox="0 0 10 20" className={styles.arr}>
+      <polyline points="1 8 5 12 9 8" />
     </svg>
   )
 }

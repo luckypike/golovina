@@ -12,23 +12,23 @@ class List extends Component {
   render () {
     const { variants } = this.props
 
-    console.log(variants);
-
     return (
       <div className={styles.root}>
         {variants.filter(variant => !variant.hide).map((variant, _) =>
           <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={styles.item}>
-            <div className={styles.image}>
-              {variant.images[0] &&
+            <div className={classNames({[styles.first]: variant.images.length == 1}, {[styles.image]: variant.images.length == 0}, styles.image)}>
+              {variant.images.length > 0 &&
                 <img src={variant.images[0].thumb} />
               }
             </div>
 
-            <div className={styles.image}>
-              {variant.images[1] &&
-                <img src={variant.images[1].thumb} />
-              }
-            </div>
+            {variant.images.length != 1 &&
+              <div className={styles.image}>
+                {variant.images.length > 1 &&
+                  <img src={variant.images[1].thumb} />
+                }
+              </div>
+            }
 
             <div className={styles.dt}>
               {variant.latest &&

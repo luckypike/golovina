@@ -9,7 +9,6 @@ body {
   color: var(--pr_color);
   hyphens: auto;
   font-family: 'futura-pt', sans-serif;
-  /* font-weight: 400; */
   font-size: calc(var(--yr) * var(--fs));
   line-height: calc(var(--yr) * var(--lh));
 
@@ -24,14 +23,12 @@ a {
   text-decoration: none;
 }
 
-
 p {
   margin: 0 0 calc(var(--yr) * 4);
 
   @media (--m) {
     margin: 0 0 calc(var(--yr) * 6);
   }
-
 
   &:last-child {
     margin: 0;

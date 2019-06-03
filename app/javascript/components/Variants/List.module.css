@@ -1,10 +1,10 @@
 .root {
+
 }
 
 .image {
   position: relative;
   background-color: #f9f9f9;
-
 
   &::before {
     display: block;
@@ -17,7 +17,7 @@
     top: 0;
     position: absolute;
     display: block;
-    max-width: 100%;
+    width: 100%;
   }
 }
 
@@ -29,6 +29,18 @@
   margin-bottom: calc(var(--yr) * var(--lh) * 2);
 
   &:nth-child(even) {
+    & .empty {
+      & .image {
+        &:nth-child(odd) {
+          order: 1;
+        }
+
+        &:nth-child(even) {
+          order: 2;
+        }
+      }
+    }
+
     & .image {
       &:nth-child(odd) {
         order: 2;
@@ -59,19 +71,39 @@
 
     &:nth-child(even) {
       & .image {
-        /* order: 3; */
+        &:nth-child(odd) {
+          order: 3;
+        }
+
+        &:nth-child(even) {
+          order: 2;
+        }
+      }
+
+      & .first {
+        &:nth-child(odd) {
+          grid-column: 2 / span 2;
+        }
+
+        &:nth-child(even) {
+          grid-column: 2 / span 2;
+        }
       }
 
       & .dt {
         order: 1;
-        padding-left: calc(1 / 4 * 100%);
+        @media(--m) {
+          padding-left: calc(1 / 4 * 100%);
+        }
       }
     }
 
     &:nth-child(odd) {
-      & .desc {
-        padding-right: calc(1 / 4 * 100%);
-        padding-left: 0;
+      @media(--m) {
+        & .desc {
+          padding-right: calc(1 / 4 * 100%);
+          padding-left: 0;
+        }
       }
     }
   }
@@ -83,51 +115,43 @@
   text-align: center;
 
   @media (--s) {
+    text-align: left;
     display: block;
     grid-column: auto;
     grid-column-gap: 0;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
   }
 }
 
 .title {
-  composes: at from '../Fonts.module.css';
   margin: 0 calc(var(--yr) * var(--lh) * 2);
 
-  @media (--m) {
+  @media (--s) {
     margin: 0;
-    padding-bottom: 12px;
-    font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
-    line-height: calc(var(--yr) * calc(var(--lh) - 1));
   }
 }
 
 .price {
   & > div {
     justify-content: center;
+
+    @media(--s) {
+      justify-content: flex-start;
+    }
   }
+
 }
 
 .colors {
-  composes: small from '../Fonts.module.css';
-  text-transform: none;
-  letter-spacing: normal;
+  composes: at from '../Fonts.module.css';
   grid-column: 1 / span 1;
   color: var(--gr_color);
-
-  @media(--m) {
-    padding-bottom: 12px;
-    font-size: 12px;
-  }
 }
 
 .label {
-  composes: label from '../Fonts.module.css';
   position: absolute;
   display: block;
+  color: var(--gr_color);
   z-index: 1;
-  padding: 0 calc(var(--xr) / 4);
   top: 0;
 
   @media(--s) {
@@ -142,7 +166,18 @@
   grid-column: 1 / -1;
 
   @media(--s) {
+    align-self: flex-end;
     grid-column: auto;
     display: block;
   }
+}
+
+.first {
+  grid-column: 1 / span 2;
+  background-color: #f9f9f9;
+}
+
+.empty {
+  grid-column: 1 / span 1;
+  background-color: #f9f9f9;
 }
