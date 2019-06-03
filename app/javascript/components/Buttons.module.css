@@ -10,14 +10,14 @@
   border: 0;
   background-color: white;
   line-height: inherit;
-  padding: calc(var(--yr) + 2px) var(--xr);
+  padding: calc(var(--yr) * 1.5) var(--xr);
   text-transform: uppercase;
   letter-spacing: 0.2em;
   transition: background 0.3s;
   user-select: none;
 
   @media (--s) {
-    padding: 2px 2em;
+    padding: calc(var(--yr) / 2) 2em;
   }
 
   &:hover {

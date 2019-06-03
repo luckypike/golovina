@@ -33,12 +33,12 @@
 
   &.active {
     &:before {
-      content : "";
+      content: "";
       position: absolute;
-      left    : 0;
-      bottom  : -6px;
-      width   : 32px;
-      border-bottom: 1px solid black;
+      left: 0;
+      bottom: calc(var(--yr) * -1.5);
+      width: calc(var(--yr) * 8);
+      border-bottom: 1px solid var(--pr_color);
     }
   }
 

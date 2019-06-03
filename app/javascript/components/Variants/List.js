@@ -6,7 +6,6 @@ import Price from './Price'
 import I18n from '../I18n'
 
 import styles from './List.module.css'
-import Fonts from '../Fonts.module.css'
 
 class List extends Component {
   render () {

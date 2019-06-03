@@ -66,7 +66,7 @@
 }
 
 .variants {
-  margin-bottom: 18px;
+  margin-bottom: calc(var(--yr) * 4.5);
 
   @media (--s) {
     margin: 0 0 calc(var(--yr) * 4);
@@ -108,12 +108,12 @@
 
   &.active {
     &:before {
-      content : "";
+      content: "";
       position: absolute;
-      left    : 0;
-      bottom  : 0;
-      width   : 32px;
-      border-bottom: 1px solid black;
+      left: 0;
+      bottom: 0;
+      width: calc(var(--yr) * 8);
+      border-bottom: 1px solid var(--pr_color);
     }
   }
 
@@ -228,13 +228,12 @@
 }
 
 .price {
-  margin-bottom: 12px;
+  margin-bottom: calc(var(--yr) * 3);
 }
 
 .wishlist {
   position: absolute;
   display: block;
-  /* transform: translateX(-110px); */
   padding: var(--yr);
   margin-right: var(--yr);
   user-select: none;

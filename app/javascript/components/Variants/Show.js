@@ -149,7 +149,7 @@ class Variant extends Component {
               <div ref={this.slides} className={classNames('glide__slides', styles.slides)}>
                 {variant.images.map((image, i) =>
                   <div className={classNames('glide__slide', styles.slide)} key={i}>
-                    <img src={image.thumb} />
+                    <img src={image.large} />
                   </div>
                 )}
               </div>
