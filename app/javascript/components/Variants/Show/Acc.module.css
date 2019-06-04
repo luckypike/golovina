@@ -5,25 +5,21 @@
 
   &.active {
     & .arr {
-      transform: scaleY(-1);
+      transform: scaleY(-1) translateY(calc(var(--yr) * 5));
     }
   }
 }
 
 .title {
-  display: flex;
+  position: relative;
   width: 100%;
   cursor: pointer;
-  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
   line-height: calc(var(--yr) * var(--lh));
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  padding: var(--yr) 0;
-}
-
-.content {
-
-  /* display: none; */
+  padding: calc(var(--yr) * 1.5) 0;
+  text-align: center;
+  @media(--m) {
+    text-align: left;
+  }
 }
 
 .ch {
@@ -31,9 +27,12 @@
 }
 
 .arr {
+  position: absolute;
+  right: 0;
   display: block;
+  transform: translateY(calc(var(--yr) * -5));
   width: 10px;
-  height: 24px;
+  height: 20px;
   margin-left: auto;
   flex-shrink: 0;
 

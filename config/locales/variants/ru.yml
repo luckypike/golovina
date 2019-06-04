@@ -1,0 +1,7 @@
+ru:
+  variants:
+    colors:
+      one: "%{count} цвет"
+      few: "%{count} цвета"
+      many: "%{count} цветов"
+      other: "%{count} цвета"

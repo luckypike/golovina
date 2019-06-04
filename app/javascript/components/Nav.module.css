@@ -19,7 +19,7 @@
     line-height: calc(var(--yr) * var(--lh));
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    padding: var(--yr) 0;
+    padding: calc(var(--yr) * 1.5) 0;
   }
 
   &.active {
@@ -37,7 +37,7 @@
 }
 
 .sub {
-  margin-bottom: var(--yr);
+  margin-bottom: calc(var(--yr) * 2);
   display: block;
 }
 
@@ -54,7 +54,7 @@
 .arr {
   display: block;
   width: 10px;
-  height: 24px;
+  height: 20px;
   margin-left: calc(var(--xr) / 2);
   flex-shrink: 0;
 

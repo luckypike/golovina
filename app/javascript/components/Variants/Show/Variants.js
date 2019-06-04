@@ -15,6 +15,8 @@ class Variants extends Component {
 
     return (
       <div className={classNames(styles.root, this.props.className)}>
+        <div className={styles.title}>{variant.color.title}</div>
+
         <div className={styles.variants}>
           {variants.map(variant =>
             <NavLink key={variant.id} to={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} className={classNames(styles.variant, { [styles.active]: variant.id == this.props.variant.id })}>
@@ -22,8 +24,6 @@ class Variants extends Component {
             </NavLink>
           )}
         </div>
-
-        <div className={styles.title}>{variant.color.title}</div>
       </div>
     )
   }

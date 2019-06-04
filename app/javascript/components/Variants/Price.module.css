@@ -1,15 +1,17 @@
 .root {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  justify-content: center;
+
+  @media(--m) {
+    justify-content: flex-start;
+  }
 }
 
 .origin {
-  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
   text-decoration: line-through;
+  color: var(--gr_color);
 }
 
 .last {
-  color: var(--red_color);
   margin-right: 0.75em;
 }
