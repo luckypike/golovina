@@ -1,14 +1,17 @@
-class CustomersController < ApplicationController
+class ServiceController < ApplicationController
+
+  layout 'app'
+
   def index
     authorize :static, :index?
-    redirect_to customers_info_path
+    redirect_to service_delivery_path
   end
 
   def return
     authorize :static, :index?
   end
 
-  def info
+  def delivery
     authorize :static, :index?
   end
 end

@@ -248,7 +248,7 @@ class Variant extends Component {
                 </p>
 
                 <p>
-                  <a href={path('customers_info_path')}>Подробнее</a>
+                  <a href={path('service_delivery_path')}>Подробнее</a>
                 </p>
               </Acc>
 
@@ -258,7 +258,7 @@ class Variant extends Component {
                 </p>
 
                 <p>
-                  <a href={path('customers_return_path')}>Подробнее</a>
+                  <a href={path('service_return_path')}>Подробнее</a>
                 </p>
               </Acc>
 

@@ -143,10 +143,10 @@ header.header class="#{menu_index? ? 'index no_t' : nil } #{current_page?(contro
 
           .section_list
             .section_list_item.l2
-              = active_link_to 'Оплата и доставка', customers_info_path
+              = active_link_to 'Оплата и доставка', service_delivery_path
 
             .section_list_item.l2
-              = active_link_to t('menu.return'), customers_return_path
+              = active_link_to t('menu.return'), service_return_path
 
       .header_menu_section.orders_and_auth
         - if signed_in? && !current_user.guest?

@@ -160,13 +160,13 @@
 
               .text
                 / .text_item.nn.active
-                  | Стоимость доставки с примеркой по Нижнему Новгороду 199&nbsp;₽ в день заказа. #{link_to 'Подробнее', [:customers, :info], class: :bordered }
+                  | Стоимость доставки с примеркой по Нижнему Новгороду 199&nbsp;₽ в день заказа. #{link_to 'Подробнее', [:service, :info], class: :bordered }
 
                 .text_item.msk.active
-                  | Стоимость доставки от 450&nbsp;₽. (возможность примерки не предусмотрена). #{link_to 'Подробнее', [:customers, :info], class: :bordered }
+                  | Стоимость доставки от 450&nbsp;₽. (возможность примерки не предусмотрена). #{link_to 'Подробнее', [:service, :delivery], class: :bordered }
 
                 .text_item.rus
-                  | Стоимость доставки от&nbsp;500&nbsp;₽ (зависит от вашего региона). #{link_to 'Подробнее', [:customers, :info], class: :bordered }
+                  | Стоимость доставки от&nbsp;500&nbsp;₽ (зависит от вашего региона). #{link_to 'Подробнее', [:service, :delivery], class: :bordered }
 
         .acc_item
           .title
@@ -177,7 +177,7 @@
 
           .content
 
-            p Возврат и обмен товара осуществляется в течение 7 дней с момента получения заказа, если он не был в употреблении, сохранен товарный вид, потребительские свойства, пломбы, фабричные ярлыки. В противном случае обмену и возврату товар не подлежит. #{link_to 'Подробнее', customers_return_path, class: 'bordered'}
+            p Возврат и обмен товара осуществляется в течение 7 дней с момента получения заказа, если он не был в употреблении, сохранен товарный вид, потребительские свойства, пломбы, фабричные ярлыки. В противном случае обмену и возврату товар не подлежит. #{link_to 'Подробнее', service_return_path, class: 'bordered'}
 
       - if variant.out_of_stock? && variant.product.similar_products.present?
           = link_to 'Подобрать похожий', '#', class: [:btn, :more], :data => { :id => variant.product.id , :similar => variant.product.similar_products.select{|s| s.purchasable}.map{ |s| s.id }.to_json }

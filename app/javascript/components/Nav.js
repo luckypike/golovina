@@ -112,13 +112,13 @@ class Nav extends Component {
           </div>
         </div>
 
-        <Section id="customers" title="Покупателям" onToggle={this.toggleSection} section={section}>
+        <Section id="service" title="Покупателям" onToggle={this.toggleSection} section={section}>
           <div className={styles.sub}>
-            <a href="/customers/info">Оплата и доставка</a>
+            <a href="/service/delivery">Оплата и доставка</a>
           </div>
 
           <div className={styles.sub}>
-            <a href="/customers/return">Обмен и возврат</a>
+            <a href="/service/return">Обмен и возврат</a>
           </div>
         </Section>
 

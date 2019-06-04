@@ -75,10 +75,10 @@ Rails.application.routes.draw do
       end
     end
 
-    namespace 'customers', module: nil do
-      get '', to: 'customers#index'
-      get 'info', to: 'customers#info'
-      get 'return', to: 'customers#return'
+    namespace 'service', module: nil do
+      get '', to: 'service#index'
+      get 'delivery', to: 'service#delivery'
+      get 'return', to: 'service#return'
     end
 
     resources :users, only: [] do
