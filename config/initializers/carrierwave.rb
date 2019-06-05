@@ -36,6 +36,12 @@ module CarrierWave
       end
     end
 
+    def rotate_according_to_exif
+      manipulate! do |img|
+        img.tap(&:auto_orient)
+      end
+    end
+
     def optimize_slide(quality)
       manipulate! do |img|
         return img unless img.mime_type.match /image\/jpeg/

@@ -38,16 +38,19 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :preview do
+    process :rotate_according_to_exif
     process smart_resize: [300, 240]
     process :optimize
   end
 
   version :thumb do
+    process :rotate_according_to_exif
     process resize_to_fill: [1000, 1250]
     process :optimize
   end
 
   version :large do
+    process :rotate_according_to_exif
     process resize_to_fill: [2000, 2500]
     process :optimize
   end
