@@ -17,4 +17,9 @@ class OrderMailer < ApplicationMailer
     @order = order
     mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: 'Тестовая СМС')
   end
+
+  def sms_doubling order, to
+    @order = order
+    mail(to: to, subject: 'Подтверждение оплаты')
+  end
 end

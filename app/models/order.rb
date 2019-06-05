@@ -13,6 +13,7 @@ class Order < ApplicationRecord
       after do
         if Rails.env.production?
           Sms.message(user.phone, sms_message)
+          OrderMailer.sms_doubling(self, user.email).deliver_later
         else
           OrderMailer.sms_test(self).deliver_later
         end
