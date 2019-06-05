@@ -47,9 +47,11 @@ class Images extends React.Component {
 
   handleImagesChange = (id) => {
     let images = this.state.images.filter(i => i.id !== id)
-    this.setState(state => ({
+    this.setState({
       images: images
-    }))
+    }, () => {
+      this.props.onImagesChange(images)
+    })
   }
 
   onDrop = (files) => {
