@@ -13,7 +13,7 @@
 .variants {
   display: flex;
   justify-content: center;
-  margin-top: var(--yr);
+  margin-top: calc(var(--yr) * 2);
 
   @media(--m) {
     justify-content: flex-start;

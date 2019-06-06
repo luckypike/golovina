@@ -38,7 +38,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :preview do
-    process smart_resize: [300, 240]
+    process smart_resize: [300, 400]
     process :optimize
   end
 
@@ -48,7 +48,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :large do
-    process resize_to_fill: [2000, 2500]
+    process resize_to_fill: [2100, 2800]
     process :optimize
   end
 

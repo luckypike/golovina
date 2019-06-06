@@ -1,14 +1,83 @@
 .row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  box-sizing: border-box;
 
-  &:not(:last-child) {
-    margin-bottom: calc(var(--yr) * 1);
+  & div:nth-child(-n+4) {
+    border-left: 1px solid var(--sep_color);
+    border-top: 1px solid var(--sep_color);
+    padding: var(--yr) var(--yr);
+  }
+  & div:nth-child(4) {
+    border-right: 1px solid var(--sep_color);
   }
 }
 
 .v {
+  padding: var(--yr) 0;
+
   @media (--s) {
     line-height: calc(var(--yr) * var(--lh));
+  }
+}
+
+.text {
+  padding: var(--yr) 0;
+  margin-bottom: var(--yr);
+  @media(--m) {
+    text-align: left;
+  }
+}
+
+.close {
+  position: fixed;
+  cursor: pointer;
+  display: block;
+  height: calc(var(--xr) * 3);
+  width: calc(var(--yr) * 8);
+  right: calc(var(--xr) * 2 - calc(var(--yr) * 2));
+  top: calc(var(--yr) * 2);
+  padding: 16px 8px;
+}
+
+.size_helper {
+  display: block;
+  composes: at from '../../Fonts.module.css';
+  padding: calc(var(--xr) * 4) calc(var(--xr) * 2);
+  text-align: center;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%) translateY(-50%);
+  background: white;
+  width: 100%;
+  max-width: 400px;
+  z-index: 1000;
+
+  & :nth-child(6) {
+    border-bottom: 1px solid var(--sep_color);
+  }
+}
+
+.size_help {
+  display: none;
+}
+
+.overlay {
+  visibility: hidden;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  opacity: 0;
+  transition: visibility 0s ease .3s, opacity .3s;
+
+  &.active {
+    visibility: visible;
+    opacity: .4;
+    transition: opacity .3s;
   }
 }

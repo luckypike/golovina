@@ -16,7 +16,7 @@
   cursor: pointer;
   line-height: calc(var(--yr) * var(--lh));
   padding: calc(var(--yr) * 1.5) 0;
-  text-align: center;
+  text-align: left;
   @media(--m) {
     text-align: left;
   }

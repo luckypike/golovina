@@ -186,13 +186,15 @@ class Variant extends Component {
                 </div>
               )}
 
-              <div className={styles.warning}>Помощь с размерами</div>
-
               {/*{!variant.soon &&
                 <div className={classNames(styles.warning, { [styles.active]: !size })}>
                   Пожалуйста, выберите размер
                 </div>
               }*/}
+            </div>
+
+            <div className={styles.guide}>
+              <Guide />
             </div>
 
             <div className={styles.buy}>
@@ -211,7 +213,7 @@ class Variant extends Component {
 
                 {!add && !variant.soon &&
                   <button className={buttons.main} disabled={!size || send} onClick={this.handleCartClick}>
-                    {!send ? 'Добавить в корзину' : 'Покупка...'}
+                    {!send ? 'Добавить в корзину' : 'Добавляем...'}
                   </button>
                 }
 
@@ -227,6 +229,7 @@ class Variant extends Component {
               {variant.desc &&
                 <Acc id="desc" title="Описание и уход" onToggle={this.toggleSection} section={section}>
                   <ReactMarkdown source={variant.desc} />
+                  <ReactMarkdown source={variant.comp} />
                 </Acc>
               }
 
