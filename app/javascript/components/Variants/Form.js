@@ -20,6 +20,7 @@ class Form extends React.Component {
       color_id: '',
       state: 'active',
       created_at: null,
+      updated_at: null,
       latest: false,
       sale: false,
       soon: false,
@@ -124,6 +125,16 @@ class Form extends React.Component {
               </div>
             </div>
 
+            <div className={form.input}>
+              <div className={form.label}>
+                Артикул
+              </div>
+
+              <div className={form.input_input}>
+                <input type="text" value={values.code} name="code" onChange={this.handleInputChange} />
+              </div>
+            </div>
+
             <div className={form.stores}>
               {stores.map((store, _) =>
                 <>
@@ -198,6 +209,20 @@ class Form extends React.Component {
               </div>
             </div>
 
+            <div className={form.el}>
+              <label>
+                <div className={form.label}>
+                  Дата обновления
+                </div>
+
+                <div className={form.datetime}>
+                  <div className={form.input}>
+                    <input name="updated_at" type="date" value={values.updated_at} onChange={this.handleInputChange}/>
+                  </div>
+                </div>
+              </label>
+            </div>
+
             <div className={form.input}>
               <div className={form.label}>
                 Изображения
@@ -224,8 +249,10 @@ class Form extends React.Component {
           variant: res.data.variant,
           values: {
             color_id: res.data.variant.color_id,
+            code: res.data.variant.code,
             state: res.data.variant.state,
             created_at: res.data.variant.created_at,
+            updated_at: res.data.variant.updated_at,
             latest: res.data.variant.latest,
             sale: res.data.variant.sale,
             soon: res.data.variant.soon,

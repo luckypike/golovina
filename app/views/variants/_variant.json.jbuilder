@@ -1,5 +1,5 @@
-json.extract! variant, :id, :price, :price_last, :price_sell, :color_id, :sale, :latest, :soon
-
+json.extract! variant, :id, :price, :price_last, :price_sell, :color_id, :sale, :latest, :soon, :code
+json.updated_at variant.updated_at.strftime('%F')
 json.can_edit policy(variant).edit?
 
 json.category do

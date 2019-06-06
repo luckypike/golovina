@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_091252) do
+ActiveRecord::Schema.define(version: 2019_06_06_095448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_091252) do
     t.bigint "theme_id"
     t.boolean "latest", default: false
     t.integer "state", default: 0
+    t.string "title"
     t.index ["theme_id"], name: "index_kits_on_theme_id"
   end
 
@@ -294,6 +295,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_091252) do
     t.boolean "pinned", default: false
     t.text "comp"
     t.boolean "soon", default: false
+    t.string "code"
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["product_id", "color_id"], name: "index_variants_on_product_id_and_color_id", unique: true
     t.index ["product_id"], name: "index_variants_on_product_id"
