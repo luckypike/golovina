@@ -20,7 +20,6 @@ class Form extends React.Component {
       color_id: '',
       state: 'active',
       created_at: null,
-      updated_at: null,
       latest: false,
       sale: false,
       soon: false,
@@ -217,7 +216,7 @@ class Form extends React.Component {
 
                 <div className={form.datetime}>
                   <div className={form.input}>
-                    <input name="updated_at" type="datetime-local" value={values.updated_at} onChange={this.handleInputChange}/>
+                    <input name="created_at" type="datetime-local" value={values.created_at} onChange={this.handleInputChange}/>
                   </div>
                 </div>
               </label>
@@ -252,7 +251,6 @@ class Form extends React.Component {
             code: res.data.variant.code,
             state: res.data.variant.state,
             created_at: res.data.variant.created_at,
-            updated_at: res.data.variant.updated_at,
             latest: res.data.variant.latest,
             sale: res.data.variant.sale,
             soon: res.data.variant.soon,
