@@ -2,6 +2,11 @@ json.variant do
   json.partial! 'variant', variant: @variant
   json.extract! @variant, :desc, :comp, :sale, :latest, :soon, :pinned, :state
 
+  json.images @variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] } do |image|
+    json.id image.id
+    json.preview image.photo.preview.url
+  end
+
   json.product_attributes do
     json.id @variant.product.id
     json.title @variant.product.title

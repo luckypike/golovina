@@ -217,7 +217,7 @@ class Form extends React.Component {
 
                 <div className={form.datetime}>
                   <div className={form.input}>
-                    <input name="updated_at" type="date" value={values.updated_at} onChange={this.handleInputChange}/>
+                    <input name="updated_at" type="datetime-local" value={values.updated_at} onChange={this.handleInputChange}/>
                   </div>
                 </div>
               </label>
