@@ -9,6 +9,7 @@ h1, .h1 {
   }
 }
 
+<<<<<<< HEAD
 h1, h2 {
   margin: 0 0 calc(var(--yr) * 4);
 
@@ -26,6 +27,16 @@ h2, .h2 {
   @media (--m) {
     font-size: calc(var(--yr) * calc(var(--fs) + 1.5));
     line-height: calc(var(--yr) * calc(var(--lh) + 2));
+=======
+h2, .h2 {
+  font-size: calc(var(--yr) * calc(var(--fs) + 0.5));
+  line-height: calc(var(--yr) * calc(var(--lh) + 1));
+  font-weight: var(--fw_normal);
+
+  @media (--m) {
+    font-size: calc(var(--yr) * calc(var(--fs) + 1.5));
+    line-height: calc(var(--yr) * calc(var(--lh) + 1));
+>>>>>>> e84045615c88433190ba5b8791678aced6b0734c
   }
 }
 
@@ -36,5 +47,25 @@ h2, .h2 {
   @media (--s) {
     font-size: calc(var(--yr) * var(--fs));
     line-height: calc(var(--yr) * calc(var(--lh) + 1));
+  }
+}
+
+h1 {
+  margin: 0 0 calc(var(--yr) * 3);
+
+  @media (--m) {
+    margin: 0 0 calc(var(--yr) * 4);
+  }
+}
+
+h2, p {
+  margin: 0 0 calc(var(--yr) * 3);
+
+  @media (--m) {
+    margin: 0 0 calc(var(--yr) * 4);
+  }
+
+  &:last-child {
+    margin: 0;
   }
 }

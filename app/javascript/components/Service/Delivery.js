@@ -13,7 +13,7 @@ class Delivery extends Component {
           <h1>Оплата и доставка</h1>
         </div>
 
-        <div className={styles.text}>
+        <div className={page.text}>
           <p>
             Заказы обрабатываются с 12:00 до 20:00.
           </p>

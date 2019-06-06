@@ -1,12 +1,3 @@
-.text {
-  max-width: 960px;
-}
-
 .link {
   border-bottom: 1px solid var(--sep_color);
-}
-
-.city {
-  text-transform: uppercase;
-  font-weight: var(--fw_normal);
 }
