@@ -1,5 +1,5 @@
 json.extract! variant, :id, :price, :price_last, :price_sell, :color_id, :sale, :latest, :soon, :code
-json.updated_at variant.updated_at.strftime('%FT%T')
+json.updated_at variant.updated_at.strftime('%FT%I:%M')
 json.can_edit policy(variant).edit?
 
 json.images variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.first(2).each do |image|
