@@ -23,7 +23,8 @@
 }
 
 .ch {
-  padding-bottom: calc(var(--yr) * 3);
+  padding: calc(var(--yr) * 2) 0;
+  /* composes: at from '../../Fonts.module.css'; */
 }
 
 .arr {
