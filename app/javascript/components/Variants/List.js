@@ -3,6 +3,7 @@ import classNames from 'classnames'
 
 import { path } from '../Routes'
 import Price from './Price'
+import I18n from '../I18n'
 
 import styles from './List.module.css'
 
@@ -13,31 +14,48 @@ class List extends Component {
     return (
       <div className={styles.root}>
         {variants.filter(variant => !variant.hide).map((variant, _) =>
-          <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={classNames(styles.item, styles[`i${_ % 6}`])}>
-            <div className={styles.image}>
-              <img src={variant.image} />
+          <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={styles.item}>
+            <div className={classNames({[styles.first]: variant.images.length == 1}, {[styles.image]: variant.images.length == 0}, styles.image)}>
+              {variant.images.length > 0 &&
+                <img src={variant.images[0].thumb} />
+              }
             </div>
 
-            <div className={styles.desc}>
-              <div className={styles.title}>
-
-                {variant.latest &&
-                  <div className={classNames(styles.label, styles.latest)}>
-                    New
-                  </div>
+            {variant.images.length != 1 &&
+              <div className={styles.image}>
+                {variant.images.length > 1 &&
+                  <img src={variant.images[1].thumb} />
                 }
-
-                {variant.sale &&
-                  <div className={classNames(styles.label, styles.sale)}>
-                    Sale
-                  </div>
-                }
-
-                {variant.title}
               </div>
+            }
 
-              <div className={styles.price}>
-                <Price sell={variant.price_sell} origin={variant.price} />
+            <div className={styles.dt}>
+              {variant.latest &&
+                <div className={styles.label}>
+                  New
+                </div>
+              }
+
+              {variant.sale &&
+                <div className={styles.label}>
+                  Sale
+                </div>
+              }
+
+              <div className={styles.desc}>
+                <div className={styles.title}>
+                  {variant.title}
+                </div>
+
+                <div className={styles.price}>
+                  <Price sell={variant.price_sell} origin={variant.price} />
+                </div>
+
+                {variant.colour > 0 &&
+                  <div className={styles.colors}>
+                    +{I18n.t('variants.colors', { count: variant.colour })}
+                  </div>
+                }
               </div>
             </div>
           </a>

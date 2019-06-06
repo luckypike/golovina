@@ -95,14 +95,14 @@ class Index extends Component {
               {carts.map(cart =>
                 <div className={styles.cart} key={cart.id}>
                   <div className={styles.image}>
-                    <img src={cart.variant.image} />
+                    <img src={cart.variant.images[0].thumb} />
                   </div>
 
                   <div className={styles.title}>
                     {cart.variant.title}
                   </div>
 
-                  <div className={styles.color}>
+                  <div className={styles.price}>
                     <Price sell={cart.variant.price_sell} origin={cart.variant.price} />
                   </div>
 

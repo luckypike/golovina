@@ -256,7 +256,7 @@
 
 .close {
   position: fixed;
-  right: calc(var(--xr) * 1.5);
+  right: calc(var(--xr) * 2 - calc(var(--yr) * 2));
   top: calc(var(--yr) * 2);
   padding: 16px 8px;
   cursor: pointer;

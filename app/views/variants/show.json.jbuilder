@@ -4,6 +4,13 @@ json.variants @variant.product.variants.includes(:color, { availabilities: :size
   json.soon variant.availabilities.all? { |availability| availability.quantity < 1} && variant.soon
   json.archived variant.archived?
 
+  json.images variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] } do |image|
+    json.id image.id
+    json.preview image.photo.preview.url
+    json.thumb image.photo.thumb.url
+    json.large image.photo.large.url
+  end
+
   json.availabilities variant.availabilities.group_by(&:size) do |size, availabilities|
     json.size do
       quantity = availabilities.sum(&:quantity)

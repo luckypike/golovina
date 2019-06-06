@@ -38,6 +38,16 @@
   }
 }
 
+.text {
+  @media (--l) {
+    margin: 0 calc(1 / 12 * 100%);
+  }
+
+  @media (--xl) {
+    margin: 0 calc(2 / 12 * 100%);
+  }
+}
+
 .title {
   text-align: center;
 }

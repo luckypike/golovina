@@ -141,24 +141,6 @@ class Variant extends Component {
     return (
       <>
         <div className={styles.root}>
-          <div className={styles.title}>
-            <h1>
-              {variant.product.title}
-            </h1>
-            {variant.can_edit &&
-              <div className={styles.edit}>
-                <a className={styles.btn_gr} href={path('edit_variant_path', { id: variant.id })}>
-                  Редактировать
-                </a>
-                <a className={styles.btn_gr} href={path('new_variant_path') + `?product_id=${variant.product.id}`}>
-                  Добавить цвет
-                </a>
-              </div>
-            }
-          </div>
-
-          <Variants variants={variants} variant={variant} className={styles.variants} />
-
           <div className={classNames('glide', styles.images)} ref={this.mount}>
             {variant.images.length > 1 &&
               <div className={styles.counter}>{index}/{variant.images.length}</div>
@@ -175,6 +157,28 @@ class Variant extends Component {
           </div>
 
           <div className={styles.rest}>
+            <div className={styles.title}>
+              <h1>
+                {variant.product.title}
+              </h1>
+              {variant.can_edit &&
+                <div className={styles.edit}>
+                  <a className={styles.btn_gr} href={path('edit_variant_path', { id: variant.id })}>
+                    Редактировать
+                  </a>
+                  <a className={styles.btn_gr} href={path('new_variant_path') + `?product_id=${variant.product.id}`}>
+                    Добавить цвет
+                  </a>
+                </div>
+              }
+            </div>
+
+            <div className={styles.price}>
+              <Price sell={variant.price_sell} origin={variant.price} originClass={styles.origin} sellClass={styles.sell} />
+            </div>
+
+            <Variants variants={variants} variant={variant} className={styles.variants} />
+
             <div className={styles.sizes}>
               {variant.availabilities.sort((a, b) => a.size.weight - b.size.weight).map(availability =>
                 <div key={availability.size.id} className={classNames(styles.size, styles[`size_${availability.size.id}`], { [styles.unavailable]: !availability.size.active, [styles.active]: availability.size.id == size })} onClick={() => this.selectSize(availability.size)}>
@@ -182,18 +186,18 @@ class Variant extends Component {
                 </div>
               )}
 
-              {!variant.soon &&
+              {/*{!variant.soon &&
                 <div className={classNames(styles.warning, { [styles.active]: !size })}>
                   Пожалуйста, выберите размер
                 </div>
-              }
+              }*/}
+            </div>
+
+            <div className={styles.guide}>
+              <Guide />
             </div>
 
             <div className={styles.buy}>
-              <div className={styles.price}>
-                <Price sell={variant.price_sell} origin={variant.price} originClass={styles.origin} sellClass={styles.sell} />
-              </div>
-
               <div className={classNames(styles.wishlist, { [styles.active]: variant.in_wishlist })} onClick={this.handleWishlistClick}>
                 <svg viewBox="0 0 24 24">
                   <path d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>
@@ -209,7 +213,7 @@ class Variant extends Component {
 
                 {!add && !variant.soon &&
                   <button className={buttons.main} disabled={!size || send} onClick={this.handleCartClick}>
-                    {!send ? 'В корзину' : 'Покупка...'}
+                    {!send ? 'Добавить в корзину' : 'Добавляем...'}
                   </button>
                 }
 
@@ -223,20 +227,11 @@ class Variant extends Component {
 
             <div className={styles.acc}>
               {variant.desc &&
-                <Acc id="desc" title="Описание" onToggle={this.toggleSection} section={section}>
+                <Acc id="desc" title="Описание и уход" onToggle={this.toggleSection} section={section}>
                   <ReactMarkdown source={variant.desc} />
-                </Acc>
-              }
-
-              {variant.comp &&
-                <Acc id="comp" title="Как ухаживать" onToggle={this.toggleSection} section={section}>
                   <ReactMarkdown source={variant.comp} />
                 </Acc>
               }
-
-              <Acc id="guide" title="Таблица размеров" onToggle={this.toggleSection} section={section}>
-                <Guide />
-              </Acc>
 
               <Acc id="delivery" title="Оплата и доставка" onToggle={this.toggleSection} section={section}>
                 <p>
@@ -248,7 +243,7 @@ class Variant extends Component {
                 </p>
 
                 <p>
-                  <a href={path('customers_info_path')}>Подробнее</a>
+                  <a href={path('service_delivery_path')}>Подробнее</a>
                 </p>
               </Acc>
 
@@ -258,7 +253,7 @@ class Variant extends Component {
                 </p>
 
                 <p>
-                  <a href={path('customers_return_path')}>Подробнее</a>
+                  <a href={path('service_return_path')}>Подробнее</a>
                 </p>
               </Acc>
 
@@ -266,7 +261,7 @@ class Variant extends Component {
                 <Acc id="archived" title="Архив цветов" onToggle={this.toggleSection} section={section}>
                   <div className={styles.archived}>
                     {archived.map((item, _) =>
-                      <div className={styles.color}>
+                      <div className={styles.color} key={_}>
                         <div className={styles.item}>
                           <img src={item.image} />
                           <div className={styles.control}>

@@ -21,12 +21,6 @@
   }
 }
 
-.title {
-  /* font-size: calc(var(--yr) * calc(var(--fs) - 0.5)); */
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-}
-
 .destroy {
   color: var(--gr_color);
   cursor: pointer;
@@ -52,4 +46,8 @@
 
 .form {
   max-width: 25rem;
+}
+
+.price {
+  justify-self: flex-start;
 }
