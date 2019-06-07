@@ -5,13 +5,14 @@
 }
 
 .drag {
+  background-image: url('../../images/icons/drag.svg');
+  background-color: color-mod(var(--pr_color) alpha(50%));
   position: absolute;
   left: calc(var(--yr) * 4);
   top: calc(var(--yr) * 4);
   height: calc(var(--yr) * 6);
   width: calc(var(--yr) * 6);
   /* margin-top: calc(var(--yr) * -3); */
-  background-color: red;
   cursor: row-resize;
 
   @media (--s) {

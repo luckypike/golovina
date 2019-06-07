@@ -37,7 +37,21 @@ class Index extends Component {
   }
 
   _onSortEnd = ({ oldIndex, newIndex }) => {
-    console.log(oldIndex, newIndex)
+    let sort = this.state.categories.slice()
+
+    sort.splice(oldIndex, 1)
+    sort.splice(newIndex, 0, this.state.categories[oldIndex])
+
+    this.state.categories.filter((c, index) => sort[index] != c).map(c => {
+      axios.patch(
+        path('category_path', { id: c.id }),
+        { category: {weight: sort.indexOf(c) + 1}, authenticity_token: document.querySelector('[name="csrf-token"]').content }
+      )}
+    )
+
+    this.setState({
+      categories: sort
+    });
   }
 }
 
