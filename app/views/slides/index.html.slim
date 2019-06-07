@@ -10,7 +10,7 @@
         .slide_admin_name
           = slide.name
         .slide_admin_img
-          = image_tag slide.image.preview.url
+          = image_tag slide.image.preview.url if slide.image.url
 
           .slide_admin_img_edit
             = link_to 'Изменить', edit_slide_path(slide), class: :btn
