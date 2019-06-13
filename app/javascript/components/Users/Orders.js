@@ -11,7 +11,8 @@ import styles from './Orders.module.css'
 
 class Orders extends Component {
   state = {
-    orders: null
+    orders: null,
+    link: true
   }
 
   componentDidMount = async () => {
@@ -20,7 +21,7 @@ class Orders extends Component {
   }
 
   render () {
-    const { orders } = this.state
+    const { orders, link } = this.state
 
     return (
       <div className={page.gray}>
@@ -30,7 +31,7 @@ class Orders extends Component {
 
         <div>
           {orders &&
-            <List orders={orders} />
+            <List orders={orders} link={link}/>
           }
         </div>
       </div>

@@ -15,7 +15,7 @@ class Item extends Component {
   }
 
   render () {
-    const { order } = this.props
+    const { order, link } = this.props
     const { toggle } = this.state
 
     return (
@@ -53,7 +53,16 @@ class Item extends Component {
             <div className={styles.details}>
               Получатель: {order.user.title}
               <br />
-              Телефон: {order.user.phone}
+              {link &&
+                <>
+                  Телефон: {order.user.phone}
+                </>
+              }
+              {!link &&
+                <>
+                  Телефон: <a href={`tel:${order.user.phone}`}>{order.user.phone}</a>
+                </>
+              }
               <br />
               Адрес: {order.address}
             </div>
@@ -122,7 +131,7 @@ class Item extends Component {
 
 class List extends Component {
   render () {
-    const { orders, states } = this.props
+    const { orders, states, link } = this.props
 
     return (
       <div className={styles.root}>
@@ -136,7 +145,7 @@ class List extends Component {
           </div>
         }
         {orders.map(order =>
-          <Item key={order.id} order={order} onOrderChange={this.props.onOrderChange}/>
+          <Item key={order.id} link={link} order={order} onOrderChange={this.props.onOrderChange}/>
         )}
       </div>
     )
