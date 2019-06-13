@@ -22,7 +22,7 @@ class Return extends Component {
             «Мяtа» по адресу: г. Нижний Новгород, ул. Ошарская, 61.
           </p>
           <p>
-            Для возврата денег Вам необходимо заполнить <a className={styles.link} href='/return_statement.docx'>акт возврата</a> и прислать нам на почту . Возврат денежных средств осуществляется на банковскую карту в
+            Для возврата денег Вам необходимо заполнить <a className={styles.link} href='/return_statement.docx'>акт возврата</a> и прислать нам на почту <a className={styles.link} href="mailto:shop@golovina.store">shop@golovina.store</a>. Возврат денежных средств осуществляется на банковскую карту в
             течение 10-ти рабочих дней с момента возвращения товара в магазин.
           </p>
         </div>
