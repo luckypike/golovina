@@ -53,12 +53,12 @@ class Item extends Component {
             <div className={styles.details}>
               Получатель: {order.user.title}
               <br />
-              {link &&
+              {!link &&
                 <>
                   Телефон: {order.user.phone}
                 </>
               }
-              {!link &&
+              {link &&
                 <>
                   Телефон: <a href={`tel:${order.user.phone}`}>{order.user.phone}</a>
                 </>

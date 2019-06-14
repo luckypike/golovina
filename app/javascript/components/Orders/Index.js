@@ -14,6 +14,7 @@ class Index extends Component {
     orders: null,
     states: null,
     status: 'paid',
+    link: true
   }
 
   componentDidMount = async () => {
@@ -22,7 +23,7 @@ class Index extends Component {
   }
 
   render () {
-    const { orders, states, status} = this.state
+    const { orders, states, status, link } = this.state
 
     return (
       <div className={page.gray}>
@@ -32,7 +33,7 @@ class Index extends Component {
 
         <div>
           {orders &&
-            <List orders={orders.filter( o => o.state == status )} states={states} status={status} onStateChange={this.handleStateChange} onOrderChange={this.handleOrderChange}/>
+            <List link={link} orders={orders.filter( o => o.state == status )} states={states} status={status} onStateChange={this.handleStateChange} onOrderChange={this.handleOrderChange}/>
           }
         </div>
       </div>
