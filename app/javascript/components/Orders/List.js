@@ -130,6 +130,10 @@ class Item extends Component {
 
 
 class List extends Component {
+  static defaultProps = {
+      link: false
+    }
+
   render () {
     const { orders, states, link } = this.props
 
