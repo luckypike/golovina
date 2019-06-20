@@ -95,7 +95,9 @@ class Index extends Component {
               {carts.map(cart =>
                 <div className={styles.cart} key={cart.id}>
                   <div className={styles.image}>
-                    <img src={cart.variant.images[0].thumb} />
+                    {cart.variant.images.length > 0 &&
+                      <img src={cart.variant.images[0].thumb} />
+                    }
                   </div>
 
                   <div className={styles.title}>
