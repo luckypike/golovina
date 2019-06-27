@@ -30,6 +30,7 @@ class Variant < ApplicationRecord
 
   has_many :kitables, dependent: :destroy
   has_many :kits, through: :kitables
+  has_many :notifications
 
   validates_presence_of :price, :state
 
@@ -62,6 +63,10 @@ class Variant < ApplicationRecord
 
   def in_wishlist user
     wishlists.where(user: user).any?
+  end
+
+  def in_notification user
+    notifications.where(user: user).any?
   end
 
   def in_order?

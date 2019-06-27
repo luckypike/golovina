@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     member do
       post :wishlist
       post :cart
+      post :notification
     end
   end
 

@@ -203,6 +203,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: calc(var(--yr) * 6);
+  position: relative;
 
   @media (--m) {
     justify-content: flex-start;
@@ -218,9 +219,11 @@
   position: absolute;
   display: block;
   padding: var(--yr);
-  margin-right: var(--yr);
   user-select: none;
   cursor: pointer;
+  right: calc(var(--xr) * -2.5);
+  top: 0;
+
 
   &.active {
     & svg {
@@ -307,5 +310,41 @@
 
   & .name {
     line-height: calc(var(--yr) * 6);
+  }
+}
+
+.notice {
+  display: flex;
+
+  @media(--m) {
+    justify-content: flex-start;
+  }
+}
+
+.text {
+  text-align: center;
+  padding: var(--yr) 0;
+  margin-bottom: var(--yr);
+
+  @media(--m) {
+    text-align: left;
+  }
+}
+
+.input {
+  margin: 0;
+  padding-right: var(--yr);
+  width: 100%;
+}
+
+.notification {
+  margin-bottom: calc(var(--yr) * 6);
+}
+
+.button {
+  justify-content: center;
+
+  @media(--m) {
+    justify-content: flex-start;
   }
 }
