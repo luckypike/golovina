@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_06_095448) do
+ActiveRecord::Schema.define(version: 2019_06_17_133414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,15 @@ ActiveRecord::Schema.define(version: 2019_06_06_095448) do
     t.integer "state", default: 0
     t.string "title"
     t.index ["theme_id"], name: "index_kits_on_theme_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "variant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+    t.index ["variant_id"], name: "index_notifications_on_variant_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -319,6 +328,8 @@ ActiveRecord::Schema.define(version: 2019_06_06_095448) do
   add_foreign_key "discounts", "users"
   add_foreign_key "kitables", "variants"
   add_foreign_key "kits", "themes"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "notifications", "variants"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "sizes"
   add_foreign_key "order_items", "variants"

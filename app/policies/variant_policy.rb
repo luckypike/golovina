@@ -47,6 +47,10 @@ class VariantPolicy < ApplicationPolicy
     user
   end
 
+  def notification?
+    true
+  end
+
   def cart?
     user
   end

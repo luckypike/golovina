@@ -1,0 +1,7 @@
+.notification
+  p
+    ' Здравствуйте! Вы получили данное письмо, потому что попросили уведомить, когда товар снова будет в продаже.
+
+  br #{link_to @variant.title, catalog_variant_url(slug: @variant.category, id: @variant.id)} снова в наличии и доступен для заказа на сайте #{link_to 'https://golovina.store', root_url}.
+
+  br С уважением, Golovina.

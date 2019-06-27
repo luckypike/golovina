@@ -1,6 +1,6 @@
 class VariantsController < ApplicationController
   before_action :set_user, only: [:wishlist, :cart]
-  before_action :set_variant, only: [:wishlist, :cart, :edit, :update, :destroy, :images]
+  before_action :set_variant, only: [:wishlist, :cart, :notification, :edit, :update, :destroy, :images]
   before_action :authorize_variant, only: [:wishlist, :cart, :edit, :update]
 
   layout 'app'
@@ -31,6 +31,27 @@ class VariantsController < ApplicationController
     @wishlist.persisted? ? @wishlist.destroy : @wishlist.save
 
     render json: { in_wishlist: @wishlist.persisted? }
+  end
+
+  def notification
+    authorize @variant
+
+    if signed_in?
+      @notification = Notification.find_or_initialize_by(user: current_user, variant: @variant)
+    else
+      @user = User.where(email: params[:variant][:email]).first_or_initialize
+      if @user.new_record?
+        @password = Devise.friendly_token.first(8)
+        @user.update_attributes({ password: @password, password_confirmation: @password, state: 1 })
+        @user.save!(validate: false)
+        sign_in(@user)
+        RegisterMailer.register_mailer(@password, @user).deliver_now
+      end
+      @notification = Notification.find_or_initialize_by(user: @user, variant: @variant)
+    end
+    @notification.save
+
+    render json: { in_notification: @notification.persisted? }
   end
 
   def cart

@@ -29,10 +29,10 @@ class Show extends Component {
 
         {variants && variants.length > 0 &&
           <div className={styles.variants}>
-            {variants.filter(variant => variant.image).map((variant, _) =>
+            {variants.filter(variant => variant.images).map((variant, _) =>
               <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={styles.variant}>
                 <div className={styles.image}>
-                  <img src={variant.image} />
+                  <img src={variant.images[0].thumb} />
                 </div>
 
                 <div className={styles.desc}>

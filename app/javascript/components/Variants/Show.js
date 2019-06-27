@@ -11,16 +11,19 @@ import Variants from './Show/Variants'
 import Price from './Price'
 import { path, Routes } from '../Routes'
 
+import form from '../Form.module.css'
 import page from '../Page'
 import styles from './Show.module.css'
 import buttons from '../Buttons.module.css'
 
 class Show extends Component {
   render () {
+    const { user } = this.props
+
     return (
       <div className={page.root}>
         <Router>
-          <Route path={Routes.catalog_variant_path} render={props => <Variant {...props.match.params} {...props} />} />
+          <Route path={Routes.catalog_variant_path} render={props => <Variant user={user} {...props.match.params} {...props} />} />
         </Router>
       </div>
     )
@@ -34,7 +37,10 @@ class Variant extends Component {
     add: false,
     send: false,
     section: null,
-    index: 1
+    index: 1,
+    values: {
+      email: ''
+    }
   }
 
   mount = React.createRef()
@@ -134,8 +140,35 @@ class Variant extends Component {
     }))
   }
 
+  handleInputChange = event => {
+    const target = event.target
+    const value = target.value
+    const name = target.name
+
+    this.setState(state => ({
+      values: { ...state.values, [name]: value }
+    }))
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    this.handleUpdate()
+  }
+
+  handleUpdate = async () => {
+    const res = await axios.post(
+      path('notification_variant_path', { id: this.props.id }),
+      { variant: this.state.values, authenticity_token: document.querySelector('[name="csrf-token"]').content }
+    )
+
+    this.setState(state => ({
+      variant: { ...state.variant, ...res.data, notification: true }
+    }))
+  }
+
   render () {
-    const { variant, variants, size, send, section, add, index, archived } = this.state
+    const { variant, variants, size, send, section, add, index, archived, values} = this.state
+    const { user } = this.props
     if(!variant) return null
 
     return (
@@ -185,45 +218,60 @@ class Variant extends Component {
                   {availability.size.title}
                 </div>
               )}
-
-              {/*{!variant.soon &&
-                <div className={classNames(styles.warning, { [styles.active]: !size })}>
-                  Пожалуйста, выберите размер
-                </div>
-              }*/}
             </div>
 
             <div className={styles.guide}>
               <Guide />
             </div>
 
-            <div className={styles.buy}>
-              <div className={classNames(styles.wishlist, { [styles.active]: variant.in_wishlist })} onClick={this.handleWishlistClick}>
-                <svg viewBox="0 0 24 24">
-                  <path d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>
-                </svg>
+            {!variant.soon &&
+              <div className={styles.buy}>
+                <div className={styles.cart}>
+                  {add &&
+                    <a className={buttons.main} href={path('cart_path')}>
+                      Оплатить
+                    </a>
+                  }
+
+                  {!add && !variant.soon &&
+                    <button className={buttons.main} disabled={!size || send} onClick={this.handleCartClick}>
+                      {!send ? 'Добавить в корзину' : 'Добавляем...'}
+                    </button>
+                  }
+
+                  <div className={classNames(styles.wishlist, { [styles.active]: variant.in_wishlist })} onClick={this.handleWishlistClick}>
+                    <svg viewBox="0 0 24 24">
+                      <path d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>
+                    </svg>
+                  </div>
+                </div>
               </div>
+            }
 
-              <div className={styles.cart}>
-                {add &&
-                  <a className={buttons.main} href={path('cart_path')}>
-                    Оплатить
-                  </a>
+            {variant.soon &&
+              <div className={styles.notification}>
+                {!variant.notification &&
+                  <div className={styles.text}>
+                    Товара временно нет в наличии. Подпишитесь, чтобы узнать о его поступлении.
+                  </div>
                 }
-
-                {!add && !variant.soon &&
-                  <button className={buttons.main} disabled={!size || send} onClick={this.handleCartClick}>
-                    {!send ? 'Добавить в корзину' : 'Добавляем...'}
-                  </button>
-                }
-
-                {variant.soon &&
-                  <button className={buttons.main} disabled>
-                    Скоро в наличии
-                  </button>
-                }
+                <form className={classNames(styles.notice, {[styles.button]: user})} onSubmit={this.handleSubmit}>
+                  {!user && !variant.notification &&
+                    <div className={classNames(form.input, styles.input)}>
+                      <input type="email" placeholder="Почта" value={values.email} name="email" onChange={this.handleInputChange} />
+                    </div>
+                  }
+                  {!variant.notification &&
+                    <input className={buttons.main} type="submit" value="Подписаться" disabled={!user && !values.email}/>
+                  }
+                  {variant.notification &&
+                    <div className={styles.text}>
+                      Вы успешно подписаны! Мы уведомим вас по электронной почте, когда товар снова появится в наличии.
+                    </div>
+                  }
+                </form>
               </div>
-            </div>
+            }
 
             <div className={styles.acc}>
               {variant.desc &&
