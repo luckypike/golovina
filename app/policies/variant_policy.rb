@@ -1,4 +1,8 @@
 class VariantPolicy < ApplicationPolicy
+  def list?
+    index?
+  end
+
   def images?
     true
   end

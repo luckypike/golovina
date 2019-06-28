@@ -154,6 +154,10 @@ class Nav extends Component {
               <a href={path('categories_path')}>Категории</a>
             </div>
 
+            <div className={styles.sub}>
+              <a href={path('control_kits_path')}>Образы</a>
+            </div>
+
 
             <div className={styles.sub}>
               <a href={path('colors_path')}>Цвета</a>

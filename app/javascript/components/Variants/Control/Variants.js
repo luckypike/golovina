@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { path } from '../../Routes'
 
-import List from '../List'
-
 import page from '../../Page'
 import styles from './Variants.module.css'
 

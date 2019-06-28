@@ -1,9 +1,26 @@
 class KitsController < ApplicationController
   before_action :set_kit, only: [:show, :edit, :update, :destroy]
 
+  layout 'app'
+
+  def control
+    authorize Kit
+    @kits = Kit.includes(:images, :variants).order(created_at: :desc)
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
+
   def index
     authorize Kit
-    @kits = Kit.order(created_at: :desc)
+    @kits = Kit.includes(:images, :variants).where(state: :active).order(created_at: :desc)
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def show
@@ -14,14 +31,17 @@ class KitsController < ApplicationController
 
   def new
     @kit = Kit.new(state: :active)
-    # @kit.images.build
 
     authorize @kit
   end
 
   def edit
-    # @kit.images.build if @kit.images.size == 0
     authorize @kit
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def create
@@ -29,9 +49,7 @@ class KitsController < ApplicationController
     authorize @kit
 
     if @kit.save
-      @theme = Theme.find(@kit.theme_id)
-      @theme.update_column(:recency, DateTime.now)
-      redirect_to [:kits], notice: 'Kit was successfully created.'
+      head :ok, location: control_kits_path()
     else
       render :new
     end
@@ -43,23 +61,20 @@ class KitsController < ApplicationController
     @kit.kitables.destroy_all
 
     if @kit.update(kit_params)
-      @theme = Theme.find(@kit.theme_id)
-      @last_kit = Kit.where(state: '1', theme_id: @kit.theme_id).last
-      if @last_kit.presence
-        @theme.update_column(:recency, @last_kit[:created_at])
-      else
-        @theme.update_column(:recency, @theme[:created_at])
-      end
-      redirect_to [:kits], notice: 'Kit was successfully updated.'
+      head :ok, location: control_kits_path()
     else
-      # @kit.images.build if @kit.images.size == 0
       render :edit
     end
   end
 
   def destroy
-    @kit.destroy
-    redirect_to kits_url, notice: 'Kit was successfully destroyed.'
+    authorize @kit
+
+    if @kit.destroy
+      head :ok
+    else
+      render text: "\"#{image.errors.full_messages.first}\"", status: 422
+    end
   end
 
   private

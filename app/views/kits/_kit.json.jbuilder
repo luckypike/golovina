@@ -1,6 +1,6 @@
-json.extract! kit, :id, :title
+json.extract! kit, :id, :title, :state
 
 json.images kit.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] } do |image|
-  json.thumb image.photo.thumb.url
-  json.large image.photo.large.url
+  json.id image.id
+  json.preview image.photo.preview.url
 end

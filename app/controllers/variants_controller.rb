@@ -26,6 +26,16 @@ class VariantsController < ApplicationController
     end
   end
 
+  def list
+    authorize Variant
+
+    @variants = Variant.includes(:product, :color).available
+    @variants = @variants.select{ |s| s.product.title.downcase.include? params[:q].downcase } if params[:q]
+    respond_to do |format|
+      format.json
+    end
+  end
+
   def wishlist
     @wishlist = Wishlist.find_or_initialize_by(user: current_user, variant: @variant)
     @wishlist.persisted? ? @wishlist.destroy : @wishlist.save

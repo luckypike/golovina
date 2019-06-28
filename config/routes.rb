@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get :wishlist, to: 'wishlists#show'
 
   resources :variants, except: [:show] do
+    collection do
+      get :list
+    end
     member do
       post :wishlist
       post :cart
@@ -93,7 +96,11 @@ Rails.application.routes.draw do
 
   get 'robots.:format', to: 'static#robots'
 
-  resources :kits, only: :show
+  resources :kits do
+    collection do
+      get :control
+    end
+  end
 
   resources :images, only: [:create, :show, :destroy] do
     collection do
