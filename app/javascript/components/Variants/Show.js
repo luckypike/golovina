@@ -39,6 +39,8 @@ class Variant extends Component {
 
   mount = React.createRef()
   slides = React.createRef()
+  mount_kits = React.createRef()
+  kits = React.createRef()
 
   componentDidMount() {
     window.addEventListener('resize', this.updateDimensions)
@@ -58,6 +60,10 @@ class Variant extends Component {
         if(this.glide) {
           this.glide.destroy()
           this.glide = null
+        }
+        if(this.kits_glide) {
+          this.kits_glide.destroy()
+          this.kits_glide = null
         }
         this.updateDimensions()
       })
@@ -97,6 +103,16 @@ class Variant extends Component {
         this.glide = null
       }
     }
+
+    if(!this.kits_glide) {
+      this.kits_glide = new Glide(this.mount_kits.current, {
+        rewind: false,
+        gap: 0,
+        perView: 2,
+      })
+
+      this.kits_glide.mount()
+    }
   }
 
   selectSize = availability => {
@@ -131,7 +147,17 @@ class Variant extends Component {
   toggleSection = (section) => {
     this.setState(state => ({
       section: state.section == section ? null : section
-    }))
+    }), () => {
+      if(this.glide) {
+        this.glide.destroy()
+        this.glide = null
+      }
+      if(this.kits_glide) {
+        this.kits_glide.destroy()
+        this.kits_glide = null
+      }
+      this.updateDimensions()
+    })
   }
 
   render () {
@@ -261,6 +287,23 @@ class Variant extends Component {
                   <a href={path('customers_return_path')}>Подробнее</a>
                 </p>
               </Acc>
+
+              {variant.kits &&
+                <Acc id="kits" title="С чем носить" onToggle={this.toggleSection} section={section}>
+                  <div className={classNames('glide', styles.kits)} ref={this.mount_kits}>
+                    <div className="glide__track" data-glide-el="track">
+                      <div ref={this.kits} className={classNames('glide__slides')}>
+                        {variant.kits.map((kit) =>
+                          <div key={kit.id} className={classNames('glide__slide', styles.kit_item)}>
+                            <div className={styles.kit_image}><img src={kit.image}/></div>
+                            <div className={styles.kit_title}>{kit.title}</div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </Acc>
+              }
 
               {archived && archived.length > 0 &&
                 <Acc id="archived" title="Архив цветов" onToggle={this.toggleSection} section={section}>

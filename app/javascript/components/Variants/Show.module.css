@@ -327,3 +327,44 @@
     line-height: calc(var(--yr) * 6);
   }
 }
+
+.kits {
+  display: flex;
+
+  & .kit_item {
+    padding-right: calc(var(--yr) * 2);
+    position: relative;
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    & .kit_fake {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+    }
+  }
+
+  & .kit_image {
+    position: relative;
+    background-color: #f9f9f9;
+
+    &::before {
+      display: block;
+      content: '';
+      padding-top: calc(5 / 4 * 100%)
+    }
+
+    & img {
+      left: 0;
+      top: 0;
+      position: absolute;
+      display: block;
+      max-width: 100%;
+    }
+  }
+}

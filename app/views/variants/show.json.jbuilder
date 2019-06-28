@@ -26,6 +26,12 @@ json.variants @variant.product.variants.includes(:color, { availabilities: :size
   json.color do
     json.extract! variant.color, :id, :title, :image_url, :color
   end
+
+  json.kits @variant.kits.active do |kit|
+    json.id kit.id
+    json.title kit.human_title
+    json.image kit.images.present? ? kit.images.first.photo.thumb.url : nil
+  end
 end
 
 json.archived @variant.product.variants.archived.includes(:color).sort_by(&:state) do |variant|
