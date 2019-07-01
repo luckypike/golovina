@@ -67,9 +67,11 @@ class Variant extends Component {
           this.glide.destroy()
           this.glide = null
         }
-        if(this.kits_glide) {
-          this.kits_glide.destroy()
-          this.kits_glide = null
+        if(this.state.variant.kits) {
+          if(this.kits_glide) {
+            this.kits_glide.destroy()
+            this.kits_glide = null
+          }
         }
         this.updateDimensions()
       })
@@ -110,14 +112,16 @@ class Variant extends Component {
       }
     }
 
-    if(!this.kits_glide) {
-      this.kits_glide = new Glide(this.mount_kits.current, {
-        rewind: false,
-        gap: 0,
-        perView: 2,
-      })
+    if(this.state.variant.kits) {
+      if(!this.kits_glide) {
+        this.kits_glide = new Glide(this.mount_kits.current, {
+          rewind: false,
+          gap: 0,
+          perView: 2,
+        })
 
-      this.kits_glide.mount()
+        this.kits_glide.mount()
+      }
     }
   }
 
