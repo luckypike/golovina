@@ -12,9 +12,10 @@ class Color < ApplicationRecord
   has_many :colors, class_name: "Color", foreign_key: "parent_color_id"
 
   class << self
-    def tree
+    def tree exclude = false
       tree = []
       colors = where(parent_color: nil).order(title: :asc)
+      colors = colors.where.not(id: exclude) if exclude.present?
       colors.each do |color|
         tree << color
         if color.colors.size > 0

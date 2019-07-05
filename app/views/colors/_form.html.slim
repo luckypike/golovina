@@ -4,7 +4,7 @@
 
     .form_inputs
       = f.input :title
-      = f.association :parent_color, collection: Color.tree
+      = f.association :parent_color, collection: Color.tree(@color.id)
       = f.input :color, input_html: { type: :color }
       - if @color.image?
         .color_ex

@@ -373,6 +373,7 @@
   & .kit_image {
     position: relative;
     background-color: #f9f9f9;
+    overflow: hidden;
 
     &::before {
       display: block;
