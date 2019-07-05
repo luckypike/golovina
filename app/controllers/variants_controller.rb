@@ -46,18 +46,23 @@ class VariantsController < ApplicationController
   def notification
     authorize @variant
 
+    user = User.find_by(email: params[:variant][:email])
+
     if signed_in?
       @notification = Notification.find_or_initialize_by(user: current_user, variant: @variant)
-    else
-      @user = User.where(email: params[:variant][:email]).first_or_initialize
-      if @user.new_record?
-        @password = Devise.friendly_token.first(8)
-        @user.update_attributes({ password: @password, password_confirmation: @password, state: 1 })
-        @user.save!(validate: false)
-        sign_in(@user)
-        RegisterMailer.register_mailer(@password, @user).deliver_now
+      if current_user.guest? && !user
+        current_user.activate(params[:variant][:email])
+        @notification = Notification.find_or_initialize_by(user: current_user, variant: @variant)
+      elsif current_user.guest? && user
+        @notification = Notification.find_or_initialize_by(user: user, variant: @variant)
       end
-      @notification = Notification.find_or_initialize_by(user: @user, variant: @variant)
+    else
+      user = User.where(email: params[:variant][:email]).first_or_initialize
+      if user.new_record?
+        user.activate(params[:variant][:email])
+        sign_in(user)
+      end
+      @notification = Notification.find_or_initialize_by(user: user, variant: @variant)
     end
     @notification.save
 

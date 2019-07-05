@@ -197,6 +197,8 @@ class Variant extends Component {
     const { user } = this.props
     if(!variant) return null
 
+    console.log(user);
+
     return (
       <>
         <div className={styles.root}>
@@ -282,7 +284,7 @@ class Variant extends Component {
                   </div>
                 }
                 <form className={classNames(styles.notice, {[styles.button]: user})} onSubmit={this.handleSubmit}>
-                  {!user && !variant.notification &&
+                  {!variant.notification && (!user || user['guest?']) &&
                     <div className={classNames(form.input, styles.input)}>
                       <input type="email" placeholder="Почта" value={values.email} name="email" onChange={this.handleInputChange} />
                     </div>

@@ -37,6 +37,13 @@ class User < ApplicationRecord
     Rails.application.credentials.payment[:test_phones].include?(phone)
   end
 
+  def activate email = false
+    password = Devise.friendly_token.first(8)
+    self.update_attributes({ email: email, password: password, password_confirmation: password, state: 1 })
+    self.save!(validate: false)
+    RegisterMailer.register_mailer(password, self).deliver_now
+  end
+
   def clear_phone
     if self.phone.present?
       self.phone = User.prepare_phone(self.phone)
