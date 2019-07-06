@@ -9,6 +9,11 @@ html
     = tag('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' })
     = tag('meta', { name: 'yandex-verification', content: '67fd84d3a4242f7f' })
 
+    = javascript_pack_tag 'app', async: true
+    = stylesheet_pack_tag 'app'
+
+    = stylesheet_link_tag 'https://use.typekit.net/crp6yvg.css' unless Rails.env.test?
+
   body
     = react_component( \
       'Header',
@@ -27,10 +32,4 @@ html
     )
 
     = yield
-
-    = javascript_pack_tag 'app', async: true
-    = stylesheet_pack_tag 'app'
-
-    = stylesheet_link_tag 'https://use.typekit.net/crp6yvg.css' unless Rails.env.test?
-
     == render '/shared/c'

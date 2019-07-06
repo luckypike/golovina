@@ -23,6 +23,7 @@ gem 'babosa'
 gem 'inline_svg'
 
 gem 'carrierwave'
+gem 'fog-aws'
 gem 'mini_magick'
 
 gem 'meta-tags'
@@ -43,24 +44,18 @@ gem 'stateful_enum'
 
 gem 'delayed_job_active_record'
 
-gem 'webpacker'
 gem 'react-rails'
+gem 'webpacker'
 
 gem 'jbuilder'
 
 gem 'sitemap_generator'
-gem 'fog-aws'
 
 gem 'whenever', require: false
 
 gem 'exception_notification'
 
 gem 'bootsnap', '>= 1.1.0', require: false
-
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
