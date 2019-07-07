@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get :wishlist, to: 'wishlists#show'
 
+  get :search, to: 'search#index'
+
   resources :variants, except: [:show] do
     collection do
       get :list

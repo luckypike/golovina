@@ -1,6 +1,7 @@
 .root {
-  height: calc(var(--yr) * 16);
-  position: absolute;
+  background: var(--wht_color);
+  height: calc(var(--yr) * 12);
+  position: fixed;
   left: 0;
   padding-top: 0;
   top: 0;
@@ -10,33 +11,41 @@
 
   @media (--s) {
     height: calc(var(--yr) * 24);
-  }
 
-  @media (--m) {
-    position: fixed;
+    & .logo {
+      top: calc(var(--yr) * 7.5);
+    }
+
+    & .burger, & .caw {
+      top: calc(var(--yr) * 6);
+    }
+
+
+    &.scrolling {
+      height: calc(var(--yr) * 12);
+
+      & .logo {
+        top: calc(var(--yr) * 1.5);
+      }
+
+      & .burger, & .caw {
+        top: 0;
+      }
+    }
   }
 
   @media (--xl) {
     height: calc(var(--yr) * 30);
-  }
-
-  &.scrolling {
-    height: calc(var(--yr) * 16);
-
-    & .burger {
-      top: calc(var(--yr) * 2);
-    }
   }
 }
 
 .logo {
   position: absolute;
   left: 50%;
-  bottom: 0.875rem;
+  top: calc(var(--yr) * 1.5);
   transform: translateX(-50%);
   z-index: 2;
-  transition-duration: 0.4s;
-  transition-property: transform opacity;
+  transition: top 0.2s;
 
   & a {
     display: block;
@@ -53,7 +62,7 @@
 .burger {
   position: fixed;
   left: var(--xr);
-  top: calc(var(--yr) * 2);
+  top: 0;
   padding: calc(var(--yr) * 3);
   margin-left:  calc(var(--yr) * 3 * -1);
   user-select: none;
@@ -91,7 +100,8 @@
   position: absolute;
   display: flex;
   right: 0;
-  bottom: calc(var(--yr) * 2);
+  top: 0;
+  transition: top 0.2s;  
 
   @media (--m) {
     right: calc(var(--xr) * 1);
@@ -104,14 +114,9 @@
 }
 
 
-.wishlist {
+.search {
   display: block;
   padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
-  opacity: 0.3;
-
-  &.active {
-    opacity: 1;
-  }
 
   & svg {
     display: block;

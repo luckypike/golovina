@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import listToTree from 'list-to-tree-lite'
 
@@ -15,38 +16,34 @@ class Header extends Component {
     scrolling: false
   }
 
-  componentDidMount() {
+  componentDidMount () {
     window.addEventListener('scroll', this.handleScroll)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     window.removeEventListener('scroll', this.handleScroll)
   }
 
   handleScroll = event => {
-    if(window.scrollY === 0 && this.state.scrolling === true) {
+    if (window.scrollY === 0 && this.state.scrolling === true) {
       this.setState({ scrolling: false })
-    } else if(window.scrollY !== 0 && this.state.scrolling !== true) {
+    } else if (window.scrollY !== 0 && this.state.scrolling !== true) {
       this.setState({ scrolling: true })
     }
   }
 
-  handleScrollUp() {
-    const top = Math.max(document.body.scrollTop,document.documentElement.scrollTop)
-
-    if (top > 0) window.scroll({top: 0, left: 0, behavior: 'smooth' })
+  handleScrollUp () {
+    const top = Math.max(document.body.scrollTop, document.documentElement.scrollTop)
+    if (top > 0) window.scroll({ top: 0, left: 0, behavior: 'smooth' })
   }
 
   render () {
     const { active, scrolling } = this.state
-    const { white, cart, wishlist, root, user, categories, themes, collections } = this.props
+    const { cart, root, user, categories, collections } = this.props
 
     return (
-      <header className={classNames(styles.root, { [styles.white]: white, [styles.scrolling]: scrolling })}>
-
-        <div className={classNames(styles.arrow, {[styles.active]: scrolling})} onClick={this.handleScrollUp}></div>
-
-        <div className={classNames(styles.overlay, {[styles.active]: active})} onClick={() => this.setState({ active: false })}></div>
+      <header className={classNames(styles.root, { [styles.scrolling]: scrolling })}>
+        <div className={classNames(styles.overlay, { [styles.active]: active })} onClick={() => this.setState({ active: false })} />
 
         <div className={styles.burger} onClick={() => this.setState({ active: true })}>
           <svg viewBox="0 0 24 24">
@@ -65,7 +62,6 @@ class Header extends Component {
 
           <Nav
             categories={listToTree(categories, { parentKey: 'parent_category_id' })}
-            themes={themes}
             collections={collections}
             user={user}
           />
@@ -84,9 +80,16 @@ class Header extends Component {
         </div>
 
         <div className={styles.caw}>
-          <a href={path('wishlist_path')} className={classNames(styles.wishlist, { [styles.active]: wishlist > 0 })}>
+          {/* <a href={path('wishlist_path')} className={classNames(styles.wishlist, { [styles.active]: wishlist > 0 })}>
             <svg viewBox="0 0 24 24">
               <path className="a" d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>
+            </svg>
+          </a> */}
+
+          <a href={path('search_path')} className={styles.search}>
+            <svg viewBox="0 0 24 24">
+              <circle className="a" cx="11" cy="11" r="6" />
+              <path className="a" d="M19 19L15.5 15.5" strokeLinecap="round" />
             </svg>
           </a>
 
@@ -106,15 +109,23 @@ class Header extends Component {
             </svg>
           </a>
         </div>
+
+        <div className={classNames(styles.arrow, { [styles.active]: scrolling })} onClick={this.handleScrollUp} />
       </header>
     )
   }
 }
 
+Header.propTypes = {
+  root: PropTypes.bool,
+  cart: PropTypes.number,
+  user: PropTypes.object,
+  collections: PropTypes.array,
+  categories: PropTypes.array
+}
+
 Header.defaultProps = {
-  white: false,
   cart: 0,
-  wishlist: 0,
   root: true
 }
 

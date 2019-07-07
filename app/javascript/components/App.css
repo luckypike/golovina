@@ -6,6 +6,7 @@ html {
 }
 
 body {
+  background: var(--wht_color);
   color: var(--pr_color);
   font-family: 'futura-pt', sans-serif;
   font-size: calc(var(--yr) * var(--fs));
