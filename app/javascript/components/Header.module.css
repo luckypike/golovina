@@ -1,6 +1,6 @@
 .root {
   background: var(--wht_color);
-  height: calc(var(--yr) * 12);
+  height: calc(var(--yr) * 16);
   position: fixed;
   left: 0;
   padding-top: 0;
@@ -8,6 +8,19 @@
   width: 100%;
   z-index: 10;
   transition: height 0.2s;
+
+
+  &.scrolling {
+    height: calc(var(--yr) * 12);
+
+    & .logo {
+      top: calc(var(--yr) * 1.5);
+    }
+
+    & .burger, & .caw {
+      top: 0;
+    }
+  }
 
   @media (--s) {
     height: calc(var(--yr) * 24);
@@ -22,27 +35,27 @@
 
 
     &.scrolling {
-      height: calc(var(--yr) * 12);
+      height: calc(var(--yr) * 16);
 
       & .logo {
-        top: calc(var(--yr) * 1.5);
+        top: calc(var(--yr) * 3.5);
       }
 
       & .burger, & .caw {
-        top: 0;
+        top: calc(var(--yr) * 2);
       }
     }
   }
 
-  @media (--xl) {
-    height: calc(var(--yr) * 30);
+  @media (--l) {
+    background: none;
   }
 }
 
 .logo {
   position: absolute;
   left: 50%;
-  top: calc(var(--yr) * 1.5);
+  top: calc(var(--yr) * 3.5);
   transform: translateX(-50%);
   z-index: 2;
   transition: top 0.2s;
@@ -62,7 +75,7 @@
 .burger {
   position: fixed;
   left: var(--xr);
-  top: 0;
+  top: calc(var(--yr) * 2);
   padding: calc(var(--yr) * 3);
   margin-left:  calc(var(--yr) * 3 * -1);
   user-select: none;
@@ -100,8 +113,8 @@
   position: absolute;
   display: flex;
   right: 0;
-  top: 0;
-  transition: top 0.2s;  
+  top: calc(var(--yr) * 2);
+  transition: top 0.2s;
 
   @media (--m) {
     right: calc(var(--xr) * 1);
@@ -187,6 +200,8 @@
 }
 
 .white {
+  background: none;
+
   & .burger {
     & svg {
       & rect {
@@ -201,7 +216,7 @@
     }
   }
 
-  & .wishlist {
+  & .search {
     & svg {
       & :global {
         & .a {

@@ -1,0 +1,37 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: var(--xr);
+
+  @media (--s) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: calc(var(--xr) * 2);
+  }
+
+  @media (--m) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  @media (--l) {
+    grid-gap: calc(var(--xr) * 4);
+  }
+}
+
+.image {
+  position: relative;
+  background-color: #f9f9f9;
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: calc(4 / 3 * 100%)
+  }
+
+  & img {
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+  }
+}

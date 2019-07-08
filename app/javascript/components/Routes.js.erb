@@ -1,13 +1,47 @@
 /* rails-erb-loader-dependencies ../config/routes.rb */
 
+import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 import { generatePath } from 'react-router'
+import querystring from 'querystring'
 
 const Routes = <%= Rails.application.routes.routes.reject{ |route| ['rails/info', 'rails/mailers', nil].include?(route.defaults[:controller])}.select(&:name).map{ |route| ["#{route.name}_path", route.path.spec.to_s.gsub('(.:format)', '.:format?').gsub(/\((\/:.+)\)/, '\1?')] }.to_h.to_json %>
 
-const path = (route, params = {}) => {
+const path = (route, params = {}, json = false) => {
+  const { hash, query, ...attr } = params
   let r = Routes[route]
   if(!r) return null
-  return generatePath(r, params)
+  return generatePath(r, attr) + (query ? `?${querystring.stringify(query)}` : '');
 }
 
-export { Routes, path }
+class Link extends Component {
+  render() {
+    const { to, params, ...props } = this.props
+    const { hash, query, ...attr } = params
+
+    props.to = {
+      pathname: path(to, attr),
+      search: query ? `?${querystring.stringify(query)}` : '',
+      hash: hash ? `#${hash}` : ''
+    }
+
+    return (
+      <NavLink
+        isActive={(match, location) => {
+          return location.pathname === decodeURIComponent(props.to.pathname) && location.search === props.to.search && location.hash === props.to.hash
+        }}
+        {...props}
+      >
+        {props.children}
+      </NavLink>
+    )
+  }
+}
+
+Link.defaultProps = {
+  to: 'root_path',
+  params: {}
+}
+
+
+export { Link as default, Routes, path }

@@ -6,19 +6,25 @@ import qs from 'querystring'
 import axios from 'axios'
 // import classNames from 'classnames'
 
+// import Grid from '../Variants/Grid'
+import List from '../Variants/List'
+
 import { path } from '../Routes'
 
 import styles from './Index.module.css'
 import page from '../Page'
+import form from '../Form'
 
 class Index extends Component {
   state = {
-    q: ''
+    q: '',
+    variants: []
   }
 
-  _loadAsyncDataDebounced = AwesomeDebouncePromise(() => axios.get(path('search_path', { format: 'json' })), 300)
+  _loadAsyncDataDebounced = AwesomeDebouncePromise(() => axios.get(path('search_path', { format: 'json' }) + `?q=${this.state.q}`), 300)
 
   componentDidMount () {
+    this._loadAsyncData()
   }
 
   static getDerivedStateFromProps (props, state) {
@@ -41,16 +47,31 @@ class Index extends Component {
   }
 
   _loadAsyncData = async () => {
-    const res = await this._loadAsyncDataDebounced()
+    if (this.state.q !== '') {
+      const res = await this._loadAsyncDataDebounced()
+      this.setState({ ...res.data })
+    } else {
+      this.setState({ variants: [] })
+    }
   }
 
   render () {
-    const { q } = this.state
+    const { q, variants } = this.state
 
     return (
       <div className={page.root}>
         <div className={styles.root}>
-          <input value={q} onChange={this.handleInputChange} />
+          <form>
+            <label className={form.el}>
+              <div className={form.input}>
+                <input type="text" value={q} name="q" onChange={this.handleInputChange} placeholder="Введите артикул или название..." />
+              </div>
+            </label>
+          </form>
+
+          {variants &&
+            <List variants={variants} />
+          }
         </div>
       </div>
     )

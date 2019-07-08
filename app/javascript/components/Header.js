@@ -39,10 +39,10 @@ class Header extends Component {
 
   render () {
     const { active, scrolling } = this.state
-    const { cart, root, user, categories, collections } = this.props
+    const { cart, index, user, categories, collections } = this.props
 
     return (
-      <header className={classNames(styles.root, { [styles.scrolling]: scrolling })}>
+      <header className={classNames(styles.root, { [styles.scrolling]: scrolling, [styles.white]: index })}>
         <div className={classNames(styles.overlay, { [styles.active]: active })} onClick={() => this.setState({ active: false })} />
 
         <div className={styles.burger} onClick={() => this.setState({ active: true })}>
@@ -68,13 +68,13 @@ class Header extends Component {
         </div>
 
         <div className={styles.logo}>
-          {!root &&
+          {!index &&
             <a href={path('root_path')}>
               <Logo />
             </a>
           }
 
-          {root &&
+          {index &&
             <Logo />
           }
         </div>
@@ -117,7 +117,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  root: PropTypes.bool,
+  index: PropTypes.bool,
   cart: PropTypes.number,
   user: PropTypes.object,
   collections: PropTypes.array,
@@ -126,7 +126,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   cart: 0,
-  root: true
+  index: false
 }
 
 export default Header

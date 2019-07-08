@@ -21,8 +21,7 @@ html
         categories: Category.active.where.not(variants_counter: 0).order(weight: :asc).map{ |category| category.slice(:title, :id, :slug) },
         themes: Theme.active.order(:weight).map{ |theme| theme.slice(:title, :id, :slug) },
         collections: Collection.order(weight: :asc, id: :desc).map{ |collection| collection.slice(:title, :id, :slug, :desc) },
-        root: current_page?(controller: :static, action: :index),
-        white: current_page?(controller: :static, action: :index),
+        index: current_page?(controller: :static, action: :index),
         user: (Current.user.slice(:id, :is_editor?, :guest?) rescue nil),
         wishlist: Wishlist.includes(:variant).where(user: Current.user, variants: { state: [:active] }).size,
         cart: Cart.where(user: Current.user).map(&:quantity).sum \
