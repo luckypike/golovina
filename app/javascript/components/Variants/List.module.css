@@ -29,35 +29,11 @@
   margin-bottom: calc(var(--yr) * var(--lh) * 2);
 
   &:nth-child(even) {
-    & .empty {
-      & .image {
-        &:nth-child(odd) {
-          order: 1;
-        }
-
-        &:nth-child(even) {
-          order: 2;
-        }
-      }
-    }
-
     & .image {
-      &:nth-child(odd) {
-        order: 2;
-      }
-
       &:nth-child(even) {
-        order: 1;
+        order: -1;
       }
     }
-
-    & .dt {
-      order: 3;
-    }
-  }
-
-  &.desc {
-    grid-column: -1 / 1;
   }
 
   @media(--s) {
@@ -65,45 +41,36 @@
     grid-column-gap: calc(var(--xr) * 2);
     margin-bottom: calc(var(--xr) * 4);
 
-    &.desc {
-      grid-column: auto;
-    }
-
     &:nth-child(even) {
-      & .image {
-        &:nth-child(odd) {
-          order: 3;
-        }
-
-        &:nth-child(even) {
-          order: 2;
-        }
-      }
-
-      & .first {
-        &:nth-child(odd) {
-          grid-column: 2 / span 2;
-        }
-
-        &:nth-child(even) {
-          grid-column: 2 / span 2;
-        }
-      }
-
       & .dt {
+        order: -2;
+      }
+
+      & .single {
         order: 1;
-        @media(--m) {
-          padding-left: calc(1 / 4 * 100%);
-        }
+        margin-right: calc(3 / 8 * 100%);
       }
     }
 
     &:nth-child(odd) {
-      @media(--m) {
-        & .desc {
-          padding-right: calc(1 / 4 * 100%);
-          padding-left: 0;
-        }
+      & .single {
+        margin-left: calc(3 / 8 * 100%);
+      }
+    }
+  }
+
+  @media(--m) {
+    margin-bottom: calc(var(--yr) * var(--lh) * 6);
+
+    &:nth-child(even) {
+      & .dt {
+        padding-left: calc(1 / 4 * 100%);
+      }
+    }
+
+    &:nth-child(odd) {
+      & .dt {
+        padding-right: calc(1 / 4 * 100%);
       }
     }
   }
@@ -138,7 +105,6 @@
       justify-content: flex-start;
     }
   }
-
 }
 
 .colors {
@@ -172,12 +138,6 @@
   }
 }
 
-.first {
-  grid-column: 1 / span 2;
-  background-color: #f9f9f9;
-}
-
-.empty {
-  grid-column: 1 / span 1;
-  background-color: #f9f9f9;
+.single {
+  grid-column: auto / span 2;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import { path } from '../Routes'
@@ -15,13 +16,13 @@ class List extends Component {
       <div className={styles.root}>
         {variants.filter(variant => !variant.hide).map((variant, _) =>
           <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={styles.item}>
-            <div className={classNames({[styles.first]: variant.images.length == 1}, {[styles.image]: variant.images.length == 0}, styles.image)}>
+            <div className={classNames(styles.image, { [styles.single]: variant.images.length === 1 })}>
               {variant.images.length > 0 &&
                 <img src={variant.images[0].thumb} />
               }
             </div>
 
-            {variant.images.length != 1 &&
+            {variant.images.length !== 1 &&
               <div className={styles.image}>
                 {variant.images.length > 1 &&
                   <img src={variant.images[1].thumb} />
@@ -63,6 +64,10 @@ class List extends Component {
       </div>
     )
   }
+}
+
+List.propTypes = {
+  variants: PropTypes.array
 }
 
 export default List
