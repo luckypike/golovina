@@ -52,7 +52,6 @@ class VariantsController < ApplicationController
       @notification = Notification.find_or_initialize_by(user: current_user, variant: @variant)
       if current_user.guest? && !user
         current_user.activate(params[:variant][:email])
-        @notification = Notification.find_or_initialize_by(user: current_user, variant: @variant)
       elsif current_user.guest? && user
         @notification = Notification.find_or_initialize_by(user: user, variant: @variant)
       end
