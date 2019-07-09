@@ -12,7 +12,22 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @orders = Order.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).where.not(state: [:undef]).order(created_at: :desc)
+        @orders = Order
+          .includes(
+            :user,
+            order_items: [
+              :size,
+              {
+                variant: [
+                  { product: [:category, :variants] },
+                  :color,
+                  :availabilities,
+                  :sizes,
+                  :images
+                ]
+              }
+            ]
+          ).where.not(state: [:undef]).order(created_at: :desc)
         @orders = @orders.where(state: params[:state]) if params[:state]
       end
     end

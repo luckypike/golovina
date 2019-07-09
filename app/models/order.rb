@@ -30,11 +30,11 @@ class Order < ApplicationRecord
     end
 
     event :archive do
-      transition :paid => :archived
+      transition paid: :archived
     end
 
     event :decline do
-      transition :active => :declined
+      transition paid: :declined
     end
   end
 
@@ -44,15 +44,15 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   accepts_nested_attributes_for :order_items
 
-  validates_presence_of :address
-  validate :quantity_cannot_be_greater_than_total
+  validates :address, presence: true
+  validate :quantity_cannot_be_greater_than_total, on: :create
 
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
   include OrdersHelper
 
   def number
-    self.id
+    id
   end
 
   def amount
