@@ -36,6 +36,14 @@
   }
 }
 
+.desc {
+  margin-bottom: calc(var(--yr) * 6);
+
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * 8);
+  }
+}
+
 .edit {
   margin-bottom: calc(var(--yr) * 2);
 

@@ -285,7 +285,7 @@ class Variant extends Component {
                     Товара временно нет в наличии. Подпишитесь, чтобы узнать о его поступлении.
                   </div>
                 }
-                <form className={classNames(styles.notice, {[styles.button]: user})} onSubmit={this.handleSubmit}>
+                <form className={classNames(styles.notice, { [styles.button]: user })} onSubmit={this.handleSubmit}>
                   {!user && !variant.notification &&
                     <div className={classNames(form.input, styles.input)}>
                       <input type="email" placeholder="Почта" value={values.email} name="email" onChange={this.handleInputChange} />
@@ -303,10 +303,15 @@ class Variant extends Component {
               </div>
             }
 
+            {variant.desc &&
+              <div className={styles.desc}>
+                <ReactMarkdown source={variant.desc} />
+              </div>
+            }
+
             <div className={styles.acc}>
-              {variant.desc &&
-                <Acc id="desc" title="Описание и уход" onToggle={this.toggleSection} section={section}>
-                  <ReactMarkdown source={variant.desc} />
+              {variant.comp &&
+                <Acc id="desc" title="Состав и уход" onToggle={this.toggleSection} section={section}>
                   <ReactMarkdown source={variant.comp} />
                 </Acc>
               }
