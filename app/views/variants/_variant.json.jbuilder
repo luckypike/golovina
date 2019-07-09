@@ -19,4 +19,4 @@ json.hide variant.images.size < 1 && !Current.user&.is_editor?
 
 json.title variant.product.title.strip
 
-json.colour variant.product.variants.where(state: [:active, :soon]).count - 1
+json.colour variant.product.variants.reject(&:archived?).size - 1

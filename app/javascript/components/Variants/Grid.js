@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
+// import classNames from 'classnames'
 
 import { path } from '../Routes'
 import Price from './Price'
 import I18n from '../I18n'
 
-import styles from './List.module.css'
+import styles from './Grid.module.css'
 
-class List extends Component {
+class Grid extends Component {
   render () {
     const { variants } = this.props
 
@@ -16,33 +16,13 @@ class List extends Component {
       <div className={styles.root}>
         {variants.filter(variant => !variant.hide).map((variant, _) =>
           <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={styles.item}>
-            <div className={classNames(styles.image, { [styles.single]: variant.images.length === 1 })}>
+            <div className={styles.image}>
               {variant.images.length > 0 &&
                 <img src={variant.images[0].thumb} />
               }
             </div>
 
-            {variant.images.length !== 1 &&
-              <div className={styles.image}>
-                {variant.images.length > 1 &&
-                  <img src={variant.images[1].thumb} />
-                }
-              </div>
-            }
-
             <div className={styles.dt}>
-              {variant.latest &&
-                <div className={styles.label}>
-                  New
-                </div>
-              }
-
-              {variant.sale &&
-                <div className={styles.label}>
-                  Sale
-                </div>
-              }
-
               <div className={styles.desc}>
                 <div className={styles.title}>
                   {variant.title}
@@ -66,8 +46,8 @@ class List extends Component {
   }
 }
 
-List.propTypes = {
+Grid.propTypes = {
   variants: PropTypes.array
 }
 
-export default List
+export default Grid

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import axios from 'axios'
 
@@ -27,7 +28,7 @@ class Item extends Component {
             </div>
 
             <div className={styles.number}>
-              № {order.number}
+              № {order.number}
             </div>
 
             <div className={styles.created_at}>
@@ -39,8 +40,8 @@ class Item extends Component {
             {I18n.t('order.quantity', { count: order.quantity, amount: currency(order.amount) })}
           </div>
 
-          {order.state == 'paid' &&
-            <div className={styles.archived}>
+          {order.state === 'paid' &&
+            <div className={styles.archive}>
               <div className={buttons.main} onClick={() => this.handleUpdate(order.id)}>
                 В архив
               </div>
@@ -53,21 +54,12 @@ class Item extends Component {
             <div className={styles.details}>
               Получатель: {order.user.title}
               <br />
-              {!link &&
-                <>
-                  Телефон: {order.user.phone}
-                </>
-              }
-              {link &&
-                <>
-                  Телефон: <a href={`tel:${order.user.phone}`}>{order.user.phone}</a>
-                </>
-              }
+              Телефон: {link ? <a href={`tel:${order.user.phone}`}>{order.user.phone}</a> : order.user.phone}
               <br />
               Адрес: {order.address}
             </div>
 
-            {order.items.filter(item => !item.available).length == 0 && order.purchasable &&
+            {order.items.filter(item => !item.available).length === 0 && order.purchasable &&
               <div className={styles.pay}>
                 <a href={path('pay_order_path', { id: order.id })} className={buttons.main}>
                   Оплатить
@@ -79,7 +71,9 @@ class Item extends Component {
               {order.items.map(item =>
                 <div className={styles.item} key={item.id}>
                   <div className={styles.image}>
-                    <img src={item.variant.image} />
+                    {item.variant.images.length > 0 &&
+                      <img src={item.variant.images[0].thumb} />
+                    }
                   </div>
 
                   <div className={styles.title}>
@@ -123,16 +117,21 @@ class Item extends Component {
       path('archive_order_path', { id: id }),
       { authenticity_token: document.querySelector('[name="csrf-token"]').content }
     ).then(res => {
-      this.props.onOrderChange(id);
+      this.props.onOrderChange(id)
     })
   }
 }
 
+Item.propTypes = {
+  order: PropTypes.object,
+  onOrderChange: PropTypes.func,
+  link: PropTypes.bool
+}
 
 class List extends Component {
   static defaultProps = {
-      link: false
-    }
+    link: false
+  }
 
   render () {
     const { orders, states, link } = this.props
@@ -142,7 +141,7 @@ class List extends Component {
         {states &&
           <div className={styles.states}>
             {states.map((status, _) =>
-              <div key={_} className={classNames(styles.state, { [styles.active]: this.props.status == status.key})} onClick={()=>this.props.onStateChange(status.key)}>
+              <div key={_} className={classNames(styles.state, { [styles.active]: this.props.status === status.key })} onClick={() => this.props.onStateChange(status.key)}>
                 {status.title}
               </div>
             )}
@@ -154,6 +153,15 @@ class List extends Component {
       </div>
     )
   }
+}
+
+List.propTypes = {
+  status: PropTypes.string,
+  orders: PropTypes.array,
+  states: PropTypes.array,
+  onStateChange: PropTypes.func,
+  onOrderChange: PropTypes.func,
+  link: PropTypes.bool
 }
 
 export default List
