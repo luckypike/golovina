@@ -95,7 +95,9 @@
 }
 
 .single {
-  grid-column: 1 / -1;
+  & .image {
+    grid-column: 1 / -1;
+  }
 }
 
 .dt {
