@@ -23,13 +23,25 @@ module CarrierWave
       end
     end
 
+    def gray
+      manipulate! do |img|
+        return img unless img.mime_type.match /image\/jpeg/
+        img.combine_options do |c|
+          c.fuzz '2%'
+          c.fill '#f8f8f8'
+          c.opaque 'white'
+        end
+        img
+      end
+    end
+
     def optimize
       manipulate! do |img|
         return img unless img.mime_type.match /image\/jpeg/
         img.strip
         img.combine_options do |c|
-          c.quality "60"
-          c.depth "7"
+          c.quality "80"
+          c.depth "8"
           c.interlace "plane"
         end
         img

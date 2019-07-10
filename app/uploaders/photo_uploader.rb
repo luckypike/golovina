@@ -44,12 +44,14 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :thumb do
+    process :gray
     process :rotate_according_to_exif
-    process resize_to_fill: [750, 1000]
+    process resize_to_fill: [1500, 2000]
     process :optimize
   end
 
   version :large do
+    process :gray
     process :rotate_according_to_exif
     process resize_to_fill: [2100, 2800]
     process :optimize

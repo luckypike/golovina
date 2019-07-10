@@ -4,7 +4,7 @@
 
 .image {
   position: relative;
-  background-color: #f9f9f9;
+  background-color: var(--ph_color);
 
   &::before {
     display: block;
