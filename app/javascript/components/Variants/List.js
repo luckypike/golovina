@@ -15,8 +15,8 @@ class List extends Component {
     return (
       <div className={styles.root}>
         {variants.filter(variant => !variant.hide).map((variant, _) =>
-          <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={styles.item}>
-            <div className={classNames(styles.image, { [styles.single]: variant.images.length === 1 })}>
+          <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={classNames(styles.item, { [styles.single]: variant.images.length === 1 })}>
+            <div className={styles.image}>
               {variant.images.length > 0 &&
                 <img src={variant.images[0].thumb} />
               }

@@ -122,7 +122,7 @@ class VariantsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @variants = Variant.available.where(latest: true)
+        @variants = Variant.includes(product: :variants).available.where(latest: true)
       end
     end
   end
