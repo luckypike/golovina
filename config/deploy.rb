@@ -13,4 +13,4 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 set :keep_releases, 5
 
-# after 'deploy:finishing', 'sitemap:create'
+after 'deploy:finishing', 'sitemap:create'

@@ -22,15 +22,11 @@ SitemapGenerator::Sitemap.create do
   # Add all articles:
   #
 
-  # Product.where(state: [:active, :archived]).find_each do |product|
-    # add polymorphic_path(product), lastmod: product.updated_at
-  # end
-
-  Category.find_each do |category|
-    add category_products_path(slug: category.slug), lastmod: Time.now
+  Variant.available.find_each do |variant|
+    add catalog_variant_path(slug: variant.category.slug, id: variant), lastmod: variant.updated_at
   end
 
-  Theme.find_each do |theme|
-    add polymorphic_path(theme), lastmod: Time.now
+  Category.active.find_each do |category|
+    add catalog_category_path(slug: category.slug), lastmod: Time.now
   end
 end
