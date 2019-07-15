@@ -10,15 +10,12 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.friendly.find(params[:slug])
+    @category = Category.active.friendly.find(params[:slug])
     authorize @category
 
-    respond_to do |format|
-      format.html
-      format.json do
-        @variants = @category.variants.available.includes(:images, :product)
-      end
-    end
+    @variants = @category.variants.available.includes(:images, :product)
+
+    respond_to :html, :json
   end
 
   def new

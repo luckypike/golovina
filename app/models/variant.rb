@@ -58,7 +58,7 @@ class Variant < ApplicationRecord
   end
 
   def title
-    "#{self.product.title_safe} (#{self.color.title})"
+    product.title_safe
   end
 
   def in_wishlist user

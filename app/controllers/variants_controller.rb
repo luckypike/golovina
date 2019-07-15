@@ -86,67 +86,39 @@ class VariantsController < ApplicationController
 
     authorize @variant
 
-    respond_to do |format|
-      format.html
-
-      format.json do
-        @variant = @category.variants.find_by_id(params[:id])
-      end
-    end
+    respond_to :html, :json
   end
 
   def all
     authorize Variant
 
-    respond_to do |format|
-      format.html
-      format.json do
-        # @where ||= {}
-        #
-        # %w(category color).each do |f|
-        #   params[f] = params[f].present? ? params[f].map(&:to_i) : []
-        #   @where[f] = params[f] if params[f].present?
-        # end
-        #
-        # params[:theme] = params[:theme].presence || []
-        # params[:size] = params[:size].presence || []
+    @variants = Variant.available
 
-        @variants = Variant.available
-      end
-    end
+    respond_to :html, :json
   end
 
   def latest
     authorize Variant
 
-    respond_to do |format|
-      format.html
-      format.json do
-        @variants = Variant.includes(product: :variants).available.where(latest: true)
-      end
-    end
+    @variants = Variant.includes(product: :variants).available.where(latest: true)
+
+    respond_to :html, :json
   end
 
   def sale
     authorize Variant
 
-    respond_to do |format|
-      format.html
-      format.json do
-        @variants = Variant.available.where(sale: true)
-      end
-    end
+    @variants = Variant.available.where(sale: true)
+
+    respond_to :html, :json
   end
 
   def soon
     authorize Variant
 
-    respond_to do |format|
-      format.html
-      format.json do
-        @variants = Variant.soon
-      end
-    end
+    @variants = Variant.soon
+
+    respond_to :html, :json
   end
 
   def new
