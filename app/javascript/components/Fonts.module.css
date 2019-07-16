@@ -20,6 +20,12 @@ h2, .h2 {
   }
 }
 
+h3 {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: var(--fw_bold);
+}
+
 .at {
   font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
   line-height: calc(var(--yr) * calc(var(--lh) - 1));
@@ -38,7 +44,7 @@ h1 {
   }
 }
 
-h2, p {
+h2, h3, p {
   margin: 0 0 calc(var(--yr) * 3);
 
   @media (--m) {

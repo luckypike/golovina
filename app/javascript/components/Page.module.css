@@ -1,8 +1,8 @@
 .root {
-  padding: calc(var(--yr) * 22) var(--xr) calc(var(--yr) * 12);
+  padding: calc(var(--yr) * 22) var(--xr);
 
   @media (--s) {
-    padding: calc(var(--yr) * 40) var(--xr) calc(var(--yr) * 12);
+    padding: calc(var(--yr) * 40) var(--xr);
   }
 
   @media (--m) {
@@ -10,11 +10,11 @@
   }
 
   @media (--l) {
-    padding: calc(var(--yr) * 40) calc(2 / 16 * 100%) calc(var(--yr) * 16);
+    padding: calc(var(--yr) * 40) calc(2 / 16 * 100%);
   }
 
   @media (--xl) {
-    padding: calc(var(--yr) * 62) calc(2 / 16 * 100%) calc(var(--yr) * 16);
+    padding: calc(var(--yr) * 62) calc(2 / 16 * 100%) calc(var(--yr) * 40);
   }
 }
 
@@ -50,4 +50,9 @@
 
 .title {
   text-align: center;
+  margin: 0 0 calc(var(--yr) * 3);
+
+  @media (--m) {
+    margin: 0 0 calc(var(--yr) * 12);
+  }
 }
