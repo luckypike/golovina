@@ -1,5 +1,6 @@
 class KitsController < ApplicationController
-  before_action :set_kit, only: [:show, :edit, :update, :destroy]
+  before_action :set_kit, only: %i[show edit update destroy]
+  before_action :authorize_kit, only: %i[show edit update destroy]
 
   layout 'app'
 
@@ -15,18 +16,14 @@ class KitsController < ApplicationController
 
   def index
     authorize Kit
-    @kits = Kit.includes(:images, :variants).where(state: :active).order(created_at: :desc)
 
-    respond_to do |format|
-      format.html
-      format.json
-    end
+    @kits = Kit.includes(:images, :variants).active
+
+    respond_to :html, :json
   end
 
   def show
-    authorize @kit
-
-    render 'static/gone', status: :not_found, locals: { title: @kit.title }
+    respond_to :html, :json
   end
 
   def new
@@ -36,12 +33,7 @@ class KitsController < ApplicationController
   end
 
   def edit
-    authorize @kit
-
-    respond_to do |format|
-      format.html
-      format.json
-    end
+    respond_to :html, :json
   end
 
   def create
@@ -49,19 +41,17 @@ class KitsController < ApplicationController
     authorize @kit
 
     if @kit.save
-      head :ok, location: control_kits_path()
+      head :ok, location: control_kits_path
     else
       render :new
     end
   end
 
   def update
-    authorize @kit
-
     @kit.kitables.destroy_all
 
     if @kit.update(kit_params)
-      head :ok, location: control_kits_path()
+      head :ok, location: control_kits_path
     else
       render :edit
     end
@@ -73,13 +63,18 @@ class KitsController < ApplicationController
     if @kit.destroy
       head :ok
     else
-      render text: "\"#{image.errors.full_messages.first}\"", status: 422
+      render text: "\"#{image.errors.full_messages.first}\"", status: :unprocessable_entity
     end
   end
 
   private
+
   def set_kit
     @kit = Kit.find(params[:id])
+  end
+
+  def authorize_kit
+    authorize @kit
   end
 
   def kit_params

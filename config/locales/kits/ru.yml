@@ -1,0 +1,7 @@
+ru:
+  kit:
+    variants:
+      one: '%{count} товар в образе'
+      few: '%{count} товара в образе'
+      many: '%{count} товаров в образе'
+      other: '%{count} товаров в образе'

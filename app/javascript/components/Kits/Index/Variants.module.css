@@ -1,0 +1,29 @@
+.image {
+  position: relative;
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: calc(4 / 3 * 100%);
+    background-color: var(--ph_color);
+  }
+
+  & img {
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+  }
+}
+
+.variants {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: calc(var(--xr) * 2);
+}
+
+.variant {
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr; */
+}

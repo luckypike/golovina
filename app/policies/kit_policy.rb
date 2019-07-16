@@ -1,6 +1,6 @@
 class KitPolicy < ApplicationPolicy
   def index?
-    update?
+    true
   end
 
   def control?

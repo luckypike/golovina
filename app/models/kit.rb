@@ -10,7 +10,7 @@ class Kit < ApplicationRecord
   has_many :images, as: :imagable, dependent: :destroy
   accepts_nested_attributes_for :images
 
-  validates_presence_of :state
+  validates :state, presence: true
 
   def human_title
     title.present? ? title : variants.map(&:product).map(&:title).to_sentence.downcase.upcase_first
