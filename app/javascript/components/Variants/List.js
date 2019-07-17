@@ -52,9 +52,9 @@ class List extends Component {
                   <Price sell={variant.price_sell} origin={variant.price} />
                 </div>
 
-                {variant.colour > 0 &&
+                {variant.colors > 0 &&
                   <div className={styles.colors}>
-                    +{I18n.t('variants.colors', { count: variant.colour })}
+                    +{I18n.t('variants.colors', { count: variant.colors })}
                   </div>
                 }
               </div>

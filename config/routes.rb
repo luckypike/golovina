@@ -28,12 +28,6 @@ Rails.application.routes.draw do
     get ':slug/:id', to: 'variants#show', as: :variant
   end
 
-  resources :themes, path: :styles, except: [:destroy] do
-    collection do
-      get :latest
-    end
-  end
-
   namespace :cart do
     get '', action: :index
     delete ':id', action: :destroy, as: :destroy

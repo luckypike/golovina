@@ -92,7 +92,7 @@ class VariantsController < ApplicationController
   def all
     authorize Variant
 
-    @variants = Variant.available
+    @variants = Variant.includes(product: :variants).available
 
     respond_to :html, :json
   end
@@ -108,7 +108,7 @@ class VariantsController < ApplicationController
   def sale
     authorize Variant
 
-    @variants = Variant.available.where(sale: true)
+    @variants = Variant.includes(product: :variants).available.where(sale: true)
 
     respond_to :html, :json
   end
@@ -116,7 +116,7 @@ class VariantsController < ApplicationController
   def soon
     authorize Variant
 
-    @variants = Variant.soon
+    @variants = Variant.includes(product: :variants).soon
 
     respond_to :html, :json
   end

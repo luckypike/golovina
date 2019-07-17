@@ -17,7 +17,14 @@ class KitsController < ApplicationController
   def index
     authorize Kit
 
-    @kits = Kit.includes(:images, :variants).active
+    @kits = Kit.active.includes(
+      [
+        :images,
+        {
+          variants: { availabilities: %i[size store] }
+        }
+      ]
+    )
 
     respond_to :html, :json
   end

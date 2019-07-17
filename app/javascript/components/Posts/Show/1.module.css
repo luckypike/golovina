@@ -29,7 +29,7 @@
   }
 
   @media (--s) {
-    margin-bottom: calc(var(--yr) * var(--s4));
+    margin-bottom: calc(var(--yr) * calc(var(--s3) * 2));
   }
 }
 

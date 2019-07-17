@@ -1,4 +1,4 @@
-json.extract! variant, :id, :price, :price_last, :price_sell, :color_id, :sale, :latest, :soon, :code
+json.extract! variant, :id, :price, :price_last, :price_sell, :color_id, :sale, :latest, :soon, :code, :state
 json.created_at variant.created_at.strftime('%FT%I:%M')
 json.can_edit policy(variant).edit?
 
@@ -19,4 +19,4 @@ json.hide variant.images.size < 1 && !Current.user&.is_editor?
 
 json.title variant.product.title.strip
 
-json.colour variant.product.variants.reject(&:archived?).size - 1
+# json.colour variant.product.variants.reject(&:archived?).size - 1

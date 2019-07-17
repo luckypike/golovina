@@ -5,6 +5,7 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: auto 1fr;
+    margin-bottom: calc(var(--yr) * calc(var(--s4) * 2));
 
     & .images {
       grid-column: 2 / span 4;
@@ -22,11 +23,6 @@
 }
 
 .images {
-  margin: 0 0 calc(var(--yr) * var(--s1));
-
-  @media (--m) {
-    margin: 0;
-  }
 }
 
 .image {
@@ -51,7 +47,7 @@
 .title {
   text-align: center;
   max-width: 80%;
-  margin: 0 auto calc(var(--yr) * var(--s2));
+  margin: calc(var(--yr) * var(--s2)) auto;
 
   & p {
     display: none;

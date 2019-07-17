@@ -7,7 +7,7 @@
   grid-template-columns: repeat(12, 1fr);
   grid-gap: var(--yr);
   grid-row-gap: calc(var(--yr) * 2);
-  margin-bottom: calc(var(--yr) * var(--lh) * 2);
+  margin-bottom: calc(var(--yr) * var(--s3));
 
   &:nth-child(even) {
     & .image {
@@ -20,7 +20,6 @@
   @media(--s) {
     grid-template-columns: repeat(12, 1fr);
     grid-column-gap: calc(var(--xr) * 2);
-    margin-bottom: calc(var(--xr) * 4);
 
     & .image {
       grid-column: auto / span 4;
@@ -70,7 +69,7 @@
   }
 
   @media(--m) {
-    margin-bottom: calc(var(--yr) * var(--lh) * 6);
+    margin-bottom: calc(var(--yr) * calc(var(--s3) * 2));
   }
 }
 
@@ -136,6 +135,7 @@
   @media(--s) {
     position: static;
     display: inline-block;
-    margin: 0;
+    margin: 0 0 calc(var(--yr) * var(--s2));
+    composes: at from '../Fonts.module.css';
   }
 }
