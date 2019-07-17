@@ -13,7 +13,7 @@ import page from '../Page.module.css'
 import form from '../Form.module.css'
 import styles from './Variant.module.css'
 
-class Form extends React.Component {
+class Form extends Component {
   state = {
     variant: null,
     values: {
@@ -21,8 +21,10 @@ class Form extends React.Component {
       state: 'active',
       created_at: null,
       latest: false,
+      code: '',
       sale: false,
       soon: false,
+      last: false,
       pinned: false,
       desc: '',
       comp: '',
@@ -44,10 +46,8 @@ class Form extends React.Component {
     },
   }
 
-  componentDidMount() {
-    if (this.props.id) {
-      this._loadAsyncData(this.props.id);
-    }
+  componentDidMount () {
+    if (this.props.id) this._loadAsyncData(this.props.id)
   }
 
   render () {
@@ -70,7 +70,7 @@ class Form extends React.Component {
                 <div className={form.checkbox}>
                   <label>
                     <input disabled={values.sale} type="checkbox" name="latest" checked={values.latest} onChange={this.handleInputChange} />
-                      new
+                      New
                   </label>
                 </div>
               </div>
@@ -81,7 +81,18 @@ class Form extends React.Component {
                 <div className={form.checkbox}>
                   <label>
                     <input disabled={values.latest} type="checkbox" name="sale" checked={values.sale} onChange={this.handleInputChange} />
-                      sale
+                      Sale
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className={form.input}>
+              <div className={form.input_input}>
+                <div className={form.checkbox}>
+                  <label>
+                    <input type="checkbox" name="last" checked={values.last} onChange={this.handleInputChange} />
+                      Последняя вещь
                   </label>
                 </div>
               </div>
@@ -239,9 +250,7 @@ class Form extends React.Component {
     )
   }
 
-  _loadAsyncData(id) {
-    this._asyncRequest = axios.CancelToken.source();
-
+  _loadAsyncData (id) {
     axios.get(path('edit_variant_path', {id: id, format: 'json' }), { authenticity_token: document.querySelector('[name="csrf-token"]').content})
       .then(res => {
         this.setState({
@@ -254,6 +263,7 @@ class Form extends React.Component {
             latest: res.data.variant.latest,
             sale: res.data.variant.sale,
             soon: res.data.variant.soon,
+            last: res.data.variant.last,
             pinned: res.data.variant.pinned,
             desc: res.data.variant.desc,
             comp: res.data.variant.comp,
@@ -265,10 +275,8 @@ class Form extends React.Component {
             images: res.data.variant.images,
             image_ids: res.data.variant.images.map(i => i.id)
           }
-        });
-
-        this._asyncRequest = null;
-      });
+        })
+      })
   }
 
   handleInputChange = event => {
@@ -306,8 +314,7 @@ class Form extends React.Component {
   handleSubmit = event => {
     if (this.props.id) {
       this._handleUpdate()
-    }
-    else {
+    } else {
       this._handleCreate()
     }
     event.preventDefault()
@@ -319,7 +326,7 @@ class Form extends React.Component {
       this.state.values.color_id &&
       this.state.values.price &&
       this.state.values.state
-    );
+    )
   }
 
   _handleUpdate = async () => {
@@ -328,7 +335,7 @@ class Form extends React.Component {
       { variant: this.state.values, authenticity_token: document.querySelector('[name="csrf-token"]').content }
     )
 
-    if(res.headers.location) window.location = res.headers.location
+    if (res.headers.location) window.location = res.headers.location
   }
 
   _handleCreate = async () => {
@@ -337,14 +344,14 @@ class Form extends React.Component {
       { variant: this.state.values, authenticity_token: document.querySelector('[name="csrf-token"]').content }
     )
 
-    if(res.headers.location) window.location = res.headers.location
+    if (res.headers.location) window.location = res.headers.location
   }
 
   handleProductChange = (product) => {
     this.setState(state => ({
       values: { ...state.values,
         product_attributes: product,
-        product_id: product.id,
+        product_id: product.id
       }
     }))
   }
@@ -387,7 +394,7 @@ class Form extends React.Component {
     this.setState(state => ({
       values: { ...state.values,
         image_ids: images.map(i => i.id),
-        images_attributes: images.map((i, index) => ({id:i.id, weight: index+1}))
+        images_attributes: images.map((i, index) => ({ id: i.id, weight: index + 1 }))
       }
     }))
   }

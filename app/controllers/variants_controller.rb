@@ -97,6 +97,14 @@ class VariantsController < ApplicationController
     respond_to :html, :json
   end
 
+  def last
+    authorize Variant
+
+    @variants = Variant.includes(product: :variants).available.where(last: true)
+
+    respond_to :html, :json
+  end
+
   def latest
     authorize Variant
 
@@ -189,6 +197,6 @@ class VariantsController < ApplicationController
   end
 
   def variant_params
-    params.require(:variant).permit(:color_id, :code, :out_of_stock, :state, :created_at, :latest, :sale, :soon, :pinned, :desc, :comp, :price, :price_last, :product_id, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :quantity, :_destroy], image_ids: [], images_attributes: [:id, :weight])
+    params.require(:variant).permit(:color_id, :code, :out_of_stock, :state, :created_at, :latest, :sale, :last, :soon, :pinned, :desc, :comp, :price, :price_last, :product_id, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :quantity, :_destroy], image_ids: [], images_attributes: [:id, :weight])
   end
 end

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   scope path: :catalog, as: :catalog do
     get '', to: 'variants#all'
     get 'control', to: 'products#control', as: :control
+    get :last, controller: :variants
     get :latest, controller: :variants
     get :sale, controller: :variants
     get :soon, controller: :variants

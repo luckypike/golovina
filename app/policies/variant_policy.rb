@@ -15,6 +15,10 @@ class VariantPolicy < ApplicationPolicy
     all?
   end
 
+  def last?
+    all?
+  end
+
   def sale?
     all?
   end
