@@ -16,19 +16,36 @@ Interview.propTypes = {
 export default function Interview (props) {
   const [index, setIndex] = useState(1)
   const mount = React.createRef()
+  const slides = React.createRef()
   let glide = null
 
   useEffect(() => {
-    glide = new Glide(mount.current, {
-      rewind: false,
-      gap: 0
-    })
+    const _onResize = e => {
+      if (window.getComputedStyle(slides.current).getPropertyValue('display') === 'flex') {
+        if (!glide) {
+          glide = new Glide(mount.current, {
+            rewind: false,
+            gap: 0
+          })
 
-    glide.on('run', move => {
-      setIndex(glide.index + 1)
-    })
+          glide.on('run', move => {
+            setIndex(glide.index + 1)
+          })
 
-    glide.mount()
+          glide.mount()
+        }
+      } else {
+        if (glide) {
+          glide.destroy()
+          glide = null
+        }
+      }
+    }
+
+    if (window) {
+      window.addEventListener('resize', e => _onResize)
+      _onResize()
+    }
   }, [])
 
   const { title, text, images } = props
@@ -49,7 +66,7 @@ export default function Interview (props) {
             </div>
           }
           <div className="glide__track" data-glide-el="track">
-            <div className={classNames('glide__slides', styles.slides)}>
+            <div className={classNames('glide__slides', styles.slides)} ref={slides}>
               {images.map((image, i) =>
                 <div className={classNames('glide__slide', styles.image)} key={i}>
                   <img src={image.collection} />

@@ -6,16 +6,30 @@
   top: calc(var(--yr) * 4);
   font-size: calc(var(--yr) * calc(var(--fs) + 0.5));
   line-height: calc(var(--yr) * 4);
+
+  @media (--s) {
+    display: none;
+  }
 }
 
 .images {
   margin-bottom: calc(4 * var(--yr));
 }
 
+.slides {
+  @media (--s) {
+    display: block;
+  }
+}
+
 .image {
   & img {
     display: block;
     width: 100%;
+  }
+
+  @media (--s) {
+    margin-bottom: calc(var(--yr) * var(--s4));
   }
 }
 
