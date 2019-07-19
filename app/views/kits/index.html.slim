@@ -1,4 +1,4 @@
-- title 'Образы'
-- description 'Образы от Golovina на различные случаи жизни'
+- title t('kits.title')
+- description t('kits.desc')
 
-= react_component 'Kits/Index'
+= react_component 'Kits/Index', {}, { prerender: Rails.env.production? }

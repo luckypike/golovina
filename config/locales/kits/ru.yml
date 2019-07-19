@@ -1,4 +1,8 @@
 ru:
+  kits:
+    title: Готовые решения
+    desc: Образы от Golovina на различные случаи жизни
+
   kit:
     variants:
       one: '%{count} товар в образе'

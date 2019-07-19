@@ -3,6 +3,10 @@ class KitPolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    record.active?
+  end
+
   def control?
     update?
   end
