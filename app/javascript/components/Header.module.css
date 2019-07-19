@@ -4,10 +4,13 @@
   position: fixed;
   left: 0;
   padding-top: 0;
-  top: 0;
   width: 100%;
   z-index: 10;
   transition: height 0.2s;
+
+  &.noad {
+    top: 0;
+  }
 
 
   &.scrolling {
@@ -73,7 +76,7 @@
 }
 
 .burger {
-  position: fixed;
+  position: absolute;
   left: var(--xr);
   top: calc(var(--yr) * 2);
   padding: calc(var(--yr) * 3);

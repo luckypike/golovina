@@ -24,6 +24,9 @@ class Latest extends Component {
       <div className={page.root}>
         <div className={page.title}>
           <h1>Последняя вещь</h1>
+          <p>
+            Успей купить последнюю вещь с бесплатной доставкой
+          </p>
         </div>
 
         <div>

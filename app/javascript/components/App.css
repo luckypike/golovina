@@ -16,6 +16,16 @@ body {
     font-size: calc(var(--yr) * calc(var(--fs) + 0.5));
     line-height: calc(var(--yr) * calc(var(--lh) + 2));
   }
+
+  &.ad {
+    padding-top: calc(var(--yr) * 12);
+  }
+}
+
+header {
+  &.ad {
+    top: calc(var(--yr) * 12);
+  }
 }
 
 a {
