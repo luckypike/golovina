@@ -2,6 +2,7 @@
   align-self: flex-start;
   composes: image from '../Variants/List.module.css';
   grid-row: 1 / span 6;
+  grid-column: auto;
   background-color: var(--sep_color);
 }
 

@@ -2,6 +2,7 @@
   background: var(--wht_color);
   height: calc(var(--yr) * 16);
   position: fixed;
+  top: 0;
   left: 0;
   padding-top: 0;
   width: 100%;
