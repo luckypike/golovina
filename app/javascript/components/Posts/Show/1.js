@@ -43,7 +43,7 @@ export default function Interview (props) {
     }
 
     if (window) {
-      window.addEventListener('resize', e => _onResize)
+      window.addEventListener('resize', _onResize)
       _onResize()
     }
   }, [])
