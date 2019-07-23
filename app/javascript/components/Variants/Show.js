@@ -4,6 +4,7 @@ import axios from 'axios'
 import classNames from 'classnames'
 import Glide from '@glidejs/glide'
 import ReactMarkdown from 'react-markdown'
+import PubSub from 'pubsub-js'
 
 import Acc from './Show/Acc'
 import Guide from './Show/Guide'
@@ -139,16 +140,18 @@ class Variant extends Component {
   }
 
   handleCartClick = async () => {
-    if(this.state.size && !this.state.send) {
+    if (this.state.size && !this.state.send) {
       this.setState({ send: true })
 
-      const res = await axios.post(
+      const { data: { quantity } } = await axios.post(
         path('cart_variant_path', { id: this.state.variant.id }),
         {
           size: this.state.size,
           authenticity_token: document.querySelector('[name="csrf-token"]').content
         }
       )
+
+      PubSub.publish('update-cart', quantity)
 
       this.setState({ add: true, send: false })
     }

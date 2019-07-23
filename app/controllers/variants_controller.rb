@@ -77,7 +77,7 @@ class VariantsController < ApplicationController
       @cart.save
     end
 
-    render json: @cart.slice(:id, :quantity)
+    render json: { quantity: Cart.where(user: Current.user).map(&:quantity).sum }
   end
 
   def show

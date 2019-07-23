@@ -54,12 +54,11 @@ class CartController < ApplicationController
       @cart.destroy
     end
 
-
-
-    head :ok
+    render json: { quantity: Cart.where(user: Current.user).map(&:quantity).sum }
   end
 
   private
+
   def set_cart
     @cart = Cart.find(params[:id])
   end

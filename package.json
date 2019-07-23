@@ -25,6 +25,7 @@
     "lodash.debounce": "^4.0.8",
     "normalize.css": "^8.0.0",
     "prop-types": "^15.7.2",
+    "pubsub-js": "^1.7.0",
     "query-string": "^5.1.0",
     "rails-erb-loader": "^5.5.2",
     "react": "^16.8.6",

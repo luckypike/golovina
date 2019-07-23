@@ -16,7 +16,7 @@ export default function List (props) {
 
   return (
     <div className={styles.kits}>
-      {kits.map(kit =>
+      {kits.filter(kit => kit.variants.filter(variant => variant.state !== 'archived').length > 0).map(kit =>
         <div key={kit.id} className={styles.kit}>
           <div className={styles.images}>
             <div className={styles.image}>

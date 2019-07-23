@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import classNames from 'classnames'
-import InputMask from 'react-input-mask';
+import InputMask from 'react-input-mask'
+import PubSub from 'pubsub-js'
 
 import { path } from '../Routes'
 import Price from '../Variants/Price'
@@ -15,7 +16,7 @@ import buttons from '../Buttons.module.css'
 class Index extends Component {
   state = {
     errors: {},
-    carts: null,
+    carts: null
   }
 
   componentDidMount = async () => {
@@ -58,7 +59,7 @@ class Index extends Component {
   }
 
   handleDestroyClick = async cart => {
-    const res = await axios.delete(
+    const { data: { quantity } } = await axios.delete(
       path('cart_destroy_path', { id: cart.id }),
       {
         params: {
@@ -67,6 +68,7 @@ class Index extends Component {
       }
     )
 
+    PubSub.publish('update-cart', quantity)
     this._loadAsyncData()
   }
 

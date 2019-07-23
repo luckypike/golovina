@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import listToTree from 'list-to-tree-lite'
 import Cookies from 'universal-cookie'
+import PubSub from 'pubsub-js'
 
 import { path } from './Routes'
 import Nav from './Nav'
@@ -29,6 +30,14 @@ export default function Header (props) {
   const [active, setActive] = useState(false)
   const cookies = new Cookies()
 
+  const CartSubscriber = function (msg, data) {
+    setCart(data)
+  }
+
+  PubSub.subscribe('update-cart', CartSubscriber)
+
+  const [cart, setCart] = useState(props.cart)
+
   const [scrolling, setScrolling] = useState(false)
   useEffect(() => {
     const _onScroll = e => {
@@ -44,7 +53,7 @@ export default function Header (props) {
     }
   }, [scrolling])
 
-  const { cart, index, user, categories, collections, ad } = props
+  const { index, user, categories, collections, ad } = props
 
   function handleScrollUp () {
     if (document) {
