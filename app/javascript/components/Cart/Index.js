@@ -131,10 +131,11 @@ class Index extends Component {
 
             <div className={styles.checkout}>
               <form className={classNames(form.root, styles.form)} onSubmit={this.handleSubmit}>
-                <div className={form.item}>
-                  <label className={form.label}>
+                <label className={form.el}>
+                  <div className={form.label}>
                     Имя
-                  </label>
+                  </div>
+
                   <div className={form.input}>
                     <input type="text" name="name" value={values.name} onChange={this.handleInputChange} />
                   </div>
@@ -147,21 +148,23 @@ class Index extends Component {
 
                     </div>
                   }
-                </div>
+                </label>
 
-                <div className={form.item}>
-                  <label className={form.label}>
+                <label className={form.el}>
+                  <div className={form.label}>
                     Фамилия
-                  </label>
+                  </div>
+
                   <div className={form.input}>
                     <input type="text" name="s_name" value={values.s_name} onChange={this.handleInputChange} />
                   </div>
-                </div>
+                </label>
 
-                <div className={form.item}>
-                  <label className={form.label}>
+                <label className={form.el}>
+                  <div className={form.label}>
                     Телефон
-                  </label>
+                  </div>
+
                   <div className={form.input}>
                     <InputMask type="text" name="phone" mask="+9 999 999 99 99" maskChar=" " value={values.phone} onChange={this.handleInputChange} />
                   </div>
@@ -174,12 +177,13 @@ class Index extends Component {
 
                     </div>
                   }
-                </div>
+                </label>
 
-                <div className={form.item}>
-                  <label className={form.label}>
+                <label className={form.el}>
+                  <div className={form.label}>
                     Электронная почта
-                  </label>
+                  </div>
+
                   <div className={form.input}>
                     <input type="text" name="email" value={values.email} onChange={this.handleInputChange} />
                   </div>
@@ -192,12 +196,13 @@ class Index extends Component {
 
                     </div>
                   }
-                </div>
+                </label>
 
-                <div className={form.item}>
-                  <label className={form.label}>
+                <label className={form.el}>
+                  <div className={form.label}>
                     Адрес доставки
-                  </label>
+                  </div>
+
                   <div className={form.input}>
                     <textarea type="text" name="address" value={values.address} onChange={this.handleInputChange} />
                   </div>
@@ -210,7 +215,7 @@ class Index extends Component {
 
                     </div>
                   }
-                </div>
+                </label>
 
                 {carts.filter(cart => !cart.available).length == 0 &&
                   <div className={form.submit}>
