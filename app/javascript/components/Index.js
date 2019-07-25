@@ -31,6 +31,9 @@ class Index extends Component {
                 }
                 <div className={styles.text}>
                   <div className={styles.title}>{slide.name}</div>
+                  {slide.link_name &&
+                    <div className={styles.desc}>{slide.link_name}</div>
+                  }
                 </div>
               </div>
             )}
