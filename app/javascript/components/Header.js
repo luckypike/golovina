@@ -51,13 +51,13 @@ export default function Header (props) {
       } else if (window.scrollY !== 0 && !scrolling) {
         setScrolling(true)
       }
-    }
 
-    if(props.index && window.scrollY > (window.innerWidth / 2 - 64)) {
+      if(props.index && window.scrollY > (window.innerWidth / 2 - 64)) {
         setWhite(false)
       } else if (props.index && window.scrollY < (window.innerWidth / 2 - 64)) {
         setWhite(true)
       }
+    }
 
     if (window) {
       window.addEventListener('scroll', _onScroll)

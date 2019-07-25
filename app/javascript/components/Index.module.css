@@ -127,15 +127,6 @@
   }
 }
 
-.name {
-  composes: h2 from './Fonts.module.css';
-
-  @media (--s) {
-    font-size: calc(var(--yr) * calc(var(--fs) + 3.5));
-    line-height: calc(var(--yr) * calc(var(--lh) + 3));
-  }
-}
-
 .places {
   position: relative;
   background-image: url('../images/contacts_moscow.jpg');
@@ -212,6 +203,7 @@
       grid-column: 4 / span 3;
       font-size: calc(var(--yr) * 4.5);
       line-height: calc(var(--yr) * calc(var(--lh) + 2));
+      margin-bottom: 0;
     }
   }
 
@@ -220,7 +212,7 @@
 
     @media (--l) {
       font-size: calc(var(--yr) * calc(var(--fs)));
-      line-height: calc(var(--yr) * calc(var(--lh)));
+      line-height: calc(var(--yr) * calc(var(--lh) + 2));
 
       grid-column: 10 / span 3;
     }
