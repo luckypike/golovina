@@ -27,7 +27,7 @@
     & .slide {
       &::before {
         @media (--s) {
-          padding-top: calc(1 / 2 * 100%);
+          padding-top: calc(2 / 3 * 100%);
         }
       }
     }
@@ -43,7 +43,7 @@
     background: rgba( 0, 0, 0, 0.1);
     display: block;
     content: '';
-    padding-top: calc(1 / 1 * 100%);
+    padding-top: calc(6 / 5 * 100%);
   }
 }
 

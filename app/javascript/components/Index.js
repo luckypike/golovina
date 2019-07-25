@@ -7,16 +7,6 @@ import I18n from './I18n'
 import styles from './Index.module.css'
 
 class Index extends Component {
-  componentDidMount() {
-    window.addEventListener('resize', this._updateDimensions)
-    this._updateDimensions()
-  }
-
-  _updateDimensions() {
-    let vh = window.innerHeight * 0.01
-    document.documentElement.style.setProperty('--vh', `${vh}px`)
-  }
-
   render () {
     const { slides, categories } = this.props
 
