@@ -3,6 +3,8 @@ import axios from 'axios'
 
 import { path } from '../Routes'
 
+import Images from '../Images/Images'
+
 import styles from './Form.module.css'
 import page from '../Page'
 
@@ -18,6 +20,15 @@ class Form extends React.Component {
 
     this.setState(state => ({
       values: { ...state.values, [name]: value }
+    }))
+  }
+
+  handleImagesChange = (images) => {
+    this.setState(state => ({
+      values: { ...state.values,
+        image_ids: images.map(i => i.id),
+        images_attributes: images.map((i, index) => ({id:i.id, weight: index+1}))
+      }
     }))
   }
 
@@ -79,6 +90,20 @@ class Form extends React.Component {
                   <option value="active">Скрывается при отсутствии товаров</option>
                   <option value="inactive">Скрыта всегда</option>
                 </select>
+              </div>
+            </div>
+
+            <div>
+              <div>
+                Изображения
+              </div>
+              <Images images={values.images} onImagesChange={this.handleImagesChange}/>
+            </div>
+
+            <div>
+              <div>
+                <input type="checkbox" name="front" checked={values.front} onChange={this.handleInputChange} />
+                Показывать на главной
               </div>
             </div>
 

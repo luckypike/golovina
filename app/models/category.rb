@@ -16,6 +16,9 @@ class Category < ApplicationRecord
   belongs_to :parent_category, class_name: 'Category', optional: true
   has_many :categories, -> { order(weight: :asc) }, class_name: "Category", foreign_key: "parent_category_id"
 
+  has_many :images, as: :imagable, dependent: :destroy
+  accepts_nested_attributes_for :images
+
   def normalize_friendly_id(input)
     input.to_s.to_slug.normalize(transliterations: :russian).to_s
   end

@@ -28,6 +28,7 @@ Header.defaultProps = {
 
 export default function Header (props) {
   const [active, setActive] = useState(false)
+  const [white, setWhite] = useState(false)
   const cookies = new Cookies()
 
   const CartSubscriber = function (msg, data) {
@@ -40,6 +41,10 @@ export default function Header (props) {
 
   const [scrolling, setScrolling] = useState(false)
   useEffect(() => {
+    if (props.index) {
+      setWhite(true)
+    }
+
     const _onScroll = e => {
       if (window.scrollY === 0 && scrolling) {
         setScrolling(false)
@@ -47,6 +52,12 @@ export default function Header (props) {
         setScrolling(true)
       }
     }
+
+    if(props.index && window.scrollY > (window.innerWidth / 2 - 64)) {
+        setWhite(false)
+      } else if (props.index && window.scrollY < (window.innerWidth / 2 - 64)) {
+        setWhite(true)
+      }
 
     if (window) {
       window.addEventListener('scroll', _onScroll)
@@ -63,7 +74,7 @@ export default function Header (props) {
   }
 
   return (
-    <header className={classNames(styles.root, { [styles.scrolling]: scrolling, [styles.white]: index, ad: ad && !cookies.get('noad') })}>
+    <header className={classNames(styles.root, { [styles.scrolling]: scrolling, [styles.white]: white, ad: ad && !cookies.get('noad') })}>
       <div className={classNames(styles.overlay, { [styles.active]: active })} onClick={() => setActive(false)} />
 
       <div className={styles.burger} onClick={() => setActive(true)}>

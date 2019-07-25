@@ -4,7 +4,8 @@ class StaticController < ApplicationController
   def index
     authorize :static, :index?
 
-    @slides = Slide.where.not(image: nil).order('weight')
+    @slides = Slide.where.not(image: nil).order('weight').limit(2)
+    @categories = Category.where(front: true).order('weight').limit(4)
   end
 
   def contacts

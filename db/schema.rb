@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_17_103957) do
+ActiveRecord::Schema.define(version: 2019_07_23_125443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_103957) do
     t.integer "weight", default: 0
     t.boolean "empty", default: false
     t.integer "variants_counter"
+    t.boolean "front"
     t.index ["parent_category_id"], name: "index_categories_on_parent_category_id"
   end
 

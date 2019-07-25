@@ -5,3 +5,9 @@ ru:
       few: "%{count} цвета"
       many: "%{count} цветов"
       other: "%{count} цвета"
+
+    count:
+      one: "%{count} предмет"
+      few: "%{count} предмета"
+      many: "%{count} предметов"
+      other: "%{count} предметов"

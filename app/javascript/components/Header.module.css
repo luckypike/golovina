@@ -7,7 +7,7 @@
   padding-top: 0;
   width: 100%;
   z-index: 10;
-  transition: height 0.2s;
+  transition: height 0.2s, background .2s;
 
   &.noad {
     top: 0;
@@ -204,48 +204,58 @@
 }
 
 .white {
-  background: none;
+  @media (--s) {
+    background: none;
 
-  & .burger {
     & svg {
-      & rect {
+      transition: fill .2s;
+    }
+
+    & .burger {
+      & svg {
+        & rect {
+          fill: white;
+        }
+      }
+    }
+
+    & .logo {
+      & svg {
         fill: white;
       }
     }
-  }
 
-  & .logo {
-    & svg {
-      fill: white;
+    & .search {
+      & svg {
+        & :global {
+          & .a {
+            stroke: white;
+          }
+        }
+      }
     }
-  }
 
-  & .search {
-    & svg {
-      & :global {
-        & .a {
-          stroke: white;
+    & .cart {
+      & svg {
+        & :global {
+          & .a, & .b {
+            stroke: white;
+          }
+
+          & .c {
+            fill: white;
+          }
+
+          & .d {
+            fill: var(--pr_color);
+          }
         }
       }
     }
   }
 
-  & .cart {
-    & svg {
-      & :global {
-        & .a, & .b {
-          stroke: white;
-        }
-
-        & .c {
-          fill: white;
-        }
-
-        & .d {
-          fill: var(--pr_color);
-        }
-      }
-    }
+  @media (--l) {
+    background: none;
   }
 }
 

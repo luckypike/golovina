@@ -2,34 +2,14 @@ import React, { Component } from 'react'
 import Glide from '@glidejs/glide'
 import classNames from 'classnames'
 
+import I18n from './I18n'
+
 import styles from './Index.module.css'
 
 class Index extends Component {
-  state = {
-    index: 0
-  }
-
-  mount = React.createRef()
-
   componentDidMount() {
     window.addEventListener('resize', this._updateDimensions)
     this._updateDimensions()
-
-    if(this.props.slides.length > 0) {
-      this.glide = new Glide(this.mount.current, {
-        type: 'carousel',
-        autoplay: 4000,
-        animationDuration: 900,
-        hoverpause: true,
-        gap: 0,
-      })
-
-      this.glide.on('run', (move) => {
-        this.setState({ index: this.glide.index })
-      })
-
-      this.glide.mount()
-    }
   }
 
   _updateDimensions() {
@@ -38,41 +18,65 @@ class Index extends Component {
   }
 
   render () {
-    const { slides } = this.props
-    const { index } = this.state
+    const { slides, categories } = this.props
 
     return (
-      <div className={styles.root}>
-        <div className={styles.images}>
-          {slides.map((slide, _) =>
-            <div key={_} className={classNames(styles.image, { [styles.active]: index == _ })} style={{ backgroundImage: `url(${slide.image})` }} />
-          )}
-        </div>
+      <>
+        <div className={styles.root}>
+          <div className={classNames(styles.slides, { [styles.single]: slides.length == 1 })} id="slides">
+            {slides.map((slide, _) =>
+              <div key={_} className={styles.slide} style={{ backgroundImage: `url(${slide.image})` }}>
+                {slide.link &&
+                  <a className={styles.fake} href={slide.link} />
+                }
+                <div className={styles.text}>
+                  <div className={styles.title}>{slide.name}</div>
+                </div>
+              </div>
+            )}
+          </div>
 
-        <div className="glide" ref={this.mount}>
-          <div className="glide__track" data-glide-el="track">
-            <div className={classNames('glide__slides', styles.slides)}>
-              {slides.map((slide, _) =>
-                <div key={_} className={classNames('glide__slide', styles.slide)}>
-                  <div className={styles.placeholder} />
-
+          <div className={styles.content}>
+            <div className={styles.categories}>
+              {categories.map((category, _) =>
+                <div key={_} className={styles.category} style={{ backgroundImage: `url(${category.image})` }}>
+                  {category.link &&
+                    <a className={styles.fake} href={category.link} />
+                  }
                   <div className={styles.text}>
-                    <div className={styles.title}>
-                      {slide.name}
-                    </div>
-
-                    {slide.link &&
-                      <a href={slide.link} className={styles.link}>
-                        {slide.link_name}
-                      </a>
-                    }
+                    <div className={styles.name}>{category.name}</div>
+                  <div className={styles.desc}>{I18n.t('variants.count', { count: category.products })}</div>
                   </div>
                 </div>
               )}
             </div>
+
+            <div className={styles.places}>
+              <a className={styles.fake} href={this.props.contacts} />
+              <div className={styles.text}>
+                <div className={styles.title}>Приходи на примерку</div>
+                <div className={styles.desc}>Места продаж</div>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.footer}>
+            <div className={styles.mail}>
+              <div>Вопрос? Пишите нам по адресу</div>
+            <a href="mailto:info@golovina.store">info@golovina.store</a>
+            </div>
+            <div className={styles.insta}>
+              <div>
+                Подписывайся на наш Instagram
+              </div>
+              <a href={this.props.instagram}>Golovina.brand</a>
+            </div>
+            <div className={styles.copy}>
+              © 2017 – 2019 Мария Головина – все права защищены – Сделано в <a href="https://luckypike.com/">L..IKE</a>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     )
   }
 }
