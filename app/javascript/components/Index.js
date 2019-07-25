@@ -16,9 +16,6 @@ class Index extends Component {
           <div className={classNames(styles.slides, { [styles.single]: slides.length == 1 })} id="slides">
             {slides.map((slide, _) =>
               <a href={slide.link} key={_} className={styles.slide} style={{ backgroundImage: `url(${slide.image})` }}>
-                {slide.link &&
-                  <div className={styles.fake}  />
-                }
                 <div className={styles.text}>
                   <div className={styles.title}>{slide.name}</div>
                   {slide.link_name &&
@@ -33,9 +30,6 @@ class Index extends Component {
             <div className={styles.categories}>
               {categories.map((category, _) =>
                 <a key={_} href={category.link} className={styles.category} style={{ backgroundImage: `url(${category.image})` }}>
-                  {category.link &&
-                    <div className={styles.fake} />
-                  }
                   <div className={styles.text}>
                     <div className={styles.title}>{category.name}</div>
                     <div className={styles.desc}>{I18n.t('variants.count', { count: category.products })}</div>
@@ -46,7 +40,6 @@ class Index extends Component {
 
             <div className={styles.places}>
               <a href={this.props.contacts} >
-                <div className={styles.fake} />
                 <div className={styles.text}>
                   <div className={styles.title}>Приходи на примерку</div>
                   <div className={styles.desc}>Места продаж</div>
