@@ -33,6 +33,9 @@ class Index extends Component {
                   <a key={_} href={slide.link} className={styles.subslide} style={{ backgroundImage: `url(${slide.image})` }}>
                     <div className={styles.text}>
                       <div className={styles.title}>{slide.name}</div>
+                      {slide.link_name &&
+                        <div className={styles.desc}>{slide.link_name}</div>
+                      }
                     </div>
                   </a>
                 )}
