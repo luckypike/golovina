@@ -52,9 +52,9 @@ export default function Header (props) {
         setScrolling(true)
       }
 
-      if(props.index && window.scrollY > (window.innerWidth / 2 - 64)) {
+      if(props.index && window.scrollY > (window.innerWidth / 1.7 - 64)) {
         setWhite(false)
-      } else if (props.index && window.scrollY < (window.innerWidth / 2 - 64)) {
+      } else if (props.index && window.scrollY < (window.innerWidth / 1.7 - 64)) {
         setWhite(true)
       }
     }

@@ -8,7 +8,6 @@
   'Index',
   { \
     slides: @slides.map{ |slide| { name: slide.name, link: slide.link, image: slide.image.large.url, link_name: slide.link_name } },
-    categories: @categories.map{ |category| {name: category.title, link: catalog_category_path(category), image: category.images.present? ? category.images.first.photo.large.url : nil, products: category.variants.available.size} },
     contacts: contacts_path(), instagram: Rails.application.credentials[Rails.env.to_sym][:instagram] \
   },
   { \
