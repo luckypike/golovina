@@ -55,7 +55,7 @@ class Index extends Component {
           <div className={styles.footer}>
             <div className={styles.mail}>
               <div>Вопрос? Пишите нам по адресу</div>
-            <a href="mailto:shop@golovina.store">shop@golovina.store</a>
+              <a href="mailto:shop@golovina.store">shop@golovina.store</a>
             </div>
             <div className={styles.insta}>
               <div>

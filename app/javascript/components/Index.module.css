@@ -118,6 +118,18 @@
     padding-top: calc(3 / 2 * 100%);
   }
 
+  & .title {
+    font-size: calc(var(--yr) * calc(var(--fs)));
+    line-height: calc(var(--yr) * calc(var(--lh)));
+    font-weight: var(--fw_normal);
+
+    @media (--s) {
+      font-size: calc(var(--yr) * calc(var(--fs) + 3.5));
+      line-height: calc(var(--yr) * calc(var(--lh) + 3));
+      font-weight: var(--fw_light);
+    }
+  }
+
   & .desc {
     display: none;
 
