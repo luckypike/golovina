@@ -24,7 +24,6 @@ html
         index: current_page?(controller: :static, action: :index),
         user: (Current.user.slice(:id, :is_editor?, :guest?) rescue nil),
         wishlist: Wishlist.includes(:variant).where(user: Current.user, variants: { state: [:active] }).size,
-        ad: cookies[:noad].blank?,
         cart: Cart.where(user: Current.user).map(&:quantity).sum \
       }, { \
         prerender: Rails.env.production? \

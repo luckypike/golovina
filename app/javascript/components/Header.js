@@ -74,7 +74,7 @@ export default function Header (props) {
   }
 
   return (
-    <header className={classNames(styles.root, { [styles.scrolling]: scrolling, [styles.white]: white, ad: ad && !cookies.get('noad') })}>
+    <header className={classNames(styles.root, { [styles.scrolling]: scrolling, [styles.white]: white })}>
       <div className={classNames(styles.overlay, { [styles.active]: active })} onClick={() => setActive(false)} />
 
       <div className={styles.burger} onClick={() => setActive(true)}>
