@@ -148,6 +148,12 @@ Rails.application.routes.draw do
 
   resources :posts
 
+  resources :promos do
+    collection do
+      get :last
+    end
+  end
+
   resources :orders, only: [:index, :create] do
     collection do
       post :paid

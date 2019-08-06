@@ -1,4 +1,4 @@
-.root {
+/* .root {
   position: fixed;
   height: calc(var(--yr) * 12);
   overflow: hidden;
@@ -8,9 +8,9 @@
   right: 0;
   background: var(--ph_color);
   z-index: 4;
-}
+} */
 
-.close {
+/* .close {
   position: absolute;
   left: 0;
   top: 0;
@@ -26,25 +26,12 @@
     left: calc(var(--xr) * 3);
   }
 
-  & svg {
-    display: block;
-    width: 16px;
-    height: 16px;
 
-    & line {
-      stroke: var(--pr_color);
-    }
-  }
-}
+} */
 
 .ad {
   align-items: center;
-  position: absolute;
   display: flex;
-  left: calc(var(--yr) * 12);
-  right: var(--xr);
-  top: 50%;
-  transform: translateY(-50%);
   composes: at from './Fonts';
 
   @media (--s) {
@@ -79,6 +66,65 @@
 
   @media (--s) {
     margin-left: var(--xr);
+  }
+}
+
+.overlay {
+  visibility: hidden;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  opacity: 0;
+  transition: visibility 0s ease .3s, opacity .3s;
+
+  &.active {
+    visibility: visible;
+    opacity: .4;
+    transition: opacity .3s;
+  }
+}
+
+.size_helper {
+  display: block;
+  composes: at from './Fonts.module.css';
+  padding: calc(var(--xr) * 4) calc(var(--xr) * 2);
+  text-align: center;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%) translateY(-50%);
+  background: white;
+  width: 100%;
+  max-width: 400px;
+  z-index: 1000;
+
+  & :nth-child(6) {
+    border-bottom: 1px solid var(--sep_color);
+  }
+}
+
+.close {
+  position: fixed;
+  cursor: pointer;
+  display: block;
+  height: calc(var(--xr) * 3);
+  width: calc(var(--yr) * 8);
+  right: calc(var(--xr) * 2 - calc(var(--yr) * 2));
+  top: calc(var(--yr) * 2);
+  padding: 16px 8px;
+
+  & svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+
+    & line {
+      stroke: var(--pr_color);
+    }
   }
 }
 

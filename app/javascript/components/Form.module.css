@@ -116,3 +116,17 @@
     margin-right: var(--xr);
   }
 }
+
+
+.submit {
+  display: flex;
+  flex-wrap: wrap;
+
+  & {
+    & button, & input {
+      &:not(:last-child) {
+        margin-right: calc(var(--xr) * 0.5);
+      }
+    }
+  }
+}

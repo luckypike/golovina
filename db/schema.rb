@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_125443) do
+ActiveRecord::Schema.define(version: 2019_08_05_104040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,15 @@ ActiveRecord::Schema.define(version: 2019_07_23_125443) do
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["colors"], name: "index_products_on_colors", using: :gin
     t.index ["kind_id"], name: "index_products_on_kind_id"
+  end
+
+  create_table "promos", force: :cascade do |t|
+    t.string "title"
+    t.string "link"
+    t.boolean "front"
+    t.boolean "popup"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "similarables", force: :cascade do |t|

@@ -14,7 +14,6 @@ import Logo from '!svg-react-loader?!../images/golovina.svg'
 
 Header.propTypes = {
   index: PropTypes.bool,
-  ad: PropTypes.bool,
   cart: PropTypes.number,
   user: PropTypes.object,
   collections: PropTypes.array,
@@ -64,7 +63,7 @@ export default function Header (props) {
     }
   }, [scrolling])
 
-  const { index, user, categories, collections, ad } = props
+  const { index, user, categories, collections } = props
 
   function handleScrollUp () {
     if (document) {
@@ -74,7 +73,7 @@ export default function Header (props) {
   }
 
   return (
-    <header className={classNames(styles.root, { [styles.scrolling]: scrolling, [styles.white]: white, ad: ad && !cookies.get('noad') })}>
+    <header className={classNames(styles.root, { [styles.scrolling]: scrolling, [styles.white]: white })}>
       <div className={classNames(styles.overlay, { [styles.active]: active })} onClick={() => setActive(false)} />
 
       <div className={styles.burger} onClick={() => setActive(true)}>
