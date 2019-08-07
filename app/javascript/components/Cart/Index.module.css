@@ -41,6 +41,16 @@
   }
 }
 
+.amount {
+  display: flex;
+  composes: h2 from '../Fonts.module.css';
+  margin-bottom: calc(var(--yr) * 2);
+}
+
+.sum {
+  margin-right: 1em;
+}
+
 .unavailable {
   color: var(--red_color);
   font-weight: var(--fw_bold);

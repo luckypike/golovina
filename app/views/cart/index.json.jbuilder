@@ -8,6 +8,7 @@ json.carts @carts do |cart|
 end
 
 json.amount @carts.sum(&:price_sell)
+json.origin @carts.sum(&:price)
 
 if @carts.size > 0
   json.user @user, :id, :name, :s_name, :phone

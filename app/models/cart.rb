@@ -9,6 +9,10 @@ class Cart < ApplicationRecord
     variant.price_sell * quantity
   end
 
+  def price
+    variant.price * quantity
+  end
+
   def available
     variant.availabilities.active.where(size: size).sum(&:quantity)
   end
