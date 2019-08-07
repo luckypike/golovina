@@ -159,7 +159,8 @@
   }
 }
 
-.guide {
+.guide,
+.check  {
   font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
   cursor: pointer;
   text-align: center;
@@ -173,6 +174,14 @@
   &.active {
     opacity: 1;
     visibility: visible;
+  }
+}
+
+.check {
+  cursor: default;
+  
+  @media (--s) {
+    text-align: left;
   }
 }
 

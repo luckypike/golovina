@@ -128,7 +128,7 @@ class Variant extends Component {
 
   selectSize = availability => {
     if(availability.active) {
-      this.setState({ size: availability.id, add: false })
+      this.setState({ size: availability.id, add: false, check: false })
     }
   }
 
@@ -140,6 +140,12 @@ class Variant extends Component {
   }
 
   handleCartClick = async () => {
+    if (!this.state.size && this.state.variant.availabilities.length === 1 && this.state.variant.availabilities[0].size.id === 1) {
+      await this.selectSize(this.state.variant.availabilities[0].size)
+    }
+    else {
+      this.setState({ check: true })
+    }
     if (this.state.size && !this.state.send) {
       this.setState({ send: true })
 
@@ -200,7 +206,7 @@ class Variant extends Component {
   }
 
   render () {
-    const { variant, variants, size, send, section, add, index, archived, values} = this.state
+    const { variant, variants, size, send, section, add, index, archived, values, check} = this.state
     const { user } = this.props
     if(!variant) return null
 
@@ -267,9 +273,16 @@ class Variant extends Component {
                   }
 
                   {!add && !variant.soon &&
-                    <button className={buttons.main} disabled={!size || send} onClick={this.handleCartClick}>
-                      {!send ? 'Добавить в корзину' : 'Добавляем...'}
-                    </button>
+                    <>
+                      <button className={buttons.main} disabled={send} onClick={this.handleCartClick}>
+
+                        {!send ? 'Добавить в корзину' : 'Добавляем...'}
+                      </button>
+
+                      {check &&
+                        <div className={styles.check}>Выберите размер</div>
+                      }
+                    </>
                   }
 
                   <div className={classNames(styles.wishlist, { [styles.active]: variant.in_wishlist })} onClick={this.handleWishlistClick}>
