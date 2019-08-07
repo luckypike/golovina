@@ -17,9 +17,9 @@ class PromosController < ApplicationController
   end
 
   def last
+    authorize Promo
+    
     @promo = Promo.where(popup: true).last
-
-    authorize @promo
   end
 
   def create

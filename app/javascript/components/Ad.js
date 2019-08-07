@@ -30,6 +30,10 @@ export default function Ad (props) {
       document.getElementsByTagName('header')[0].classList.remove('ad')
     }
 
+    handleCookiesClear()
+  }
+
+  function handleCookiesClear () {
     cookies.set('noad', true, { path: '/' })
   }
 
@@ -53,7 +57,7 @@ export default function Ad (props) {
             {promo.title}
           </div>
 
-          <a href={promo.link} className={styles.more}>
+          <a href={promo.link} className={styles.more} onClick={handleCookiesClear}>
             Подробнее
           </a>
         </div>
