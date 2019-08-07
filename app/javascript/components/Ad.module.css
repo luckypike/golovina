@@ -12,10 +12,6 @@
   }
 }
 
-.text {
-  margin-right: var(--xr);
-}
-
 .more {
   display: inline-block;
   background-color: var(--pr_color);
