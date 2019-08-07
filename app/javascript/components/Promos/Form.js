@@ -117,22 +117,13 @@ class Form extends React.Component {
 
 
   handleSubmit = event => {
-    if (this.props.promo.id) {
+    if (this.props.promo) {
       this._handleUpdate()
     }
     else {
       this._handleCreate()
     }
     event.preventDefault()
-  }
-
-  _handleUpdate = async () => {
-    const res = await axios.patch(
-      path('promo_path', { id: this.props.promo.id }),
-      { promo: this.state.promo, authenticity_token: document.querySelector('[name="csrf-token"]').content }
-    )
-
-    if(res.headers.location) window.location = res.headers.location
   }
 
   _handleCreate = async () => {
