@@ -14,7 +14,6 @@ import Logo from '!svg-react-loader?!../images/golovina.svg'
 
 Header.propTypes = {
   index: PropTypes.bool,
-  ad: PropTypes.bool,
   cart: PropTypes.number,
   user: PropTypes.object,
   collections: PropTypes.array,
@@ -64,7 +63,7 @@ export default function Header (props) {
     }
   }, [scrolling])
 
-  const { index, user, categories, collections, ad } = props
+  const { index, user, categories, collections } = props
 
   function handleScrollUp () {
     if (document) {

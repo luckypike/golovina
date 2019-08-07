@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-// import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import classNames from 'classnames'
+import axios from 'axios'
 import Cookies from 'universal-cookie'
 
 import { path } from './Routes'
@@ -9,6 +10,16 @@ import styles from './Ad.module.css'
 export default function Ad (props) {
   const cookies = new Cookies()
   const [noad, setNoad] = useState(false)
+  const [promo, setPromo] = useState()
+
+  useEffect(() => {
+    const _loadAsyncData = async () => {
+      const { data: { promo } } = await axios.get(path('last_promos_path', { format: 'json' }))
+      setPromo(promo)
+    }
+
+    _loadAsyncData()
+  }, [])
 
   function handleClose (e) {
     e.preventDefault()
@@ -19,29 +30,38 @@ export default function Ad (props) {
       document.getElementsByTagName('header')[0].classList.remove('ad')
     }
 
+    handleCookiesClear()
+  }
+
+  function handleCookiesClear () {
     cookies.set('noad', true, { path: '/' })
   }
 
   if (noad) return null
+  if (!promo) return null
 
   return (
-    <a href={path('catalog_last_path')} className={styles.root}>
-      <div className={styles.close} onClick={handleClose}>
-        <svg viewBox="0 0 16 16">
-          <line x1="1" y1="1" x2="15" y2="15" />
-          <line x1="1" y1="15" x2="15" y2="1" />
-        </svg>
-      </div>
+    <>
+      <div className={classNames(styles.overlay, styles.active)} onClick={handleClose}></div>
 
-      <div className={styles.ad}>
-        <div className={styles.text}>
-          Успей купить последнюю вещь с приятным бонусом
+      <div className={classNames(styles.size_helper)}>
+        <div className={styles.close} onClick={handleClose}>
+          <svg viewBox="0 0 16 16">
+            <line x1="1" y1="1" x2="15" y2="15" />
+            <line x1="1" y1="15" x2="15" y2="1" />
+          </svg>
         </div>
 
-        <div className={styles.more}>
-          Подробнее
+        <div className={styles.ad}>
+          <div className={styles.text}>
+            {promo.title}
+          </div>
+
+          <a href={promo.link} className={styles.more} onClick={handleCookiesClear}>
+            Подробнее
+          </a>
         </div>
       </div>
-    </a>
+    </>
   )
 }

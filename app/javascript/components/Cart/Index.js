@@ -73,7 +73,7 @@ class Index extends Component {
   }
 
   render () {
-    const { carts, order, user, values, amount, errors } = this.state
+    const { carts, order, user, values, amount, origin, errors } = this.state
 
     return (
       <div className={page.gray}>
@@ -90,9 +90,10 @@ class Index extends Component {
         {carts && carts.length > 0 &&
           <div className={styles.root}>
             <div className={styles.carts}>
-              <p>
-                Сумма заказа: {amount}
-              </p>
+              <div className={styles.amount}>
+                <div className={styles.sum}>Сумма заказа:</div>
+                <Price sell={amount} origin={origin} />
+            </div>
 
               {carts.map(cart =>
                 <div className={styles.cart} key={cart.id}>

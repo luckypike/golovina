@@ -1,56 +1,6 @@
-.root {
-  position: fixed;
-  height: calc(var(--yr) * 12);
-  overflow: hidden;
-  display: block;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: var(--ph_color);
-  z-index: 4;
-}
-
-.close {
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 16px var(--xr);
-  cursor: pointer;
-  z-index: 3;
-
-  @media (--m) {
-    left: var(--xr);
-  }
-
-  @media (--xl) {
-    left: calc(var(--xr) * 3);
-  }
-
-  & svg {
-    display: block;
-    width: 16px;
-    height: 16px;
-
-    & line {
-      stroke: var(--pr_color);
-    }
-  }
-}
-
 .ad {
-  align-items: center;
-  position: absolute;
-  display: flex;
-  left: calc(var(--yr) * 12);
-  right: var(--xr);
-  top: 50%;
-  transform: translateY(-50%);
-  composes: at from './Fonts';
-
   @media (--s) {
     left: calc(var(--yr) * 16);
-    font-size: inherit;
-    line-height: inherit;
   }
 
   @media (--m) {
@@ -67,28 +17,71 @@
 }
 
 .more {
+  display: inline-block;
   background-color: var(--pr_color);
   color: var(--wht_color);
   padding: calc(var(--yr) * 2) var(--xr);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-left: auto;
+  margin-top: calc(var(--yr) * 2);
   font-size: calc(var(--yr) * calc(var(--fs) - 1));
   line-height: calc(var(--yr) * calc(var(--lh) - 1));
+}
 
+.overlay {
+  visibility: hidden;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  opacity: 0;
+  transition: visibility 0s ease .3s, opacity .3s;
 
-  @media (--s) {
-    margin-left: var(--xr);
+  &.active {
+    visibility: visible;
+    opacity: .4;
+    transition: opacity .3s;
   }
 }
 
-/* .more {
-  right: var(--xr);
+.size_helper {
+  display: block;
+  padding: calc(var(--xr) * 4) calc(var(--xr) * 2);
+  text-align: center;
+  position: fixed;
+  left: 50%;
   top: 50%;
-  position: absolute;
-  transform: translateY(-50%);
+  transform: translate(-50%) translateY(-50%);
+  background: white;
+  width: 100%;
+  max-width: 400px;
+  z-index: 1000;
 
-  @media (--m) {
-    right: calc(var(--xr) * 2);
+  & :nth-child(6) {
+    border-bottom: 1px solid var(--sep_color);
   }
-} */
+}
+
+.close {
+  position: fixed;
+  cursor: pointer;
+  display: block;
+  height: calc(var(--xr) * 3);
+  width: calc(var(--yr) * 8);
+  right: calc(var(--xr) * 2 - calc(var(--yr) * 2));
+  top: calc(var(--yr) * 2);
+  padding: 16px 8px;
+
+  & svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+
+    & line {
+      stroke: var(--pr_color);
+    }
+  }
+}

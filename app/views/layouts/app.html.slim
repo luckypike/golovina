@@ -15,6 +15,7 @@ html
     = stylesheet_link_tag 'https://use.typekit.net/crp6yvg.css' unless Rails.env.test?
 
   body
+    = react_component 'Ad' unless cookies[:noad]
     = react_component( \
       'Header',
       { \
