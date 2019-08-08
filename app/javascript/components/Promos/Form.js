@@ -42,7 +42,7 @@ class Form extends React.Component {
               </div>
 
               <div className={form.input_input}>
-                <input type="text" value={promo.title} name="title" onChange={this.handleInputChange} />
+                <textarea name="title" value={promo.title} rows="2" onChange={this.handleInputChange} />
               </div>
             </div>
 
@@ -106,6 +106,7 @@ class Form extends React.Component {
   }
 
   handleInputChange = event => {
+
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const name = target.name

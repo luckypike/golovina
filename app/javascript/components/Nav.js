@@ -162,13 +162,16 @@ class Nav extends Component {
               <a href={path('control_kits_path')}>Образы</a>
             </div>
 
-
             <div className={styles.sub}>
               <a href={path('colors_path')}>Цвета</a>
             </div>
 
             <div className={styles.sub}>
               <a href={path('slides_path')}>Слайды</a>
+            </div>
+
+            <div className={styles.sub}>
+              <a href={path('promos_path')}>Предложения</a>
             </div>
           </Section>
         }
