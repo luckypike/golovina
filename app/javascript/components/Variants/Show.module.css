@@ -179,7 +179,7 @@
 
 .check {
   cursor: default;
-  
+
   @media (--s) {
     text-align: left;
   }
@@ -190,6 +190,7 @@
 }
 
 .images {
+  position: relative;
   margin-bottom: calc(var(--yr) * 3);
   margin-left: calc(var(--xr) * -1);
   margin-right: calc(var(--xr) * -1);
@@ -203,8 +204,10 @@
 }
 
 .slides {
+  position: static;
+  
   @media (--m) {
-    display: block;
+    position: relative;
   }
 }
 

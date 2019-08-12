@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import axios from 'axios'
 import classNames from 'classnames'
 import Glide from '@glidejs/glide'
+import Siema from 'siema'
 import ReactMarkdown from 'react-markdown'
 import PubSub from 'pubsub-js'
 
@@ -22,11 +23,9 @@ class Show extends Component {
     const { user } = this.props
 
     return (
-      <div className={page.root}>
-        <Router>
-          <Route path={Routes.catalog_variant_path} render={props => <Variant user={user} {...props.match.params} {...props} />} />
-        </Router>
-      </div>
+      <Router>
+        <Route path={Routes.catalog_variant_path} render={props => <Variant user={user} {...props.match.params} {...props} />} />
+      </Router>
     )
   }
 }
@@ -63,9 +62,9 @@ class Variant extends Component {
       //   size = variant.availabilities.find(availability => availability.active).size.id
       // }
 
-      this.setState({ variant, size }, () => {
+      this.setState({ variant, size, index: 1 }, () => {
         if(this.glide) {
-          this.glide.destroy()
+          this.glide.destroy(true)
           this.glide = null
         }
         if(this.state.variant.kits) {
@@ -95,20 +94,15 @@ class Variant extends Component {
   }
 
   updateDimensions = () =>  {
-    if(window.getComputedStyle(this.slides.current).getPropertyValue('display') == 'flex') {
+    if(window.getComputedStyle(this.slides.current).getPropertyValue('position') === 'static') {
       if(!this.glide) {
-        this.glide = new Glide(this.mount.current, {
-          rewind: false,
-          gap: 0
+        this.glide = new Siema({
+          onChange: () => this.setState({ index: this.glide.currentSlide + 1 })
         })
-        this.glide.on('run', (move) => {
-          this.setState({ index: this.glide.index + 1 })
-        })
-        this.glide.mount()
       }
     } else {
       if(this.glide) {
-        this.glide.destroy()
+        this.glide.destroy(true)
         this.glide = null
       }
     }
@@ -168,7 +162,7 @@ class Variant extends Component {
       section: state.section == section ? null : section
     }), () => {
       if(this.glide) {
-        this.glide.destroy()
+        this.glide.destroy(true)
         this.glide = null
       }
       if(this.kits_glide) {
@@ -206,25 +200,25 @@ class Variant extends Component {
   }
 
   render () {
-    const { variant, variants, size, send, section, add, index, archived, values, check} = this.state
+    const { variant, variants, size, send, section, add, index, archived, values, check } = this.state
     const { user } = this.props
     if(!variant) return null
 
     return (
-      <>
+      <div className={classNames(page.root)}>
         <div className={styles.root}>
-          <div className={classNames('glide', styles.images)} ref={this.mount}>
+
+          <div className={styles.images}>
             {variant.images.length > 1 &&
               <div className={styles.counter}>{index}/{variant.images.length}</div>
             }
-            <div className="glide__track" data-glide-el="track">
-              <div ref={this.slides} className={classNames('glide__slides', styles.slides)}>
-                {variant.images.map((image, i) =>
-                  <div className={classNames('glide__slide', styles.slide)} key={i}>
-                    <img src={image.large} />
-                  </div>
-                )}
-              </div>
+
+            <div className={classNames('siema', styles.slides)} ref={this.slides}>
+              {variant.images.map((image, i) =>
+                <div className={classNames('glide__slide', styles.slide)} key={i}>
+                  <img src={image.large} />
+                </div>
+              )}
             </div>
           </div>
 
@@ -395,7 +389,7 @@ class Variant extends Component {
             </div>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }
