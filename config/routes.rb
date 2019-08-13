@@ -154,6 +154,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :refunds
+
   resources :orders, only: [:index, :create] do
     collection do
       post :paid
