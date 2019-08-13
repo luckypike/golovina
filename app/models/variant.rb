@@ -3,6 +3,7 @@ class Variant < ApplicationRecord
 
   default_scope { includes(:images, { product: :category }).order(pinned: :desc, created_at: :desc) }
   scope :available, -> { where(state: [:active, :soon]) }
+  scope :visible, -> { where(show: true) if !Current.user&.is_editor? }
 
   before_validation :parse_image_ids
 
