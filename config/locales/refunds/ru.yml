@@ -1,0 +1,12 @@
+ru:
+  refund:
+    quantity:
+      one: "%{count} товар на сумму %{amount}"
+      few: "%{count} товара на сумму %{amount}"
+      many: "%{count} товаров на сумму %{amount}"
+      other: "%{count} товара на сумму %{amount}"
+
+
+    state:
+      active: Новый
+      done: Завершен

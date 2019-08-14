@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:orders]
+  before_action :set_user, only: [:orders, :refunds]
 
   layout 'app'
 
@@ -11,6 +11,17 @@ class UsersController < ApplicationController
       format.json do
         @orders = @user.orders.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).where.not(state: [:undef]).order(created_at: :desc)
         @orders = @orders.where(state: params[:state]) if params[:state]
+      end
+    end
+  end
+
+  def refunds
+    authorize @user
+
+    respond_to do |format|
+      format.html
+      format.json do
+        @refunds = @user.refunds.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]})
       end
     end
   end

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :wishlists
   has_many :carts
   has_many :orders
+  has_many :refunds
   has_many :notifications
 
   has_one :discount

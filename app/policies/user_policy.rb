@@ -3,6 +3,10 @@ class UserPolicy < ApplicationPolicy
     user == record
   end
 
+  def refunds?
+    user == record
+  end
+
   def account?
     true
   end

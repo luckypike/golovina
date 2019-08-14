@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_143106) do
+ActiveRecord::Schema.define(version: 2019_08_14_125138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,6 +217,10 @@ ActiveRecord::Schema.define(version: 2019_08_12_143106) do
     t.text "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_refunds_on_order_id"
+    t.index ["user_id"], name: "index_refunds_on_user_id"
   end
 
   create_table "similarables", force: :cascade do |t|
@@ -326,6 +330,7 @@ ActiveRecord::Schema.define(version: 2019_08_12_143106) do
     t.boolean "soon", default: false
     t.string "code"
     t.boolean "last", default: false
+    t.boolean "show", default: true
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["product_id", "color_id"], name: "index_variants_on_product_id_and_color_id", unique: true
     t.index ["product_id"], name: "index_variants_on_product_id"
@@ -356,6 +361,8 @@ ActiveRecord::Schema.define(version: 2019_08_12_143106) do
   add_foreign_key "order_items", "variants"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
+  add_foreign_key "refunds", "orders"
+  add_foreign_key "refunds", "users"
   add_foreign_key "similarables", "products"
   add_foreign_key "sizes", "sizes_groups"
   add_foreign_key "themables", "products"
