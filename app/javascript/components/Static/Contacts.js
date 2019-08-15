@@ -23,7 +23,7 @@ class Contacts extends Component {
             <div className={styles.info_wrapper}>
               <div className={styles.city}>Москва</div>
               <div className={styles.address}>
-                Магазин-галерея
+                Салон-галерея
                 <br/>
                 Большая Никитская, 21/18 с4, помещение 206
                 <br/>
