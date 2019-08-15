@@ -76,7 +76,7 @@
     padding-top: calc(5 / 4 * 100%);
 
     @media(--m) {
-      padding-top: calc(3 / 4 * 100%);
+      /* padding-top: calc(3 / 4 * 100%); */
     }
   }
 
@@ -104,9 +104,15 @@
 }
 
 .info {
+  margin-bottom: calc(var(--yr) * var(--s3));
+
   @media (--s) {
     align-self: center;
     order: 0;
+
+    &.moscow {
+      text-align: right;
+    }
 
     &:nth-child(4) {
       order: 2;

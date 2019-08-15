@@ -92,7 +92,7 @@ class VariantsController < ApplicationController
   def all
     authorize Variant
 
-    @variants = Variant.includes(product: :variants).available
+    @variants = Variant.includes(product: :variants).available.visible
 
     respond_to :html, :json
   end
@@ -100,7 +100,7 @@ class VariantsController < ApplicationController
   def last
     authorize Variant
 
-    @variants = Variant.includes(product: :variants).available.where(last: true)
+    @variants = Variant.includes(product: :variants).available.visible.where(last: true)
 
     respond_to :html, :json
   end
@@ -108,7 +108,7 @@ class VariantsController < ApplicationController
   def latest
     authorize Variant
 
-    @variants = Variant.includes(product: :variants).available.where(latest: true)
+    @variants = Variant.includes(product: :variants).available.visible.where(latest: true)
 
     respond_to :html, :json
   end
@@ -116,7 +116,7 @@ class VariantsController < ApplicationController
   def sale
     authorize Variant
 
-    @variants = Variant.includes(product: :variants).available.where(sale: true)
+    @variants = Variant.includes(product: :variants).available.visible.where(sale: true)
 
     respond_to :html, :json
   end
@@ -197,6 +197,6 @@ class VariantsController < ApplicationController
   end
 
   def variant_params
-    params.require(:variant).permit(:color_id, :code, :out_of_stock, :state, :created_at, :latest, :sale, :last, :soon, :pinned, :desc, :comp, :price, :price_last, :product_id, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :quantity, :_destroy], image_ids: [], images_attributes: [:id, :weight])
+    params.require(:variant).permit(:color_id, :code, :out_of_stock, :state, :created_at, :latest, :sale, :last, :soon, :pinned, :desc, :comp, :price, :price_last, :show, :product_id, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :quantity, :_destroy], image_ids: [], images_attributes: [:id, :weight])
   end
 end

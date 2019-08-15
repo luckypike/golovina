@@ -30,6 +30,7 @@ class Form extends Component {
       comp: '',
       price: '',
       price_last: '',
+      show: true,
       product_id: this.props.product ? this.props.product.id : [],
       product_attributes: this.props.product || null,
       availabilities_attributes: [],
@@ -200,6 +201,17 @@ class Form extends Component {
             </div>
 
             <div className={form.input}>
+              <div className={form.input_input}>
+                <div className={form.checkbox}>
+                  <label>
+                    <input type="checkbox" name="show" checked={values.show} onChange={this.handleInputChange} />
+                      Показывать товар
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className={form.input}>
               <div className={form.label}>
                 Описание
               </div>
@@ -269,6 +281,7 @@ class Form extends Component {
             comp: res.data.variant.comp,
             price: res.data.variant.price,
             price_last: res.data.variant.price_last,
+            show: res.data.variant.show,
             product_id: res.data.variant.product_attributes.id,
             product_attributes: res.data.variant.product_attributes,
             availabilities_attributes: res.data.variant.availabilities_attributes,
