@@ -145,6 +145,9 @@ class List extends Component {
                 {status.title}
               </div>
             )}
+            <a href={path('refunds_path')} className={styles.state}>
+              Возврат
+            </a>
           </div>
         }
         {orders.map(order =>

@@ -80,6 +80,7 @@ Rails.application.routes.draw do
       get '', to: 'service#index'
       get 'delivery', to: 'service#delivery'
       get 'return', to: 'service#return'
+      get 'refund', to: 'refunds#refund', format: :json
     end
 
     resources :users, only: [] do
@@ -155,7 +156,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :refunds
+  resources :refunds do
+    member do
+      post :done
+    end
+  end
 
   resources :orders, only: [:index, :create] do
     collection do

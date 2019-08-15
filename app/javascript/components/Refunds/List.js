@@ -40,10 +40,10 @@ class Item extends Component {
             {I18n.t('refund.quantity', { count: refund.quantity, amount: currency(refund.amount) })}
           </div>
 
-          {refund.state === 'paid' &&
-            <div className={styles.archive}>
+          {refund.editable && refund.state !== 'done' &&
+            <div className={styles.done}>
               <div className={buttons.main} onClick={() => this.handleUpdate(refund.id)}>
-                В архив
+                Завершить
               </div>
             </div>
           }
@@ -54,18 +54,19 @@ class Item extends Component {
             <div className={styles.details}>
               Получатель: {refund.user.title}
               <br />
-            Телефон: {link ? <a href={`tel:${refund.user.phone}`}>{refund.user.phone}</a> : refund.user.phone}
+              Телефон: {link ? <a href={`tel:${refund.user.phone}`}>{refund.user.phone}</a> : refund.user.phone}
               <br />
-            Адрес: {refund.address}
-            </div>
+              Адрес: {refund.address}
+              <br />
+              Причина возврата: {I18n.t(`refund.reason.${refund.reason}`)}
 
-            {refund.items.filter(item => !item.available).length === 0 && refund.purchasable &&
-              <div className={styles.pay}>
-                <a href={path('pay_refund_path', { id: refund.id })} className={buttons.main}>
-                  Оплатить
-                </a>
-              </div>
-            }
+              {refund.reason === 'other' &&
+                <>
+                  <br />
+                  Описание: {refund.detail}
+                </>
+              }
+            </div>
 
             <div className={styles.items}>
               {refund.items.map(item =>
@@ -114,17 +115,17 @@ class Item extends Component {
 
   handleUpdate = (id) => {
     axios.post(
-      path('archive_refund_path', { id: id }),
+      path('done_refund_path', { id: id }),
       { authenticity_token: document.querySelector('[name="csrf-token"]').content }
     ).then(res => {
-      this.props.onOrderChange(id)
+      this.props.onRefundChange(id)
     })
   }
 }
 
 Item.propTypes = {
   refund: PropTypes.object,
-  onOrderChange: PropTypes.func,
+  onRefundChange: PropTypes.func,
   link: PropTypes.bool
 }
 
@@ -148,7 +149,7 @@ class List extends Component {
           </div>
         }
         {refunds.map(refund =>
-          <Item key={refund.id} link={link} refund={refund} onOrderChange={this.props.onOrderChange}/>
+          <Item key={refund.id} link={link} refund={refund} onRefundChange={this.props.onRefundChange}/>
         )}
       </div>
     )
@@ -156,11 +157,8 @@ class List extends Component {
 }
 
 List.propTypes = {
-  status: PropTypes.string,
-  refunss: PropTypes.array,
-  states: PropTypes.array,
-  onStateChange: PropTypes.func,
-  onOrderChange: PropTypes.func,
+  refunds: PropTypes.array,
+  onRefundChange: PropTypes.func,
   link: PropTypes.bool
 }
 

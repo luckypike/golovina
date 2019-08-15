@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  enum state: { undef: 0, active: 1, paid: 2, archived: 3, declined: 4 } do
+  enum state: { undef: 0, active: 1, paid: 2, archived: 3 } do
     event :activate do
       after do
         user.common!
@@ -31,10 +31,6 @@ class Order < ApplicationRecord
 
     event :archive do
       transition paid: :archived
-    end
-
-    event :decline do
-      transition paid: :declined
     end
   end
 
