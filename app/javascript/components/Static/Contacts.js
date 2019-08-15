@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-// import classNames from 'classnames'
+import classNames from 'classnames'
 
 import page from '../Page'
 import styles from './Contacts.module.css'
@@ -19,11 +19,14 @@ class Contacts extends Component {
           <div className={styles.showcase}>
             <div className={styles.img} />
           </div>
-          <div className={styles.info}>
+          <div className={classNames(styles.info, styles.moscow)}>
             <div className={styles.info_wrapper}>
               <div className={styles.city}>Москва</div>
               <div className={styles.address}>
-                Большая Никитская, 21/18с4<br/>
+                Магазин-галерея
+                <br/>
+                Большая Никитская, 21/18 с4, помещение 206
+                <br/>
                 Телефон: +7 985 714-55-58
               </div>
               <div className={styles.schedule}>Ежедневно с 13:00 до 21:00</div>
@@ -38,7 +41,10 @@ class Contacts extends Component {
             <div className={styles.info_wrapper}>
               <div className={styles.city}>Нижний Новгород</div>
               <div className={styles.address}>
-                Ошарская, 61 <br/>
+                Корнер в магазине «Мяtа»
+                <br/>
+                Ошарская, 61
+                <br/>
                 Телефон: +7 910 134-07-77
               </div>
               <div className={styles.schedule}>Ежедневно с 12:00 до 20:00</div>
