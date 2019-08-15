@@ -112,7 +112,7 @@
   position: relative;
 
   &::before {
-    background: color-mod(#000 a(0.2));
+    background: color-mod(#000 a(0.3));
     display: block;
     content: '';
     padding-top: calc(3 / 2 * 100%);
