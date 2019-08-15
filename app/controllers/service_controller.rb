@@ -9,6 +9,7 @@ class ServiceController < ApplicationController
 
   def return
     authorize :static, :index?
+    @user = Current.user
   end
 
   def delivery

@@ -194,28 +194,34 @@ export default function Refund (props) {
         <h1>Возврат товара</h1>
       </div>
 
-      {orders &&
-        <div className={form.input}>
-          <div className={form.label}>
-            Выберите номер заказа, товары которого вы хотите вернуть
-          </div>
+      <div className={form.tight}>
+        {orders && orders.length === 0 &&
+          <div>У вас пока нет заказов</div>
+        }
 
-          <div className={form.input_input}>
-            <select name="order_id" onChange={(option) => setActive(orders.find(order => order.id === parseInt(option.target.value)))} value={active.id}>
-              {!active &&
-                <option />
-              }
-              {orders.map(order =>
-                <option key={order.id} value={order.id}>{order.id}</option>
-              )}
-            </select>
-          </div>
-        </div>
-      }
+        {orders && orders.length > 0 &&
+          <div className={form.input}>
+            <div className={form.label}>
+              Выберите номер заказа, товары которого вы хотите вернуть
+            </div>
 
-      {active &&
-        <Form order={active}/>
-      }
+            <div className={form.input_input}>
+              <select name="order_id" onChange={(option) => setActive(orders.find(order => order.id === parseInt(option.target.value)))} value={active.id}>
+                {!active &&
+                  <option />
+                }
+                {orders.map(order =>
+                  <option key={order.id} value={order.id}>{order.id}</option>
+                )}
+              </select>
+            </div>
+          </div>
+        }
+
+        {active &&
+          <Form order={active}/>
+        }
+      </div>
     </div>
   )
 }
