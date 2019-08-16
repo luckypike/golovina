@@ -137,7 +137,7 @@ class Variant extends Component {
     if (!this.state.size && this.state.variant.availabilities.length === 1 && this.state.variant.availabilities[0].size.id === 1) {
       await this.selectSize(this.state.variant.availabilities[0].size)
     }
-    else {
+    else if(!this.state.size) {
       this.setState({ check: true })
     }
     if (this.state.size && !this.state.send) {
