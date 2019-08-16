@@ -1,12 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { path } from '../Routes'
 
 import page from '../Page'
-import styles from './Service.module.css'
+// import styles from './Service.module.css'
 import buttons from '../Buttons.module.css'
 
+Return.propTypes = {
+  user: PropTypes.object
+}
+
 export default function Return (props) {
+  const { user } = props
+
   return (
     <div className={page.root}>
       <div className={page.title}>
@@ -26,14 +33,16 @@ export default function Return (props) {
           Для возврата денег Вам необходимо авторизоваться на сайте и заполнить форму возврата. Возврат денежных средств осуществляется на банковскую карту в
           течение 10-ти рабочих дней с момента возвращения товара в магазин.
         </p>
-        {props.user.state !== 'guest' &&
+
+        {user && user.state !== 'guest' &&
           <p>
             <a className={buttons.main} href={path('service_refund_path')}>Оформить возврат</a>
           </p>
         }
-        {props.user.state === 'guest' &&
+
+        {(!user || user.state === 'guest') &&
           <p>
-            <a className={buttons.main} href={path('new_user_session_path')}>Авторизоваться</a>
+            <a className={buttons.main} href={path('new_user_session_path')}>Войти</a>
           </p>
         }
       </div>
