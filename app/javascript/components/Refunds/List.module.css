@@ -80,7 +80,7 @@
   }
 }
 
-.archive {
+.done {
  margin: calc(var(--yr) * 2) 0;
 
   @media (--s) {

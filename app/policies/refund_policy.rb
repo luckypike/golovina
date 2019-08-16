@@ -4,7 +4,7 @@ class RefundPolicy < ApplicationPolicy
   end
 
   def index?
-    user&.is_admin?
+    user&.is_editor?
   end
 
   def create?
@@ -12,6 +12,6 @@ class RefundPolicy < ApplicationPolicy
   end
 
   def done?
-    user&.is_admin?
+    user&.is_editor?
   end
 end
