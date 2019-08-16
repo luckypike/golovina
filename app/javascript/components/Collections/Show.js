@@ -29,6 +29,7 @@ export default function Show (props) {
 
   let singles = []
 
+  if (id === 10) singles = [2, 8, 23]
   if (id === 8) singles = [3, 4, 7, 10, 16, 20, 29, 32, 33, 39]
   if (id === 7) singles = [0, 4, 7, 8, 10, 14, 17, 20, 23, 27, 28, 34, 35, 36, 39, 40, 43, 44, 47]
 

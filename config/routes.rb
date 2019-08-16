@@ -66,16 +66,6 @@ Rails.application.routes.draw do
   resources :collections
 
   scope format: false do
-    namespace 'about', module: nil do
-      get '', to: 'about#collection'
-      # get 'open', to: 'about#open'
-      namespace 'golovina', module: nil do
-        get '', to:  'about#brand'
-        get 'lookbook', to: 'about#lookbook'
-        get 'xmas', to: 'about#xmas'
-      end
-    end
-
     namespace 'service', module: nil do
       get '', to: 'service#index'
       get 'delivery', to: 'service#delivery'
