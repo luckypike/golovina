@@ -205,7 +205,7 @@
 
 .slides {
   position: static;
-  
+
   @media (--m) {
     position: relative;
   }
@@ -370,15 +370,12 @@
 }
 
 .kits {
-  display: flex;
+  display: grid;
+  grid-gap: calc(var(--yr) * 2);
+  grid-template-columns: 1fr 1fr;
 
   & .kit_item {
-    padding-right: calc(var(--yr) * 2);
     position: relative;
-
-    &:last-child {
-      padding-right: 0;
-    }
 
     & .kit_fake {
       position: absolute;
@@ -394,11 +391,12 @@
     position: relative;
     background-color: #f9f9f9;
     overflow: hidden;
+    margin-bottom: var(--yr);
 
     &::before {
       display: block;
       content: '';
-      padding-top: calc(5 / 4 * 100%)
+      padding-top: calc(4 / 3 * 100%)
     }
 
     & img {
