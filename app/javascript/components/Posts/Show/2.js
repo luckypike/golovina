@@ -41,6 +41,10 @@ export default function Collection (props) {
         </h1>
       </div>
 
+      <div className={styles.text}>
+        <ReactMarkdown source={text} />
+      </div>
+
       <div className={styles.video}>
         <div className={styles.player}>
           <iframe
@@ -50,10 +54,6 @@ export default function Collection (props) {
             allowFullScreen
           />
         </div>
-      </div>
-
-      <div className={styles.text}>
-        <ReactMarkdown source={text} />
       </div>
 
       <div className={classNames('glide', styles.images)} ref={mount}>
