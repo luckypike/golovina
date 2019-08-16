@@ -40,7 +40,7 @@ class Item extends Component {
             {I18n.t('order.quantity', { count: order.quantity, amount: currency(order.amount) })}
           </div>
 
-          {order.state === 'paid' &&
+          {order.editable && order.state === 'paid' &&
             <div className={styles.archive}>
               <div className={buttons.main} onClick={() => this.handleUpdate(order.id)}>
                 В архив

@@ -29,6 +29,15 @@ class Orders extends Component {
         </div>
 
         <div>
+          <div className={styles.states}>
+            <a href={path('orders_user_path', { id: this.props.user.id })} className={classNames(styles.state, { [styles.active]: true })}>
+              Заказы
+            </a>
+            <a href={path('refunds_user_path', { id: this.props.user.id })} className={styles.state}>
+              Возвраты
+            </a>
+          </div>
+
           {orders &&
             <List orders={orders} />
           }

@@ -104,12 +104,20 @@ class Form extends React.Component {
         </div>
         <div className={styles.items}>
           {items.map(item =>
-            <div className={classNames(styles.item, { [styles.selected]: item.selected})} key={item.id} onClick={() => this.handleSelect(item)}>
+            <div className={styles.item} key={item.id} onClick={() => this.handleSelect(item)}>
               {item.refund &&
                 <div className={styles.refund}>
                   <div>На данный товар уже составлена заявка на возврат</div>
                 </div>
               }
+              <div className={styles.check}>
+                <div className={form.checkbox}>
+                  <label>
+                    <input type="checkbox" name="latest" checked={item.selected} onChange={() => this.handleSelect(item)}/>
+                  </label>
+                </div>
+              </div>
+
               <div className={styles.image}>
                 {item.variant.images.length > 0 &&
                   <img src={item.variant.images[0].thumb} />
@@ -167,7 +175,7 @@ class Form extends React.Component {
           }
 
           <div>
-            <input className={buttons.main} type="submit" value="Сохранить" disabled={!this.canSubmit()}/>
+            <input className={buttons.main} type="submit" value="Оформить" disabled={!this.canSubmit()}/>
           </div>
         </form>
       </div>
