@@ -55,12 +55,15 @@ class Variant extends Component {
     if((prevState.id != this.state.id || !this.state.variant) && this.state.variants) {
       const variant = this.state.variants.find(variant => variant.id == this.state.id)
       let size = null
+      let section = null
+
+      if (variant.section) section = variant.section
 
       // if(variant.availabilities.filter(availability => availability.active).length == 1) {
       //   size = variant.availabilities.find(availability => availability.active).size.id
       // }
 
-      this.setState({ variant, size, index: 1 }, () => {
+      this.setState({ variant, size, section, index: 1 }, () => {
         if(this.glide) {
           this.glide.destroy(true)
           this.glide = null
@@ -296,6 +299,19 @@ class Variant extends Component {
             }
 
             <div className={styles.acc}>
+              {variant.kits &&
+                <Acc id="kits" title="С чем носить" onToggle={this.toggleSection} section={section}>
+                  <div className={styles.kits}>
+                    {variant.kits.map((kit) =>
+                      <a href={path('kit_path', {id: kit.id})} key={kit.id} className={styles.kit_item}>
+                        <div className={styles.kit_image}><img src={kit.image}/></div>
+                        <div className={styles.kit_title}>{kit.title}</div>
+                      </a>
+                    )}
+                  </div>
+                </Acc>
+              }
+
               {variant.comp &&
                 <Acc id="desc" title="Состав и уход" onToggle={this.toggleSection} section={section}>
                   <ReactMarkdown source={variant.comp} />
@@ -325,19 +341,6 @@ class Variant extends Component {
                   <a href={path('service_return_path')}>Подробнее</a>
                 </p>
               </Acc>
-
-              {variant.kits &&
-                <Acc id="kits" title="С чем носить" onToggle={this.toggleSection} section={section}>
-                  <div className={styles.kits}>
-                    {variant.kits.map((kit) =>
-                      <a href={path('kit_path', {id: kit.id})} key={kit.id} className={styles.kit_item}>
-                        <div className={styles.kit_image}><img src={kit.image}/></div>
-                        <div className={styles.kit_title}>{kit.title}</div>
-                      </a>
-                    )}
-                  </div>
-                </Acc>
-              }
 
               {archived && archived.length > 0 &&
                 <Acc id="archived" title="Архив цветов" onToggle={this.toggleSection} section={section}>
