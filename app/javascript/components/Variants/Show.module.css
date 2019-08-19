@@ -371,8 +371,13 @@
 
 .kits {
   display: grid;
-  grid-gap: calc(var(--yr) * 2);
+  composes: at from '../Fonts.module.css';
+  grid-gap: calc(var(--yr) * 4);
   grid-template-columns: 1fr 1fr;
+
+  @media(--m) {
+    grid-gap: calc(var(--yr) * 8);
+  }
 
   & .kit_item {
     position: relative;
