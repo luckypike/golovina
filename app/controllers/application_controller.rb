@@ -10,7 +10,10 @@ class ApplicationController < ActionController::Base
 
   after_action :verify_authorized
 
+  around_action :switch_locale
+
   private
+
   def set_current
     Current.user = current_user
   end
@@ -34,5 +37,16 @@ class ApplicationController < ActionController::Base
       user.save!(validate: false)
       sign_in(user)
     end
+  end
+
+  def switch_locale(&action)
+    locale = extract_locale_from_subdomain || I18n.default_locale
+
+    I18n.with_locale(locale, &action)
+  end
+
+  def extract_locale_from_subdomain
+    parsed_locale = request.subdomains.first
+    I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end
 end
