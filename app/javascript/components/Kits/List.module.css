@@ -7,7 +7,7 @@
     grid-template-rows: auto 1fr;
     margin-bottom: calc(var(--yr) * calc(var(--s4) * 2));
 
-    & .images {
+    & .slider {
       grid-column: 2 / span 4;
       grid-row: span 2;
     }
@@ -20,6 +20,50 @@
       grid-column: 7 / span 6;
     }
   }
+}
+
+.slider {
+  position: relative;
+  align-self: start;
+}
+
+.nav {
+  color: white;
+  position: absolute;
+  z-index: 2;
+  bottom: calc(var(--yr) * var(--s2));
+  right: calc(var(--yr) * var(--s2));
+  padding-right: 0;
+
+  &.isSlide {
+    padding-right: 66px;
+  }
+}
+
+.prev, .next {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background-color: var(--pr_color);
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  top: 0;
+}
+
+.next {
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+  background-image: url(../../images/icons/arr.svg);
+  right: 0;
+}
+
+.prev {
+  background-image: url(../../images/icons/arl.svg);
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+  right: 28px;
 }
 
 .images {

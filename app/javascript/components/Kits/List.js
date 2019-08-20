@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import Siema from 'siema'
 import classNames from 'classnames'
@@ -8,39 +8,52 @@ import I18n from '../I18n'
 
 import styles from './List.module.css'
 
-List.propTypes = {
-  kits: PropTypes.array
+Kit.propTypes = {
+  kit: PropTypes.object
 }
 
-function Kit (props) {
-  const { kit } = props
-  const slider = useRef(null)
-  const mount = useRef(null)
+function Kit ({ kit }) {
+  const slider = useRef()
+  const mount = useRef()
+
+  const isSlide = () => {
+    return kit.images.length > 1
+  }
 
   useEffect(() => {
-    const _updateDimensions = () => {
-      if(mount.current) {
-        mount.current.destroy(true)
-      }
-
-      mount.current = new Siema({
-        selector: slider.current
+    if (isSlide()) {
+      slider.current = new Siema({
+        selector: mount.current,
+        onChange: () => {
+          setCurrent(slider.current.currentSlide + 1)
+        }
       })
     }
-
-    _updateDimensions()
-
-    window.addEventListener('resize', _updateDimensions)
   }, [])
+
+  const [current, setCurrent] = useState(1)
 
   return (
     <div key={kit.id} className={styles.kit}>
-      <div ref={slider} className={classNames('siema', styles.images)}>
-        {kit.images.map((image, index) =>
-          <div key={index} className={styles.image}>
-            <img src={image.thumb} />
-          </div>
-        )}
+      <div className={styles.slider}>
+        <div className={classNames(styles.nav, { [styles.isSlide]: isSlide() })}>
+          {current} / {kit.images.length}
+
+          {isSlide() &&
+            <>
+              <div className={styles.prev} onClick={() => slider.current.prev()} />
+              <div className={styles.next} onClick={() => slider.current.next()} />
+            </>
+          }
+        </div>
+
+        <div ref={mount} className={styles.images}>
+          {kit.images.map((image, index) =>
+            <div key={index} className={styles.image}>
+              <img src={image.thumb} />
+            </div>
+          )}
+        </div>
       </div>
 
       <div className={styles.title}>
@@ -58,6 +71,10 @@ function Kit (props) {
       </div>
     </div>
   )
+}
+
+List.propTypes = {
+  kits: PropTypes.array
 }
 
 export default function List (props) {

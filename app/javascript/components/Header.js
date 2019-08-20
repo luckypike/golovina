@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import listToTree from 'list-to-tree-lite'
-import Cookies from 'universal-cookie'
 import PubSub from 'pubsub-js'
 
 import { path } from './Routes'
@@ -28,7 +27,6 @@ Header.defaultProps = {
 export default function Header (props) {
   const [active, setActive] = useState(false)
   const [white, setWhite] = useState(false)
-  const cookies = new Cookies()
 
   const CartSubscriber = function (msg, data) {
     setCart(data)
@@ -51,7 +49,7 @@ export default function Header (props) {
         setScrolling(true)
       }
 
-      if(props.index && window.scrollY > (window.innerWidth / 1.7 - 64)) {
+      if (props.index && window.scrollY > (window.innerWidth / 1.7 - 64)) {
         setWhite(false)
       } else if (props.index && window.scrollY < (window.innerWidth / 1.7 - 64)) {
         setWhite(true)

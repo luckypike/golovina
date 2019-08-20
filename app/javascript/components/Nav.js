@@ -42,6 +42,10 @@ class Nav extends Component {
             <a href={path('catalog_latest_path')}>New</a>
           </div>
 
+          <div className={styles.sub}>
+            <a href={path('kits_path')}>Готовые решения</a>
+          </div>
+
           {categories.map(category =>
             <div className={styles.sub} key={category.id}>
               <a href={path('catalog_category_path', { slug: category.slug })}>{category.title}</a>
