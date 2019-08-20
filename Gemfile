@@ -38,6 +38,7 @@ gem 'pundit'
 gem 'active_link_to'
 
 gem 'globalize'
+gem 'globalize-accessors'
 gem 'i18n-js'
 gem 'rails-i18n'
 

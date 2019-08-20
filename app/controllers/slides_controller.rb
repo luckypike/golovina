@@ -1,24 +1,23 @@
 class SlidesController < ApplicationController
-  before_action :set_slide, only: [:show, :edit, :update, :destroy]
+  before_action :set_slide, only: %i[edit update destroy]
+  # before_action :set_slide, only: [:show, :edit, :update, :destroy]
+
+  layout 'app'
 
   def index
-    @slides = Slide.all.order('weight')
+    authorize Slide
 
-    authorize @slides
+    @slides = Slide.all.order('weight')
   end
 
   def new
     @slide = Slide.new
 
     authorize @slide
+
+    respond_to :html, :json
   end
 
-  # GET /slides/1/edit
-  def edit
-    authorize @slide
-  end
-
-  # POST /slides
   def create
     @slide = Slide.new(slide_params)
 
@@ -29,6 +28,10 @@ class SlidesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+    authorize @slide
   end
 
   # PATCH/PUT /slides/1
