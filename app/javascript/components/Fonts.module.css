@@ -23,6 +23,10 @@ h2, .h2 {
 h3, .h3 {
   font-size: inherit;
   line-height: inherit;
+  font-weight: var(--fw_normal);
+}
+
+strong {
   font-weight: var(--fw_bold);
 }
 
