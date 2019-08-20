@@ -5,6 +5,7 @@ json.variant do
   json.images @variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] } do |image|
     json.id image.id
     json.preview image.photo.preview.url
+    json.favourite image.favourite
   end
 
   json.product_attributes do

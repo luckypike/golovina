@@ -407,7 +407,7 @@ class Form extends Component {
     this.setState(state => ({
       values: { ...state.values,
         image_ids: images.map(i => i.id),
-        images_attributes: images.map((i, index) => ({ id: i.id, weight: index + 1 }))
+        images_attributes: images.map((i, index) => ({ id: i.id, weight: index + 1, favourite: i.favourite }))
       }
     }))
   }

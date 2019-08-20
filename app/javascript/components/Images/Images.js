@@ -2,18 +2,19 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import Dropzone from 'react-dropzone'
 import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc'
+import Check from '!svg-react-loader?!../../images/icons/check.svg'
+import update from 'immutability-helper'
 
 import ImageItem from './ImageItem'
 import Image from './Image'
 
 import styles from './Images.module.css'
 
-class Images extends React.Component {
+class Images extends Component {
   state = {
     files: [],
     images: []
   }
-
 
   static getDerivedStateFromProps(props, state) {
     if(props.images !== state.images && state.images.length == 0) {
@@ -26,10 +27,10 @@ class Images extends React.Component {
   }
 
   render () {
-    const { images, files} = this.state
+    const { images, files } = this.state
 
     return (
-      <List images={images} files={files} onImagesChange={this.handleImagesChange} onFileUpload={this.handleFileUpload} onDrop={this.onDrop} onSortEnd={this._onSortEnd} axis={'xy'} useDragHandle />
+      <List images={images} files={files} onFavouriteChange={this.handleFavouriteChange} onImagesChange={this.handleImagesChange} onFileUpload={this.handleFileUpload} onDrop={this.onDrop} onSortEnd={this._onSortEnd} axis={'xy'} useDragHandle />
     )
   }
 
@@ -67,20 +68,52 @@ class Images extends React.Component {
       this.props.onImagesChange(this.state.images)
     });
   }
+
+  handleFavouriteChange = (id) => {
+    let images = this.state.images
+
+    images.map((image, i) => {
+      let favourite = false
+
+      if (image.id == id) {
+        favourite = !image.favourite
+      }
+      images = update(images, {
+        [i]: {
+          favourite: { $set: favourite }
+        }
+      })
+    })
+
+    this.setState(state => ({
+      images
+    }), () => {
+      this.props.onImagesChange(images)
+    })
+  }
 }
 
 const DragHandle = sortableHandle(() => <div className={styles.drag} />)
 
-const Item = SortableElement(({ image, onImagesChange }) => {
+const Item = SortableElement(({ images, image, onImagesChange, onFavouriteChange }) => {
   return (
     <div className={styles.item}>
-      <DragHandle />
-      <ImageItem image={image} onImagesChange={onImagesChange}></ImageItem>
+      <div>
+        <ImageItem onFavouriteChange={onFavouriteChange} image={image} onImagesChange={onImagesChange}></ImageItem>
+      </div>
+      <div className={styles.options}>
+        <div className={styles.option}>
+          <div className={classNames(styles.favourite, {[styles.active]: image.favourite })} onClick={() => onFavouriteChange(image.id)}>
+            <Check />
+          </div>
+        </div>
+        <DragHandle />
+      </div>
     </div>
   )
 })
 
-const List = SortableContainer(({ images, files, onImagesChange, onFileUpload, onDrop }) => {
+const List = SortableContainer(({ images, files, onImagesChange, onFileUpload, onDrop, onFavouriteChange }) => {
   return (
     <div className={styles.images}>
       <Dropzone onDrop={onDrop}>
@@ -96,7 +129,7 @@ const List = SortableContainer(({ images, files, onImagesChange, onFileUpload, o
 
       {images &&
         images.map((image, index) => (
-          <Item key={image.id} index={index} image={image} onImagesChange={onImagesChange}/>
+          <Item key={image.id} index={index} image={image} onImagesChange={onImagesChange} onFavouriteChange={onFavouriteChange} />
         ))
       }
 
