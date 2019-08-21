@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
@@ -9,6 +9,7 @@ import { Errors } from '../Form'
 
 import page from '../Page.module.css'
 import form from '../Form.module.css'
+import buttons from '../Buttons.module.css'
 
 Form.propTypes = {
   locale: PropTypes.string,
@@ -16,6 +17,8 @@ Form.propTypes = {
 }
 
 export default function Form (props) {
+  const image = useRef()
+
   const I18n = useI18n(props.locale)
   // const axios = useAxios()
   const { id } = props
@@ -45,10 +48,13 @@ export default function Form (props) {
       setSend(true)
     }
 
-    const params = {
-      slide: values,
-      authenticity_token: document.querySelector('[name="csrf-token"]').content
-    }
+    const params = new FormData()
+    params.append('authenticity_token', document.querySelector('[name="csrf-token"]').content)
+    Object.entries(values).map(([ key, value ]) => {
+      params.append(`slide[${key}]`, value)
+    })
+
+    if (image.current.files[0]) params.append('slide[image]', image.current.files[0])
 
     if (id) {
       _handleUpdate(params)
@@ -87,12 +93,10 @@ export default function Form (props) {
     e.preventDefault()
 
     await axios.delete(
-      path('slide_path', { id })
+      path('slide_path', { id }),
+      { data: { authenticity_token: document.querySelector('[name="csrf-token"]').content } }
     ).then(res => {
       window.location = res.headers.location
-    }).catch((error) => {
-      setErrors(error.response.data)
-      setSend(false)
     })
   }
 
@@ -106,6 +110,20 @@ export default function Form (props) {
 
       <div>
         <form onSubmit={handleSubmit}>
+          <div className={form.el}>
+            <label>
+              <div className={form.label}>
+                Изображение
+              </div>
+
+              <div className={form.input}>
+                <input type="file" name="image" ref={image} />
+              </div>
+            </label>
+
+            <Errors errors={errors.image} />
+          </div>
+
           <div className={form.el}>
             <div className={form.label}>
               Текст в блоке
@@ -149,7 +167,7 @@ export default function Form (props) {
               </div>
 
               <div className={form.input}>
-                <input value={values.weight} name="link" onChange={handleChange} />
+                <input value={values.weight} name="weight" onChange={handleChange} />
               </div>
             </label>
 
@@ -157,9 +175,14 @@ export default function Form (props) {
           </div>
 
           <div>
-            <input type="submit" value="Сохранить" />
+            {send && 'Настройки блока сохраняются..' }
 
-            <a href={path('slide_path', { id })} onClick={handleDestroy}>Удалить</a>
+            {!send &&
+              <>
+                <input type="submit" value="Сохранить" className={buttons.main} disabled={send} />
+                <a href={path('slide_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>
+              </>
+            }
           </div>
         </form>
       </div>

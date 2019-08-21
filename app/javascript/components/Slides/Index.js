@@ -80,6 +80,12 @@ export default function Index ({ locale }) {
         <div className={styles.slides}>
           {slides.map(slide =>
             <a href={path('edit_slide_path', { id: slide.id })} key={slide.id} className={styles.slide}>
+              <div className={styles.image}>
+                {slide.image &&
+                  <img src={slide.image} />
+                }
+              </div>
+
               <div>{slide.name}</div>
             </a>
           )}

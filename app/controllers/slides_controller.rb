@@ -47,7 +47,7 @@ class SlidesController < ApplicationController
     authorize @slide
 
     @slide.destroy
-    redirect_to slides_url, notice: 'Slide was successfully destroyed.'
+    head :ok, location: slides_path
   end
 
   private
@@ -57,7 +57,7 @@ class SlidesController < ApplicationController
   end
 
   def slide_params
-    permitted = Slide.globalize_attribute_names + %i[weight link]
+    permitted = Slide.globalize_attribute_names + %i[weight link image]
     params.require(:slide).permit(*permitted)
   end
 end
