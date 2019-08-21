@@ -1,1 +1,1 @@
-json.extract! slide, :id
+json.extract! slide, :id, :name

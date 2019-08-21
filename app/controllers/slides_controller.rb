@@ -7,15 +7,13 @@ class SlidesController < ApplicationController
   def index
     authorize Slide
 
-    @slides = Slide.all.order('weight')
+    @slides = Slide.order(weight: :asc, id: :asc)
   end
 
   def new
     @slide = Slide.new
 
     authorize @slide
-
-    respond_to :html, :json
   end
 
   def create
@@ -24,9 +22,9 @@ class SlidesController < ApplicationController
     authorize @slide
 
     if @slide.save
-      redirect_to slides_path, notice: 'Slide was successfully created.'
+      head :ok, location: slides_path
     else
-      render :new
+      render json: @slide.errors, status: :unprocessable_entity
     end
   end
 
@@ -34,14 +32,13 @@ class SlidesController < ApplicationController
     authorize @slide
   end
 
-  # PATCH/PUT /slides/1
   def update
     authorize @slide
 
     if @slide.update(slide_params)
-      redirect_to slides_path, notice: 'Slide was successfully updated.'
+      head :ok, location: slides_path
     else
-      render :edit
+      render json: @slide.errors, status: :unprocessable_entity
     end
   end
 
@@ -54,13 +51,13 @@ class SlidesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_slide
-      @slide = Slide.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def slide_params
-      params.require(:slide).permit(:name, :link, :link_name, :logo, :image, :left_offset, :top_offset, :weight)
-    end
+  def set_slide
+    @slide = Slide.find(params[:id])
+  end
+
+  def slide_params
+    permitted = Slide.globalize_attribute_names + %i[weight link]
+    params.require(:slide).permit(*permitted)
+  end
 end

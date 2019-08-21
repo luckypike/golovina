@@ -17,6 +17,10 @@
   }
 }
 
+.gl {
+  
+}
+
 .input {
   margin: 0 0 calc(var(--yr) * 4);
 

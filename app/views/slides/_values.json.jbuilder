@@ -3,6 +3,9 @@ json.values do
     json.set! f, slide.send(f) || ''
   end
 
+  json.weight slide.weight || Slide.order(weight: :desc).first.weight + 1
+  json.link slide.link || ''
+
   # json.translations slide.translations do |translation|
   #   json.locale translation.locale
   #   json.name translation.name

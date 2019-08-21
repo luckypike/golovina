@@ -1,0 +1,32 @@
+.root {
+  @media (--s) {
+    margin: 0 calc(2 / 12 * 100%);
+  }
+}
+
+.drag {
+  background-image: url('../../images/icons/drag.svg');
+  background-color: color-mod(var(--pr_color) alpha(50%));
+  position: absolute;
+  left: calc(var(--yr) * 4);
+  top: calc(var(--yr) * 4);
+  height: calc(var(--yr) * 6);
+  width: calc(var(--yr) * 6);
+  cursor: row-resize;
+
+  @media (--s) {
+    top: calc(var(--yr) * 5);
+  }
+}
+
+.slide {
+  display: block;
+  padding: calc(var(--yr) * var(--s2));
+  background-color: white;
+  /* padding-left: calc(var(--yr) * 14); */
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * var(--s2));
+  }
+}
