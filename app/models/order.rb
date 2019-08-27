@@ -3,6 +3,7 @@ class Order < ApplicationRecord
     event :activate do
       after do
         user.common!
+        user.activate(user.email)
         OrderMailer.activate(self).deliver if Rails.env.development?
       end
 
