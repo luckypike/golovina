@@ -62,7 +62,7 @@ class User < ApplicationRecord
   class << self
     def prepare_phone text
       text ||= ''
-      text = text.sub('/^8/', '+7').gsub(/[\D]/, '')
+      text = text.sub(/^8/, '7').gsub(/[\D]/, '')
       text.size == 11 ? text : false
     end
   end
