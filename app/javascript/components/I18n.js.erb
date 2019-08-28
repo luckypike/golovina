@@ -1,15 +1,21 @@
 /* rails-erb-loader-dependencies ../config/locales/ */
 
 import I18n from 'i18n-js'
+// import react from 'react'
 
-I18n.pluralization["ru"] = function (count) {
-  var key = count % 10 == 1 && count % 100 != 11 ? "one" : [2, 3, 4].indexOf(count % 10) >= 0 && [12, 13, 14].indexOf(count % 100) < 0 ? "few" : count % 10 == 0 || [5, 6, 7, 8, 9].indexOf(count % 10) >= 0 || [11, 12, 13, 14].indexOf(count % 100) >= 0 ? "many" : "other"
+I18n.pluralization['ru'] = function (count) {
+  let key = count % 10 == 1 && count % 100 != 11 ? "one" : [2, 3, 4].indexOf(count % 10) >= 0 && [12, 13, 14].indexOf(count % 100) < 0 ? "few" : count % 10 == 0 || [5, 6, 7, 8, 9].indexOf(count % 10) >= 0 || [11, 12, 13, 14].indexOf(count % 100) >= 0 ? "many" : "other"
+  if (count < 1) key = 'zero'
   return [key]
-};
+}
 
 I18n.translations = <%= I18n::JS.filtered_translations.to_json %>
-
-I18n.default_locale = 'ru'
-I18n.locale = 'ru'
+I18n.available_locales = <%= I18n.available_locales.to_json %>
 
 export default I18n
+
+export function useI18n (locale) {
+  I18n.locale = locale
+
+  return I18n
+}

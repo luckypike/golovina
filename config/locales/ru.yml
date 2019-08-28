@@ -51,6 +51,12 @@ ru:
       add: Добавить цвет
       remove: Удалить цвет
 
+
+  errors:
+    messages:
+      extension_whitelist_error: Разрешены только картинки!
+
+
   activerecord:
     errors:
       models:

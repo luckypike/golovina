@@ -1,0 +1,7 @@
+en:
+  search:
+    title: Search
+    desc: Search page across the products
+
+    form:
+      placeholder: Enter title or code...

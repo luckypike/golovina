@@ -8,7 +8,7 @@ class Search extends Component {
   render () {
     return (
       <Router>
-        <Route path={Routes.search_path} component={Index} />
+        <Route path={Routes.search_path} render={props => <Index {...props} {...this.props} />} />
       </Router>
     )
   }

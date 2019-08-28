@@ -1,10 +1,13 @@
 class SlidesController < ApplicationController
-  before_action :set_slide, only: [:show, :edit, :update, :destroy]
+  before_action :set_slide, only: %i[edit update destroy]
+  # before_action :set_slide, only: [:show, :edit, :update, :destroy]
+
+  layout 'app'
 
   def index
-    @slides = Slide.all.order('weight')
+    authorize Slide
 
-    authorize @slides
+    @slides = Slide.order(weight: :asc, id: :asc)
   end
 
   def new
@@ -13,32 +16,29 @@ class SlidesController < ApplicationController
     authorize @slide
   end
 
-  # GET /slides/1/edit
-  def edit
-    authorize @slide
-  end
-
-  # POST /slides
   def create
     @slide = Slide.new(slide_params)
 
     authorize @slide
 
     if @slide.save
-      redirect_to slides_path, notice: 'Slide was successfully created.'
+      head :ok, location: slides_path
     else
-      render :new
+      render json: @slide.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /slides/1
+  def edit
+    authorize @slide
+  end
+
   def update
     authorize @slide
 
     if @slide.update(slide_params)
-      redirect_to slides_path, notice: 'Slide was successfully updated.'
+      head :ok, location: slides_path
     else
-      render :edit
+      render json: @slide.errors, status: :unprocessable_entity
     end
   end
 
@@ -47,17 +47,17 @@ class SlidesController < ApplicationController
     authorize @slide
 
     @slide.destroy
-    redirect_to slides_url, notice: 'Slide was successfully destroyed.'
+    head :ok, location: slides_path
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_slide
-      @slide = Slide.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def slide_params
-      params.require(:slide).permit(:name, :link, :link_name, :logo, :image, :left_offset, :top_offset, :weight)
-    end
+  def set_slide
+    @slide = Slide.find(params[:id])
+  end
+
+  def slide_params
+    permitted = Slide.globalize_attribute_names + %i[weight link image]
+    params.require(:slide).permit(*permitted)
+  end
 end
