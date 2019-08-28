@@ -1,10 +1,11 @@
 class ColorsController < ApplicationController
   before_action :set_color, only: [:show, :edit, :update, :destroy]
 
-  # GET /colors
+  layout 'app'
+
   def index
     authorize Color
-    @colors = Color.all.order(title: :asc)
+    @colors = Color.where(parent_color: nil).order(id: :asc)
   end
 
   # GET /colors/1

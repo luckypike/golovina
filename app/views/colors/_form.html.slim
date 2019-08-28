@@ -1,18 +1,1 @@
-.form
-  = simple_form_for(@color) do |f|
-    = f.error_notification
-
-    .form_inputs
-      = f.input :title
-      = f.association :parent_color, collection: Color.tree(@color.id)
-      = f.input :color, input_html: { type: :color }
-      - if @color.image?
-        .color_ex
-          = image_tag @color.image.url
-          = f.check_box :remove_image
-
-      = f.input :image
-
-    .form_actions
-      = f.button :submit
-      =< link_to 'Удалить', @color, class: [:btn, :btn_gr], method: :delete, data: { confirm: 'Точно удалить?' } unless @color.new_record?
+= react_component 'Colors/Form'

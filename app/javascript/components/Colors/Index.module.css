@@ -1,0 +1,8 @@
+.root {
+  margin-bottom: calc(var(--yr) * 4);
+
+  @media (--s) {
+    margin: 0 calc(2 / 12 * 100%);
+    margin-bottom: calc(var(--yr) * 4);
+  }
+}
