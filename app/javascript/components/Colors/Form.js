@@ -131,7 +131,7 @@ export default function Form (props) {
               <select name="parent_color_id" value={values.parent_color_id} onChange={handleChange}>
                 <option value={null}></option>
                 {colors.map((i, _) =>
-                  <option key={_} disabled={values.parent_color_id} value={i.id}>{i.title}</option>
+                  <option key={_} disabled={values.title == i.title} value={i.id}>{i.title}</option>
                 )}
               </select>
             </div>
