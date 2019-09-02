@@ -15,8 +15,6 @@ class Item extends Component {
     const { toggle } = this.state
     const { color } = this.props
 
-    console.log(color);
-
     return(
         <div className={styles.parent_color} onClick={() => this.setState(state => ({ toggle: !state.toggle }))}>
           <div className={styles.parent_title}>

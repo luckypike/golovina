@@ -1,64 +1,58 @@
 class ColorsController < ApplicationController
-  before_action :set_color, only: [:show, :edit, :update, :destroy]
+  before_action :set_color, only: %i[edit update destroy]
 
   layout 'app'
 
   def index
     authorize Color
+
     @colors = Color.where(parent_color: nil).order(id: :asc)
   end
 
-  # GET /colors/1
   def show
   end
 
-  # GET /colors/new
   def new
     @color = Color.new
     authorize @color
   end
 
-  # GET /colors/1/edit
   def edit
     authorize @color
   end
 
-  # POST /colors
   def create
     @color = Color.new(color_params)
     authorize @color
 
     if @color.save
-      redirect_to [:colors], notice: 'Color was successfully created.'
+      head :ok, location: colors_path
     else
-      render :new
+      render json: @color.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /colors/1
   def update
     authorize @color
     if @color.update(color_params)
-      redirect_to [:colors], notice: 'Color was successfully updated.'
+      head :ok, location: colors_path
     else
-      render :edit
+      render json: @color.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /colors/1
   def destroy
     authorize @color
+
     @color.destroy
-    redirect_to [:colors], notice: 'Color was successfully destroyed.'
+    head :ok, location: colors_path
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_color
       @color = Color.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def color_params
       params.require(:color).permit(:title, :color, :image, :parent_color_id, :remove_image)
     end

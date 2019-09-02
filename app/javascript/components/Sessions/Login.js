@@ -7,7 +7,7 @@ import I18n from '../I18n'
 
 import page from '../Page'
 import buttons from '../Buttons'
-import form from '../Form'
+import { Errors } from '../Form'
 import styles from './Login.module.css'
 
 class Login extends Component {
