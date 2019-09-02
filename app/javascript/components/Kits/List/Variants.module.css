@@ -101,7 +101,7 @@
   }
 
   &:not(:last-child) {
-    margin-right: var(--xr);
+    margin-right: 0;
   }
 }
 

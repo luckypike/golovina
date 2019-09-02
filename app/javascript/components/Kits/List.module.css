@@ -10,6 +10,7 @@
     & .slider {
       grid-column: 2 / span 4;
       grid-row: span 2;
+      overflow: hidden;
     }
 
     & .title {
