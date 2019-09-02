@@ -57,7 +57,7 @@ class Variant extends Component {
       let size = null
       let section = null
 
-      if (variant.section) section = variant.section
+      if (variant.kits) section = 'kits'
 
       // if(variant.availabilities.filter(availability => availability.active).length == 1) {
       //   size = variant.availabilities.find(availability => availability.active).size.id
