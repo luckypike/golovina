@@ -13,7 +13,7 @@ import I18n from '../I18n'
 
 import styles from './Index.module.css'
 import page from '../Page'
-import { Errors } from '../Form'
+import form from '../Form.module.css'
 
 class Index extends Component {
   state = {
