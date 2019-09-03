@@ -1,0 +1,12 @@
+en:
+  header:
+    nav:
+      catalog: Online shop
+      collections: Collections
+      about: About
+      shops: Shops
+
+      service:
+        title: Service
+        delivery: Delivery
+        return: Return

@@ -62,6 +62,12 @@ const Item = SortableElement(({ category }) =>
     <DragHandle />
     <div>
       {category.title}
+
+      {!category.translated &&
+        <span className={styles.translate}>
+          (нужен перевод)
+        </span>
+      }
     </div>
 
     <div className={styles.variants}>

@@ -19,5 +19,7 @@ class I18nComponentMount < React::Rails::ComponentMount
 end
 
 Rails.application.configure do
+  config.i18n.fallbacks = [I18n.default_locale]
+
   config.react.view_helper_implementation = I18nComponentMount
 end

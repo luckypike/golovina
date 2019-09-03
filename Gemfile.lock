@@ -56,7 +56,6 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    babosa (1.0.2)
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.4)
@@ -99,7 +98,6 @@ GEM
     childprocess (1.0.1)
       rake (< 13.0)
     chronic (0.10.2)
-    cocoon (1.2.14)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
@@ -298,9 +296,6 @@ GEM
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
-    simple_form (4.1.0)
-      actionpack (>= 5.0)
-      activemodel (>= 5.0)
     sitemap_generator (6.0.2)
       builder (~> 3.0)
     slim (4.0.1)
@@ -363,7 +358,6 @@ DEPENDENCIES
   active_link_to
   addressable
   autoprefixer-rails
-  babosa
   bootsnap (>= 1.1.0)
   byebug
   capistrano-passenger
@@ -372,7 +366,6 @@ DEPENDENCIES
   capybara
   capybara-screenshot
   carrierwave
-  cocoon
   delayed_job_active_record
   devise
   enum_help
@@ -401,7 +394,6 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   selenium-webdriver
-  simple_form
   sitemap_generator
   slim-rails
   spring

@@ -3,6 +3,8 @@ import classNames from 'classnames'
 import axios from 'axios'
 import AnimateHeight from 'react-animate-height'
 
+import { useI18n } from './I18n'
+
 import { path } from './Routes'
 
 import styles from './Nav.module.css'
@@ -31,13 +33,15 @@ class Nav extends Component {
     window.location = path('root_path')
   }
 
-  render() {
+  render () {
     const { active, section } = this.state
-    const { user, categories, themes, collections } = this.props
+    const { user, categories, themes, collections, locale } = this.props
+
+    const I18n = useI18n(locale)
 
     return (
       <nav className={classNames(styles.root, { [styles.active]: active })}>
-        <Section id="categories" title="Онлайн магазин" onToggle={this.toggleSection} section={section}>
+        <Section id="categories" title={I18n.t('header.nav.catalog')} onToggle={this.toggleSection} section={section}>
           <div className={styles.sub}>
             <a href={path('catalog_latest_path')}>New</a>
           </div>
@@ -65,27 +69,7 @@ class Nav extends Component {
           </div>
         </Section>
 
-        {/*
-        <Section id="themes" title="Образы" onToggle={this.toggleSection} section={section}>
-          <div className={styles.sub}>
-            <a href={path('latest_themes_path')}>New</a>
-          </div>
-
-          {themes.map(theme =>
-            <div className={styles.sub} key={theme.id}>
-              <a href={path('theme_path', { id: theme.slug })}>
-                {theme.title}
-              </a>
-            </div>
-          )}
-
-          <div className={styles.sub}>
-            <a href={path('themes_path')}>Посмотреть всё</a>
-          </div>
-        </Section>
-        */}
-
-        <Section id="collections" title="Коллекции" onToggle={this.toggleSection} section={section}>
+        <Section id="collections" title={I18n.t('header.nav.collections')} onToggle={this.toggleSection} section={section}>
           {collections.map(collection =>
             <div className={classNames(styles.sub)} key={collection.id}>
               <a href={path('collection_path', { id: collection.slug })}>
@@ -102,7 +86,7 @@ class Nav extends Component {
           )}
         </Section>
 
-        <Section id="brand" title="О бренде" onToggle={this.toggleSection} section={section}>
+        <Section id="brand" title={I18n.t('header.nav.about')} onToggle={this.toggleSection} section={section}>
           <div className={styles.sub}>
             <a href="/posts/1">Интервью</a>
           </div>
@@ -115,18 +99,18 @@ class Nav extends Component {
         <div className={classNames(styles.section)}>
           <div className={styles.title}>
             <a href="/contacts">
-              Места продаж
+              {I18n.t('header.nav.shops')}
             </a>
           </div>
         </div>
 
-        <Section id="service" title="Покупателям" onToggle={this.toggleSection} section={section}>
+        <Section id="service" title={I18n.t('header.nav.service.title')} onToggle={this.toggleSection} section={section}>
           <div className={styles.sub}>
-            <a href="/service/delivery">Оплата и доставка</a>
+            <a href="/service/delivery">{I18n.t('header.nav.service.delivery')}</a>
           </div>
 
           <div className={styles.sub}>
-            <a href="/service/return">Обмен и возврат</a>
+            <a href="/service/return">{I18n.t('header.nav.service.return')}</a>
           </div>
         </Section>
 

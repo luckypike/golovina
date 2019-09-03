@@ -1,0 +1,12 @@
+ru:
+  header:
+    nav:
+      catalog: Онлайн магазин
+      collections: Коллекции
+      about: О бренде
+      shops: Места продаж
+
+      service:
+        title: Покупателям
+        delivery: Оплата и доставка
+        return: Обмен и возврат

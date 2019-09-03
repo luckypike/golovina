@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import listToTree from 'list-to-tree-lite'
 import PubSub from 'pubsub-js'
 
 import { path } from './Routes'
+
 import Nav from './Nav'
 
 import styles from './Header.module.css'
@@ -14,6 +14,7 @@ import Logo from '!svg-react-loader?!../images/golovina.svg'
 Header.propTypes = {
   index: PropTypes.bool,
   cart: PropTypes.number,
+  locale: PropTypes.string,
   user: PropTypes.object,
   collections: PropTypes.array,
   categories: PropTypes.array
@@ -90,7 +91,8 @@ export default function Header (props) {
         </div>
 
         <Nav
-          categories={listToTree(categories, { parentKey: 'parent_category_id' })}
+          locale={props.locale}
+          categories={categories}
           collections={collections}
           user={user}
         />

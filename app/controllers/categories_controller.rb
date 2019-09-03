@@ -1,12 +1,15 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:edit, :update, :destroy]
+  before_action :set_category, only: %i[edit update destroy]
+  before_action :authorize_category, only: %i[edit update destroy]
 
   layout 'app'
 
   def index
     authorize Category
 
-    @categories = Category.includes(:variants).order(weight: :asc).all
+    @categories = Category
+      .includes(:variants, :translations)
+      .order(weight: :asc).all
   end
 
   def show
@@ -20,11 +23,12 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new(state: :active)
+
     authorize @category
   end
 
   def edit
-    authorize @category
+    respond_to :html, :json
   end
 
   def create
@@ -32,15 +36,13 @@ class CategoriesController < ApplicationController
     authorize @category
 
     if @category.save
-      redirect_to categories_path, notice: 'Category was successfully created.'
+      head :ok, location: categories_path
     else
-      render :new
+      render json: @category.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    authorize @category
-
     if @category.update(category_params)
       head :ok, location: categories_path
     else
@@ -50,17 +52,21 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    redirect_to categories_url, notice: 'Category was successfully destroyed.'
+    head :ok, location: categories_path
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.friendly.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def category_params
-      params.require(:category).permit(:title, :slug, :state, :weight, :front, image_ids: [], images_attributes: [:weight, :id])
-    end
+  def set_category
+    @category = Category.find(params[:id])
+  end
+
+  def authorize_category
+    authorize @category
+  end
+
+  def category_params
+    permitted = Category.globalize_attribute_names + %i[slug state front weight]
+    params.require(:category).permit(*permitted)
+  end
 end

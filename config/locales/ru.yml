@@ -60,6 +60,10 @@ ru:
   activerecord:
     errors:
       models:
+        category:
+          attributes:
+            slug:
+              only_slug: только маленькие англ. буквы и тире без пробелов
         user:
           attributes:
             name:

@@ -19,9 +19,8 @@ html
     = react_component( \
       'Header',
       { \
-        categories: Category.active.where.not(variants_counter: 0).order(weight: :asc).map{ |category| category.slice(:title, :id, :slug) },
-        themes: Theme.active.order(:weight).map{ |theme| theme.slice(:title, :id, :slug) },
-        collections: Collection.order(weight: :asc, id: :desc).map{ |collection| collection.slice(:title, :id, :slug, :desc) },
+        categories: Category.with_translations.active.where.not(variants_counter: 0).order(weight: :asc).map{ |category| category.slice(:id, :slug, :title) },
+        collections: Collection.order(weight: :asc, id: :desc).map{ |category| category.slice(:id, :slug, :title, :desc) },
         index: current_page?(controller: :static, action: :index),
         user: (Current.user.slice(:id, :is_editor?, :guest?) rescue nil),
         wishlist: Wishlist.includes(:variant).where(user: Current.user, variants: { state: [:active] }).size,

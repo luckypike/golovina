@@ -7,8 +7,8 @@
 = react_component \
   'Index',
   { \
-    slides: @slides.map{ |slide| { name: slide.name, link: slide.link, image: slide.image.large.url, link_name: slide.link_name } },
-    contacts: contacts_path(), instagram: Rails.application.credentials[Rails.env.to_sym][:instagram] \
+    slides: @slides.map{ |slide| slide.slice(:id, :name, :link).merge({ image: slide.image.large.url }) },
+    instagram: Rails.application.credentials[Rails.env.to_sym][:instagram] \
   },
   { \
     prerender: Rails.env.production? \

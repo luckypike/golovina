@@ -40,3 +40,8 @@
 .variants {
   composes: at from '../Fonts';
 }
+
+.translate {
+  margin-left: 0.5em;
+  color: red;
+}

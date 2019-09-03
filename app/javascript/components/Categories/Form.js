@@ -1,120 +1,159 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 
 import { path } from '../Routes'
+import { useI18n } from '../I18n'
+import { Errors } from '../Form'
 
-import Images from '../Images/Images'
+import page from '../Page.module.css'
+import form from '../Form.module.css'
+import buttons from '../Buttons.module.css'
 
-import styles from './Form.module.css'
-import page from '../Page'
-
-class Form extends React.Component {
-  state = {
-    values: this.props.values
-  }
-
-  handleInputChange = event => {
-    const target = event.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
-
-    this.setState(state => ({
-      values: { ...state.values, [name]: value }
-    }))
-  }
-
-  handleImagesChange = (images) => {
-    this.setState(state => ({
-      values: { ...state.values,
-        image_ids: images.map(i => i.id),
-        images_attributes: images.map((i, index) => ({id:i.id, weight: index+1}))
-      }
-    }))
-  }
-
-  handleSubmit = event => {
-    this._handleUpdate()
-    event.preventDefault()
-  }
-
-  _handleUpdate = async () => {
-    console.log(this.props)
-    console.log(path('category_path', { id: this.props.id }))
-    const res = await axios.patch(
-      path('category_path', { id: this.props.id }),
-      { category: { ...this.state.values }, authenticity_token: document.querySelector('[name="csrf-token"]').content }
-    )
-
-    if(res.headers.location) window.location = res.headers.location
-  }
-
-  render () {
-    const { title, id } = this.props
-    const { values } = this.state
-
-    return (
-      <div className={page.gray}>
-        <div className={page.title}>
-          <h1>Редактирование: {title}</h1>
-        </div>
-
-        <div className={styles.root}>
-          <form onSubmit={this.handleSubmit}>
-            <div>
-              <div>
-                Название
-              </div>
-
-              <div>
-                <input value={values.title} name="title" onChange={this.handleInputChange} />
-              </div>
-            </div>
-
-            <div>
-              <div>
-                Название на англ. (для ссылки)
-              </div>
-
-              <div>
-                <input value={values.slug} name="slug" onChange={this.handleInputChange} />
-              </div>
-            </div>
-
-            <div>
-              <div>
-                Поведение
-              </div>
-
-              <div>
-                <select name="state" value={values.state} onChange={this.handleInputChange}>
-                  <option value="active">Скрывается при отсутствии товаров</option>
-                  <option value="inactive">Скрыта всегда</option>
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <div>
-                Изображения
-              </div>
-              <Images images={values.images} onImagesChange={this.handleImagesChange}/>
-            </div>
-
-            <div>
-              <div>
-                <input type="checkbox" name="front" checked={values.front} onChange={this.handleInputChange} />
-                Показывать на главной
-              </div>
-            </div>
-
-            <div>
-              <input type="submit" value="Сохранить" />
-            </div>
-          </form>
-        </div>
-      </div>
-    )
-  }
+Form.propTypes = {
+  id: PropTypes.number,
+  locale: PropTypes.string
 }
 
-export default Form
+export default function Form ({ id, locale }) {
+  const I18n = useI18n(locale)
+
+  const [values, setValues] = useState()
+
+  useEffect(() => {
+    const _fetch = async () => {
+      const { data: { values } } = await axios.get(id ? path('edit_category_path', { id, format: 'json' }) : path('new_category_path', { format: 'json' }))
+
+      setValues(values)
+    }
+
+    _fetch()
+  }, [id])
+
+  const [send, setSend] = useState(false)
+  const [errors, setErrors] = useState({})
+
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    if (send) {
+      return null
+    } else {
+      setErrors({})
+      setSend(true)
+    }
+
+    const params = new FormData()
+    params.append('authenticity_token', document.querySelector('[name="csrf-token"]').content)
+    Object.entries(values).map(([ key, value ]) => {
+      params.append(`category[${key}]`, value)
+    })
+
+    if (id) {
+      _handleUpdate(params)
+    } else {
+      _handleCreate(params)
+    }
+  }
+
+  const _handleUpdate = async params => {
+    await axios.patch(
+      path('category_path', { id }), params
+    ).then(res => {
+      window.location = res.headers.location
+    }).catch((error) => {
+      setErrors(error.response.data)
+      setSend(false)
+    })
+  }
+
+  const _handleCreate = async params => {
+    await axios.post(
+      path('categories_path'), params
+    ).then(res => {
+      window.location = res.headers.location
+    }).catch((error) => {
+      setErrors(error.response.data)
+      setSend(false)
+    })
+  }
+
+  const handleChange = ({ target: { name, value } }) => {
+    setValues({ ...values, [name]: value })
+  }
+
+  const handleDestroy = async e => {
+    e.preventDefault()
+
+    await axios.delete(
+      path('category_path', { id }),
+      { data: { authenticity_token: document.querySelector('[name="csrf-token"]').content } }
+    ).then(res => {
+      window.location = res.headers.location
+    })
+  }
+
+  if (!values) return null
+
+  return (
+    <div className={page.gray}>
+      <div className={page.title}>
+        <h1>Редактирование блока</h1>
+      </div>
+
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div className={form.el}>
+            <label>
+              <div className={form.label}>
+                Код для ссылок
+              </div>
+
+              <div className={form.input}>
+                <input type="text" value={values.slug} name="slug" onChange={handleChange} />
+              </div>
+            </label>
+
+            <Errors errors={errors.slug} />
+          </div>
+
+          <div className={form.el}>
+            <div className={form.label}>
+              Название категории
+            </div>
+
+            {I18n.available_locales.map(locale =>
+              <div className={form.gl} key={locale}>
+                <label>
+                  <div className={form.label}>
+                    {locale}
+                  </div>
+
+                  <div className={form.input}>
+                    <input type="text" value={values[`title_${locale}`]} name={`title_${locale}`} onChange={handleChange} />
+                  </div>
+                </label>
+
+                <Errors errors={errors[`title_${locale}`]} />
+              </div>
+            )}
+          </div>
+
+          <div>
+            {send && 'Настройки блока сохраняются..' }
+
+            {!send &&
+              <>
+                <input type="submit" value="Сохранить" className={buttons.main} disabled={send} />
+
+                {id &&
+                  <a href={path('category_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>
+                }
+              </>
+            }
+          </div>
+        </form>
+      </div>
+    </div>
+  )
+}
