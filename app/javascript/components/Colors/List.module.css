@@ -5,14 +5,12 @@
 }
 
 .parent_color {
+  position: relative;
   display: block;
   padding: var(--xr);
   background-color: #fff;
   margin-bottom: calc(var(--yr) * 4);
-
-  @media(--s) {
-    padding: calc(var(--yr) * 4) calc(var(--yr) * 14);
-  }
+  padding: calc(var(--yr) * 4) calc(var(--yr) * 14);
 }
 
 .child_color {
@@ -34,5 +32,54 @@
 
   &:first-child {
     margin-top: var(--yr);
+  }
+}
+
+.quantity {
+  display: block;
+  margin-top: 4px;
+}
+
+.drag {
+  position: absolute;
+  left: calc(var(--yr) * 4);
+  top: calc(var(--yr) * 4);
+  cursor: row-resize;
+  height: calc(var(--yr) * 6);
+  width: calc(var(--yr) * 6);
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+
+  & img {
+    display: block;
+    width: 100%;
+  }
+}
+
+.icons {
+  position: absolute;
+  left: calc(var(--yr) * 4);
+  top: calc(var(--yr) * 4);
+  cursor: row-resize;
+  height: calc(var(--yr) * 6);
+  width: calc(var(--yr) * 6);
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+.arr {
+  position: absolute;
+  width: 10px;
+  height: 20px;
+  right: var(--xr);
+
+  & polyline {
+    fill: none;
+    stroke-width: 1px;
+    stroke: var(--pr_color);
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+  }
+
+  &.active {
+    transform: scaleY(-1);
   }
 }

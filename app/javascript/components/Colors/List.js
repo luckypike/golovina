@@ -16,12 +16,35 @@ class Item extends Component {
     const { color } = this.props
 
     return(
-        <div className={styles.parent_color} onClick={() => this.setState(state => ({ toggle: !state.toggle }))}>
-          <div className={styles.parent_title}>
-            <a href={path('edit_color_path', { id: color.id })}>
+        <div className={styles.parent_color}>
+
+          {color.image.url != null &&
+            <div className={styles.drag}>
+              <img src={color.image.url} />
+            </div>
+          }
+
+          {color.image.url == null &&
+            <div className={styles.icons}>
+              <div style={{ backgroundColor: (color.color ? color.color : null), height: "100%" }} />
+            </div>
+          }
+
+          <a href={path('edit_color_path', { id: color.id })}>
+            <div className={styles.parent_title}>
               {color.title}
-            </a>
-          </div>
+            </div>
+          </a>
+
+          {color.child_color.length != 0 &&
+            <div className={styles.quantity}>
+              Количество дочерних цветов: {color.child_color.length}
+
+              <svg viewBox="0 0 10 20" className={classNames(styles.arr, {[styles.active]: toggle})} onClick={() => this.setState(state => ({ toggle: !toggle }))}>
+                <polyline points="1 8 5 12 9 8" />
+              </svg>
+            </div>
+          }
 
           {toggle && color.child_color.length != 0 &&
             <div className={styles.child_color}>

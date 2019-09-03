@@ -4,7 +4,6 @@ import axios from 'axios'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
-import { Errors } from '../Form'
 
 import page from '../Page.module.css'
 import form from '../Form.module.css'
@@ -131,7 +130,7 @@ export default function Form (props) {
               <select name="parent_color_id" value={values.parent_color_id} onChange={handleChange}>
                 <option value={null}></option>
                 {colors.map((i, _) =>
-                  <option key={_} disabled={values.title == i.title} value={i.id}>{i.title}</option>
+                  <option key={_} disabled={values.child_color.length != 0} value={i.id}>{i.title}</option>
                 )}
               </select>
             </div>
@@ -144,13 +143,13 @@ export default function Form (props) {
               </div>
             </label>
 
-            {values.image.url == null &&
+            {color.image.url == null &&
               <div className={form.input}>
                 <input type="color" name="color" value={values.color} onChange={handleChange}/>
               </div>
             }
 
-            {values.image.url &&
+            {color.image &&
               <img src={color.image.url} />
             }
           </div>
