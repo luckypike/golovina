@@ -5,6 +5,7 @@ class VariantsController < ApplicationController
 
   layout 'app'
 
+  # TODO: REWRITE
   def index
     authorize Variant
 
@@ -31,9 +32,8 @@ class VariantsController < ApplicationController
 
     @variants = Variant.includes(:product, :color).available
     @variants = @variants.select{ |s| s.product.title.downcase.include? params[:q].downcase } if params[:q]
-    respond_to do |format|
-      format.json
-    end
+
+    respond_to :json
   end
 
   def wishlist
@@ -130,23 +130,27 @@ class VariantsController < ApplicationController
   end
 
   def new
-    @variant = Variant.new
+    @variant = Variant.new(product: Product.new)
     authorize @variant
 
-    @colors = Color.all
-    @stores = Store.all
-    @sizes = Size.where(sizes_group_id: 1)
-    @categories = Category.order(weight: :asc).all
+    respond_to :html, :json
 
-    @product = params[:product_id].present? ? Product.select(:id, :category_id, :title).find(params[:product_id]) : nil
+    # @colors = Color.all
+    # @stores = Store.all
+    # @sizes = Size.where(sizes_group_id: 1)
+    # @categories = Category.order(weight: :asc).all
+    #
+    # @product = params[:product_id].present? ? Product.select(:id, :category_id, :title).find(params[:product_id]) : nil
   end
 
   def create
+
+    pp variant_params
     @variant = Variant.new(variant_params)
 
     authorize @variant
 
-    if @variant.save!
+    if @variant.save
       head :created, location: catalog_variant_path(slug: @variant.product.category.slug, id: @variant.id)
     else
       render json: @variant.errors, status: :unprocessable_entity
@@ -188,6 +192,7 @@ class VariantsController < ApplicationController
   end
 
   private
+
   def authorize_variant
     authorize @variant
   end
@@ -196,7 +201,20 @@ class VariantsController < ApplicationController
     @variant = Variant.find(params[:id])
   end
 
+  # TODO: remove trailing \
   def variant_params
-    params.require(:variant).permit(:color_id, :code, :out_of_stock, :state, :created_at, :latest, :sale, :last, :soon, :pinned, :desc, :comp, :price, :price_last, :show, :product_id, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :quantity, :_destroy], image_ids: [], images_attributes: [:id, :weight, :favourite])
+    permitted =
+      Variant.globalize_attribute_names \
+      + %i[code color_id price price_last created_at] \
+      + [
+        {
+          product_attributes: Product.globalize_attribute_names \
+            + %i[id category_id]
+        }
+      ]
+
+    params.require(:variant).permit(*permitted)
+
+    # params.require(:variant).permit(:color_id, :code, :out_of_stock, :state, :created_at, :latest, :sale, :last, :soon, :pinned, :desc, :comp, :price, :price_last, :show, :product_id, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :quantity, :_destroy], image_ids: [], images_attributes: [:id, :weight, :favourite])
   end
 end

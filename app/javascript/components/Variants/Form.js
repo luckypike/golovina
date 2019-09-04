@@ -1,416 +1,334 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
-import classNames from 'classnames'
-import update from 'immutability-helper'
 
 import { path } from '../Routes'
+import { useI18n } from '../I18n'
+import { Errors } from '../Form'
 
-import ProductForm from './ProductForm'
-import Images from '../Images/Images'
-
-import buttons from '../Buttons.module.css'
 import page from '../Page.module.css'
 import form from '../Form.module.css'
-import styles from './Variant.module.css'
+import buttons from '../Buttons.module.css'
 
-class Form extends Component {
-  state = {
-    variant: null,
-    values: {
-      color_id: '',
-      state: 'active',
-      created_at: null,
-      latest: false,
-      code: '',
-      sale: false,
-      soon: false,
-      last: false,
-      pinned: false,
-      desc: '',
-      comp: '',
-      price: '',
-      price_last: '',
-      show: true,
-      product_id: this.props.product ? this.props.product.id : [],
-      product_attributes: this.props.product || null,
-      availabilities_attributes: [],
-      images: [],
-      image_ids: null,
-      images_attributes: [],
+Form.propTypes = {
+  id: PropTypes.number,
+  locale: PropTypes.string
+}
 
-    },
-    dictionaries: {
-      colors: this.props.colors || [],
-      stores: this.props.stores || [],
-      sizes: this.props.sizes || [],
-      categories: this.props.categories || [],
-    },
+export default function Form ({ id, locale }) {
+  const I18n = useI18n(locale)
+
+  const [values, setValues] = useState()
+  const [dictionaries, setDictionaries] = useState()
+  const [variant, setVariant] = useState()
+
+  useEffect(() => {
+    const _fetch = async () => {
+      const { data: { values, variant, dictionaries } } = await axios.get(id ? path('edit_variant_path', { id, format: 'json' }) : path('new_variant_path', { format: 'json' }))
+
+      setValues(values)
+      setVariant(variant)
+      setDictionaries(dictionaries)
+    }
+
+    _fetch()
+  }, [id])
+
+  const [send, setSend] = useState(false)
+  const [errors, setErrors] = useState({})
+
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    if (send) {
+      return null
+    } else {
+      setErrors({})
+      setSend(true)
+    }
+
+    const params = {
+      variant: values,
+      authenticity_token: document.querySelector('[name="csrf-token"]').content
+    }
+
+    if (id) {
+      _handleUpdate(params)
+    } else {
+      _handleCreate(params)
+    }
   }
 
-  componentDidMount () {
-    if (this.props.id) this._loadAsyncData(this.props.id)
+  const _handleUpdate = async params => {
+    await axios.patch(
+      path('variant_path', { id }), params
+    ).then(res => {
+      window.location = res.headers.location
+    }).catch((error) => {
+      setErrors(error.response.data)
+      setSend(false)
+    })
   }
 
-  render () {
-    const { title, id } = this.props
-    const { values, variant} = this.state
-    const { colors, stores, sizes, categories } = this.state.dictionaries
+  const _handleCreate = async params => {
+    await axios.post(
+      path('variants_path'), params
+    ).then(res => {
+      window.location = res.headers.location
+    }).catch((error) => {
+      setErrors(error.response.data)
+      setSend(false)
+    })
+  }
 
-    return (
-      <div className={page.gray}>
-        <div className={page.title}>
-          <h1>{variant ? `Редактирование: ${title}` : 'Новый товар'}</h1>
-        </div>
+  const handleChange = ({ target: { name, value } }) => {
+    setValues({ ...values, [name]: value })
+  }
 
-        <div className={classNames(form.root, form.tight)}>
-          <ProductForm values={values.product_attributes} onChange={this.handleProductChange} categories={categories}/>
-          <form className={styles.variant_form} onSubmit={this.handleSubmit}>
+  const handleDestroy = async e => {
+    e.preventDefault()
 
-            <div className={form.input}>
-              <div className={form.input_input}>
-                <div className={form.checkbox}>
-                  <label>
-                    <input disabled={values.sale} type="checkbox" name="latest" checked={values.latest} onChange={this.handleInputChange} />
-                      New
-                  </label>
-                </div>
-              </div>
-            </div>
+    // await axios.delete(
+    //   path('variant_path', { id }),
+    //   { data: { authenticity_token: document.querySelector('[name="csrf-token"]').content } }
+    // ).then(res => {
+    //   window.location = res.headers.location
+    // })
+  }
 
-            <div className={form.input}>
-              <div className={form.input_input}>
-                <div className={form.checkbox}>
-                  <label>
-                    <input disabled={values.latest} type="checkbox" name="sale" checked={values.sale} onChange={this.handleInputChange} />
-                      Sale
-                  </label>
-                </div>
-              </div>
-            </div>
+  if (!values || !dictionaries) return null
 
-            <div className={form.input}>
-              <div className={form.input_input}>
-                <div className={form.checkbox}>
-                  <label>
-                    <input type="checkbox" name="last" checked={values.last} onChange={this.handleInputChange} />
-                      Последняя вещь
-                  </label>
-                </div>
-              </div>
-            </div>
+  return (
+    <div className={page.gray}>
+      <div className={page.title}>
+        <h1>{variant ? `Редактирование: ${variant.title}` : 'Новый товар'}</h1>
+      </div>
 
-            <div className={form.input}>
-              <div className={form.input_input}>
-                <div className={form.checkbox}>
-                  <label>
-                    <input type="checkbox" name="soon" checked={values.soon} onChange={this.handleInputChange} />
-                      Скоро в наличии
-                  </label>
-                </div>
-              </div>
-            </div>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <Product
+            errors={errors}
+            dictionaries={dictionaries}
+            locale={locale}
+            productValues={values.product_attributes}
+            onValuesChange={
+              productValues => setValues({ ...values, product_attributes: productValues })
+            }
+          />
 
-            <div className={form.input}>
-              <div className={form.input_input}>
-                <div className={form.checkbox}>
-                  <label>
-                    <input type="checkbox" name="pinned" checked={values.pinned} onChange={this.handleInputChange} />
-                      Закреплен
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div className={form.input}>
-              <div className={form.label}>
-                Цвет
-              </div>
-
-              <div className={form.input_input}>
-                <select name="color_id" onChange={this.handleInputChange} value={values.color_id}>
-                  <option />
-                  {colors.map(color =>
-                    <option key={color.id} value={color.id}>{color.title}</option>
-                  )}
-                </select>
-              </div>
-            </div>
-
-            <div className={form.input}>
+          <div className={form.el}>
+            <label>
               <div className={form.label}>
                 Артикул
               </div>
 
-              <div className={form.input_input}>
-                <input type="text" value={values.code} name="code" onChange={this.handleInputChange} />
+              <div className={form.input}>
+                <input
+                  type="text"
+                  value={values.code}
+                  name="code"
+                  onChange={handleChange}
+                  placeholder="Укажите артикул если есть..."
+                />
               </div>
-            </div>
+            </label>
 
-            <div className={form.stores}>
-              {stores.map((store, _) =>
-                <>
-                  <div className={form.store}>
-                    <div className={form.input}>
-                      <div className={form.label}>
-                        Доступные размеры для {store.title}
-                      </div>
+            <Errors errors={errors.code} />
+          </div>
 
-                      <div className={styles.sizes}>
-                        {sizes.sort((a, b) => a.weight - b.weight).map((size, _) =>
-                          <div key={_} className={classNames([styles.size], {[styles.active]: values.availabilities_attributes.find(s => s.size_id == size.id && s.store_id == store.id && !s._destroy)})} onClick={() => this.handleSizesChange(store.id, size.id)}>{size.size}</div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {values.availabilities_attributes && values.availabilities_attributes.filter(s => s.store_id == store.id )&&
-                    values.availabilities_attributes.filter(s => s.store_id == store.id && !s._destroy).sort((a, b) => a.weight - b.weight).map((size, key) =>
-                      <div key={key} className={form.input}>
-                        <div className={form.label}>
-                          Количество размера "{sizes.find(s => s.id == size.size_id).size}"
-                        </div>
-
-                        <div className={form.input_input}>
-                          <input type="text" value={size.quantity} name={`size[${size.size_id}]`} onChange={this.handleQuantityChange(store.id, size.size_id)} />
-                        </div>
-                      </div>
-                    )
-                  }
-                </>
-              )}
-            </div>
-
-            <div className={form.input}>
+          <div className={form.el}>
+            <label>
               <div className={form.label}>
                 Стоимость
               </div>
 
-              <div className={form.input_input}>
-                <input type="text" value={values.price} name="price" onChange={this.handleInputChange} />
+              <div className={form.input}>
+                <input
+                  type="text"
+                  value={values.price}
+                  name="price"
+                  onChange={handleChange}
+                  placeholder="Обязательно заполните цену..."
+                />
               </div>
-            </div>
+            </label>
 
-            <div className={form.input}>
+            <Errors errors={errors.price} />
+          </div>
+
+          <div className={form.el}>
+            <label>
               <div className={form.label}>
                 Стоимость со скидкой
               </div>
 
-              <div className={form.input_input}>
-                <input type="text" value={values.price_last} name="price_last" onChange={this.handleInputChange} />
+              <div className={form.input}>
+                <input
+                  type="text"
+                  value={values.price_last}
+                  name="price_last"
+                  onChange={handleChange}
+                />
               </div>
-            </div>
+            </label>
 
-            <div className={form.input}>
-              <div className={form.input_input}>
-                <div className={form.checkbox}>
-                  <label>
-                    <input type="checkbox" name="show" checked={values.show} onChange={this.handleInputChange} />
-                      Показывать товар
-                  </label>
-                </div>
-              </div>
-            </div>
+            <Errors errors={errors.price_last} />
+          </div>
 
-            <div className={form.input}>
+          <div className={form.el}>
+            <label>
               <div className={form.label}>
-                Описание
+                Цвет
               </div>
 
-              <div className={form.input_input}>
-                <textarea name="desc" value={values.desc} rows="2" onChange={this.handleInputChange} />
+              <div className={form.input}>
+                <select name="color_id" onChange={handleChange} value={values.color_id}>
+                  <option>Выберите цвет...</option>
+
+                  {dictionaries.colors.map(color =>
+                    <optgroup key={color.id} label={color.title}>
+                      {color.colors.map(color =>
+                        <option key={color.id} value={color.id}>{color.title}</option>
+                      )}
+                    </optgroup>
+                  )}
+                </select>
               </div>
+            </label>
+
+            <Errors errors={errors.color} />
+          </div>
+
+          <div className={form.el}>
+            <div className={form.label}>
+              Описание
             </div>
 
-            <div className={form.input}>
-              <div className={form.label}>
-                Как ухаживать
-              </div>
-
-              <div className={form.input_input}>
-                <textarea name="comp" value={values.comp} rows="2" onChange={this.handleInputChange} />
-              </div>
-            </div>
-
-            <div className={form.el}>
-              <label>
-                <div className={form.label}>
-                  Дата обновления
-                </div>
-
-                <div className={form.datetime}>
-                  <div className={form.input}>
-                    <input name="created_at" type="datetime-local" value={values.created_at} onChange={this.handleInputChange}/>
+            {I18n.available_locales.map(locale =>
+              <div className={form.gl} key={locale}>
+                <label>
+                  <div className={form.label}>
+                    {locale}
                   </div>
-                </div>
-              </label>
-            </div>
 
-            <div className={form.input}>
-              <div className={form.label}>
-                Изображения
+                  <div className={form.input}>
+                    <textarea value={values[`desc_${locale}`]} name={`desc_${locale}`} onChange={handleChange} />
+                  </div>
+                </label>
+
+                <Errors errors={errors[`title_${locale}`]} />
               </div>
-              <Images images={values.images} onImagesChange={this.handleImagesChange}/>
-            </div>
+            )}
+          </div>
 
-            <div>
-              <input className={buttons.main} type="submit" value="Сохранить" disabled={!this.canSubmit()} />
-            </div>
-          </form>
+          <div className={form.el}>
+            <label>
+              <div className={form.label}>
+                Дата создания
+              </div>
 
-        </div>
+              <div className={form.input}>
+                <input
+                  type="datetime-local"
+                  value={values.created_at}
+                  name="created_at"
+                  onChange={handleChange}
+                />
+              </div>
+            </label>
+
+            <Errors errors={errors.price_last} />
+          </div>
+
+          <div>
+            {send && 'Настройки блока сохраняются..' }
+
+            {!send &&
+              <>
+                <input type="submit" value="Сохранить" className={buttons.main} disabled={send} />
+
+                {id &&
+                  <a href={path('category_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>
+                }
+              </>
+            }
+          </div>
+        </form>
       </div>
-    )
-  }
-
-  _loadAsyncData (id) {
-    axios.get(path('edit_variant_path', {id: id, format: 'json' }), { authenticity_token: document.querySelector('[name="csrf-token"]').content})
-      .then(res => {
-        this.setState({
-          variant: res.data.variant,
-          values: {
-            color_id: res.data.variant.color_id,
-            code: res.data.variant.code,
-            state: res.data.variant.state,
-            created_at: res.data.variant.created_at,
-            latest: res.data.variant.latest,
-            sale: res.data.variant.sale,
-            soon: res.data.variant.soon,
-            last: res.data.variant.last,
-            pinned: res.data.variant.pinned,
-            desc: res.data.variant.desc,
-            comp: res.data.variant.comp,
-            price: res.data.variant.price,
-            price_last: res.data.variant.price_last,
-            show: res.data.variant.show,
-            product_id: res.data.variant.product_attributes.id,
-            product_attributes: res.data.variant.product_attributes,
-            availabilities_attributes: res.data.variant.availabilities_attributes,
-            images: res.data.variant.images,
-            image_ids: res.data.variant.images.map(i => i.id)
-          }
-        })
-      })
-  }
-
-  handleInputChange = event => {
-    const target = event.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
-
-    this.setState(state => ({
-      values: { ...state.values, [name]: value }
-    }))
-  }
-
-  handleQuantityChange = (store, size) => (event) => {
-    const target = event.target
-    const value = target.value
-
-    let key = Object.keys(this.state.values.availabilities_attributes).find(s => this.state.values.availabilities_attributes[s].size_id == size && this.state.values.availabilities_attributes[s].store_id == store);
-
-    const availabilities = update(this.state.values.availabilities_attributes, {
-      [key]: {
-        quantity: {
-          $set: value
-        }
-      }
-    });
-
-    this.setState(state => ({
-      values: { ...state.values,
-        availabilities_attributes: availabilities
-      }
-    }))
-  }
-
-
-  handleSubmit = event => {
-    if (this.props.id) {
-      this._handleUpdate()
-    } else {
-      this._handleCreate()
-    }
-    event.preventDefault()
-  }
-
-  canSubmit = () => {
-    return (
-      this.state.values.product_attributes &&
-      this.state.values.color_id &&
-      this.state.values.price &&
-      this.state.values.state
-    )
-  }
-
-  _handleUpdate = async () => {
-    const res = await axios.patch(
-      path('variant_path', { id: this.props.id }),
-      { variant: this.state.values, authenticity_token: document.querySelector('[name="csrf-token"]').content }
-    )
-
-    if (res.headers.location) window.location = res.headers.location
-  }
-
-  _handleCreate = async () => {
-    const res = await axios.post(
-      path('variants_path'),
-      { variant: this.state.values, authenticity_token: document.querySelector('[name="csrf-token"]').content }
-    )
-
-    if (res.headers.location) window.location = res.headers.location
-  }
-
-  handleProductChange = (product) => {
-    this.setState(state => ({
-      values: { ...state.values,
-        product_attributes: product,
-        product_id: product.id
-      }
-    }))
-  }
-
-  handleSizesChange = (store, size) => {
-    if (this.state.values.availabilities_attributes.find(s => s.size_id == size && s.store_id == store)) {
-      let key = Object.keys(this.state.values.availabilities_attributes).find(s => this.state.values.availabilities_attributes[s].size_id == size && this.state.values.availabilities_attributes[s].store_id == store);
-
-      const availabilities = update(this.state.values.availabilities_attributes, {
-        [key]: {
-          _destroy: {
-            $set: !this.state.values.availabilities_attributes[key]._destroy
-          }
-        }
-      });
-
-      this.setState(state => ({
-        values: { ...state.values,
-          availabilities_attributes: availabilities
-        }
-      }))
-    }
-    else {
-      this.setState(state => ({
-        values: { ...state.values,
-          availabilities_attributes: [ ...state.values.availabilities_attributes, {
-            store_id: store,
-            size_id: size,
-            variant_id: this.props.id,
-            quantity: 0,
-            weight: this.state.dictionaries.sizes.find(s => s.id == size).weight,
-            _destroy: false
-          }]
-        }
-      }))
-    }
-  }
-
-  handleImagesChange = (images) => {
-    this.setState(state => ({
-      values: { ...state.values,
-        image_ids: images.map(i => i.id),
-        images_attributes: images.map((i, index) => ({ id: i.id, weight: index + 1, favourite: i.favourite }))
-      }
-    }))
-  }
+    </div>
+  )
 }
 
-export default Form
+Product.propTypes = {
+  errors: PropTypes.object,
+  dictionaries: PropTypes.object,
+  productValues: PropTypes.object,
+  onValuesChange: PropTypes.func,
+  locale: PropTypes.string
+}
+
+function Product ({ errors, dictionaries, productValues, onValuesChange, locale }) {
+  const I18n = useI18n(locale)
+
+  const [values, setValues] = useState(productValues)
+
+  useEffect(() => {
+    onValuesChange && onValuesChange(values)
+  }, [values])
+
+  const handleChange = ({ target: { name, value } }) => {
+    setValues({ ...values, [name]: value })
+  }
+
+  return (
+    <>
+      <div className={form.el}>
+        <div className={form.label}>
+          Название
+        </div>
+
+        {I18n.available_locales.map(locale =>
+          <div className={form.gl} key={locale}>
+            <label>
+              <div className={form.label}>
+                {locale}
+              </div>
+
+              <div className={form.input}>
+                <input
+                  type="text"
+                  value={values[`title_${locale}`]}
+                  name={`title_${locale}`}
+                  onChange={handleChange}
+                  placeholder="Заполните название товара..."
+                />
+              </div>
+            </label>
+
+            <Errors errors={errors[`product.title_${locale}`]} />
+          </div>
+        )}
+      </div>
+
+      <div className={form.el}>
+        <label>
+          <div className={form.label}>
+            Категория
+          </div>
+
+          <div className={form.input}>
+            <select name="category_id" onChange={handleChange} value={values.category_id}>
+              <option>Выберите категорию...</option>
+
+              {dictionaries.categories.map(category =>
+                <option key={category.id} value={category.id}>{category.title}</option>
+              )}
+            </select>
+          </div>
+        </label>
+
+        <Errors errors={errors['product.category']} />
+      </div>
+    </>
+  )
+}

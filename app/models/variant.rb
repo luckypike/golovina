@@ -1,29 +1,38 @@
 class Variant < ApplicationRecord
-  enum state: { active: 1, archived: 2, soon: 3 }
-
   default_scope { includes(:images, { product: :category }).order(pinned: :desc, created_at: :desc) }
-  scope :available, -> { where(state: [:active, :soon]) }
-  scope :visible, -> { where(show: true) if !Current.user&.is_editor? }
 
-  before_validation :parse_image_ids
+  scope :available, -> { where(state: %i[active soon]) }
+  scope :visible, -> { Current.user&.is_editor? && where(show: true) }
 
-  after_save :check_state
-  before_save :cache_sizes
-  after_save :check_category
+  enum state: { active: 1, archived: 2, soon: 3 }
 
   belongs_to :product
   accepts_nested_attributes_for :product, update_only: true
 
   has_one :category, through: :product
+
   belongs_to :color
-  has_many :availabilities, dependent: :destroy
-  has_many :sizes, through: :availabilities
-  accepts_nested_attributes_for :availabilities, allow_destroy: true
 
   has_many :images, as: :imagable, dependent: :destroy
   accepts_nested_attributes_for :images
 
-  validates_uniqueness_of :color_id, scope: [:product_id]
+  has_many :availabilities, dependent: :destroy
+  has_many :sizes, through: :availabilities
+
+  validates :color_id, uniqueness: { scope: :product_id }
+  validates :code, uniqueness: true, unless: -> { code.blank? }
+
+  translates :desc, :comp
+  globalize_accessors locales: I18n.available_locales, attributes: %i[desc comp]
+
+  # --------------
+
+  before_save :cache_sizes
+
+  after_save :check_state
+  after_save :check_category
+
+  accepts_nested_attributes_for :availabilities, allow_destroy: true
 
   has_many :wishlists, dependent: :destroy
   has_many :carts, dependent: :destroy
@@ -31,9 +40,9 @@ class Variant < ApplicationRecord
 
   has_many :kitables, dependent: :destroy
   has_many :kits, through: :kitables
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
 
-  validates_presence_of :price, :state
+  validates :price, :state, presence: true
 
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
@@ -43,11 +52,7 @@ class Variant < ApplicationRecord
   end
 
   def discount_price(discount)
-    self.price_sell - self.price_sell * discount
-  end
-
-  def parse_image_ids
-    p self
+    price_sell - price_sell * discount
   end
 
   def entity_created_at
@@ -62,11 +67,11 @@ class Variant < ApplicationRecord
     product.title_safe
   end
 
-  def in_wishlist user
+  def in_wishlist(user)
     wishlists.where(user: user).any?
   end
 
-  def in_notification user
+  def in_notification(user)
     notifications.where(user: user).any?
   end
 
@@ -111,8 +116,8 @@ class Variant < ApplicationRecord
   end
 
   def check_category
-    Category.find(product.category_id_before_last_save).check if product.category_id_before_last_save
-    product.category.check
+    Category.find(product.category_id_before_last_save).check_variants_counter if product.category_id_before_last_save
+    product.category.check_variants_counter
   end
 
   def cache_sizes

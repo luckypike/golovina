@@ -1,20 +1,25 @@
 class Product < ApplicationRecord
+
+  # has_many :themable, dependent: :destroy
+  # has_many :themes, through: :themable
+
   belongs_to :category
 
-  has_many :themable, dependent: :destroy
-  has_many :themes, through: :themable
-
   has_many :variants, dependent: :destroy
-  accepts_nested_attributes_for :variants, reject_if: :all_blank, allow_destroy: true
-
+  has_many :kits, through: :variants
   has_many :images, through: :variants
 
-  has_many :similarables, dependent: :destroy
-  has_many :similar_products, class_name: 'Product', through: :similarables
+  # accepts_nested_attributes_for :variants, reject_if: :all_blank, allow_destroy: true
 
-  has_many :kits, through: :variants
 
-  validates_presence_of :title
+  # has_many :similarables, dependent: :destroy
+  # has_many :similar_products, class_name: 'Product', through: :similarables
+
+
+  validates :title_ru, :title_en, presence: true
+
+  translates :title
+  globalize_accessors locales: I18n.available_locales, attributes: [:title]
 
   def title_safe
     title_temp = (self.title.presence || self.id.to_s).strip

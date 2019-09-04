@@ -19,7 +19,7 @@ class Category < ApplicationRecord
   #   input.to_s.to_slug.normalize(transliterations: :russian).to_s
   # end
 
-  # def check
-  #   update_attribute(:variants_counter, variants.active.size)
-  # end
+  def check_variants_counter
+    update_attribute(:variants_counter, variants.active.size)
+  end
 end

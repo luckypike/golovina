@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     collection do
       get :list
     end
+
     member do
       post :wishlist
       post :cart
