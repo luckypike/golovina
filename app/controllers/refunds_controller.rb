@@ -20,7 +20,7 @@ class RefundsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @orders = Order.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).where(user: Current.user, state: :paid)
+        @orders = Order.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).where(user: Current.user, state: [:paid, :archived])
       end
     end
   end
