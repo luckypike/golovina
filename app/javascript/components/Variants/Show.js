@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import axios from 'axios'
 import classNames from 'classnames'
-import Glide from '@glidejs/glide'
+// import Glide from '@glidejs/glide'
 import Siema from 'siema'
 import ReactMarkdown from 'react-markdown'
 import PubSub from 'pubsub-js'
@@ -20,14 +21,16 @@ import buttons from '../Buttons.module.css'
 
 class Show extends Component {
   render () {
-    const { user } = this.props
-
     return (
       <Router>
-        <Route path={Routes.catalog_variant_path} render={props => <Variant user={user} {...props.match.params} {...props} />} />
+        <Route path={Routes.catalog_variant_path} render={props => <Variant user={this.props.user} {...props.match.params} {...props} />} />
       </Router>
     )
   }
+}
+
+Show.propTypes = {
+  user: PropTypes.object
 }
 
 class Variant extends Component {
@@ -46,14 +49,14 @@ class Variant extends Component {
   mount = React.createRef()
   slides = React.createRef()
 
-  componentDidMount() {
+  componentDidMount () {
     window.addEventListener('resize', this.updateDimensions)
     this._loadAsyncData()
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if((prevState.id != this.state.id || !this.state.variant) && this.state.variants) {
-      const variant = this.state.variants.find(variant => variant.id == this.state.id)
+  componentDidUpdate (prevProps, prevState) {
+    if ((prevState.id !== this.state.id || !this.state.variant) && this.state.variants) {
+      const variant = this.state.variants.find(variant => variant.id === parseInt(this.state.id))
       let size = null
       let section = null
 
@@ -64,7 +67,7 @@ class Variant extends Component {
       // }
 
       this.setState({ variant, size, section, index: 1 }, () => {
-        if(this.glide) {
+        if (this.glide) {
           this.glide.destroy(true)
           this.glide = null
         }
@@ -73,8 +76,8 @@ class Variant extends Component {
     }
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if(props.id != state.id) {
+  static getDerivedStateFromProps (props, state) {
+    if (props.id !== state.id) {
       return {
         id: props.id
       }
@@ -88,15 +91,15 @@ class Variant extends Component {
     this.setState({ ...res.data })
   }
 
-  updateDimensions = () =>  {
-    if(window.getComputedStyle(this.slides.current).getPropertyValue('position') === 'static') {
-      if(!this.glide) {
+  updateDimensions = () => {
+    if (window.getComputedStyle(this.slides.current).getPropertyValue('position') === 'static') {
+      if (!this.glide) {
         this.glide = new Siema({
           onChange: () => this.setState({ index: this.glide.currentSlide + 1 })
         })
       }
     } else {
-      if(this.glide) {
+      if (this.glide) {
         this.glide.destroy(true)
         this.glide = null
       }
@@ -104,7 +107,7 @@ class Variant extends Component {
   }
 
   selectSize = availability => {
-    if(availability.active) {
+    if (availability.active) {
       this.setState({ size: availability.id, add: false, check: false })
     }
   }
@@ -119,10 +122,10 @@ class Variant extends Component {
   handleCartClick = async () => {
     if (!this.state.size && this.state.variant.availabilities.length === 1 && this.state.variant.availabilities[0].size.id === 1) {
       await this.selectSize(this.state.variant.availabilities[0].size)
-    }
-    else if(!this.state.size) {
+    } else if (!this.state.size) {
       this.setState({ check: true })
     }
+
     if (this.state.size && !this.state.send) {
       this.setState({ send: true })
 
@@ -142,9 +145,9 @@ class Variant extends Component {
 
   toggleSection = (section) => {
     this.setState(state => ({
-      section: state.section == section ? null : section
+      section: state.section === section ? null : section
     }), () => {
-      if(this.glide) {
+      if (this.glide) {
         this.glide.destroy(true)
         this.glide = null
       }
@@ -179,9 +182,9 @@ class Variant extends Component {
   }
 
   render () {
-    const { variant, variants, size, send, section, add, index, archived, values, check } = this.state
-    const { user } = this.props
-    if(!variant) return null
+    const { variant, variants, size, section, index, archived } = this.state
+    // const { user } = this.props
+    if (!variant) return null
 
     return (
       <div className={classNames(page.root)}>
@@ -218,9 +221,11 @@ class Variant extends Component {
               }
             </div>
 
-            <div className={styles.price}>
-              <Price sell={variant.price_sell} origin={variant.price} originClass={styles.origin} sellClass={styles.sell} />
-            </div>
+            {['active', 'archive'].includes(variant.state) &&
+              <div className={styles.price}>
+                <Price sell={variant.price_sell} origin={variant.price} originClass={styles.origin} sellClass={styles.sell} />
+              </div>
+            }
 
             <Variants variants={variants} variant={variant} className={styles.variants} />
 
@@ -232,13 +237,16 @@ class Variant extends Component {
               )}
             </div>
 
-            <div className={styles.guide}>
-              <Guide />
-            </div>
+            {variant.available &&
+              <div className={styles.guide}>
+                <Guide />
+              </div>
+            }
 
-            {!variant.soon &&
+            {variant.state === 'active' &&
               <div className={styles.buy}>
-                <div className={styles.cart}>
+                ЙЙЙ
+                {/* <div className={styles.cart}>
                   {add &&
                     <a className={buttons.main} href={path('cart_path')}>
                       Оплатить
@@ -263,11 +271,11 @@ class Variant extends Component {
                       <path d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>
                     </svg>
                   </div>
-                </div>
+                </div> */}
               </div>
             }
 
-            {variant.soon &&
+            {/* {variant.soon &&
               <div className={styles.notification}>
                 {!variant.notification &&
                   <div className={styles.text}>
@@ -290,7 +298,7 @@ class Variant extends Component {
                   }
                 </form>
               </div>
-            }
+            } */}
 
             {variant.desc &&
               <div className={styles.desc}>
@@ -303,7 +311,7 @@ class Variant extends Component {
                 <Acc id="kits" title="Готовые решения" onToggle={this.toggleSection} section={section}>
                   <div className={styles.kits}>
                     {variant.kits.map((kit) =>
-                      <a href={path('kit_path', {id: kit.id})} key={kit.id} className={styles.kit_item}>
+                      <a href={path('kit_path', { id: kit.id })} key={kit.id} className={styles.kit_item}>
                         <div className={styles.kit_image}><img src={kit.image}/></div>
                         <div className={styles.kit_title}>{kit.title}</div>
                       </a>
@@ -367,6 +375,11 @@ class Variant extends Component {
       </div>
     )
   }
+}
+
+Variant.propTypes = {
+  user: PropTypes.object,
+  id: PropTypes.string
 }
 
 export default Show

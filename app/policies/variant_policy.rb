@@ -28,7 +28,7 @@ class VariantPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    record.active? || user&.is_editor?
   end
 
   def index?
@@ -61,5 +61,15 @@ class VariantPolicy < ApplicationPolicy
 
   def cart?
     user
+  end
+
+  class Scope < Scope
+    def resolve
+      if user&.is_editor?
+        scope.all
+      else
+        scope.active
+      end
+    end
   end
 end

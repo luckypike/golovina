@@ -1,13 +1,13 @@
 class Variant < ApplicationRecord
   default_scope { includes(:images, { product: :category }).order(pinned: :desc, created_at: :desc) }
 
-  scope :available, -> { where(state: %i[active soon]) }
-  scope :visible, -> { Current.user&.is_editor? && where(show: true) }
+  # scope :available, -> { where(state: %i[active soon]) }
+  # scope :visible, -> { Current.user&.is_editor? && where(show: true) }
 
-  enum state: { active: 1, archived: 2, soon: 3 }
+  enum state: { unpub: 0, active: 1, archived: 2 }
 
-  belongs_to :product
-  accepts_nested_attributes_for :product, update_only: true
+  belongs_to :product, inverse_of: :variants
+  accepts_nested_attributes_for :product
 
   has_one :category, through: :product
 
@@ -19,18 +19,20 @@ class Variant < ApplicationRecord
   has_many :availabilities, dependent: :destroy
   has_many :sizes, through: :availabilities
 
-  validates :color_id, uniqueness: { scope: :product_id }
+  validates :color, uniqueness: { scope: :product_id }
   validates :code, uniqueness: true, unless: -> { code.blank? }
+  validates :price, presence: true, if: -> { active? }
+
+  before_save :default_values
+
+  after_save :cache_sizes
+  # after_save :check_state
+  after_save :check_category
 
   translates :desc, :comp
   globalize_accessors locales: I18n.available_locales, attributes: %i[desc comp]
 
   # --------------
-
-  before_save :cache_sizes
-
-  after_save :check_state
-  after_save :check_category
 
   accepts_nested_attributes_for :availabilities, allow_destroy: true
 
@@ -42,10 +44,12 @@ class Variant < ApplicationRecord
   has_many :kits, through: :kitables
   has_many :notifications, dependent: :destroy
 
-  validates :price, :state, presence: true
-
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
+
+  def available?
+    availabilities.active.any?
+  end
 
   def price_sell
     price_last.presence || price
@@ -101,18 +105,29 @@ class Variant < ApplicationRecord
     end
   end
 
-  def check_state
-    if soon && availabilities.all? { |a| !a.active? }
-      update_column(:state, :soon)
-    elsif !soon && availabilities.all? { |a| !a.active? }
-      update_column(:state, :archived)
-    else
-      update_column(:state, :active)
-    end
-  end
+  # def check_state
+  #   if soon && availabilities.all? { |a| !a.active? }
+  #     update_column(:state, :soon)
+  #   elsif !soon && availabilities.all? { |a| !a.active? }
+  #     update_column(:state, :archived)
+  #   else
+  #     update_column(:state, :active)
+  #   end
+  # end
 
   def images?
     images.size.positive?
+  end
+
+  def product_attributes=(attributes)
+    self.product = Product.find_by(id: attributes[:id])
+    super
+  end
+
+  private
+
+  def default_values
+    self.state = state.presence || :unpub
   end
 
   def check_category
@@ -121,6 +136,8 @@ class Variant < ApplicationRecord
   end
 
   def cache_sizes
-    self.sizes_cache = sizes.map(&:id)
+    update_column(:sizes_cache, sizes.map(&:id))
   end
+
+
 end

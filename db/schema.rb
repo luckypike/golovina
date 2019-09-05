@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_145411) do
+ActiveRecord::Schema.define(version: 2019_09_05_123638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -360,7 +360,7 @@ ActiveRecord::Schema.define(version: 2019_09_03_145411) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "out_of_stock", default: false
-    t.integer "state", default: 1
+    t.integer "state"
     t.jsonb "sizes_cache"
     t.text "desc"
     t.decimal "price"

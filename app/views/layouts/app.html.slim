@@ -19,7 +19,7 @@ html
     = react_component( \
       'Header',
       { \
-        categories: Category.with_translations.active.where.not(variants_counter: 0).order(weight: :asc).map{ |category| category.slice(:id, :slug, :title) },
+        categories: policy_scope(Category).with_translations.order(weight: :asc).map{ |category| category.slice(:id, :slug, :title) },
         collections: Collection.order(weight: :asc, id: :desc).map{ |category| category.slice(:id, :slug, :title, :desc) },
         index: current_page?(controller: :static, action: :index),
         user: (Current.user.slice(:id, :is_editor?, :guest?) rescue nil),

@@ -1,4 +1,14 @@
 json.dictionaries do
+  json.states(Variant.states.map{ |key, _id| key })
+
+  json.stores Store.all do |store|
+    json.partial! store
+  end
+
+  json.sizes Size.all do |size|
+    json.partial! size
+  end
+
   json.categories Category.with_translations.all.sort_by(&:title) do |category|
     json.partial! category
   end
@@ -17,6 +27,7 @@ json.values do
     json.set! f, variant.send(f) || ''
   end
 
+  json.state variant.state || ''
   json.code variant.code || ''
   json.price variant.price || ''
   json.price_last variant.price_last || ''
@@ -28,6 +39,13 @@ json.values do
       json.set! f, variant.product.send(f) || ''
     end
 
+    json.id variant.product.id
     json.category_id variant.product.category_id || ''
+  end
+
+  json.availabilities_attributes @variant.availabilities do |availability|
+    json.extract! availability, :id, :variant_id, :size_id, :quantity, :store_id
+    json.weight availability.size.weight
+    # json._destroy false
   end
 end

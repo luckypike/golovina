@@ -5,7 +5,7 @@ class Product < ApplicationRecord
 
   belongs_to :category
 
-  has_many :variants, dependent: :destroy
+  has_many :variants, inverse_of: :product, dependent: :destroy
   has_many :kits, through: :variants
   has_many :images, through: :variants
 

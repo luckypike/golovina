@@ -13,10 +13,10 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.active.friendly.find(params[:slug])
+    @category = Category.friendly.find(params[:slug])
     authorize @category
 
-    @variants = @category.variants.available.visible.includes(:images, :product)
+    @variants = policy_scope(@category.variants).includes(:images, :product)
 
     respond_to :html, :json
   end

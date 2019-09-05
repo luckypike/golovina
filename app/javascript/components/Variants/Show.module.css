@@ -36,12 +36,12 @@
   }
 }
 
-.desc {
-  margin-bottom: calc(var(--yr) * 6);
+.acc {
+  margin-top: calc(var(--yr) * var(--s3));
+}
 
-  @media (--m) {
-    margin-bottom: calc(var(--yr) * 8);
-  }
+.desc {
+  margin-top: calc(var(--yr) * var(--s3));
 }
 
 .edit {
@@ -222,12 +222,11 @@
 .buy {
   display: flex;
   justify-content: center;
-  margin-bottom: calc(var(--yr) * 6);
   position: relative;
 
   @media (--m) {
     justify-content: flex-start;
-    margin-bottom: calc(var(--yr) * 8);
+    /* margin-bottom: calc(var(--yr) * 8); */
   }
 }
 

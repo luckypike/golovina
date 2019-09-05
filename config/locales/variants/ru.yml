@@ -1,4 +1,10 @@
 ru:
+  variant:
+    states:
+      unpub: Неопубликован
+      active: Размещён
+      archived: Архивный
+
   variants:
     colors:
       one: "%{count} цвет"

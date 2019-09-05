@@ -82,9 +82,11 @@ class VariantsController < ApplicationController
 
   def show
     @category = Category.friendly.find(params[:slug])
-    @variant = @category.variants.find_by_id!(params[:id])
+    @variant = @category.variants.find_by!(id: params[:id])
 
     authorize @variant
+
+    @variants = policy_scope(@variant.product.variants).includes(:translations, :color, availabilities: :size)
 
     respond_to :html, :json
   end
@@ -130,7 +132,9 @@ class VariantsController < ApplicationController
   end
 
   def new
-    @variant = Variant.new(product: Product.new)
+    @product = Product.find_or_initialize_by(id: params[:product_id])
+    @variant = Variant.new(product: @product)
+
     authorize @variant
 
     respond_to :html, :json
@@ -144,8 +148,6 @@ class VariantsController < ApplicationController
   end
 
   def create
-
-    pp variant_params
     @variant = Variant.new(variant_params)
 
     authorize @variant
@@ -205,9 +207,10 @@ class VariantsController < ApplicationController
   def variant_params
     permitted =
       Variant.globalize_attribute_names \
-      + %i[code color_id price price_last created_at] \
+      + %i[state code color_id price price_last created_at] \
       + [
         {
+          availabilities_attributes: %i[id size_id store_id quantity _destroy],
           product_attributes: Product.globalize_attribute_names \
             + %i[id category_id]
         }

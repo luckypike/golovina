@@ -4,7 +4,7 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    (record.active? && record.variants_counter > 0) || user&.is_editor?
   end
 
   def update?
@@ -25,5 +25,15 @@ class CategoryPolicy < ApplicationPolicy
 
   def destroy?
     update?
+  end
+
+  class Scope < Scope
+    def resolve
+      if user&.is_editor?
+        scope.all
+      else
+        scope.active.where.not(variants_counter: 0)
+      end
+    end
   end
 end

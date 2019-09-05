@@ -121,6 +121,9 @@
   }
 }
 
+.hint {
+  composes: at from './Fonts.module.css';
+}
 
 .submit {
   display: flex;

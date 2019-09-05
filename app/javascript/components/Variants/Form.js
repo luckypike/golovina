@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
+import classNames from 'classnames'
+import update from 'immutability-helper'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
@@ -9,13 +11,15 @@ import { Errors } from '../Form'
 import page from '../Page.module.css'
 import form from '../Form.module.css'
 import buttons from '../Buttons.module.css'
+import styles from './Variant.module.css'
 
 Form.propTypes = {
   id: PropTypes.number,
+  product_id: PropTypes.number,
   locale: PropTypes.string
 }
 
-export default function Form ({ id, locale }) {
+export default function Form ({ id, product_id: productId, locale }) {
   const I18n = useI18n(locale)
 
   const [values, setValues] = useState()
@@ -24,7 +28,13 @@ export default function Form ({ id, locale }) {
 
   useEffect(() => {
     const _fetch = async () => {
-      const { data: { values, variant, dictionaries } } = await axios.get(id ? path('edit_variant_path', { id, format: 'json' }) : path('new_variant_path', { format: 'json' }))
+      const {
+        data: {
+          values,
+          variant,
+          dictionaries
+        }
+      } = await axios.get(id ? path('edit_variant_path', { id, format: 'json' }) : path('new_variant_path', { format: 'json', query: { product_id: productId } }))
 
       setValues(values)
       setVariant(variant)
@@ -106,6 +116,26 @@ export default function Form ({ id, locale }) {
 
       <div>
         <form onSubmit={handleSubmit}>
+          <div className={form.el}>
+            <label>
+              <div className={form.label}>
+                Статус
+              </div>
+
+              <div className={form.input}>
+                <select name="state" onChange={handleChange} value={values.state}>
+                  {dictionaries.states.map(state =>
+                    <option key={state} value={state}>{I18n.t(`variant.states.${state}`)}</option>
+                  )}
+                </select>
+              </div>
+            </label>
+
+            <div className={form.hint}>
+              Неопубликованные товары видны только редакторам, размещенные становятся видны всем, а архивные скрываются ото всех и найти их можно только через управление.
+            </div>
+          </div>
+
           <Product
             errors={errors}
             dictionaries={dictionaries}
@@ -199,6 +229,16 @@ export default function Form ({ id, locale }) {
             <Errors errors={errors.color} />
           </div>
 
+          <Availabilities
+            // errors={errors}
+            dictionaries={dictionaries}
+            locale={locale}
+            availabilitiesValues={values.availabilities_attributes}
+            onValuesChange={
+              availabilitiesValues => setValues({ ...values, availabilities_attributes: availabilitiesValues })
+            }
+          />
+
           <div className={form.el}>
             <div className={form.label}>
               Описание
@@ -215,30 +255,50 @@ export default function Form ({ id, locale }) {
                     <textarea value={values[`desc_${locale}`]} name={`desc_${locale}`} onChange={handleChange} />
                   </div>
                 </label>
-
-                <Errors errors={errors[`title_${locale}`]} />
               </div>
             )}
           </div>
 
           <div className={form.el}>
-            <label>
-              <div className={form.label}>
-                Дата создания
-              </div>
+            <div className={form.label}>
+              Состав
+            </div>
 
-              <div className={form.input}>
-                <input
-                  type="datetime-local"
-                  value={values.created_at}
-                  name="created_at"
-                  onChange={handleChange}
-                />
-              </div>
-            </label>
+            {I18n.available_locales.map(locale =>
+              <div className={form.gl} key={locale}>
+                <label>
+                  <div className={form.label}>
+                    {locale}
+                  </div>
 
-            <Errors errors={errors.price_last} />
+                  <div className={form.input}>
+                    <textarea value={values[`comp_${locale}`]} name={`comp_${locale}`} onChange={handleChange} />
+                  </div>
+                </label>
+              </div>
+            )}
           </div>
+
+          {id &&
+            <div className={form.el}>
+              <label>
+                <div className={form.label}>
+                  Дата создания
+                </div>
+
+                <div className={form.input}>
+                  <input
+                    type="datetime-local"
+                    value={values.created_at}
+                    name="created_at"
+                    onChange={handleChange}
+                  />
+                </div>
+              </label>
+
+              <Errors errors={errors.price_last} />
+            </div>
+          }
 
           <div>
             {send && 'Настройки блока сохраняются..' }
@@ -332,3 +392,137 @@ function Product ({ errors, dictionaries, productValues, onValuesChange, locale 
     </>
   )
 }
+
+Availabilities.propTypes = {
+  dictionaries: PropTypes.object,
+  availabilitiesValues: PropTypes.array,
+  onValuesChange: PropTypes.func
+}
+
+function Availabilities ({ dictionaries, availabilitiesValues, onValuesChange }) {
+  const { stores, sizes } = dictionaries
+
+  const [values, setValues] = useState(availabilitiesValues)
+
+  useEffect(() => {
+    onValuesChange && onValuesChange(values)
+    // console.log(values)
+  }, [values])
+
+  const handleAddSize = (store, size) => {
+    const key = values.findIndex(value => value.size_id === size && value.store_id === store)
+
+    if (key >= 0) {
+      setValues(update(values, { [key]: { $toggle: ['_destroy'] } }))
+    } else {
+      setValues([...values, { store_id: store, size_id: size, quantity: 0 }])
+    }
+  }
+
+  const handleQuantityChange = (store, size, quantity) => {
+    const key = values.findIndex(value => value.size_id === size && value.store_id === store)
+    setValues(update(values, { [key]: { quantity: { $set: quantity } } }))
+    // console.log(key)
+    // console.log(store, size, quantity)
+  }
+
+  const hasSizeOnStore = (store, size) => {
+    return values.find(value => value.size_id === size && value.store_id === store && !value._destroy)
+  }
+
+  return (
+    <div className={form.stores}>
+      {stores.map(store =>
+        <React.Fragment key={store.id}>
+          <div className={form.store}>
+            <div className={form.input}>
+              <div className={form.label}>
+                Доступные размеры для {store.title}
+              </div>
+
+              <div className={styles.sizes}>
+                {sizes.map(size =>
+                  <div
+                    key={size.id}
+                    className={classNames(
+                      styles.size,
+                      {
+                        [styles.active]: hasSizeOnStore(store.id, size.id)
+                      }
+                    )}
+                    onClick={() => handleAddSize(store.id, size.id)}>{size.size}</div>
+                )}
+              </div>
+
+              {/* <div className={styles.sizes}>
+                {sizes.sort((a, b) => a.weight - b.weight).map((size, _) =>
+                  <div key={_} className={classNames([styles.size], {[styles.active]: values.availabilities_attributes.find(s => s.size_id == size.id && s.store_id == store.id && !s._destroy)})} onClick={() => this.handleSizesChange(store.id, size.id)}>{size.size}</div>
+                )}
+              </div> */}
+            </div>
+          </div>
+
+          {values.sort((a, b) => sizes.find(size => size.id === a.size_id).weight - sizes.find(size => size.id === b.size_id).weight).filter(value => value.store_id === store.id && !value._destroy).map((value, i) =>
+            <div key={i} className={form.input}>
+              <div className={form.label}>
+                Количество размера {sizes.find(size => size.id === value.size_id).size}
+              </div>
+
+              <div className={form.input_input}>
+                <input
+                  type="text"
+                  value={value.quantity}
+                  onChange={({ target }) => handleQuantityChange(value.store_id, value.size_id, target.value)}
+                />
+              </div>
+            </div>
+            // <Availability
+            //
+            //   i={_i}
+            //   key={_i}
+            //   sizes={sizes}
+            //   {...value}
+            // />
+          )}
+
+          {/* {values.availabilities_attributes && values.availabilities_attributes.filter(s => s.store_id == store.id )&&
+            values.availabilities_attributes.filter(s => s.store_id == store.id && !s._destroy).sort((a, b) => a.weight - b.weight).map((size, key) =>
+              <div key={key} className={form.input}>
+                <div className={form.label}>
+                  Количество размера "{sizes.find(s => s.id == size.size_id).size}"
+                </div>
+
+                <div className={form.input_input}>
+                  <input type="text" value={size.quantity} name={`size[${size.size_id}]`} onChange={this.handleQuantityChange(store.id, size.size_id)} />
+                </div>
+              </div>
+            )
+          } */}
+        </React.Fragment>
+      )}
+    </div>
+  )
+}
+
+// Availability.propTypes = {
+//   onValueChange: PropTypes.func,
+//   quantity: PropTypes.string,
+//   sizes: PropTypes.array,
+//   i: PropTypes.number,
+//   size_id: PropTypes.number
+// }
+//
+// function Availability (props) {
+//   const { i, sizes, size_id: sizeId, onValueChange } = props
+//
+//   const [quantity, setQuantity] = useState(props.quantity)
+//
+//   useEffect(() => {
+//     console.log(i, quantity)
+//     onValueChange && onValueChange(i, quantity)
+//   }, [quantity])
+//
+//   return (
+//
+//   )
+// }
