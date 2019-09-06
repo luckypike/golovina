@@ -82,9 +82,9 @@
 .full {
   grid-column: span 12;
 
-  @media (--s) {
+  /* @media (--s) {
     grid-column: 2 / span 8;
-  }
+  } */
 }
 
 .landscape {
