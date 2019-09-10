@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_05_123638) do
+ActiveRecord::Schema.define(version: 2019_09_10_104615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,16 @@ ActiveRecord::Schema.define(version: 2019_09_05_123638) do
     t.integer "weight", default: 0
     t.string "desc"
     t.index ["slug"], name: "index_collections_on_slug", unique: true
+  end
+
+  create_table "color_translations", force: :cascade do |t|
+    t.bigint "color_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.index ["color_id"], name: "index_color_translations_on_color_id"
+    t.index ["locale"], name: "index_color_translations_on_locale"
   end
 
   create_table "colors", force: :cascade do |t|

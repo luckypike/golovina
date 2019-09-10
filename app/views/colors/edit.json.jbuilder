@@ -1,2 +1,5 @@
-json.color @color, partial: 'colors/color', as: :color
-json.partial! 'colors/values', color: @color
+json.color do
+  json.partial! @color
+end
+
+json.partial! 'values', color: @color

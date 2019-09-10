@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
+import { Errors } from '../Form'
 
 import page from '../Page.module.css'
 import form from '../Form.module.css'
@@ -18,15 +19,19 @@ export default function Form (props) {
   const image = useRef()
 
   const I18n = useI18n(props.locale)
-  const { id, color, colors } = props
+  const { id } = props
 
   const [values, setValues] = useState()
+  const [dictionaries, setDictionaries] = useState()
+  const [color, setColor] = useState()
 
   useEffect(() => {
     const _fetch = async () => {
-      const { data: { values } } = await axios.get(id ? path('edit_color_path', { id, format: 'json' }) : path('new_color_path', { format: 'json' }))
+      const { data: { values, color, dictionaries } } = await axios.get(id ? path('edit_color_path', { id, format: 'json' }) : path('new_color_path', { format: 'json' }))
 
       setValues(values)
+      setColor(color)
+      setDictionaries(dictionaries)
     }
 
     _fetch()
@@ -86,6 +91,10 @@ export default function Form (props) {
     setValues({ ...values, [name]: value })
   }
 
+  const handleChangeCheckbox = ({ target: { name, checked } }) => {
+    setValues({ ...values, [name]: checked })
+  }
+
   const handleDestroy = async e => {
     e.preventDefault()
 
@@ -97,7 +106,7 @@ export default function Form (props) {
     })
   }
 
-  if (!values) return null
+  if (!values || !dictionaries) return null
 
   return (
     <div className={page.gray}>
@@ -108,15 +117,25 @@ export default function Form (props) {
       <div>
         <form onSubmit={handleSubmit}>
           <div className={form.el}>
-            <label>
-              <div className={form.label}>
-                Название цвета
-              </div>
-            </label>
-
-            <div className={form.input}>
-              <input type="text" name="title" value={values.title} onChange={handleChange} />
+            <div className={form.label}>
+              Название цвета
             </div>
+
+            {I18n.available_locales.map(locale =>
+              <div className={form.gl} key={locale}>
+                <label>
+                  <div className={form.label}>
+                    {locale}
+                  </div>
+
+                  <div className={form.input}>
+                    <input type="text" value={values[`title_${locale}`]} name={`title_${locale}`} onChange={handleChange} />
+                  </div>
+                </label>
+
+                <Errors errors={errors[`title_${locale}`]} />
+              </div>
+            )}
           </div>
 
           <div className={form.el}>
@@ -129,11 +148,13 @@ export default function Form (props) {
             <div className={form.input}>
               <select name="parent_color_id" value={values.parent_color_id} onChange={handleChange}>
                 <option value={null}></option>
-                {colors.map((i, _) =>
-                  <option key={_} disabled={values.child_color.length != 0} value={i.id}>{i.title}</option>
+                {dictionaries.colors.map(color =>
+                  <option key={color.id} value={color.id}>{color.title}</option>
                 )}
               </select>
             </div>
+
+            <Errors errors={errors.parent_color} />
           </div>
 
           <div className={form.el}>
@@ -143,15 +164,9 @@ export default function Form (props) {
               </div>
             </label>
 
-            {color.image.url == null &&
-              <div className={form.input}>
-                <input type="color" name="color" value={values.color} onChange={handleChange}/>
-              </div>
-            }
-
-            {color.image &&
-              <img src={color.image.url} />
-            }
+            <div className={form.input}>
+              <input type="color" name="color" value={values.color} onChange={handleChange} />
+            </div>
           </div>
 
           <div className={form.el}>
@@ -161,18 +176,28 @@ export default function Form (props) {
               </div>
             </label>
 
+            {color && color.image_url &&
+              <img src={color.image_url} />
+            }
+
             <div className={form.input}>
               <input type="file" name="image" ref={image} />
+            </div>
+
+            <div className={form.input}>
+              <input type="checkbox" name="remove_image" checked={values.remove_image} onChange={handleChangeCheckbox} /> Удалить изображение
             </div>
           </div>
 
           <div>
-            {send && 'Настройки блока сохраняются..' }
+            {send && 'Настройки цвета сохраняются..' }
 
             {!send &&
               <>
                 <input type="submit" value="Сохранить" className={buttons.main} disabled={send} />
-                <a href={path('colors_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>
+                {(!color.colors || color.colors.length === 0) &&
+                  <a href={path('colors_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>
+                }
               </>
             }
           </div>

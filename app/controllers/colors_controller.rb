@@ -6,7 +6,7 @@ class ColorsController < ApplicationController
   def index
     authorize Color
 
-    @colors = Color.where(parent_color: nil).order(id: :asc)
+    @colors = Color.main.with_translations.includes(colors: :translations).order(id: :asc)
   end
 
   def show
@@ -49,11 +49,13 @@ class ColorsController < ApplicationController
   end
 
   private
-    def set_color
-      @color = Color.find(params[:id])
-    end
 
-    def color_params
-      params.require(:color).permit(:title, :color, :image, :parent_color_id, :remove_image)
-    end
+  def set_color
+    @color = Color.find(params[:id])
+  end
+
+  def color_params
+    permitted = Color.globalize_attribute_names + %i[color image parent_color_id remove_image]
+    params.require(:color).permit(*permitted)
+  end
 end
