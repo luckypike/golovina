@@ -1,6 +1,6 @@
 class CategoryPolicy < ApplicationPolicy
   def index?
-    show?
+    true
   end
 
   def show?

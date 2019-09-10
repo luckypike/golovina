@@ -2,9 +2,8 @@ json.variants @variants do |variant|
   json.partial! 'variants/variant', variant: variant
   json.extract! variant, :desc, :comp
   json.available variant.available?
-  # json.soon variant.availabilities.all? { |availability| availability.quantity < 1} && variant.soon
 
-  json.images variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] } do |image|
+  json.images variant.images.sort_by(&:weight_or_created) do |image|
     json.id image.id
     json.preview image.photo.preview.url
     json.thumb image.photo.thumb.url
@@ -36,15 +35,15 @@ json.variants @variants do |variant|
     json.extract! variant.color, :id, :title, :image_url, :color
   end
 
-  if @variant.kits.active.present?
-    json.section 'kits'
-
-    json.kits @variant.kits.active do |kit|
-      json.id kit.id
-      json.title kit.title.present? ? kit.human_title : kit.human_title.truncate(60)
-      json.image kit.images.present? ? kit.images.sort_by(&:weight).first.photo.thumb.url : nil
-    end
-  end
+  # if @variant.kits.active.present?
+  #   json.section 'kits'
+  #
+  #   json.kits @variant.kits.active do |kit|
+  #     json.id kit.id
+  #     json.title kit.title.present? ? kit.human_title : kit.human_title.truncate(60)
+  #     json.image kit.images.present? ? kit.images.sort_by(&:weight).first.photo.thumb.url : nil
+  #   end
+  # end
 end
 
 # json.archived @variant.product.variants.archived.includes(:color).sort_by(&:state) do |variant|

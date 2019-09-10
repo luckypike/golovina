@@ -182,8 +182,8 @@ class Variant extends Component {
   }
 
   render () {
-    const { variant, variants, size, section, index, archived } = this.state
-    // const { user } = this.props
+    const { variant, variants, size, section, index, archived, values, add, send, check } = this.state
+    const { user } = this.props
     if (!variant) return null
 
     return (
@@ -223,7 +223,7 @@ class Variant extends Component {
 
             {['active', 'archive'].includes(variant.state) &&
               <div className={styles.price}>
-                <Price sell={variant.price_sell} origin={variant.price} originClass={styles.origin} sellClass={styles.sell} />
+                <Price sell={parseFloat(variant.price_sell)} origin={parseFloat(variant.price)} originClass={styles.origin} sellClass={styles.sell} />
               </div>
             }
 
@@ -244,60 +244,68 @@ class Variant extends Component {
             }
 
             {variant.state === 'active' &&
-              <div className={styles.buy}>
-                ЙЙЙ
-                {/* <div className={styles.cart}>
-                  {add &&
-                    <a className={buttons.main} href={path('cart_path')}>
-                      Оплатить
-                    </a>
-                  }
-
-                  {!add && !variant.soon &&
-                    <>
-                      <button className={buttons.main} disabled={send} onClick={this.handleCartClick}>
-
-                        {!send ? 'Добавить в корзину' : 'Добавляем...'}
-                      </button>
-
-                      {check &&
-                        <div className={styles.check}>Выберите размер</div>
+              <>
+                {variant.available &&
+                  <div className={styles.buy}>
+                    <div className={styles.cart}>
+                      {add &&
+                        <a className={buttons.main} href={path('cart_path')}>
+                          Оплатить
+                        </a>
                       }
-                    </>
-                  }
 
-                  <div className={classNames(styles.wishlist, { [styles.active]: variant.in_wishlist })} onClick={this.handleWishlistClick}>
-                    <svg viewBox="0 0 24 24">
-                      <path d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>
-                    </svg>
+                      {!add && !variant.soon &&
+                        <>
+                          <button className={buttons.main} disabled={send} onClick={this.handleCartClick}>
+
+                            {!send ? 'Добавить в корзину' : 'Добавляем...'}
+                          </button>
+
+                          {check &&
+                            <div className={styles.check}>Выберите размер</div>
+                          }
+                        </>
+                      }
+
+                      <div className={classNames(styles.wishlist, { [styles.active]: variant.in_wishlist })} onClick={this.handleWishlistClick}>
+                        <svg viewBox="0 0 24 24">
+                          <path d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>
+                        </svg>
+                      </div>
+                    </div>
                   </div>
-                </div> */}
-              </div>
+                }
+
+                {!variant.available &&
+                  <div className={styles.notification}>
+                    {!variant.notification &&
+                      <div className={styles.text}>
+                        Товара временно нет в наличии. Подпишитесь, чтобы узнать о его поступлении.
+                      </div>
+                    }
+                    <form className={classNames(styles.notice, { [styles.button]: user })} onSubmit={this.handleSubmit}>
+                      {!variant.notification && (!user || user['guest?']) &&
+                        <div className={classNames(form.input, styles.input)}>
+                          <input type="email" placeholder="Почта" value={values.email} name="email" onChange={this.handleInputChange} />
+                        </div>
+                      }
+                      {!variant.notification &&
+                        <input className={buttons.main} type="submit" value="Подписаться" disabled={!user && !values.email}/>
+                      }
+                      {variant.notification &&
+                        <div className={styles.text}>
+                          Вы успешно подписаны! Мы уведомим вас по электронной почте, когда товар снова появится в наличии.
+                        </div>
+                      }
+                    </form>
+                  </div>
+                }
+              </>
+
             }
 
             {/* {variant.soon &&
-              <div className={styles.notification}>
-                {!variant.notification &&
-                  <div className={styles.text}>
-                    Товара временно нет в наличии. Подпишитесь, чтобы узнать о его поступлении.
-                  </div>
-                }
-                <form className={classNames(styles.notice, { [styles.button]: user })} onSubmit={this.handleSubmit}>
-                  {!variant.notification && (!user || user['guest?']) &&
-                    <div className={classNames(form.input, styles.input)}>
-                      <input type="email" placeholder="Почта" value={values.email} name="email" onChange={this.handleInputChange} />
-                    </div>
-                  }
-                  {!variant.notification &&
-                    <input className={buttons.main} type="submit" value="Подписаться" disabled={!user && !values.email}/>
-                  }
-                  {variant.notification &&
-                    <div className={styles.text}>
-                      Вы успешно подписаны! Мы уведомим вас по электронной почте, когда товар снова появится в наличии.
-                    </div>
-                  }
-                </form>
-              </div>
+
             } */}
 
             {variant.desc &&

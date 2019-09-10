@@ -7,6 +7,7 @@ import update from 'immutability-helper'
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
 import { Errors } from '../Form'
+import Images from '../Images/Images'
 
 import page from '../Page.module.css'
 import form from '../Form.module.css'
@@ -95,6 +96,10 @@ export default function Form ({ id, product_id: productId, locale }) {
     setValues({ ...values, [name]: value })
   }
 
+  const handleImagesChange = images => {
+    console.log(images)
+  }
+
   const handleDestroy = async e => {
     e.preventDefault()
 
@@ -178,7 +183,7 @@ export default function Form ({ id, product_id: productId, locale }) {
                   value={values.price}
                   name="price"
                   onChange={handleChange}
-                  placeholder="Обязательно заполните цену..."
+                  placeholder="Укажите стоимость..."
                 />
               </div>
             </label>
@@ -299,6 +304,21 @@ export default function Form ({ id, product_id: productId, locale }) {
               <Errors errors={errors.price_last} />
             </div>
           }
+
+          <div className={form.el}>
+            <div className={form.label}>
+              Изображения
+            </div>
+
+            <div className={form.input}>
+              <Images
+                images={values.images_attributes}
+                onImagesChange={
+                  images => setValues({ ...values, images_attributes: images.map((i, index) => ({ id: i.id, weight: index + 1, favourite: i.favourite })) })
+                }
+              />
+            </div>
+          </div>
 
           <div>
             {send && 'Настройки блока сохраняются..' }

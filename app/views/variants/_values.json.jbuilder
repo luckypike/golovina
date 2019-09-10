@@ -48,4 +48,10 @@ json.values do
     json.weight availability.size.weight
     # json._destroy false
   end
+
+  json.images_attributes @variant.images.sort_by(&:weight_or_created) do |image|
+    json.id image.id
+    json.preview image.photo.preview.url
+    json.favourite image.favourite
+  end
 end

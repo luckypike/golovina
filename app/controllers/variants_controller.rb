@@ -86,7 +86,7 @@ class VariantsController < ApplicationController
 
     authorize @variant
 
-    @variants = policy_scope(@variant.product.variants).includes(:translations, :color, availabilities: :size)
+    @variants = policy_scope(@variant.product.variants).includes(:translations, :color, availabilities: [:size, :store])
 
     respond_to :html, :json
   end
@@ -214,6 +214,9 @@ class VariantsController < ApplicationController
           product_attributes: Product.globalize_attribute_names \
             + %i[id category_id]
         }
+      ] \
+      + [
+        images_attributes: %i[id weight favourite]
       ]
 
     params.require(:variant).permit(*permitted)

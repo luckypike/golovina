@@ -49,7 +49,7 @@ class List extends Component {
                 </div>
 
                 <div className={styles.price}>
-                  <Price sell={variant.price_sell} origin={variant.price} />
+                  <Price sell={parseFloat(variant.price_sell)} origin={parseFloat(variant.price)} />
                 </div>
 
                 {variant.colors > 0 &&

@@ -21,7 +21,7 @@ class Variant < ApplicationRecord
 
   validates :color, uniqueness: { scope: :product_id }
   validates :code, uniqueness: true, unless: -> { code.blank? }
-  validates :price, presence: true, if: -> { active? }
+  # validates :price, presence: true, if: -> { active? }
 
   before_save :default_values
 
@@ -48,7 +48,7 @@ class Variant < ApplicationRecord
   include ProductsHelper
 
   def available?
-    availabilities.active.any?
+    availabilities.active.any? && price_sell.present?
   end
 
   def price_sell
@@ -121,6 +121,11 @@ class Variant < ApplicationRecord
 
   def product_attributes=(attributes)
     self.product = Product.find_by(id: attributes[:id])
+    super
+  end
+
+  def images_attributes=(attributes)
+    self.images = Image.where(id: attributes.map{ |attribute| attribute[:id] })
     super
   end
 
