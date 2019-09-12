@@ -79,6 +79,11 @@
   margin: 0 0 calc(var(--yr) * 1.5);
 }
 
+.hint {
+  composes: at from './Fonts.module.css';
+  margin: calc(var(--yr) * var(--s1)) 0 0;
+}
+
 .checkbox {
   composes: at from './Fonts.module.css';
   composes: small from './Fonts.module.css';

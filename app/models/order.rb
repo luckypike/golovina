@@ -3,6 +3,7 @@ class Order < ApplicationRecord
     event :activate do
       after do
         user.common!
+        user.activate(user.email)
         OrderMailer.activate(self).deliver if Rails.env.development?
       end
 
@@ -40,7 +41,7 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   accepts_nested_attributes_for :order_items
 
-  validates :address, presence: true
+  # validates :address, presence: true
   validate :quantity_cannot_be_greater_than_total, on: :create
 
   include ActionView::Helpers::NumberHelper

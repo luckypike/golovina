@@ -216,6 +216,10 @@ class Index extends Component {
 
                     </div>
                   }
+
+                  <div className={form.hint}>
+                    Не заполняйте это поле если планируете забрать заказ самостоятельно.
+                  </div>
                 </label>
 
                 {carts.filter(cart => !cart.available).length == 0 &&
