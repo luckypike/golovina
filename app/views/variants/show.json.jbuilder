@@ -35,15 +35,15 @@ json.variants @variants do |variant|
     json.extract! variant.color, :id, :title, :image_url, :color
   end
 
-  # if @variant.kits.active.present?
-  #   json.section 'kits'
-  #
-  #   json.kits @variant.kits.active do |kit|
-  #     json.id kit.id
-  #     json.title kit.title.present? ? kit.human_title : kit.human_title.truncate(60)
-  #     json.image kit.images.present? ? kit.images.sort_by(&:weight).first.photo.thumb.url : nil
-  #   end
-  # end
+  if @variant.kits.active.present?
+    json.section 'kits'
+
+    json.kits @variant.kits.active do |kit|
+      json.id kit.id
+      json.title kit.title.present? ? kit.human_title : kit.human_title.truncate(60)
+      json.image kit.images.present? ? kit.images.sort_by(&:weight).first.photo.thumb.url : nil
+    end
+  end
 end
 
 # json.archived @variant.product.variants.archived.includes(:color).sort_by(&:state) do |variant|

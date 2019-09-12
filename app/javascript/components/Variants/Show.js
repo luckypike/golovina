@@ -182,9 +182,11 @@ class Variant extends Component {
   }
 
   render () {
-    const { variant, variants, size, section, index, archived, values, add, send, check } = this.state
+    const { variant, variants, size, section, index, values, add, send, check } = this.state
     const { user } = this.props
     if (!variant) return null
+
+    const archived = variants.filter(variant => variant.state === 'archived')
 
     return (
       <div className={classNames(page.root)}>
@@ -358,19 +360,18 @@ class Variant extends Component {
                 </p>
               </Acc>
 
-              {archived && archived.length > 0 &&
+              {archived.length > 0 &&
                 <Acc id="archived" title="Архив цветов" onToggle={this.toggleSection} section={section}>
                   <div className={styles.archived}>
                     {archived.map((item, _) =>
                       <div className={styles.color} key={_}>
                         <div className={styles.item}>
-                          <img src={item.image} />
                           <div className={styles.control}>
                             <a href={path('edit_variant_path', { id: item.id })} className={classNames([styles.a], [styles.edit])}></a>
                           </div>
                         </div>
                         <div className={styles.name}>
-                          {item.color}
+                          {item.color.title}
                         </div>
                       </div>
                     )}
