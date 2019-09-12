@@ -7,16 +7,18 @@ json.carts @carts do |cart|
   json.available cart.available?
 end
 
-json.amount @carts.sum(&:price_sell)
-json.origin @carts.sum(&:price)
+json.price do
+  json.sell @carts.sum(&:price_sell)
+  json.origin @carts.sum(&:price)
+end
 
-if @carts.size > 0
-  json.user @user, :id, :name, :s_name, :phone
-  json.values do
+json.values do
+  json.address ''
+
+  json.user_attributes do
     json.name @user.name || ''
-    json.s_name @user.s_name || ''
+    json.sname @user.sname || ''
     json.phone @user.phone || ''
-    json.email (@user.guest? ? '' : @user.email) || ''
-    json.address ''
+    json.email((@user.guest? ? '' : @user.email) || '')
   end
 end

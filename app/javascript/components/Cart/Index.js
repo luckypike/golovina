@@ -1,11 +1,14 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 import classNames from 'classnames'
 import InputMask from 'react-input-mask'
 import PubSub from 'pubsub-js'
 
 import { path } from '../Routes'
+import { useI18n } from '../I18n'
 import Price from '../Variants/Price'
+import { Errors } from '../Form'
 
 import page from '../Page'
 
@@ -13,227 +16,254 @@ import styles from './Index.module.css'
 import form from '../Form.module.css'
 import buttons from '../Buttons.module.css'
 
-class Index extends Component {
-  state = {
-    errors: {},
-    carts: null
+Index.propTypes = {
+  locale: PropTypes.string
+}
+
+export default function Index ({ locale }) {
+  const I18n = useI18n(locale)
+
+  const [send, setSend] = useState(false)
+  const [errors, setErrors] = useState({})
+  const [carts, setCarts] = useState()
+  const [values, setValues] = useState()
+  const [price, setPrice] = useState()
+
+  const _fetch = async () => {
+    const { data: { values, carts, price } } = await axios.get(path('cart_path', { format: 'json' }))
+
+    setValues(values)
+    setCarts(carts)
+    setPrice(price)
   }
 
-  componentDidMount = async () => {
-    this._loadAsyncData()
-    this.token = document.querySelector('[name="csrf-token"]').content
-  }
+  useEffect(() => {
+    _fetch()
+  }, [])
 
-  _loadAsyncData = async () => {
-    const res = await axios.get(path('cart_path', { format: 'json' }))
-    this.setState({ ...res.data })
-  }
+  const handleSubmit = async e => {
+    e.preventDefault()
 
-  handleInputChange = event => {
-    const target = event.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
+    if (send) {
+      return null
+    } else {
+      setErrors({})
+      setSend(true)
+    }
 
-    this.setState(state => ({
-      values: { ...state.values, [name]: value }
-    }))
-  }
-
-  handleSubmit = async (event) => {
-    event.preventDefault()
-
-    const res = await axios.post(
+    await axios.post(
       path('orders_path'),
       {
-        order: {
-          user_attributes: (({ name, s_name, phone, email }) => ({ name, s_name, phone, email }))(this.state.values),
-          address: this.state.values.address
-        },
-        authenticity_token: this.token
+        order: values,
+        authenticity_token: document.querySelector('[name="csrf-token"]').content
       }
-    ).catch(({ response }) => {
-      this.setState({ errors: response.data })
+    ).then(({ headers: { location } }) => {
+      window.location = location
+    }).catch(({ response: { data } }) => {
+      setErrors(data)
+      setSend(false)
     })
-
-    if(res.headers.location) window.location = res.headers.location
   }
 
-  handleDestroyClick = async cart => {
+  const handleDestroy = async cart => {
     const { data: { quantity } } = await axios.delete(
       path('cart_destroy_path', { id: cart.id }),
       {
         params: {
-          authenticity_token: this.token
+          authenticity_token: document.querySelector('[name="csrf-token"]').content
         }
       }
     )
 
     PubSub.publish('update-cart', quantity)
-    this._loadAsyncData()
+    _fetch()
   }
 
-  render () {
-    const { carts, order, user, values, amount, origin, errors } = this.state
+  const handleInputChange = ({ target: { name, value } }) => {
+    setValues({ ...values, [name]: value })
+  }
 
-    return (
-      <div className={page.gray}>
-        <div className={page.title}>
-          <h1>Корзина</h1>
+  return (
+    <div className={page.gray}>
+      <div className={page.title}>
+        <h1>{I18n.t('cart.title')}</h1>
+      </div>
+
+      {carts && carts.length < 1 &&
+        <div>
+          В корзине пока ничего нет :(
         </div>
+      }
 
-        {carts && carts.length < 1 &&
-          <div>
-            В корзине пока ничего нет :(
-          </div>
-        }
-
-        {carts && carts.length > 0 &&
-          <div className={styles.root}>
-            <div className={styles.carts}>
+      {carts && carts.length > 0 &&
+        <div className={styles.root}>
+          <div className={styles.carts}>
+            {price &&
               <div className={styles.amount}>
                 <div className={styles.sum}>Сумма заказа:</div>
-                <Price sell={amount} origin={origin} />
-            </div>
+                <Price sell={parseFloat(price.sell)} origin={parseFloat(price.origin)} />
+              </div>
+            }
 
-              {carts.map(cart =>
-                <div className={styles.cart} key={cart.id}>
-                  <div className={styles.image}>
-                    {cart.variant.images.length > 0 &&
-                      <img src={cart.variant.images[0].thumb} />
-                    }
-                  </div>
-
-                  <div className={styles.title}>
-                    {cart.variant.title}
-                  </div>
-
-                  <div className={styles.price}>
-                    <Price sell={cart.variant.price_sell} origin={cart.variant.price} />
-                  </div>
-
-                  <div className={styles.color}>
-                    Цвет: {cart.color.title}
-                  </div>
-
-                  <div className={styles.size}>
-                    Размер: {cart.size.title}
-                  </div>
-
-                  <div className={classNames(styles.quantity, { [styles.unavailable]: !cart.available })}>
-                    Количество: {cart.quantity} {!cart.available ? ` (доступно: ${cart.quantity_available})` : null}
-                  </div>
-
-                  <div className={styles.destroy} onClick={() => this.handleDestroyClick(cart)}>
-                    Удалить из корзины
-                  </div>
+            {carts.map(cart =>
+              <div className={styles.cart} key={cart.id}>
+                <div className={styles.image}>
+                  {cart.variant.images.length > 0 &&
+                    <img src={cart.variant.images[0].thumb} />
+                  }
                 </div>
-              )}
-            </div>
 
-            <div className={styles.checkout}>
-              <form className={classNames(form.root, styles.form)} onSubmit={this.handleSubmit}>
-                <label className={form.el}>
-                  <div className={form.label}>
-                    Имя
-                  </div>
+                <div className={styles.title}>
+                  {cart.variant.title}
+                </div>
 
-                  <div className={form.input}>
-                    <input type="text" name="name" value={values.name} onChange={this.handleInputChange} />
-                  </div>
+                <div className={styles.price}>
+                  <Price sell={parseFloat(cart.variant.price_sell)} origin={parseFloat(cart.variant.price)} />
+                </div>
 
-                  {errors['user.name'] &&
-                    <div className={form.error}>
-                      <ul>
-                        {errors['user.name'].map((error, i) => <li key={i}>{error}</li>)}
-                      </ul>
+                <div className={styles.color}>
+                  Цвет: {cart.color.title}
+                </div>
 
-                    </div>
-                  }
-                </label>
+                <div className={styles.size}>
+                  Размер: {cart.size.title}
+                </div>
 
-                <label className={form.el}>
-                  <div className={form.label}>
-                    Фамилия
-                  </div>
+                <div className={classNames(styles.quantity, { [styles.unavailable]: !cart.available })}>
+                  Количество: {cart.quantity} {!cart.available ? ` (доступно: ${cart.quantity_available})` : null}
+                </div>
 
-                  <div className={form.input}>
-                    <input type="text" name="s_name" value={values.s_name} onChange={this.handleInputChange} />
-                  </div>
-                </label>
+                <div className={styles.destroy} onClick={() => handleDestroy(cart)}>
+                  Удалить из корзины
+                </div>
+              </div>
+            )}
+          </div>
 
-                <label className={form.el}>
-                  <div className={form.label}>
-                    Телефон
-                  </div>
+          <div className={styles.checkout}>
+            <form className={classNames(form.root, styles.form)} onSubmit={handleSubmit}>
+              <User
+                errors={errors}
+                userValues={values.user_attributes}
+                locale={locale}
+                onValuesChange={
+                  userValues => setValues({ ...values, user_attributes: userValues })
+                }
+              />
 
-                  <div className={form.input}>
-                    <InputMask type="text" name="phone" mask="+9 999 999 99 99" maskChar=" " value={values.phone} onChange={this.handleInputChange} />
-                  </div>
+              <label className={form.el}>
+                <div className={form.label}>
+                  Адрес доставки
+                </div>
 
-                  {errors['user.phone'] &&
-                    <div className={form.error}>
-                      <ul>
-                        {errors['user.phone'].map((error, i) => <li key={i} dangerouslySetInnerHTML={{ __html: error }} /> )}
-                      </ul>
+                <div className={form.input}>
+                  <textarea type="text" name="address" value={values.address} onChange={handleInputChange} />
+                </div>
 
-                    </div>
-                  }
-                </label>
+                {errors.address &&
+                  <div className={form.error}>
+                    <ul>
+                      {errors.address.map((error, i) => <li key={i}>{error}</li>)}
+                    </ul>
 
-                <label className={form.el}>
-                  <div className={form.label}>
-                    Электронная почта
-                  </div>
-
-                  <div className={form.input}>
-                    <input type="text" name="email" value={values.email} onChange={this.handleInputChange} />
-                  </div>
-
-                  {errors['user.email'] &&
-                    <div className={form.error}>
-                      <ul>
-                        {errors['user.email'].map((error, i) => <li key={i} dangerouslySetInnerHTML={{ __html: error }} /> )}
-                      </ul>
-
-                    </div>
-                  }
-                </label>
-
-                <label className={form.el}>
-                  <div className={form.label}>
-                    Адрес доставки
-                  </div>
-
-                  <div className={form.input}>
-                    <textarea type="text" name="address" value={values.address} onChange={this.handleInputChange} />
-                  </div>
-
-                  {errors.address &&
-                    <div className={form.error}>
-                      <ul>
-                        {errors.address.map((error, i) => <li key={i}>{error}</li>)}
-                      </ul>
-
-                    </div>
-                  }
-
-                  <div className={form.hint}>
-                    Не заполняйте это поле если планируете забрать заказ самостоятельно.
-                  </div>
-                </label>
-
-                {carts.filter(cart => !cart.available).length == 0 &&
-                  <div className={form.submit}>
-                    <input type="submit" value="Оплатить" className={buttons.main} />
                   </div>
                 }
-              </form>
-            </div>
+
+                <div className={form.hint}>
+                  Не заполняйте это поле если планируете забрать заказ самостоятельно.
+                </div>
+              </label>
+
+              {carts.filter(cart => !cart.available).length === 0 &&
+                <div className={form.submit}>
+                  <input type="submit" value="Оформить заказ" className={buttons.main} />
+                </div>
+              }
+            </form>
           </div>
-        }
-      </div>
-    )
-  }
+        </div>
+      }
+    </div>
+  )
 }
 
-export default Index
+User.propTypes = {
+  errors: PropTypes.object,
+  userValues: PropTypes.object,
+  onValuesChange: PropTypes.func,
+  locale: PropTypes.string
+}
+
+function User ({ errors, userValues, onValuesChange, locale }) {
+  const I18n = useI18n(locale)
+
+  const [values, setValues] = useState(userValues)
+
+  useEffect(() => {
+    onValuesChange && onValuesChange(values)
+  }, [values])
+
+  const handleInputChange = ({ target: { name, value } }) => {
+    setValues({ ...values, [name]: value })
+  }
+
+  return (
+    <>
+      <div className={form.el}>
+        <label>
+          <div className={form.label}>
+            {I18n.t('user.name')}
+          </div>
+        </label>
+
+        <div className={form.input}>
+          <input type="text" name="name" value={values.name} onChange={handleInputChange} />
+        </div>
+
+        <Errors errors={errors['user.name']} />
+      </div>
+
+      <div className={form.el}>
+        <label>
+          <div className={form.label}>
+            {I18n.t('user.sname')}
+          </div>
+        </label>
+
+        <div className={form.input}>
+          <input type="text" name="sname" value={values.sname} onChange={handleInputChange} />
+        </div>
+
+        <Errors errors={errors['user.sname']} />
+      </div>
+
+      <div className={form.el}>
+        <label>
+          <div className={form.label}>
+            {I18n.t('user.phone')}
+          </div>
+        </label>
+
+        <div className={form.input}>
+          <InputMask type="text" name="phone" mask="+9 999 999 99 99" maskChar=" " value={values.phone} onChange={handleInputChange} />
+        </div>
+
+        <Errors errors={errors['user.phone']} />
+      </div>
+
+      <div className={form.el}>
+        <label>
+          <div className={form.label}>
+            {I18n.t('user.email')}
+          </div>
+        </label>
+
+        <div className={form.input}>
+          <input type="email" name="email" value={values.email} onChange={handleInputChange} />
+        </div>
+
+        <Errors errors={errors['user.email']} />
+      </div>
+    </>
+  )
+}

@@ -8,7 +8,7 @@ json.images variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), 
 end
 
 json.category do
-  json.extract! variant.product.category, :id, :title, :slug
+  json.extract! variant.product.category, :id, :slug
 end
 
 json.product do

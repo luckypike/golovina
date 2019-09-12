@@ -1,0 +1,37 @@
+en:
+  variant:
+    states:
+      unpub: Неопубликован
+      active: Размещён
+      archived: Архивный
+
+  variants:
+    latest:
+      title: New
+      desc: New products from Golovina
+
+    soon:
+      title: Soon
+      desc: Товары которые скоро появятся в продаже
+
+    sale:
+      title: Sale
+      desc: Товары со скидкой в продаже из коллекций Golovina
+
+    last:
+      title: Last products
+      desc: Товары которые остались в одном экземпляре
+
+    all:
+      title: All products
+      desc: Все товары в продажу из коллекций Golovina
+
+    colors:
+      one: "%{count} color"
+      other: "%{count} colors"
+
+    # count:
+    #   one: "%{count} предмет"
+    #   few: "%{count} предмета"
+    #   many: "%{count} предметов"
+    #   other: "%{count} предметов"

@@ -1,5 +1,9 @@
-- title 'Последняя вещь'
-- description 'Товары которые остались в одном экземпляре'
-/ - set_meta_tags og: { image: @variants.select(&:images?).first(5).map{ |variant| variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.first.photo.thumb.url } }
+- title I18n.t('variants.last.title')
+- description I18n.t('variants.last.desc')
+- set_meta_tags og: { \
+  image: policy_scope(Variant.unscope(:includes)) \
+    .select(:id).includes(:images).where(latest: true).where.not(images: { id: nil }).limit(3) \
+    .map{ |variant| variant.images.sort_by(&:weight_or_created).first.photo.thumb.url } \
+}
 
 = react_component 'Variants/Last'

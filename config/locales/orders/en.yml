@@ -1,6 +1,6 @@
 ru:
   order:
-    checkout: Оформить заказ
+    checkout: Checkout
 
     quantity:
       one: "%{count} товар на сумму %{amount}"

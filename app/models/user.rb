@@ -17,6 +17,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :phone
   validates_presence_of :phone, :name, :email
 
+  validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :phone, length: { is: 11 }
 
   # before_validation :clear_email, on: :update
@@ -57,6 +58,10 @@ class User < ApplicationRecord
 
   def get_discount
     self.discount.present? ? self.discount.size : 0
+  end
+
+  def s_name
+    sname
   end
 
   class << self

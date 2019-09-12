@@ -1,7 +1,9 @@
 class VariantsController < ApplicationController
-  before_action :set_user, only: [:wishlist, :cart]
-  before_action :set_variant, only: [:wishlist, :cart, :notification, :edit, :update, :destroy, :images]
-  before_action :authorize_variant, only: [:wishlist, :cart, :edit, :update]
+  before_action :set_user, only: %i[wishlist cart]
+  before_action :set_variant, only: %i[edit update wishlist cart notification]
+  before_action :authorize_variant, only: %i[edit update wishlist cart]
+
+  skip_after_action :verify_authorized, only: %i[latest soon sale last all]
 
   layout 'app'
 
@@ -25,6 +27,42 @@ class VariantsController < ApplicationController
       format.html
       format.json
     end
+  end
+
+  # END TODO
+
+  def latest
+    @variants = policy_scope(Variant)
+      .includes(product: :variants).where(latest: true)
+
+    respond_to :html, :json
+  end
+
+  def soon
+    @variants = policy_scope(Variant)
+      .includes(product: :variants).available
+
+    respond_to :html, :json
+  end
+
+  def sale
+    @variants = policy_scope(Variant)
+      .includes(product: :variants).where(sale: true)
+
+    respond_to :html, :json
+  end
+
+  def last
+    @variants = policy_scope(Variant)
+      .includes(product: :variants).where(last: true)
+
+    respond_to :html, :json
+  end
+
+  def all
+    @variants = policy_scope(Variant).includes(product: :variants)
+
+    respond_to :html, :json
   end
 
   def list
@@ -91,46 +129,6 @@ class VariantsController < ApplicationController
     respond_to :html, :json
   end
 
-  def all
-    authorize Variant
-
-    @variants = Variant.includes(product: :variants).available.visible
-
-    respond_to :html, :json
-  end
-
-  def last
-    authorize Variant
-
-    @variants = Variant.includes(product: :variants).available.visible.where(last: true)
-
-    respond_to :html, :json
-  end
-
-  def latest
-    authorize Variant
-
-    @variants = Variant.includes(product: :variants).available.visible.where(latest: true)
-
-    respond_to :html, :json
-  end
-
-  def sale
-    authorize Variant
-
-    @variants = Variant.includes(product: :variants).available.visible.where(sale: true)
-
-    respond_to :html, :json
-  end
-
-  def soon
-    authorize Variant
-
-    @variants = Variant.includes(product: :variants).soon
-
-    respond_to :html, :json
-  end
-
   def new
     @product = Product.find_or_initialize_by(id: params[:product_id])
     @variant = Variant.new(product: @product)
@@ -138,13 +136,6 @@ class VariantsController < ApplicationController
     authorize @variant
 
     respond_to :html, :json
-
-    # @colors = Color.all
-    # @stores = Store.all
-    # @sizes = Size.where(sizes_group_id: 1)
-    # @categories = Category.order(weight: :asc).all
-    #
-    # @product = params[:product_id].present? ? Product.select(:id, :category_id, :title).find(params[:product_id]) : nil
   end
 
   def create
@@ -183,14 +174,6 @@ class VariantsController < ApplicationController
     authorize @variant
 
     render json: { images: @variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }, wishlist: @variant.in_wishlist(current_user), out_of_stock: @variant.out_of_stock, variant_state: @variant.state }
-  end
-
-  def destroy
-    authorize @variant
-
-    @variant.destroy
-
-    redirect_to [:variants, @variant.product]
   end
 
   private

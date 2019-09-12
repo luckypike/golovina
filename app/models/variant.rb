@@ -1,7 +1,12 @@
 class Variant < ApplicationRecord
-  default_scope { includes(:images, { product: :category }).order(pinned: :desc, created_at: :desc) }
+  default_scope do
+    includes(
+      :images,
+      product: %i[translations category]
+    ).order(pinned: :desc, created_at: :desc)
+  end
 
-  # scope :available, -> { where(state: %i[active soon]) }
+  scope :available, -> { includes(:availabilities).where(availabilities: { id: nil }) }
   # scope :visible, -> { Current.user&.is_editor? && where(show: true) }
 
   enum state: { unpub: 0, active: 1, archived: 2 }
