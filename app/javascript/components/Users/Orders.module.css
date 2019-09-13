@@ -1,11 +1,11 @@
 .states {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-bottom: calc(var(--yr) * 4);
 
   @media (--s) {
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
   }
 
   @media (--m) {
@@ -20,9 +20,14 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
 
+  &:not(:last-child) {
+    margin-right: var(--xr);
+  }
+
   @media (--s) {
-    margin-left: 1em;
-    margin-right: 2em;
+    &:first-child {
+      margin-left: var(--xr);
+    }
   }
 
   &.active {

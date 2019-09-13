@@ -21,8 +21,12 @@ class Item extends Component {
 
     return (
       <div className={styles.order}>
-        <div className={styles.handle}>
-          <div className={styles.title} onClick={() => this.setState(state => ({ toggle: !state.toggle }))}>
+        <div className={styles.handle} onClick={() => this.setState(state => ({ toggle: !state.toggle }))}>
+          <svg viewBox="0 0 10 20" className={classNames(styles.arr, { [styles.active]: toggle })}>
+            <polyline points="1 8 5 12 9 8" />
+          </svg>
+
+          <div className={styles.title}>
             <div className={classNames(styles.status, styles[order.state])}>
               {I18n.t(`order.state.${order.state}`)}
             </div>
@@ -36,8 +40,8 @@ class Item extends Component {
             </div>
           </div>
 
-          <div className={styles.what} onClick={() => this.setState(state => ({ toggle: !state.toggle }))}>
-            {I18n.t('order.quantity', { count: order.quantity, amount: currency(order.amount) })}
+          <div className={styles.what}>
+            {I18n.t('order.quantity', { count: order.quantity, amount: currency(parseFloat(order.amount)) })}
           </div>
 
           {order.editable && order.state === 'paid' &&
@@ -49,6 +53,14 @@ class Item extends Component {
           }
         </div>
 
+        {order.items.filter(item => !item.available).length === 0 && order.purchasable &&
+          <div className={styles.pay}>
+            <a href={path('pay_order_path', { id: order.id })} className={buttons.main}>
+              Оплатить
+            </a>
+          </div>
+        }
+
         {toggle &&
           <>
             <div className={styles.details}>
@@ -58,14 +70,6 @@ class Item extends Component {
               <br />
               Адрес: {order.address}
             </div>
-
-            {order.items.filter(item => !item.available).length === 0 && order.purchasable &&
-              <div className={styles.pay}>
-                <a href={path('pay_order_path', { id: order.id })} className={buttons.main}>
-                  Оплатить
-                </a>
-              </div>
-            }
 
             <div className={styles.items}>
               {order.items.map(item =>
@@ -80,8 +84,8 @@ class Item extends Component {
                     {item.variant.title}
                   </div>
 
-                  <div className={styles.color}>
-                    <Price sell={item.variant.price_sell} origin={item.variant.price} />
+                  <div className={styles.price}>
+                    <Price sell={parseFloat(item.variant.price_sell)} origin={parseFloat(item.variant.price)} />
                   </div>
 
                   <div className={styles.color}>

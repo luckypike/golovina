@@ -139,7 +139,7 @@ class Variant extends Component {
 
       PubSub.publish('update-cart', quantity)
 
-      this.setState({ add: true, send: false })
+      this.setState({ add: true, send: false, size: false })
     }
   }
 
@@ -252,7 +252,7 @@ class Variant extends Component {
                     <div className={styles.cart}>
                       {add &&
                         <a className={buttons.main} href={path('cart_path')}>
-                          Оплатить
+                          Оформить заказ
                         </a>
                       }
 

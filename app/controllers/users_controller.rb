@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     if signed_in?
       redirect_to [:orders, Current.user]
     else
-      redirect_to [:login]
+      redirect_to [:new_user_session]
     end
   end
 

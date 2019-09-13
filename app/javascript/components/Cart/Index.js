@@ -245,7 +245,7 @@ function User ({ errors, userValues, onValuesChange, locale }) {
         </label>
 
         <div className={form.input}>
-          <InputMask type="text" name="phone" mask="+9 999 999 99 99" maskChar=" " value={values.phone} onChange={handleInputChange} />
+          <InputMask type="tel" name="phone" mask="+9 999 999 99 99" maskChar=" " value={values.phone} onChange={handleInputChange} />
         </div>
 
         <Errors errors={errors['user.phone']} />

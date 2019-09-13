@@ -14,7 +14,7 @@
 
 .order {
   background-color: white;
-  padding: calc(var(--xr));
+  padding: calc(var(--yr) * var(--s2)) var(--xr);
 
   &:not(:last-child) {
     margin-bottom: calc(var(--yr) * 4);
@@ -24,6 +24,7 @@
 .handle {
   cursor: pointer;
   user-select: none;
+  position: relative;
 
   & .title {
     display: flex;
@@ -33,6 +34,41 @@
   @media (--s) {
     display: grid;
     grid-template-columns: 3fr 2fr 1fr;
+  }
+}
+
+.what {
+  margin-top: calc(var(--yr) * var(--s1));
+
+  @media (--s) {
+    margin-top: 0;
+  }
+}
+
+.arr {
+  top: 0;
+  right: 0;
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 20px;
+  margin-left: calc(var(--xr) / 2);
+  flex-shrink: 0;
+
+  @media (--s) {
+    top: var(--yr);
+  }
+
+  &.active {
+    transform: rotateX(180deg);
+  }
+
+  & polyline {
+    fill: none;
+    stroke-width: 1px;
+    stroke: var(--pr_color);
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
   }
 }
 
@@ -95,6 +131,7 @@
 
 .details {
   composes: at from '../Fonts';
+  margin-top: calc(var(--yr) * var(--s2));
 }
 
 .number {
@@ -111,8 +148,7 @@
 }
 
 .items {
-  margin-top: calc(var(--yr) * 8);
-  composes: at from '../Fonts';
+  margin-top: calc(var(--yr) * var(--s2));
 
   @media (--s) {
     display: grid;
@@ -127,13 +163,14 @@
   grid-template-columns: 6rem 1fr;
   grid-template-rows: repeat(5, auto) 1fr;
 
-  & .title {
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-  }
-
   &:not(:last-child) {
     margin-bottom: calc(var(--yr) * 8);
+  }
+}
+
+.price {
+  & div {
+    justify-content: flex-start;
   }
 }
 

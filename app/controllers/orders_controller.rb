@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
     if @order.save
       @order.activate!
       Current.user.carts.destroy_all
-      head :ok, location: pay_order_path(@order)
+      head :ok, location: orders_user_path(@order.user)
     else
       render json: @order.errors, status: :unprocessable_entity
     end
