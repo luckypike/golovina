@@ -22,16 +22,16 @@ header.header class="#{menu_index? ? 'index no_t' : nil }"
       = link_to [:wishlist], data: { src: polymorphic_path([:wishlist], format: :json) } do
         = inline_svg 'icons/wishlist.svg'
 
-    .cart class=(@cart.any? ? :active : :nil)
+    .cart
       = link_to [:cart], data: { src: polymorphic_path([:cart], format: :json) } do
         svg.cart_icon xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'
           g
             path.a d="M29.18,21.76H18.82l-.82,9H30Z"
             path.b d="M21,20.25a3,3,0,0,1,6,0"
-          g.counter class=(@cart.size > 0 ? :active : :inactive)
+          g.counter
             circle.c cx="32" cy="16" r="8"
             text.d x='32' y='19'
-              = @cart.map(&:quantity).sum
+              / = @cart.map(&:quantity).sum
 
 
   .header_menu
@@ -51,7 +51,7 @@ header.header class="#{menu_index? ? 'index no_t' : nil }"
             .section_list_item.l2
               = active_link_to 'New', [:catalog, :latest]
 
-            - @categories.reject{ |c| c.parent_category || c.id == Rails.application.secrets.men }.each do |category|
+            - policy_scope(Category.active).with_translations.order(weight: :asc).each do |category|
               .section
                 .section_list_item.l2
                   = active_link_to category.title, catalog_category_path(slug: category.slug)

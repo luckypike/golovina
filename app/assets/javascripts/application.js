@@ -12,7 +12,6 @@
 //
 //= require rails-ujs
 //= require jquery
-//= require cocoon
 //= require dropzone/dist/dropzone
 
 //= require swiper/dist/js/swiper.jquery
