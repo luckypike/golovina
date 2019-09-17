@@ -7,7 +7,7 @@
 = react_component \
   'Index',
   { \
-    slides: @slides.map{ |slide| slide.slice(:id, :name, :link).merge({ image: slide.image.large.url }) },
+    slides: @slides.map{ |slide| slide.slice(:id, :name, :link, :link_relative).merge({ image: slide.image.large.url }) },
     instagram: Rails.application.credentials[Rails.env.to_sym][:instagram] \
   },
   { \

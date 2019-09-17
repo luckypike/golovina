@@ -20,7 +20,7 @@ export default function Index ({ slides, instagram, locale }) {
     <div className={styles.root}>
       <div className={classNames(styles.slides, { [styles.single]: slides.length === 1 })} id="slides">
         {slides.slice(0, 2).map((slide, _) =>
-          <a href={slide.link} key={_} className={styles.slide} style={{ backgroundImage: `url(${slide.image})` }}>
+          <a href={slide.link_relative} key={_} className={styles.slide} style={{ backgroundImage: `url(${slide.image})` }}>
             <div className={styles.text}>
               <div className={styles.title}>{slide.name}</div>
             </div>
@@ -32,7 +32,7 @@ export default function Index ({ slides, instagram, locale }) {
         {slides.length > 2 &&
           <div className={styles.subslides}>
             {slides.slice(2, slides.length).map((slide, _) =>
-              <a key={_} href={slide.link} className={styles.subslide} style={{ backgroundImage: `url(${slide.image})` }}>
+              <a key={_} href={slide.link_relative} className={styles.subslide} style={{ backgroundImage: `url(${slide.image})` }}>
                 <div className={styles.text}>
                   <div className={styles.title}>{slide.name}</div>
                 </div>
