@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
     @category = Category.friendly.find(params[:slug])
     authorize @category
 
-    @variants = policy_scope(@category.variants).includes(:images, :product)
+    @variants = policy_scope(@category.variants.not_archived).includes(:images, :product)
 
     respond_to :html, :json
   end

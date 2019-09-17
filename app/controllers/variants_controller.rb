@@ -32,35 +32,36 @@ class VariantsController < ApplicationController
   # END TODO
 
   def latest
-    @variants = policy_scope(Variant)
+    @variants = policy_scope(Variant.not_archived)
       .includes(product: :variants).where(latest: true)
 
     respond_to :html, :json
   end
 
   def soon
-    @variants = policy_scope(Variant)
+    @variants = policy_scope(Variant.not_archived)
       .includes(product: :variants).available
 
     respond_to :html, :json
   end
 
   def sale
-    @variants = policy_scope(Variant)
+    @variants = policy_scope(Variant.not_archived)
       .includes(product: :variants).where(sale: true)
 
     respond_to :html, :json
   end
 
   def last
-    @variants = policy_scope(Variant)
+    @variants = policy_scope(Variant.not_archived)
       .includes(product: :variants).where(last: true)
 
     respond_to :html, :json
   end
 
   def all
-    @variants = policy_scope(Variant).includes(product: :variants)
+    @variants = policy_scope(Variant.not_archived)
+      .includes(product: :variants)
 
     respond_to :html, :json
   end
