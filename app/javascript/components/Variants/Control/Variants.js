@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 
 import { path } from '../../Routes'
+import I18n from '../../I18n'
 
 import page from '../../Page'
 import styles from './Variants.module.css'
@@ -16,6 +17,7 @@ class Variants extends Component {
         {variants.map((variant) =>
           <div className={styles.item} key={variant.id}>
             <div className={styles.image}>
+              <div className={styles.state}>{I18n.t(`variant.states.${variant.state}`)}</div>
               <div className={styles.control}>
                 <a className={styles.edit} href={path('edit_variant_path', {id: variant.id})}/>
               </div>
