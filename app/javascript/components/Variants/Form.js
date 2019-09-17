@@ -92,7 +92,9 @@ export default function Form ({ id, product_id: productId, locale }) {
     })
   }
 
-  const handleChange = ({ target: { name, value } }) => {
+  const handleChange = ({ target: { name, value, type, checked } }) => {
+    value = type === 'checkbox' ? checked : value
+    
     setValues({ ...values, [name]: value })
   }
 
@@ -150,6 +152,42 @@ export default function Form ({ id, product_id: productId, locale }) {
               productValues => setValues({ ...values, product_attributes: productValues })
             }
           />
+
+          <div className={form.el}>
+            <label>
+              <div className={form.checkbox}>
+                <input type="checkbox" name="latest" checked={values.latest} onChange={handleChange} />
+                  New
+              </div>
+            </label>
+          </div>
+
+          <div className={form.el}>
+            <label>
+              <div className={form.checkbox}>
+                <input type="checkbox" name="sale" checked={values.sale} onChange={handleChange} />
+                  Sale
+              </div>
+            </label>
+          </div>
+
+          <div className={form.el}>
+            <label>
+              <div className={form.checkbox}>
+                <input type="checkbox" name="last" checked={values.last} onChange={handleChange} />
+                  Последняя вещь
+              </div>
+            </label>
+          </div>
+
+          <div className={form.el}>
+            <label>
+              <div className={form.checkbox}>
+                <input type="checkbox" name="pinned" checked={values.pinned} onChange={handleChange} />
+                  Закреплен
+              </div>
+            </label>
+          </div>
 
           <div className={form.el}>
             <label>
