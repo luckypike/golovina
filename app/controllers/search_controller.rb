@@ -8,7 +8,7 @@ class SearchController < ApplicationController
       format.html
       format.json do
         if params[:q].present?
-          @variants = policy_scope(Variant).includes(product: :variants).joins(:product)
+          @variants = policy_scope(Variant.not_archived).includes(product: :variants).joins(:product)
             .where('LOWER(code) LIKE LOWER(:q) OR LOWER(products.title) LIKE LOWER(:q)', q: "%#{params[:q]}%")
         end
       end
