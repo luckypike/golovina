@@ -3,8 +3,7 @@
 }
 
 .brand {
-  margin-top: calc(var(--yr) * var(--lh) * 6);
-  margin-bottom: calc(var(--yr) * var(--lh) * 4);
+  padding: calc(var(--yr) * var(--lh) * var(--s3)) 0  calc(var(--yr) * var(--lh) * var(--s2));
   position: absolute;
   top: 50%;
   transform: translate(0%, -50%);

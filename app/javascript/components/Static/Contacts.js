@@ -33,24 +33,6 @@ class Contacts extends Component {
               <a className={styles.way} href="https://yandex.ru/maps/org/87679230211" target="_blank" rel="noopener noreferrer">Схема проезда</a>
             </div>
           </div>
-
-          <div className={styles.showcase}>
-            <div className={styles.img} />
-          </div>
-          <div className={styles.info}>
-            <div className={styles.info_wrapper}>
-              <div className={styles.city}>Нижний Новгород</div>
-              <div className={styles.address}>
-                Корнер в магазине «Мяtа»
-                <br/>
-                Ошарская, 61
-                <br/>
-                Телефон: +7 910 134-07-77
-              </div>
-              <div className={styles.schedule}>Ежедневно с 12:00 до 20:00</div>
-              <a className={styles.way} href="https://yandex.ru/maps/org/31036430646" target="_blank" rel="noopener noreferrer">Схема проезда</a>
-            </div>
-          </div>
         </div>
 
         <div className={styles.intro}>

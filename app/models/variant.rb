@@ -7,6 +7,7 @@ class Variant < ApplicationRecord
   end
 
   scope :available, -> { includes(:availabilities).where(availabilities: { id: nil }) }
+  scope :not_archived, -> { where.not(state: :archived) }
   # scope :visible, -> { Current.user&.is_editor? && where(show: true) }
 
   enum state: { unpub: 0, active: 1, archived: 2 }

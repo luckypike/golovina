@@ -9,14 +9,6 @@
   grid-row-gap: calc(var(--yr) * 2);
   margin-bottom: calc(var(--yr) * var(--s3));
 
-  &:nth-child(even) {
-    & .image {
-      &:nth-child(even) {
-        order: -1;
-      }
-    }
-  }
-
   @media(--s) {
     grid-template-columns: repeat(12, 1fr);
     grid-column-gap: calc(var(--xr) * 2);
