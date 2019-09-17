@@ -163,7 +163,7 @@ class VariantsController < ApplicationController
   end
 
   def update
-    if @variant.update(variant_params)
+    if @variant.update!(variant_params)
       head :ok, location: catalog_variant_path(slug: @variant.product.category.slug, id: @variant.id)
     else
       render json: @variant.errors, status: :unprocessable_entity
@@ -190,7 +190,7 @@ class VariantsController < ApplicationController
   def variant_params
     permitted =
       Variant.globalize_attribute_names \
-      + %i[state code color_id price price_last created_at] \
+      + %i[state code color_id price price_last created_at latest sale last pinned] \
       + [
         {
           availabilities_attributes: %i[id size_id store_id quantity _destroy],

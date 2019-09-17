@@ -27,6 +27,11 @@ json.values do
     json.set! f, variant.send(f) || ''
   end
 
+  json.latest variant.latest || ''
+  json.sale variant.sale || ''
+  json.last variant.last || ''
+  json.pinned variant.pinned || ''
+
   json.state variant.state || ''
   json.code variant.code || ''
   json.price variant.price || ''
