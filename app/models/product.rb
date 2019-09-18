@@ -16,7 +16,7 @@ class Product < ApplicationRecord
   # has_many :similar_products, class_name: 'Product', through: :similarables
 
 
-  validates :title_ru, :title_en, presence: true
+  validates :title_ru, presence: true
 
   translates :title
   globalize_accessors locales: I18n.available_locales, attributes: [:title]
