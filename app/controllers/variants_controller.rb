@@ -164,7 +164,7 @@ class VariantsController < ApplicationController
   end
 
   def update
-    if @variant.update!(variant_params)
+    if @variant.update(variant_params)
       head :ok, location: catalog_variant_path(slug: @variant.product.category.slug, id: @variant.id)
     else
       render json: @variant.errors, status: :unprocessable_entity
