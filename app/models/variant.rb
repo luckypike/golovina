@@ -26,7 +26,7 @@ class Variant < ApplicationRecord
   has_many :sizes, through: :availabilities
 
   validates :color, uniqueness: { scope: :product_id }
-  validates :code, uniqueness: true, unless: -> { code.blank? }
+  # validates :code, uniqueness: true, unless: -> { code.blank? }
   # validates :price, presence: true, if: -> { active? }
 
   before_save :default_values
