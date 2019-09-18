@@ -256,7 +256,7 @@ class Variant extends Component {
                         </a>
                       }
 
-                      {!add && !variant.soon &&
+                      {!add &&
                         <>
                           <button className={buttons.main} disabled={send} onClick={this.handleCartClick}>
 
