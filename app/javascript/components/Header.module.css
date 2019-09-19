@@ -276,6 +276,7 @@
   transition-property: transform opacity;
   z-index: 4;
   overflow: hidden;
+  overflow-y: auto;
 
   &.active {
     visibility: visible;
