@@ -1,0 +1,2 @@
+class DeliveryCity < ApplicationRecord
+end

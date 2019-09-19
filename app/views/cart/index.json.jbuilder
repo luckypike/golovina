@@ -14,6 +14,7 @@ end
 
 json.values do
   json.address ''
+  json.delivery false
 
   json.user_attributes do
     json.name @user.name || ''
@@ -21,4 +22,8 @@ json.values do
     json.phone @user.phone || ''
     json.email((@user.guest? ? '' : @user.email) || '')
   end
+end
+
+json.dictionaries do
+  json.delivery_cities DeliveryCity.all
 end

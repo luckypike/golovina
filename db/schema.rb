@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_12_145727) do
+ActiveRecord::Schema.define(version: 2019_09_19_140703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,16 @@ ActiveRecord::Schema.define(version: 2019_09_12_145727) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "delivery_cities", force: :cascade do |t|
+    t.string "title"
+    t.integer "door"
+    t.string "door_days"
+    t.integer "storage"
+    t.string "storage_days"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "discounts", force: :cascade do |t|
     t.bigint "user_id"
     t.string "name"
@@ -190,6 +200,9 @@ ActiveRecord::Schema.define(version: 2019_09_12_145727) do
     t.string "payment_id"
     t.decimal "payment_amount"
     t.boolean "delivery"
+    t.bigint "delivery_city_id"
+    t.integer "delivery_option"
+    t.index ["delivery_city_id"], name: "index_orders_on_delivery_city_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -411,6 +424,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_145727) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "sizes"
   add_foreign_key "order_items", "variants"
+  add_foreign_key "orders", "delivery_cities"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "refunds", "orders"

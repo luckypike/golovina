@@ -4,6 +4,7 @@ import axios from 'axios'
 import classNames from 'classnames'
 import InputMask from 'react-input-mask'
 import PubSub from 'pubsub-js'
+import Select from 'react-select'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
@@ -27,14 +28,17 @@ export default function Index ({ locale }) {
   const [errors, setErrors] = useState({})
   const [carts, setCarts] = useState()
   const [values, setValues] = useState()
+  const [dictionaries, setDictionaries] = useState()
   const [price, setPrice] = useState()
+  const [city, setCity] = useState()
 
   const _fetch = async () => {
-    const { data: { values, carts, price } } = await axios.get(path('cart_path', { format: 'json' }))
+    const { data } = await axios.get(path('cart_path', { format: 'json' }))
 
-    setValues(values)
-    setCarts(carts)
-    setPrice(price)
+    setValues(data.values)
+    setDictionaries(data.dictionaries)
+    setCarts(data.carts)
+    setPrice(data.price)
   }
 
   useEffect(() => {
@@ -54,7 +58,10 @@ export default function Index ({ locale }) {
     await axios.post(
       path('orders_path'),
       {
-        order: values,
+        order: {
+          ...values,
+          delivery_city_id: city ? city.id : null
+        },
         authenticity_token: document.querySelector('[name="csrf-token"]').content
       }
     ).then(({ headers: { location } }) => {
@@ -142,6 +149,105 @@ export default function Index ({ locale }) {
 
           <div className={styles.checkout}>
             <form className={classNames(form.root, styles.form)} onSubmit={handleSubmit}>
+
+              <h2>
+                Выберите способ получения
+              </h2>
+
+              <label className={form.el}>
+                <div className={styles.delivery}>
+                  <div
+                    className={classNames(
+                      styles.deliveryItem,
+                      { [styles.active]: !values.delivery }
+                    )}
+                    onClick={() => setValues({ ...values, delivery: false })}
+                  >
+                    <strong>
+                      Самостоятельно
+                    </strong>
+                    <div className={styles.deliveryItemDesc}>
+                      Москва, Большая Никитская, 21/18 с4
+                    </div>
+                  </div>
+
+                  <div
+                    className={classNames(
+                      styles.deliveryItem,
+                      { [styles.active]: values.delivery }
+                    )}
+                    onClick={() => setValues({ ...values, delivery: true })}
+                  >
+                    <strong>
+                      Доставка от 265 ₽
+                    </strong>
+                    <div className={styles.deliveryItemDesc}>
+                      Более 500 городов до двери или до точки выдачи
+                    </div>
+                  </div>
+                </div>
+              </label>
+
+              {dictionaries && values.delivery &&
+                <div className={form.el}>
+                  <label>
+                    <div className={form.label}>
+                      {I18n.t('order.choose_delivery_city')}
+                    </div>
+                  </label>
+
+                  <div className={form.input}>
+                    <Select
+                      isClearable={true}
+                      value={values.delivery_city_id}
+                      getOptionLabel={option => option.title}
+                      getOptionValue={option => option.id}
+                      onChange={selectedCity => {
+                        if (selectedCity) {
+                          setCity(selectedCity)
+                          setValues({ ...values, delivery_option: (selectedCity.door ? 'door' : 'storage') })
+                        } else {
+                          setCity()
+                        }
+                      }}
+                      options={dictionaries.delivery_cities}
+                    />
+                  </div>
+
+                  {city &&
+                    <div className={form.radio}>
+                      {city.door &&
+                        <label>
+                          <input
+                            type="radio"
+                            name="delivery_option"
+                            checked={values.delivery_option === 'door'}
+                            onChange={() => setValues({ ...values, delivery_option: 'door' })}
+                          />
+                          Доставка до двери ({city.door_days} дн.): {city.door} ₽
+                        </label>
+                      }
+
+                      <label>
+                        <input
+                          type="radio"
+                          name="delivery_option"
+                          checked={values.delivery_option === 'storage'}
+                          onChange={() => setValues({ ...values, delivery_option: 'storage' })}
+                        />
+                        Доставка до точки выдачи ({city.storage_days}): {city.storage} ₽
+                      </label>
+                    </div>
+                  }
+
+                  <Errors errors={errors.delivery_city} />
+                </div>
+              }
+
+              <h2>
+                Заполните ваши данные
+              </h2>
+
               <User
                 errors={errors}
                 userValues={values.user_attributes}
@@ -150,29 +256,6 @@ export default function Index ({ locale }) {
                   userValues => setValues({ ...values, user_attributes: userValues })
                 }
               />
-
-              <label className={form.el}>
-                <div className={form.label}>
-                  Адрес доставки
-                </div>
-
-                <div className={form.input}>
-                  <textarea type="text" name="address" value={values.address} onChange={handleInputChange} />
-                </div>
-
-                {errors.address &&
-                  <div className={form.error}>
-                    <ul>
-                      {errors.address.map((error, i) => <li key={i}>{error}</li>)}
-                    </ul>
-
-                  </div>
-                }
-
-                <div className={form.hint}>
-                  Не заполняйте это поле если планируете забрать заказ самостоятельно.
-                </div>
-              </label>
 
               {carts.filter(cart => !cart.available).length === 0 &&
                 <div className={form.submit}>

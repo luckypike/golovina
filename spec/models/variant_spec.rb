@@ -10,7 +10,7 @@ describe Variant do
         availability.quantity -= 1
         availability.save
         variant.save
-        expect(variant.availabilities.first.quantity).to eq 0 and expect(variant.state).to eq('soon')
+        expect(variant.availabilities.first.quantity).to eq 0
       end
     end
 
@@ -22,16 +22,7 @@ describe Variant do
         availability.quantity -= 1
         availability.save
         variant.save
-        expect(variant.availabilities.first.quantity).to eq 0 and expect(variant.state).to eq('archived')
-      end
-    end
-
-    context 'soon checkbox without availability' do
-      let(:variant) { FactoryBot.create(:variant) }
-
-      it 'change state to archived' do
-        variant.save
-        expect(variant.state).to eq('archived')
+        expect(variant.availabilities.first.quantity).to eq 0
       end
     end
   end

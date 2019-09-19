@@ -92,6 +92,9 @@ class OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(
+      :delivery,
+      :delivery_option,
+      :delivery_city_id,
       :address,
       user_attributes: [
         :name, :s_name, :phone, :email

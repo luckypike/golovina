@@ -9,7 +9,7 @@ class Category < ApplicationRecord
   has_many :variants, through: :products
 
   validates :state, :title_ru, presence: true
-  validates :slug, uniqueness: true, presence: true, format: { with: /\A[a-z-]+\z/, message: :only_slug }
+  validates :slug, uniqueness: true, presence: true, format: { with: /\A[a-z0-9-]+\z/, message: :only_slug }
 
   translates :title
   globalize_accessors locales: I18n.available_locales, attributes: [:title]

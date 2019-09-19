@@ -63,3 +63,24 @@
 .price {
   justify-self: flex-start;
 }
+
+.delivery {
+  display: grid;
+  grid-column-gap: var(--xr);
+  grid-template-columns: 1fr 1fr;
+}
+
+.deliveryItem {
+  box-shadow: 0 0 0 1px var(--sep_color);
+  cursor: pointer;
+  padding: calc(var(--yr) * var(--s1)) var(--xr) calc(var(--yr) * var(--s2));
+  transition: box-shadow 0.4s;
+
+  &.active {
+    box-shadow: 0 0 0 2px var(--pr_color);
+  }
+}
+
+.deliveryItemDesc {
+  composes: at from '../Fonts.module.css';
+}

@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  enum delivery_option: { door: 1, storage: 2 }
+
   enum state: { undef: 0, active: 1, paid: 2, archived: 3 } do
     event :activate do
       after do
@@ -41,8 +43,12 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   accepts_nested_attributes_for :order_items
 
-  # validates :address, presence: true
+  belongs_to :delivery_city, optional: true
+
+  validates :delivery, inclusion: { in: [true, false] }
   validate :quantity_cannot_be_greater_than_total, on: :create
+  validates :delivery_city, presence: true, if: -> { delivery }
+  validates :delivery_option, presence: true, if: -> { delivery }
 
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
