@@ -8,7 +8,7 @@ class Category < ApplicationRecord
   has_many :products, dependent: :nullify
   has_many :variants, through: :products
 
-  validates :state, :title_ru, :title_en, presence: true
+  validates :state, :title_ru, presence: true
   validates :slug, uniqueness: true, presence: true, format: { with: /\A[a-z-]+\z/, message: :only_slug }
 
   translates :title

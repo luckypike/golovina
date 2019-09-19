@@ -6,7 +6,7 @@ class Color < ApplicationRecord
   belongs_to :parent_color, class_name: 'Color', optional: true
   has_many :colors, class_name: 'Color', foreign_key: :parent_color_id
 
-  validates :title_ru, :title_en, presence: true
+  validates :title_ru, presence: true
   validates :parent_color, absence: true, if: -> { colors.any? }
 
   translates :title
