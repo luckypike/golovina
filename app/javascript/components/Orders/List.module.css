@@ -151,6 +151,7 @@
   margin-top: calc(var(--yr) * var(--s2));
 
   @media (--s) {
+    align-items: start;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: var(--xr);
@@ -159,6 +160,7 @@
 
 .item {
   display: grid;
+  align-items: start;
   grid-column-gap: var(--xr);
   grid-template-columns: 6rem 1fr;
   grid-template-rows: repeat(5, auto) 1fr;
@@ -193,7 +195,7 @@
   &::before {
     display: block;
     content: '';
-    padding-top: calc(5 / 4 * 100%)
+    padding-top: calc(4 / 3 * 100%)
   }
 
   & img {

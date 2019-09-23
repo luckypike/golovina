@@ -47,6 +47,7 @@ class Order < ApplicationRecord
 
   validates :delivery, inclusion: { in: [true, false] }
   validate :quantity_cannot_be_greater_than_total, on: :create
+  validates :address, presence: true, if: -> { delivery && door? }
   validates :delivery_city, presence: true, if: -> { delivery }
   validates :delivery_option, presence: true, if: -> { delivery }
 
@@ -59,7 +60,7 @@ class Order < ApplicationRecord
   end
 
   def amount
-    @amount ||= order_items.map(&:price_sell).sum
+    @amount ||= order_items.map(&:price_sell).sum + (delivery ? delivery_city.send(delivery_option) : 0)
   end
 
   def quantity

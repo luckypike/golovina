@@ -1,0 +1,23 @@
+div.react-select__control {
+  appearance: none;
+  border: 1px solid var(--sep_color);
+  border-radius: 0;
+  font-family: inherit;
+  font-size: calc(var(--yr) * 4);
+  line-height: calc(var(--yr) * calc(var(--lh) + 2));
+  box-shadow: none;
+
+  &:hover {
+    border: 1px solid var(--sep_color);
+  }
+}
+
+div.react-select__control--is-focused {
+  border-color: var(--highlight_color);
+
+  &:hover {
+    border-color: var(--highlight_color);
+  }
+
+
+}

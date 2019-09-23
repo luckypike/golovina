@@ -58,6 +58,7 @@
 
 .form {
   max-width: 25rem;
+  padding-bottom: calc(var(--yr) * var(--s4));
 }
 
 .price {

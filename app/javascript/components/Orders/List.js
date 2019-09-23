@@ -68,7 +68,18 @@ class Item extends Component {
               <br />
               Телефон: {link ? <a href={`tel:${order.user.phone}`}>{order.user.phone}</a> : order.user.phone}
               <br />
-              Адрес: {order.address}
+              {order.delivery &&
+                <>
+                  <p>
+                    Доставка: {order.delivery_city.title} ({order.delivery_city[order.delivery_option]} руб.)
+                    <br />
+                    {order.delivery_option === 'storage' && 'Точка выдачи' }
+                    {order.delivery_option === 'door' && `Адрес: ${order.address}` }
+                  </p>
+                </>
+              }
+
+              {!order.delivery && 'Самовывоз'}
             </div>
 
             <div className={styles.items}>

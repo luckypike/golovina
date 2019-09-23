@@ -1,7 +1,7 @@
-css:
-  #payment_gateway {
-    display: none;
-  }
+/ css:
+/   #payment_gateway {
+/     display: none;
+/   }
 
 = form_tag Rails.application.credentials[Rails.env.to_sym][:payment][:gateway], method: :post, id: :payment_gateway do |f|
   = text_field_tag(:sum, Rails.env.production? && Current.user.tester? ? 1 : @order.amount)
@@ -10,5 +10,5 @@ css:
   = text_field_tag(:client_phone, @order.user.phone)
 
 
-javascript:
+// javascript:
   document.getElementById('payment_gateway').submit()

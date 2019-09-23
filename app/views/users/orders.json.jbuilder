@@ -9,4 +9,9 @@ json.orders @orders do |order|
     json.quantity_available item.available
     json.available item.available?
   end
+
+  if order.delivery
+    json.extract! order, :delivery_option
+    json.delivery_city order.delivery_city
+  end
 end

@@ -161,7 +161,14 @@ export default function Index ({ locale }) {
                       styles.deliveryItem,
                       { [styles.active]: !values.delivery }
                     )}
-                    onClick={() => setValues({ ...values, delivery: false })}
+                    onClick={() => {
+                      setValues({
+                        ...values,
+                        delivery: null,
+                        delivery_option: null
+                      })
+                      setCity()
+                    }}
                   >
                     <strong>
                       Самостоятельно
@@ -192,12 +199,15 @@ export default function Index ({ locale }) {
                 <div className={form.el}>
                   <label>
                     <div className={form.label}>
-                      {I18n.t('order.choose_delivery_city')}
+                      {I18n.t('order.delivery_city')}
                     </div>
                   </label>
 
                   <div className={form.input}>
                     <Select
+                      placeholder={I18n.t('order.choose_delivery_city')}
+                      noOptionsMessage={() => null}
+                      classNamePrefix="react-select"
                       isClearable={true}
                       value={values.delivery_city_id}
                       getOptionLabel={option => option.title}
@@ -208,6 +218,7 @@ export default function Index ({ locale }) {
                           setValues({ ...values, delivery_option: (selectedCity.door ? 'door' : 'storage') })
                         } else {
                           setCity()
+                          setValues({ ...values, delivery_option: null })
                         }
                       }}
                       options={dictionaries.delivery_cities}
@@ -244,6 +255,22 @@ export default function Index ({ locale }) {
                 </div>
               }
 
+              {values.delivery_option === 'door' &&
+                <div className={form.el}>
+                  <label>
+                    <div className={form.label}>
+                      {I18n.t('order.address')}
+                    </div>
+                  </label>
+
+                  <div className={form.input}>
+                    <textarea type="text" name="address" value={values.address} onChange={handleInputChange} />
+                  </div>
+
+                  <Errors errors={errors.address} />
+                </div>
+              }
+
               <h2>
                 Заполните ваши данные
               </h2>
@@ -256,6 +283,13 @@ export default function Index ({ locale }) {
                   userValues => setValues({ ...values, user_attributes: userValues })
                 }
               />
+
+              {(!values.delivery || values.delivery_option) && price &&
+                <h2>
+                  Итоговая стоимость:
+                  <Price sell={parseFloat(price.sell) + (values.delivery ? city[values.delivery_option] : 0)} />
+                </h2>
+              }
 
               {carts.filter(cart => !cart.available).length === 0 &&
                 <div className={form.submit}>

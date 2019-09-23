@@ -9,6 +9,11 @@ json.orders @orders do |order|
     json.quantity_available 0
     json.available false
   end
+
+  if order.delivery
+    json.extract! order, :delivery_option
+    json.delivery_city order.delivery_city
+  end
 end
 
 json.states Order.states.keys.reject{|k| k == 'undef'}.map{|o| {key: o, title: t("order.state.#{o}")}}

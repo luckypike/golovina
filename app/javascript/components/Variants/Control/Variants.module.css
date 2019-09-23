@@ -16,7 +16,7 @@
   composes: image from '../List.module.css';
 
   &::before {
-    padding-top: calc(5 / 4 * 100%)
+    padding-top: calc(4 / 3 * 100%)
   }
 }
 

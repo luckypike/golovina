@@ -1,5 +1,7 @@
 ru:
   order:
+    address: Адрес доставки
+
     checkout: Оформить заказ
 
     quantity:
@@ -9,7 +11,7 @@ ru:
       other: "%{count} товара на сумму %{amount}"
 
     delivery_city: Населенный пункт
-    choose_delivery_city: Выберите населенный пункт для рассчета стоимости доставки
+    choose_delivery_city: Выберите город для доставки
 
     state:
       active: Новый

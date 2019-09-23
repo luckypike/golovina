@@ -38,7 +38,6 @@
     border: 1px solid var(--sep_color);
     border-radius: 0;
     font-family: inherit;
-    font-size: inherit;
     font-size: calc(var(--yr) * 4);
     line-height: calc(var(--yr) * calc(var(--lh) + 2));
     padding: calc(var(--yr) * 2) var(--xr);
