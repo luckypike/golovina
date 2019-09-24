@@ -286,8 +286,10 @@ export default function Index ({ locale }) {
 
               {(!values.delivery || values.delivery_option) && price &&
                 <h2>
-                  Итоговая стоимость:
-                  <Price sell={parseFloat(price.sell) + (values.delivery ? city[values.delivery_option] : 0)} />
+                  Итоговая стоимость
+                  <div className={styles.price}>
+                    <Price sell={parseFloat(price.sell) + (values.delivery ? city[values.delivery_option] : 0)} />
+                  </div>
                 </h2>
               }
 

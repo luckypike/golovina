@@ -63,6 +63,10 @@
 
 .price {
   justify-self: flex-start;
+
+  & div {
+    justify-content: flex-start;
+  }
 }
 
 .delivery {
