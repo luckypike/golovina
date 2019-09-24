@@ -21,11 +21,16 @@
     = @order.user.email
     br
 
-    ' Адрес:
-    = @order.address
+    - if @order.delivery
+      ' Доставка:
+      => @order.delivery_city.title
+      | (#{@order.delivery_city[@order.delivery_option]} руб.)
+      br
+      = @order.address
+    - else
+      | Самовывоз
 
     br
-
     ' Общая стоимость:
     = number_to_rub @order.amount
 
