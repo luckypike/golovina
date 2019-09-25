@@ -6,7 +6,7 @@ class ColorsController < ApplicationController
   def index
     authorize Color
 
-    @colors = Color.main.with_translations.includes(colors: :translations).order(id: :asc)
+    @colors = Color.main.with_translations.includes(colors: :translations).includes(:variants).order(id: :asc)
   end
 
   def show

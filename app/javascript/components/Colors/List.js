@@ -33,6 +33,9 @@ class Item extends Component {
           <a href={path('edit_color_path', { id: color.id })}>
             <div className={styles.parent_title}>
               {color.title}
+              {color.variants &&
+                <> ({color.variants})</>
+              }
             </div>
           </a>
 
@@ -52,6 +55,9 @@ class Item extends Component {
                 <div key={i.id} className={classNames(styles.child_title, {[styles.active]: toggle})} >
                   <a href={path('edit_color_path', { id: i.id })}>
                     — {i.title}
+                    {i.variants &&
+                      <> ({i.variants})</>
+                    }
                   </a>
                 </div>
               )}
