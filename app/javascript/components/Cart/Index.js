@@ -262,15 +262,17 @@ export default function Index ({ locale }) {
                         </label>
                       }
 
-                      <label>
-                        <input
-                          type="radio"
-                          name="delivery_option"
-                          checked={values.delivery_option === 'storage'}
-                          onChange={() => setValues({ ...values, delivery_option: 'storage' })}
-                        />
-                        Доставка до точки выдачи ({city.storage_days}): {city.storage} ₽
-                      </label>
+                      {city.storage &&
+                        <label>
+                          <input
+                            type="radio"
+                            name="delivery_option"
+                            checked={values.delivery_option === 'storage'}
+                            onChange={() => setValues({ ...values, delivery_option: 'storage' })}
+                          />
+                          Доставка до точки выдачи ({city.storage_days}): {city.storage} ₽
+                        </label>
+                      }
                     </div>
                   }
 
