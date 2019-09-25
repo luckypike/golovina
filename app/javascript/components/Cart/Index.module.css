@@ -47,6 +47,15 @@
   margin-bottom: calc(var(--yr) * 2);
 }
 
+.noCity {
+  composes: at from '../Fonts.module.css';
+
+  & a {
+    white-space: nowrap;
+  }
+  /* color: var(--gr_color); */
+}
+
 .sum {
   margin-right: 1em;
 }
@@ -70,9 +79,9 @@
 }
 
 .delivery {
-  display: grid;
-  grid-column-gap: var(--xr);
-  grid-template-columns: 1fr 1fr;
+  /* display: grid; */
+  /* grid-column-gap: var(--xr); */
+  /* grid-template-columns: 1fr 1fr; */
 }
 
 .deliveryItem {
@@ -80,6 +89,10 @@
   cursor: pointer;
   padding: calc(var(--yr) * var(--s1)) var(--xr) calc(var(--yr) * var(--s2));
   transition: box-shadow 0.4s;
+
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * var(--s2));
+  }
 
   &.active {
     box-shadow: 0 0 0 2px var(--pr_color);

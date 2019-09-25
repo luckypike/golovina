@@ -90,6 +90,10 @@ export default function Index ({ locale }) {
     setValues({ ...values, [name]: value })
   }
 
+  const isPickup = () => values.delivery === 'pickup'
+  const isRussia = () => values.delivery === 'russia'
+  const isInternational = () => values.delivery === 'international'
+
   return (
     <div className={page.gray}>
       <div className={page.title}>
@@ -159,12 +163,12 @@ export default function Index ({ locale }) {
                   <div
                     className={classNames(
                       styles.deliveryItem,
-                      { [styles.active]: !values.delivery }
+                      { [styles.active]: isPickup() }
                     )}
                     onClick={() => {
                       setValues({
                         ...values,
-                        delivery: null,
+                        delivery: 'pickup',
                         delivery_option: null
                       })
                       setCity()
@@ -181,21 +185,36 @@ export default function Index ({ locale }) {
                   <div
                     className={classNames(
                       styles.deliveryItem,
-                      { [styles.active]: values.delivery }
+                      { [styles.active]: isRussia() }
                     )}
-                    onClick={() => setValues({ ...values, delivery: true })}
+                    onClick={() => setValues({ ...values, delivery: 'russia' })}
                   >
                     <strong>
-                      Доставка от 265 ₽
+                      Доставка по России
                     </strong>
                     <div className={styles.deliveryItemDesc}>
-                      Более 500 городов до двери или до точки выдачи
+                      Более 500 городов до двери или до точки выдачи от 265 ₽
+                    </div>
+                  </div>
+
+                  <div
+                    className={classNames(
+                      styles.deliveryItem,
+                      { [styles.active]: isInternational() }
+                    )}
+                    onClick={() => setValues({ ...values, delivery: 'international' })}
+                  >
+                    <strong>
+                      Международная доставка
+                    </strong>
+                    <div className={styles.deliveryItemDesc}>
+                      Доставка за пределы России от 2500 ₽
                     </div>
                   </div>
                 </div>
               </label>
 
-              {dictionaries && values.delivery &&
+              {dictionaries && isRussia() &&
                 <div className={form.el}>
                   <label>
                     <div className={form.label}>
@@ -224,6 +243,10 @@ export default function Index ({ locale }) {
                       options={dictionaries.delivery_cities}
                     />
                   </div>
+
+                  <p className={styles.noCity}>
+                    Если вы не нашли нужный город свяжитесь с нами, чтобы обсудить возможные варианты доставки. Можете позвонить по номеру телефона <a href="tel:+79857145558">+7 985 714-55-58</a> или выбрать опцию самостоятельного получения заказа, чтобы решить этот вопрос позже.
+                  </p>
 
                   {city &&
                     <div className={form.radio}>
@@ -255,7 +278,7 @@ export default function Index ({ locale }) {
                 </div>
               }
 
-              {values.delivery_option === 'door' &&
+              {((isRussia() && values.delivery_option === 'door') || isInternational()) &&
                 <div className={form.el}>
                   <label>
                     <div className={form.label}>
@@ -284,11 +307,11 @@ export default function Index ({ locale }) {
                 }
               />
 
-              {(!values.delivery || values.delivery_option) && price &&
+              {((isRussia() && values.delivery_option) || isInternational() || isPickup()) && price &&
                 <h2>
                   Итоговая стоимость
                   <div className={styles.price}>
-                    <Price sell={parseFloat(price.sell) + (values.delivery ? city[values.delivery_option] : 0)} />
+                    <Price sell={parseFloat(price.sell) + (isInternational() ? 2500 : (isRussia() ? city[values.delivery_option] : 0))} />
                   </div>
                 </h2>
               }

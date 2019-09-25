@@ -27,7 +27,7 @@ class Contacts extends Component {
                 <br/>
                 Большая Никитская, 21/18 с4, помещение 206
                 <br/>
-                Телефон: +7 985 714-55-58
+                Телефон: <a href="tel:+79857145558">+7 985 714-55-58</a>
               </div>
               <div className={styles.schedule}>Ежедневно с 13:00 до 21:00</div>
               <a className={styles.way} href="https://yandex.ru/maps/org/87679230211" target="_blank" rel="noopener noreferrer">Схема проезда</a>

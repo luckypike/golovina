@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   enum delivery_option: { door: 1, storage: 2 }
+  enum delivery: { pickup: 1, russia: 2, international: 3 }
 
   enum state: { undef: 0, active: 1, paid: 2, archived: 3 } do
     event :activate do
@@ -44,11 +45,11 @@ class Order < ApplicationRecord
 
   belongs_to :delivery_city, optional: true
 
-  validates :delivery, inclusion: { in: [true, false] }
+  validates :delivery, presence: true
   validate :quantity_cannot_be_greater_than_total, on: :create
-  validates :address, presence: true, if: -> { delivery && door? }
-  validates :delivery_city, presence: true, if: -> { delivery }
-  validates :delivery_option, presence: true, if: -> { delivery }
+  validates :address, presence: true, if: -> { (russia? && door?) || international? }
+  validates :delivery_city, presence: true, if: -> { russia? }
+  validates :delivery_option, presence: true, if: -> { russia? }
 
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
@@ -59,7 +60,7 @@ class Order < ApplicationRecord
   end
 
   def amount
-    @amount ||= order_items.map(&:price_sell).sum + (delivery ? delivery_city.send(delivery_option) : 0)
+    @amount ||= order_items.map(&:price_sell).sum + (international? ? 2500 : (russia? ? delivery_city.send(delivery_option) : 0))
   end
 
   def quantity

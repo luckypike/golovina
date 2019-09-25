@@ -21,11 +21,14 @@
     = @order.user.email
     br
 
-    - if @order.delivery
+    - if @order.russia?
       ' Доставка:
       => @order.delivery_city.title
       | (#{@order.delivery_city[@order.delivery_option]} руб.)
       br
+      = @order.address
+    - elsif @order.international?
+      ' Международная доставка:
       = @order.address
     - else
       | Самовывоз

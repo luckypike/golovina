@@ -14,7 +14,7 @@ end
 
 json.values do
   json.address ''
-  json.delivery false
+  json.delivery :pickup
 
   json.user_attributes do
     json.name @user.name || ''
