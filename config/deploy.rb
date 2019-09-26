@@ -9,7 +9,7 @@ set :deploy_to, '/home/deploy/apps/golovina.store'
 set :ssh_options, { forward_agent: true }
 
 append :linked_files, 'config/database.yml', 'config/master.key'
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/uploads"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/uploads", 'public/.well-known'
 
 set :keep_releases, 5
 
