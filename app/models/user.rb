@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :orders
   has_many :refunds
   has_many :notifications
+  has_many :identities, dependent: :destroy
 
   has_one :discount
 
@@ -39,10 +40,12 @@ class User < ApplicationRecord
     Rails.application.credentials.payment[:test_phones].include?(phone)
   end
 
-  def activate email = false
+  def activate(email = false)
     password = Devise.friendly_token.first(8)
-    self.update_attributes({ email: email, password: password, password_confirmation: password, state: 1 })
-    self.save!(validate: false)
+    self.email = email
+    self.password = password
+    self.state = :common
+    save!(validate: false)
     RegisterMailer.register_mailer(password, self).deliver_now
   end
 
@@ -62,6 +65,10 @@ class User < ApplicationRecord
 
   def s_name
     sname
+  end
+
+  def guest_email?
+    email.match(/guest_.*?@golovina\.store/i)
   end
 
   class << self

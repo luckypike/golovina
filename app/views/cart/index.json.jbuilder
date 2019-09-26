@@ -20,7 +20,7 @@ json.values do
     json.name @user.name || ''
     json.sname @user.sname || ''
     json.phone @user.phone || ''
-    json.email((@user.guest? ? '' : @user.email) || '')
+    json.email((@user.guest_email? ? '' : @user.email) || '')
   end
 end
 

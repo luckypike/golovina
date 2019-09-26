@@ -31,6 +31,7 @@ gem 'redcarpet'
 gem 'addressable'
 
 gem 'devise'
+gem 'jwt'
 gem 'pundit'
 
 gem 'active_link_to'

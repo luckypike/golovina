@@ -2,4 +2,4 @@
 - description 'Страница входа в магазин'
 - keywords ['войти', 'авторизация', 'golovina', 'головина']
 
-= react_component 'Sessions/Login'
+= react_component 'Sessions/Login', { appleid: Rails.application.credentials[Rails.env.to_sym][:appleid] }
