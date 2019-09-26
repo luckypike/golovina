@@ -79,7 +79,13 @@ class Item extends Component {
                 </>
               }
 
-              {!order.delivery && 'Самовывоз'}
+              {order.delivery && order.delivery === 'international' &&
+                <p>
+                  Международная доставка: {order.address}
+                </p>
+              }
+
+              {order.delivery && order.delivery === 'pickup' && 'Самовывоз'}
             </div>
 
             <div className={styles.items}>
