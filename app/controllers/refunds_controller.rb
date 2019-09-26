@@ -9,7 +9,7 @@ class RefundsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @refunds = Refund.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]})
+        @refunds = Refund.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).order(id: :desc)
       end
     end
   end
