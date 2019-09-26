@@ -75,6 +75,11 @@ class SessionsController < Devise::SessionsController
     redirect_to root_path
   end
 
+  def destroy
+    signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
+    head :ok
+  end
+
   private
   def authorize_session
     authorize :session

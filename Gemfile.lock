@@ -169,6 +169,7 @@ GEM
     ipaddress (0.8.3)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
+    jwt (2.2.1)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.7.0)
@@ -379,6 +380,7 @@ DEPENDENCIES
   i18n-js
   inline_svg
   jbuilder
+  jwt
   letter_opener
   listen
   meta-tags

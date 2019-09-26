@@ -5,6 +5,8 @@ import classNames from 'classnames'
 import { path } from '../Routes'
 import I18n from '../I18n'
 
+import Auth from './Auth'
+
 import page from '../Page'
 import buttons from '../Buttons'
 import form from '../Form.module.css'
@@ -107,18 +109,6 @@ class Login extends Component {
         </div>
 
         <div className={form.tight}>
-          {/*
-          <div className={styles.tabs}>
-            <div className={classNames(styles.tab, { [styles.active]: section == 'email' })} onClick={() => this.setState({ section: 'email' })}>
-              Электронная почта
-            </div>
-
-            <div className={classNames(styles.tab, { [styles.active]: section == 'phone' })} onClick={() => this.setState({ section: 'phone' })}>
-              Телефон
-            </div>
-          </div>
-          */}
-
           <div className={styles.form}>
             {!this.isRecovery() &&
               <form onSubmit={this.handleEmailSubmit}>
@@ -193,6 +183,10 @@ class Login extends Component {
               </div>
             }
           </div>
+
+          <div className={styles.sep}>Или</div>
+
+          <Auth appleid={this.props.appleid} />
 
           <div className={styles.sep}>Или</div>
 

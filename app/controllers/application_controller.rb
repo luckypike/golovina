@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :not_authenticated
 
-  protect_from_forgery with: :exception
+  protect_from_forgery prepend: true
 
   before_action :set_current
 
