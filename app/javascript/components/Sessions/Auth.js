@@ -8,15 +8,7 @@ Auth.propTypes = {
 }
 
 export default function Auth ({ appleid }) {
-  const params = new URLSearchParams({
-    client_id: appleid.client_id,
-    redirect_uri: appleid.redirect_uri,
-    response_type: 'code id_token',
-    scope: 'name email',
-    response_mode: 'form_post'
-  })
-
-  const url = new URL('https://appleid.apple.com/auth/authorize?' + params)
+  const url = new URL(`https://appleid.apple.com/auth/authorize?scope=name%20email&client_id=${appleid.client_id}&redirect_uri=${appleid.redirect_uri}&response_type=code%20id_token&response_mode=form_post`)
 
   return (
     <div className={styles.root}>
