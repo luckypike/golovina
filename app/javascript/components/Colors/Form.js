@@ -195,7 +195,7 @@ export default function Form (props) {
             {!send &&
               <>
                 <input type="submit" value="Сохранить" className={buttons.main} disabled={send} />
-                {(!color.colors || color.colors.length === 0) &&
+                {color && (!color.colors || color.colors.length === 0) &&
                   <a href={path('colors_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>
                 }
               </>
