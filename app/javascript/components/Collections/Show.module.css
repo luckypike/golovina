@@ -80,7 +80,7 @@
 }
 
 .full {
-  grid-column: span 12;
+  grid-column: span 12 !important;
 
   /* @media (--s) {
     grid-column: 2 / span 8;
