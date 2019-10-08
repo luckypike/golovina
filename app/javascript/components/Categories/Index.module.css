@@ -4,6 +4,10 @@
   }
 }
 
+.edit {
+  margin-bottom: calc(var(--yr) * 4);
+}
+
 .drag {
   background-image: url('../../images/icons/drag.svg');
   background-color: color-mod(var(--pr_color) alpha(50%));

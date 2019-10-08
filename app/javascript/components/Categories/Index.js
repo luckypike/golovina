@@ -6,6 +6,7 @@ import { SortableContainer, SortableElement, sortableHandle } from 'react-sortab
 import { path } from '../Routes'
 
 import styles from './Index.module.css'
+import buttons from '../Buttons.module.css'
 import page from '../Page'
 
 class Index extends Component {
@@ -28,6 +29,11 @@ class Index extends Component {
         </div>
 
         <div className={styles.root}>
+
+          <div className={styles.edit}>
+            <a className={buttons.main} href={path('new_category_path')}>Добавить категорию</a>
+          </div>
+
           {categories &&
             <List categories={categories} onSortEnd={this._onSortEnd} useDragHandle />
           }
