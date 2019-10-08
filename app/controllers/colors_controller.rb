@@ -13,7 +13,7 @@ class ColorsController < ApplicationController
   end
 
   def new
-    @color = Color.new
+    @color = Color.new(color: '#000000')
     authorize @color
   end
 

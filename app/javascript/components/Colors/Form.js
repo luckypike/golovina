@@ -167,6 +167,8 @@ export default function Form (props) {
             <div className={form.input}>
               <input type="color" name="color" value={values.color} onChange={handleChange} />
             </div>
+
+            <Errors errors={errors.color} />
           </div>
 
           <div className={form.el}>

@@ -9,6 +9,7 @@ class Color < ApplicationRecord
 
   validates :title_ru, presence: true
   validates :parent_color, absence: true, if: -> { colors.any? }
+  validates :color, presence: true, unless: -> { image.presence }
 
   translates :title
   globalize_accessors locales: I18n.available_locales, attributes: [:title]
