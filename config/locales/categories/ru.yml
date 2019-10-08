@@ -1,0 +1,5 @@
+ru:
+  category:
+    states:
+      inactive: Скрытая
+      active: Активная

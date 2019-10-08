@@ -19,11 +19,13 @@ export default function Form ({ id, locale }) {
   const I18n = useI18n(locale)
 
   const [values, setValues] = useState()
+  const [dictionaries, setDictionaries] = useState()
 
   useEffect(() => {
     const _fetch = async () => {
-      const { data: { values } } = await axios.get(id ? path('edit_category_path', { id, format: 'json' }) : path('new_category_path', { format: 'json' }))
+      const { data: { values, dictionaries } } = await axios.get(id ? path('edit_category_path', { id, format: 'json' }) : path('new_category_path', { format: 'json' }))
 
+      setDictionaries(dictionaries)
       setValues(values)
     }
 
@@ -93,7 +95,7 @@ export default function Form ({ id, locale }) {
     })
   }
 
-  if (!values) return null
+  if (!values || !dictionaries) return null
 
   return (
     <div className={page.gray}>
@@ -103,6 +105,26 @@ export default function Form ({ id, locale }) {
 
       <div>
         <form onSubmit={handleSubmit}>
+          <div className={form.el}>
+            <label>
+              <div className={form.label}>
+                Статус
+              </div>
+
+              <div className={form.input}>
+                <select name="state" onChange={handleChange} value={values.state}>
+                  {dictionaries.states.map(state =>
+                    <option key={state} value={state}>{I18n.t(`category.states.${state}`)}</option>
+                  )}
+                </select>
+              </div>
+            </label>
+
+            <div className={form.hint}>
+              Неопубликованные категории видны только редакторам.
+            </div>
+          </div>
+
           <div className={form.el}>
             <label>
               <div className={form.label}>
