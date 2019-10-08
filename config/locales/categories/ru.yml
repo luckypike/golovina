@@ -1,5 +1,5 @@
 ru:
   category:
     states:
-      inactive: Скрытая
-      active: Активная
+      inactive: Всегда скрыта
+      active: Скрыта, когда нет активных товаров
