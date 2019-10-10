@@ -64,7 +64,7 @@ class Item extends Component {
         {toggle &&
           <>
             <div className={styles.details}>
-              Получатель: {order.user.title}
+              Получатель: {order.user.title} ({order.user.email})
               <br />
               Телефон: {link ? <a href={`tel:${order.user.phone}`}>{order.user.phone}</a> : order.user.phone}
               <br />
