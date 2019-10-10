@@ -76,7 +76,7 @@
   &::before {
     display: block;
     content: '';
-    padding-top: calc(4 / 3 * 100%);
+    padding-top: calc(5 / 4 * 100%);
     background-color: var(--ph_color);
   }
 

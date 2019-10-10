@@ -69,7 +69,7 @@ class VariantsController < ApplicationController
   def list
     authorize Variant
 
-    @variants = Variant.includes(:product, :color).available
+    @variants = Variant.includes(:product, :color).not_archived
     @variants = @variants.select{ |s| s.product.title.downcase.include? params[:q].downcase } if params[:q]
 
     respond_to :json
