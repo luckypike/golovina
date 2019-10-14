@@ -27,6 +27,8 @@ class Order < ApplicationRecord
           item.update(price: item.variant.price_sell)
           item.variant.decrease item
         end
+
+        update(payed_at: Time.current)
       end
 
       transition active: :paid

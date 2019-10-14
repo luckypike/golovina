@@ -36,7 +36,7 @@ class Item extends Component {
             </div>
 
             <div className={styles.created_at}>
-              {order.created_at}
+              {order.date}
             </div>
           </div>
 
