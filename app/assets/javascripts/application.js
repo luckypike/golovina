@@ -16,7 +16,6 @@
 
 //= require swiper/dist/js/swiper.jquery
 
-//= require selectize/dist/js/standalone/selectize
 //= require jquery-mask-plugin/dist/jquery.mask.min
 //= require cleave.js/dist/cleave.min.js
 
