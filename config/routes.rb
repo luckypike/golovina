@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     }
 
   devise_scope :user do
-    post 'auth/apple', to: 'users/omniauth_callbacks#apple'
+    post 'auth/apple(/:from)', to: 'users/omniauth_callbacks#apple'
     post :recovery, controller: :sessions, as: :recovery_user_session
     post :phone, controller: :sessions, as: :phone_user_session
     post :code, controller: :sessions, as: :code_user_session

@@ -19,17 +19,23 @@ module Users
         user = User.where(email: auth['email']).first_or_initialize(name: name['firstName'], sname: name['lastName'], state: :common)
         user.identities << identity
         user.save!(validate: false)
-        sign_in(user)
+
       else
         identity.user.email = auth['email'] if identity.user.guest_email? && auth['email']
         identity.user.name ||= name['firstName'] if name['firstName']
         identity.user.sname ||= name['lastName'] if name['lastName']
         identity.user.save!(validate: false)
-
-        sign_in(identity.user)
+        user = identity.user
       end
 
-      redirect_to root_path
+      if Current.user && Current.user.guest?
+        Cart.where(user: Current.user).update_all(user_id: user.id)
+        Wishlist.where(user: Current.user).update_all(user_id: user.id)
+      end
+
+      sign_in(user)
+
+      redirect_to params[:from].present? ? [params[:from].to_sym] : orders_user_path(user)
     end
 
     def failure

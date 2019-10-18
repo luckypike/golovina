@@ -1,3 +1,3 @@
 - title I18n.t('cart.title')
 
-= react_component 'Cart/Index'
+= react_component 'Cart/Index', { appleid: appleid, user: (Current.user.slice(:id, :is_editor?, :guest?) rescue nil) }

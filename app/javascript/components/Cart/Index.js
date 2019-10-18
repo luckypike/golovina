@@ -11,6 +11,8 @@ import { useI18n } from '../I18n'
 import Price from '../Variants/Price'
 import { Errors } from '../Form'
 
+import Auth from '../Sessions/Auth'
+
 import page from '../Page'
 
 import styles from './Index.module.css'
@@ -18,10 +20,12 @@ import form from '../Form.module.css'
 import buttons from '../Buttons.module.css'
 
 Index.propTypes = {
-  locale: PropTypes.string
+  user: PropTypes.object,
+  locale: PropTypes.string,
+  appleid: PropTypes.object.isRequired
 }
 
-export default function Index ({ locale }) {
+export default function Index ({ locale, appleid, user }) {
   const I18n = useI18n(locale)
 
   const [send, setSend] = useState(false)
@@ -294,6 +298,20 @@ export default function Index ({ locale }) {
 
                   <Errors errors={errors.address} />
                 </div>
+              }
+
+              {(!user || user['guest?']) &&
+                <>
+                  <div className={styles.appleid}>
+                    <Auth appleid={appleid} from="cart" />
+
+                    <p className={styles.appledesc}>
+                      Вы можете войти используя ваш идентификатор Apple. После этого ваши имя и почта будут переданы нам автоматически, а вы всегда сможете входить на сайт по отпечатку пальца или сканеру лица.
+                    </p>
+                  </div>
+
+                  <div className={styles.sep}>Или</div>
+                </>
               }
 
               <h2>

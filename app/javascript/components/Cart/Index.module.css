@@ -102,3 +102,19 @@
 .deliveryItemDesc {
   composes: at from '../Fonts.module.css';
 }
+
+.appleid {
+  margin-bottom: calc(var(--yr) * var(--s2));
+
+  & p {
+    margin-top: calc(var(--yr) * var(--s2));
+  }
+}
+
+.appledesc {
+  composes: at from '../Fonts.module.css';
+}
+
+.sep {
+  composes: sep from '../Sessions/Login.module.css';
+}
