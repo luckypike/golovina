@@ -1,38 +1,15 @@
 class CollectionsController < ApplicationController
-  before_action :set_collection, only: [:edit, :update, :destroy, :show]
+  before_action :set_collection, only: %i[edit update show]
 
-  layout 'app', except: [:show]
+  layout 'app'
 
   def show
     authorize @collection
 
-    @photos = Rails.cache.fetch("#{@collection.id}/photos", expires_in: 12.hours) do
-      photos = {}
-
-      Dir.glob(File.join('public', 'uploads', 'collections', @collection.id.to_s, "*.jpg"), File::FNM_CASEFOLD).each do |file|
-        k, i = File.basename(file.downcase, '.jpg').split('_')
-        photos[k] ||= OpenStruct.new
-        photos[k].images ||= []
-
-        im = MiniMagick::Image.open(file)
-
-        photos[k].images << {
-          id: i,
-          pos: (im[:height] > im[:width] ? :vert : :hor)
-        }
-      end
-
-      photos
-    end
-
     respond_to do |format|
-      format.html do
-        render 'show_comp', layout: 'layouts/app' if @collection.images.any? 
-      end
+      format.html
       format.json
     end
-
-
   end
 
   def new
@@ -72,11 +49,15 @@ class CollectionsController < ApplicationController
   end
 
   private
+
   def set_collection
     @collection = Collection.friendly.find(params[:id])
   end
 
   def collection_params
-    params.require(:collection).permit(:title, :slug, :desc, :text, :weight, image_ids: [], images_attributes: [:id, :weight])
+    params.require(:collection).permit(
+      :title, :slug, :desc, :text, :weight,
+      image_ids: [], images_attributes: %i[id weight]
+    )
   end
 end

@@ -37,6 +37,8 @@ export default function Show (props) {
   if (id === 7) singles = [0, 4, 7, 8, 10, 14, 17, 20, 23, 27, 28, 34, 35, 36, 39, 40, 43, 44, 47]
   if (id === 6) singles = [18, 24]
   if (id === 5) singles = [3, 8, 14, 21, 28, 31]
+  if (id === 3) singles = [7]
+  if (id === 1) singles = [14, 15, 18, 20, 22]
 
   if (!collection) return null
 
