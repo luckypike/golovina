@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "https://#{Rails.application.secrets[:host]}"
+SitemapGenerator::Sitemap.default_host = "https://golovina.store"
 
 SitemapGenerator::Sitemap.create do
   # Put links creation logic here.
@@ -22,11 +22,11 @@ SitemapGenerator::Sitemap.create do
   # Add all articles:
   #
 
-  Variant.available.find_each do |variant|
+  Variant.active.find_each do |variant|
     add catalog_variant_path(slug: variant.category.slug, id: variant), lastmod: variant.updated_at
   end
 
   Category.active.find_each do |category|
-    add catalog_category_path(slug: category.slug), lastmod: Time.now
+    add catalog_category_path(slug: category.slug), lastmod: Time.current
   end
 end
