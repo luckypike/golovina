@@ -374,6 +374,10 @@
   grid-gap: calc(var(--yr) * 4);
   grid-template-columns: 1fr 1fr;
 
+  &.single {
+    grid-template-columns: 1fr;
+  }
+
   @media(--m) {
     grid-gap: calc(var(--yr) * 8);
   }

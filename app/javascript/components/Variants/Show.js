@@ -319,7 +319,7 @@ class Variant extends Component {
             <div className={styles.acc}>
               {variant.kits &&
                 <Acc id="kits" title="Готовые решения" onToggle={this.toggleSection} section={section}>
-                  <div className={styles.kits}>
+                  <div className={classNames(styles.kits, { [styles.single]: variant.kits.length === 1 })}>
                     {variant.kits.map((kit) =>
                       <a href={path('kit_path', { id: kit.id })} key={kit.id} className={styles.kit_item}>
                         <div className={styles.kit_image}><img src={kit.image}/></div>

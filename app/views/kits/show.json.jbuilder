@@ -3,6 +3,8 @@ json.kit do
   json.title @kit.human_title
 
   json.variants @kit.variants do |variant|
+    next unless variant.active?
+
     json.partial! variant
 
     json.availabilities do
