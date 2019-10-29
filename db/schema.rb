@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_14_105257) do
+ActiveRecord::Schema.define(version: 2019_10_29_103649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -384,6 +384,7 @@ ActiveRecord::Schema.define(version: 2019_10_14_105257) do
     t.datetime "updated_at", null: false
     t.text "desc"
     t.text "comp"
+    t.string "title"
     t.index ["locale"], name: "index_variant_translations_on_locale"
     t.index ["variant_id"], name: "index_variant_translations_on_variant_id"
   end

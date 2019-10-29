@@ -209,7 +209,7 @@ class Variant extends Component {
           <div className={styles.rest}>
             <div className={styles.title}>
               <h1>
-                {variant.product.title}
+                {variant.title}
               </h1>
               {variant.can_edit &&
                 <div className={styles.edit}>

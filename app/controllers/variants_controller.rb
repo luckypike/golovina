@@ -18,7 +18,7 @@ class VariantsController < ApplicationController
     end
 
     if params[:category_id].present?
-      @variants = Variant.includes(:product, :images, :color).where.not(id: @selected.map(&:id)).where(products: {category_id: params[:category_id]}).unscope(:order).order(:state, created_at: :desc)
+      @variants = Variant.includes(:product, :images, color: :translations).where.not(id: @selected.map(&:id)).where(products: {category_id: params[:category_id]}).unscope(:order).order(:state, created_at: :desc)
     else
       @variants = Variant.includes(:product, :images, :color).where.not(id: @selected.map(&:id)).unscope(:order).order(:state, created_at: :desc).limit(params[:q].present? ? nil : 12)
     end

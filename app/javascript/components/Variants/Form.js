@@ -94,7 +94,7 @@ export default function Form ({ id, product_id: productId, locale }) {
 
   const handleChange = ({ target: { name, value, type, checked } }) => {
     value = type === 'checkbox' ? checked : value
-    
+
     setValues({ ...values, [name]: value })
   }
 
@@ -272,6 +272,35 @@ export default function Form ({ id, product_id: productId, locale }) {
             <Errors errors={errors.color} />
           </div>
 
+          <div className={form.el}>
+            <div className={form.label}>
+              Название для цвета
+            </div>
+
+            {I18n.available_locales.map(locale =>
+              <div className={form.gl} key={locale}>
+                <label>
+                  <div className={form.label}>
+                    {locale}
+                  </div>
+
+                  <div className={form.input}>
+                    <input
+                      type="text"
+                      value={values[`title_${locale}`]}
+                      name={`title_${locale}`}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </label>
+              </div>
+            )}
+
+            <div className={form.hint}>
+              Название для выбранного цвета, можно оставить пустым — тогда будет браться общее название товара.
+            </div>
+          </div>
+
           <Availabilities
             // errors={errors}
             dictionaries={dictionaries}
@@ -359,7 +388,7 @@ export default function Form ({ id, product_id: productId, locale }) {
           </div>
 
           <div>
-            {send && 'Настройки блока сохраняются..' }
+            {send && 'Настройки товара сохраняются..' }
 
             {!send &&
               <>

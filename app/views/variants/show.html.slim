@@ -1,4 +1,4 @@
-- title @variant.title
+- title @variant.title_last
 - description @variant.desc
 - set_meta_tags og: { image: @variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.select(&:photo).map{ |i| asset_url(i.photo.thumb.url) } }
 

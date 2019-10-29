@@ -38,8 +38,9 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :preview do
+    process :gray
     process :rotate_according_to_exif
-    process smart_resize: [300, 240]
+    process resize_to_fill: [210, 280]
     process :optimize
   end
 

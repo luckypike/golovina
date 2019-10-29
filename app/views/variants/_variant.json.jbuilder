@@ -4,7 +4,7 @@ json.can_edit policy(variant).edit?
 
 json.images variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.first(2).each do |image|
   json.id image.id
-  json.thumb image.photo.thumb.url + '?v=1.1' if variant.images.size > 0
+  json.thumb image.photo.thumb.url unless variant.images.empty?
 end
 
 json.category do
@@ -15,9 +15,4 @@ json.product do
   json.extract! variant.product, :id, :title
 end
 
-# json.hide variant.images.size < 1 && !Current.user&.is_editor?
-
-json.title variant.product.title.strip
-
-
-# json.colour variant.product.variants.reject(&:archived?).size - 1
+json.title variant.title_last.strip

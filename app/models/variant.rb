@@ -35,8 +35,8 @@ class Variant < ApplicationRecord
   # after_save :check_state
   after_save :check_category
 
-  translates :desc, :comp
-  globalize_accessors locales: I18n.available_locales, attributes: %i[desc comp]
+  translates :desc, :comp, :title
+  globalize_accessors locales: I18n.available_locales, attributes: %i[desc comp title]
 
   # --------------
 
@@ -73,8 +73,8 @@ class Variant < ApplicationRecord
     images[0].photo.presence || nil
   end
 
-  def title
-    product.title_safe
+  def title_last
+    title.presence || product.title
   end
 
   def in_wishlist(user)
