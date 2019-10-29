@@ -74,7 +74,7 @@ class Variant < ApplicationRecord
   end
 
   def title_last
-    title.presence || product.title
+    (title.presence || product.title).strip
   end
 
   def in_wishlist(user)

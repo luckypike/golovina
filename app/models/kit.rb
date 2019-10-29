@@ -13,7 +13,7 @@ class Kit < ApplicationRecord
   validates :state, presence: true
 
   def human_title
-    title.present? ? title : variants.map(&:product).map(&:title).to_sentence.downcase.upcase_first
+    title.present? ? title : variants.map(&:title_last).to_sentence.downcase.upcase_first
   end
 
   def entity_created_at

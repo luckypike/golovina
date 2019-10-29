@@ -82,7 +82,7 @@ function Variant (props) {
         </div>
 
         <div className={styles.price}>
-          <Price sell={variant.price_sell} origin={variant.price} />
+          <Price sell={parseFloat(variant.price_sell)} origin={parseFloat(variant.price)} />
         </div>
 
         {variant.state === 'active' &&
