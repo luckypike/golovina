@@ -54,6 +54,17 @@ class Variant extends Component {
     this._loadAsyncData()
   }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.state.variant !== nextState.variant) {
+      if (this.glide) {
+        this.glide.destroy(true)
+        this.glide = null
+      }
+    }
+
+    return true
+  }
+
   componentDidUpdate (prevProps, prevState) {
     if ((prevState.id !== this.state.id || !this.state.variant) && this.state.variants) {
       const variant = this.state.variants.find(variant => variant.id === parseInt(this.state.id))
@@ -62,15 +73,7 @@ class Variant extends Component {
 
       if (variant.kits) section = 'kits'
 
-      // if(variant.availabilities.filter(availability => availability.active).length == 1) {
-      //   size = variant.availabilities.find(availability => availability.active).size.id
-      // }
-
       this.setState({ variant, size, section, index: 1 }, () => {
-        if (this.glide) {
-          this.glide.destroy(true)
-          this.glide = null
-        }
         this.updateDimensions()
       })
     }
@@ -93,16 +96,14 @@ class Variant extends Component {
 
   updateDimensions = () => {
     if (window.getComputedStyle(this.slides.current).getPropertyValue('position') === 'static') {
-      if (!this.glide) {
+      if (!this.glide && this.state.variant.images.length > 1) {
         this.glide = new Siema({
           onChange: () => this.setState({ index: this.glide.currentSlide + 1 })
         })
       }
-    } else {
-      if (this.glide) {
-        this.glide.destroy(true)
-        this.glide = null
-      }
+    } else if (this.glide) {
+      this.glide.destroy(true)
+      this.glide = null
     }
   }
 
@@ -146,13 +147,7 @@ class Variant extends Component {
   toggleSection = (section) => {
     this.setState(state => ({
       section: state.section === section ? null : section
-    }), () => {
-      if (this.glide) {
-        this.glide.destroy(true)
-        this.glide = null
-      }
-      this.updateDimensions()
-    })
+    }))
   }
 
   handleInputChange = event => {
@@ -199,7 +194,7 @@ class Variant extends Component {
 
             <div className={classNames('siema', styles.slides)} ref={this.slides}>
               {variant.images.map((image, i) =>
-                <div className={classNames('glide__slide', styles.slide)} key={i}>
+                <div className={classNames('glide__slide', styles.slide)} key={image.id}>
                   <img src={image.large} />
                 </div>
               )}
