@@ -1,9 +1,7 @@
 - title I18n.t('variants.all.title')
 - description I18n.t('variants.all.desc')
 - set_meta_tags og: { \
-  image: policy_scope(Variant.unscope(:includes)) \
-    .select(:id).includes(:images).where.not(images: { id: nil }).limit(3) \
-    .map{ |variant| variant.images.sort_by(&:weight_or_created).first.photo.thumb.url } \
+  image: Image.overall.map{ |image| image.photo.large.url } \
 }
 
 = react_component 'Variants/Index'

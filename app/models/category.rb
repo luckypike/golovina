@@ -15,11 +15,14 @@ class Category < ApplicationRecord
   globalize_accessors locales: I18n.available_locales, attributes: [:title]
   friendly_id :slug
 
-  # def normalize_friendly_id(input)
-  #   input.to_s.to_slug.normalize(transliterations: :russian).to_s
-  # end
-
   def check_variants_counter
     update_attribute(:variants_counter, variants.active.size)
+  end
+
+  class << self
+    def for_header
+      with_translations(I18n.available_locales).active
+        .where.not(variants_counter: 0).order(weight: :asc)
+    end
   end
 end

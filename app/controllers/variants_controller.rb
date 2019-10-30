@@ -33,6 +33,7 @@ class VariantsController < ApplicationController
 
   def latest
     @variants = policy_scope(Variant.not_archived)
+      .with_translations(I18n.available_locales)
       .includes(product: :variants).where(latest: true)
 
     respond_to :html, :json
@@ -40,6 +41,7 @@ class VariantsController < ApplicationController
 
   def soon
     @variants = policy_scope(Variant.not_archived)
+      .with_translations(I18n.available_locales)
       .includes(product: :variants).available
 
     respond_to :html, :json
@@ -47,6 +49,7 @@ class VariantsController < ApplicationController
 
   def sale
     @variants = policy_scope(Variant.not_archived)
+      .with_translations(I18n.available_locales)
       .includes(product: :variants).where(sale: true)
 
     respond_to :html, :json
@@ -54,6 +57,7 @@ class VariantsController < ApplicationController
 
   def last
     @variants = policy_scope(Variant.not_archived)
+      .with_translations(I18n.available_locales)
       .includes(product: :variants).where(last: true)
 
     respond_to :html, :json
@@ -61,6 +65,7 @@ class VariantsController < ApplicationController
 
   def all
     @variants = policy_scope(Variant.not_archived)
+      .with_translations(I18n.available_locales)
       .includes(product: :variants)
 
     respond_to :html, :json
@@ -116,16 +121,18 @@ class VariantsController < ApplicationController
       @cart.save
     end
 
-    render json: { quantity: Cart.where(user: Current.user).map(&:quantity).sum }
+    render json: { quantity: Cart.where(user: current_user).map(&:quantity).sum }
   end
 
   def show
     @category = Category.friendly.find(params[:slug])
-    @variant = @category.variants.find_by!(id: params[:id])
+    @variant = @category.variants.with_translations(I18n.available_locales).find_by!(id: params[:id])
 
     authorize @variant
 
-    @variants = policy_scope(@variant.product.variants).includes(:translations, :color, availabilities: [:size, :store])
+    @variants = policy_scope(@variant.product.variants)
+      .with_translations(I18n.available_locales)
+      .includes(:color, availabilities: [:size, :store])
 
     respond_to :html, :json
   end

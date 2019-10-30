@@ -1,16 +1,15 @@
 class StaticController < ApplicationController
-  layout 'app', only: [:index, :contacts]
+  layout 'app', only: %i[index contacts]
 
   def index
     authorize :static, :index?
 
-    @slides = Slide.with_translations.where.not(image: nil).order(weight: :asc)
+    @slides = Slide.with_translations(I18n.available_locales)
+      .where.not(image: nil).order(weight: :asc)
   end
 
   def contacts
     authorize :static, :index?
-
-
   end
 
   def robots
