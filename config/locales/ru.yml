@@ -56,6 +56,9 @@ ru:
     messages:
       extension_whitelist_error: Разрешены только картинки!
 
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"
 
   activerecord:
     errors:
