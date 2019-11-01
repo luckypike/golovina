@@ -21,7 +21,7 @@ class Item extends Component {
 
     return (
       <div className={styles.order}>
-        <div className={styles.handle} onClick={() => this.setState(state => ({ toggle: !state.toggle }))}>
+        <div className={styles.handle} onClick={(e) => !e.target.getAttribute('data-archive') && this.setState(state => ({ toggle: !state.toggle }))}>
           <svg viewBox="0 0 10 20" className={classNames(styles.arr, { [styles.active]: toggle })}>
             <polyline points="1 8 5 12 9 8" />
           </svg>
@@ -46,7 +46,7 @@ class Item extends Component {
 
           {order.editable && order.state === 'paid' &&
             <div className={styles.archive}>
-              <div className={buttons.main} onClick={() => this.handleUpdate(order.id)}>
+              <div className={buttons.main} onClick={() => this.handleUpdate(order.id)} data-archive={true}>
                 В архив
               </div>
             </div>

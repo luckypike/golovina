@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import classNames from 'classnames'
-// import update from 'immutability-helper'
+import update from 'immutability-helper'
 
 import { path } from '../Routes'
 import I18n from '../I18n'
@@ -36,6 +36,11 @@ export default function Index () {
     }
   }, [activeTab])
 
+  const handleOrderChange = id => {
+    const newOrders = [...orders].filter(order => order.id !== id)
+    setOrders(newOrders)
+  }
+
   return (
     <div className={page.gray}>
       <div className={page.title}>
@@ -61,7 +66,7 @@ export default function Index () {
           }
 
           {orders.length > 0 &&
-            <List orders={orders} />
+            <List orders={orders} onOrderChange={handleOrderChange} />
           }
         </div>
       }

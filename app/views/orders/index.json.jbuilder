@@ -1,5 +1,5 @@
 json.orders @orders do |order|
-  json.cache! order, expires_in: 10.minutes do
+  json.cache! order, expires_in: 5.minutes do
     json.partial! 'orders/order', order: order
     json.user order.user, partial: 'users/user', as: :user
     json.items order.order_items do |item|
