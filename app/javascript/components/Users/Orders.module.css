@@ -1,15 +1,10 @@
 .states {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-between; */
-  margin-bottom: calc(var(--yr) * 4);
-
-  @media (--s) {
-    /* justify-content: flex-start; */
-  }
+  margin-bottom: calc(var(--yr) * var(--s3));
 
   @media (--m) {
-    margin: 0 calc(2 / 12 * 100%) calc(var(--yr) * 4);
+    margin: 0 calc(2 / 12 * 100%) calc(var(--yr) * var(--s3));
   }
 }
 
@@ -19,16 +14,7 @@
   line-height: calc(var(--yr) * var(--lh));
   letter-spacing: 0.2em;
   text-transform: uppercase;
-
-  &:not(:last-child) {
-    margin-right: var(--xr);
-  }
-
-  @media (--s) {
-    &:first-child {
-      margin-left: var(--xr);
-    }
-  }
+  margin-right: var(--xr);
 
   &.active {
     border-bottom: 2px solid;

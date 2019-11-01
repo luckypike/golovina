@@ -9,8 +9,18 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @orders = @user.orders.includes(:user, order_items: { variant: [ { product: [:images, :category] }, :color, :images ]}).where.not(state: [:undef]).order(created_at: :desc)
-        @orders = @orders.where(state: params[:state]) if params[:state]
+        @orders = @user.orders
+          .includes(
+            :user,
+            :delivery_city,
+            order_items: [
+              :size,
+              variant: [
+                { color: [{ colors: :translations }, :translations] },
+                :translations
+              ]
+            ]
+          ).where.not(state: [:undef]).order(created_at: :desc)
       end
     end
   end

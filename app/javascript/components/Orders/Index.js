@@ -1,65 +1,74 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import update from 'immutability-helper'
+import classNames from 'classnames'
+// import update from 'immutability-helper'
 
 import { path } from '../Routes'
+import I18n from '../I18n'
 import List from '../Orders/List'
 
 import page from '../Page'
 
 import styles from './Index.module.css'
 
-class Index extends Component {
-  state = {
-    orders: null,
-    states: null,
-    status: 'paid'
-  }
+export default function Index () {
+  const _cancelToken = axios.CancelToken.source()
+  const TABS = ['paid', 'archived']
 
-  componentDidMount = async () => {
-    const res = await axios.get(path('orders_path', { format: 'json' }))
-    this.setState({ ...res.data })
-  }
+  const [activeTab, setActiveTab] = useState(TABS[0])
+  const [orders, setOrders] = useState()
 
-  render () {
-    const { orders, states, status } = this.state
+  useEffect(() => {
+    const _fetch = async () => {
+      const { data } = await axios.get(
+        path('orders_path', { format: 'json', query: { state: activeTab } }),
+        { cancelToken: _cancelToken.token }
+      )
 
-    return (
-      <div className={page.gray}>
-        <div className={page.title}>
-          <h1>Заказы</h1>
-        </div>
+      setOrders(data.orders)
+    }
 
-        <div>
-          {orders &&
-            <List link={true} orders={orders.filter( o => o.state == status )} states={states} status={status} onStateChange={this.handleStateChange} onOrderChange={this.handleOrderChange}/>
+    setOrders()
+    _fetch()
+
+    return () => {
+      _cancelToken.cancel()
+    }
+  }, [activeTab])
+
+  return (
+    <div className={page.gray}>
+      <div className={page.title}>
+        <h1>Заказы</h1>
+      </div>
+
+      <div className={styles.tabs}>
+        {TABS.map(tab =>
+          <div key={tab} className={classNames(styles.tab, { [styles.active]: tab === activeTab })} onClick={() => setActiveTab(tab)}>
+            {I18n.t(`order.state.${tab}`)}
+          </div>
+        )}
+
+        <a href={path('refunds_path')} className={styles.tab}>
+          Возврат
+        </a>
+      </div>
+
+      {orders &&
+        <div className={styles.orders}>
+          {orders.length === 0 &&
+            <div className={styles.empty}>Пока у вас нет ни одного заказа.</div>
+          }
+
+          {orders.length > 0 &&
+            <List orders={orders} />
           }
         </div>
-      </div>
-    )
-  }
-
-  handleOrderChange = (id) => {
-    let key = this.state.orders.findIndex(o => o.id == id)
-
-    const orders = update(this.state.orders, {
-      [key]: {
-        state: {
-          $set: 'archived'
-        }
       }
-    });
 
-    this.setState(state => ({
-      orders: orders
-    }))
-  }
-
-  handleStateChange = (status) => {
-    this.setState(state => ({
-      status: status
-    }))
-  }
+      {!orders &&
+        <div className={styles.loading}>Загрузка заказов...</div>
+      }
+    </div>
+  )
 }
-
-export default Index

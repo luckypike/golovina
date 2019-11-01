@@ -155,22 +155,10 @@ class List extends Component {
   }
 
   render () {
-    const { orders, states, link } = this.props
+    const { orders, link } = this.props
 
     return (
       <div className={styles.root}>
-        {states &&
-          <div className={styles.states}>
-            {states.map((status, _) =>
-              <div key={_} className={classNames(styles.state, { [styles.active]: this.props.status === status.key })} onClick={() => this.props.onStateChange(status.key)}>
-                {status.title}
-              </div>
-            )}
-            <a href={path('refunds_path')} className={styles.state}>
-              Возврат
-            </a>
-          </div>
-        }
         {orders.map(order =>
           <Item key={order.id} link={link} order={order} onOrderChange={this.props.onOrderChange}/>
         )}

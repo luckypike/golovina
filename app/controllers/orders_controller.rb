@@ -15,17 +15,13 @@ class OrdersController < ApplicationController
         @orders = Order
           .includes(
             :user,
+            :delivery_city,
             order_items: [
               :size,
-              {
-                variant: [
-                  { product: [:category, :variants] },
-                  :color,
-                  :availabilities,
-                  :sizes,
-                  :images
-                ]
-              }
+              variant: [
+                { color: [{ colors: :translations }, :translations] },
+                :translations
+              ]
             ]
           ).where.not(state: [:undef]).order(created_at: :desc)
         @orders = @orders.where(state: params[:state]) if params[:state]
