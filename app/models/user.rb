@@ -40,13 +40,14 @@ class User < ApplicationRecord
     Rails.application.credentials.payment[:test_phones].include?(phone)
   end
 
-  def activate(email = false)
+  def activate(email, type: :notify)
     password = Devise.friendly_token.first(8)
     self.email = email
     self.password = password
     self.state = :common
     save!(validate: false)
-    RegisterMailer.register_mailer(password, self).deliver_now
+    # RegisterMailer.register_mailer(password, self).deliver_now
+    RegisterMailer.send("#{type}_mailer", password, self).deliver_now
   end
 
   def clear_phone

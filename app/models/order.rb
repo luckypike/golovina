@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   enum state: { undef: 0, active: 1, paid: 2, archived: 3 } do
     event :activate do
       after do
-        user.activate(user.email) if user.guest?
+        user.activate(user.email, type: :order) if user.guest?
         OrderMailer.activate(self).deliver if Rails.env.development?
       end
 
