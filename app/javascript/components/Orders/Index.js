@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import classNames from 'classnames'
-import update from 'immutability-helper'
+// import update from 'immutability-helper'
 
 import { path } from '../Routes'
 import I18n from '../I18n'
@@ -13,7 +13,7 @@ import styles from './Index.module.css'
 
 export default function Index () {
   const _cancelToken = axios.CancelToken.source()
-  const TABS = ['paid', 'archived']
+  const TABS = ['paid', 'active', 'archived']
 
   const [activeTab, setActiveTab] = useState(TABS[0])
   const [orders, setOrders] = useState()
