@@ -9,7 +9,7 @@ CarrierWave.configure do |config|
 
   config.fog_directory = Rails.application.credentials[Rails.env.to_sym][:aws][:bucket]
   config.fog_public = true
-  config.asset_host = 'https://' + Rails.application.credentials[Rails.env.to_sym][:aws][:host]
+  # config.asset_host = 'https://' + Rails.application.credentials[Rails.env.to_sym][:aws][:host]
   config.fog_authenticated_url_expiration = 12.hours
   config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" } # optional, defaults to {}
 end
