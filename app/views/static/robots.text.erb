@@ -1,8 +1,10 @@
 <% if Rails.env.production? %>
 User-Agent: *
 Allow: /
-Host: https://golovina.store
+Host: https://<%= I18n.locale != I18n.default_locale ? "#{I18n.locale}." : '' %>golovina.store
+<% if I18n.locale == I18n.default_locale %>
 Sitemap: https://golovina.store/sitemap.xml.gz
+<% end %>
 <% else %>
 User-Agent: *
 Disallow: /
