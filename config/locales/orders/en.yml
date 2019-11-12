@@ -1,5 +1,7 @@
-ru:
+en:
   order:
+    address: Delivery address
+
     checkout: Checkout
 
     quantity:
@@ -8,6 +10,8 @@ ru:
       many: "%{count} товаров на сумму %{amount}"
       other: "%{count} товара на сумму %{amount}"
 
+    delivery_city: City
+    choose_delivery_city: Choose delivery city
 
     state:
       active: Новый

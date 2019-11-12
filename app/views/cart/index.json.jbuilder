@@ -14,7 +14,7 @@ end
 
 json.values do
   json.address ''
-  json.delivery :pickup
+  json.delivery I18n.locale == :en ? :international : :pickup
 
   json.user_attributes do
     json.name @user.name || ''

@@ -8,6 +8,7 @@ import Siema from 'siema'
 import ReactMarkdown from 'react-markdown'
 import PubSub from 'pubsub-js'
 
+import I18n from '../I18n'
 import Acc from './Show/Acc'
 import Guide from './Show/Guide'
 import Variants from './Show/Variants'
@@ -247,7 +248,7 @@ class Variant extends Component {
                     <div className={styles.cart}>
                       {add &&
                         <a className={buttons.main} href={path('cart_path')}>
-                          Оформить заказ
+                          {I18n.t('variant.cart.checkout')}
                         </a>
                       }
 
@@ -255,7 +256,7 @@ class Variant extends Component {
                         <>
                           <button className={buttons.main} disabled={send} onClick={this.handleCartClick}>
 
-                            {!send ? 'Добавить в корзину' : 'Добавляем...'}
+                            {!send ? I18n.t('variant.cart.add') : I18n.t('variant.cart.processing')}
                           </button>
 
                           {check &&
@@ -313,7 +314,7 @@ class Variant extends Component {
 
             <div className={styles.acc}>
               {variant.kits &&
-                <Acc id="kits" title="Готовые решения" onToggle={this.toggleSection} section={section}>
+                <Acc id="kits" title={I18n.t('variant.kits')} onToggle={this.toggleSection} section={section}>
                   <div className={classNames(styles.kits, { [styles.single]: variant.kits.length === 1 })}>
                     {variant.kits.map((kit) =>
                       <a href={path('kit_path', { id: kit.id })} key={kit.id} className={styles.kit_item}>
@@ -326,32 +327,36 @@ class Variant extends Component {
               }
 
               {variant.comp &&
-                <Acc id="desc" title="Состав и уход" onToggle={this.toggleSection} section={section}>
+                <Acc id="desc" title={I18n.t('variant.comp')} onToggle={this.toggleSection} section={section}>
                   <ReactMarkdown source={variant.comp} />
                 </Acc>
               }
 
-              <Acc id="delivery" title="Оплата и доставка" onToggle={this.toggleSection} section={section}>
+              <Acc id="delivery" title={I18n.t('variant.delivery.title')} onToggle={this.toggleSection} section={section}>
                 <p>
-                  Доставка по Москве от 250 ₽ (с возможностью примерки)
+                  {I18n.t('variant.delivery.moscow')}
                 </p>
 
                 <p>
-                  Доставка по России от 500 ₽ (зависит от вашего региона)
+                  {I18n.t('variant.delivery.russia')}
                 </p>
 
                 <p>
-                  <a href={path('service_delivery_path')}>Подробнее</a>
+                  {I18n.t('variant.delivery.world')}
+                </p>
+
+                <p>
+                  <a href={path('service_delivery_path')}>{I18n.t('variant.more')}</a>
                 </p>
               </Acc>
 
-              <Acc id="return" title="Обмен и возврат" onToggle={this.toggleSection} section={section}>
+              <Acc id="return" title={I18n.t('variant.return.title')} onToggle={this.toggleSection} section={section}>
                 <p>
-                  Возврат и обмен товара осуществляется в течение 7 дней с момента получения заказа, если он не был в употреблении, сохранен товарный вид, потребительские свойства, пломбы, фабричные ярлыки. В противном случае обмену и возврату товар не подлежит.
+                  {I18n.t('variant.return.desc')}
                 </p>
 
                 <p>
-                  <a href={path('service_return_path')}>Подробнее</a>
+                  <a href={path('service_return_path')}>{I18n.t('variant.more')}</a>
                 </p>
               </Acc>
 

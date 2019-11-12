@@ -1,0 +1,6 @@
+en:
+  user:
+    name: Name
+    sname: Surname
+    phone: Phone number
+    email: Email

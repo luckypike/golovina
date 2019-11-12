@@ -1,4 +1,22 @@
 ru:
   login: Войти
+
+  session:
+    email: Почта
+    password: Пароль
+    submit: Войти
+    phone: Телефон
+    code: Код из SMS
+    recovery: Забыли пароль?
+    appleid: Войти с Apple ID
+
+    reset: Восстановить пароль
+
+    or: Или
+
+    sms: Введите номер телефона, на него мы отправим SMS с кодом доступа к личному кабинету
+    request: Получить код
+    confirm: Подтвердить телефон
+
   sessions:
     qq: QQ

@@ -115,7 +115,7 @@ export default function Index ({ locale, appleid, user }) {
           <div className={styles.carts}>
             {price &&
               <div className={styles.amount}>
-                <div className={styles.sum}>Сумма заказа:</div>
+                <div className={styles.sum}>{I18n.t('cart.sum')}:</div>
                 <Price sell={parseFloat(price.sell)} origin={parseFloat(price.origin)} />
               </div>
             }
@@ -137,19 +137,19 @@ export default function Index ({ locale, appleid, user }) {
                 </div>
 
                 <div className={styles.color}>
-                  Цвет: {cart.color.title}
+                  {I18n.t('cart.color')}: {cart.color.title}
                 </div>
 
                 <div className={styles.size}>
-                  Размер: {cart.size.title}
+                  {I18n.t('cart.size')}: {cart.size.title}
                 </div>
 
                 <div className={classNames(styles.quantity, { [styles.unavailable]: !cart.available })}>
-                  Количество: {cart.quantity} {!cart.available ? ` (доступно: ${cart.quantity_available})` : null}
+                  {I18n.t('cart.quantity')}: {cart.quantity} {!cart.available ? ` (${I18n.t('cart.available')}: ${cart.quantity_available})` : null}
                 </div>
 
                 <div className={styles.destroy} onClick={() => handleDestroy(cart)}>
-                  Удалить из корзины
+                  {I18n.t('cart.delete')}
                 </div>
               </div>
             )}
@@ -159,47 +159,51 @@ export default function Index ({ locale, appleid, user }) {
             <form className={classNames(form.root, styles.form)} onSubmit={handleSubmit}>
 
               <h2>
-                Выберите способ получения
+                {I18n.t('cart.shipping.title')}
               </h2>
 
               <label className={form.el}>
                 <div className={styles.delivery}>
-                  <div
-                    className={classNames(
-                      styles.deliveryItem,
-                      { [styles.active]: isPickup() }
-                    )}
-                    onClick={() => {
-                      setValues({
-                        ...values,
-                        delivery: 'pickup',
-                        delivery_option: null
-                      })
-                      setCity()
-                    }}
-                  >
-                    <strong>
-                      Самостоятельно
-                    </strong>
-                    <div className={styles.deliveryItemDesc}>
-                      Москва, Большая Никитская, 21/18 с4
-                    </div>
-                  </div>
+                  {I18n.locale === 'ru' &&
+                    <>
+                      <div
+                        className={classNames(
+                          styles.deliveryItem,
+                          { [styles.active]: isPickup() }
+                        )}
+                        onClick={() => {
+                          setValues({
+                            ...values,
+                            delivery: 'pickup',
+                            delivery_option: null
+                          })
+                          setCity()
+                        }}
+                      >
+                        <strong>
+                          {I18n.t('cart.shipping.store.title')}
+                        </strong>
+                        <div className={styles.deliveryItemDesc}>
+                          {I18n.t('cart.shipping.store.desc')}
+                        </div>
+                      </div>
 
-                  <div
-                    className={classNames(
-                      styles.deliveryItem,
-                      { [styles.active]: isRussia() }
-                    )}
-                    onClick={() => setValues({ ...values, delivery: 'russia' })}
-                  >
-                    <strong>
-                      Доставка по России
-                    </strong>
-                    <div className={styles.deliveryItemDesc}>
-                      Более 500 городов до двери или до точки выдачи от 265 ₽
-                    </div>
-                  </div>
+                      <div
+                        className={classNames(
+                          styles.deliveryItem,
+                          { [styles.active]: isRussia() }
+                        )}
+                        onClick={() => setValues({ ...values, delivery: 'russia' })}
+                      >
+                        <strong>
+                          {I18n.t('cart.shipping.russia.title')}
+                        </strong>
+                        <div className={styles.deliveryItemDesc}>
+                          {I18n.t('cart.shipping.russia.desc')}
+                        </div>
+                      </div>
+                    </>
+                  }
 
                   <div
                     className={classNames(
@@ -209,10 +213,10 @@ export default function Index ({ locale, appleid, user }) {
                     onClick={() => setValues({ ...values, delivery: 'international' })}
                   >
                     <strong>
-                      Международная доставка
+                      {I18n.t('cart.shipping.world.title')}
                     </strong>
                     <div className={styles.deliveryItemDesc}>
-                      Доставка за пределы России от 2500 ₽
+                      {I18n.t('cart.shipping.world.desc')}
                     </div>
                   </div>
                 </div>
@@ -315,7 +319,7 @@ export default function Index ({ locale, appleid, user }) {
               }
 
               <h2>
-                Заполните ваши данные
+                {I18n.t('cart.shipping.data')}
               </h2>
 
               <User
@@ -329,7 +333,7 @@ export default function Index ({ locale, appleid, user }) {
 
               {((isRussia() && values.delivery_option) || isInternational() || isPickup()) && price &&
                 <h2>
-                  Итоговая стоимость
+                  {I18n.t('cart.total')}
                   <div className={styles.price}>
                     <Price sell={parseFloat(price.sell) + (isInternational() ? 2500 : (isRussia() ? city[values.delivery_option] : 0))} />
                   </div>
@@ -338,7 +342,7 @@ export default function Index ({ locale, appleid, user }) {
 
               {carts.filter(cart => !cart.available).length === 0 &&
                 <div className={form.submit}>
-                  <input type="submit" value="Оформить заказ" className={buttons.main} />
+                  <input type="submit" value={I18n.t('cart.checkout')} className={buttons.main} />
                 </div>
               }
             </form>

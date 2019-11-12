@@ -1,18 +1,23 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 
-import styles from './Guide.module.css'
-import Fonts from '../../Fonts.module.css'
+import I18n from '../../I18n'
 
-function Guide() {
+import styles from './Guide.module.css'
+// import Fonts from '../../Fonts.module.css'
+
+function Guide () {
   const [active, setActive] = useState(false)
 
   return (
     <>
-      <div className={classNames(styles.overlay, {[styles.active]: active})} onClick={() => setActive( false )}></div>
+      <div
+        className={classNames(styles.overlay, { [styles.active]: active })}
+        onClick={() => setActive(false)}
+      />
 
-      <div className={styles.text} onClick={() => setActive( true )}>
-        Помощь с размерами
+      <div className={styles.text} onClick={() => setActive(true)}>
+        {I18n.t('variant.size.guide')}
       </div>
 
       <div className={classNames({[styles.size_helper]: active, [styles.size_help]: !active})}>

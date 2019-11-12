@@ -4,7 +4,9 @@ ru:
       catalog: Онлайн магазин
       collections: Коллекции
       about: О бренде
-      shops: Места продаж
+      contacts: Места продаж
+      login: Войти
+      orders: Ваши заказы
 
       service:
         title: Покупателям

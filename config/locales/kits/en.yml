@@ -1,0 +1,9 @@
+en:
+  kits:
+    title: Suggestions
+    desc: Образы от Golovina на различные случаи жизни
+
+  kit:
+    variants:
+      one: '%{count} product in kit'
+      other: '%{count} products in kit'

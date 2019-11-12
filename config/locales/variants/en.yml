@@ -5,6 +5,28 @@ en:
       active: Размещён
       archived: Архивный
 
+    size:
+      guide: Size guide
+
+    cart:
+      add: Add to shopbag
+      processing: Adding...
+      checkout: Checkout
+
+    kits: Suggestions
+    comp: Composition & Care
+    delivery:
+      title: Payment & Delivery
+      moscow: Moscow shipping — 350 RUB
+      russia: Russia shipping — from 450 RUB
+      world: Worldwide shipping — 2500 RUB
+
+    return:
+      title: Exchange & Returns
+      desc: Exchange and return of items can be done within 14 days from the date of purchase in the Salon, and 7 days from the date of receiving the order online. Return or exchange  is possible if it was not in use, the presentation, consumer properties, seals and factory labels are preserved. Otherwise, exchange and return of goods is not possible.
+
+    more: More information
+
   variants:
     latest:
       title: New
@@ -19,11 +41,11 @@ en:
       desc: Товары со скидкой в продаже из коллекций Golovina
 
     last:
-      title: Last products
+      title: Last item
       desc: Товары которые остались в одном экземпляре
 
     all:
-      title: All products
+      title: View all
       desc: Все товары в продажу из коллекций Golovina
 
     colors:

@@ -1,11 +1,4 @@
 ru:
-  order:
-    state:
-      paid: Оплачен
-      archived: Архив
-      active: Новый
-      declined: Отменен
-
   kit_products:
     one: "%{count} позиция"
     few: "%{count} позиции"

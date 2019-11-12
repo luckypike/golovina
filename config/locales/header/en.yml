@@ -4,7 +4,9 @@ en:
       catalog: Online shop
       collections: Collections
       about: About
-      shops: Shops
+      contacts: Salon
+      login: My account
+      orders: My orders
 
       service:
         title: Service

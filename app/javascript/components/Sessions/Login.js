@@ -114,7 +114,7 @@ class Login extends Component {
               <form onSubmit={this.handleEmailSubmit}>
                 <label className={form.el}>
                   <div className={form.label}>
-                    Почта
+                    {I18n.t('session.email')}
                   </div>
 
                   <div className={form.input}>
@@ -124,7 +124,7 @@ class Login extends Component {
 
                 <label className={form.el}>
                   <div className={form.label}>
-                    Пароль
+                    {I18n.t('session.password')}
                   </div>
 
                   <div className={form.input}>
@@ -139,10 +139,10 @@ class Login extends Component {
                 </label>
 
                 <div className={classNames(form.submit, styles.submit)}>
-                  <input className={buttons.main} type="submit" value="Войти" />
+                  <input className={buttons.main} type="submit" value={I18n.t('session.submit')} />
 
                   <div className={styles.recovery}>
-                    <span id="recovery" onClick={() => this.setState({ section: 'recovery' })}>Забыли пароль?</span>
+                    <span id="recovery" onClick={() => this.setState({ section: 'recovery' })}>{I18n.t('session.recovery')}</span>
                   </div>
                 </div>
               </form>
@@ -160,7 +160,7 @@ class Login extends Component {
                   <form onSubmit={this.handleRecoverySubmit}>
                     <label className={form.el}>
                       <div className={form.label}>
-                        Почта
+                        {I18n.t('session.email')}
                       </div>
 
                       <div className={form.input}>
@@ -175,7 +175,7 @@ class Login extends Component {
                     </label>
 
                     <div className={classNames(form.submit, styles.submit)}>
-                      <input className={buttons.main} type="submit" value="Восстановить пароль" />
+                      <input className={buttons.main} type="submit" value={I18n.t('session.reset')} />
                     </div>
 
                   </form>
@@ -184,21 +184,21 @@ class Login extends Component {
             }
           </div>
 
-          <div className={styles.sep}>Или</div>
+          <div className={styles.sep}>{I18n.t('session.or')}</div>
 
-          <Auth appleid={this.props.appleid} />
+          <Auth appleid={this.props.appleid} text={I18n.t('session.appleid')} />
 
-          <div className={styles.sep}>Или</div>
+          <div className={styles.sep}>{I18n.t('session.or')}</div>
 
           <div className={styles.form}>
             <form onSubmit={this.handlePhoneSubmit}>
               <div className={styles.desc}>
-                Введите номер телефона, на него мы отправим SMS с кодом доступа к личному кабинету
+                {I18n.t('session.sms')}
               </div>
 
               <label className={form.el}>
                 <div className={form.label}>
-                  Телефон
+                  {I18n.t('session.phone')}
                 </div>
 
                 <div className={form.input}>
@@ -215,7 +215,7 @@ class Login extends Component {
               {this.isCode() &&
                 <label className={form.el}>
                   <div className={form.label}>
-                    Код из SMS
+                    {I18n.t('session.code')}
                   </div>
 
                   <div className={form.input}>
@@ -231,7 +231,7 @@ class Login extends Component {
               }
 
               <div className={form.submit}>
-                <input className={buttons.main} type="submit" value={this.isCode() ? 'Подтвердить телефон' : 'Получить код'} />
+                <input className={buttons.main} type="submit" value={this.isCode() ? I18n.t('session.confirm') : I18n.t('session.request')} />
               </div>
             </form>
           </div>

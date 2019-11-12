@@ -25,7 +25,14 @@ class Nav extends Component {
     e.preventDefault()
 
     try {
-      await axios.delete(path('destroy_user_session_path'), { params: { authenticity_token: document.querySelector('[name="csrf-token"]').content }})
+      await axios.delete(
+        path('destroy_user_session_path'),
+        {
+          params: {
+            authenticity_token: document.querySelector('[name="csrf-token"]').content
+          }
+        }
+      )
     } catch (err) {
 
     }
@@ -47,7 +54,7 @@ class Nav extends Component {
           </div>
 
           <div className={styles.sub}>
-            <a href={path('kits_path')}>Готовые решения</a>
+            <a href={path('kits_path')}>{I18n.t('kits.title')}</a>
           </div>
 
           {categories.map(category =>
@@ -57,15 +64,15 @@ class Nav extends Component {
           )}
 
           <div className={styles.sub}>
-            <a href={path('catalog_last_path')}>Последняя вещь</a>
+            <a href={path('catalog_last_path')}>{I18n.t('variants.last.title')}</a>
           </div>
 
           <div className={styles.sub}>
-            <a href={path('catalog_sale_path')}>Sale</a>
+            <a href={path('catalog_sale_path')}>{I18n.t('variants.sale.title')}</a>
           </div>
 
           <div className={styles.sub}>
-            <a href={path('catalog_path')}>Посмотреть всё</a>
+            <a href={path('catalog_path')}>{I18n.t('variants.all.title')}</a>
           </div>
         </Section>
 
@@ -98,8 +105,8 @@ class Nav extends Component {
 
         <div className={classNames(styles.section)}>
           <div className={styles.title}>
-            <a href="/contacts">
-              {I18n.t('header.nav.shops')}
+            <a href={path('contacts_path')}>
+              {I18n.t('header.nav.contacts')}
             </a>
           </div>
         </div>
@@ -117,7 +124,7 @@ class Nav extends Component {
         <div className={classNames(styles.section)}>
           <div className={styles.title}>
             <a href={path('new_user_session_path')}>
-              {user && !user['guest?'] ? 'Ваши заказы' : 'Войти'}
+              {user && !user['guest?'] ? I18n.t('header.nav.orders') : I18n.t('header.nav.login')}
             </a>
 
             {user && !user['guest?'] &&

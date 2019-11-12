@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import { path } from '../Routes'
+import I18n from '../I18n'
 
 import List from './List'
 
@@ -23,7 +24,7 @@ class All extends Component {
     return (
       <div className={page.root}>
         <div className={page.title}>
-          <h1>Все товары</h1>
+          <h1>{I18n.t('variants.all.title')}</h1>
         </div>
 
         <div>

@@ -1,0 +1,22 @@
+en:
+  login: My account
+
+  session:
+    email: Email
+    password: Password
+    submit: Sign in
+    phone: Phone number
+    code: Code from SMS
+    recovery: Forgot your password?
+    appleid: Auth with Apple ID
+
+    reset: Reset password
+
+    or: Or
+
+    sms: Enter your phone number, you will get SMS code for entrance to your account
+    request: To get SMS code
+    confirm: Confirm phone
+
+  sessions:
+    qq: QQ

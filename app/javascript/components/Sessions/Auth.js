@@ -6,10 +6,11 @@ import styles from './Auth.module.css'
 
 Auth.propTypes = {
   appleid: PropTypes.object.isRequired,
-  from: PropTypes.string
+  from: PropTypes.string,
+  text: PropTypes.string
 }
 
-export default function Auth ({ appleid, from }) {
+export default function Auth ({ appleid, from, text }) {
   let redirectUri = appleid.redirect_uri
   if (from) redirectUri += `/${from}`
 
@@ -28,7 +29,7 @@ export default function Auth ({ appleid, from }) {
   return (
     <div className={styles.root}>
       <a className={classNames(styles.apple, { [styles.disabled]: clicked })} onClick={handleClick} href={url}>
-        Войти с Apple ID
+        {text || 'Войти с Apple ID'}
       </a>
     </div>
   )

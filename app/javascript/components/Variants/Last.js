@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import { path } from '../Routes'
+import I18n from '../I18n'
 
 import List from './List'
 
@@ -23,7 +24,7 @@ class Latest extends Component {
     return (
       <div className={page.root}>
         <div className={page.title}>
-          <h1>Последняя вещь</h1>
+          <h1>{I18n.t('variants.last.title')}</h1>
           <p>
             Успей купить последнюю вещь с бесплатной доставкой
           </p>

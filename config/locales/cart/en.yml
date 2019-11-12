@@ -1,0 +1,27 @@
+en:
+  cart:
+    title: Shopbag
+    sum: Total price
+    color: Color
+    size: Size
+    quantity: Quantity
+    available: available
+    delete: Remove from shopbag
+    total: Total to pay
+    checkout: Checkout
+
+    shipping:
+      title: Select a shipping method
+      store:
+        title: Collect from store
+        desc: Moscow, Bolshaya Nikitskaya 21/18 str 4
+
+      russia:
+        title: Russia shipping by CDEK
+        desc: More than 500 cities from 265 ₽
+
+      world:
+        title: Worldwide
+        desc: Worldwide shipping — 2500 ₽
+
+      data: Shipping data
