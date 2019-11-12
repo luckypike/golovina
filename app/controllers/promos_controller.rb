@@ -2,8 +2,6 @@ class PromosController < ApplicationController
   before_action :set_promo, only: %i[edit update destroy]
   before_action :authorize_promo, only: %i[edit update destroy]
 
-  layout 'app'
-
   def index
     @promos = Promo.all.order(:id)
 
@@ -18,7 +16,7 @@ class PromosController < ApplicationController
 
   def last
     authorize Promo
-    
+
     @promo = Promo.where(popup: true).last
   end
 

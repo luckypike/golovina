@@ -1,8 +1,6 @@
 class RefundsController < ApplicationController
   before_action :set_refund, only: [:done]
 
-  layout 'app'
-
   def index
     authorize Refund
 

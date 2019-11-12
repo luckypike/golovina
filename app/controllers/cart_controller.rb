@@ -5,8 +5,6 @@ class CartController < ApplicationController
   before_action :set_cart, only: [:destroy]
   before_action :set_user, only: [:index]
 
-  layout 'app'
-
   def index
     authorize Cart
 

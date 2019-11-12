@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:orders, :refunds]
 
-  layout 'app'
-
   def orders
     authorize @user
 

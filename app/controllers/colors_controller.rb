@@ -1,8 +1,6 @@
 class ColorsController < ApplicationController
   before_action :set_color, only: %i[edit update destroy]
 
-  layout 'app'
-
   def index
     authorize Color
 

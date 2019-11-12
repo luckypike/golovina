@@ -2,8 +2,6 @@ class KitsController < ApplicationController
   before_action :set_kit, only: %i[show edit update destroy]
   before_action :authorize_kit, only: %i[show edit update destroy]
 
-  layout 'app'
-
   def control
     authorize Kit
     @kits = Kit.includes(:images, :variants).order(created_at: :desc)

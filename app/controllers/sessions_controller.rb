@@ -6,8 +6,6 @@ class SessionsController < Devise::SessionsController
   before_action :authorize_session
   skip_before_action :require_no_authentication
 
-  layout 'app'
-
   def new
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)

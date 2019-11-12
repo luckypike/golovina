@@ -2,8 +2,6 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %i[edit update destroy]
   before_action :authorize_category, only: %i[edit update destroy]
 
-  layout 'app'
-
   def index
     authorize Category
 

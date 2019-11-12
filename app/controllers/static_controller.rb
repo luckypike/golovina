@@ -1,6 +1,4 @@
 class StaticController < ApplicationController
-  layout 'app', only: %i[index contacts]
-
   def index
     authorize :static, :index?
 

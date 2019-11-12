@@ -4,8 +4,6 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:checkout, :pay, :archive]
   skip_before_action :verify_authenticity_token, only: [:paid]
 
-  layout 'app'
-
   def index
     authorize Order
 

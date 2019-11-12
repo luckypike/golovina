@@ -1,8 +1,6 @@
 class CollectionsController < ApplicationController
   before_action :set_collection, only: %i[edit update show]
 
-  layout 'app'
-
   def show
     authorize @collection
 

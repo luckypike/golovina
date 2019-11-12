@@ -5,8 +5,6 @@ class VariantsController < ApplicationController
 
   skip_after_action :verify_authorized, only: %i[latest soon sale last all]
 
-  layout 'app'
-
   # TODO: REWRITE
   def index
     authorize Variant

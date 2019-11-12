@@ -1,7 +1,4 @@
 class ServiceController < ApplicationController
-
-  layout 'app'
-
   def index
     authorize :static, :index?
     redirect_to service_delivery_path

@@ -1,8 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :wishlist, :cart, :variants, :publish, :info, :similar]
 
-  layout 'app', only: [:index, :latest, :category]
-
   def control
     authorize Product
     @variants = Product.includes(variants: [:images, :color]).where(category_id: params[:category_id])

@@ -1,8 +1,6 @@
 class ThemesController < ApplicationController
   before_action :set_theme, only: [:edit, :update, :destroy, :show]
 
-  layout 'app', only: [:index, :latest, :show]
-
   def latest
     authorize Theme
 

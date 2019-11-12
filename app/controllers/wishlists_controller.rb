@@ -1,6 +1,4 @@
 class WishlistsController < ApplicationController
-  layout 'app'
-
   def show
     authorize Wishlist
 

@@ -1,8 +1,5 @@
 class SlidesController < ApplicationController
   before_action :set_slide, only: %i[edit update destroy]
-  # before_action :set_slide, only: [:show, :edit, :update, :destroy]
-
-  layout 'app'
 
   def index
     authorize Slide

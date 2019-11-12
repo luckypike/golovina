@@ -50,8 +50,6 @@ GEM
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (9.0.0)
-    autoprefixer-rails (9.7.1)
-      execjs
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -281,16 +279,6 @@ GEM
     ruby-vips (2.0.16)
       ffi (~> 1.9)
     rubyzip (2.0.0)
-    sass-rails (6.0.0)
-      sassc-rails (~> 2.1, >= 2.1.1)
-    sassc (2.2.1)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     selenium-webdriver (3.142.6)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -324,8 +312,6 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -355,7 +341,6 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   addressable
-  autoprefixer-rails
   bootsnap (>= 1.1.0)
   byebug
   capistrano-passenger
@@ -391,14 +376,12 @@ DEPENDENCIES
   react-rails
   redcarpet
   rspec-rails
-  sass-rails
   selenium-webdriver
   sitemap_generator
   slim-rails
   spring
   spring-watcher-listen
   stateful_enum
-  uglifier
   web-console
   webdrivers
   webpacker
