@@ -2,6 +2,9 @@
 - description @variant.desc
 - set_meta_tags og: { image: @variant.images.sort_by{ |i| [(i.weight.to_i.zero? ? 99 : i.weight), i.created_at] }.select(&:photo).map{ |i| asset_url(i.photo.thumb.url) } }
 
+- set_meta_tags alternate: I18n.available_locales.map { |locale| [locale, locale_url_for(:catalog_variant_url, locale, slug: @category.slug, id: @variant.id)] }.to_h
+- set_meta_tags canonical: locale_url_for(:catalog_variant_url, I18n.locale, slug: @category.slug, id: @variant.id)
+
 = react_component( \
   'Variants/Show',
   { \

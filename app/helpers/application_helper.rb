@@ -10,6 +10,12 @@ module ApplicationHelper
     }
   end
 
+  def locale_url_for(path, locale, options = {})
+    host = (locale && I18n.default_locale != locale ? "#{locale}." : '') + Rails.application.credentials[Rails.env.to_sym][:host]
+
+    send(path, options.merge(host: host))
+  end
+
   def menu_index?
     %w(static).include?(controller_name) && %w(index).include?(action_name)
   end
