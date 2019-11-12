@@ -307,7 +307,7 @@ export default function Index ({ locale, appleid, user }) {
               {(!user || user['guest?']) &&
                 <>
                   <div className={styles.appleid}>
-                    <Auth appleid={appleid} from="cart" />
+                    <Auth appleid={appleid} from="cart" text={I18n.t('session.appleid')} />
 
                     <p className={styles.appledesc}>
                       Вы можете войти используя ваш идентификатор Apple. После этого ваши имя и почта будут переданы нам автоматически, а вы всегда сможете входить на сайт по отпечатку пальца или сканеру лица.
