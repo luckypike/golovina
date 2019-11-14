@@ -10,17 +10,18 @@ import { path } from '../Routes'
 import styles from './Show.module.css'
 
 Show.propTypes = {
-  id: PropTypes.number
+  id: PropTypes.number,
+  slug: PropTypes.string
 }
 
 export default function Show (props) {
-  const { id } = props
+  const { id, slug } = props
 
   const [collection, setCollection] = useState()
 
   useEffect(() => {
     const _loadAsyncData = async () => {
-      const { data: { collection } } = await axios.get(path('collection_path', { id, format: 'json' }))
+      const { data: { collection } } = await axios.get(path('collection_path', { id: slug, format: 'json' }))
       setCollection(collection)
     }
 

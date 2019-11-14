@@ -1,4 +1,4 @@
 - set_meta_tags title: ['Коллекции', @collection.title],
   description: (@collection.text.presence || "Коллекция «#{@collection.title}»")
 
-= react_component 'Collections/Show', { id: @collection.id }, { prerender: Rails.env.production? }
+= react_component 'Collections/Show', @collection.slice(:id, :slug), { prerender: Rails.env.production? }
