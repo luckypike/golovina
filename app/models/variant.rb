@@ -34,6 +34,7 @@ class Variant < ApplicationRecord
   after_save :cache_sizes
   # after_save :check_state
   after_save :check_category
+  after_save :check_notifications
 
   translates :desc, :comp, :title
   globalize_accessors locales: I18n.available_locales, attributes: %i[desc comp title]
@@ -120,6 +121,15 @@ class Variant < ApplicationRecord
   #     update_column(:state, :active)
   #   end
   # end
+
+  def check_notifications
+    if active? && available?
+      notifications.each do |notification|
+        NotifyMailer.notify_mailer(notification).deliver_later
+        notification.destroy
+      end
+    end
+  end
 
   def images?
     images.size.positive?

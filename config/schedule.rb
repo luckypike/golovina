@@ -29,5 +29,4 @@ end
 
 every 5.minutes do
   rake 'jobs:workoff'
-  rake 'notification:send_notice'
 end
