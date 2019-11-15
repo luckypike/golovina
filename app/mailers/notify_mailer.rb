@@ -1,6 +1,6 @@
 class NotifyMailer < ApplicationMailer
-  def notify_mailer(notification)
-    @variant = notification.variant
-    mail(to: notification.user.email, subject: 'Уведомление о поступлении товара')
+  def notify_mailer(mail, variant)
+    @variant = variant
+    mail(to: mail, subject: 'Уведомление о поступлении товара')
   end
 end

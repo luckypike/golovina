@@ -125,7 +125,7 @@ class Variant < ApplicationRecord
   def check_notifications
     if active? && available?
       notifications.each do |notification|
-        NotifyMailer.notify_mailer(notification).deliver_later
+        NotifyMailer.notify_mailer(notification.user.email, notification.variant).deliver_later
         notification.destroy
       end
     end
