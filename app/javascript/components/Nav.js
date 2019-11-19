@@ -168,6 +168,10 @@ class Nav extends Component {
             <div className={styles.sub}>
               <a href={path('promos_path')}>Предложения</a>
             </div>
+
+            <div className={styles.sub}>
+              <a href={path('statistics_path')}>Статистика</a>
+            </div>
           </Section>
         }
       </nav>

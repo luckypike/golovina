@@ -69,6 +69,10 @@ class Order < ApplicationRecord
     order_items.sum(&:quantity)
   end
 
+  def month
+    (payed_at.presence || created_at).beginning_of_month
+  end
+
   # def can_paid?
   #   amount > 0 && active?
   # end

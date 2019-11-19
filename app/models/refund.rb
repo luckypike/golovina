@@ -27,4 +27,8 @@ class Refund < ApplicationRecord
   def amount
     @amount ||= order_items.map(&:price_sell).sum
   end
+
+  def month
+    created_at.beginning_of_month
+  end
 end

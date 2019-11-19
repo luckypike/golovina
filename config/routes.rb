@@ -142,6 +142,8 @@ Rails.application.routes.draw do
 
   resources :posts
 
+  resources :statistics
+
   resources :promos do
     collection do
       get :last
