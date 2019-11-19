@@ -44,7 +44,7 @@ const currency = (source) => {
   })
 
   let value = formatter.format(source)
-  if (source < 10000) value = value.replace(/\s/, '')
+  if ((source < 10000 && source > 0) || (source > -10000 && source < 0)) value = value.replace(/\s/, '')
   return `${value} ₽`
 }
 

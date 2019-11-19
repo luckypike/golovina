@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+
 import { path } from '../Routes'
+import Price from '../Variants/Price'
 
 import page from '../Page.module.css'
 import styles from './Index.module.css'
@@ -28,7 +30,7 @@ export default function Index () {
         {items &&
           <>
             <div className={styles.tables}>
-              <div>Месяц</div>
+              <div className={styles.month}>Месяц</div>
               <div>Приход</div>
               <div>Возврат</div>
               <div>Итого</div>
@@ -37,9 +39,17 @@ export default function Index () {
             {items.map((item, _) =>
               <div className={styles.item} key={_}>
                 <div className={styles.month}>{item.month}</div>
-                <div className={styles.profit}>{item.profit}</div>
-                <div className={styles.refund}>{item.refund}</div>
-                <div className={styles.result}>{item.result}</div>
+                <div className={styles.profit}>
+                  <Price sell={item.profit} />
+                </div>
+
+                <div className={styles.refund}>
+                  <Price sell={item.refund * -1} />
+                </div>
+
+                <div className={styles.result}>
+                  <Price sell={item.result} />
+                </div>
               </div>
             )}
           </>
