@@ -19,6 +19,10 @@ class OrderPolicy < ApplicationPolicy
     user&.is_editor? && record.can_archive?
   end
 
+  def carts?
+    user&.is_editor?
+  end
+
   class Scope < Scope
     def resolve
       scope

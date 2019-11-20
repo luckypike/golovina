@@ -83,6 +83,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  def carts
+    authorize Order
+
+    @carts = Cart.includes(:user).last(100).reverse
+  end
+
   private
   def order_params
     params.require(:order).permit(
