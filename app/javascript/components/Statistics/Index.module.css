@@ -1,7 +1,6 @@
 .item {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* text-align: center; */
   border-bottom: 1px solid var(--sep_color);
   padding-bottom: calc(var(--yr) * var(--s1));
   margin-bottom: calc(var(--yr) * var(--s1));
@@ -10,14 +9,13 @@
 .tables {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  text-align: center;
   margin-bottom: calc(var(--yr) * var(--s2));
-}
-
-.month {
-  text-align: left;
 }
 
 .refund {
   color: var(--red_color);
+}
+
+.profit, .refund, .result {
+  justify-self: flex-start;
 }

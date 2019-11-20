@@ -30,7 +30,7 @@ export default function Index () {
         {items &&
           <>
             <div className={styles.tables}>
-              <div className={styles.month}>Месяц</div>
+              <div>Месяц</div>
               <div>Приход</div>
               <div>Возврат</div>
               <div>Итого</div>
