@@ -48,10 +48,6 @@ export default function Index () {
       </div>
 
       <div className={styles.tabs}>
-        <a href={path('carts_path')} className={styles.tab}>
-          Корзина
-        </a>
-
         {TABS.map(tab =>
           <div key={tab} className={classNames(styles.tab, { [styles.active]: tab === activeTab })} onClick={() => setActiveTab(tab)}>
             {I18n.t(`order.state.${tab}`)}
@@ -60,6 +56,10 @@ export default function Index () {
 
         <a href={path('refunds_path')} className={styles.tab}>
           Возврат
+        </a>
+
+        <a href={path('carts_path')} className={styles.tab}>
+          Корзины
         </a>
       </div>
 

@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import Price, { currency } from '../Variants/Price'
-import I18n from '../I18n'
+import Price, { currency } from '../../Variants/Price'
+import I18n from '../../I18n'
 
-import styles from './Items.module.css'
+import styles from './Item.module.css'
 
-Items.propTypes = {
+Item.propTypes = {
   cart: PropTypes.object
 }
 
-function Items ({ cart }) {
+export default function Item ({ cart }) {
   const [toggle, setToggle] = useState(false)
 
   return (
@@ -90,20 +90,6 @@ function Items ({ cart }) {
           </div>
         </>
       }
-    </div>
-  )
-}
-
-List.propTypes = {
-  carts: PropTypes.array
-}
-
-export default function List ({ carts }) {
-  return (
-    <div className={styles.root}>
-      {carts.map(cart =>
-        <Items key={cart.id} cart={cart} />
-      )}
     </div>
   )
 }

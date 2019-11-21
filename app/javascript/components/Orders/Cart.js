@@ -4,7 +4,7 @@ import axios from 'axios'
 import { path } from '../Routes'
 
 import page from '../Page'
-import Items from './Items'
+import List from './Cart/List'
 
 import styles from './Index.module.css'
 
@@ -26,13 +26,13 @@ export default function Cart () {
   return (
     <div className={page.gray}>
       <div className={page.title}>
-        <h1>Корзина</h1>
+        <h1>Корзины</h1>
       </div>
 
       {carts &&
         <div>
           {carts.length > 0 &&
-            <Items carts={carts} />
+            <List carts={carts} />
           }
         </div>
       }
