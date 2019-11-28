@@ -6,7 +6,13 @@ en:
       archived: Архивный
 
     size:
-      guide: Size guide
+      guide:
+        title: Size guide
+        size: Size
+        bust: "Bust, cm"
+        waist: "Waist, cm"
+        hips: "Hips, cm"
+      select: Select size
 
     cart:
       add: Add to shopbag
@@ -19,7 +25,12 @@ en:
       title: Payment & Delivery
       moscow: Moscow shipping — 350 RUB
       russia: Russia shipping — from 450 RUB
-      world: Worldwide shipping — 2500 RUB
+      world: International shipping — 2500 RUB
+
+    notify:
+      desc: Comming soon. Notify me.
+      email: E-mail
+      subscribe: Subscribe
 
     return:
       title: Exchange & Returns

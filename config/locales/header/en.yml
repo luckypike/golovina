@@ -6,9 +6,10 @@ en:
       about: About
       contacts: Salon
       login: My account
+      logout: Log out
       orders: My orders
 
       service:
-        title: Service
-        delivery: Delivery
-        return: Return
+        title: Customer Service
+        delivery: Delivery Information
+        return: Return & Refund

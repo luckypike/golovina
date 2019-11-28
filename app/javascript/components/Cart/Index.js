@@ -106,7 +106,7 @@ export default function Index ({ locale, appleid, user }) {
 
       {carts && carts.length < 1 &&
         <div>
-          В корзине пока ничего нет :(
+          {I18n.t('cart.empty')}
         </div>
       }
 

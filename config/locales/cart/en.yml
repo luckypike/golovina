@@ -1,14 +1,15 @@
 en:
   cart:
     title: Shopbag
+    empty: Your bag is empty :(
     sum: Total price
     color: Color
     size: Size
     quantity: Quantity
     available: available
     delete: Remove from shopbag
-    total: Total to pay
-    checkout: Checkout
+    total: Total
+    checkout: Place the order
 
     shipping:
       title: Select a shipping method

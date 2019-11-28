@@ -129,7 +129,7 @@ class Nav extends Component {
 
             {user && !user['guest?'] &&
               <a className={styles.logout} href={path('destroy_user_session_path')} onClick={this.handleLogout}>
-                Выйти
+                {I18n.t('header.nav.logout')}
               </a>
             }
           </div>

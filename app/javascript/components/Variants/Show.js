@@ -237,7 +237,7 @@ class Variant extends Component {
 
             {variant.available &&
               <div className={styles.guide}>
-                <Guide />
+                <Guide locale={I18n.locale} />
               </div>
             }
 
@@ -260,7 +260,7 @@ class Variant extends Component {
                           </button>
 
                           {check &&
-                            <div className={styles.check}>Выберите размер</div>
+                            <div className={styles.check}>{I18n.t('variant.size.select')}</div>
                           }
                         </>
                       }
@@ -278,17 +278,17 @@ class Variant extends Component {
                   <div className={styles.notification}>
                     {!variant.notification &&
                       <div className={styles.text}>
-                        Товара временно нет в наличии. Подпишитесь, чтобы узнать о его поступлении.
+                        {I18n.t('variant.nofity.desc')}
                       </div>
                     }
                     <form className={classNames(styles.notice, { [styles.button]: user })} onSubmit={this.handleSubmit}>
                       {!variant.notification && (!user || user['guest?']) &&
                         <div className={classNames(form.input, styles.input)}>
-                          <input type="email" placeholder="Почта" value={values.email} name="email" onChange={this.handleInputChange} />
+                          <input type="email" placeholder={I18n.t('variant.nofity.email')} value={values.email} name="email" onChange={this.handleInputChange} />
                         </div>
                       }
                       {!variant.notification &&
-                        <input className={buttons.main} type="submit" value="Подписаться" disabled={!user && !values.email}/>
+                        <input className={buttons.main} type="submit" value={I18n.t('variant.nofity.subscribe')} disabled={!user && !values.email}/>
                       }
                       {variant.notification &&
                         <div className={styles.text}>

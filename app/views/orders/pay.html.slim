@@ -7,6 +7,7 @@ css:
   = text_field_tag(:sum, Rails.env.production? && Current.user.tester? ? 1 : @order.amount)
   = text_field_tag(:clientid, @order.user.phone)
   = text_field_tag(:orderid, @order.id)
+  = text_field_tag(:lang, I18n.locale)
   = text_field_tag(:client_phone, @order.user.phone)
 
 

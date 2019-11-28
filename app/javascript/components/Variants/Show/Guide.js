@@ -1,12 +1,20 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import I18n from '../../I18n'
+// import I18n from '../../I18n'
+import { useI18n } from '../../I18n'
 
 import styles from './Guide.module.css'
 // import Fonts from '../../Fonts.module.css'
 
-function Guide () {
+Guide.propTypes = {
+  locale: PropTypes.string
+}
+
+export default function Guide ({ locale }) {
+  const I18n = useI18n(locale)
+
   const [active, setActive] = useState(false)
 
   return (
@@ -17,11 +25,11 @@ function Guide () {
       />
 
       <div className={styles.text} onClick={() => setActive(true)}>
-        {I18n.t('variant.size.guide')}
+        {I18n.t('variant.size.guide.title')}
       </div>
 
-      <div className={classNames({[styles.size_helper]: active, [styles.size_help]: !active})}>
-        <div className={styles.close} onClick={() => setActive( false )}>
+      <div className={classNames({ [styles.size_helper]: active, [styles.size_help]: !active })}>
+        <div className={styles.close} onClick={() => setActive(false)}>
           <svg viewBox="0 0 16 16">
             <line x1="1" y1="1" x2="15" y2="15" stroke="var(--pr_color)" />
             <line x1="1" y1="15" x2="15" y2="1" stroke="var(--pr_color)" />
@@ -30,19 +38,19 @@ function Guide () {
 
         <div className={styles.row}>
           <div className={styles.v}>
-            Размер
+            {I18n.t('variant.size.guide.size')}
           </div>
 
           <div className={styles.v}>
-            Обхват груди, см
+            {I18n.t('variant.size.guide.bust')}
           </div>
 
           <div className={styles.v}>
-            Обхват талии, см
+            {I18n.t('variant.size.guide.waist')}
           </div>
 
           <div className={styles.v}>
-            Обхват бёдер, см
+            {I18n.t('variant.size.guide.hips')}
           </div>
         </div>
 
@@ -121,5 +129,3 @@ function Guide () {
     </>
   )
 }
-
-export default Guide

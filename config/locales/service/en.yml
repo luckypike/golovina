@@ -1,0 +1,7 @@
+en:
+  service:
+    delivery:
+      title: Payment & Delivery
+
+    return:
+      title: Returns & Refunds
