@@ -278,17 +278,17 @@ class Variant extends Component {
                   <div className={styles.notification}>
                     {!variant.notification &&
                       <div className={styles.text}>
-                        {I18n.t('variant.nofity.desc')}
+                        {I18n.t('variant.notify.desc')}
                       </div>
                     }
                     <form className={classNames(styles.notice, { [styles.button]: user })} onSubmit={this.handleSubmit}>
                       {!variant.notification && (!user || user['guest?']) &&
                         <div className={classNames(form.input, styles.input)}>
-                          <input type="email" placeholder={I18n.t('variant.nofity.email')} value={values.email} name="email" onChange={this.handleInputChange} />
+                          <input type="email" placeholder={I18n.t('variant.notify.email')} value={values.email} name="email" onChange={this.handleInputChange} />
                         </div>
                       }
                       {!variant.notification &&
-                        <input className={buttons.main} type="submit" value={I18n.t('variant.nofity.subscribe')} disabled={!user && !values.email}/>
+                        <input className={buttons.main} type="submit" value={I18n.t('variant.notify.subscribe')} disabled={!user && !values.email}/>
                       }
                       {variant.notification &&
                         <div className={styles.text}>
