@@ -45,7 +45,6 @@ export default function Index ({ slides, instagram, locale }) {
           <a href={path('contacts_path')} >
             <div className={styles.text}>
               <div className={styles.title}>{I18n.t('static.index.contacts')}</div>
-              <div className={styles.desc}>{I18n.t('static.index.salon')}</div>
             </div>
           </a>
         </div>
