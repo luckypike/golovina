@@ -65,6 +65,10 @@ class Order < ApplicationRecord
     @amount ||= order_items.map(&:price_sell).sum + (international? ? 2500 : (russia? ? delivery_city.send(delivery_option) : 0))
   end
 
+  def amount_without_delivery
+    order_items.map(&:price_sell).sum
+  end
+
   def quantity
     order_items.sum(&:quantity)
   end
