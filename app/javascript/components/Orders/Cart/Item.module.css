@@ -173,6 +173,11 @@
   }
 }
 
+.created_at {
+  margin-left: 2em;
+  color: var(--gr_color);
+}
+
 .image {
   /* align-self: flex-start;
   composes: image from '../Variants/List.module.css';

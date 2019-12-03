@@ -29,6 +29,10 @@ export default function Item ({ cart }) {
           <div className={styles.number}>
             № {cart.id}
           </div>
+
+          <div className={styles.created_at}>
+            {cart.created_at}
+          </div>
         </div>
 
         <div className={styles.what}>
