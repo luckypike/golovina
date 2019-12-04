@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import List from '../Colors/List'
 
@@ -8,35 +8,32 @@ import buttons from '../Buttons.module.css'
 import styles from './Index.module.css'
 import page from '../Page.module.css'
 
-class Index extends Component {
-  state = {
-    colors: null
-  }
+export default function Index () {
+  const [colors, setColors] = useState()
 
-  componentDidMount = async () => {
-    const res = await axios.get(path('colors_path', { format: 'json' }))
-    this.setState({ ...res.data })
-  }
+  useEffect(() => {
+    const _fetch = async () => {
+      const { data: { colors } } = await axios.get(path('colors_path', { format: 'json' }))
 
-  render () {
-    const { colors } = this.state
+      setColors(colors)
+    }
 
-    return (
-      <div className={page.gray}>
-        <div className={page.title}>
-          <h1>Цвета</h1>
-        </div>
+    _fetch()
+  }, [])
 
-        <div className={styles.root}>
-          <a className={buttons.main} href={path('new_color_path')}>Новый цвет</a>
-        </div>
-
-        {colors &&
-          <List colors={colors} />
-        }
+  return (
+    <div className={page.gray}>
+      <div className={page.title}>
+        <h1>Цвета</h1>
       </div>
-    )
-  }
-}
 
-export default Index
+      <div className={styles.root}>
+        <a className={buttons.main} href={path('new_color_path')}>Новый цвет</a>
+      </div>
+
+      {colors &&
+        <List colors={colors} />
+      }
+    </div>
+  )
+}
