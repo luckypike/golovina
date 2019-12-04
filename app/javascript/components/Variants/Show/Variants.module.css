@@ -47,5 +47,6 @@
     display: block;
     width: calc(var(--yr) * 8);
     height: calc(var(--yr) * 8);
+    background-size: 100%;
   }
 }

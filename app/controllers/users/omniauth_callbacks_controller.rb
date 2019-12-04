@@ -6,7 +6,7 @@ module Users
     def apple
       auth = JWT.decode(params[:id_token], nil, false)[0]
 
-      name = JSON.parse(params[:user])['name']
+      name = params[:user] ? JSON.parse(params[:user])['name'] : nil
       name ||= {
         firstName: nil,
         lastName: nil
