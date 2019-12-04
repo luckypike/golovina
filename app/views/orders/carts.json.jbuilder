@@ -2,7 +2,7 @@ json.carts @carts.group_by(&:user_id).each do |user_id, cart|
   user = cart.map{ |u| u.user }.uniq
   quantity = cart.map{ |q| q.quantity }.sum
   amount = cart.map{ |v| v.variant.price }.sum.round
-  created_at = cart.map{ |c| c.created_at.strftime('%d.%m.%y') }
+  created_at = cart.map{ |c| c.created_at.strftime('%d.%m.%y') }.uniq
 
   json.id user_id
   json.quantity quantity
