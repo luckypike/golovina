@@ -61,6 +61,10 @@ export default function Index () {
         <a href={path('carts_path')} className={styles.tab}>
           Корзины
         </a>
+
+        <a href={path('subscribers_path')} className={styles.tab}>
+          Подписки
+        </a>
       </div>
 
       {orders &&

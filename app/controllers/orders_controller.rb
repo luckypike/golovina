@@ -89,6 +89,12 @@ class OrdersController < ApplicationController
     @carts = Cart.includes(:user).last(100).reverse
   end
 
+  def subscribers
+    authorize Order
+
+    @subscribers = Notification.includes(:variant, :user).all
+  end
+
   private
   def order_params
     params.require(:order).permit(

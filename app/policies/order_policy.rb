@@ -23,6 +23,10 @@ class OrderPolicy < ApplicationPolicy
     user&.is_editor?
   end
 
+  def subscribers?
+    user&.is_editor?
+  end
+
   class Scope < Scope
     def resolve
       scope

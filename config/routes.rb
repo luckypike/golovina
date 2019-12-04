@@ -139,6 +139,8 @@ Rails.application.routes.draw do
 
   get :carts, to: 'orders#carts'
 
+  get :subscribers, to: 'orders#subscribers'
+
 
   # get 'posts', to: redirect('/posts/1')
 
