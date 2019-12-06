@@ -86,7 +86,11 @@ class Order < ApplicationRecord
   end
 
   def sms_message
-    "Заказ #{self.number} (#{number_to_rub(self.amount).gsub('&nbsp;', ' ')}) оплачен. Ожидайте, пожалуйста, звонка."
+    if I18n.locale == :ru
+      "Заказ #{self.number} (#{number_to_rub(self.amount).gsub('&nbsp;', ' ')}) оплачен. Ожидайте, пожалуйста, звонка."
+    else
+      "Hello! Thank you for your order № #{self.number} (#{number_to_rub(self.amount).gsub('&nbsp;', ' ')}). It has been paid successfully. We will contact you by E-mail."
+    end
   end
 
   def quantity_cannot_be_greater_than_total

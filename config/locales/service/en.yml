@@ -5,3 +5,6 @@ en:
 
     return:
       title: Returns & Refunds
+
+      refund: Refund
+      login: Login

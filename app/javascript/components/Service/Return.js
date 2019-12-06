@@ -28,13 +28,13 @@ export default function Return ({ locale, user }) {
 
         {user && user.state !== 'guest' &&
           <p>
-            <a className={buttons.main} href={path('service_refund_path')}>Оформить возврат</a>
+            <a className={buttons.main} href={path('service_refund_path')}>{I18n.t('service.return.refund')}</a>
           </p>
         }
 
         {(!user || user.state === 'guest') &&
           <p>
-            <a className={buttons.main} href={path('new_user_session_path')}>Войти</a>
+            <a className={buttons.main} href={path('new_user_session_path')}>{I18n.t('service.return.login')}</a>
           </p>
         }
       </div>
