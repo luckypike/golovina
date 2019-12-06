@@ -41,7 +41,7 @@ function Item ({ color }) {
         <div className={styles.quantity}>
           Количество дочерних цветов: {color.child_color.length}
 
-          <svg viewBox="0 0 10 20" className={classNames(styles.arr, { [styles.active]: toggle })} onClick={setToggle(!toggle)}>
+          <svg viewBox="0 0 10 20" className={classNames(styles.arr, { [styles.active]: toggle })} onClick={() => setToggle(!toggle)}>
             <polyline points="1 8 5 12 9 8" />
           </svg>
         </div>
