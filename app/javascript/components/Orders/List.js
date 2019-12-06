@@ -47,7 +47,7 @@ class Item extends Component {
           {order.editable && order.state === 'paid' &&
             <div className={styles.archive}>
               <div className={buttons.main} onClick={() => this.handleUpdate(order.id)} data-archive={true}>
-                В архив
+                {I18n.t('order.archive')}
               </div>
             </div>
           }
@@ -56,7 +56,7 @@ class Item extends Component {
         {order.items.filter(item => !item.available).length === 0 && order.purchasable &&
           <div className={styles.pay}>
             <a href={path('pay_order_path', { id: order.id })} className={buttons.main}>
-              Оплатить
+              {I18n.t('order.pay')}
             </a>
           </div>
         }
@@ -64,24 +64,24 @@ class Item extends Component {
         {toggle &&
           <>
             <div className={styles.details}>
-              Получатель: {order.user.title} ({order.user.email})
+              {I18n.t('order.customer')}: {order.user.title} ({order.user.email})
               <br />
-              Телефон: {link ? <a href={`tel:${order.user.phone}`}>{order.user.phone}</a> : order.user.phone}
+              {I18n.t('order.phone')}: {link ? <a href={`tel:${order.user.phone}`}>{order.user.phone}</a> : order.user.phone}
               <br />
               {order.delivery && order.delivery === 'russia' &&
                 <>
                   <p>
-                    Доставка: {order.delivery_city.title} ({order.delivery_city[order.delivery_option]} руб.)
+                    {I18n.t('order.delivery')}: {order.delivery_city.title} ({order.delivery_city[order.delivery_option]} руб.)
                     <br />
-                    {order.delivery_option === 'storage' && 'Точка выдачи' }
-                    {order.delivery_option === 'door' && `Адрес: ${order.address}` }
+                    {order.delivery_option === 'storage' && `${I18n.t('order.storage')}` }
+                    {order.delivery_option === 'door' && `${I18n.t('order.door')}: ${order.address}` }
                   </p>
                 </>
               }
 
               {order.delivery && order.delivery === 'international' &&
                 <p>
-                  Международная доставка: {order.address}
+                  {I18n.t('order.international')}: {order.address}
                 </p>
               }
 
@@ -106,22 +106,22 @@ class Item extends Component {
                   </div>
 
                   <div className={styles.color}>
-                    Цвет: {item.color.title}
+                    {I18n.t('order.color')}: {item.color.title}
                   </div>
 
                   <div className={styles.size}>
-                    Размер: {item.size.title}
+                    {I18n.t('order.size')}: {item.size.title}
                   </div>
 
                   {order.purchasable &&
                     <div className={classNames(styles.quantity, { [styles.unavailable]: !item.available })}>
-                      Количество: {item.quantity} {!item.available ? ` (доступно: ${item.quantity_available})` : null}
+                      {I18n.t('order.amount')}: {item.quantity} {!item.available ? ` (${I18n.t('order.item.available')}: ${item.quantity_available})` : null}
                     </div>
                   }
 
                   {!order.purchasable &&
                     <div className={styles.quantity}>
-                      Количество: {item.quantity}
+                      {I18n.t('order.amount')}: {item.quantity}
                     </div>
                   }
                 </div>

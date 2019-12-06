@@ -1,6 +1,15 @@
 ru:
   order:
     address: Адрес доставки
+    customer: Получатель
+    phone: Телефон
+    delivery: Доставка
+    storage: Точка выдачи
+    door: Адрес
+    color: Цвет
+    size: Размер
+    amount: Количество
+    international: Международная доставка
 
     checkout: Оформить заказ
 
@@ -10,6 +19,9 @@ ru:
       many: "%{count} товаров на сумму %{amount}"
       other: "%{count} товара на сумму %{amount}"
 
+    item:
+      available: доступно
+
     delivery_city: Населенный пункт
     choose_delivery_city: Выберите город для доставки
 
@@ -18,4 +30,15 @@ ru:
       active: Новый
       paid: Оплачен
       archived: Архив
-      declined: Возврат
+      refund: Возврат
+      subscribers: Подписки
+
+    archive: В архив
+    pay: Оплатить
+
+  orders:
+    title: Ваши заказы
+
+    states:
+      orders: Заказы
+      refunds: Возвраты

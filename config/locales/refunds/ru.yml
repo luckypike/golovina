@@ -1,5 +1,17 @@
 ru:
   refund:
+    address: Адрес доставки
+    customer: Получатель
+    phone: Телефон
+    delivery: Доставка
+    storage: Точка выдачи
+    door: Адрес
+    color: Цвет
+    size: Размер
+    amount: Количество
+    international: Международная доставка
+    reasons: Причина возврата
+
     quantity:
       one: "%{count} товар на сумму %{amount}"
       few: "%{count} товара на сумму %{amount}"
@@ -16,3 +28,6 @@ ru:
       defect: Вещь имеет дефект
       color: Не соотвествует цвет
       other: Другая причина
+
+  refunds:
+    title: Ваши возвраты

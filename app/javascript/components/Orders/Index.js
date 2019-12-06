@@ -55,15 +55,15 @@ export default function Index () {
         )}
 
         <a href={path('refunds_path')} className={styles.tab}>
-          Возврат
+          {I18n.t(`order.state.refund`)}
         </a>
 
         <a href={path('carts_path')} className={styles.tab}>
-          Корзины
+          {I18n.t(`order.state.cart`)}
         </a>
 
         <a href={path('subscribers_path')} className={styles.tab}>
-          Подписки
+          {I18n.t(`order.state.subscribers`)}
         </a>
       </div>
 

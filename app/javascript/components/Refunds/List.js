@@ -43,7 +43,7 @@ class Item extends Component {
           {refund.editable && refund.state !== 'done' &&
             <div className={styles.done}>
               <div className={buttons.main} onClick={() => this.handleUpdate(refund.id)}>
-                Завершить
+                {I18n.t('order.archive')}
               </div>
             </div>
           }
@@ -52,13 +52,13 @@ class Item extends Component {
         {toggle &&
           <>
             <div className={styles.details}>
-              Получатель: {refund.user.title}
+              {I18n.t('order.customer')}: {refund.user.title}
               <br />
-              Телефон: {link ? <a href={`tel:${refund.user.phone}`}>{refund.user.phone}</a> : refund.user.phone}
+              {I18n.t('order.phone')}: {link ? <a href={`tel:${refund.user.phone}`}>{refund.user.phone}</a> : refund.user.phone}
               <br />
-              Адрес: {refund.address}
+              {I18n.t('order.address')}: {refund.address}
               <br />
-              Причина возврата: {I18n.t(`refund.reason.${refund.reason}`)}
+              {`${I18n.t('refund.reasons')}`}: {I18n.t(`refund.reason.${refund.reason}`)}
 
               {refund.reason === 'other' &&
                 <>
@@ -86,22 +86,22 @@ class Item extends Component {
                   </div>
 
                   <div className={styles.color}>
-                    Цвет: {item.color.title}
+                    {I18n.t('order.color')}: {item.color.title}
                   </div>
 
                   <div className={styles.size}>
-                    Размер: {item.size.title}
+                    {I18n.t('order.size')}: {item.size.title}
                   </div>
 
                   {refund.purchasable &&
                     <div className={classNames(styles.quantity, { [styles.unavailable]: !item.available })}>
-                      Количество: {item.quantity} {!item.available ? ` (доступно: ${item.quantity_available})` : null}
+                      {I18n.t('order.amount')}: {item.quantity} {!item.available ? ` (${I18n.t('order.item.available')}: ${item.quantity_available})` : null}
                     </div>
                   }
 
                   {!refund.purchasable &&
                     <div className={styles.quantity}>
-                      Количество: {item.quantity}
+                      {I18n.t('order.amount')}: {item.quantity}
                     </div>
                   }
                 </div>

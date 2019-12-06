@@ -1,5 +1,5 @@
 en:
-  order:
+  refund:
     address: Delivery address
     customer: Customer
     phone: Phone
@@ -10,8 +10,7 @@ en:
     size: Size
     amount: Quantity
     international: International delivery
-
-    checkout: Checkout
+    reasons: Reason
 
     quantity:
       one: "%{count} product for total price %{amount}"
@@ -19,26 +18,16 @@ en:
       many: "%{count} products for total price %{amount}"
       other: "%{count} products for total price %{amount}"
 
-    item:
-      available: available
-
-    delivery_city: City
-    choose_delivery_city: Choose delivery city
 
     state:
-      cart: in cart
-      active: new
-      paid: paid
-      archived: archived
-      refund: refund
-      subscribers: subscribes
+      active: Active
+      done: Done
 
-    archive: archive
-    pay: pay
+    reason:
+      sizes: Size doesn't fit
+      defect: Product has a defect
+      color: Color doesn't match
+      other: Other
 
-  orders:
-    title: Your orders
-
-    states:
-      orders: Orders
-      refunds: Refunds
+  refunds:
+    title: Your refunds
