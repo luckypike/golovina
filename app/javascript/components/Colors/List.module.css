@@ -83,3 +83,8 @@
     transform: scaleY(-1);
   }
 }
+
+.translate {
+  margin-left: 0.5em;
+  color: red;
+}

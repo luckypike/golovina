@@ -31,8 +31,15 @@ function Item ({ color }) {
       <a href={path('edit_color_path', { id: color.id })}>
         <div className={styles.parent_title}>
           {color.title}
+
           {color.variants &&
             <> ({color.variants})</>
+          }
+
+          {!color.translated &&
+            <span className={styles.translate}>
+              (нужен перевод)
+            </span>
           }
         </div>
       </a>
@@ -53,8 +60,15 @@ function Item ({ color }) {
             <div key={i.id} className={classNames(styles.child_title, { [styles.active]: toggle })}>
               <a href={path('edit_color_path', { id: i.id })}>
                 — {i.title}
+
                 {i.variants &&
                   <> ({i.variants})</>
+                }
+
+                {!i.translated &&
+                  <span className={styles.translate}>
+                    (нужен перевод)
+                  </span>
                 }
               </a>
             </div>
