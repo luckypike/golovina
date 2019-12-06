@@ -4,6 +4,7 @@ import update from 'immutability-helper'
 import classNames from 'classnames'
 
 import { path } from '../Routes'
+import I18n from '../I18n'
 
 import Price, { currency } from '../Variants/Price'
 
@@ -100,7 +101,7 @@ class Form extends React.Component {
     return (
       <div>
         <div className={form.label}>
-          Отметьте товары для возврата
+          {I18n.t(`refund.product_choice`)}
         </div>
         <div className={styles.items}>
           {items.map(item =>
@@ -133,11 +134,11 @@ class Form extends React.Component {
               </div>
 
               <div className={styles.color}>
-                Цвет: {item.color.title}
+                {I18n.t('order.color')}: {item.color.title}
               </div>
 
               <div className={styles.size}>
-                Размер: {item.size.title}
+                {I18n.t('order.size')}: {item.size.title}
               </div>
             </div>
           )}
@@ -146,7 +147,7 @@ class Form extends React.Component {
         <form className={form.form} onSubmit={this.handleSubmit}>
           <div className={form.input}>
             <div className={form.label}>
-              Укажите причину возврата
+              {I18n.t('refund.reason_choice')}
             </div>
 
             <div className={form.input_input}>
@@ -154,10 +155,10 @@ class Form extends React.Component {
                 {!reason &&
                   <option />
                 }
-                <option key={1} value="sizes">Не подошел размер</option>
-                <option key={2} value="defect">Вещь имеет дефект</option>
-                <option key={3} value="color">Не соответсвует цвет</option>
-                <option key={0} value="other">Другая причина</option>
+                <option key={1} value="sizes">{I18n.t('refund.reason.sizes')}</option>
+                <option key={2} value="defect">{I18n.t('refund.reason.defect')}</option>
+                <option key={3} value="color">{I18n.t('refund.reason.color')}</option>
+                <option key={0} value="other">{I18n.t('refund.reason.other')}</option>
               </select>
             </div>
           </div>
@@ -165,7 +166,7 @@ class Form extends React.Component {
           {reason && reason === 'other' &&
             <div className={form.input}>
               <div className={form.label}>
-                Опишите причину
+                {I18n.t('refund.reason.describe')}
               </div>
 
               <div className={form.input_input}>
@@ -175,7 +176,7 @@ class Form extends React.Component {
           }
 
           <div>
-            <input className={buttons.main} type="submit" value="Оформить" disabled={!this.canSubmit()}/>
+            <input className={buttons.main} type="submit" value={I18n.t('refund.submit')} disabled={!this.canSubmit()}/>
           </div>
         </form>
       </div>
@@ -199,18 +200,18 @@ export default function Refund (props) {
   return (
     <div className={page.gray}>
       <div className={page.title}>
-        <h1>Возврат товара</h1>
+        <h1>{I18n.t(`refund.title`)}</h1>
       </div>
 
       <div className={form.tight}>
         {orders && orders.length === 0 &&
-          <div>У вас пока нет заказов</div>
+          <div>{I18n.t(`refund.no_orders`)}</div>
         }
 
         {orders && orders.length > 0 &&
           <div className={form.input}>
             <div className={form.label}>
-              Выберите номер заказа, товары которого вы хотите вернуть
+              {I18n.t(`refund.order_choice`)}
             </div>
 
             <div className={form.input_input}>

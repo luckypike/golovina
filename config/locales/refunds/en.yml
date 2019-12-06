@@ -1,5 +1,6 @@
 en:
   refund:
+    title: Refund
     address: Delivery address
     customer: Customer
     phone: Phone
@@ -11,13 +12,17 @@ en:
     amount: Quantity
     international: International delivery
     reasons: Reason
+    order_choice: Select the order, which one you would like to refund
+    no_orders: You don't have any orders yet
+    product_choice: Select the products, you would like to refund
+    reason_choice: Select refund reason
+    submit: Submit
 
     quantity:
       one: "%{count} product for total price %{amount}"
       few: "%{count} products for total price %{amount}"
       many: "%{count} products for total price %{amount}"
       other: "%{count} products for total price %{amount}"
-
 
     state:
       active: Active
@@ -28,6 +33,8 @@ en:
       defect: Product has a defect
       color: Color doesn't match
       other: Other
+
+      describe: Describe the reason
 
   refunds:
     title: Your refunds

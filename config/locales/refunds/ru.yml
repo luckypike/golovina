@@ -1,5 +1,6 @@
 ru:
   refund:
+    title: Возврат товара
     address: Адрес доставки
     customer: Получатель
     phone: Телефон
@@ -11,6 +12,11 @@ ru:
     amount: Количество
     international: Международная доставка
     reasons: Причина возврата
+    order_choice: Выберите номер заказа, товары которого вы хотите вернуть
+    no_orders: У вас пока нет заказов
+    product_choice: Отметьте товары для возврата
+    reason_choice: Укажите причину возврата
+    submit: Оформить
 
     quantity:
       one: "%{count} товар на сумму %{amount}"
@@ -28,6 +34,8 @@ ru:
       defect: Вещь имеет дефект
       color: Не соотвествует цвет
       other: Другая причина
+
+      describe: Опишите причину
 
   refunds:
     title: Ваши возвраты
