@@ -203,7 +203,8 @@ GEM
     orm_adapter (0.5.0)
     pg (1.1.4)
     public_suffix (4.0.1)
-    puma (3.12.2)
+    puma (4.3.1)
+      nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.7)
@@ -368,7 +369,7 @@ DEPENDENCIES
   meta-tags
   mini_magick
   pg (~> 1)
-  puma (~> 3)
+  puma (~> 4)
   pundit
   rails (~> 5.2.0)
   rails-controller-testing
