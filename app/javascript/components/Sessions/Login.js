@@ -188,7 +188,7 @@ class Login extends Component {
 
           <Auth appleid={this.props.appleid} text={I18n.t('session.appleid')} />
 
-          <div className={styles.sep}>{I18n.t('session.or')}</div>
+          {/* <div className={styles.sep}>{I18n.t('session.or')}</div>
 
           <div className={styles.form}>
             <form onSubmit={this.handlePhoneSubmit}>
@@ -234,7 +234,7 @@ class Login extends Component {
                 <input className={buttons.main} type="submit" value={this.isCode() ? I18n.t('session.confirm') : I18n.t('session.request')} />
               </div>
             </form>
-          </div>
+          </div> */}
         </div>
       </div>
     )

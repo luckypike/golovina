@@ -1,11 +1,11 @@
 class User < ApplicationRecord
   enum state: { guest: 0, common: 1 }
 
-  has_many :wishlists
-  has_many :carts
-  has_many :orders
+  has_many :wishlists, dependent: :destroy
+  has_many :carts, dependent: :destroy
+  has_many :orders, dependent: :nullify
   has_many :refunds
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
   has_many :identities, dependent: :destroy
 
   has_one :discount
@@ -15,14 +15,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates_uniqueness_of :phone
-  validates_presence_of :phone, :name, :email
-
+  validates :name, :email, presence: true
   validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :phone, length: { is: 11 }
 
   # before_validation :clear_email, on: :update
-  before_validation :clear_phone
+  # before_validation :clear_phone
 
   def remember_me
     true
@@ -50,11 +47,11 @@ class User < ApplicationRecord
     RegisterMailer.send("#{type}_mailer", password, self).deliver_now
   end
 
-  def clear_phone
-    if self.phone.present?
-      self.phone = User.prepare_phone(self.phone)
-    end
-  end
+  # def clear_phone
+  #   if self.phone.present?
+  #     self.phone = User.prepare_phone(self.phone)
+  #   end
+  # end
 
   def clear_email
     restore_attributes([:email]) if email.blank?
@@ -73,10 +70,13 @@ class User < ApplicationRecord
   end
 
   class << self
-    def prepare_phone text
-      text ||= ''
-      text = text.gsub(/[\D]/, '')
-      text.size == 11 ? text : false
+    def destroy_old_user(old_user)
+      if old_user.guest?
+        old_user.destroy
+      elsif old_user.orders.where(state: %i[paid archived]).empty?
+        # old_user.orders.destroy_all
+        old_user.destroy
+      end
     end
   end
 end

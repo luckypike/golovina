@@ -38,7 +38,7 @@ class SessionsController < Devise::SessionsController
       Sms.message(user.phone, user.code) if Rails.env.production?
       head :ok
     else
-      render json: { message: 'Не найдет такой номер телефона' }, status: :not_found
+      render json: { message: 'Не найден такой номер телефона' }, status: :not_found
     end
   end
 

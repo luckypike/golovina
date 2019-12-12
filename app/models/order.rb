@@ -6,6 +6,7 @@ class Order < ApplicationRecord
     event :activate do
       after do
         user.activate(user.email, type: :order) if user.guest?
+        user.update(phone: phone)
         OrderMailer.activate(self).deliver if Rails.env.development?
       end
 
@@ -15,7 +16,7 @@ class Order < ApplicationRecord
     event :pay do
       after do
         if Rails.env.production?
-          Sms.message(user.phone, sms_message)
+          Sms.message(phone, sms_message)
           OrderMailer.sms_doubling(self, user.email).deliver_later
         else
           OrderMailer.sms_test(self).deliver_later
@@ -53,6 +54,10 @@ class Order < ApplicationRecord
   validates :delivery_city, presence: true, if: -> { russia? }
   validates :delivery_option, presence: true, if: -> { russia? }
 
+  validates :phone, presence: true
+
+  before_validation :clear_phone
+
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
   include OrdersHelper
@@ -77,10 +82,11 @@ class Order < ApplicationRecord
     (payed_at.presence || created_at).beginning_of_month
   end
 
-  # def can_paid?
-  #   amount > 0 && active?
-  # end
-  #
+
+  def clear_phone
+    self.phone = phone&.gsub(/[\D]/, '')
+  end
+
   def purchasable?
     active? && order_items.reject(&:available?).size == 0 && amount > 0 && user == Current.user
   end

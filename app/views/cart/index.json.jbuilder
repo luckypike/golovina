@@ -14,12 +14,12 @@ end
 
 json.values do
   json.address ''
-  json.delivery I18n.locale == :en ? :international : :pickup
+  json.phone @user.phone || ''
+  json.delivery I18n.locale == :en ? :international : ''
 
   json.user_attributes do
     json.name @user.name || ''
     json.sname @user.sname || ''
-    json.phone @user.phone || ''
     json.email((@user.guest_email? ? '' : @user.email) || '')
   end
 end

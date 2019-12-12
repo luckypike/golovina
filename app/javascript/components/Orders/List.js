@@ -66,7 +66,7 @@ class Item extends Component {
             <div className={styles.details}>
               {I18n.t('order.customer')}: {order.user.title} ({order.user.email})
               <br />
-              {I18n.t('order.phone')}: {link ? <a href={`tel:${order.user.phone}`}>{order.user.phone}</a> : order.user.phone}
+              {I18n.t('order.phone')}: {link ? <a href={`tel:${order.phone}`}>{order.phone}</a> : order.phone}
               <br />
               {order.delivery && order.delivery === 'russia' &&
                 <>

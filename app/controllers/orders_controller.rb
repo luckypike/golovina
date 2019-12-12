@@ -21,7 +21,8 @@ class OrdersController < ApplicationController
                 :translations
               ]
             ]
-          ).where.not(state: [:undef]).order(created_at: :desc)
+          ).where.not(state: [:undef]).where.not(user: nil)
+          .order(created_at: :desc)
         @orders = @orders.where(state: params[:state]) if params[:state]
       end
     end
@@ -32,6 +33,11 @@ class OrdersController < ApplicationController
 
     @order = Order.new(user: Current.user)
     @order.assign_attributes(order_params)
+
+
+    if (existed_user = User.find_for_authentication(email: order_params[:user_attributes][:email]))
+      User.destroy_old_user existed_user if existed_user != current_user
+    end
 
     Current.user.carts.each do |cart|
       @order.order_items.build(variant: cart.variant, quantity: cart.quantity, size: cart.size)
@@ -96,14 +102,16 @@ class OrdersController < ApplicationController
   end
 
   private
+
   def order_params
     params.require(:order).permit(
       :delivery,
       :delivery_option,
       :delivery_city_id,
       :address,
+      :phone,
       user_attributes: [
-        :name, :s_name, :phone, :email
+        :name, :sname, :email
       ]
     )
   end
@@ -111,5 +119,4 @@ class OrdersController < ApplicationController
   def set_order
     @order = Order.find(params[:id])
   end
-
 end

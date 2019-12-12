@@ -41,6 +41,10 @@
   }
 }
 
+.countries {
+  display: none;
+}
+
 .amount {
   display: flex;
   composes: h2 from '../Fonts.module.css';

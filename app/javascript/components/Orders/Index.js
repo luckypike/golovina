@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 import classNames from 'classnames'
 // import update from 'immutability-helper'
@@ -11,7 +12,11 @@ import page from '../Page'
 
 import styles from './Index.module.css'
 
-export default function Index () {
+Index.propTypes = {
+  link: PropTypes.bool
+}
+
+export default function Index ({ link }) {
   const _cancelToken = axios.CancelToken.source()
   const TABS = ['paid', 'active', 'archived']
 
@@ -74,7 +79,7 @@ export default function Index () {
           }
 
           {orders.length > 0 &&
-            <List orders={orders} onOrderChange={handleOrderChange} />
+            <List orders={orders} onOrderChange={handleOrderChange} link={link} />
           }
         </div>
       }

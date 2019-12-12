@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import classNames from 'classnames'
-import InputMask from 'react-input-mask'
 import PubSub from 'pubsub-js'
 import Select from 'react-select'
+import PhoneInput from 'react-phone-input-2'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
@@ -331,6 +331,25 @@ export default function Index ({ locale, appleid, user }) {
                 }
               />
 
+              <div className={form.el}>
+                <label>
+                  <div className={form.label}>
+                    {I18n.t('user.phone')}
+                  </div>
+                </label>
+
+                <PhoneInput
+                  type="tel" name="phone"
+                  placeholder="+7 999 111-11-11"
+                  value={values.phone}
+                  disableDropdown={true}
+                  buttonClass={styles.countries}
+                  containerClass={form.input}
+                  onChange={phone => setValues({ ...values, phone })} />
+
+                <Errors errors={errors.phone} />
+              </div>
+
               {((isRussia() && values.delivery_option) || isInternational() || isPickup()) && price &&
                 <h2>
                   {I18n.t('cart.total')}
@@ -343,6 +362,8 @@ export default function Index ({ locale, appleid, user }) {
               {carts.filter(cart => !cart.available).length === 0 &&
                 <div className={form.submit}>
                   <input type="submit" value={I18n.t('cart.checkout')} className={buttons.main} />
+
+                  <Errors errors={errors.delivery} />
                 </div>
               }
             </form>
@@ -401,20 +422,6 @@ function User ({ errors, userValues, onValuesChange, locale }) {
         </div>
 
         <Errors errors={errors['user.sname']} />
-      </div>
-
-      <div className={form.el}>
-        <label>
-          <div className={form.label}>
-            {I18n.t('user.phone')}
-          </div>
-        </label>
-
-        <div className={form.input}>
-          <InputMask type="tel" name="phone" mask="+9 999 999 99 99" maskChar=" " value={values.phone} onChange={handleInputChange} />
-        </div>
-
-        <Errors errors={errors['user.phone']} />
       </div>
 
       <div className={form.el}>
