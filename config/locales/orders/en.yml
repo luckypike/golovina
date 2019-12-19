@@ -14,10 +14,10 @@ en:
     checkout: Checkout
 
     quantity:
-      one: "%{count} product for total price %{amount}"
-      few: "%{count} products for total price %{amount}"
-      many: "%{count} products for total price %{amount}"
-      other: "%{count} products for total price %{amount}"
+      one: "%{count} item for total price %{amount}"
+      few: "%{count} items for total price %{amount}"
+      many: "%{count} items for total price %{amount}"
+      other: "%{count} items for total price %{amount}"
 
     item:
       available: available
@@ -26,15 +26,15 @@ en:
     choose_delivery_city: Choose delivery city
 
     state:
-      cart: in cart
-      active: new
-      paid: paid
-      archived: archived
-      refund: refund
-      subscribers: subscribes
+      cart: Cart
+      active: New
+      paid: Paid
+      archived: Archived
+      refund: Refund
+      subscribers: Subscribes
 
-    archive: archive
-    pay: pay
+    archive: Archive
+    pay: Continue to pay
 
   orders:
     title: Your orders
