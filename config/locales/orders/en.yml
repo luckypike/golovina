@@ -36,6 +36,9 @@ en:
     archive: Archive
     pay: Continue to pay
 
+    order_mail: Hello! You received this email as you place an order on Golovina.store. You are automatically assigned a password for your account.
+    regards: Best wishes, Golovina Store
+
   orders:
     title: Your orders
 

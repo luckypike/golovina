@@ -3,6 +3,7 @@ en:
 
   session:
     email: Email
+    login: Login
     password: Password
     submit: Sign in
     phone: Phone number
@@ -18,5 +19,15 @@ en:
     request: To get SMS code
     confirm: Confirm phone
 
+    authorize_mail: Insructions to account restore were sent to your email
+
+    reset_password_mail: You requested a password reset on the Golovina website. Follow the link below to access your personal account.
+
   sessions:
     qq: QQ
+
+  messages:
+    password: 'Wrong email or password'
+    email: 'Email not found'
+    phone: 'Phone not found'
+    code: 'Wrong code'

@@ -25,7 +25,7 @@ class SessionsController < Devise::SessionsController
       sign_in user
       head :ok, location: root_path
     else
-      render json: { message: 'Неверная почта или пароль' }, status: :unauthorized
+      render json: { message: t('messages.password')}, status: :unauthorized
     end
   end
 
@@ -38,7 +38,7 @@ class SessionsController < Devise::SessionsController
       Sms.message(user.phone, user.code) if Rails.env.production?
       head :ok
     else
-      render json: { message: 'Не найден такой номер телефона' }, status: :not_found
+      render json: { message: t('messages.phone') }, status: :not_found
     end
   end
 
@@ -52,7 +52,7 @@ class SessionsController < Devise::SessionsController
       sign_in user
       head :ok, location: root_path
     else
-      render json: { message: 'Неверный код из SMS' }, status: :bad_request
+      render json: { message: t('messages.code') }, status: :bad_request
     end
   end
 
@@ -61,7 +61,7 @@ class SessionsController < Devise::SessionsController
       user.send_reset_password_instructions
       head :ok
     else
-      render json: { message: 'Почта не найдена' }, status: :not_found
+      render json: { message: t('messages.email') }, status: :not_found
     end
   end
 

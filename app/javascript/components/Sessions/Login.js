@@ -152,7 +152,7 @@ class Login extends Component {
               <div className={styles.form}>
                 {this.isRecovered() &&
                   <div className={styles.desc}>
-                    Вам на почту выслано письмо с инструкцией по восстановлению доступа
+                    {I18n.t('session.authorize_mail')}
                   </div>
                 }
 

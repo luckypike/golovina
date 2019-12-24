@@ -1,13 +1,14 @@
 .register
-  p
-    ' Здравствуйте! Вы получили данное письмо потому, что совершили заказ в интеренет-магазине Golovina, поэтому для вас был автоматически сформирован пароль для входа в личный кабинет.
+  p = I18n.t('order.order_mail')
 
   p
-    ' Логин:
+    = I18n.t('session.login')
+    ' :
     = @user.email
     br
 
-    ' Пароль:
+    = I18n.t('session.password')
+    ' :
     = @user.password
 
-  p С уважением, Golovina
+  p = I18n.t('order.regards')
