@@ -34,6 +34,7 @@ class OrdersController < ApplicationController
     @order = Order.new(user: Current.user)
     @order.assign_attributes(order_params)
 
+    @order.promo = Order::PROMO if Order::PROMO
 
     if (existed_user = User.find_for_authentication(email: order_params[:user_attributes][:email]))
       User.destroy_old_user existed_user if existed_user != current_user

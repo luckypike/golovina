@@ -266,7 +266,7 @@ export default function Index ({ locale, appleid, user }) {
                             checked={values.delivery_option === 'door'}
                             onChange={() => setValues({ ...values, delivery_option: 'door' })}
                           />
-                          Доставка до двери ({city.door_days} дн.): {city.door} ₽
+                          Доставка до двери ({city.door_days} дн.): {price.promo && parseFloat(price.sell) >= price.promo ? 0 : city.door} ₽
                         </label>
                       }
 
@@ -278,7 +278,7 @@ export default function Index ({ locale, appleid, user }) {
                             checked={values.delivery_option === 'storage'}
                             onChange={() => setValues({ ...values, delivery_option: 'storage' })}
                           />
-                          Доставка до точки выдачи ({city.storage_days}): {city.storage} ₽
+                          Доставка до точки выдачи ({city.storage_days}): {price.promo && parseFloat(price.sell) >= price.promo ? 0 : city.storage} ₽
                         </label>
                       }
                     </div>

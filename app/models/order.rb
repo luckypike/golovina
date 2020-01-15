@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  PROMO = 10000
+
   enum delivery_option: { door: 1, storage: 2 }
   enum delivery: { pickup: 1, russia: 2, international: 3 }
 
@@ -67,7 +69,12 @@ class Order < ApplicationRecord
   end
 
   def amount
-    @amount ||= order_items.map(&:price_sell).sum + (international? ? 2500 : (russia? ? delivery_city.send(delivery_option) : 0))
+    if promo &&
+      amount_without_delivery >= promo
+        @amount ||= order_items.map(&:price_sell).sum + (international? ? 2500 : 0)
+    else
+      @amount ||= order_items.map(&:price_sell).sum + (international? ? 2500 : (russia? ? delivery_city.send(delivery_option) : 0))
+    end
   end
 
   def amount_without_delivery
