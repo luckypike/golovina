@@ -97,6 +97,7 @@ export default function Index ({ locale, appleid, user }) {
   const isPickup = () => values.delivery === 'pickup'
   const isRussia = () => values.delivery === 'russia'
   const isInternational = () => values.delivery === 'international'
+  const isPromo = () => price.promo && parseFloat(price.sell) >= price.promo
 
   return (
     <div className={page.gray}>
@@ -200,6 +201,11 @@ export default function Index ({ locale, appleid, user }) {
                         </strong>
                         <div className={styles.deliveryItemDesc}>
                           {I18n.t('cart.shipping.russia.desc')}
+                          <div className={styles.promo}>
+                            {price && isPromo() &&
+                              I18n.t('cart.shipping.russia.promo')
+                            }
+                          </div>
                         </div>
                       </div>
                     </>
@@ -266,7 +272,7 @@ export default function Index ({ locale, appleid, user }) {
                             checked={values.delivery_option === 'door'}
                             onChange={() => setValues({ ...values, delivery_option: 'door' })}
                           />
-                          Доставка до двери ({city.door_days} дн.): {price.promo && parseFloat(price.sell) >= price.promo ? 0 : city.door} ₽
+                          Доставка до двери ({city.door_days} дн.): {isPromo() ? 'бесплатно' : `${city.door} ₽`}
                         </label>
                       }
 
@@ -278,7 +284,7 @@ export default function Index ({ locale, appleid, user }) {
                             checked={values.delivery_option === 'storage'}
                             onChange={() => setValues({ ...values, delivery_option: 'storage' })}
                           />
-                          Доставка до точки выдачи ({city.storage_days}): {price.promo && parseFloat(price.sell) >= price.promo ? 0 : city.storage} ₽
+                          Доставка до точки выдачи ({city.storage_days}): {isPromo() ? 'бесплатно' : `${city.storage} ₽`}
                         </label>
                       }
                     </div>
@@ -354,7 +360,7 @@ export default function Index ({ locale, appleid, user }) {
                 <h2>
                   {I18n.t('cart.total')}
                   <div className={styles.price}>
-                    <Price sell={parseFloat(price.sell) + (isInternational() ? 2500 : (isRussia() ? city[values.delivery_option] : 0))} />
+                    <Price sell={parseFloat(price.sell) + (isInternational() ? 2500 : (isRussia() && !isPromo() ? city[values.delivery_option] : 0))} />
                   </div>
                 </h2>
               }

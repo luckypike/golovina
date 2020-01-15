@@ -24,7 +24,10 @@
     - if @order.russia?
       ' Доставка:
       => @order.delivery_city.title
-      | (#{@order.delivery_city[@order.delivery_option]} руб.)
+      - if @order.promo?
+        | (бесплатно)
+      - else
+        | (#{@order.delivery_city[@order.delivery_option]} руб.)
       br
       = @order.address
     - elsif @order.international?
