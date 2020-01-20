@@ -70,16 +70,6 @@ class Form extends React.Component {
               </div>
             )}
 
-            <div className={form.input}>
-              <div className={form.label}>
-                Название
-              </div>
-
-              <div className={form.input_input}>
-                <input type="text" value={values.title} name="title" onChange={this.handleInputChange} />
-              </div>
-            </div>
-
             {kit && kit.variants &&
               <div className={form.input}>
                 <div className={form.label}>Товары в образе</div>
