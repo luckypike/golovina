@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import update from 'immutability-helper'
 
 import { path } from '../Routes'
+import { useI18n } from '../I18n'
 
 import Images from '../Images/Images'
 
@@ -35,8 +36,9 @@ class Form extends React.Component {
   }
 
   render () {
-    const { title, id } = this.props
-    const { values, kit, categories} = this.state
+    const { title, id, locale } = this.props
+    const { values, kit, categories } = this.state
+    const I18n = useI18n(locale)
 
     return (
       <div className={page.gray}>
@@ -46,6 +48,27 @@ class Form extends React.Component {
 
         <div className={classNames(form.root, form.tight)}>
           <form onSubmit={this.handleSubmit}>
+
+            {I18n.available_locales.map(locale =>
+              <div className={form.gl} key={locale}>
+                <label>
+                  <div className={form.label}>
+                    {locale}
+                  </div>
+
+                  <div className={form.input}>
+                    <input
+                      type="text"
+                      value={values[`title_${locale}`]}
+                      name={`title_${locale}`}
+                      onChange={this.handleInputChange}
+                      placeholder="Заполните название товара..."
+                    />
+                  </div>
+                </label>
+
+              </div>
+            )}
 
             <div className={form.input}>
               <div className={form.label}>
@@ -140,7 +163,8 @@ class Form extends React.Component {
         this.setState({
           kit: res.data.kit,
           values: {
-            title: res.data.kit.title,
+            title_en: res.data.kit.title_en,
+            title_ru: res.data.kit.title_ru,
             state: res.data.kit.state,
             images: res.data.kit.images,
             image_ids: res.data.kit.images.map(i => i.id),

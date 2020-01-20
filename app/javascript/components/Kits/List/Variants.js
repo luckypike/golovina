@@ -7,6 +7,7 @@ import PubSub from 'pubsub-js'
 import Price from '../../Variants/Price'
 
 import { path } from '../../Routes'
+import I18n from '../../I18n'
 
 import styles from './Variants.module.css'
 import buttons from '../../Buttons.module.css'
@@ -100,13 +101,13 @@ function Variant (props) {
                 <div className={styles.cart}>
                   {add &&
                     <a className={buttons.main} href={path('cart_path')}>
-                      Оплатить
+                      {I18n.t('variant.cart.checkout')}
                     </a>
                   }
 
                   {!add &&
                     <button className={buttons.main} disabled={!size || send} onClick={handleCartClick}>
-                      {!send ? 'В корзину' : 'Добавляем...'}
+                      {!send ? I18n.t('variant.cart.add') : I18n.t('variant.cart.processing')}
                     </button>
                   }
                 </div>

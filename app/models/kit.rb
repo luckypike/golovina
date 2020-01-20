@@ -12,6 +12,9 @@ class Kit < ApplicationRecord
 
   validates :state, presence: true
 
+  translates :title
+  globalize_accessors locales: I18n.available_locales, attributes: %i[title]
+
   def human_title
     title.present? ? title : variants.map(&:title_last).to_sentence.downcase.upcase_first
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_15_111410) do
+ActiveRecord::Schema.define(version: 2020_01_20_141903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,16 @@ ActiveRecord::Schema.define(version: 2020_01_15_111410) do
     t.integer "width"
     t.boolean "favourite", default: false
     t.index ["imagable_type", "imagable_id"], name: "index_images_on_imagable_type_and_imagable_id"
+  end
+
+  create_table "kit_translations", force: :cascade do |t|
+    t.bigint "kit_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.index ["kit_id"], name: "index_kit_translations_on_kit_id"
+    t.index ["locale"], name: "index_kit_translations_on_locale"
   end
 
   create_table "kitables", force: :cascade do |t|

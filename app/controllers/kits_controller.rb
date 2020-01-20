@@ -84,6 +84,22 @@ class KitsController < ApplicationController
 
   def kit_params
     params[:kit][:image_ids] = JSON.parse(params[:kit][:image_ids]) if params[:kit][:image_ids].present? && params[:kit][:image_ids].is_a?(String)
-    params.require(:kit).permit(:title, :created_at, :theme_id, :state, :latest, image_ids: [], variant_ids: [], images_attributes: [:weight, :id])
+    
+    permitted =
+      Kit.globalize_attribute_names \
+      + %i[title created_at theme_id state latest] \
+      + [
+        image_ids: %i[]
+      ] \
+      + [
+        variant_ids: %i[]
+      ] \
+      + [
+        images_attributes: %i[id weight]
+      ]
+
+    # params.require(:kit).permit(:title, :created_at, :theme_id, :state, :latest, image_ids: [], variant_ids: [], images_attributes: [:weight, :id])
+
+    params.require(:kit).permit(*permitted)
   end
 end
