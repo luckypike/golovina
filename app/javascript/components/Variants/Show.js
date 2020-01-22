@@ -319,7 +319,7 @@ class Variant extends Component {
                     {variant.kits.map((kit) =>
                       <a href={path('kit_path', { id: kit.id })} key={kit.id} className={styles.kit_item}>
                         <div className={styles.kit_image}><img src={kit.image}/></div>
-                        <div className={styles.kit_title}>{kit.title}</div>
+                        <h2 className={styles.kit_title}>{kit.title}</h2>
                       </a>
                     )}
                   </div>

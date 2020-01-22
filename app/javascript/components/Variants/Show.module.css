@@ -395,11 +395,17 @@
     }
   }
 
+  & .kit_title {
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
   & .kit_image {
     position: relative;
     background-color: #f9f9f9;
     overflow: hidden;
-    margin-bottom: var(--yr);
+    margin-bottom: calc(var(--yr) * 2);
 
     &::before {
       display: block;

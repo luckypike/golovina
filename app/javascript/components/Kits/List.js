@@ -35,6 +35,16 @@ function Kit ({ kit }) {
 
   return (
     <div key={kit.id} className={styles.kit}>
+      <div className={styles.title}>
+        <h2>
+          {kit.title}
+        </h2>
+
+        <p className={styles.additional}>
+          {I18n.t('kit.variants', { count: kit.variants.length })}
+        </p>
+      </div>
+
       <div className={styles.slider}>
         <div className={classNames(styles.nav, { [styles.isSlide]: isSlide() })}>
           {current} / {kit.images.length}
@@ -54,16 +64,6 @@ function Kit ({ kit }) {
             </div>
           )}
         </div>
-      </div>
-
-      <div className={styles.title}>
-        <h2>
-          {kit.title}
-        </h2>
-
-        <p className={styles.additional}>
-          {I18n.t('kit.variants', { count: kit.variants.length })}
-        </p>
       </div>
 
       <div className={styles.variants}>
