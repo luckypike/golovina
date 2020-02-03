@@ -165,30 +165,30 @@ export default function Index ({ locale, appleid, user }) {
 
               <label className={form.el}>
                 <div className={styles.delivery}>
-                  {I18n.locale === 'ru' &&
-                    <>
-                      <div
-                        className={classNames(
-                          styles.deliveryItem,
-                          { [styles.active]: isPickup() }
-                        )}
-                        onClick={() => {
-                          setValues({
-                            ...values,
-                            delivery: 'pickup',
-                            delivery_option: null
-                          })
-                          setCity()
-                        }}
-                      >
-                        <strong>
-                          {I18n.t('cart.shipping.store.title')}
-                        </strong>
-                        <div className={styles.deliveryItemDesc}>
-                          {I18n.t('cart.shipping.store.desc')}
-                        </div>
+                  <>
+                    <div
+                      className={classNames(
+                        styles.deliveryItem,
+                        { [styles.active]: isPickup() }
+                      )}
+                      onClick={() => {
+                        setValues({
+                          ...values,
+                          delivery: 'pickup',
+                          delivery_option: null
+                        })
+                        setCity()
+                      }}
+                    >
+                      <strong>
+                        {I18n.t('cart.shipping.store.title')}
+                      </strong>
+                      <div className={styles.deliveryItemDesc}>
+                        {I18n.t('cart.shipping.store.desc')}
                       </div>
+                    </div>
 
+                    {I18n.locale === 'ru' &&
                       <div
                         className={classNames(
                           styles.deliveryItem,
@@ -208,8 +208,8 @@ export default function Index ({ locale, appleid, user }) {
                           </div>
                         </div>
                       </div>
-                    </>
-                  }
+                    }
+                  </>
 
                   <div
                     className={classNames(
@@ -316,11 +316,11 @@ export default function Index ({ locale, appleid, user }) {
                     <Auth appleid={appleid} from="cart" text={I18n.t('session.appleid')} />
 
                     <p className={styles.appledesc}>
-                      Вы можете войти используя ваш идентификатор Apple. После этого ваши имя и почта будут переданы нам автоматически, а вы всегда сможете входить на сайт по отпечатку пальца или сканеру лица.
+                      {I18n.t('cart.appledesc')}
                     </p>
                   </div>
 
-                  <div className={styles.sep}>Или</div>
+                  <div className={styles.sep}>{I18n.t('cart.or')}</div>
                 </>
               }
 

@@ -10,6 +10,8 @@ en:
     delete: Remove from shopbag
     total: Total
     checkout: Place the order
+    appledesc: You may login using AppleID. You`re name and email will be send to us automatically, and you will always be able to login by TouchId or FaceID.
+    or: Or
 
     shipping:
       title: Select a shipping method
