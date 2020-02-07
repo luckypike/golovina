@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  PROMO = 10000
+  PROMO = nil
 
   enum delivery_option: { door: 1, storage: 2 }
   enum delivery: { pickup: 1, russia: 2, international: 3 }
