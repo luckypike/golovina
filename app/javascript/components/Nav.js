@@ -81,7 +81,7 @@ class Nav extends Component {
             <div className={classNames(styles.sub)} key={collection.id}>
               <a href={path('collection_path', { id: collection.slug })}>
                 <div>
-                  {collection.title}
+                  {I18n.t(`header.nav.collection.${collection.id}`)}
                 </div>
                 {collection.desc &&
                   <div className={styles.collection}>
@@ -95,11 +95,11 @@ class Nav extends Component {
 
         <Section id="brand" title={I18n.t('header.nav.about')} onToggle={this.toggleSection} section={section}>
           <div className={styles.sub}>
-            <a href="/posts/1">Интервью</a>
+            <a href="/posts/1">{I18n.t('header.nav.interview')}</a>
           </div>
 
           <div className={styles.sub}>
-            <a href="/posts/2">Показ коллекции</a>
+            <a href="/posts/2">{I18n.t('header.nav.showcase')}</a>
           </div>
         </Section>
 

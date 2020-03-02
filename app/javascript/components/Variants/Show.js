@@ -292,7 +292,7 @@ class Variant extends Component {
                       }
                       {variant.notification &&
                         <div className={styles.text}>
-                          Вы успешно подписаны! Мы уведомим вас по электронной почте, когда товар снова появится в наличии.
+                          {I18n.t('variant.notify.subscribed')}
                         </div>
                       }
                     </form>

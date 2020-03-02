@@ -74,7 +74,7 @@ class Contacts extends Component {
               </svg>
             </a>
             <a href={instagram} className={styles.name}>Golovina.brand</a>
-            <div className={styles.desc}>Подписывайтесь на наш Instagram</div>
+            <div className={styles.desc}>{I18n.t('static.index.instagram')}</div>
           </div>
         </div>
       </div>

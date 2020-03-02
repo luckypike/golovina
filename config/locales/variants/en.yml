@@ -31,6 +31,7 @@ en:
       desc: Comming soon. Notify me.
       email: E-mail
       subscribe: Subscribe
+      subscribed: Thank you! We’ll let you know by email when the item is back.
 
     return:
       title: Exchange & Returns
@@ -53,6 +54,7 @@ en:
 
     last:
       title: Last item
+      promo: Buy the last item with free shipping option
       desc: Товары которые остались в одном экземпляре
 
     all:

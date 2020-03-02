@@ -26,7 +26,7 @@ class Latest extends Component {
         <div className={page.title}>
           <h1>{I18n.t('variants.last.title')}</h1>
           <p>
-            Успей купить последнюю вещь с бесплатной доставкой
+            {I18n.t('variants.last.promo')}
           </p>
         </div>
 
