@@ -1,1 +1,3 @@
-json.variants @variants, partial: 'variants/variant', as: :variant
+json.variants @records.each_with_hit do |record, hit|
+  json.partial! record
+end

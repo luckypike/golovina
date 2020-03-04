@@ -1,4 +1,7 @@
 class Variant < ApplicationRecord
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   default_scope do
     includes(
       :images,
@@ -50,6 +53,29 @@ class Variant < ApplicationRecord
   has_many :kitables, dependent: :destroy
   has_many :kits, through: :kitables
   has_many :notifications, dependent: :destroy
+
+  settings do
+    mappings dynamic: false do
+      indexes :desc, fields: {
+        ru: { analyzer: :russian, type: :text },
+        en: { analyzer: :english, type: :text }
+      }
+
+      indexes :product, type: 'object' do
+        indexes :title, fields: {
+          ru: { analyzer: :russian, type: :text },
+          en: { analyzer: :english, type: :text }
+        }
+      end
+
+      indexes :color, type: 'object' do
+        indexes :title, fields: {
+          ru: { analyzer: :russian, type: :text },
+          en: { analyzer: :english, type: :text }
+        }
+      end
+    end
+  end
 
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
@@ -160,5 +186,14 @@ class Variant < ApplicationRecord
     update_column(:sizes_cache, sizes.map(&:id))
   end
 
+  def as_indexed_json(_options = {})
+    as_json(
+      only: :desc,
+      include: {
+        product: { only: :title },
+        color: { only: :title}
+      }
+    )
+  end
 
 end
