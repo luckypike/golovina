@@ -77,6 +77,15 @@ class Variant < ApplicationRecord
     end
   end
 
+  def as_indexed_json(_options = {})
+    as_json(
+      include: {
+        product: { only: :title },
+        color: { only: :title }
+      }
+    )
+  end
+
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
 
@@ -186,14 +195,5 @@ class Variant < ApplicationRecord
     update_column(:sizes_cache, sizes.map(&:id))
   end
 
-  def as_indexed_json(_options = {})
-    as_json(
-      only: :desc,
-      include: {
-        product: { only: :title },
-        color: { only: :title}
-      }
-    )
-  end
 
 end
