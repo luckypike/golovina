@@ -99,7 +99,7 @@ class OrdersController < ApplicationController
   def subscribers
     authorize Order
 
-    @subscribers = Notification.includes(:variant, :user).all
+    @subscribers = Notification.includes(:variant, :user).order(created_at: :desc).all
   end
 
   private
