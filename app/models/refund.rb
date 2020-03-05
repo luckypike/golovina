@@ -29,6 +29,6 @@ class Refund < ApplicationRecord
   end
 
   def month
-    created_at.beginning_of_month
+    order.created_at.beginning_of_month
   end
 end
