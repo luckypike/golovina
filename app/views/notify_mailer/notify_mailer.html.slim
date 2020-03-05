@@ -1,7 +1,15 @@
 .notification
-  p
-    ' Здравствуйте! Вы получили данное письмо потому, что попросили уведомить, когда товар снова будет в продаже.
+  p = I18n.t('mailers.body.notify')
 
-  br #{link_to @variant.title_last, catalog_variant_url(slug: @variant.category, id: @variant.id)} снова в наличии и доступен для заказа на сайте #{link_to 'https://golovina.store', root_url}.
+  br
 
-  br С уважением, Golovina.
+  ' #{link_to @variant.title_last, catalog_variant_url(slug: @variant.category, id: @variant.id)} #{I18n.t('mailers.body.availability')}
+
+  - if I18n.locale == :ru
+    = link_to 'https://golovina.store', root_url
+  - else
+    = link_to 'https://en.golovina.store', root_url
+
+  '.
+
+  br = I18n.t('order.regards')

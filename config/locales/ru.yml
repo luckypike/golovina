@@ -26,10 +26,6 @@ ru:
       order:
         update: Оплатить
 
-  mailers:
-    subjects:
-      register: Уведомление о регистрации пользователя
-
   catalog: Каталог
   catalog_all: Все товары
 

@@ -1,0 +1,11 @@
+en:
+  mailers:
+    subjects:
+      register: Client Registration
+      register_notify: Client Registration
+      notify: Product available to purchase
+
+    body:
+      register_notify: Hello! You have recieved this mail, because were subscribed for notification about this product availability in Golovina Store. Password was automatically generated for you to enter your personal account.
+      notify: Hello! You have recieved this mail, because were subscribed for notification about this product availability in Golovina Store.
+      availability: available to order on
