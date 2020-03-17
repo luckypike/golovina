@@ -57,9 +57,11 @@ export default function Ad (props) {
             {promo.title}
           </div>
 
-          <a href={promo.link} className={styles.more} onClick={handleCookiesClear}>
-            Подробнее
-          </a>
+          {promo.link && promo.link !== '' &&
+            <a href={promo.link} className={styles.more} onClick={handleCookiesClear}>
+              Подробнее
+            </a>
+          }
         </div>
       </div>
     </>
