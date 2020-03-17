@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  PROMO = nil
+  PROMO = 0
 
   enum delivery_option: { door: 1, storage: 2 }
   enum delivery: { pickup: 1, russia: 2, international: 3 }
@@ -69,7 +69,7 @@ class Order < ApplicationRecord
   end
 
   def promo?
-    promo && amount_without_delivery >= promo
+    !promo.nil? && amount_without_delivery >= promo
   end
 
   def amount

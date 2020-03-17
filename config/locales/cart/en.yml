@@ -22,7 +22,8 @@ en:
       russia:
         title: Russia shipping by CDEK
         desc: More than 500 cities from 265 ₽
-        promo: Free delivery starting from 10.000 ₽
+        promo: "Free delivery starting from %{promo} ₽"
+        free_shipping: Free delivery
 
       world:
         title: International

@@ -97,7 +97,7 @@ export default function Index ({ locale, appleid, user }) {
   const isPickup = () => values.delivery === 'pickup'
   const isRussia = () => values.delivery === 'russia'
   const isInternational = () => values.delivery === 'international'
-  const isPromo = () => price.promo && parseFloat(price.sell) >= price.promo
+  const isPromo = () => ((price.promo || price.promo === 0) && parseFloat(price.sell) >= price.promo)
 
   return (
     <div className={page.gray}>
@@ -202,9 +202,14 @@ export default function Index ({ locale, appleid, user }) {
                         <div className={styles.deliveryItemDesc}>
                           {I18n.t('cart.shipping.russia.desc')}
                           <div className={styles.promo}>
-                            {price && isPromo() &&
-                              I18n.t('cart.shipping.russia.promo')
-                            }
+                            <>
+                              {price && price.promo > 0 &&
+                                I18n.t('cart.shipping.russia.promo', { promo: price.promo })
+                              }
+                              {price && price.promo === 0 &&
+                                I18n.t('cart.shipping.russia.free_shipping')
+                              }
+                            </>
                           </div>
                         </div>
                       </div>
