@@ -19,7 +19,6 @@ class Form extends React.Component {
       variants: [],
     },
     values: {
-      title: null,
       state: 'active',
       images: [],
       image_ids: null,
