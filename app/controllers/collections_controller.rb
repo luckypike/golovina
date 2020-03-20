@@ -53,9 +53,16 @@ class CollectionsController < ApplicationController
   end
 
   def collection_params
-    params.require(:collection).permit(
-      :title, :slug, :desc, :text, :weight,
-      image_ids: [], images_attributes: %i[id weight]
-    )
+    permitted =
+      Collection.globalize_attribute_names \
+      + %i[title text desc text weight] \
+      + [
+        image_ids: %i[]
+      ] \
+      + [
+        images_attributes: %i[id weight]
+      ]
+
+    params.require(:collection).permit(*permitted)
   end
 end

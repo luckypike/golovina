@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_20_141903) do
+ActiveRecord::Schema.define(version: 2020_03_20_112506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 2020_01_20_141903) do
     t.string "title"
     t.index ["category_id"], name: "index_category_translations_on_category_id"
     t.index ["locale"], name: "index_category_translations_on_locale"
+  end
+
+  create_table "collection_translations", force: :cascade do |t|
+    t.bigint "collection_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "text"
+    t.index ["collection_id"], name: "index_collection_translations_on_collection_id"
+    t.index ["locale"], name: "index_collection_translations_on_locale"
   end
 
   create_table "collections", force: :cascade do |t|

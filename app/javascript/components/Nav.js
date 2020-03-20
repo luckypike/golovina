@@ -81,7 +81,7 @@ class Nav extends Component {
             <div className={classNames(styles.sub)} key={collection.id}>
               <a href={path('collection_path', { id: collection.slug })}>
                 <div>
-                  {I18n.t(`header.nav.collection.${collection.id}`)}
+                  {collection.title}
                 </div>
                 {collection.desc &&
                   <div className={styles.collection}>

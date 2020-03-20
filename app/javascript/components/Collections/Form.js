@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import { path } from '../Routes'
+import { useI18n } from '../I18n'
 
 import Images from '../Images/Images'
 
@@ -13,9 +14,11 @@ class Form extends React.Component {
   state = {
     images: this.props.values.images || [],
     values: {
-      title: this.props.values.title || '',
+      title_ru: this.props.values.title_ru || '',
+      title_en: this.props.values.title_en || '',
       slug: this.props.values.slug || '',
-      text: this.props.values.text || '',
+      text_ru: this.props.values.text_ru || '',
+      text_en: this.props.values.text_en || '',
       desc: this.props.values.desc || '',
     }
   }
@@ -60,8 +63,9 @@ class Form extends React.Component {
   }
 
   render () {
-    const { title, id } = this.props
+    const { title, id, locale } = this.props
     const { values, images } = this.state
+    const I18n = useI18n(locale)
 
     return (
       <div className={page.gray}>
@@ -71,15 +75,26 @@ class Form extends React.Component {
 
         <div className={form.root}>
           <form onSubmit={this.handleSubmit}>
-            <div className={form.input}>
-              <div className={form.label}>
-                Название
-              </div>
 
-              <div className={form.input_input}>
-                <input type="text" value={values.title} name="title" onChange={this.handleInputChange} />
+            {I18n.available_locales.map(locale =>
+              <div className={form.gl} key={locale}>
+                <label>
+                  <div className={form.label}>
+                    {locale}
+                  </div>
+
+                  <div className={form.input}>
+                    <input
+                      type="text"
+                      value={values[`title_${locale}`]}
+                      name={`title_${locale}`}
+                      onChange={this.handleInputChange}
+                    />
+                  </div>
+                </label>
+
               </div>
-            </div>
+            )}
 
             <div className={form.input}>
               <div className={form.label}>
@@ -91,15 +106,6 @@ class Form extends React.Component {
               </div>
             </div>
 
-            <div className={form.input}>
-              <div className={form.label}>
-                Описание
-              </div>
-
-              <div className={form.input_input}>
-                <input type="text" value={values.desc} name="desc" onChange={this.handleInputChange} />
-              </div>
-            </div>
 
             <div className={form.input}>
               <div className={form.label}>
@@ -107,9 +113,29 @@ class Form extends React.Component {
               </div>
 
               <div className={form.input_input}>
-                <textarea name="text" value={values.text} rows="2" onChange={this.handleInputChange} />
+                <input type="text" value={values.desc} name="desc" onChange={this.handleInputChange} />
               </div>
             </div>
+
+            {I18n.available_locales.map(locale =>
+              <div className={form.gl} key={locale}>
+                <label>
+                  <div className={form.label}>
+                    Описание {locale}
+                  </div>
+
+                  <div className={form.input}>
+                    <textarea
+                      rows="2"
+                      value={values[`text_${locale}`]}
+                      name={`text_${locale}`}
+                      onChange={this.handleInputChange}
+                    />
+                  </div>
+                </label>
+
+              </div>
+            )}
 
             <div className={form.input}>
               <div className={form.label}>
