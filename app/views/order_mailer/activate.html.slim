@@ -36,6 +36,12 @@
     - else
       | Самовывоз
 
+    - if @order.gift?
+      br
+      ' Подарочная упаковка:
+      => Order::GIFT
+      | ₽
+
     br
     ' Общая стоимость:
     = number_to_rub @order.amount

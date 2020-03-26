@@ -88,7 +88,8 @@
   /* grid-template-columns: 1fr 1fr; */
 }
 
-.deliveryItem {
+.deliveryItem,
+.gift {
   box-shadow: 0 0 0 1px var(--sep_color);
   cursor: pointer;
   padding: calc(var(--yr) * var(--s1)) var(--xr) calc(var(--yr) * var(--s2));
@@ -103,8 +104,13 @@
   }
 }
 
-.deliveryItemDesc {
+.deliveryItemDesc,
+.giftDesc {
   composes: at from '../Fonts.module.css';
+}
+
+.gift {
+  margin-top: calc(var(--yr) * var(--s2));
 }
 
 .appleid {

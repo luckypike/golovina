@@ -111,6 +111,7 @@ class OrdersController < ApplicationController
       :delivery_city_id,
       :address,
       :phone,
+      :gift,
       user_attributes: [
         :name, :sname, :email
       ]

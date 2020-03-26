@@ -11,6 +11,7 @@ json.price do
   json.sell @carts.sum(&:price_sell)
   json.origin @carts.sum(&:price)
   json.promo Order::PROMO
+  json.gift Order::GIFT
 end
 
 json.values do

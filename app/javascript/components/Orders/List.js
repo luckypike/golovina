@@ -68,10 +68,16 @@ class Item extends Component {
               <br />
               {I18n.t('order.phone')}: {link ? <a href={`tel:${order.phone}`}>{order.phone}</a> : order.phone}
               <br />
+              {order.gift &&
+                <>
+                  {I18n.t('order.gift')}: {order.gift} ₽
+                  <br />
+                </>
+              }
               {order.delivery && order.delivery === 'russia' &&
                 <>
                   <p>
-                    {I18n.t('order.delivery')}: {order.delivery_city.title} ({order.delivery_city[order.delivery_option]} руб.)
+                    {I18n.t('order.delivery')}: {order.delivery_city.title} ({order.delivery_city[order.delivery_option]} ₽)
                     <br />
                     {order.delivery_option === 'storage' && `${I18n.t('order.storage')}` }
                     {order.delivery_option === 'door' && `${I18n.t('order.door')}: ${order.address}` }

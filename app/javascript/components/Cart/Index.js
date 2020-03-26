@@ -268,31 +268,50 @@ export default function Index ({ locale, appleid, user }) {
                   </p>
 
                   {city &&
-                    <div className={form.radio}>
-                      {city.door &&
-                        <label>
-                          <input
-                            type="radio"
-                            name="delivery_option"
-                            checked={values.delivery_option === 'door'}
-                            onChange={() => setValues({ ...values, delivery_option: 'door' })}
-                          />
-                          Доставка до двери ({city.door_days} дн.): {isPromo() ? 'бесплатно' : `${city.door} ₽`}
-                        </label>
-                      }
+                    <>
+                      <div className={form.radio}>
+                        {city.door &&
+                          <label>
+                            <input
+                              type="radio"
+                              name="delivery_option"
+                              checked={values.delivery_option === 'door'}
+                              onChange={() => setValues({ ...values, delivery_option: 'door' })}
+                            />
+                            Доставка до двери ({city.door_days} дн.): {isPromo() ? 'бесплатно' : `${city.door} ₽`}
+                          </label>
+                        }
 
-                      {city.storage &&
-                        <label>
-                          <input
-                            type="radio"
-                            name="delivery_option"
-                            checked={values.delivery_option === 'storage'}
-                            onChange={() => setValues({ ...values, delivery_option: 'storage' })}
-                          />
-                          Доставка до точки выдачи ({city.storage_days}): {isPromo() ? 'бесплатно' : `${city.storage} ₽`}
-                        </label>
+                        {city.storage &&
+                          <label>
+                            <input
+                              type="radio"
+                              name="delivery_option"
+                              checked={values.delivery_option === 'storage'}
+                              onChange={() => setValues({ ...values, delivery_option: 'storage' })}
+                            />
+                            Доставка до точки выдачи ({city.storage_days}): {isPromo() ? 'бесплатно' : `${city.storage} ₽`}
+                          </label>
+                        }
+                      </div>
+
+                      {city.id == 280 &&
+                        <div
+                          className={classNames(
+                            styles.gift,
+                            { [styles.active]: values.gift }
+                          )}
+                          onClick={() => setValues({ ...values, gift: !values.gift })}
+                        >
+                          <strong>
+                            {I18n.t('cart.gift.title')}
+                          </strong>
+                          <div className={styles.giftDesc}>
+                            {I18n.t('cart.gift.desc', { gift: price.gift })}
+                          </div>
+                        </div>
                       }
-                    </div>
+                    </>
                   }
 
                   <Errors errors={errors.delivery_city} />
@@ -365,7 +384,7 @@ export default function Index ({ locale, appleid, user }) {
                 <h2>
                   {I18n.t('cart.total')}
                   <div className={styles.price}>
-                    <Price sell={parseFloat(price.sell) + (isInternational() ? 2500 : (isRussia() && !isPromo() ? city[values.delivery_option] : 0))} />
+                    <Price sell={parseFloat(price.sell) + (isInternational() ? 2500 : (isRussia() && !isPromo() ? city[values.delivery_option] : 0)) + (values.gift ? price.gift : 0)} />
                   </div>
                 </h2>
               }
