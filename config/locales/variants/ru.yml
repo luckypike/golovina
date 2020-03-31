@@ -41,7 +41,11 @@ ru:
 
   variants:
     premium:
-      title: Premium
+      title: Golovina PREMIUM
+      desc:
+
+    stayhome:
+      title: '#Stayhome'
       desc:
 
     latest:

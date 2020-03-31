@@ -1,0 +1,7 @@
+- title I18n.t('variants.stayhome.title')
+- description I18n.t('variants.stayhome.desc')
+- set_meta_tags og: { \
+  image: Image.stayhome.map{ |image| image.photo.large.url } \
+}
+
+= react_component 'Variants/Stayhome'
