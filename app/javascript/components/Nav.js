@@ -64,10 +64,6 @@ class Nav extends Component {
           )}
 
           <div className={styles.sub}>
-            <a href={path('catalog_last_path')}>{I18n.t('variants.last.title')}</a>
-          </div>
-
-          <div className={styles.sub}>
             <a href={path('catalog_sale_path')}>{I18n.t('variants.sale.title')}</a>
           </div>
 
