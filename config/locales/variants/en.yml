@@ -40,6 +40,10 @@ en:
     more: More information
 
   variants:
+    premium:
+      title: Premium
+      desc:
+
     latest:
       title: New
       desc: New products from Golovina

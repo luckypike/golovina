@@ -1,0 +1,7 @@
+- title I18n.t('variants.premium.title')
+- description I18n.t('variants.premium.desc')
+- set_meta_tags og: { \
+  image: Image.premium.map{ |image| image.photo.large.url } \
+}
+
+= react_component 'Variants/Premium'

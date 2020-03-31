@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get :latest, controller: :variants
     get :sale, controller: :variants
     get :soon, controller: :variants
+    get :premium, controller: :variants
     get ':slug', to: 'categories#show', as: :category
     get ':slug/:id', to: 'variants#show', as: :variant
   end

@@ -35,6 +35,12 @@ class Image < ApplicationRecord
       end
     end
 
+    def premium
+      Rails.cache.fetch('images/premium', expires_in: 1.hour) do
+        variants.where(premium: true).map(&:images).flatten
+      end
+    end
+
     def overall
       Rails.cache.fetch('images/overall', expires_in: 1.hour) do
         variants.map(&:images).flatten

@@ -40,6 +40,10 @@ ru:
     more: Подробнее
 
   variants:
+    premium:
+      title: Premium
+      desc:
+
     latest:
       title: Новые товары
       desc: Новинки поступившие в продажу из коллекций Golovina

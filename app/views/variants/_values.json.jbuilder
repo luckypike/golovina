@@ -31,6 +31,8 @@ json.values do
   json.sale variant.sale || ''
   json.last variant.last || ''
   json.pinned variant.pinned || ''
+  json.premium variant.premium || ''
+  json.stayhome variant.stayhome || ''
 
   json.state variant.state || ''
   json.code variant.code || ''

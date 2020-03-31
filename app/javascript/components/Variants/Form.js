@@ -174,6 +174,24 @@ export default function Form ({ id, product_id: productId, locale }) {
           <div className={form.el}>
             <label>
               <div className={form.checkbox}>
+                <input type="checkbox" name="premium" checked={values.premium} onChange={handleChange} />
+                  Premium
+              </div>
+            </label>
+          </div>
+
+          <div className={form.el}>
+            <label>
+              <div className={form.checkbox}>
+                <input type="checkbox" name="stayhome" checked={values.stayhome} onChange={handleChange} />
+                  Stayhome
+              </div>
+            </label>
+          </div>
+
+          <div className={form.el}>
+            <label>
+              <div className={form.checkbox}>
                 <input type="checkbox" name="last" checked={values.last} onChange={handleChange} />
                   Последняя вещь
               </div>

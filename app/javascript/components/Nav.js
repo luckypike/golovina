@@ -54,6 +54,10 @@ class Nav extends Component {
           </div>
 
           <div className={styles.sub}>
+            <a href={path('catalog_premium_path')}>Premium</a>
+          </div>
+
+          <div className={styles.sub}>
             <a href={path('kits_path')}>{I18n.t('kits.title')}</a>
           </div>
 
