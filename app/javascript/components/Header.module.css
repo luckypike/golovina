@@ -130,6 +130,41 @@
 
 }
 
+.lang {
+  color: color-mod(black tint(87%));
+  font-weight: 300;
+  display: none;
+  line-height: calc(var(--yr) * 8);
+  margin-right: calc(var(--yr) * 6);
+  padding: calc(var(--yr) * 2.5) 0;
+
+  & a {
+    display: block;
+    margin: 0 calc(var(--yr) * 2);
+    position: relative;
+    opacity: 0.3;
+
+    &.active {
+      opacity: 1;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        border-bottom: 1px solid var(--pr_color);
+      }
+    }
+  }
+
+  @media (--s) {
+    display: flex;
+
+    composes: at from './Fonts.module.css';
+  }
+}
+
 
 .search {
   display: block;
@@ -249,6 +284,18 @@
           & .d {
             fill: var(--pr_color);
           }
+        }
+      }
+    }
+
+    & .lang {
+      color: var(--wht_color);
+
+      & a {
+        color: var(--wht_color);
+
+        &:before {
+          border-bottom: 1px solid var(--wht_color);
         }
       }
     }

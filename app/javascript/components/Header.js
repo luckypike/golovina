@@ -111,6 +111,15 @@ export default function Header (props) {
       </div>
 
       <div className={styles.caw}>
+        <div className={styles.lang}>
+          <a className={classNames({ [styles.active]: props.locale === 'ru' })} href="https://golovina.store/" >
+            Рус
+          </a>
+          /
+          <a className={classNames({ [styles.active]: props.locale === 'en' })} href="https://en.golovina.store/">
+            Eng
+          </a>
+        </div>
         {/* <a href={path('wishlist_path')} className={classNames(styles.wishlist, { [styles.active]: wishlist > 0 })}>
           <svg viewBox="0 0 24 24">
             <path className="a" d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>

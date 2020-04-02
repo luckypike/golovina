@@ -70,3 +70,40 @@
 .logout {
   margin-left: auto;
 }
+
+.lang {
+  composes: lang from './Header.module.css';
+
+  display: flex;
+  font-size: calc(var(--yr) * var(--fs));
+  line-height: calc(var(--yr) * 8);
+  margin: calc(var(--yr) * 7) 0 0 0;
+  padding: 0;
+
+  & a {
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.active {
+      opacity: 1;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        border-bottom: 1px solid var(--pr_color);
+      }
+    }
+  }
+
+  @media (--s) {
+    display: none;
+  }
+}

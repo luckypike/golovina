@@ -178,6 +178,16 @@ class Nav extends Component {
             </div>
           </Section>
         }
+
+        <div className={styles.lang}>
+          <a className={classNames({ [styles.active]: locale === 'ru' })} href="https://golovina.store/" >
+            Рус
+          </a>
+          /
+          <a className={classNames({ [styles.active]: locale === 'en' })} href="https://en.golovina.store/">
+            Eng
+          </a>
+        </div>
       </nav>
     )
   }
