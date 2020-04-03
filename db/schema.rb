@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_31_130030) do
+ActiveRecord::Schema.define(version: 2020_04_03_114133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -278,6 +278,16 @@ ActiveRecord::Schema.define(version: 2020_03_31_130030) do
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["colors"], name: "index_products_on_colors", using: :gin
     t.index ["kind_id"], name: "index_products_on_kind_id"
+  end
+
+  create_table "promo_translations", force: :cascade do |t|
+    t.bigint "promo_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.index ["locale"], name: "index_promo_translations_on_locale"
+    t.index ["promo_id"], name: "index_promo_translations_on_promo_id"
   end
 
   create_table "promos", force: :cascade do |t|

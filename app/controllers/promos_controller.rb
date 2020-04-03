@@ -58,6 +58,8 @@ class PromosController < ApplicationController
   end
 
   def promo_params
-    params.require(:promo).permit(:title, :link, :front, :popup)
+    permitted = Promo.globalize_attribute_names + %i[link front popup]
+
+    params.require(:promo).permit(*permitted)
   end
 end

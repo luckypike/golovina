@@ -4,6 +4,7 @@ import axios from 'axios'
 import Cookies from 'universal-cookie'
 
 import { path } from './Routes'
+import { useI18n } from './I18n'
 
 import styles from './Ad.module.css'
 
@@ -11,6 +12,8 @@ export default function Ad (props) {
   const cookies = new Cookies()
   const [noad, setNoad] = useState(false)
   const [promo, setPromo] = useState()
+
+  const I18n = useI18n(props.locale)
 
   useEffect(() => {
     const _loadAsyncData = async () => {
@@ -54,12 +57,12 @@ export default function Ad (props) {
 
         <div className={styles.ad}>
           <div className={styles.text}>
-            {promo.title}
+            {promo[`title_${props.locale}`]}
           </div>
 
           {promo.link && promo.link !== '' &&
             <a href={promo.link} className={styles.more} onClick={handleCookiesClear}>
-              Подробнее
+              {I18n.t('static.index.more')}
             </a>
           }
         </div>

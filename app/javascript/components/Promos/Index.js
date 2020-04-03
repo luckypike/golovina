@@ -34,7 +34,7 @@ class Promo extends React.Component {
         ) : (
           <div onClick={() => this.setState({ edit: true })}>
             <div className={styles.subject}>
-              {promo.title}
+              {promo.title_ru}
             </div>
           </div>
         )}

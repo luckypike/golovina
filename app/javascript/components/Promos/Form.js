@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import update from 'immutability-helper'
 
 import { path } from '../Routes'
+import { useI18n } from '../I18n'
 
 import Images from '../Images/Images'
 
@@ -15,7 +16,8 @@ class Form extends React.Component {
   state = {
     promo: {
       id: null,
-      title: '',
+      title_en: '',
+      title_ru: '',
       link: '',
       popup: '',
       front: '',
@@ -31,20 +33,33 @@ class Form extends React.Component {
   render () {
     const { promo } = this.state
 
+    const {locale } = this.props
+    const I18n = useI18n(locale)
+
     return (
       <div>
         <div>
           <form onSubmit={this.handleSubmit}>
 
-            <div className={form.input}>
-              <div className={form.label}>
-                Текст
-              </div>
+            {I18n.available_locales.map(locale =>
+              <div className={form.gl} key={locale}>
+                <label>
+                  <div className={form.label}>
+                    Текст {locale}
+                  </div>
 
-              <div className={form.input_input}>
-                <textarea name="title" value={promo.title} rows="2" onChange={this.handleInputChange} />
+                  <div className={form.input}>
+                    <textarea
+                      rows="2"
+                      value={promo[`title_${locale}`]}
+                      name={`title_${locale}`}
+                      onChange={this.handleInputChange}
+                    />
+                  </div>
+                </label>
+
               </div>
-            </div>
+            )}
 
             <div className={form.input}>
               <div className={form.label}>
