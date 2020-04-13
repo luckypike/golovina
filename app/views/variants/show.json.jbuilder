@@ -40,6 +40,7 @@ json.variants @variants do |variant|
       json.id kit.id
       json.title kit.title.present? ? kit.human_title : kit.human_title.truncate(60)
       json.image kit.images.present? ? kit.images.sort_by(&:weight).first.photo.thumb.url : nil
+      json.items kit.variants.size
     end
   end
 end

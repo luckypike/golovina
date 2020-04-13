@@ -22,7 +22,7 @@
   @media (--m) {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: calc(var(--xr) * 2);
+    grid-gap: calc(var(--xr) * 2);
   }
 }
 

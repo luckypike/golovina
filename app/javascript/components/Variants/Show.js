@@ -49,6 +49,7 @@ class Variant extends Component {
 
   mount = React.createRef()
   slides = React.createRef()
+  kit_slides = React.createRef()
 
   componentDidMount () {
     window.addEventListener('resize', this.updateDimensions)
@@ -60,6 +61,8 @@ class Variant extends Component {
       if (this.glide) {
         this.glide.destroy(true)
         this.glide = null
+        this.kit_glide.destroy(true)
+        this.kit_glide = null
       }
     }
 
@@ -106,6 +109,19 @@ class Variant extends Component {
       this.glide.destroy(true)
       this.glide = null
     }
+
+    if (this.kit_glide) {
+      this.kit_glide.destroy(true)
+      this.kit_glide = null
+    }
+
+    if (!this.kit_glide && this.state.variant.kits.length > 1) {
+      this.kit_glide = new Siema({
+        selector: '.siema_kits'
+      });
+    }
+
+    console.log(this.kit_glide);
   }
 
   selectSize = availability => {
@@ -316,12 +332,18 @@ class Variant extends Component {
               {variant.kits &&
                 <Acc id="kits" title={I18n.t('variant.kits')} onToggle={this.toggleSection} section={section}>
                   <div className={classNames(styles.kits, { [styles.single]: variant.kits.length === 1 })}>
-                    {variant.kits.map((kit) =>
-                      <a href={path('kit_path', { id: kit.id })} key={kit.id} className={styles.kit_item}>
-                        <div className={styles.kit_image}><img src={kit.image}/></div>
-                        <h2 className={styles.kit_title}>{kit.title}</h2>
-                      </a>
-                    )}
+                    <div className={classNames('siema_kits', styles.kit_slides)} ref={this.kit_slides}>
+                      {variant.kits.map((kit) =>
+                        <div key={kit.id} className={classNames('glide__slide', styles.kit_item)}>
+                          <div className={styles.kit_image}><img src={kit.image}/></div>
+                          <h2 className={styles.kit_title}>{kit.title}</h2>
+                          <div className={styles.kit_items}>{I18n.t('kit_variants', {count: kit.items})}</div>
+                          <a className={classNames(styles.kit_link, buttons.main)} href={path('kit_path', { id: kit.id })}>
+                            {I18n.t('variant.kit_select')}
+                          </a>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </Acc>
               }
