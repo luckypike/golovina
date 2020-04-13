@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   PROMO = 0
-  GIFT = 150
+  GIFT = 300
 
   enum delivery_option: { door: 1, storage: 2 }
   enum delivery: { pickup: 1, russia: 2, international: 3 }
