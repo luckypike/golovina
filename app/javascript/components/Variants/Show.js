@@ -115,7 +115,7 @@ class Variant extends Component {
       this.kit_glide = null
     }
 
-    if (!this.kit_glide && this.state.variant.kits.length > 1) {
+    if (!this.kit_glide && this.state.variant.kits && this.state.variant.kits.length > 1) {
       this.kit_glide = new Siema({
         selector: '.siema_kits'
       });
