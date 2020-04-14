@@ -120,8 +120,6 @@ class Variant extends Component {
         selector: '.siema_kits'
       });
     }
-
-    console.log(this.kit_glide);
   }
 
   selectSize = availability => {
@@ -339,7 +337,7 @@ class Variant extends Component {
                           <h2 className={styles.kit_title}>{kit.title}</h2>
                           <div className={styles.kit_items}>{I18n.t('kit_variants', {count: kit.items})}</div>
                           <a className={classNames(styles.kit_link, buttons.main)} href={path('kit_path', { id: kit.id })}>
-                            {I18n.t('variant.kit_select')}
+                            {I18n.t('variant.more')}
                           </a>
                         </div>
                       )}
