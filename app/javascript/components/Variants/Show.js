@@ -61,6 +61,8 @@ class Variant extends Component {
       if (this.glide) {
         this.glide.destroy(true)
         this.glide = null
+      }
+      if(this.kit_glide) {
         this.kit_glide.destroy(true)
         this.kit_glide = null
       }
