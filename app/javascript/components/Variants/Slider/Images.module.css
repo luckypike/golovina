@@ -37,10 +37,11 @@
 }
 
 .root {
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: calc(var(--yr) * 2);
 
   @media(--s) {
-    display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-column-gap: calc(var(--xr) * 2);
   }
