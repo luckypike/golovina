@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_120215) do
+ActiveRecord::Schema.define(version: 2020_04_21_182225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -445,6 +445,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_120215) do
     t.boolean "premium"
     t.boolean "stayhome"
     t.boolean "morning"
+    t.boolean "bestseller"
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["last"], name: "index_variants_on_last"
     t.index ["latest"], name: "index_variants_on_latest"

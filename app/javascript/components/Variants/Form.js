@@ -157,7 +157,16 @@ export default function Form ({ id, product_id: productId, locale }) {
             <label>
               <div className={form.checkbox}>
                 <input type="checkbox" name="latest" checked={values.latest} onChange={handleChange} />
-                  New
+                  Новый сезон
+              </div>
+            </label>
+          </div>
+
+          <div className={form.el}>
+            <label>
+              <div className={form.checkbox}>
+                <input type="checkbox" name="bestseller" checked={values.bestseller} onChange={handleChange} />
+                  Бестселлер
               </div>
             </label>
           </div>
@@ -202,7 +211,7 @@ export default function Form ({ id, product_id: productId, locale }) {
             <label>
               <div className={form.checkbox}>
                 <input type="checkbox" name="last" checked={values.last} onChange={handleChange} />
-                  Последняя вещь
+                  Последний размер
               </div>
             </label>
           </div>

@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-gap: var(--yr);
-  grid-row-gap: calc(var(--yr) * 2);
+  grid-row-gap: calc(var(--yr) * 1);
   margin-bottom: calc(var(--yr) * var(--s3));
 
   @media(--s) {
@@ -38,6 +38,14 @@
     &:nth-child(even) {
       & .image {
 
+      }
+
+      & .labels {
+        justify-content: flex-end;
+      }
+
+      & .label {
+        margin: 0 0 calc(var(--yr) * var(--s2)) calc(var(--yr) * 2);
       }
 
       & .dt {
@@ -117,17 +125,38 @@
   color: var(--gr_color);
 }
 
+.labels {
+  display: flex;
+  justify-content: center;
+
+  @media(--s) {
+    justify-content: flex-start;
+  }
+}
+
 .label {
-  position: absolute;
+  margin: 0 var(--yr);
+  /* position: absolute; */
   display: block;
   color: var(--gr_color);
-  z-index: 1;
-  top: 0;
+  /* z-index: 1; */
+  /* top: 0; */
 
   @media(--s) {
     position: static;
-    display: inline-block;
-    margin: 0 0 calc(var(--yr) * var(--s2));
+    margin: 0 calc(var(--yr) * 2) calc(var(--yr) * var(--s2)) 0;
     composes: at from '../Fonts.module.css';
+  }
+
+  &.new {
+    color: var(--orng_color);
+  }
+
+  &.latest {
+    color: var(--red_color);
+  }
+
+  &.bestseller {
+    color: var(--grn_color);
   }
 }

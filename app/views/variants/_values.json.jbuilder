@@ -29,6 +29,7 @@ json.values do
 
   json.latest variant.latest || ''
   json.sale variant.sale || ''
+  json.bestseller variant.bestseller || ''
   json.last variant.last || ''
   json.pinned variant.pinned || ''
   json.premium variant.premium || ''

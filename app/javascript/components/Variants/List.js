@@ -22,17 +22,32 @@ export default function List ({ variants }) {
           <Images variant={variant} />
 
           <div className={styles.dt}>
-            {variant.latest &&
-              <div className={styles.label}>
-                New
-              </div>
-            }
+            <div className={styles.labels}>
+              {variant.latest &&
+                <div className={classNames(styles.label, styles.new)}>
+                  Новый сезон
+                </div>
+              }
 
-            {variant.sale &&
-              <div className={styles.label}>
-                Sale
-              </div>
-            }
+              {variant.bestseller &&
+                <div className={classNames(styles.label, styles.bestseller)}>
+                  Бестселлер
+                </div>
+              }
+
+              {variant.sale &&
+                <div className={classNames(styles.label, styles.sale)}>
+                  Sale
+                </div>
+              }
+
+              {variant.latest &&
+                <div className={classNames(styles.label, styles.latest)}>
+                  Последний размер
+                </div>
+              }
+
+            </div>
 
             <div className={styles.desc}>
               <div className={styles.title}>

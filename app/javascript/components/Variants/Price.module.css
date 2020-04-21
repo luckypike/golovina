@@ -13,5 +13,6 @@
 }
 
 .last {
+  color: var(--red_color);
   margin-right: 0.75em;
 }
