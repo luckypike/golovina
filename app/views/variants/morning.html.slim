@@ -1,0 +1,7 @@
+- title I18n.t('variants.morning.title')
+- description I18n.t('variants.morning.desc')
+- set_meta_tags og: { \
+  image: Image.morning.map{ |image| image.photo.large.url } \
+}
+
+= react_component 'Variants/Morning'

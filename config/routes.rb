@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get :soon, controller: :variants
     get :premium, controller: :variants
     get :stayhome, controller: :variants
+    get :morning, controller: :variants
     get ':slug', to: 'categories#show', as: :category
     get ':slug/:id', to: 'variants#show', as: :variant
   end

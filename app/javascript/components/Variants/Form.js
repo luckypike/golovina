@@ -183,6 +183,15 @@ export default function Form ({ id, product_id: productId, locale }) {
           <div className={form.el}>
             <label>
               <div className={form.checkbox}>
+                <input type="checkbox" name="morning" checked={values.morning} onChange={handleChange} />
+                  Morning
+              </div>
+            </label>
+          </div>
+
+          <div className={form.el}>
+            <label>
+              <div className={form.checkbox}>
                 <input type="checkbox" name="stayhome" checked={values.stayhome} onChange={handleChange} />
                   Stayhome
               </div>

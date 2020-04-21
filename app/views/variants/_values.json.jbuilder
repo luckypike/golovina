@@ -32,6 +32,7 @@ json.values do
   json.last variant.last || ''
   json.pinned variant.pinned || ''
   json.premium variant.premium || ''
+  json.morning variant.morning || ''
   json.stayhome variant.stayhome || ''
 
   json.state variant.state || ''

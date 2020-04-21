@@ -3,7 +3,7 @@ class VariantsController < ApplicationController
   before_action :set_variant, only: %i[edit update wishlist cart notification]
   before_action :authorize_variant, only: %i[edit update wishlist cart]
 
-  skip_after_action :verify_authorized, only: %i[latest soon sale last premium stayhome all]
+  skip_after_action :verify_authorized, only: %i[latest soon sale last premium morning stayhome all]
 
   # TODO: REWRITE
   def index
@@ -73,6 +73,14 @@ class VariantsController < ApplicationController
     @variants = policy_scope(Variant.not_archived)
       .with_translations(I18n.available_locales)
       .includes(product: :variants).where(stayhome: true)
+
+    respond_to :html, :json
+  end
+
+  def morning
+    @variants = policy_scope(Variant.not_archived)
+      .with_translations(I18n.available_locales)
+      .includes(product: :variants).where(morning: true)
 
     respond_to :html, :json
   end
@@ -212,7 +220,7 @@ class VariantsController < ApplicationController
   def variant_params
     permitted =
       Variant.globalize_attribute_names \
-      + %i[state code color_id price price_last created_at latest sale last pinned premium stayhome] \
+      + %i[state code color_id price price_last created_at latest sale last pinned premium stayhome morning] \
       + [
         {
           availabilities_attributes: %i[id size_id store_id quantity _destroy],
