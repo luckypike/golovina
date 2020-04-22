@@ -41,8 +41,8 @@ export default function List ({ variants }) {
                 </div>
               }
 
-              {variant.latest &&
-                <div className={classNames(styles.label, styles.latest)}>
+              {variant.last &&
+                <div className={classNames(styles.label, styles.last)}>
                   Последний размер
                 </div>
               }

@@ -152,7 +152,7 @@
     color: var(--orng_color);
   }
 
-  &.latest {
+  &.last {
     color: var(--red_color);
   }
 
