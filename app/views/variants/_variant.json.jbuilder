@@ -1,4 +1,14 @@
-json.extract! variant, :id, :price, :price_last, :price_sell, :color_id, :sale, :latest, :code, :state, :bestseller, :last
+json.extract! variant, :id, :price, :price_last, :price_sell, :color_id, :code, :state
+
+if variant.available?
+  json.latest variant.latest || '' unless variant.bestseller
+  json.sale variant.sale || '' unless variant.last
+  json.bestseller variant.bestseller || ''
+  json.last variant.last || ''
+elsif
+  json.sold_out true
+end
+
 json.created_at variant.created_at.strftime('%FT%I:%M')
 json.can_edit policy(variant).edit?
 

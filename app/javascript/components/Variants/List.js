@@ -47,6 +47,12 @@ export default function List ({ variants }) {
                 </div>
               }
 
+              {variant.sold_out &&
+                <div className={classNames(styles.label, styles.sold_out)}>
+                  Распродано
+                </div>
+              }
+
             </div>
 
             <div className={styles.desc}>

@@ -148,7 +148,8 @@
     composes: at from '../Fonts.module.css';
   }
 
-  &.new {
+  &.new,
+  &.sold_out {
     color: var(--orng_color);
   }
 
