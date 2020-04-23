@@ -24,13 +24,13 @@ en:
         desc: Moscow, Bolshaya Nikitskaya 21/18 str 4
 
       russia:
-        title: Russia shipping by CDEK
+        title: Russia shipping by CDEK (free)
         desc: More than 500 cities from 265 ₽
         promo: "Free delivery starting from %{promo} ₽"
         free_shipping: Free delivery
 
       world:
         title: International
-        desc: International shipping — 2500 ₽
+        desc: International shipping — 2500 ₽, free shipping for 30000 ₽ purchase
 
       data: Shipping data

@@ -356,10 +356,6 @@ class Variant extends Component {
 
               <Acc id="delivery" title={I18n.t('variant.delivery.title')} onToggle={this.toggleSection} section={section}>
                 <p>
-                  {I18n.t('variant.delivery.moscow')}
-                </p>
-
-                <p>
                   {I18n.t('variant.delivery.russia')}
                 </p>
 

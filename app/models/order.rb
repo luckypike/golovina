@@ -79,9 +79,9 @@ class Order < ApplicationRecord
 
   def amount
     if promo?
-      @amount ||= order_items.map(&:price_sell).sum + (international? ? 2500 : 0) + (gift? ? GIFT : 0)
+      @amount ||= order_items.map(&:price_sell).sum + (international? ? (amount_without_delivery > 30000 ? 0 : 2500) : 0) + (gift? ? GIFT : 0)
     else
-      @amount ||= order_items.map(&:price_sell).sum + (international? ? 2500 : (russia? ? delivery_city.send(delivery_option) : 0)) + (gift? ? GIFT : 0)
+      @amount ||= order_items.map(&:price_sell).sum + (international? ? (amount_without_delivery > 30000 ? 0 : 2500) : (russia? ? delivery_city.send(delivery_option) : 0)) + (gift? ? GIFT : 0)
     end
   end
 

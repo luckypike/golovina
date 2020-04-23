@@ -24,8 +24,8 @@ en:
     delivery:
       title: Payment & Delivery
       moscow: Moscow shipping — 400 RUB
-      russia: Russia shipping — from 450 RUB
-      world: International shipping — 2500 RUB
+      russia: Russia shipping — free
+      world: International shipping — 2500 ₽, free shipping for 30000 ₽ purchase
 
     notify:
       desc: Comming soon. Notify me.

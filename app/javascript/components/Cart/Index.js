@@ -199,19 +199,6 @@ export default function Index ({ locale, appleid, user }) {
                         <strong>
                           {I18n.t('cart.shipping.russia.title')}
                         </strong>
-                        <div className={styles.deliveryItemDesc}>
-                          {I18n.t('cart.shipping.russia.desc')}
-                          <div className={styles.promo}>
-                            <>
-                              {price && price.promo > 0 &&
-                                I18n.t('cart.shipping.russia.promo', { promo: price.promo })
-                              }
-                              {price && price.promo === 0 &&
-                                I18n.t('cart.shipping.russia.free_shipping')
-                              }
-                            </>
-                          </div>
-                        </div>
                       </div>
                     }
                   </>
@@ -384,7 +371,7 @@ export default function Index ({ locale, appleid, user }) {
                 <h2>
                   {I18n.t('cart.total')}
                   <div className={styles.price}>
-                    <Price sell={parseFloat(price.sell) + (isInternational() ? 2500 : (isRussia() && !isPromo() ? city[values.delivery_option] : 0)) + (values.gift ? price.gift : 0)} />
+                    <Price sell={parseFloat(price.sell) + (isInternational() ? (parseFloat(price.sell) > 30000 ? 0 : 2500) : (isRussia() && !isPromo() ? city[values.delivery_option] : 0)) + (values.gift ? price.gift : 0)} />
                   </div>
                 </h2>
               }
