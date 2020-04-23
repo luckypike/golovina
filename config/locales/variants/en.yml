@@ -40,6 +40,13 @@ en:
     more: More information
     kit_select: Complement image
 
+    labels:
+      new: New season
+      bestseller: Bestseller
+      sale: Sale
+      last: Last size
+      sold_out: Sold out
+
   variants:
     premium:
       title: Golovina PREMIUM

@@ -25,31 +25,31 @@ export default function List ({ variants }) {
             <div className={styles.labels}>
               {variant.latest &&
                 <div className={classNames(styles.label, styles.new)}>
-                  Новый сезон
+                  {I18n.t('variant.labels.new')}
                 </div>
               }
 
               {variant.bestseller &&
                 <div className={classNames(styles.label, styles.bestseller)}>
-                  Бестселлер
+                  {I18n.t('variant.labels.bestseller')}
                 </div>
               }
 
               {variant.sale &&
                 <div className={classNames(styles.label, styles.sale)}>
-                  Sale
+                  {I18n.t('variant.labels.sale')}
                 </div>
               }
 
               {variant.last &&
                 <div className={classNames(styles.label, styles.last)}>
-                  Последний размер
+                  {I18n.t('variant.labels.last')}
                 </div>
               }
 
               {variant.sold_out &&
                 <div className={classNames(styles.label, styles.sold_out)}>
-                  Распродано
+                  {I18n.t('variant.labels.sold_out')}
                 </div>
               }
 

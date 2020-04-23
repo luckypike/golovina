@@ -30,6 +30,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  kit_variants:
+    one: "%{count} product in suggestion"
+    few: "%{count} products in suggestion"
+    many: "%{count} products in suggestion"
+    other: '%{count} products in suggestion'
+
   mailers:
     subjects:
       register: Client Registration

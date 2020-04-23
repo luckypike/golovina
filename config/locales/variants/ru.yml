@@ -40,6 +40,13 @@ ru:
     more: Подробнее
     kit_select: Дополнить образ
 
+    labels:
+      new: Новый сезон
+      bestseller: Бестселлер
+      sale: Sale
+      last: Последний размер
+      sold_out: Распродано
+
   variants:
     premium:
       title: Golovina PREMIUM
