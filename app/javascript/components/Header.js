@@ -17,7 +17,8 @@ Header.propTypes = {
   locale: PropTypes.string,
   user: PropTypes.object,
   collections: PropTypes.array,
-  categories: PropTypes.array
+  categories: PropTypes.array,
+  last: PropTypes.bool
 }
 
 Header.defaultProps = {
@@ -62,7 +63,7 @@ export default function Header (props) {
     }
   }, [scrolling])
 
-  const { index, user, categories, collections } = props
+  const { index, user, categories, collections, last } = props
 
   function handleScrollUp () {
     if (document) {
@@ -95,6 +96,7 @@ export default function Header (props) {
           categories={categories}
           collections={collections}
           user={user}
+          last={last}
         />
       </div>
 

@@ -195,5 +195,11 @@ class Variant < ApplicationRecord
     update_column(:sizes_cache, sizes.map(&:id))
   end
 
+  class << self
+    def for_header_last
+      active.where(last: true).present? ? true : false
+    end
+  end
+
 
 end

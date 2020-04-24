@@ -42,7 +42,7 @@ class Nav extends Component {
 
   render () {
     const { active, section } = this.state
-    const { user, categories, themes, collections, locale } = this.props
+    const { user, categories, themes, collections, locale, last } = this.props
 
     const I18n = useI18n(locale)
 
@@ -74,6 +74,12 @@ class Nav extends Component {
               <a href={path('catalog_category_path', { slug: category.slug })}>{category.title}</a>
             </div>
           )}
+
+          {last &&
+            <div className={styles.sub}>
+              <a href={path('catalog_last_path')}>{I18n.t('variants.last.title')}</a>
+            </div>
+          }
 
           <div className={styles.sub}>
             <a href={path('catalog_sale_path')}>{I18n.t('variants.sale.title')}</a>
