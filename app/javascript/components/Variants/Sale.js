@@ -23,7 +23,7 @@ class Sale extends Component {
     return (
       <div className={page.root}>
         <div className={page.title}>
-          <h1>Sale</h1>
+          <h1>Товары со скидкой</h1>
         </div>
 
         <div>
