@@ -1,9 +1,9 @@
 json.extract! variant, :id, :price, :price_last, :price_sell, :color_id, :code, :state
 
 if variant.available?
-  json.latest variant.latest || '' unless variant.bestseller
+  json.latest variant.latest || '' unless variant.bestseller || variant.last
   json.sale variant.sale || '' unless variant.last
-  json.bestseller variant.bestseller || ''
+  json.bestseller variant.bestseller || '' unless variant.last
   json.last variant.last || ''
 elsif
   json.sold_out true
