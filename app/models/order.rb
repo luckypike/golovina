@@ -53,7 +53,7 @@ class Order < ApplicationRecord
 
   validates :delivery, presence: true
   validate :quantity_cannot_be_greater_than_total, on: :create
-  validates :street, :house, :appartment, presence: true, if: -> { (russia? && door?) || international? }
+  validates :street, :house, :appartment, presence: true, if: -> { ((russia? && door?) || international?) && undef? } 
   validates :delivery_city, presence: true, if: -> { russia? }
   validates :delivery_option, presence: true, if: -> { russia? }
 
