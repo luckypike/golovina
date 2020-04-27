@@ -179,9 +179,14 @@ class List extends Component {
   render () {
     const { orders, link } = this.props
 
+    const sortOrders = (a, b) => {
+      if (a.date > b.date) return -1
+      // if (a.date < b.date) return 1
+    }
+
     return (
       <div className={styles.root}>
-        {orders.map(order =>
+        {orders.sort(sortOrders).map(order =>
           <Item key={order.id} link={link} order={order} onOrderChange={this.props.onOrderChange}/>
         )}
       </div>
