@@ -109,7 +109,10 @@ class OrdersController < ApplicationController
       :delivery,
       :delivery_option,
       :delivery_city_id,
-      :address,
+      :street,
+      :house,
+      :appartment,
+      :comment,
       :phone,
       :gift,
       user_attributes: [

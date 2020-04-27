@@ -53,7 +53,7 @@ class Order < ApplicationRecord
 
   validates :delivery, presence: true
   validate :quantity_cannot_be_greater_than_total, on: :create
-  validates :address, presence: true, if: -> { (russia? && door?) || international? }
+  validates :street, :house, :appartment, presence: true, if: -> { (russia? && door?) || international? }
   validates :delivery_city, presence: true, if: -> { russia? }
   validates :delivery_option, presence: true, if: -> { russia? }
 
@@ -67,6 +67,10 @@ class Order < ApplicationRecord
 
   def number
     id
+  end
+
+  def address
+    address_old.present? ? address_old : "#{street} #{house}-#{appartment}"
   end
 
   def promo?

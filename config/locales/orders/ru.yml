@@ -1,6 +1,10 @@
 ru:
   order:
     address: Адрес доставки
+    street: Улица
+    house: Дом
+    appartment: Квартира/офис
+    comment: Комментарий
     customer: Получатель
     phone: Телефон
     delivery: Доставка

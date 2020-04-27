@@ -30,9 +30,17 @@
         | (#{@order.delivery_city[@order.delivery_option]} руб.)
       br
       = @order.address
+      - if @order.comment
+        br
+        ' Комментарий:
+        = @order.comment
     - elsif @order.international?
       ' Международная доставка:
       = @order.address
+      - if @order.comment
+        br
+        ' Комментарий:
+        = @order.comment
     - else
       | Самовывоз
 

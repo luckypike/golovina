@@ -80,7 +80,17 @@ class Item extends Component {
                     {I18n.t('order.delivery')}: {order.delivery_city.title} ({order.delivery_city[order.delivery_option]} ₽)
                     <br />
                     {order.delivery_option === 'storage' && `${I18n.t('order.storage')}` }
-                    {order.delivery_option === 'door' && `${I18n.t('order.door')}: ${order.address}` }
+                    {order.delivery_option === 'door' &&
+                      <>
+                        {I18n.t('order.door')}: {order.address}
+                        {order.comment &&
+                          <>
+                            <br />
+                            {I18n.t('order.comment')}: {order.comment}
+                          </>
+                        }
+                      </>
+                     }
                   </p>
                 </>
               }
@@ -88,6 +98,12 @@ class Item extends Component {
               {order.delivery && order.delivery === 'international' &&
                 <p>
                   {I18n.t('order.international')}: {order.address}
+                  {order.comment &&
+                    <>
+                      <br />
+                      {I18n.t('order.comment')}: {order.comment}
+                    </>
+                  }
                 </p>
               }
 

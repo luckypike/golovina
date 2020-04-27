@@ -306,19 +306,63 @@ export default function Index ({ locale, appleid, user }) {
               }
 
               {((isRussia() && values.delivery_option === 'door') || isInternational()) &&
-                <div className={form.el}>
-                  <label>
-                    <div className={form.label}>
-                      {I18n.t('order.address')}
-                    </div>
-                  </label>
+                <>
+                  <div className={form.el}>
+                    <label>
+                      <div className={form.label}>
+                        {I18n.t('order.street')}
+                      </div>
+                    </label>
 
-                  <div className={form.input}>
-                    <textarea type="text" name="address" value={values.address} onChange={handleInputChange} />
+                    <div className={form.input}>
+                      <input type="text" name="street" value={values.street} onChange={handleInputChange} />
+                    </div>
+
+                    <Errors errors={errors.street} />
                   </div>
 
-                  <Errors errors={errors.address} />
-                </div>
+                  <div className={form.el}>
+                    <label>
+                      <div className={form.label}>
+                        {I18n.t('order.house')}
+                      </div>
+                    </label>
+
+                    <div className={form.input}>
+                      <input type="text" name="house" value={values.house} onChange={handleInputChange} />
+                    </div>
+
+                    <Errors errors={errors.house} />
+                  </div>
+
+                  <div className={form.el}>
+                    <label>
+                      <div className={form.label}>
+                        {I18n.t('order.appartment')}
+                      </div>
+                    </label>
+
+                    <div className={form.input}>
+                      <input type="text" name="appartment" value={values.appartment} onChange={handleInputChange} />
+                    </div>
+
+                    <Errors errors={errors.appartment} />
+                  </div>
+
+                  <div className={form.el}>
+                    <label>
+                      <div className={form.label}>
+                        {I18n.t('order.comment')}
+                      </div>
+                    </label>
+
+                    <div className={form.input}>
+                      <textarea type="text" name="comment" value={values.comment} onChange={handleInputChange} />
+                    </div>
+
+                    <Errors errors={errors.comment} />
+                  </div>
+                </>
               }
 
               {(!user || user['guest?']) &&

@@ -1,6 +1,10 @@
 en:
   order:
     address: Delivery address
+    street: Street
+    house: House
+    appartment: Appartment
+    comment: Comment
     customer: Customer
     phone: Phone
     delivery: Delivery
