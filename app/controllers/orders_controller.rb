@@ -22,8 +22,9 @@ class OrdersController < ApplicationController
               ]
             ]
           ).where.not(state: [:undef]).where.not(user: nil)
-          .order(created_at: :desc)
+
         @orders = @orders.where(state: params[:state]) if params[:state]
+        @orders = @orders.sort_by { |order| order.payed_at.presence || order.created_at }.reverse
       end
     end
   end
