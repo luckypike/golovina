@@ -19,7 +19,8 @@ en:
       processing: Adding...
       checkout: Checkout
 
-    kits: Suggestions
+    title: Variant
+    kits: Complement image
     comp: Composition & Care
     delivery:
       title: Payment & Delivery

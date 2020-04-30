@@ -48,13 +48,6 @@ function Kit ({ kit }) {
       <div className={styles.slider}>
         <div className={classNames(styles.nav, { [styles.isSlide]: isSlide() })}>
           {current} / {kit.images.length}
-
-          {isSlide() &&
-            <>
-              <div className={styles.prev} onClick={() => slider.current.prev()} />
-              <div className={styles.next} onClick={() => slider.current.next()} />
-            </>
-          }
         </div>
 
         <div ref={mount} className={styles.images}>

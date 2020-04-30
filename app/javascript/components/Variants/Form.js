@@ -560,7 +560,7 @@ function Availabilities ({ dictionaries, availabilitiesValues, onValuesChange })
           <div className={form.store}>
             <div className={form.input}>
               <div className={form.label}>
-                Доступные размеры для {store.title}
+                {store.id === 2 ? `Доступные размеры на производстве` : `Доступные размеры для ${store.title}`}
               </div>
 
               <div className={styles.sizes}>

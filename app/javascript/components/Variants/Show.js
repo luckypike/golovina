@@ -333,10 +333,10 @@ class Variant extends Component {
                 <Acc id="kits" title={I18n.t('variant.kits')} onToggle={this.toggleSection} section={section}>
                   <div className={classNames(styles.kits, { [styles.single]: variant.kits.length === 1 })}>
                     <div className={classNames('siema_kits', styles.kit_slides)} ref={this.kit_slides}>
-                      {variant.kits.map((kit) =>
+                      {variant.kits.map((kit, i) =>
                         <div key={kit.id} className={classNames('glide__slide', styles.kit_item)}>
                           <div className={styles.kit_image}><img src={kit.image}/></div>
-                          <h2 className={styles.kit_title}>{kit.title}</h2>
+                          <h2 className={styles.kit_title}>{I18n.t('variant.title')} {i + 1}</h2>
                           <div className={styles.kit_items}>{I18n.t('kit_variants', {count: kit.items})}</div>
                           <a className={classNames(styles.kit_link, buttons.main)} href={path('kit_path', { id: kit.id })}>
                             {I18n.t('variant.more')}

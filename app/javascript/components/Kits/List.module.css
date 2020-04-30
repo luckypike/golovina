@@ -40,10 +40,6 @@
   bottom: calc(var(--yr) * var(--s2));
   right: calc(var(--yr) * var(--s2));
   padding-right: 0;
-
-  &.isSlide {
-    padding-right: 66px;
-  }
 }
 
 .prev, .next {

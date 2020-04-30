@@ -19,7 +19,8 @@ ru:
       processing: Добавляем...
       checkout: Оформить заказ
 
-    kits: Готовые решения
+    title: Вариант
+    kits: Дополнить образ
     comp: Состав и уход
     delivery:
       title: Оплата и доставка
