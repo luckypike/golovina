@@ -180,6 +180,23 @@ class Variant < ApplicationRecord
     super
   end
 
+  def labels
+    if available?
+      labels = []
+      if !last
+        latest && !bestseller ? labels << 'new' : ''
+        sale ? labels << 'sale' : ''
+        bestseller ? labels << 'bestseller' : ''
+      else
+        labels << 'last'
+      end
+
+      labels
+    else
+      %w[sold_out]
+    end
+  end
+
   private
 
   def default_values

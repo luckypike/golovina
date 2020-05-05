@@ -17,6 +17,7 @@ import { path, Routes } from '../Routes'
 
 import form from '../Form.module.css'
 import page from '../Page'
+import list from './List.module.css'
 import styles from './Show.module.css'
 import buttons from '../Buttons.module.css'
 
@@ -219,6 +220,16 @@ class Variant extends Component {
           </div>
 
           <div className={styles.rest}>
+            {variant.labels &&
+              <div className={list.labels}>
+                {variant.labels.map(label =>
+                  <div className={classNames(list.label, list[label])}>
+                    {I18n.t(`variant.labels.${label}`)}
+                  </div>
+                )}
+              </div>
+            }
+
             <div className={styles.title}>
               <h1>
                 {variant.title}

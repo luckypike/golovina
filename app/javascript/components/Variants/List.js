@@ -22,38 +22,15 @@ export default function List ({ variants }) {
           <Images variant={variant} />
 
           <div className={styles.dt}>
-            <div className={styles.labels}>
-              {variant.latest &&
-                <div className={classNames(styles.label, styles.new)}>
-                  {I18n.t('variant.labels.new')}
-                </div>
-              }
-
-              {variant.bestseller &&
-                <div className={classNames(styles.label, styles.bestseller)}>
-                  {I18n.t('variant.labels.bestseller')}
-                </div>
-              }
-
-              {variant.sale &&
-                <div className={classNames(styles.label, styles.sale)}>
-                  {I18n.t('variant.labels.sale')}
-                </div>
-              }
-
-              {variant.last &&
-                <div className={classNames(styles.label, styles.last)}>
-                  {I18n.t('variant.labels.last')}
-                </div>
-              }
-
-              {variant.sold_out &&
-                <div className={classNames(styles.label, styles.sold_out)}>
-                  {I18n.t('variant.labels.sold_out')}
-                </div>
-              }
-
-            </div>
+            {variant.labels &&
+              <div className={styles.labels}>
+                {variant.labels.map(label =>
+                  <div className={classNames(styles.label, styles[label])}>
+                    {I18n.t(`variant.labels.${label}`)}
+                  </div>
+                )}
+              </div>
+            }
 
             <div className={styles.desc}>
               <div className={styles.title}>
