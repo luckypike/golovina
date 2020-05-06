@@ -13,14 +13,9 @@ class OrderMailer < ApplicationMailer
     mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:prefix] + " оплачен заказ № #{order.number}")
   end
 
-  def sms_test order
+  def customer_notice order, to
     @order = order
-    mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: 'Тестовая СМС')
-  end
-
-  def sms_doubling order, to
-    @order = order
-    mail(to: to, subject: 'Подтверждение оплаты')
+    mail(to: to, subject: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:prefix] + " оплачен заказ № #{order.number}")
   end
 
   def refund refund

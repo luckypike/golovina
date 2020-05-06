@@ -18,14 +18,8 @@ class Order < ApplicationRecord
 
     event :pay do
       after do
-        if Rails.env.production?
-          Sms.message(phone, sms_message)
-          OrderMailer.sms_doubling(self, user.email).deliver_later
-        else
-          OrderMailer.sms_test(self).deliver_later
-        end
-
         OrderMailer.pay(self).deliver_later
+        OrderMailer.customer_notice(self, user.email).deliver_later
 
         order_items.each do |item|
           item.update(price: item.variant.price_sell)
@@ -108,14 +102,6 @@ class Order < ApplicationRecord
 
   def purchasable?
     active? && order_items.reject(&:available?).size == 0 && amount > 0 && user == Current.user
-  end
-
-  def sms_message
-    if I18n.locale == :ru
-      "Поздравляем вас с достойным приобретением!\n#{self.user.name}, ваш заказ № #{self.number} принят и находится в стадии обработки. Обычно на это требуется до 1 дня. Как только ваш заказ будет укомплектован и передан в службу доставки, мы оповестим Вас.\nБлагодарим вас за выбор и безупречный вкус."
-    else
-      "Hello! Thank you for your order № #{self.number} (#{number_to_rub(self.amount).gsub('&nbsp;', ' ')}). It has been paid successfully. We will contact you by E-mail."
-    end
   end
 
   def quantity_cannot_be_greater_than_total
