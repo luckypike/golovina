@@ -53,7 +53,7 @@ class Order < ApplicationRecord
 
   validates :delivery, presence: true
   validate :quantity_cannot_be_greater_than_total, on: :create
-  validates :street, :house, :appartment, presence: true, if: -> { ((russia? && door?) || international?) && undef? } 
+  validates :street, :house, :appartment, presence: true, if: -> { ((russia? && door?) || international?) && undef? }
   validates :delivery_city, presence: true, if: -> { russia? }
   validates :delivery_option, presence: true, if: -> { russia? }
 
@@ -112,7 +112,7 @@ class Order < ApplicationRecord
 
   def sms_message
     if I18n.locale == :ru
-      "Заказ #{self.number} (#{number_to_rub(self.amount).gsub('&nbsp;', ' ')}) оплачен. Ожидайте, пожалуйста, звонка."
+      "Поздравляем вас с достойным приобретением!\n#{self.user.name}, ваш заказ № #{self.number} принят и находится в стадии обработки. Обычно на это требуется до 1 дня. Как только ваш заказ будет укомплектован и передан в службу доставки, мы оповестим Вас.\nБлагодарим вас за выбор и безупречный вкус."
     else
       "Hello! Thank you for your order № #{self.number} (#{number_to_rub(self.amount).gsub('&nbsp;', ' ')}). It has been paid successfully. We will contact you by E-mail."
     end
