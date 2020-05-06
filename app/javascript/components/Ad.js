@@ -8,6 +8,20 @@ import { useI18n } from './I18n'
 
 import styles from './Ad.module.css'
 
+function useKeyboardEvent (key, callback) {
+  useEffect(() => {
+    const handler = function (event) {
+      if (event.key === key) {
+        callback()
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => {
+      window.removeEventListener('keydown', handler)
+    }
+  }, [])
+}
+
 export default function Ad (props) {
   const cookies = new Cookies()
   const [noad, setNoad] = useState(false)
@@ -25,7 +39,10 @@ export default function Ad (props) {
   }, [])
 
   function handleClose (e) {
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
+
     setNoad(true)
 
     if (document) {
@@ -37,8 +54,12 @@ export default function Ad (props) {
   }
 
   function handleCookiesClear () {
-    cookies.set('noad', true, { path: '/' })
+    cookies.set('noad', true, { path: '/', expires: new Date('December 31, 2030') })
   }
+
+  useKeyboardEvent('Escape', () => {
+    handleClose()
+  })
 
   if (noad) return null
   if (!promo) return null
