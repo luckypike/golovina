@@ -141,7 +141,7 @@
 
 .places {
   position: relative;
-  background-image: url('../images/contacts_intro.jpg');
+  background-image: url('../../images/contacts_intro.jpg');
   background-position: center;
   background-size: cover;
 
@@ -204,7 +204,7 @@
 
     & a {
       display: inline-block;
-      background-image: url('../images/insta.svg');
+      background-image: url('../../images/insta.svg');
       background-repeat: no-repeat;
       background-size: 18px 18px;
       background-position: left center;

@@ -3,7 +3,7 @@
   { \
     categories: Category.for_header.as_json(only: %i[id slug title]),
     collections: Collection.for_header.as_json(only: %i[id slug title desc]),
-    index: current_page?(controller: :static, action: :index),
+    index: current_page?(controller: :pages, action: :index),
     user: (Current.user.slice(:id, :is_editor?, :guest?) rescue nil),
     last: Variant.for_header_last,
     # wishlist: Wishlist.includes(:variant).where(user: Current.user, variants: { state: [:active] }).size,

@@ -1,5 +1,0 @@
-- set_meta_tags title: t('header.nav.contacts')
-- description 'Контакты шоурумов женской одежды Golovina'
-- keywords ['golovina', 'головина', 'контакты']
-
-= react_component 'Static/Contacts', { mail: Rails.application.credentials[Rails.env.to_sym][:mail][:username], instagram: Rails.application.credentials[Rails.env.to_sym][:instagram] }, { prerender: Rails.env.production? }

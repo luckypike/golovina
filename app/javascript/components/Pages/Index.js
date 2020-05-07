@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import { path } from './Routes'
-import { useI18n } from './I18n'
+import { path } from '../Routes'
+import { useI18n } from '../I18n'
 
 import styles from './Index.module.css'
 

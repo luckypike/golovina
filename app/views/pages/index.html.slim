@@ -8,7 +8,7 @@
 - set_meta_tags canonical: locale_url_for(:root_url, I18n.locale)
 
 = react_component \
-  'Index',
+  'Pages/Index',
   { \
     slides: @slides.map{ |slide| slide.slice(:id, :name, :link, :link_relative).merge({ image: slide.image.large.url }) },
     instagram: Rails.application.credentials[Rails.env.to_sym][:instagram] \

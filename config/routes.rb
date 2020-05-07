@@ -1,5 +1,8 @@
-Rails.application.routes.draw do
-  root 'static#index'
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
+  root 'pages#index'
+
+  get :robots, to: 'pages#robots'
+  get :contacts, to: 'pages#contacts'
 
   get :wishlist, to: 'wishlists#show'
 
@@ -85,10 +88,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  get :contacts, to: 'static#contacts'
-
-  get 'robots.:format', to: 'static#robots'
 
   resources :kits do
     collection do

@@ -56,29 +56,34 @@ gem 'elasticsearch-rails'
 gem 'elasticsearch-ruby'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
-  gem 'capistrano-rails'
-  gem 'capistrano-passenger'
-  gem 'capistrano-rbenv'
+  # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'rspec-rails'
+
+  gem 'rails-controller-testing'
+
+  gem 'capybara'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'capybara'
-  gem 'capybara-screenshot'
-  gem 'selenium-webdriver'
+  # gem 'capybara-screenshot'
+  # gem 'selenium-webdriver'
+
   gem 'webdrivers'
-  gem 'rails-controller-testing'
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
   gem 'listen'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'web-console'
+
   gem 'spring'
   gem 'spring-watcher-listen'
 
   gem 'letter_opener'
+
+  gem 'rubocop-rails', require: false
+
+  gem 'capistrano', require: false
+  gem 'capistrano-passenger', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rbenv', require: false
 end

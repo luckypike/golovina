@@ -31,6 +31,7 @@ module Golovina
     config.generators.jbuilder = nil
     config.generators.stylesheets = nil
     config.generators.javascripts = nil
+    config.generators.test_framework = nil
     config.generators.helper = nil
   end
 end
