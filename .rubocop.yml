@@ -1,7 +1,7 @@
 require: rubocop-rails
 
-# Style/ClassAndModuleChildren:
-#   EnforcedStyle: compact
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -12,5 +12,8 @@ Style/Documentation:
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
 Metrics/BlockLength:
-  ExcludedMethods: ['describe', 'context', 'enum']
+  ExcludedMethods: ['describe', 'context', 'enum', 'feature']
