@@ -24,8 +24,8 @@ export default function List ({ variants }) {
           <div className={styles.dt}>
             {variant.labels &&
               <div className={styles.labels}>
-                {variant.labels.map(label =>
-                  <div className={classNames(styles.label, styles[label])}>
+                {variant.labels.map((label, i) =>
+                  <div key={i} className={classNames(styles.label, styles[label])}>
                     {I18n.t(`variant.labels.${label}`)}
                   </div>
                 )}

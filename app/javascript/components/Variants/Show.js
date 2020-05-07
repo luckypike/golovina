@@ -222,8 +222,8 @@ class Variant extends Component {
           <div className={styles.rest}>
             {variant.labels &&
               <div className={list.labels}>
-                {variant.labels.map(label =>
-                  <div className={classNames(list.label, list[label])}>
+                {variant.labels.map((label, i) =>
+                  <div key={i} className={classNames(list.label, list[label])}>
                     {I18n.t(`variant.labels.${label}`)}
                   </div>
                 )}
