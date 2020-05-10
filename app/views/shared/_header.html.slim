@@ -1,13 +1,14 @@
 = react_component( \
   'Header',
   { \
-    categories: Category.for_header.as_json(only: %i[id slug title]),
-    collections: Collection.for_header.as_json(only: %i[id slug title desc]),
+    # categories: Category.for_header.as_json(only: %i[id slug title]),
+    categories: CategorySerializer.new(@categories_nav).serializable_hash,
+    collections: CollectionSerializer.new(@collections_nav).serializable_hash,
     index: current_page?(controller: :pages, action: :index),
     user: (Current.user.slice(:id, :is_editor?, :guest?) rescue nil),
-    last: Variant.for_header_last,
+    last: @last_nav \
     # wishlist: Wishlist.includes(:variant).where(user: Current.user, variants: { state: [:active] }).size,
-    cart: Cart.where(user: Current.user).map(&:quantity).sum \
+    # cart: Cart.where(user: Current.user).map(&:quantity).sum \
   }, { \
     prerender: Rails.env.production? \
   } \

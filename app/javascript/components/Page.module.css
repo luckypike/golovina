@@ -19,7 +19,7 @@
 }
 
 .gray {
-  background-color: #f9f9f9;
+  background-color: var(--ph_color);
   padding: calc(var(--yr) * 12) var(--xr) calc(var(--yr) * 12);
   margin-top: calc(var(--yr) * 22);
 

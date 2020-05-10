@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 import form from './Form.module.css'
 
@@ -17,4 +18,55 @@ export function Errors ({ errors }) {
       </ul>
     </div>
   )
+}
+
+export function useForm (initValues) {
+  const cancelToken = useRef(axios.CancelToken.source())
+
+  const prevPendingRef = useRef(false)
+  const [pending, setPending] = useState(prevPendingRef.current)
+
+  const prevErrorsRef = useRef({})
+  const [errors, setErrors] = useState(prevErrorsRef.current)
+
+  const prevSavedRef = useRef()
+  const [saved, setSaved] = useState(prevSavedRef.current)
+
+  const [values, setValues] = useState(initValues)
+
+  const handleInputChange = ({ target: { name, value } }) => {
+    setValues({ ...values, [name]: value })
+  }
+
+  const onSubmit = useCallback(
+    handleSubmit => async e => {
+      e.preventDefault()
+
+      if (pending) {
+        return null
+      } else {
+        // console.log('SET FIRST TIME')
+        setErrors({})
+        setPending(true)
+        setSaved(false)
+      }
+
+      await handleSubmit(e)
+
+      setPending(false)
+    }
+  )
+
+  return {
+    values,
+    setValues,
+    errors,
+    setErrors,
+    saved,
+    setSaved,
+    onSubmit,
+    pending,
+    cancelToken,
+    handleInputChange
+  }
 }

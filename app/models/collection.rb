@@ -13,8 +13,9 @@ class Collection < ApplicationRecord
   globalize_accessors locales: I18n.available_locales, attributes: %i[text title]
 
   class << self
-    def for_header
-      order(weight: :asc, id: :desc)
+    def nav
+      with_translations(I18n.available_locales)
+        .order(weight: :asc, id: :desc)
     end
   end
 end

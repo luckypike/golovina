@@ -2,7 +2,6 @@
   display: inline-block;
   border-radius: 0;
   font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
-  line-height: calc(var(--yr) * var(--lh));
   cursor: pointer;
   appearance: none;
   outline: none;
@@ -39,4 +38,12 @@
 
 .destroy {
   margin-left: calc(var(--xr) * 4);
+}
+
+.big {
+  padding: calc(var(--yr) * 2) var(--xr);
+
+  @media (--s) {
+    padding: calc(var(--yr) * 3) 2em;
+  }
 }

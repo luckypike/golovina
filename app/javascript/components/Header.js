@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import PubSub from 'pubsub-js'
+import { deserialize } from 'jsonapi-deserializer'
 
 import { path } from './Routes'
 
@@ -16,8 +17,8 @@ Header.propTypes = {
   cart: PropTypes.number,
   locale: PropTypes.string,
   user: PropTypes.object,
-  collections: PropTypes.array,
-  categories: PropTypes.array,
+  collections: PropTypes.object,
+  categories: PropTypes.object,
   last: PropTypes.bool
 }
 
@@ -93,8 +94,8 @@ export default function Header (props) {
 
         <Nav
           locale={props.locale}
-          categories={categories}
-          collections={collections}
+          categories={deserialize(categories)}
+          collections={deserialize(collections)}
           user={user}
           last={last}
         />

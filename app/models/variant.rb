@@ -2,16 +2,18 @@ class Variant < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  default_scope do
-    includes(
-      :images,
-      product: %i[translations category]
-    ).order(pinned: :desc, created_at: :desc)
-  end
+  # default_scope do
+  #   includes(
+  #     :images,
+  #     product: %i[translations category]
+  #   ).order(pinned: :desc, created_at: :desc)
+  # end
 
   scope :available, -> { includes(:availabilities).where(availabilities: { id: nil }) }
-  scope :not_archived, -> { where.not(state: :archived) }
+  # scope :not_archived, -> { where.not(state: :archived) }
   # scope :visible, -> { Current.user&.is_editor? && where(show: true) }
+
+  # scope :for_list, lambda { }
 
   enum state: { unpub: 0, active: 1, archived: 2 }
 
@@ -181,20 +183,23 @@ class Variant < ApplicationRecord
   end
 
   def labels
-    if available?
-      labels = []
-      if !last
-        latest && !bestseller ? labels << 'new' : ''
-        sale ? labels << 'sale' : ''
-        bestseller ? labels << 'bestseller' : ''
-      else
-        labels << 'last'
-      end
-
-      labels
+    labels = []
+    if !last
+      latest && !bestseller ? labels << 'new' : ''
+      sale ? labels << 'sale' : ''
+      bestseller ? labels << 'bestseller' : ''
     else
-      %w[sold_out]
+      labels << 'last'
     end
+
+    labels
+    # if available?
+    #
+    #
+    #   labels
+    # else
+    #   %w[sold_out]
+    # end
   end
 
   private
@@ -213,10 +218,13 @@ class Variant < ApplicationRecord
   end
 
   class << self
-    def for_header_last
-      active.where(last: true).present? ? true : false
+    def for_list
+      with_translations(I18n.available_locales)
+        .includes(
+          :images,
+          product: %i[translations category variants]
+        )
+        .order(pinned: :desc, created_at: :desc)
     end
   end
-
-
 end

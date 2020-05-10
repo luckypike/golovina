@@ -16,7 +16,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     member do
       post :wishlist
       post :cart
-      post :notification
     end
   end
 
@@ -34,11 +33,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     get :morning, controller: :variants
     get ':slug', to: 'categories#show', as: :category
     get ':slug/:id', to: 'variants#show', as: :variant
-  end
-
-  namespace :cart do
-    get '', action: :index
-    delete ':id', action: :destroy, as: :destroy
   end
 
   devise_for :users,
@@ -137,14 +131,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   #   end
   # end
 
-  get 'account/orders', to: 'users#account'
-
-  get :carts, to: 'orders#carts'
-
-  get :subscribers, to: 'orders#subscribers'
-
-
-  # get 'posts', to: redirect('/posts/1')
+  # get 'account/orders', to: 'users#account'
 
   resources :posts
 
@@ -162,16 +149,19 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  resources :orders, only: [:index, :create] do
+  resources :orders, only: %i[index] do
     collection do
       post :paid
     end
 
     member do
+      patch :checkout
       post :archive
       get :pay
     end
   end
+
+  get :cart, to: 'orders#cart'
 
   resources :slides, except: [:show]
 end

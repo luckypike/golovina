@@ -1,0 +1,35 @@
+.title {
+  margin: 0 0 calc(var(--yr) * var(--s2));
+}
+
+.addresses {
+  background-color: color-mod(var(--ph_color) shade(2%));
+  padding: calc(var(--yr) * var(--s2)) var(--xr);
+}
+
+.address {
+  box-shadow: inset 0 0 0 1px color-mod(var(--sp_color) shade(2%));
+  background-color: var(--ph_color);
+  cursor: pointer;
+  padding: calc(var(--yr) * var(--s1)) var(--xr);
+  transition: box-shadow 0.4s;
+
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * var(--s2));
+  }
+
+  &.active {
+    box-shadow: inset 0 0 0 2px var(--pr_color);
+  }
+}
+
+.desc {
+  composes: at from '../../Fonts.module.css';
+}
+
+.new {
+  & span {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

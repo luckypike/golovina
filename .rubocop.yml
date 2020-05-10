@@ -15,5 +15,11 @@ Layout/MultilineMethodCallIndentation:
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
 
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/LineLength:
+  Max: 90
+
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context', 'enum', 'feature']

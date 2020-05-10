@@ -1,68 +1,58 @@
 class User < ApplicationRecord
-  enum state: { guest: 0, common: 1 }
+  enum state: { guest: 0, common: 1 } do
+    event :activate do
+      after do
+        pp 'ACTIVATE'
+      end
+
+      transition guest: :common
+    end
+  end
 
   has_many :wishlists, dependent: :destroy
   has_many :carts, dependent: :destroy
-  has_many :orders, dependent: :nullify
-  has_many :refunds
+  has_many :orders, dependent: :destroy
+  has_many :refunds, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :identities, dependent: :destroy
+  has_many :user_addresses, dependent: :destroy
+  alias_attribute :addresses, :user_addresses
 
-  has_one :discount
+  # has_one :discount
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  validates :name, :sname, :phone, presence: true, unless: :guest?
+
+  validates :email,
+    presence: true, uniqueness: true,
+    format: { with: URI::MailTo::EMAIL_REGEXP }
+
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-  validates :name, :email, presence: true
-  validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-
-  # before_validation :clear_email, on: :update
-  # before_validation :clear_phone
+    :recoverable, :rememberable, :trackable, :validatable
 
   def remember_me
     true
   end
 
-  def is_admin?
-    self.id == 1
+  def admin?
+    id == 1
   end
 
-  def is_editor?
-    is_admin? || editor
+  def editor?
+    admin? || editor
   end
 
-  def tester?
-    Rails.application.credentials.payment[:test_phones].include?(phone)
-  end
-
-  def activate(email, type: :notify)
-    password = Devise.friendly_token.first(8)
-    self.email = email
-    self.password = password
-    self.state = :common
-    save!(validate: false)
-    # RegisterMailer.register_mailer(password, self).deliver_now
-    RegisterMailer.send("#{type}_mailer", password, self).deliver_now
-  end
-
-  # def clear_phone
-  #   if self.phone.present?
-  #     self.phone = User.prepare_phone(self.phone)
-  #   end
+  # def activate(email, type: :notify)
+  #   password = Devise.friendly_token.first(8)
+  #   self.email = email
+  #   self.password = password
+  #   self.state = :common
+  #   save!(validate: false)
+  #   # RegisterMailer.register_mailer(password, self).deliver_now
+  #   RegisterMailer.send("#{type}_mailer", password, self).deliver_now
   # end
 
-  def clear_email
-    restore_attributes([:email]) if email.blank?
-  end
-
-  def get_discount
-    self.discount.present? ? self.discount.size : 0
-  end
-
-  def s_name
-    sname
+  def cart
+    orders.cart.first_or_create
   end
 
   def guest_email?
@@ -78,5 +68,29 @@ class User < ApplicationRecord
         old_user.destroy
       end
     end
+
+    def guest_email
+      "guest_#{Devise.friendly_token.first(10)}@golovina.store"
+    end
+  end
+
+  # Rewrite until pretected
+
+  def is_admin? # rubocop:disable Naming/PredicateName
+    admin?
+  end
+
+  def is_editor? # rubocop:disable Naming/PredicateName
+    editor?
+  end
+
+  def s_name
+    sname
+  end
+
+  protected
+
+  def password_required?
+    guest? ? false : super
   end
 end

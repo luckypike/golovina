@@ -4,7 +4,7 @@ css:
   }
 
 = form_tag Rails.application.credentials[Rails.env.to_sym][:payment][:gateway], method: :post, id: :payment_gateway do |f|
-  = text_field_tag(:sum, Rails.env.production? && Current.user.tester? ? 1 : @order.amount)
+  = text_field_tag(:sum, @order.amount)
   = text_field_tag(:clientid, @order.user.phone)
   = text_field_tag(:orderid, @order.id)
   = text_field_tag(:lang, I18n.locale)

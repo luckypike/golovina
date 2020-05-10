@@ -41,6 +41,7 @@ gem 'delayed_job_active_record'
 gem 'react-rails'
 gem 'webpacker'
 
+gem 'fast_jsonapi', github: 'fast-jsonapi/fast_jsonapi'
 gem 'jbuilder'
 
 gem 'sitemap_generator'
@@ -65,6 +66,7 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'shoulda-matchers'
   # gem 'capybara-screenshot'
   # gem 'selenium-webdriver'
 

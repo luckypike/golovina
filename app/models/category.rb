@@ -20,7 +20,7 @@ class Category < ApplicationRecord
   end
 
   class << self
-    def for_header
+    def nav
       with_translations(I18n.available_locales).active
         .where.not(variants_counter: 0).order(weight: :asc)
     end

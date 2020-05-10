@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :authorize_pages
+  before_action :authorize_page
 
   def index
     @slides = Slide.with_translations(I18n.available_locales)
@@ -15,7 +15,7 @@ class PagesController < ApplicationController
 
   private
 
-  def authorize_pages
-    authorize :pages
+  def authorize_page
+    authorize :page
   end
 end

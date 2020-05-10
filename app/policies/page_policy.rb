@@ -1,4 +1,4 @@
-PagesPolicy = Struct.new :user, :pages do
+PagePolicy = Struct.new :user, :page do
   def index?
     true
   end

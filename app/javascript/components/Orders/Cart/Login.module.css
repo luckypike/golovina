@@ -1,0 +1,32 @@
+.root {
+  max-width: 33rem;
+}
+
+.appleid {
+  margin-bottom: calc(var(--yr) * var(--s2));
+
+  & p {
+    margin-top: calc(var(--yr) * var(--s2));
+  }
+}
+
+.desc {
+  composes: at from '../../Fonts.module.css';
+  text-align: center;
+}
+
+.login {
+  text-align: center;
+
+  & a {
+    text-decoration: underline;
+  }
+}
+
+.sep {
+  composes: sep from '../../Sessions/Login.module.css';
+}
+
+.checkout {
+  text-align: center;
+}

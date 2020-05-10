@@ -1,44 +1,268 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
+import classNames from 'classnames'
+import Select from 'react-select'
+import { deserialize } from 'jsonapi-deserializer'
+
+import User from './Cart/User'
+import Address from './Cart/Address'
+import UserAddresses from './Cart/UserAddresses'
 
 import { path } from '../Routes'
+import { useI18n } from '../I18n'
+import { useForm, Errors } from '../Form'
+import Login from './Cart/Login'
+// import Auth from '../Sessions/Auth'
 
-import page from '../Page'
-import List from './Cart/List'
+import styles from './Cart.module.css'
+import page from '../Page.module.css'
+import form from '../Form.module.css'
+import buttons from '../Buttons.module.css'
 
-import styles from './Index.module.css'
+Cart.propTypes = {
+  // user: PropTypes.object,
+  locale: PropTypes.string,
+  user: PropTypes.object,
+  appleid: PropTypes.object.isRequired
+}
 
-export default function Cart () {
-  const [carts, setCarts] = useState()
+export default function Cart ({ appleid, locale, user: userJSON }) {
+  const I18n = useI18n(locale)
+  const user = deserialize(userJSON)
+
+  const [loading, setLoading] = useState(true)
+  const [guest, setGuest] = useState(false)
+  const [newAddress, setNewAddress] = useState(false)
+  const [order, setOrder] = useState()
+  const [dictionaries, setDictionaries] = useState()
+  // const [city, setCity] = useState()
+
+  const _fetch = async () => {
+    const { data } = await axios.get(path('cart_path', { format: 'json' }))
+
+    setOrder(data.order)
+    setValues(data.values)
+    setDictionaries(data.dictionaries)
+    setLoading(false)
+  }
 
   useEffect(() => {
-    const _fetch = async () => {
-      const { data: { carts } } = await axios.get(
-        path('carts_path', { format: 'json' })
-      )
-
-      setCarts(carts)
-    }
-
     _fetch()
   }, [])
+
+  const {
+    values,
+    setValues,
+    saved,
+    setSaved,
+    handleInputChange,
+    errors,
+    pending,
+    setErrors,
+    onSubmit,
+    cancelToken
+  } = useForm()
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+
+    await axios.patch(
+      path('checkout_order_path', { id: order.id, format: 'json' }),
+      { order: values },
+      { cancelToken: cancelToken.current.token }
+    ).then(res => {
+      setSaved(true)
+    }).catch(error => {
+      setErrors(error.response.data)
+    })
+  }
+
+  const isPickup = () => values.delivery === 'pickup'
+  const isRussia = () => values.delivery === 'russia'
+  const isInternational = () => values.delivery === 'international'
+  // const isPromo = () => ((price.promo || price.promo === 0) && parseFloat(price.sell) >= price.promo)
+
+  const isStep1 = () => guest || user.common
+  const isStep2 = () => isStep1() && values.delivery
+  const isStep3 = () => isStep2()
+  // const isStep3 = () => isStep2() && (isPickup() || isInternational() || isRussia())
+
+  const haveUserAddresses = () => dictionaries && dictionaries.user_addresses.length > 0
+
+  // console.log(user)
+  // console.log(errors)
+
+  if (loading) return null
 
   return (
     <div className={page.gray}>
       <div className={page.title}>
-        <h1>Корзины</h1>
+        <h1>{I18n.t('order.cart.title')}</h1>
       </div>
 
-      {carts &&
-        <div>
-          {carts.length > 0 &&
-            <List carts={carts} />
-          }
+      {(!order || order.items.length < 1) &&
+        <div className={styles.empty}>
+          {I18n.t('order.cart.empty')}
         </div>
       }
 
-      {!carts &&
-        <div className={styles.loading}>Загрузка...</div>
+      {order && values && dictionaries && order.items.length > 0 &&
+        <div className={styles.root}>
+          <div className={styles.variants}>
+            Список заказов
+          </div>
+
+          <div className={styles.checkout}>
+            {user.guest && !guest &&
+              <div>
+                <Login setGuest={setGuest} appleid={appleid} locale={locale} />
+              </div>
+            }
+
+            {isStep1() &&
+              <form className={classNames(form.root, styles.form)} onSubmit={onSubmit(handleSubmit)}>
+
+                <div className={classNames(styles.step, { [styles.inactive]: !isStep1() || pending })}>
+                  <div className={styles.overlay} />
+
+                  <h2>
+                    {I18n.t('order.cart.shipping.title')}
+                  </h2>
+
+                  <div className={form.el}>
+                    <div className={styles.delivery}>
+                      <div
+                        className={classNames(
+                          styles.deliveryItem,
+                          { [styles.active]: isPickup() }
+                        )}
+                        onClick={() => {
+                          setValues({
+                            ...values,
+                            delivery: 'pickup',
+                            delivery_option: '',
+                            user_address_id: ''
+                          })
+                        }}
+                      >
+                        <strong>
+                          {I18n.t('order.cart.shipping.store.title')}
+                        </strong>
+
+                        <div className={styles.deliveryItemDesc}>
+                          {I18n.t('order.cart.shipping.store.desc')}
+                        </div>
+                      </div>
+
+                      {haveUserAddresses() && !newAddress &&
+                        <UserAddresses
+                          values={values}
+                          setValues={setValues}
+                          addresses={dictionaries.user_addresses}
+                          cities={dictionaries.delivery_cities}
+                          setNewAddress={setNewAddress}
+                          locale={locale}
+                        />
+                      }
+
+                      {(newAddress || !haveUserAddresses()) &&
+                        <>
+                          {I18n.locale === 'ru' &&
+                            <div
+                              className={classNames(
+                                styles.deliveryItem,
+                                { [styles.active]: isRussia() }
+                              )}
+                              onClick={() => setValues({ ...values, delivery: 'russia' })}
+                            >
+                              <strong>
+                                {I18n.t('order.cart.shipping.russia.title')}
+                              </strong>
+
+                              <div className={styles.deliveryItemDesc}>
+                                {I18n.t('order.cart.shipping.russia.desc')}
+                              </div>
+                            </div>
+                          }
+                          <div
+                            className={classNames(
+                              styles.deliveryItem,
+                              { [styles.active]: isInternational() }
+                            )}
+                            onClick={() => setValues({ ...values, delivery: 'international', delivery_option: null })}
+                          >
+                            <strong>
+                              {I18n.t('order.cart.shipping.world.title')}
+                            </strong>
+
+                            <div className={styles.deliveryItemDesc}>
+                              {I18n.t('order.cart.shipping.world.desc')}
+                            </div>
+                          </div>
+                        </>
+                      }
+                    </div>
+                  </div>
+
+                  <Address
+                    errors={errors}
+                    values={values}
+                    handleInputChange={handleInputChange}
+                    dictionaries={dictionaries}
+                    setValues={setValues}
+                    locale={locale}
+                  />
+
+                  {/* <div className={form.item}>
+                    <label>
+                      <div className={form.label}>
+                        Улица
+                      </div>
+
+                      <div className={form.input}>
+                        <input
+                          type="text"
+                          value={values.street}
+                          name="street"
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                    </label>
+
+                    <Errors errors={errors.street} />
+                  </div> */}
+                </div>
+
+                <div className={classNames(styles.step, { [styles.inactive]: !isStep3() || pending })}>
+                  <div className={styles.overlay} />
+
+                  <h2>
+                    {I18n.t('order.cart.shipping.data')}
+                  </h2>
+
+                  <User
+                    errors={errors}
+                    userValues={values.user_attributes}
+                    locale={locale}
+                    onValuesChange={
+                      userValues => setValues({ ...values, user_attributes: userValues })
+                    }
+                  />
+
+                  <div className={classNames(form.submit, styles.submit)}>
+                    <input
+                      type="submit"
+                      value={pending ? 'Оформление...' : 'Перейти к оплате'}
+                      className={classNames(buttons.main, buttons.big, { [buttons.pending]: pending })}
+                      disabled={pending}
+                    />
+                  </div>
+                </div>
+              </form>
+            }
+          </div>
+        </div>
       }
     </div>
   )

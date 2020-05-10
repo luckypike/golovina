@@ -1,0 +1,6 @@
+- title I18n.t('order.cart.title')
+
+= react_component 'Orders/Cart', { \
+  appleid: appleid,
+  user: UserSerializer.new(current_user).serializable_hash \
+}

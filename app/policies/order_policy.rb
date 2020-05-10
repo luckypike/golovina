@@ -1,30 +1,22 @@
 class OrderPolicy < ApplicationPolicy
-  def index?
-    user&.is_editor?
+  def cart?
+    true
   end
 
-  def create?
-    user
+  def checkout?
+    user == record.user
+  end
+
+  def index?
+    user&.editor?
   end
 
   def paid?
     true
   end
 
-  def pay?
-    record.user == user && record.purchasable?
-  end
-
   def archive?
-    user&.is_editor? && record.can_archive?
-  end
-
-  def carts?
-    user&.is_editor?
-  end
-
-  def subscribers?
-    user&.is_editor?
+    user&.editor? && record.can_archive?
   end
 
   class Scope < Scope

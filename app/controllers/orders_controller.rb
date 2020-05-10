@@ -1,12 +1,38 @@
-require 'sms'
-
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:checkout, :pay, :archive]
-  skip_before_action :verify_authenticity_token, only: [:paid]
+  skip_before_action :verify_authenticity_token, only: :paid
+
+  before_action :set_order, only: %i[checkout archive]
+  before_action :authorize_order
+
+  def cart
+    return unless user_signed_in?
+
+    respond_to do |format|
+      format.html
+      format.json do
+        @order = current_user.orders.cart.includes(order_items: :size).first
+      end
+    end
+  end
+
+  def checkout
+    sleep 1
+
+    @order.assign_attributes({ to_pay: true })
+    @order.user.assign_attributes({ state: :common })
+
+    respond_to do |format|
+      format.json do
+        if @order.update(order_params)
+          head :ok
+        else
+          render json: @order.errors, status: :unprocessable_entity
+        end
+      end
+    end
+  end
 
   def index
-    authorize Order
-
     respond_to do |format|
       format.html
       format.json do
@@ -21,47 +47,12 @@ class OrdersController < ApplicationController
                 :translations
               ]
             ]
-          ).where.not(state: [:undef]).where.not(user: nil)
+          ).where.not(user: nil)
 
         @orders = @orders.where(state: params[:state]) if params[:state]
         @orders = @orders.sort_by { |order| order.payed_at.presence || order.created_at }.reverse
       end
     end
-  end
-
-  def create
-    authorize Order
-
-    @order = Order.new(user: Current.user)
-    @order.assign_attributes(order_params)
-
-    @order.promo = Order::PROMO if Order::PROMO
-
-    if (existed_user = User.find_for_authentication(email: order_params[:user_attributes][:email]))
-      User.destroy_old_user existed_user if existed_user != current_user
-    end
-
-    Current.user.carts.each do |cart|
-      @order.order_items.build(variant: cart.variant, quantity: cart.quantity, size: cart.size)
-    end
-
-    if @order.save
-      @order.activate!
-      Current.user.carts.destroy_all
-      head :ok, location: orders_user_path(@order.user)
-    else
-      render json: @order.errors, status: :unprocessable_entity
-    end
-  end
-
-  def pay
-    authorize @order
-
-    unless @order.purchasable?
-      redirect_to orders_user_path(current_user, :order => @order.id), notice: 'Неверный заказ' and return
-    end
-
-    render layout: false
   end
 
   def archive
@@ -71,8 +62,6 @@ class OrdersController < ApplicationController
   end
 
   def paid
-    authorize Order
-
     if Digest::MD5.hexdigest(params.slice(:id, :sum, :clientid, :orderid).values.push(Rails.application.credentials[Rails.env.to_sym][:payment][:key]).join('')) == params[:key]
       order = Order.find(params[:orderid])
 
@@ -91,38 +80,24 @@ class OrdersController < ApplicationController
     end
   end
 
-  def carts
-    authorize Order
-
-    @carts = Cart.includes(:user).last(100).reverse
-  end
-
-  def subscribers
-    authorize Order
-
-    @subscribers = Notification.includes(:variant, :user).order(created_at: :desc).all
-  end
-
   private
-
-  def order_params
-    params.require(:order).permit(
-      :delivery,
-      :delivery_option,
-      :delivery_city_id,
-      :street,
-      :house,
-      :appartment,
-      :comment,
-      :phone,
-      :gift,
-      user_attributes: [
-        :name, :sname, :email
-      ]
-    )
-  end
 
   def set_order
     @order = Order.find(params[:id])
+  end
+
+  def authorize_order
+    authorize @order || Order
+  end
+
+  def order_params
+    params.require(:order).permit(
+      :user_address_id,
+      :delivery, :delivery_option, :delivery_city_id,
+      :country, :city,
+      :street, :house, :appartment,
+      :comment, :gift,
+      user_attributes: %i[name sname email phone]
+    )
   end
 end

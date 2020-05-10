@@ -1,14 +1,11 @@
 class VariantsController < ApplicationController
-  before_action :set_user, only: %i[wishlist cart]
-  before_action :set_variant, only: %i[edit update wishlist cart notification]
-  before_action :authorize_variant, only: %i[edit update wishlist cart]
-
-  skip_after_action :verify_authorized, only: %i[latest soon sale last premium morning stayhome all]
+  before_action :set_guest_user, only: %i[wishlist cart]
+  before_action :set_variant, only: %i[edit update wishlist cart]
+  # before_action :authorize_variant, only: %i[edit update wishlist cart]
+  before_action :authorize_variant, except: :show
 
   # TODO: REWRITE
   def index
-    authorize Variant
-
     if params[:kit_id].present?
       @selected = Variant.includes(:product, :images, :color, :kitables).where(id: params[:selected], kitables: { kit_id: params[:kit_id] }).sort_by{ |v| v.kitables.first.id }
     else
@@ -29,69 +26,59 @@ class VariantsController < ApplicationController
 
   # END TODO
 
+  # TODO: create new model Section instead
   def latest
-    @variants = policy_scope(Variant.not_archived)
-      .with_translations(I18n.available_locales)
-      .includes(product: :variants).where(latest: true)
-
-    respond_to :html, :json
-  end
-
-  def soon
-    @variants = policy_scope(Variant.not_archived)
-      .with_translations(I18n.available_locales)
-      .includes(product: :variants).available
+    @variants = policy_scope(Variant.for_list).where(latest: true)
 
     respond_to :html, :json
   end
 
   def sale
-    @variants = policy_scope(Variant.not_archived)
-      .with_translations(I18n.available_locales)
-      .includes(product: :variants).where(sale: true)
+    @variants = policy_scope(Variant.for_list).where(sale: true)
 
     respond_to :html, :json
   end
 
   def last
-    @variants = policy_scope(Variant.not_archived)
-      .with_translations(I18n.available_locales)
-      .includes(product: :variants).where(last: true)
+    @variants = policy_scope(Variant.for_list).where(last: true)
 
     respond_to :html, :json
   end
 
   def premium
-    @variants = policy_scope(Variant.not_archived)
-      .with_translations(I18n.available_locales)
-      .includes(product: :variants).where(premium: true)
+    @variants = policy_scope(Variant.for_list).where(premium: true)
 
     respond_to :html, :json
   end
 
   def stayhome
-    @variants = policy_scope(Variant.not_archived)
-      .with_translations(I18n.available_locales)
-      .includes(product: :variants).where(stayhome: true)
+    @variants = policy_scope(Variant.for_list).where(stayhome: true)
 
     respond_to :html, :json
   end
 
   def morning
-    @variants = policy_scope(Variant.not_archived)
-      .with_translations(I18n.available_locales)
-      .includes(product: :variants).where(morning: true)
+    @variants = policy_scope(Variant.for_list).where(morning: true)
 
     respond_to :html, :json
   end
 
   def all
-    @variants = policy_scope(Variant.not_archived)
-      .with_translations(I18n.available_locales)
-      .includes(product: :variants)
+    @variants = policy_scope(Variant.for_list)
 
     respond_to :html, :json
   end
+  # END TODO
+
+  # TODO: Check below
+
+  # def soon
+  #   @variants = policy_scope(Variant.not_archived)
+  #     .with_translations(I18n.available_locales)
+  #     .includes(product: :variants).available
+  #
+  #   respond_to :html, :json
+  # end
 
   def list
     authorize Variant
@@ -109,52 +96,33 @@ class VariantsController < ApplicationController
     render json: { in_wishlist: @wishlist.persisted? }
   end
 
-  def notification
-    authorize @variant
-
-    user = User.find_by(email: params[:variant][:email])
-
-    if signed_in?
-      @notification = Notification.find_or_initialize_by(user: current_user, variant: @variant)
-      if current_user.guest? && !user
-        current_user.activate(params[:variant][:email])
-      elsif current_user.guest? && user
-        @notification = Notification.find_or_initialize_by(user: user, variant: @variant)
-      end
-    else
-      user = User.where(email: params[:variant][:email]).first_or_initialize
-      if user.new_record?
-        user.activate(params[:variant][:email])
-        sign_in(user)
-      end
-      @notification = Notification.find_or_initialize_by(user: user, variant: @variant)
-    end
-    @notification.save
-
-    render json: { in_notification: @notification.persisted? }
-  end
-
   def cart
+    # Do not remove this deplay @brg
     sleep 1
 
-    if @variant.sizes.find_by_id!(params[:size]) && @variant.active?
-      @cart = Cart.find_or_initialize_by(user: current_user, variant: @variant, size: Size.find(params[:size]))
-      @cart.quantity += 1 if @cart.persisted?
-      @cart.save
-    end
+    @order_item = current_user.cart.items
+      .where(variant: @variant, size: Size.find(params[:size]))
+      .first_or_initialize(quantity: 0)
 
-    render json: { quantity: Cart.where(user: current_user).map(&:quantity).sum }
+    @order_item.quantity += 1
+
+    if @order_item.save!
+      render json: { quantity: current_user.cart.items.map(&:quantity).sum }
+    else
+      render json: @order_item.errors, status: :unprocessable_entity
+    end
   end
 
   def show
     @category = Category.friendly.find(params[:slug])
-    @variant = @category.variants.with_translations(I18n.available_locales).find_by!(id: params[:id])
+    @variant = @category.variants.with_translations(I18n.available_locales)
+      .find_by!(id: params[:id])
 
     authorize @variant
 
     @variants = policy_scope(@variant.product.variants)
       .with_translations(I18n.available_locales)
-      .includes(:color, availabilities: [:size, :store])
+      .includes(:color, availabilities: %i[size store])
 
     respond_to :html, :json
   end
@@ -208,12 +176,12 @@ class VariantsController < ApplicationController
 
   private
 
-  def authorize_variant
-    authorize @variant
-  end
-
   def set_variant
     @variant = Variant.find(params[:id])
+  end
+
+  def authorize_variant
+    authorize @variant || Variant
   end
 
   # TODO: remove trailing \
@@ -233,7 +201,5 @@ class VariantsController < ApplicationController
       ]
 
     params.require(:variant).permit(*permitted)
-
-    # params.require(:variant).permit(:color_id, :code, :out_of_stock, :state, :created_at, :latest, :sale, :last, :soon, :pinned, :desc, :comp, :price, :price_last, :show, :product_id, product_attributes: [:id, :title, :category_id ], availabilities_attributes: [:id, :variant_id, :size_id, :store_id, :quantity, :_destroy], image_ids: [], images_attributes: [:id, :weight, :favourite])
   end
 end

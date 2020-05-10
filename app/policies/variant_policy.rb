@@ -1,17 +1,21 @@
 class VariantPolicy < ApplicationPolicy
-  def list?
-    index?
-  end
-
-  def images?
-    true
-  end
-
   def all?
     true
   end
 
+  def wishlist?
+    user
+  end
+
+  def cart?
+    user
+  end
+
   def latest?
+    all?
+  end
+
+  def premium?
     all?
   end
 
@@ -23,8 +27,22 @@ class VariantPolicy < ApplicationPolicy
     all?
   end
 
-  def soon?
+  def stayhome?
     all?
+  end
+
+  def morning?
+    all?
+  end
+
+  # Recheck below
+
+  def list?
+    index?
+  end
+
+  def images?
+    true
   end
 
   def show?
@@ -51,21 +69,9 @@ class VariantPolicy < ApplicationPolicy
     update?
   end
 
-  def wishlist?
-    user
-  end
-
-  def notification?
-    true
-  end
-
-  def cart?
-    user
-  end
-
   class Scope < Scope
     def resolve
-      if user&.is_editor?
+      if user&.editor?
         scope.all
       else
         scope.active

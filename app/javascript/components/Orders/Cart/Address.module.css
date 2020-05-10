@@ -1,0 +1,15 @@
+.root {
+  border-top: 1px solid var(--sp_color);
+  padding-top: calc(var(--yr) * var(--s3));
+  margin-top: calc(var(--yr) * var(--s3));
+}
+
+.ha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: var(--xr);
+}
+
+.hai {
+  margin-bottom: 0 !important;
+}

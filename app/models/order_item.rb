@@ -4,6 +4,8 @@ class OrderItem < ApplicationRecord
   belongs_to :size
   belongs_to :refund, optional: true
 
+  validates :quantity, presence: true
+
   def price_sell
     price.present? ? price * quantity : variant.price_sell * quantity rescue 0
   end
