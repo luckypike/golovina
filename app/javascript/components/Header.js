@@ -64,7 +64,9 @@ export default function Header (props) {
     }
   }, [scrolling])
 
-  const { index, user, categories, collections, last } = props
+  const { index, categories, collections, last } = props
+
+  const user = deserialize(props.user)
 
   function handleScrollUp () {
     if (document) {

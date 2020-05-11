@@ -5,9 +5,8 @@ en:
       collections: Collections
       about: About
       contacts: Salon
-      login: My account
-      logout: Log out
-      orders: My orders
+      login: Login
+      account: Account
 
       service:
         title: Customer Service

@@ -51,22 +51,3 @@ ru:
   time:
     formats:
       default: "%d.%m.%Y %H:%M"
-
-  activerecord:
-    errors:
-      models:
-        category:
-          attributes:
-            slug:
-              only_slug: только маленькие англ. буквы и тире без пробелов
-
-        order:
-          attributes:
-            delivery:
-              blank: необходимо выбрать доставку или самовывоз
-        user:
-          attributes:
-            name:
-              blank: нужно указать имя
-            email:
-              taken: на эту почту уже совершались покупки ранее, поэтому необходимо указать другую почту или войти используя прежнюю почту

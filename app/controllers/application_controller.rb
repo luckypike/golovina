@@ -25,8 +25,12 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated
-    session[:return_to_url] = request.original_fullpath
-    redirect_to new_user_session_path, alert: t(:login_first)
+    if user_signed_in?
+      render :not_authenticated
+    else
+      session[:return_to_url] = request.original_fullpath
+      redirect_to new_user_session_path
+    end
   end
 
   def set_guest_user

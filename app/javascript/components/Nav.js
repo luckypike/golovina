@@ -137,19 +137,21 @@ class Nav extends Component {
 
         <div className={classNames(styles.section)}>
           <div className={styles.title}>
-            <a href={path('new_user_session_path')}>
-              {user && !user['guest?'] ? I18n.t('header.nav.orders') : I18n.t('header.nav.login')}
-            </a>
+            {user && user.common &&
+              <a href={path('account_path')}>
+                {I18n.t('header.nav.account')}
+              </a>
+            }
 
-            {user && !user['guest?'] &&
-              <a className={styles.logout} href={path('destroy_user_session_path')} onClick={this.handleLogout}>
-                {I18n.t('header.nav.logout')}
+            {(!user || !user.common) &&
+              <a href={path('new_user_session_path')}>
+                {I18n.t('header.nav.login')}
               </a>
             }
           </div>
         </div>
 
-        {user && user['is_editor?'] &&
+        {user && user.editor &&
           <Section id="control" title="Управление" onToggle={this.toggleSection} section={section}>
             <div className={styles.sub}>
               <a href={path('orders_path')}>Заказы и возвраты</a>

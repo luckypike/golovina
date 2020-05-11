@@ -4,8 +4,8 @@
     # categories: Category.for_header.as_json(only: %i[id slug title]),
     categories: CategorySerializer.new(@categories_nav).serializable_hash,
     collections: CollectionSerializer.new(@collections_nav).serializable_hash,
-    index: current_page?(controller: :pages, action: :index),
-    user: (Current.user.slice(:id, :is_editor?, :guest?) rescue nil),
+    index: current_page?(root_path),
+    user: UserSerializer.new(current_user).serializable_hash,
     last: @last_nav \
     # wishlist: Wishlist.includes(:variant).where(user: Current.user, variants: { state: [:active] }).size,
     # cart: Cart.where(user: Current.user).map(&:quantity).sum \

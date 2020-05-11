@@ -1,0 +1,3 @@
+- title I18n.t('accounts.passwords.show')
+
+= react_component 'Accounts/Passwords/Show', { user: UserSerializer.new(@user, { params: { with_reset_password_token: true }}).serializable_hash }

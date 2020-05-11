@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_accessor :skip_validation
+
   enum state: { guest: 0, common: 1 } do
     event :activate do
       after do
@@ -20,7 +22,7 @@ class User < ApplicationRecord
 
   # has_one :discount
 
-  validates :name, :sname, :phone, presence: true, unless: :guest?
+  validates :name, :sname, :phone, presence: true, if: -> { common? && !skip_validation }
 
   validates :email,
     presence: true, uniqueness: true,
@@ -59,6 +61,18 @@ class User < ApplicationRecord
     email.match(/guest_.*?@golovina\.store/i)
   end
 
+  def reset_password(new_password, new_password_confirmation)
+    if new_password.present?
+      self.skip_validation = true
+      self.password = new_password
+      self.password_confirmation = new_password_confirmation
+      save
+    else
+      errors.add(:password, :blank)
+      false
+    end
+  end
+
   class << self
     def destroy_old_user(old_user)
       if old_user.guest?
@@ -74,7 +88,7 @@ class User < ApplicationRecord
     end
   end
 
-  # Rewrite until pretected
+  # Rewrite until protected
 
   def is_admin? # rubocop:disable Naming/PredicateName
     admin?

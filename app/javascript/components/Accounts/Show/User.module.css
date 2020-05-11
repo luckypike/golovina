@@ -1,0 +1,14 @@
+.buttons {
+  & a {
+    white-space: nowrap;
+    margin-bottom: calc(var(--yr) * var(--s2));
+  }
+
+  & a:not(:last-child) {
+    margin-right: var(--xr);
+  }
+
+  @media (--s) {
+    /* grid-template-columns: repeat(auto-fill, minmax(auto, 200px)); */
+  }
+}

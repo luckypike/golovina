@@ -48,19 +48,20 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   devise_scope :user do
     post 'auth/apple(/:from)', to: 'users/omniauth_callbacks#apple'
     post :recovery, controller: :sessions, as: :recovery_user_session
-    post :phone, controller: :sessions, as: :phone_user_session
-    post :code, controller: :sessions, as: :code_user_session
     get :auth, controller: :sessions, as: :auth_user_session
   end
-  # devise_for :users
 
-  # namespace 'login', module: nil do
-  #   get :email, to: 'sessions#email'
-  #   get '', to: 'sessions#login'
-  #   post 'code', to: 'sessions#code'
-  #   post '', to: 'sessions#auth'
-  # end
+  resource :account, only: :show do
+    scope module: :accounts do
+      resource :password, only: %i[show update]
 
+      resource :user, only: %i[show update] do
+        collection do
+          get :password
+        end
+      end
+    end
+  end
 
   resources :sizes
   resources :sizes_groups
