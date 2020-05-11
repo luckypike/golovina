@@ -1,11 +1,9 @@
 class Accounts::UsersController < Accounts::ApplicationController
   before_action :authorize_user
 
-  def show
-  end
+  def show; end
 
-  def password
-  end
+  def password; end
 
   def update
     sleep 1
@@ -21,7 +19,7 @@ class Accounts::UsersController < Accounts::ApplicationController
   private
 
   def authorize_user
-    authorize @user
+    authorize @user || User
   end
 
   def user_params

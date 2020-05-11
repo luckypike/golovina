@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated
-    if user_signed_in?
+    if user_signed_in? && current_user.common?
       render :not_authenticated
     else
       session[:return_to_url] = request.original_fullpath

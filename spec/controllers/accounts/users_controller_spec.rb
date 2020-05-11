@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe AccountsController do
-  describe 'GET #index' do
+describe Accounts::UsersController do
+  describe 'GET #show' do
     let(:guest_user) { create(:guest_user) }
     let(:common_user) { create(:common_user) }
 
