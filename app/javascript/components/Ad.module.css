@@ -34,12 +34,12 @@
   bottom: 0;
   z-index: 15;
   opacity: 0;
-  transition: visibility 0s ease .3s, opacity .3s;
+  transition: visibility 0s ease 0.3s, opacity 0.3s;
 
   &.active {
     visibility: visible;
-    opacity: .4;
-    transition: opacity .3s;
+    opacity: 0.7;
+    transition: opacity 0.3s;
   }
 }
 
@@ -55,6 +55,7 @@
   width: 100%;
   max-width: 400px;
   z-index: 1000;
+  box-shadow: 0 0 30px 2px var(--sp_color);
 
   & :nth-child(6) {
     border-bottom: 1px solid var(--sep_color);
