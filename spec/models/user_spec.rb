@@ -17,12 +17,22 @@ describe User do
 
     context 'if common?' do
       before do
-        allow(subject).to receive(:guest?).and_return(false)
+        allow(subject).to receive(:common?).and_return(true)
       end
 
       it { is_expected.to validate_presence_of(:name) }
       it { is_expected.to validate_presence_of(:sname) }
       it { is_expected.to validate_presence_of(:phone) }
+
+      context 'and skip validate' do
+        before do
+          allow(subject).to receive(:skip_validation).and_return(true)
+        end
+
+        it { is_expected.not_to validate_presence_of(:name) }
+        it { is_expected.not_to validate_presence_of(:sname) }
+        it { is_expected.not_to validate_presence_of(:phone) }
+      end
     end
   end
 

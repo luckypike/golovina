@@ -52,7 +52,7 @@ export default function Password ({ user: userJSON, locale }) {
   return (
     <div className={page.gray}>
       <div className={page.title}>
-        <h1>{I18n.t('accounts.passwords.edit')}</h1>
+        <h1>{I18n.t('accounts.users.password')}</h1>
       </div>
 
       <div className={styles.root}>

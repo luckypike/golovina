@@ -102,6 +102,10 @@ class User < ApplicationRecord
     sname
   end
 
+  def title
+    [name, sname].join(' ').squish
+  end
+
   protected
 
   def password_required?

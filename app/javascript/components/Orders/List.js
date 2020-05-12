@@ -77,7 +77,7 @@ class Item extends Component {
               {order.delivery && order.delivery === 'russia' &&
                 <>
                   <p>
-                    {I18n.t('order.delivery')}: {order.delivery_city.title} ({order.delivery_city[order.delivery_option]} ₽)
+                    {I18n.t('order.delivery.title')}: {order.delivery_city.title} ({order.delivery_city[order.delivery_option]} ₽)
                     <br />
                     {order.delivery_option === 'storage' && `${I18n.t('order.storage')}` }
                     {order.delivery_option === 'door' &&

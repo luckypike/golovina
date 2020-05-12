@@ -1,5 +1,7 @@
 ru:
   order:
+    number: "№ %{number}"
+
     address: Адрес доставки
     street: Улица
     house: Дом
@@ -7,7 +9,6 @@ ru:
     comment: Комментарий
     customer: Получатель
     phone: Телефон
-    delivery: Доставка
     storage: Точка выдачи
     door: Адрес
     color: Цвет
@@ -17,6 +18,12 @@ ru:
     gift: Подарочная упаковка
 
     checkout: Оформить заказ
+
+    delivery:
+      title: Доставка
+      pickup: Самовывоз
+      russia: Доставка по России
+      international: Международная доставка
 
     quantity:
       one: "%{count} товар на сумму %{amount}"

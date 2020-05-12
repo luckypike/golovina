@@ -63,10 +63,6 @@ class Order < ApplicationRecord
     id
   end
 
-  def address
-    address_old.present? ? address_old : "#{street} #{house}-#{appartment}"
-  end
-
   def promo?
     !promo.nil? && amount_without_delivery >= promo
   end
@@ -105,6 +101,14 @@ class Order < ApplicationRecord
       unless order_item.available?
         errors.add(:order_items)
       end
+    end
+  end
+
+  class << self
+    def with_items
+      includes(
+        { order_items: :variant }, :delivery_city
+      )
     end
   end
 end

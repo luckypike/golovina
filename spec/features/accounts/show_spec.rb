@@ -10,6 +10,6 @@ feature 'User visits account page', :js do
   it 'shows title' do
     visit account_path
 
-    expect(page).to have_text(I18n.t('account.show.title'))
+    expect(page).to have_text(I18n.t('accounts.show.title'))
   end
 end

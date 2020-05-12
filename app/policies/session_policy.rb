@@ -1,25 +1,9 @@
-class SessionPolicy < Struct.new(:user, :session)
+SessionPolicy = Struct.new :user, :session do
   def new?
-    true
+    create?
   end
 
   def create?
-    true
-  end
-
-  def phone?
-    true
-  end
-
-  def code?
-    true
-  end
-
-  def recovery?
-    true
-  end
-
-  def auth?
     true
   end
 
