@@ -63,23 +63,19 @@ class Order < ApplicationRecord
     id
   end
 
-  def promo?
-    !promo.nil? && amount_without_delivery >= promo
+  # def gift?
+  #   !gift.nil?
+  # end
+
+  def amount_calc
+    amount_without_delivery_calc + amount_delivery_calc
   end
 
-  def gift?
-    !gift.nil?
+  def amount_delivery_calc
+    international? && amount_without_delivery < 30_000 ? 2500 : 0
   end
 
-  def amount
-    if promo?
-      @amount ||= order_items.map(&:price_sell).sum + (international? ? (amount_without_delivery > 30000 ? 0 : 2500) : 0) + (gift? ? GIFT : 0)
-    else
-      @amount ||= order_items.map(&:price_sell).sum + (international? ? (amount_without_delivery > 30000 ? 0 : 2500) : (russia? ? delivery_city.send(delivery_option) : 0)) + (gift? ? GIFT : 0)
-    end
-  end
-
-  def amount_without_delivery
+  def amount_without_delivery_calc
     order_items.map(&:price_sell).sum
   end
 
@@ -88,9 +84,8 @@ class Order < ApplicationRecord
   end
 
   def month
-    (payed_at.presence || created_at).beginning_of_month
+    payed_at.beginning_of_month
   end
-
 
   def purchasable?
     active? && order_items.reject(&:available?).size == 0 && amount > 0 && user == Current.user

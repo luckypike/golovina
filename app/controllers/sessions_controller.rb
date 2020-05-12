@@ -3,7 +3,7 @@ class SessionsController < Devise::SessionsController
   skip_before_action :require_no_authentication
 
   def new
-    redirect_to [:account] if current_user.common?
+    redirect_to [:account] if current_user&.common?
 
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
@@ -22,6 +22,15 @@ class SessionsController < Devise::SessionsController
       head :ok, location: root_path
     else
       render json: { message: t('messages.password') }, status: :unauthorized
+    end
+  end
+
+  def recovery
+    if (user = User.find_for_database_authentication(email: params[:user][:email].squish))
+      user.send_reset_password_instructions
+      head :ok
+    else
+      render json: { message: t('messages.email') }, status: :not_found
     end
   end
 

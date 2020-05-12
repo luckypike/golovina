@@ -51,7 +51,7 @@ Order.propTypes = {
 function Order ({ order, locale }) {
   const I18n = useI18n(locale)
 
-  const [active, setActive] = useState(true)
+  const [active, setActive] = useState(false)
 
   return (
     <div className={classNames(styles.order, { [styles.active]: active })}>
@@ -65,7 +65,7 @@ function Order ({ order, locale }) {
         </div>
 
         <div className={styles.what}>
-          {I18n.t('order.quantity', { count: 11, amount: '999' })}
+          {I18n.t('order.quantity', { count: order.quantity, amount: '999' })}
         </div>
 
         <svg viewBox="0 0 10 20" className={styles.arr}>
@@ -80,7 +80,7 @@ function Order ({ order, locale }) {
           </div>
 
           <div>
-            VARIANTS
+            Список товаров (доделывается)
           </div>
         </div>
       }
@@ -121,7 +121,9 @@ function Address ({ order, locale }) {
           }
 
           {/* LEGACY */}
-          {order.address_old && order.address_old}
+          {order.address_old &&
+            [order.delivery_city.title, order.address_old].filter(Boolean).join(', ')
+          }
         </div>
       }
 

@@ -1,0 +1,48 @@
+.root {
+  max-width: 33rem;
+  margin-left: auto;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  grid-gap: var(--xr);
+
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * var(--s3));
+  }
+}
+
+.image {
+  align-self: flex-start;
+  position: relative;
+  background-color: var(--ph_color);
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: calc(4 / 3 * 100%);
+  }
+
+  & img {
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+  }
+}
+
+.title {
+  font-weight: var(--fw_bold);
+}
+
+.destroy {
+  margin-top: calc(var(--yr) * var(--s1));
+
+  & span {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--gr_color);
+  }
+}

@@ -162,6 +162,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
+  resources :order_items, only: %i[destroy]
+
   get :cart, to: 'orders#cart'
 
   resources :slides, except: [:show]

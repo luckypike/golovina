@@ -5,11 +5,11 @@ class AccountsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @orders = Order.not_cart
-          .with_items.order(payed_at: :desc)
-          .limit(200)
-        # @orders = current_user.orders.not_cart
+        # @orders = Order.not_cart
         #   .with_items.order(payed_at: :desc)
+        #   .limit(200)
+        @orders = current_user.orders.not_cart
+          .with_items.order(payed_at: :desc)
       end
     end
   end

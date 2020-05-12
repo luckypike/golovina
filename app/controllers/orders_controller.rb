@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
       format.html
       format.json do
         @order = current_user.orders.cart.includes(order_items: :size).first
+        @items = @order.items.with_variant.with_size
       end
     end
   end

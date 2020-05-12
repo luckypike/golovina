@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current
-    # sign_in(User.find(482))
+    # sign_in(User.find(3997))
     # sign_in(User.find(145))
     Current.user = current_user
   end

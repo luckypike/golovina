@@ -1,13 +1,30 @@
 if @order
   json.order do
     json.partial! @order
+    json.extract! @order, :amount_calc, :amount_without_delivery_calc,
+      :amount_delivery_calc
 
-    json.items @order.items do |item|
+    json.items @items do |item|
       json.partial! item
+      json.extract! item, :price_sell
+
+      json.variant do
+        json.partial! item.variant
+
+        json.color do
+          json.partial! item.variant.color
+        end
+      end
 
       json.size do
         json.partial! item.size
       end
+
+      # json.variant cart.variant, partial: 'variants/variant', as: :variant
+      # json.color cart.variant.color, partial: 'colors/color', as: :color
+      # json.size cart.size, partial: 'sizes/size', as: :size
+      # json.quantity_available cart.available
+      # json.available cart.available?
 
       # json.size do
       #   json.partial! item.size

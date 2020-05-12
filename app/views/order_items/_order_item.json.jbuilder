@@ -1,1 +1,1 @@
-json.extract! order_item, :id, :quantity, :price
+json.extract! order_item, :id, :quantity, :amount

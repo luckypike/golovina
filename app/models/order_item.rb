@@ -7,7 +7,7 @@ class OrderItem < ApplicationRecord
   validates :quantity, presence: true
 
   def price_sell
-    price.present? ? price * quantity : variant.price_sell * quantity rescue 0
+    variant.price_sell * quantity
   end
 
   def available
@@ -16,5 +16,24 @@ class OrderItem < ApplicationRecord
 
   def available?
     available >= quantity
+  end
+
+  class << self
+    def with_variant
+      includes(
+        variant: [
+          :images,
+          :translations,
+          color: :translations,
+          product: %i[translations category]
+        ]
+      )
+    end
+
+    def with_size
+      includes(
+        :size
+      )
+    end
   end
 end

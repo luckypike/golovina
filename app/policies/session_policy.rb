@@ -7,6 +7,10 @@ SessionPolicy = Struct.new :user, :session do
     true
   end
 
+  def recovery?
+    true
+  end
+
   def destroy?
     user
   end

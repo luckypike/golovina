@@ -10,12 +10,6 @@
   background-color: var(--sep_color);
 }
 
-.items {
-  @media (--s) {
-    padding-right: calc(var(--xr) * 2);
-  }
-}
-
 .cart {
   display: grid;
   grid-column-gap: var(--xr);
@@ -38,6 +32,11 @@
 
   @media (--s) {
     grid-template-columns: 1fr 1fr;
+    grid-gap: calc(var(--xr) * 2);
+  }
+
+  @media (--m) {
+    /* margin: 0 calc(2 / 12 * 100%); */
   }
 }
 

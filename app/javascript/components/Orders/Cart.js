@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import classNames from 'classnames'
-import Select from 'react-select'
+// import Select from 'react-select'
 import { deserialize } from 'jsonapi-deserializer'
 
+import Items from './Cart/Items'
 import User from './Cart/User'
 import Address from './Cart/Address'
 import UserAddresses from './Cart/UserAddresses'
+import Login from './Cart/Login'
+import Checkout from './Cart/Checkout'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
-import { useForm, Errors } from '../Form'
-import Login from './Cart/Login'
+import { useForm } from '../Form'
 // import Auth from '../Sessions/Auth'
 
 import styles from './Cart.module.css'
@@ -31,6 +33,7 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
   const I18n = useI18n(locale)
   const user = deserialize(userJSON)
 
+  const [checkout, setCheckout] = useState(false)
   const [loading, setLoading] = useState(true)
   const [guest, setGuest] = useState(false)
   const [newAddress, setNewAddress] = useState(false)
@@ -54,7 +57,7 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
   const {
     values,
     setValues,
-    saved,
+    // saved,
     setSaved,
     handleInputChange,
     errors,
@@ -83,9 +86,11 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
   const isInternational = () => values.delivery === 'international'
   // const isPromo = () => ((price.promo || price.promo === 0) && parseFloat(price.sell) >= price.promo)
 
-  const isStep1 = () => guest || user.common
-  const isStep2 = () => isStep1() && values.delivery
-  const isStep3 = () => isStep2()
+  const isStep1 = () => !checkout
+  const isStep2 = () => !isStep1() && (!guest && user.guest)
+  const isStep3 = () => !isStep1() && !isStep2() && (guest || user.common)
+  const isStep4 = () => isStep3() && values.delivery
+  // const isStep3 = () => isStep2()
   // const isStep3 = () => isStep2() && (isPickup() || isInternational() || isRussia())
 
   const haveUserAddresses = () => dictionaries && dictionaries.user_addresses.length > 0
@@ -109,21 +114,35 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
 
       {order && values && dictionaries && order.items.length > 0 &&
         <div className={styles.root}>
-          <div className={styles.variants}>
-            Список заказов
+          <div className={styles.items}>
+            <Items
+              items={order.items}
+              locale={locale}
+              checkout={checkout}
+              _fetch={_fetch}
+            />
           </div>
 
           <div className={styles.checkout}>
-            {user.guest && !guest &&
+            {isStep1() &&
+              <div className={styles.checkout}>
+                <Checkout
+                  setCheckout={setCheckout}
+                  locale={locale}
+                  order={order}
+                />
+              </div>
+            }
+
+            {isStep2() &&
               <div>
                 <Login setGuest={setGuest} appleid={appleid} locale={locale} />
               </div>
             }
 
-            {isStep1() &&
+            {isStep3() &&
               <form className={classNames(form.root, styles.form)} onSubmit={onSubmit(handleSubmit)}>
-
-                <div className={classNames(styles.step, { [styles.inactive]: !isStep1() || pending })}>
+                <div className={classNames(styles.step, { [styles.inactive]: !isStep3() || pending })}>
                   <div className={styles.overlay} />
 
                   <h2>

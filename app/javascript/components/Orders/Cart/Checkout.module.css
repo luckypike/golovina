@@ -1,0 +1,18 @@
+.dl {
+  margin: 0 0 calc(var(--yr) * var(--s3));
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+
+  & dd,
+  & dt {
+    margin: 0 0 calc(var(--yr) * var(--s1));
+  }
+
+  & dt {
+    font-weight: var(--fw_bold);
+  }
+
+  @media (--s) {
+    /* grid-template-columns: 7rem 1fr; */
+  }
+}
