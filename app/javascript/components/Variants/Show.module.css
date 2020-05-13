@@ -92,6 +92,7 @@
 }
 
 .size {
+  border: 1px solid var(--sep_color);
   font-weight: var(--fw_light);
   user-select: none;
   background-color: white;
@@ -100,23 +101,16 @@
   text-align: center;
   min-width: calc(var(--yr) * 8);
   height: calc(var(--yr) * 8);
-  line-height: calc(var(--yr) * 8);
+  line-height: calc(var(--yr) * 7.5);
   overflow: hidden;
   transition: background 0.2s, box-shadow 0.4s;
 
   &.active {
-    &:before {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: calc(var(--yr) * 8);
-      border-bottom: 1px solid var(--pr_color);
-    }
+    border: 1px solid var(--pr_color);
   }
 
   &:not(:last-child) {
-    margin-right: var(--xr);
+    margin-right: calc(var(--yr) * 2);
   }
 }
 
