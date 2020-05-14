@@ -12,7 +12,7 @@ describe OrderPolicy do
     end
   end
 
-  permissions :checkout? do
+  permissions :checkout?, :pay? do
     it 'grants access for owner' do
       order = create(:order, user: guest_user)
 

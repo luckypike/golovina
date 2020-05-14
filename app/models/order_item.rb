@@ -24,6 +24,7 @@ class OrderItem < ApplicationRecord
         variant: [
           :images,
           :translations,
+          :availabilities,
           color: :translations,
           product: %i[translations category]
         ]

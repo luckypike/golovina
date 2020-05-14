@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_143309) do
+ActiveRecord::Schema.define(version: 2020_05_14_103204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "acts", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "availability_id", null: false
+    t.bigint "store_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["availability_id"], name: "index_acts_on_availability_id"
+    t.index ["store_id"], name: "index_acts_on_store_id"
+  end
 
   create_table "availabilities", force: :cascade do |t|
     t.bigint "variant_id"
@@ -24,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_143309) do
     t.datetime "updated_at", null: false
     t.index ["size_id"], name: "index_availabilities_on_size_id"
     t.index ["store_id"], name: "index_availabilities_on_store_id"
+    t.index ["variant_id", "size_id"], name: "index_availabilities_on_variant_id_and_size_id", unique: true
     t.index ["variant_id"], name: "index_availabilities_on_variant_id"
   end
 
@@ -471,6 +482,8 @@ ActiveRecord::Schema.define(version: 2020_05_12_143309) do
     t.boolean "stayhome"
     t.boolean "morning"
     t.boolean "bestseller"
+    t.integer "quantity", default: 0, null: false
+    t.integer "acts_count", default: 0, null: false
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["last"], name: "index_variants_on_last"
     t.index ["latest"], name: "index_variants_on_latest"
@@ -490,6 +503,8 @@ ActiveRecord::Schema.define(version: 2020_05_12_143309) do
     t.index ["variant_id"], name: "index_wishlists_on_variant_id"
   end
 
+  add_foreign_key "acts", "availabilities"
+  add_foreign_key "acts", "stores"
   add_foreign_key "availabilities", "sizes"
   add_foreign_key "availabilities", "stores"
   add_foreign_key "availabilities", "variants"

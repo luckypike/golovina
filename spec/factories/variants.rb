@@ -4,27 +4,27 @@ FactoryBot.define do
     color
     price { 5000 }
 
-    trait :with_availability do
-      transient do
-        quantity { 1 }
-      end
-
-      after(:create) do |variant, evaluator|
-        create :availability, variant: variant, quantity: evaluator.quantity, store: create(:store, :default)
-      end
-    end
-
-    trait :with_availabilities do
-      transient do
-        quantities { [1, 1] }
-      end
-
-      after(:create) do |variant, evaluator|
-        size = create(:size)
-        create :availability, variant: variant, size: size, quantity: evaluator.quantities.first, store: create(:store, :default)
-        create :availability, variant: variant, size: size, quantity: evaluator.quantities.last
-      end
-    end
+    # trait :with_availability do
+    #   transient do
+    #     quantity { 1 }
+    #   end
+    #
+    #   after(:create) do |variant, evaluator|
+    #     create :availability, variant: variant, quantity: evaluator.quantity, store: create(:store, :default)
+    #   end
+    # end
+    #
+    # trait :with_availabilities do
+    #   transient do
+    #     quantities { [1, 1] }
+    #   end
+    #
+    #   after(:create) do |variant, evaluator|
+    #     size = create(:size)
+    #     create :availability, variant: variant, size: size, quantity: evaluator.quantities.first, store: create(:store, :default)
+    #     create :availability, variant: variant, size: size, quantity: evaluator.quantities.last
+    #   end
+    # end
 
     # factory :variant_in_stores do
     #   transient do

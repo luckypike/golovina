@@ -17,7 +17,11 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       post :wishlist
       post :cart
     end
+
+    resources :availabilities, only: %i[index create destroy]
   end
+
+  resources :acts, only: :create
 
   resources :categories, except: [:show]
 

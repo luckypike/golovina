@@ -8,8 +8,11 @@ FactoryBot.define do
       user factory: :common_user
     end
 
-    factory :order_ready do
+    factory :pickup_order do
       user factory: :common_user
+
+      to_pay { true }
+      delivery { :pickup }
     end
   end
 end

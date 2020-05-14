@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :paid
 
-  before_action :set_order, only: %i[checkout archive]
+  before_action :set_order, only: %i[checkout archive pay]
   before_action :authorize_order
 
   def cart
@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @order = current_user.orders.cart.includes(order_items: :size).first
+        @order = current_user.cart
         @items = @order.items.with_variant.with_size
       end
     end
@@ -25,12 +25,16 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.json do
         if @order.update(order_params)
-          head :ok
+          render json: @order.slice(:id, :amount_calc, :purchasable?), status: :ok, location: pay_order_path(@order)
         else
           render json: @order.errors, status: :unprocessable_entity
         end
       end
     end
+  end
+
+  def pay
+    render layout: false
   end
 
   def index
@@ -66,7 +70,7 @@ class OrdersController < ApplicationController
     if Digest::MD5.hexdigest(params.slice(:id, :sum, :clientid, :orderid).values.push(Rails.application.credentials[Rails.env.to_sym][:payment][:key]).join('')) == params[:key]
       order = Order.find(params[:orderid])
 
-      if order.active?
+      if order.cart?
         order.update(payment_id: params[:id], payment_amount: params[:sum])
         order.pay!
       end

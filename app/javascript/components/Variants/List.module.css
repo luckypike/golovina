@@ -93,10 +93,8 @@
   }
 }
 
-.single {
-  & .image {
-    grid-column: 1 / -1;
-  }
+.unpub {
+  background-color: red;
 }
 
 .dt {

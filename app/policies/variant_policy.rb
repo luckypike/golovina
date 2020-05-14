@@ -35,6 +35,10 @@ class VariantPolicy < ApplicationPolicy
     all?
   end
 
+  def availabilities?
+    user&.editor?
+  end
+
   # Recheck below
 
   def list?

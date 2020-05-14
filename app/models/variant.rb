@@ -9,7 +9,7 @@ class Variant < ApplicationRecord
   #   ).order(pinned: :desc, created_at: :desc)
   # end
 
-  scope :available, -> { includes(:availabilities).where(availabilities: { id: nil }) }
+  # scope :available, -> { includes(:availabilities).where(availabilities: { id: nil }) }
   # scope :not_archived, -> { where.not(state: :archived) }
   # scope :visible, -> { Current.user&.is_editor? && where(show: true) }
 
@@ -29,6 +29,7 @@ class Variant < ApplicationRecord
 
   has_many :availabilities, dependent: :destroy
   has_many :sizes, through: :availabilities
+  has_many :acts, through: :availabilities
 
   validates :color, uniqueness: { scope: :product_id }
   # validates :code, uniqueness: true, unless: -> { code.blank? }
@@ -36,17 +37,17 @@ class Variant < ApplicationRecord
 
   before_save :default_values
 
-  after_save :cache_sizes
+  # after_save :cache_sizes
   # after_save :check_state
   after_save :check_category
-  after_save :check_notifications
+  # after_save :check_notifications
 
   translates :desc, :comp, :title
   globalize_accessors locales: I18n.available_locales, attributes: %i[desc comp title]
 
   # --------------
 
-  accepts_nested_attributes_for :availabilities, allow_destroy: true
+  # accepts_nested_attributes_for :availabilities, allow_destroy: true
 
   has_many :wishlists, dependent: :destroy
   has_many :carts, dependent: :destroy
@@ -92,19 +93,15 @@ class Variant < ApplicationRecord
   include ProductsHelper
 
   def available?
-    availabilities.active.any? && price_sell.present?
+    price_sell.positive? && quantity.positive?
   end
 
   def price_sell
-    price_last.presence || price
+    price_last.presence || price.presence || 0
   end
 
   def discount_price(discount)
     price_sell - price_sell * discount
-  end
-
-  def entity_created_at
-    product.created_at
   end
 
   def photo
@@ -117,10 +114,6 @@ class Variant < ApplicationRecord
 
   def in_wishlist(user)
     wishlists.where(user: user).any?
-  end
-
-  def in_notification(user)
-    notifications.where(user: user).any?
   end
 
   def in_order?
@@ -159,14 +152,14 @@ class Variant < ApplicationRecord
   #   end
   # end
 
-  def check_notifications
-    if active? && available?
-      notifications.each do |notification|
-        NotifyMailer.notify_mailer(notification.user.email, notification.variant).deliver_later
-        notification.destroy
-      end
-    end
-  end
+  # def check_notifications
+  #   if active? && available?
+  #     notifications.each do |notification|
+  #       NotifyMailer.notify_mailer(notification.user.email, notification.variant).deliver_later
+  #       notification.destroy
+  #     end
+  #   end
+  # end
 
   def images?
     images.size.positive?
@@ -182,27 +175,19 @@ class Variant < ApplicationRecord
     super
   end
 
-  def labels
-    labels = []
-    if !last
-      latest && !bestseller ? labels << 'new' : ''
-      sale ? labels << 'sale' : ''
-      bestseller ? labels << 'bestseller' : ''
-    else
-      labels << 'last'
-    end
-
-    labels
-    # if available?
-    #
-    #
-    #   labels
-    # else
-    #   %w[sold_out]
-    # end
+  def label
+    return :sold_out if sold_out?
+    return :last if last
+    return :bestseller if bestseller
+    return :latest if latest
+    return :sale if sale
   end
 
   private
+
+  def sold_out?
+    quantity.zero? && acts_count.positive?
+  end
 
   def default_values
     self.state = state.presence || :unpub

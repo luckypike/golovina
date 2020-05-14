@@ -1,0 +1,7 @@
+.size {
+  box-shadow: inset 0 0 0 1px color-mod(var(--sp_color) shade(2%));
+  background-color: var(--ph_color);
+  /* cursor: pointer; */
+  padding: calc(var(--yr) * var(--s2)) var(--xr);
+  margin-bottom: calc(var(--yr) * var(--s3));
+}

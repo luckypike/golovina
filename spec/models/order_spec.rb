@@ -91,6 +91,11 @@ describe Order do
   end
 
   # describe '#pay' do
+  #
+  #   let(:order) { create(:order) }
+  # end
+
+  # describe '#pay' do
   #   let(:order) { FactoryBot.create(:order) }
   #   let(:user) { FactoryBot.create(:user) }
   #

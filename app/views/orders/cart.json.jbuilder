@@ -2,11 +2,11 @@ if @order
   json.order do
     json.partial! @order
     json.extract! @order, :amount_calc, :amount_without_delivery_calc,
-      :amount_delivery_calc
+      :amount_delivery_calc, :purchasable?
 
     json.items @items do |item|
       json.partial! item
-      json.extract! item, :price_sell
+      json.extract! item, :price_sell, :available, :available?
 
       json.variant do
         json.partial! item.variant

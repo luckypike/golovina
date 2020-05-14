@@ -1,0 +1,35 @@
+.size {
+  display: flex;
+}
+
+.title {
+  width: 7rem;
+}
+
+.total {
+  /* margin-left: var(--xr); */
+}
+
+.action {
+  margin-left: auto;
+
+  & span {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--gr_color);
+  }
+}
+
+.stores {
+  margin-top: calc(var(--yr) * var(--s2));
+  /* display: none; */
+}
+
+.store {
+  padding: calc(var(--yr) * var(--s1)) 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--sp_color);
+    /* margin-bottom: calc(var(--yr) * var(--s1)); */
+  }
+}

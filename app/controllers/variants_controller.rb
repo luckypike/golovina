@@ -191,7 +191,6 @@ class VariantsController < ApplicationController
       + %i[state code color_id price price_last created_at latest bestseller sale last pinned premium stayhome morning] \
       + [
         {
-          availabilities_attributes: %i[id size_id store_id quantity _destroy],
           product_attributes: Product.globalize_attribute_names \
             + %i[id category_id]
         }

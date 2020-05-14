@@ -1,45 +1,5 @@
-.root {
-
-}
-
-.input {
-  /* margin: 0 0 calc(var(--yr) * 2); */
-
-  & input[type=text],
-  & input[type=email],
-  & input[type=number],
-  & input[type=tel],
-  & input[type=date],
-  & input[type=url],
-  & textarea,
-  & select,
-  & input[type=password] {
-    border: 1px solid var(--sep_color);
-    border-radius: 0;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    padding: calc(var(--yr) * 2) var(--xr);
-    width: 100%;
-
-    &:focus {
-      border-color: var(--highlight_color);
-    }
-
-    &.focus,
-    &:focus {
-      background-color: #f8f8f8;
-      box-shadow: 0 0 0 2px var(--highlight_color) inset;
-    }
-
-    &:disabled {
-      opacity: 0.5;
-    }
-  }
-
-  textarea {
-    resize: vertical;
-    display: block;
-  }
+.group {
+  padding: calc(var(--yr) * var(--s2)) var(--xr);
+  background-color: color-mod(var(--ph_color) shade(2%));
+  margin-bottom: calc(var(--yr) * var(--s2));
 }

@@ -14,7 +14,7 @@ import Checkout from './Cart/Checkout'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
-import { useForm } from '../Form'
+import { useForm, Errors } from '../Form'
 // import Auth from '../Sessions/Auth'
 
 import styles from './Cart.module.css'
@@ -75,6 +75,11 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
       { order: values },
       { cancelToken: cancelToken.current.token }
     ).then(res => {
+      if (res.data['purchasable?']) {
+        if (res.headers.location && window)window.location = res.headers.location
+      } else {
+        _fetch()
+      }
       setSaved(true)
     }).catch(error => {
       setErrors(error.response.data)
@@ -89,7 +94,7 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
   const isStep1 = () => !checkout
   const isStep2 = () => !isStep1() && (!guest && user.guest)
   const isStep3 = () => !isStep1() && !isStep2() && (guest || user.common)
-  const isStep4 = () => isStep3() && values.delivery
+  // const isStep4 = () => isStep3() && values.delivery
   // const isStep3 = () => isStep2()
   // const isStep3 = () => isStep2() && (isPickup() || isInternational() || isRussia())
 
@@ -119,6 +124,7 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
               items={order.items}
               locale={locale}
               checkout={checkout}
+              setCheckout={setCheckout}
               _fetch={_fetch}
             />
           </div>
@@ -269,12 +275,18 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
                     }
                   />
 
+                  {!order['purchasable?'] &&
+                    <div className={styles.notPurchasable}>
+                      Одного из выбранных товаров временно нет в наличии. Пожалуйста, удалите его из корзины, чтобы оформить заказ.
+                    </div>
+                  }
+
                   <div className={classNames(form.submit, styles.submit)}>
                     <input
                       type="submit"
                       value={pending ? 'Оформление...' : 'Перейти к оплате'}
                       className={classNames(buttons.main, buttons.big, { [buttons.pending]: pending })}
-                      disabled={pending}
+                      disabled={pending || !order['purchasable?']}
                     />
                   </div>
                 </div>

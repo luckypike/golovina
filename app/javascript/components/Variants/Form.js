@@ -12,7 +12,7 @@ import Images from '../Images/Images'
 import page from '../Page.module.css'
 import form from '../Form.module.css'
 import buttons from '../Buttons.module.css'
-import styles from './Variant.module.css'
+import styles from './Form.module.css'
 
 Form.propTypes = {
   id: PropTypes.number,
@@ -143,15 +143,21 @@ export default function Form ({ id, product_id: productId, locale }) {
             </div>
           </div>
 
-          <Product
-            errors={errors}
-            dictionaries={dictionaries}
-            locale={locale}
-            productValues={values.product_attributes}
-            onValuesChange={
-              productValues => setValues({ ...values, product_attributes: productValues })
-            }
-          />
+          <div className={styles.group}>
+            <Product
+              errors={errors}
+              dictionaries={dictionaries}
+              locale={locale}
+              productValues={values.product_attributes}
+              onValuesChange={
+                productValues => setValues({ ...values, product_attributes: productValues })
+              }
+            />
+
+            <div className={form.hint}>
+              Общие параметры товара, изменение приведёт к смене названия и категори по всех цветов.
+            </div>
+          </div>
 
           <div className={form.el}>
             <label>
@@ -308,44 +314,37 @@ export default function Form ({ id, product_id: productId, locale }) {
             <Errors errors={errors.color} />
           </div>
 
-          <div className={form.el}>
-            <div className={form.label}>
-              Название для цвета
-            </div>
+          <div className={styles.group}>
+            <div className={form.el}>
+              <h2 className={form.label}>
+                Название товара в конкретном цвете
+              </h2>
 
-            {I18n.available_locales.map(locale =>
-              <div className={form.gl} key={locale}>
-                <label>
-                  <div className={form.label}>
-                    {locale}
-                  </div>
+              {I18n.available_locales.map(locale =>
+                <div className={form.gl} key={locale}>
+                  <label>
+                    <div className={form.label}>
+                      {locale}
+                    </div>
 
-                  <div className={form.input}>
-                    <input
-                      type="text"
-                      value={values[`title_${locale}`]}
-                      name={`title_${locale}`}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </label>
+                    <div className={form.input}>
+                      <input
+                        type="text"
+                        value={values[`title_${locale}`]}
+                        name={`title_${locale}`}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </label>
+                </div>
+              )}
+
+              <div className={form.hint}>
+                Название для выбранного цвета, можно оставить пустым — тогда будет браться общее название товара.
               </div>
-            )}
-
-            <div className={form.hint}>
-              Название для выбранного цвета, можно оставить пустым — тогда будет браться общее название товара.
             </div>
           </div>
 
-          <Availabilities
-            // errors={errors}
-            dictionaries={dictionaries}
-            locale={locale}
-            availabilitiesValues={values.availabilities_attributes}
-            onValuesChange={
-              availabilitiesValues => setValues({ ...values, availabilities_attributes: availabilitiesValues })
-            }
-          />
 
           <div className={form.el}>
             <div className={form.label}>
@@ -466,9 +465,9 @@ function Product ({ errors, dictionaries, productValues, onValuesChange, locale 
   return (
     <>
       <div className={form.el}>
-        <div className={form.label}>
+        <h2 className={form.label}>
           Название
-        </div>
+        </h2>
 
         {I18n.available_locales.map(locale =>
           <div className={form.gl} key={locale}>
@@ -515,137 +514,3 @@ function Product ({ errors, dictionaries, productValues, onValuesChange, locale 
     </>
   )
 }
-
-Availabilities.propTypes = {
-  dictionaries: PropTypes.object,
-  availabilitiesValues: PropTypes.array,
-  onValuesChange: PropTypes.func
-}
-
-function Availabilities ({ dictionaries, availabilitiesValues, onValuesChange }) {
-  const { stores, sizes } = dictionaries
-
-  const [values, setValues] = useState(availabilitiesValues)
-
-  useEffect(() => {
-    onValuesChange && onValuesChange(values)
-    // console.log(values)
-  }, [values])
-
-  const handleAddSize = (store, size) => {
-    const key = values.findIndex(value => value.size_id === size && value.store_id === store)
-
-    if (key >= 0) {
-      setValues(update(values, { [key]: { $toggle: ['_destroy'] } }))
-    } else {
-      setValues([...values, { store_id: store, size_id: size, quantity: 0 }])
-    }
-  }
-
-  const handleQuantityChange = (store, size, quantity) => {
-    const key = values.findIndex(value => value.size_id === size && value.store_id === store)
-    setValues(update(values, { [key]: { quantity: { $set: quantity } } }))
-    // console.log(key)
-    // console.log(store, size, quantity)
-  }
-
-  const hasSizeOnStore = (store, size) => {
-    return values.find(value => value.size_id === size && value.store_id === store && !value._destroy)
-  }
-
-  return (
-    <div className={form.stores}>
-      {stores.map(store =>
-        <React.Fragment key={store.id}>
-          <div className={form.store}>
-            <div className={form.input}>
-              <div className={form.label}>
-                {store.id === 2 ? `Доступные размеры на производстве` : `Доступные размеры для ${store.title}`}
-              </div>
-
-              <div className={styles.sizes}>
-                {sizes.map(size =>
-                  <div
-                    key={size.id}
-                    className={classNames(
-                      styles.size,
-                      {
-                        [styles.active]: hasSizeOnStore(store.id, size.id)
-                      }
-                    )}
-                    onClick={() => handleAddSize(store.id, size.id)}>{size.size}</div>
-                )}
-              </div>
-
-              {/* <div className={styles.sizes}>
-                {sizes.sort((a, b) => a.weight - b.weight).map((size, _) =>
-                  <div key={_} className={classNames([styles.size], {[styles.active]: values.availabilities_attributes.find(s => s.size_id == size.id && s.store_id == store.id && !s._destroy)})} onClick={() => this.handleSizesChange(store.id, size.id)}>{size.size}</div>
-                )}
-              </div> */}
-            </div>
-          </div>
-
-          {values.sort((a, b) => sizes.find(size => size.id === a.size_id).weight - sizes.find(size => size.id === b.size_id).weight).filter(value => value.store_id === store.id && !value._destroy).map((value, i) =>
-            <div key={i} className={form.input}>
-              <div className={form.label}>
-                Количество размера {sizes.find(size => size.id === value.size_id).size}
-              </div>
-
-              <div className={form.input_input}>
-                <input
-                  type="text"
-                  value={value.quantity}
-                  onChange={({ target }) => handleQuantityChange(value.store_id, value.size_id, target.value)}
-                />
-              </div>
-            </div>
-            // <Availability
-            //
-            //   i={_i}
-            //   key={_i}
-            //   sizes={sizes}
-            //   {...value}
-            // />
-          )}
-
-          {/* {values.availabilities_attributes && values.availabilities_attributes.filter(s => s.store_id == store.id )&&
-            values.availabilities_attributes.filter(s => s.store_id == store.id && !s._destroy).sort((a, b) => a.weight - b.weight).map((size, key) =>
-              <div key={key} className={form.input}>
-                <div className={form.label}>
-                  Количество размера "{sizes.find(s => s.id == size.size_id).size}"
-                </div>
-
-                <div className={form.input_input}>
-                  <input type="text" value={size.quantity} name={`size[${size.size_id}]`} onChange={this.handleQuantityChange(store.id, size.size_id)} />
-                </div>
-              </div>
-            )
-          } */}
-        </React.Fragment>
-      )}
-    </div>
-  )
-}
-
-// Availability.propTypes = {
-//   onValueChange: PropTypes.func,
-//   quantity: PropTypes.string,
-//   sizes: PropTypes.array,
-//   i: PropTypes.number,
-//   size_id: PropTypes.number
-// }
-//
-// function Availability (props) {
-//   const { i, sizes, size_id: sizeId, onValueChange } = props
-//
-//   const [quantity, setQuantity] = useState(props.quantity)
-//
-//   useEffect(() => {
-//     console.log(i, quantity)
-//     onValueChange && onValueChange(i, quantity)
-//   }, [quantity])
-//
-//   return (
-//
-//   )
-// }

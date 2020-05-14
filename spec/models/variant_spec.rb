@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe Variant do
+  describe 'associations' do
+    it { should belong_to(:color) }
+    it { should have_many(:availabilities) }
+  end
+
   # describe '#state_change' do
   #   context 'soon checkbox checked' do
   #     let(:variant) { FactoryBot.create(:variant, :with_availability, soon: true) }

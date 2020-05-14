@@ -34,10 +34,6 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: calc(var(--xr) * 2);
   }
-
-  @media (--m) {
-    /* margin: 0 calc(2 / 12 * 100%); */
-  }
 }
 
 .countries {
@@ -95,6 +91,11 @@
   &.active {
     box-shadow: inset 0 0 0 2px var(--pr_color);
   }
+}
+
+.notPurchasable {
+  color: var(--red_color);
+  margin-bottom: calc(var(--yr) * var(--s3));
 }
 
 .deliveryItemDesc,

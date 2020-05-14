@@ -37,6 +37,14 @@
   font-weight: var(--fw_bold);
 }
 
+.checkout {
+  & span {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--gr_color);
+  }
+}
+
 .destroy {
   margin-top: calc(var(--yr) * var(--s1));
 
@@ -45,4 +53,10 @@
     text-decoration: underline;
     text-decoration-color: var(--gr_color);
   }
+}
+
+.noAvailable,
+.noPrice {
+  font-weight: var(--fw_bold);
+  color: red;
 }

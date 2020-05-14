@@ -54,7 +54,7 @@ class User < ApplicationRecord
   # end
 
   def cart
-    orders.cart.first_or_create
+    orders.for_amount.cart.first_or_create
   end
 
   def guest_email?

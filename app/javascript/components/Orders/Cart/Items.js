@@ -12,10 +12,11 @@ Items.propTypes = {
   items: PropTypes.array,
   locale: PropTypes.string.isRequired,
   _fetch: PropTypes.func.isRequired,
+  setCheckout: PropTypes.func.isRequired,
   checkout: PropTypes.bool.isRequired
 }
 
-export default function Items ({ items, checkout, locale, _fetch }) {
+export default function Items ({ items, checkout, setCheckout, locale, _fetch }) {
   const I18n = useI18n(locale)
 
   const handleDestroy = async (e, item) => {
@@ -61,6 +62,18 @@ export default function Items ({ items, checkout, locale, _fetch }) {
               {I18n.t('order.cart.quantity')}: {item.quantity}
             </div>
 
+            {!item.variant.price &&
+              <div className={styles.noPrice}>
+                {I18n.t('order.cart.items.cant')}
+              </div>
+            }
+
+            {!item['available?'] &&
+              <div className={styles.noAvailable}>
+                {I18n.t('order.cart.items.noav', { count: item.available })}
+              </div>
+            }
+
             {!checkout &&
               <div className={styles.destroy}>
                 <span onClick={e => handleDestroy(e, item)}>
@@ -71,6 +84,14 @@ export default function Items ({ items, checkout, locale, _fetch }) {
           </div>
         </div>
       )}
+
+      <div className={styles.checkout}>
+        {checkout &&
+          <span onClick={() => setCheckout(false)}>
+            Изменить список покупок
+          </span>
+        }
+      </div>
     </div>
   )
 }

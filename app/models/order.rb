@@ -18,25 +18,29 @@ class Order < ApplicationRecord
     #   transition undef: :active
     # end
     #
-    # event :pay do
-    #   after do
-    #     OrderMailer.pay(self).deliver_later
-    #     OrderMailer.customer_notice(self, user.email).deliver_later
-    #
-    #     order_items.each do |item|
-    #       item.update(price: item.variant.price_sell)
-    #       item.variant.decrease item
-    #     end
-    #
-    #     update(payed_at: Time.current)
-    #   end
-    #
-    #   transition active: :paid
-    # end
-    #
-    # event :archive do
-    #   transition paid: :archived
-    # end
+    event :pay do
+      after do
+        OrderMailer.pay(self).deliver_later
+        OrderMailer.customer_notice(self, user.email).deliver_later
+
+        order_items.each do |item|
+          item.update(amount: item.variant.price_sell)
+          item.variant.decrease item
+        end
+
+        update(
+          amount: amount_calc,
+          amount_delivery: amount_delivery_calc,
+          payed_at: Time.current
+        )
+      end
+
+      transition cart: :paid
+    end
+
+    event :archive do
+      transition paid: :archived
+    end
   end
 
   belongs_to :user, default: -> { Current.user }
@@ -72,7 +76,7 @@ class Order < ApplicationRecord
   end
 
   def amount_delivery_calc
-    international? && amount_without_delivery < 30_000 ? 2500 : 0
+    international? && amount_without_delivery_calc < 30_000 ? 2500 : 0
   end
 
   def amount_without_delivery_calc
@@ -88,7 +92,7 @@ class Order < ApplicationRecord
   end
 
   def purchasable?
-    active? && order_items.reject(&:available?).size == 0 && amount > 0 && user == Current.user
+    cart? && order_items.reject(&:available?).size.zero? && amount_calc.positive?
   end
 
   def quantity_cannot_be_greater_than_total
@@ -104,6 +108,10 @@ class Order < ApplicationRecord
       includes(
         { order_items: :variant }, :delivery_city
       )
+    end
+
+    def for_amount
+      includes(order_items: :variant)
     end
   end
 end

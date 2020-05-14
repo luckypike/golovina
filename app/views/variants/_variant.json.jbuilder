@@ -1,7 +1,5 @@
 json.extract! variant, :id, :price, :price_last, :price_sell, :color_id, :code, :state
 
-json.labels variant.labels
-
 json.created_at variant.created_at.strftime('%FT%I:%M')
 json.can_edit policy(variant).edit?
 
