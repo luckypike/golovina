@@ -10,7 +10,7 @@ class Act < ApplicationRecord
     availability.update(quantity: availability.acts.sum(&:quantity))
     availability.variant.update(
       quantity: availability.variant.availabilities.sum(&:quantity),
-      acts_count: availability.acts.size
+      acts_count: variant.acts.size
     )
   end
 end

@@ -19,6 +19,7 @@ class Variant < ApplicationRecord
 
   belongs_to :product, inverse_of: :variants
   accepts_nested_attributes_for :product
+  has_many :variants, through: :product
 
   has_one :category, through: :product
 
@@ -92,10 +93,6 @@ class Variant < ApplicationRecord
   include ActionView::Helpers::NumberHelper
   include ProductsHelper
 
-  def available?
-    price_sell.positive? && quantity.positive?
-  end
-
   def price_sell
     price_last.presence || price.presence || 0
   end
@@ -116,31 +113,31 @@ class Variant < ApplicationRecord
     wishlists.where(user: user).any?
   end
 
-  def in_order?
-    OrderItem.where(variant_id: self).any?
-  end
+  # def in_order?
+  #   OrderItem.where(variant_id: self).any?
+  # end
 
   # TODO: переписать этот метод чтобы для более няшного кода
-  def decrease item
-    availability = availabilities.where(store_id: 1, size_id: item.size_id).where('quantity > ?', 0).first
-    availability = availabilities.where.not(store_id: 1).where(size_id: item.size_id).where('quantity > ?', 0).first unless availability
-
-    if availability
-      if item.quantity > availability.quantity
-        diff = item.quantity - availability.quantity
-        availability.quantity = 0
-        availability.save
-        availability = availabilities.where.not(store_id: 1).where(size_id: item.size_id).where('quantity > ?', 0).first
-        availability.quantity -= diff
-        availability.save
-      else
-        availability.quantity -= item.quantity
-        availability.save
-      end
-    else
-      # TODO: добавить действие если произошел казус что оба заказа оплачивали одновременно
-    end
-  end
+  # def decrease item
+  #   availability = availabilities.where(store_id: 1, size_id: item.size_id).where('quantity > ?', 0).first
+  #   availability = availabilities.where.not(store_id: 1).where(size_id: item.size_id).where('quantity > ?', 0).first unless availability
+  #
+  #   if availability
+  #     if item.quantity > availability.quantity
+  #       diff = item.quantity - availability.quantity
+  #       availability.quantity = 0
+  #       availability.save
+  #       availability = availabilities.where.not(store_id: 1).where(size_id: item.size_id).where('quantity > ?', 0).first
+  #       availability.quantity -= diff
+  #       availability.save
+  #     else
+  #       availability.quantity -= item.quantity
+  #       availability.save
+  #     end
+  #   else
+  #     # TODO: добавить действие если произошел казус что оба заказа оплачивали одновременно
+  #   end
+  # end
 
   # def check_state
   #   if soon && availabilities.all? { |a| !a.active? }
@@ -161,9 +158,9 @@ class Variant < ApplicationRecord
   #   end
   # end
 
-  def images?
-    images.size.positive?
-  end
+  # def images?
+  #   images.size.positive?
+  # end
 
   def product_attributes=(attributes)
     self.product = Product.find_by(id: attributes[:id])
@@ -175,6 +172,14 @@ class Variant < ApplicationRecord
     super
   end
 
+  def sold_out?
+    quantity.zero? && acts_count.positive?
+  end
+
+  def available?
+    price_sell.positive? && quantity.positive?
+  end
+
   def label
     return :sold_out if sold_out?
     return :last if last
@@ -184,10 +189,6 @@ class Variant < ApplicationRecord
   end
 
   private
-
-  def sold_out?
-    quantity.zero? && acts_count.positive?
-  end
 
   def default_values
     self.state = state.presence || :unpub
@@ -203,6 +204,16 @@ class Variant < ApplicationRecord
   end
 
   class << self
+    def for_variant
+      with_translations(I18n.available_locales)
+        .includes(
+          :images,
+          availabilities: :size,
+          color: %i[translations],
+          product: %i[translations category category]
+        )
+    end
+
     def for_list
       with_translations(I18n.available_locales)
         .includes(

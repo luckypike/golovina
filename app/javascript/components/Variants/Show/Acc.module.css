@@ -17,14 +17,14 @@
   line-height: calc(var(--yr) * var(--lh));
   padding: calc(var(--yr) * 1.5) 0;
   text-align: left;
+  
   @media(--m) {
     text-align: left;
   }
 }
 
 .ch {
-  padding: calc(var(--yr) * 2) 0;
-  /* composes: at from '../../Fonts.module.css'; */
+  padding: calc(var(--yr) * var(--s1)) 0 calc(var(--yr) * var(--s3));
 }
 
 .arr {

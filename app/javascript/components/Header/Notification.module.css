@@ -1,0 +1,89 @@
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  visibility: hidden;
+  background: #fff;
+  transition: visibility 0s 0.3s, opacity 0.3s;
+  z-index: 10;
+  opacity: 0;
+  padding: calc(var(--yr) * var(--s4)) var(--xr);
+}
+
+.overlay {
+  visibility: hidden;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: visibility 0s ease 0.3s, opacity 0.3s;
+}
+
+.root.active {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s;
+
+  & .overlay {
+    visibility: visible;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+}
+
+.message {
+  text-align: center;
+  font-weight: var(--fw_bold);
+  margin-bottom: calc(var(--yr) * var(--s3));
+}
+
+.buttons {
+  text-align: center;
+  margin-top: calc(var(--yr) * var(--s3));
+
+  & button {
+    margin: 0 var(--xr) var(--xr);
+  }
+}
+
+.variant {
+  max-width: 16rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  grid-gap: var(--xr);
+
+  @media (--s) {
+    max-width: 26rem;
+  }
+}
+
+.price {
+  & div {
+    justify-content: flex-start;
+  }
+}
+
+.image {
+  position: relative;
+  background-color: var(--ph_color);
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: calc(4 / 3 * 100%);
+  }
+
+  & img {
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+  }
+}

@@ -17,29 +17,32 @@ export default function List ({ variants }) {
   return (
     <div className={styles.root}>
       {variants.map((variant, _) =>
-        <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={classNames(styles.item, { [styles.unpub]: variant.state === 'unpub' })}>
-
+        <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={classNames(styles.item, { [styles.single]: variant.images.length < 2 })}>
           <Images variant={variant} />
 
           <div className={styles.dt}>
-            {variant.labels &&
-              <div className={styles.labels}>
-                {variant.labels.map((label, i) =>
-                  <div key={i} className={classNames(styles.label, styles[label])}>
-                    {I18n.t(`variant.labels.${label}`)}
-                  </div>
-                )}
+            {variant.label &&
+              <div className={classNames(styles.label, styles[variant.label])}>
+                {I18n.t(`variant.labels.${variant.label}`)}
               </div>
             }
 
             <div className={styles.desc}>
+              {variant.state === 'unpub' &&
+                <div className={styles.unpub}>
+                  {I18n.t('variant.unpub')}
+                </div>
+              }
+
               <div className={styles.title}>
                 {variant.title}
               </div>
 
-              <div className={styles.price}>
-                <Price sell={parseFloat(variant.price_sell)} origin={parseFloat(variant.price)} />
-              </div>
+              {variant.price_sell > 0 &&
+                <div className={styles.price}>
+                  <Price sell={parseFloat(variant.price_sell)} origin={parseFloat(variant.price)} />
+                </div>
+              }
 
               {variant.colors > 0 &&
                 <div className={styles.colors}>

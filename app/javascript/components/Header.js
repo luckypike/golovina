@@ -7,6 +7,7 @@ import { deserialize } from 'jsonapi-deserializer'
 import { path } from './Routes'
 
 import Nav from './Nav'
+import Notification from './Header/Notification'
 
 import styles from './Header.module.css'
 
@@ -156,6 +157,8 @@ export default function Header (props) {
       </div>
 
       <div className={classNames(styles.arrow, { [styles.active]: scrolling })} onClick={handleScrollUp} />
+
+      <Notification />
     </header>
   )
 }

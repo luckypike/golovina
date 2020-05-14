@@ -47,3 +47,9 @@
     padding: calc(var(--yr) * 3) 2em;
   }
 }
+
+.black {
+  background-color: var(--pr_color);
+  color: #fff;
+  box-shadow: none;
+}

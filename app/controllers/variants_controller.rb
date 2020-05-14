@@ -26,6 +26,19 @@ class VariantsController < ApplicationController
 
   # END TODO
 
+  def show
+    @category = Category.friendly.find(params[:slug])
+    @variant = @category.variants.find_by!(id: params[:id])
+
+    authorize @variant
+
+    @variants = policy_scope(@variant.variants.for_variant)
+    #   .with_translations(I18n.available_locales)
+    #   .includes(:color, availabilities: %i[size store])
+
+    respond_to :html, :json
+  end
+
   # TODO: create new model Section instead
   def latest
     @variants = policy_scope(Variant.for_list).where(latest: true)
@@ -111,20 +124,6 @@ class VariantsController < ApplicationController
     else
       render json: @order_item.errors, status: :unprocessable_entity
     end
-  end
-
-  def show
-    @category = Category.friendly.find(params[:slug])
-    @variant = @category.variants.with_translations(I18n.available_locales)
-      .find_by!(id: params[:id])
-
-    authorize @variant
-
-    @variants = policy_scope(@variant.product.variants)
-      .with_translations(I18n.available_locales)
-      .includes(:color, availabilities: %i[size store])
-
-    respond_to :html, :json
   end
 
   def new

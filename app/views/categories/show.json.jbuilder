@@ -1,5 +1,3 @@
-json.variants @variants do |variant|
-  json.cache! variant, expires_in: 10.minutes do
-    json.partial! 'variants/variant', variant: variant
-  end
+json.variants do
+  json.partial! 'variants/list', variants: @variants
 end

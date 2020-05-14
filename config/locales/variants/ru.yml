@@ -16,7 +16,7 @@ ru:
 
     cart:
       add: Добавить в корзину
-      processing: Добавляем...
+      adding: Добавляем в корзину...
       checkout: Оформить заказ
 
     title: Вариант
@@ -41,8 +41,10 @@ ru:
     more: Подробнее
     kit_select: Дополнить образ
 
+    unpub: Неопубликован
+
     labels:
-      new: Новый сезон
+      latest: Новый сезон
       bestseller: Бестселлер
       sale: Sale
       last: Последний размер

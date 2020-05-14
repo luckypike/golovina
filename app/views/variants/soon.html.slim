@@ -1,9 +1,0 @@
-- title I18n.t('variants.soon.title')
-- description I18n.t('variants.soon.desc')
-- set_meta_tags og: { \
-  image: policy_scope(Variant.unscope(:includes)) \
-    .select(:id).includes(:images).where(latest: true).where.not(images: { id: nil }).limit(3) \
-    .map{ |variant| variant.images.sort_by(&:weight_or_created).first.photo.thumb.url } \
-}
-
-= react_component 'Variants/Soon'

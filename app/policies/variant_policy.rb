@@ -76,7 +76,7 @@ class VariantPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user&.editor?
-        scope.all
+        scope.not_archived
       else
         scope.active
       end

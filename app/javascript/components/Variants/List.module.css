@@ -1,21 +1,11 @@
-.root {
-
-}
-
 .item {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-gap: var(--yr);
-  grid-row-gap: calc(var(--yr) * 1);
-  margin-bottom: calc(var(--yr) * var(--s3));
+  grid-row-gap: calc(var(--yr) * var(--s1));
+  margin-bottom: calc(var(--yr) * var(--s4));
 
-  @media(--s) {
+  @media (--s) {
     grid-template-columns: repeat(12, 1fr);
     grid-column-gap: calc(var(--xr) * 2);
-
-    & .image {
-      grid-column: auto / span 4;
-    }
 
     & .dt {
       grid-column: auto / span 4;
@@ -29,23 +19,9 @@
       }
     }
 
-    &.single {
-      & .image {
-        grid-column: auto / span 5;
-      }
-    }
-
     &:nth-child(even) {
-      & .image {
-
-      }
-
-      & .labels {
-        justify-content: flex-end;
-      }
-
       & .label {
-        margin: 0 0 calc(var(--yr) * var(--s2)) calc(var(--yr) * 2);
+        text-align: right;
       }
 
       & .dt {
@@ -59,7 +35,6 @@
         }
       }
 
-
       &.single {
         & .dt {
           grid-column: 4 / span 4;
@@ -68,43 +43,28 @@
     }
   }
 
-  @media(--m) {
-    margin-bottom: calc(var(--yr) * calc(var(--s3) * 2));
-  }
-}
-
-.image {
-  grid-column: auto / span 6;
-  position: relative;
-  background-color: var(--ph_color);
-
-  &::before {
-    display: block;
-    content: '';
-    padding-top: calc(4 / 3 * 100%)
-  }
-
-  & img {
-    left: 0;
-    top: 0;
-    position: absolute;
-    display: block;
-    width: 100%;
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * calc(var(--s4) * 2));
   }
 }
 
 .unpub {
-  background-color: red;
+  composes: at from '../Fonts.module.css';
+  color: red;
+  font-weight: var(--fw_bold);
 }
 
 .dt {
   position: relative;
-  grid-column: 1 / -1;
   text-align: center;
+
+  @media (--s) {
+    margin-bottom: calc(var(--yr) * var(--s4));
+  }
 }
 
 .title {
-  margin: 0 calc(var(--yr) * var(--lh) * 2);
+  margin: 0 10%;
 
   @media (--s) {
     margin: 0;
@@ -112,6 +72,8 @@
 }
 
 .price {
+  margin-top: var(--yr);
+
   & > div {
     justify-content: center;
   }
@@ -119,35 +81,15 @@
 
 .colors {
   composes: at from '../Fonts.module.css';
-  grid-column: 1 / span 1;
   color: var(--gr_color);
-}
-
-.labels {
-  display: flex;
-  justify-content: center;
-
-  @media(--s) {
-    justify-content: flex-start;
-  }
 }
 
 .label {
-  margin: 0 var(--yr);
-  /* position: absolute; */
-  display: block;
+  composes: at from '../Fonts.module.css';
   color: var(--gr_color);
-  /* z-index: 1; */
-  /* top: 0; */
+  margin-bottom: var(--yr);
 
-  @media(--s) {
-    position: static;
-    margin: 0 calc(var(--yr) * 2) calc(var(--yr) * var(--s2)) 0;
-    composes: at from '../Fonts.module.css';
-  }
-
-  &.new,
-  &.sold_out {
+  &.bestseller {
     color: var(--orng_color);
   }
 
@@ -155,7 +97,7 @@
     color: var(--red_color);
   }
 
-  &.bestseller {
+  &.latest {
     color: var(--grn_color);
   }
 }

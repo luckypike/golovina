@@ -25,7 +25,9 @@ export default function Guide ({ locale }) {
       />
 
       <div className={styles.text} onClick={() => setActive(true)}>
-        {I18n.t('variant.size.guide.title')}
+        <span>
+          {I18n.t('variant.size.guide.title')}
+        </span>
       </div>
 
       <div className={classNames({ [styles.size_helper]: active, [styles.size_help]: !active })}>

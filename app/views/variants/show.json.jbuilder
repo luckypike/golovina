@@ -1,49 +1,80 @@
 json.variants @variants do |variant|
-  json.partial! 'variants/variant', variant: variant
-  json.extract! variant, :desc, :comp
+  json.partial! variant
+  json.extract! variant, :label, :desc, :comp
   json.available variant.available?
 
-  json.images variant.images.sort_by(&:weight_or_created) do |image|
+  json.title variant.title_last.squish
+
+  json.images variant.images.sort_by(&:weight_or_created).each do |image|
     json.id image.id
-    json.preview image.photo.preview.url
     json.thumb image.photo.thumb.url
     json.large image.photo.large.url
   end
 
-  json.availabilities variant.availabilities.group_by(&:size) do |size, availabilities|
-    json.size do
-      quantity = availabilities.sum(&:quantity)
-      json.id size.id
-      json.title size.size
-      json.weight size.weight
-      json.quantity quantity
-      json.active quantity > 0
-    end
-
-    json.availabilities availabilities do |availability|
-      json.extract! availability, :quantity
-      json.active availability.active?
-      json.store availability.store, :id, :title
-    end
-  end
-
-  json.in_wishlist variant.in_wishlist(Current.user)
-
-  json.notification variant.in_notification(Current.user)
-
   json.color do
-    json.extract! variant.color, :id, :title, :image_url, :color
+    json.partial! variant.color
   end
 
-  if variant.kits.active.present?
-    json.kits variant.kits.active do |kit|
-      json.id kit.id
-      json.title kit.title.present? ? kit.human_title : kit.human_title.truncate(60)
-      json.image kit.images.present? ? kit.images.sort_by(&:weight).first.photo.thumb.url : nil
-      json.items kit.variants.size
+  json.category do
+    json.extract! variant.product.category, :id, :slug
+  end
+
+  json.availabilities(variant.availabilities.sort_by { |a| a.size.weight }) do |availability|
+    json.partial! availability
+    json.active availability.active?
+
+    json.size do
+      json.partial! availability.size
     end
   end
 end
+
+# json.variants @variants do |variant|
+#   json.partial! 'variants/variant', variant: variant
+#   json.extract! variant, :desc, :comp
+#   json.available variant.available?
+#
+#   json.images variant.images.sort_by(&:weight_or_created) do |image|
+#     json.id image.id
+#     json.preview image.photo.preview.url
+#     json.thumb image.photo.thumb.url
+#     json.large image.photo.large.url
+#   end
+#
+#   json.availabilities variant.availabilities.group_by(&:size) do |size, availabilities|
+#     json.size do
+#       quantity = availabilities.sum(&:quantity)
+#       json.id size.id
+#       json.title size.size
+#       json.weight size.weight
+#       json.quantity quantity
+#       json.active quantity > 0
+#     end
+#
+#     json.availabilities availabilities do |availability|
+#       json.extract! availability, :quantity
+#       json.active availability.active?
+#       json.store availability.store, :id, :title
+#     end
+#   end
+#
+#   json.in_wishlist variant.in_wishlist(Current.user)
+#
+#   json.notification variant.in_notification(Current.user)
+#
+#   json.color do
+#     json.extract! variant.color, :id, :title, :image_url, :color
+#   end
+#
+#   if variant.kits.active.present?
+#     json.kits variant.kits.active do |kit|
+#       json.id kit.id
+#       json.title kit.title.present? ? kit.human_title : kit.human_title.truncate(60)
+#       json.image kit.images.present? ? kit.images.sort_by(&:weight).first.photo.thumb.url : nil
+#       json.items kit.variants.size
+#     end
+#   end
+# end
 
 # json.archived @variant.product.variants.archived.includes(:color).sort_by(&:state) do |variant|
 #   json.id variant.id
