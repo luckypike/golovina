@@ -28,6 +28,7 @@
   width: calc(var(--yr) * 8);
   height: calc(var(--yr) * 8);
   line-height: calc(var(--yr) * 7.5);
+  padding: calc(var(--yr) / 2);
 
   &:not(:last-child) {
     margin-right: calc(var(--yr) * 2);
@@ -40,8 +41,8 @@
   & > div {
     overflow: hidden;
     display: block;
-    width: calc(var(--yr) * 7.5);
-    height: calc(var(--yr) * 7.5);
+    width: calc(var(--yr) * 6.5);
+    height: calc(var(--yr) * 6.5);
     background-size: 100%;
   }
 }
