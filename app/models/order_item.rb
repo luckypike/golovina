@@ -3,6 +3,7 @@ class OrderItem < ApplicationRecord
   belongs_to :variant
   belongs_to :size
   belongs_to :refund, optional: true
+  has_many :acts, dependent: :nullify
 
   validates :quantity, presence: true
 
@@ -16,6 +17,30 @@ class OrderItem < ApplicationRecord
 
   def available?
     available >= quantity
+  end
+
+  def process_acts
+    availability = Availability.find_by(variant: variant, size: size)
+    return unless availability
+
+    unallocated_quantity = quantity
+
+    Store.find_each do |store|
+      store_quantity = availability.acts.where(store: store).sum(:quantity)
+
+      allocated_quantity = [unallocated_quantity, store_quantity].min
+
+      act = acts.build(
+        state: :paid,
+        availability: availability,
+        store: store,
+        quantity: allocated_quantity * -1
+      )
+
+      unallocated_quantity -= allocated_quantity if act.save
+
+      break if unallocated_quantity.zero?
+    end
   end
 
   class << self

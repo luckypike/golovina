@@ -84,5 +84,7 @@
 .recovery {
   composes: at from '../Fonts';
   cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--gr_color);
   margin-left: auto;
 }

@@ -38,10 +38,8 @@ class Variant < ApplicationRecord
 
   before_save :default_values
 
-  # after_save :cache_sizes
-  # after_save :check_state
-  after_save :check_category
-  # after_save :check_notifications
+  after_save :update_sizes_cache
+  after_save :update_category_variants_counter
 
   translates :desc, :comp, :title
   globalize_accessors locales: I18n.available_locales, attributes: %i[desc comp title]
@@ -194,12 +192,13 @@ class Variant < ApplicationRecord
     self.state = state.presence || :unpub
   end
 
-  def check_category
+  # TODO: Check and renew below 2 methods
+  def update_category_variants_counter
     Category.find(product.category_id_before_last_save).check_variants_counter if product.category_id_before_last_save
-    product.category.check_variants_counter
+    product.category.update_variants_counter
   end
 
-  def cache_sizes
+  def update_sizes_cache
     update_column(:sizes_cache, sizes.map(&:id))
   end
 

@@ -33,7 +33,7 @@ export default function Show ({ user: userJSON, locale }) {
     setErrors,
     onSubmit,
     cancelToken
-  } = useForm({ password: '', password_confirmation: '', reset_password_token: user.reset_password_token })
+  } = useForm({ password: '', password_confirmation: '', reset_password_token: user && user.reset_password_token })
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -58,59 +58,67 @@ export default function Show ({ user: userJSON, locale }) {
 
       <div className={styles.root}>
         <div className={form.tight}>
-          <form className={classNames(form.root, styles.form)} onSubmit={onSubmit(handleSubmit)}>
-            <Errors errors={errors.reset_password_token} />
+          {user &&
+            <form className={classNames(form.root, styles.form)} onSubmit={onSubmit(handleSubmit)}>
+              <Errors errors={errors.reset_password_token} />
 
-            <div className={form.item}>
-              <label>
-                <div className={form.label}>
-                  Новый пароль
-                </div>
+              <div className={form.item}>
+                <label>
+                  <div className={form.label}>
+                    {I18n.t('accounts.passwords.password')}
+                  </div>
 
-                <div className={form.input}>
-                  <input
-                    type="password"
-                    autoFocus
-                    autoComplete="new-password"
-                    value={values.password}
-                    name="password"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </label>
+                  <div className={form.input}>
+                    <input
+                      type="password"
+                      autoFocus
+                      autoComplete="new-password"
+                      value={values.password}
+                      name="password"
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </label>
 
-              <Errors errors={errors.password} />
+                <Errors errors={errors.password} />
+              </div>
+
+              <div className={form.item}>
+                <label>
+                  <div className={form.label}>
+                    {I18n.t('accounts.passwords.password_confirmation')}
+                  </div>
+
+                  <div className={form.input}>
+                    <input
+                      type="password"
+                      autoComplete="off"
+                      value={values.password_confirmation}
+                      name="password_confirmation"
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </label>
+
+                <Errors errors={errors.password_confirmation} />
+              </div>
+
+              <div className={classNames(form.submit, styles.submit)}>
+                <input
+                  type="submit"
+                  value={pending ? I18n.t('accounts.passwords.submiting') : I18n.t('accounts.passwords.submit')}
+                  className={classNames(buttons.main, { [buttons.pending]: pending })}
+                  disabled={pending}
+                />
+              </div>
+            </form>
+          }
+
+          {!user &&
+            <div>
+              {I18n.t('accounts.passwords.no_token')}
             </div>
-
-            <div className={form.item}>
-              <label>
-                <div className={form.label}>
-                  Подтверждение пароля
-                </div>
-
-                <div className={form.input}>
-                  <input
-                    type="password"
-                    autoComplete="off"
-                    value={values.password_confirmation}
-                    name="password_confirmation"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </label>
-
-              <Errors errors={errors.password_confirmation} />
-            </div>
-
-            <div className={classNames(form.submit, styles.submit)}>
-              <input
-                type="submit"
-                value={pending ? 'Меняем пароль...' : 'Сменить пароль'}
-                className={classNames(buttons.main, { [buttons.pending]: pending })}
-                disabled={pending}
-              />
-            </div>
-          </form>
+          }
         </div>
       </div>
     </div>

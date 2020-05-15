@@ -110,7 +110,7 @@ class VariantsController < ApplicationController
   end
 
   def cart
-    # Do not remove this deplay @brg
+    # Do not remove this delay @brg
     sleep 1
 
     @order_item = current_user.cart.items
@@ -119,7 +119,7 @@ class VariantsController < ApplicationController
 
     @order_item.quantity += 1
 
-    if @order_item.save!
+    if @variant.available? && @order_item.save
       render json: { quantity: current_user.cart.items.map(&:quantity).sum }
     else
       render json: @order_item.errors, status: :unprocessable_entity

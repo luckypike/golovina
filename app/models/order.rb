@@ -8,24 +8,11 @@ class Order < ApplicationRecord
   enum delivery: { pickup: 1, russia: 2, international: 3 }
 
   enum state: { cart: 0, paid: 2, archived: 3 } do
-    # event :activate do
-    #   after do
-    #     user.activate(user.email, type: :order) if user.guest?
-    #     user.update(phone: phone)
-    #     OrderMailer.activate(self).deliver if Rails.env.development?
-    #   end
-    #
-    #   transition undef: :active
-    # end
-    #
     event :pay do
       after do
-        OrderMailer.pay(self).deliver_later
-        OrderMailer.customer_notice(self, user.email).deliver_later
-
         order_items.each do |item|
           item.update(amount: item.variant.price_sell)
-          item.variant.decrease item
+          item.process_acts
         end
 
         update(
@@ -33,6 +20,9 @@ class Order < ApplicationRecord
           amount_delivery: amount_delivery_calc,
           payed_at: Time.current
         )
+
+        OrderMailer.pay(self).deliver_later
+        OrderMailer.customer_notice(self, user.email).deliver_later
       end
 
       transition cart: :paid

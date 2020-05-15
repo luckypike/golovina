@@ -15,7 +15,7 @@ class Category < ApplicationRecord
   globalize_accessors locales: I18n.available_locales, attributes: [:title]
   friendly_id :slug
 
-  def check_variants_counter
+  def update_variants_counter
     update_attribute(:variants_counter, variants.active.size)
   end
 

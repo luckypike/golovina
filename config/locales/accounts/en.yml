@@ -1,5 +1,19 @@
 en:
-  account:
+  accounts:
     show:
       title: My account
       user: Account details
+      orders: Your orders
+
+    passwords:
+      show: Password recovery
+      no_token: Looks like recovery link was expired, please request new one
+
+      password: New password
+      password_confirmation: Password confirmation
+      submit: Change password
+      submiting: Changing password...
+
+    users:
+      show: Edit details
+      password: Change password

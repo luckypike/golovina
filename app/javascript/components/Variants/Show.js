@@ -81,7 +81,7 @@ function Variant ({ locale }) {
       imagesCountRef.current = variant.images.length
 
       updateDimensions()
-      if (variant.availabilities.length === 1 && variant.availabilities[0].size.id === 1) {
+      if (variant.availabilities.length === 1 && variant.availabilities[0].size.id === 1 && variant.availabilities[0].active) {
         setSize(variant.availabilities[0].size)
       } else {
         setSize()
@@ -93,7 +93,7 @@ function Variant ({ locale }) {
   }, [variant])
 
   const updateDimensions = () => {
-    if (window.getComputedStyle(slidesRef.current).getPropertyValue('position') === 'static') {
+    if (slidesRef.current && window.getComputedStyle(slidesRef.current).getPropertyValue('position') === 'static') {
       if (!sliderRef.current && imagesCountRef.current > 1) {
         sliderRef.current = new Siema({
           selector: slidesRef.current
@@ -129,16 +129,17 @@ function Variant ({ locale }) {
 
     setNoSize(false)
 
-    const { data } = await axios.post(
+    await axios.post(
       path('cart_variant_path', { id: variant.id, format: 'json' }),
       {
         size: size.id
       },
       { cancelToken: cancelToken.current.token }
-    )
-
-    PubSub.publish('update-cart', data.quantity)
-    PubSub.publish('notification-cart', variant)
+    ).then(res => {
+      PubSub.publish('update-cart', res.data.quantity)
+      PubSub.publish('notification-cart', variant)
+    }).catch(_error => {
+    })
   }
 
   return (
@@ -146,17 +147,24 @@ function Variant ({ locale }) {
       {variant && variants &&
         <div className={styles.root}>
           <div className={styles.images}>
+            {variant.images.length > 0 &&
+              <div className={styles.slides} ref={slidesRef}>
+                {variant.images.map(image =>
+                  <div className={styles.image} key={image.id}>
+                    <img src={image.large} />
+                  </div>
+                )}
+              </div>
+            }
+
+            {variant.images.length < 1 &&
+              <div className={styles.image} />
+            }
+
             {/* {variant.images.length > 1 &&
               <div className={styles.counter}>{index}/{variant.images.length}</div>
             } */}
 
-            <div className={styles.slides} ref={slidesRef}>
-              {variant.images.map(image =>
-                <div className={styles.image} key={image.id}>
-                  <img src={image.large} />
-                </div>
-              )}
-            </div>
           </div>
 
           <div className={styles.rest}>
@@ -170,6 +178,22 @@ function Variant ({ locale }) {
               <h1>
                 {variant.title}
               </h1>
+
+              {variant.can_edit &&
+                <div className={styles.edit}>
+                  <a href={path('edit_variant_path', { id: variant.id })}>
+                    Редактировать
+                  </a>
+
+                  <a href={path('variant_availabilities_path', { variant_id: variant.id })}>
+                    Размеры и количество
+                  </a>
+
+                  <a href={path('new_variant_path') + `?product_id=${variant.product.id}`}>
+                    Добавить цвет
+                  </a>
+                </div>
+              }
             </div>
 
             <div className={styles.price}>
@@ -178,47 +202,51 @@ function Variant ({ locale }) {
 
             <Variants variants={variants} variant={variant} className={styles.variants} />
 
-            <div className={styles.sizes}>
-              {variant.availabilities.map(availability =>
-                <div
-                  key={availability.size.id}
-                  className={classNames(
-                    styles.size,
-                    styles[`size_${availability.size.id}`],
-                    { [styles.unavailable]: !availability.active, [styles.active]: size && availability.size.id === size.id }
-                  )}
-                  onClick={() => {
-                    if (availability.active) {
-                      setSize(availability.size)
-                    }
-                  }}
-                >
-                  {availability.size.title}
-                </div>
-              )}
-            </div>
-
             {variant.available &&
-              <div className={styles.guide}>
-                <Guide locale={locale} />
-              </div>
+              <>
+                <div className={styles.sizesWith}>
+                  <div className={styles.sizes}>
+                    {variant.availabilities.map(availability =>
+                      <div
+                        key={availability.size.id}
+                        className={classNames(
+                          styles.size,
+                          styles[`size_${availability.size.id}`],
+                          { [styles.unavailable]: !availability.active, [styles.active]: size && availability.size.id === size.id }
+                        )}
+                        onClick={() => {
+                          if (availability.active) {
+                            setSize(availability.size)
+                          }
+                        }}
+                      >
+                        {availability.size.title}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className={styles.guide}>
+                    <Guide locale={locale} />
+                  </div>
+                </div>
+
+                <div className={styles.buy}>
+                  <div className={styles.cart}>
+                    <button
+                      className={classNames(buttons.main, { [buttons.pending]: pending })}
+                      disabled={pending}
+                      onClick={onSubmit(handleCartClick)}
+                    >
+                      {pending ? I18n.t('variant.cart.adding') : I18n.t('variant.cart.add')}
+                    </button>
+
+                    {noSize &&
+                      <div className={styles.noSize}>{I18n.t('variant.size.select')}</div>
+                    }
+                  </div>
+                </div>
+              </>
             }
-
-            <div className={styles.buy}>
-              <div className={styles.cart}>
-                <button
-                  className={classNames(buttons.main, { [buttons.pending]: pending })}
-                  disabled={pending}
-                  onClick={onSubmit(handleCartClick)}
-                >
-                  {pending ? I18n.t('variant.cart.adding') : I18n.t('variant.cart.add')}
-                </button>
-
-                {noSize &&
-                  <div className={styles.noSize}>{I18n.t('variant.size.select')}</div>
-                }
-              </div>
-            </div>
 
             {variant.desc &&
               <div className={styles.desc}>

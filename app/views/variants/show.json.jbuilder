@@ -15,6 +15,10 @@ json.variants @variants do |variant|
     json.partial! variant.color
   end
 
+  json.product do
+    json.partial! variant.product
+  end
+
   json.category do
     json.extract! variant.product.category, :id, :slug
   end
@@ -27,6 +31,8 @@ json.variants @variants do |variant|
       json.partial! availability.size
     end
   end
+
+  json.can_edit policy(variant).edit?
 end
 
 # json.variants @variants do |variant|

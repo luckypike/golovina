@@ -15,7 +15,6 @@ import Checkout from './Cart/Checkout'
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
 import { useForm, Errors } from '../Form'
-// import Auth from '../Sessions/Auth'
 
 import styles from './Cart.module.css'
 import page from '../Page.module.css'
@@ -23,7 +22,6 @@ import form from '../Form.module.css'
 import buttons from '../Buttons.module.css'
 
 Cart.propTypes = {
-  // user: PropTypes.object,
   locale: PropTypes.string,
   user: PropTypes.object,
   appleid: PropTypes.object.isRequired
@@ -39,7 +37,6 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
   const [newAddress, setNewAddress] = useState(false)
   const [order, setOrder] = useState()
   const [dictionaries, setDictionaries] = useState()
-  // const [city, setCity] = useState()
 
   const _fetch = async () => {
     const { data } = await axios.get(path('cart_path', { format: 'json' }))
@@ -76,7 +73,7 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
       { cancelToken: cancelToken.current.token }
     ).then(res => {
       if (res.data['purchasable?']) {
-        if (res.headers.location && window)window.location = res.headers.location
+        if (res.headers.location && window) window.location = res.headers.location
       } else {
         _fetch()
       }
@@ -89,19 +86,12 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
   const isPickup = () => values.delivery === 'pickup'
   const isRussia = () => values.delivery === 'russia'
   const isInternational = () => values.delivery === 'international'
-  // const isPromo = () => ((price.promo || price.promo === 0) && parseFloat(price.sell) >= price.promo)
 
   const isStep1 = () => !checkout
   const isStep2 = () => !isStep1() && (!guest && user.guest)
   const isStep3 = () => !isStep1() && !isStep2() && (guest || user.common)
-  // const isStep4 = () => isStep3() && values.delivery
-  // const isStep3 = () => isStep2()
-  // const isStep3 = () => isStep2() && (isPickup() || isInternational() || isRussia())
 
   const haveUserAddresses = () => dictionaries && dictionaries.user_addresses.length > 0
-
-  // console.log(user)
-  // console.log(errors)
 
   if (loading) return null
 
@@ -228,6 +218,8 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
                         </>
                       }
                     </div>
+
+                    <Errors errors={errors.delivery} />
                   </div>
 
                   <Address
@@ -276,8 +268,8 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
                   />
 
                   {!order['purchasable?'] &&
-                    <div className={styles.notPurchasable}>
-                      Одного из выбранных товаров временно нет в наличии. Пожалуйста, удалите его из корзины, чтобы оформить заказ.
+                    <div className={styles.notAvailable}>
+                      {I18n.t('orders.cart.checkout.notAvailable')}
                     </div>
                   }
 

@@ -13,7 +13,7 @@ json.dictionaries do
     json.partial! category
   end
 
-  json.colors Color.main.includes(:colors).sort_by(&:title) do |color|
+  json.colors Color.main.with_translations.includes(colors: :translations).sort_by(&:title) do |color|
     json.partial! color
 
     json.colors color.colors.sort_by(&:title) do |child_color|

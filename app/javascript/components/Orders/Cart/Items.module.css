@@ -16,7 +16,7 @@
 .image {
   align-self: flex-start;
   position: relative;
-  background-color: var(--ph_color);
+  background-color: color-mod(var(--ph_color) shade(2%));
 
   &::before {
     display: block;

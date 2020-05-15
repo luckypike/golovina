@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import { useI18n } from '../../I18n'
+import Price from '../../Variants/Price'
 
 import styles from './Checkout.module.css'
 import buttons from '../../Buttons.module.css'
@@ -28,7 +29,7 @@ export default function Checkout ({ locale, setCheckout, order }) {
         </dt>
 
         <dd>
-          {order.amount_calc}
+          <Price sell={parseFloat(order.amount_calc)} />
         </dd>
 
         <dt>
@@ -49,9 +50,19 @@ export default function Checkout ({ locale, setCheckout, order }) {
       </dl>
 
       <div className={styles.checkout}>
-        <button className={classNames(buttons.main, buttons.big)} onClick={() => setCheckout(true)}>
+        <button
+          className={classNames(buttons.main)}
+          disabled={!order['purchasable?']}
+          onClick={() => setCheckout(true)}
+        >
           Оформить заказ
         </button>
+
+        {!order['purchasable?'] &&
+          <div className={styles.notAvailable}>
+            {I18n.t('orders.cart.checkout.notAvailable')}
+          </div>
+        }
       </div>
     </div>
   )

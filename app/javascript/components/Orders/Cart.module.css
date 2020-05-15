@@ -93,7 +93,7 @@
   }
 }
 
-.notPurchasable {
+.notAvailable {
   color: var(--red_color);
   margin-bottom: calc(var(--yr) * var(--s3));
 }

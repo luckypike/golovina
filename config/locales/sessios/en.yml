@@ -21,7 +21,7 @@ en:
 
     authorize_mail: Insructions to account restore were sent to your email
 
-    reset_password_mail: You requested a password reset on the Golovina website. Follow the link below to access your personal account.
+    reset_password_mail: You requested a password reset on the Golovina website. Follow the link below to change you password.
 
   sessions:
     qq: QQ

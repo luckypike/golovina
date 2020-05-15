@@ -67,7 +67,7 @@
 }
 
 .desc {
-  margin: calc(var(--yr) * var(--s3)) 0;
+  margin-bottom: calc(var(--yr) * var(--s3));
 }
 
 .a {
@@ -77,31 +77,15 @@
 }
 
 .edit {
-  margin-bottom: calc(var(--yr) * 2);
+  margin-bottom: calc(var(--yr) * var(--s2));
+  display: flex;
+  composes: at from '../Fonts.module.css';
 
-  & .btn_gr {
-    font-size: 0.625rem;
-    line-height: 1.5rem;
-
-    background-color: transparent;
-    border: 1px solid var(--sand_color);
-
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-
-    font-family: inherit;
-    font-weight: inherit;
-    appearance: none;
+  & a {
     cursor: pointer;
-    color: var(--pr_color);
-    display: inline-block;
-    padding: var(--yr) calc(var(--xr) / 2);
-    user-select: none;
-    margin-right: calc(var(--yr) * 2);
-
-    &:hover {
-      background-color: var(--sand_color);
-    }
+    text-decoration: underline;
+    text-decoration-color: var(--gr_color);
+    margin-right: 1em;
   }
 }
 
@@ -113,7 +97,12 @@
   }
 }
 
+.sizesWith {
+  margin-bottom: calc(var(--yr) * var(--s2));
+}
+
 .sizes {
+  margin-bottom: calc(var(--yr) * var(--s1));
   display: flex;
   justify-content: center;
   position: relative;
@@ -267,6 +256,7 @@
   display: flex;
   justify-content: center;
   position: relative;
+  margin-bottom: calc(var(--yr) * var(--s3));
 
   @media (--m) {
     justify-content: flex-start;

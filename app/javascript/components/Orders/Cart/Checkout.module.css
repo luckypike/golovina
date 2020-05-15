@@ -11,8 +11,9 @@
   & dt {
     font-weight: var(--fw_bold);
   }
+}
 
-  @media (--s) {
-    /* grid-template-columns: 7rem 1fr; */
-  }
+.notAvailable {
+  color: var(--red_color);
+  margin-top: calc(var(--yr) * var(--s3));
 }

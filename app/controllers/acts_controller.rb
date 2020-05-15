@@ -2,7 +2,7 @@ class ActsController < ApplicationController
   def create
     authorize Act
 
-    @act = Act.new(act_params)
+    @act = Act.manual.new(act_params)
 
     respond_to do |format|
       format.json do

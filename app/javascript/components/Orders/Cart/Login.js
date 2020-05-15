@@ -37,9 +37,8 @@ export default function Login ({ appleid, locale, setGuest }) {
       <div className={styles.sep}>{I18n.t('order.cart.or')}</div>
 
       <div className={styles.checkout}>
-        <button className={classNames(buttons.main, buttons.big)} onClick={() => setGuest(true)}>
-          Оформить заказ как гость
-          {/* Перейти к оформлению сразу */}
+        <button className={classNames(buttons.main)} onClick={() => setGuest(true)}>
+          {I18n.t('orders.cart.login.guest')}
         </button>
       </div>
     </div>
