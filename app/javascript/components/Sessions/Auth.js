@@ -11,10 +11,10 @@ Auth.propTypes = {
 }
 
 export default function Auth ({ appleid, from, text }) {
-  let redirectUri = appleid.redirect_uri
-  if (from) redirectUri += `/${from}`
+  // let redirectUri =
+  // if (from) redirectUri += `/${from}`
 
-  const url = new URL(`https://appleid.apple.com/auth/authorize?scope=name%20email&client_id=${appleid.client_id}&redirect_uri=${redirectUri}&response_type=code%20id_token&response_mode=form_post`)
+  const url = new URL(`https://appleid.apple.com/auth/authorize?scope=name%20email&client_id=${appleid.client_id}&redirect_uri=${appleid.redirect_uri}&response_type=code%20id_token&response_mode=form_post`)
 
   const [clicked, setClicked] = useState(false)
 

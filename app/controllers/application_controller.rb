@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_current
   before_action :set_header
+  before_action :store_user_location!, if: :storable_location?
 
   around_action :switch_locale
 
@@ -51,5 +52,13 @@ class ApplicationController < ActionController::Base
   def extract_locale_from_subdomain
     parsed_locale = request.subdomains.first
     parsed_locale if I18n.available_locales.map(&:to_s).include?(parsed_locale)
+  end
+
+  def storable_location?
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+  end
+
+  def store_user_location!
+    store_location_for(:user, request.fullpath)
   end
 end

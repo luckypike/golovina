@@ -1,12 +1,8 @@
 module ApplicationHelper
   def appleid
-    redirect_uri = URI(Rails.application.credentials[Rails.env.to_sym][:appleid][:redirect_uri])
-
-    redirect_uri =  request.protocol + request.host_with_port + redirect_uri.path if Rails.env.development?
-
     {
       client_id: Rails.application.credentials[Rails.env.to_sym][:appleid][:client_id],
-      redirect_uri: redirect_uri
+      redirect_uri: URI(Rails.application.credentials[Rails.env.to_sym][:appleid][:redirect_uri])
     }
   end
 

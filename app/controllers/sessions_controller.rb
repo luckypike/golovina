@@ -12,14 +12,13 @@ class SessionsController < Devise::SessionsController
   def create
     user = User.find_for_database_authentication(email: params[:user][:email].squish)
     if user&.valid_password?(params[:user][:password].squish)
-
       if current_user&.guest?
         # Cart.where(user: Current.user).update_all(user_id: user.id)
         # Wishlist.where(user: Current.user).update_all(user_id: user.id)
       end
 
       sign_in user
-      head :ok, location: root_path
+      head :ok, location: after_sign_in_path_for(user)
     else
       render json: { message: t('messages.password') }, status: :unauthorized
     end

@@ -28,14 +28,13 @@ module Users
         user = identity.user
       end
 
-      if Current.user && Current.user.guest?
-        Cart.where(user: Current.user).update_all(user_id: user.id)
-        Wishlist.where(user: Current.user).update_all(user_id: user.id)
+      if current_user&.guest?
+        # Cart.where(user: Current.user).update_all(user_id: user.id)
+        # Wishlist.where(user: Current.user).update_all(user_id: user.id)
       end
 
-      sign_in(user)
-
-      redirect_to params[:from].present? ? [params[:from].to_sym] : orders_user_path(user)
+      sign_in user
+      redirect_to after_sign_in_path_for(user)
     end
 
     def failure

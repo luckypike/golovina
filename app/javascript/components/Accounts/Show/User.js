@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 import { path } from '../../Routes'
 import { useI18n } from '../../I18n'
@@ -14,6 +15,22 @@ User.propTypes = {
 
 export default function User ({ user, locale }) {
   const I18n = useI18n(locale)
+
+  const handleLogout = async e => {
+    e.preventDefault()
+
+    await axios.delete(
+      path('destroy_user_session_path', { format: 'json' }),
+      {
+        // params: {
+        //   authenticity_token: document.querySelector('[name="csrf-token"]').content
+        // }
+      }
+    )
+
+
+    // window.location = path('root_path')
+  }
 
   return (
     <div>
@@ -63,6 +80,12 @@ export default function User ({ user, locale }) {
         <a href={path('password_account_user_path')} className={buttons.main}>
           Сменить пароль
         </a>
+      </div>
+
+      <div>
+        <span onClick={handleLogout}>
+          Выйти
+        </span>
       </div>
     </div>
   )

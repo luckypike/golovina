@@ -21,6 +21,8 @@ class Order < ApplicationRecord
           payed_at: Time.current
         )
 
+        save_address
+
         OrderMailer.pay(self).deliver_later
         OrderMailer.customer_notice(self, user.email).deliver_later
       end
@@ -97,6 +99,25 @@ class Order < ApplicationRecord
       unless order_item.available?
         errors.add(:order_items)
       end
+    end
+  end
+
+  def save_address
+    if (russia? && door?) || international?
+      current_user_address = user_address
+      current_user_address ||= build_user_address
+      current_user_address.assign_attributes({
+        delivery_option: delivery_option,
+        delivery_city: delivery_city,
+        user: user,
+        country: country,
+        city: city,
+        street: street,
+        house: house,
+        appartment: appartment
+      })
+
+      current_user_address.save!
     end
   end
 
