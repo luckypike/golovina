@@ -17,6 +17,6 @@ json.array! variants do |variant|
   json.colors variant.product.variants.select(&:active?).size - 1
 
   if current_user
-    json.in_wishlist(current_user.wishlists.detect { |w| w.variant.id == variant.id }.present?)
+    json.in_wishlist(current_user.wishlists.detect { |w| w.variant_id == variant.id }.present?)
   end
 end

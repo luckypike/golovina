@@ -1,62 +1,42 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import { path } from '../Routes'
 import Price from '../Variants/Price'
+import List from '../Variants/List'
 
 import page from '../Page'
 
 import styles from './Show.module.css'
 
-class Show extends Component {
-  state = {
-    variants: null
-  }
+export default function Show () {
+  const [variants, setVariants] = useState()
 
-  componentDidMount = async () => {
-    const res = await axios.get(path('wishlist_path', { format: 'json' }))
-    this.setState({ ...res.data })
-  }
+  useEffect(() => {
+    const _fetch = async () => {
+      const { data } = await axios.get(path('wishlist_path', { format: 'json' }))
 
-  render () {
-    const { variants } = this.state
+      setVariants(data.variants)
+    }
 
-    return (
-      <div className={page.root}>
-        <div className={page.title}>
-          <h1>Избранное</h1>
-        </div>
+    _fetch()
+  }, [])
 
-        {variants && variants.length > 0 &&
-          <div className={styles.variants}>
-            {variants.filter(variant => variant.images).map((variant, _) =>
-              <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={styles.variant}>
-                <div className={styles.image}>
-                  <img src={variant.images[0].thumb} />
-                </div>
-
-                <div className={styles.desc}>
-                  <div className={styles.title}>
-                    {variant.title}
-                  </div>
-
-                  <div className={styles.price}>
-                    <Price sell={variant.price_sell} origin={variant.price} />
-                  </div>
-                </div>
-              </a>
-            )}
-          </div>
-        }
-
-        {variants && variants.length == 0 &&
-          <div>
-            У вас нет избранных товаров, добавляйте их в избранное чтобы потом быстрее найти их.
-          </div>
-        }
+  return (
+    <div className={page.root}>
+      <div className={page.title}>
+        <h1>Избранное</h1>
       </div>
-    )
-  }
-}
 
-export default Show
+      {variants && variants.length > 0 &&
+        <List variants={variants} />
+      }
+
+      {variants && variants.length === 0 &&
+        <div>
+          У вас нет избранных товаров, добавляйте их в избранное чтобы потом быстрее найти их.
+        </div>
+      }
+    </div>
+  )
+}

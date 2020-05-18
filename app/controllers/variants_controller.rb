@@ -106,7 +106,9 @@ class VariantsController < ApplicationController
     @wishlist = Wishlist.find_or_initialize_by(user: current_user, variant: @variant)
     @wishlist.persisted? ? @wishlist.destroy : @wishlist.save
 
-    render json: { in_wishlist: @wishlist.persisted?, quantity: current_user.wishlists.size }
+    @wishlists = Wishlist.joins(:variant)
+      .where(user: current_user, variants: { state: :active })
+    render json: { in_wishlist: @wishlist.persisted?, quantity: @wishlists.size }
   end
 
   def cart
