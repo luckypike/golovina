@@ -37,6 +37,12 @@
   font-weight: var(--fw_bold);
 }
 
+.price {
+  & div {
+    justify-content: flex-start;
+  }
+}
+
 .checkout {
   & span {
     cursor: pointer;

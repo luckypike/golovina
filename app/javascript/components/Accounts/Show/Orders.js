@@ -6,7 +6,7 @@ import 'dayjs/locale/ru'
 import 'dayjs/locale/en'
 
 import { useI18n } from '../../I18n'
-// import Price, { currency } from '../../Variants/Price'
+import Price, { currency } from '../../Variants/Price'
 
 import styles from './Orders.module.css'
 
@@ -65,7 +65,7 @@ function Order ({ order, locale }) {
         </div>
 
         <div className={styles.what}>
-          {I18n.t('order.quantity', { count: order.quantity, amount: '999' })}
+          {I18n.t('order.quantity', { count: order.quantity, amount: currency(parseFloat(order.amount)) })}
         </div>
 
         <svg viewBox="0 0 10 20" className={styles.arr}>
@@ -75,12 +75,14 @@ function Order ({ order, locale }) {
 
       {active &&
         <div className={styles.details}>
-          <div className={styles.address}>
-            <Address order={order} locale={locale} />
-          </div>
+          {order.delivery &&
+            <div className={styles.address}>
+              <Address order={order} locale={locale} />
+            </div>
+          }
 
           <div>
-            Список товаров (доделывается)
+            <Items items={order.items} locale={locale} />
           </div>
         </div>
       }
@@ -140,6 +142,53 @@ function Address ({ order, locale }) {
         </div>
       }
 
+    </div>
+  )
+}
+
+Items.propTypes = {
+  items: PropTypes.array.isRequired,
+  locale: PropTypes.string.isRequired
+}
+
+function Items ({ items, locale }) {
+  const I18n = useI18n(locale)
+
+  return (
+    <div className={styles.items}>
+      {items.map(item =>
+        <div className={styles.item} key={item.id}>
+          <div className={styles.image}>
+            {item.variant.images.length > 0 &&
+              <img src={item.variant.images[0].thumb} />
+            }
+          </div>
+
+          <div className={styles.itemDetails}>
+            <div className={styles.title}>
+              {item.variant.title}
+            </div>
+
+            <div className={styles.price}>
+              <Price sell={parseFloat(item.variant.price_sell)} origin={parseFloat(item.variant.price)} />
+            </div>
+
+            <div className={styles.color}>
+              {I18n.t('order.color')}: {item.variant.color.title}
+            </div>
+
+            {item.size &&
+              <div className={styles.size}>
+                {I18n.t('order.size')}: {item.size.title}
+              </div>
+            }
+
+            <div className={styles.quantity}>
+              {I18n.t('order.amount')}: {item.quantity}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -74,3 +74,45 @@
   padding-bottom: calc(var(--yr) * var(--s2));
   margin-bottom: calc(var(--yr) * var(--s2));
 }
+
+.image {
+  position: relative;
+  background-color: var(--ph_color);
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: calc(4 / 3 * 100%);
+  }
+
+  & img {
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+  }
+}
+
+.items {
+  display: grid;
+  grid-row-gap: calc(var(--yr) * var(--s2));
+
+  @media (--s) {
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: var(--xr);
+  }
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  grid-gap: var(--xr);
+  align-items: start;
+}
+
+.price {
+  & div {
+    justify-content: flex-start;
+  }
+}

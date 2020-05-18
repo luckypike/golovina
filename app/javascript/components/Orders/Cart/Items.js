@@ -5,6 +5,7 @@ import axios from 'axios'
 
 import { useI18n } from '../../I18n'
 import { path } from '../../Routes'
+import Price from '../../Variants/Price'
 
 import styles from './Items.module.css'
 
@@ -47,7 +48,7 @@ export default function Items ({ items, checkout, setCheckout, locale, _fetch })
             </div>
 
             <div className={styles.price}>
-              {/* <Price sell={parseFloat(cart.variant.price_sell)} origin={parseFloat(cart.variant.price)} /> */}
+              <Price sell={parseFloat(item.variant.price_sell)} origin={parseFloat(item.variant.price)} />
             </div>
 
             <div className={styles.color}>
