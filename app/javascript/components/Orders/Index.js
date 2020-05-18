@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import classNames from 'classnames'
@@ -12,32 +12,33 @@ import page from '../Page'
 
 import styles from './Index.module.css'
 
-Index.propTypes = {
-  link: PropTypes.bool
-}
+// Index.propTypes = {
+//   link: PropTypes.bool
+// }
 
 export default function Index ({ link }) {
-  const _cancelToken = axios.CancelToken.source()
-  const TABS = ['paid', 'active', 'archived']
+  const cancelToken = useRef(axios.CancelToken.source())
+  // const _cancelToken = axios.CancelToken.source()
+  const TABS = ['paid', 'cart', 'archived']
 
   const [activeTab, setActiveTab] = useState(TABS[0])
   const [orders, setOrders] = useState()
 
   useEffect(() => {
-    const _fetch = async () => {
-      const { data } = await axios.get(
-        path('orders_path', { format: 'json', query: { state: activeTab } }),
-        { cancelToken: _cancelToken.token }
-      )
+    // const _fetch = async () => {
+    //   const { data } = await axios.get(
+    //     path('orders_path', { format: 'json', query: { state: activeTab } }),
+    //     { cancelToken: _cancelToken.token }
+    //   )
+    //
+    //   setOrders(data.orders)
+    // }
 
-      setOrders(data.orders)
-    }
-
-    setOrders()
-    _fetch()
+    // setOrders()
+    // _fetch()
 
     return () => {
-      _cancelToken.cancel()
+      cancelToken.current.cancel()
     }
   }, [activeTab])
 

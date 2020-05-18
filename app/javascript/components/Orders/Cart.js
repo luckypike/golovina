@@ -230,25 +230,6 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
                     setValues={setValues}
                     locale={locale}
                   />
-
-                  {/* <div className={form.item}>
-                    <label>
-                      <div className={form.label}>
-                        Улица
-                      </div>
-
-                      <div className={form.input}>
-                        <input
-                          type="text"
-                          value={values.street}
-                          name="street"
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                    </label>
-
-                    <Errors errors={errors.street} />
-                  </div> */}
                 </div>
 
                 <div className={classNames(styles.step, { [styles.inactive]: !isStep3() || pending })}>
@@ -266,6 +247,24 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
                       userValues => setValues({ ...values, user_attributes: userValues })
                     }
                   />
+
+                  <div className={form.item}>
+                    <label>
+                      <div className={form.label}>
+                        Комментарий к заказу
+                      </div>
+
+                      <div className={form.input}>
+                        <textarea
+                          value={values.comment}
+                          name="comment"
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                    </label>
+
+                    <Errors errors={errors.comment} />
+                  </div>
 
                   {!order['purchasable?'] &&
                     <div className={styles.notAvailable}>

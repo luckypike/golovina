@@ -1,0 +1,15 @@
+ru:
+  dashboard:
+    nav:
+      index: Оплачено
+      archived: Архив
+      cart: Корзины
+
+    index:
+      title: Оплаченные заказы
+
+    archived:
+      title: Архив заказов
+
+    cart:
+      title: Корзины

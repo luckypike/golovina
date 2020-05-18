@@ -37,29 +37,6 @@ class OrdersController < ApplicationController
     render layout: false
   end
 
-  def index
-    respond_to do |format|
-      format.html
-      format.json do
-        @orders = Order
-          .includes(
-            :user,
-            :delivery_city,
-            order_items: [
-              :size,
-              variant: [
-                { color: [{ colors: :translations }, :translations] },
-                :translations
-              ]
-            ]
-          ).where.not(user: nil)
-
-        @orders = @orders.where(state: params[:state]) if params[:state]
-        @orders = @orders.sort_by { |order| order.payed_at.presence || order.created_at }.reverse
-      end
-    end
-  end
-
   def archive
     authorize @order
     @order.archive!

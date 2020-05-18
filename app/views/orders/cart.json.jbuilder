@@ -31,16 +31,6 @@ if @order
       json.size do
         json.partial! item.size
       end
-
-      # json.variant cart.variant, partial: 'variants/variant', as: :variant
-      # json.color cart.variant.color, partial: 'colors/color', as: :color
-      # json.size cart.size, partial: 'sizes/size', as: :size
-      # json.quantity_available cart.available
-      # json.available cart.available?
-
-      # json.size do
-      #   json.partial! item.size
-      # end
     end
   end
 

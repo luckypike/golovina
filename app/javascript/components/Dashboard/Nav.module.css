@@ -1,0 +1,22 @@
+.tabs {
+  display: flex;
+  margin-bottom: calc(var(--yr) * var(--s3));
+}
+
+.tab {
+  cursor: pointer;
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+  line-height: calc(var(--yr) * var(--lh));
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-right: var(--xr);
+
+  &.active {
+    border-bottom: 2px solid;
+    color: green;
+  }
+
+  &:not(:last-child) {
+    margin-right: var(--xr);
+  }
+}

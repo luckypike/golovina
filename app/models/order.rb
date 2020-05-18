@@ -62,11 +62,18 @@ class Order < ApplicationRecord
   # end
 
   def amount_calc
-    amount_without_delivery_calc + amount_delivery_calc
+    amount_without_delivery_calc +
+      (international? && amount_without_delivery_calc < 30_000 ? amount_delivery_calc : 0)
   end
 
   def amount_delivery_calc
-    international? && amount_without_delivery_calc < 30_000 ? 2500 : 0
+    if international?
+      2500
+    elsif russia?
+      delivery_city.send(delivery_option)
+    else
+      0
+    end
   end
 
   def amount_without_delivery_calc
@@ -96,7 +103,15 @@ class Order < ApplicationRecord
   class << self
     def with_items
       includes(
-        { order_items: :variant }, :delivery_city
+        { order_items: [{
+          variant: [
+            :images,
+            :translations,
+            :availabilities,
+            color: :translations,
+            product: %i[translations category]
+          ]
+        }, :size] }, :delivery_city
       )
     end
 

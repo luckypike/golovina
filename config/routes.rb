@@ -67,6 +67,12 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
+  namespace :dashboard, module: nil do
+    get '', to: 'dashboard#index'
+    get :archived, to: 'dashboard#archived'
+    get :cart, to: 'dashboard#cart'
+  end
+
   resources :sizes
   resources :sizes_groups
 
@@ -78,13 +84,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       get 'delivery', to: 'service#delivery'
       get 'return', to: 'service#return'
       get 'refund', to: 'refunds#refund', format: :json
-    end
-
-    resources :users, only: [] do
-      member do
-        get :orders, format: :json
-        get :refunds, format: :json
-      end
     end
   end
 
@@ -154,7 +153,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  resources :orders, only: %i[index] do
+  resources :orders, only: [] do
     collection do
       post :paid
     end

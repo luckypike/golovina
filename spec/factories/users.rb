@@ -11,6 +11,10 @@ FactoryBot.define do
       sname { Faker::Name.last_name }
       phone { Faker::PhoneNumber.cell_phone_with_country_code }
       state { :common }
+
+      trait :editor do
+        editor { true }
+      end
     end
   end
 end
