@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import Images from './Slider/Images'
+
+import Images from './Images/Images'
 
 import { path } from '../Routes'
 import Price from './Price'
@@ -18,7 +19,9 @@ export default function List ({ variants }) {
     <div className={styles.root}>
       {variants.map((variant, _) =>
         <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={classNames(styles.item, { [styles.single]: variant.images.length < 2 })}>
-          <Images variant={variant} />
+          <Images
+            variant={variant}
+          />
 
           <div className={styles.dt}>
             {variant.label &&

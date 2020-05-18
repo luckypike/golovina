@@ -48,3 +48,25 @@
     grid-column-gap: calc(var(--xr) * 2);
   }
 }
+
+.wishlist {
+  cursor: pointer;
+  position: absolute;
+  width: calc(var(--yr) * 12);
+  height: calc(var(--yr) * 12);
+  right: 0;
+  top: 0;
+  padding: calc(var(--yr) * 3);
+
+  & svg {
+    display: block;
+    width: calc(var(--yr) * 6);
+    height: calc(var(--yr) * 6);
+  }
+
+  &.active {
+    & svg {
+      fill: var(--pr_color);
+    }
+  }
+}

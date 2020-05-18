@@ -12,10 +12,13 @@ import Notification from './Header/Notification'
 import styles from './Header.module.css'
 
 import Logo from '!svg-react-loader?!../images/golovina.svg'
+import WishlistImg from '!svg-react-loader?!../images/icons/wishlist.svg'
+import CartImg from '!svg-react-loader?!../images/icons/cart.svg'
 
 Header.propTypes = {
   index: PropTypes.bool,
   cart: PropTypes.number,
+  wishlist: PropTypes.number,
   locale: PropTypes.string,
   user: PropTypes.object,
   collections: PropTypes.object,
@@ -32,13 +35,18 @@ export default function Header (props) {
   const [active, setActive] = useState(false)
   const [white, setWhite] = useState(false)
 
-  const CartSubscriber = function (msg, data) {
+  PubSub.subscribe('update-cart', (msg, data) => {
     setCart(data)
-  }
+  })
 
-  PubSub.subscribe('update-cart', CartSubscriber)
+  PubSub.subscribe('update-wishlist', (msg, data) => {
+    console.log(msg)
+    console.log(data)
+    setWishlist(data)
+  })
 
   const [cart, setCart] = useState(props.cart)
+  const [wishlist, setWishlist] = useState(props.wishlist)
 
   const [scrolling, setScrolling] = useState(false)
   useEffect(() => {
@@ -126,11 +134,6 @@ export default function Header (props) {
             Eng
           </a>
         </div>
-        {/* <a href={path('wishlist_path')} className={classNames(styles.wishlist, { [styles.active]: wishlist > 0 })}>
-          <svg viewBox="0 0 24 24">
-            <path className="a" d="M9.09,5.51A4,4,0,0,0,6.18,6.72,4.22,4.22,0,0,0,6,12.38c0,.07,4.83,4.95,6,6.12,2.38-2.42,5.74-5.84,6-6.12v0a4,4,0,0,0,1-2.71,4.13,4.13,0,0,0-1.19-2.92,4.06,4.06,0,0,0-5.57-.21L12,6.72l-.25-.21A4.05,4.05,0,0,0,9.09,5.51Z"/>
-          </svg>
-        </a> */}
 
         <a href={path('search_path')} className={styles.search}>
           <svg viewBox="0 0 24 24">
@@ -139,20 +142,20 @@ export default function Header (props) {
           </svg>
         </a>
 
-        <a href={path('cart_path')} className={classNames(styles.cart, { [styles.active]: cart > 0 })}>
-          <svg viewBox="0 0 48 48">
-            <g>
-              <path className="a" d="M29.18,21.76H18.82l-.82,9H30Z" />
-              <path className="b" d="M21,20.25a3,3,0,0,1,6,0" />
-            </g>
+        <a href={path('wishlist_path')} className={classNames(styles.wishlist, { [styles.active]: wishlist > 0 })}>
+          <WishlistImg />
 
-            <g className={classNames(styles.counter, { [styles.active]: cart > 0 })}>
-              <circle className="c" cx="32" cy="16" r="8" />
-              <text className="d" x="32" y="19">
-                {cart}
-              </text>
-            </g>
-          </svg>
+          {wishlist > 0 &&
+            <div className={styles.counter}>{wishlist}</div>
+          }
+        </a>
+
+        <a href={path('cart_path')} className={classNames(styles.cart, { [styles.active]: cart > 0 })}>
+          <CartImg />
+
+          {cart > 0 &&
+            <div className={styles.counter}>{cart}</div>
+          }
         </a>
       </div>
 

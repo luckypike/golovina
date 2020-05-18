@@ -6,9 +6,9 @@
     collections: CollectionSerializer.new(@collections_nav).serializable_hash,
     index: current_page?(root_path),
     user: UserSerializer.new(current_user).serializable_hash,
-    last: @last_nav \
-    # wishlist: Wishlist.includes(:variant).where(user: Current.user, variants: { state: [:active] }).size,
-    # cart: Cart.where(user: Current.user).map(&:quantity).sum \
+    last: @last_nav,
+    wishlist: Wishlist.where(user: current_user).size,
+    cart: current_user&.orders&.cart&.first&.quantity \
   }, { \
     prerender: Rails.env.production? \
   } \

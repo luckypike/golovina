@@ -13,7 +13,6 @@
     top: 0;
   }
 
-
   &.scrolling {
     height: calc(var(--yr) * 12);
 
@@ -71,8 +70,13 @@
   & svg {
     display: block;
     fill: #212121;
-    width: 106px;
-    height: 36px;
+    width: 82px;
+    height: 28px;
+
+    @media (--s) {
+      width: 106px;
+      height: 36px;
+    }
   }
 }
 
@@ -81,12 +85,11 @@
   left: var(--xr);
   top: calc(var(--yr) * 2);
   padding: calc(var(--yr) * 3);
-  margin-left:  calc(var(--yr) * 3 * -1);
+  margin-left: calc(var(--yr) * 3 * -1);
   user-select: none;
   z-index: 3;
   transition: top 0.2s;
   cursor: pointer;
-  user-select: none;
 
   @media (--s) {
     top: calc(var(--yr) * 10);
@@ -127,7 +130,6 @@
   @media (--xl) {
     right: calc(var(--xr) * 3);
   }
-
 }
 
 .lang {
@@ -147,7 +149,7 @@
     &.active {
       opacity: 1;
 
-      &:before {
+      &::before {
         content: "";
         position: absolute;
         left: 0;
@@ -160,11 +162,9 @@
 
   @media (--s) {
     display: flex;
-
     composes: at from './Fonts.module.css';
   }
 }
-
 
 .search {
   display: block;
@@ -185,8 +185,28 @@
   }
 }
 
-.cart {
+.wishlist {
+  position: relative;
   display: block;
+  padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
+  opacity: 0.3;
+  transition: opacity 0.3s;
+
+  &.active {
+    opacity: 1;
+  }
+
+  & svg {
+    display: block;
+    width: calc(var(--yr) * 6);
+    height: calc(var(--yr) * 6);
+  }
+}
+
+.cart {
+  position: relative;
+  display: block;
+  padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
   opacity: 0.3;
 
   &.active {
@@ -195,46 +215,27 @@
 
   & svg {
     display: block;
-    width: calc(var(--yr) * 12);
-    height: calc(var(--yr) * 12);
-
-    & :global {
-      & .a, & .b {
-        fill: none;
-        stroke: var(--pr_color);
-      }
-
-      & .a {
-        stroke-linejoin: round;
-      }
-
-      & .b {
-        stroke-miterlimit: 10;
-      }
-
-      & .c {
-        fill: #282828;
-      }
-
-      & .d {
-        font-size: 10px;
-        fill: #fff;
-        letter-spacing: -0.06em;
-        text-anchor: middle;
-      }
-
-      & .e {
-        letter-spacing: -0.06em;
-      }
-    }
+    width: calc(var(--yr) * 6);
+    height: calc(var(--yr) * 6);
   }
 }
 
 .counter {
-  opacity: 0;
+  position: absolute;
+  top: calc(var(--yr) * 0);
+  right: calc(var(--yr) * 1);
+  width: calc(var(--yr) * 4);
+  height: calc(var(--yr) * 4);
+  line-height: calc(var(--yr) * 4);
+  font-size: calc(var(--yr) * 2.5);
+  text-align: center;
+  background-color: var(--pr_color);
+  color: #fff;
+  border-radius: 50%;
+  overflow: hidden;
 
   &.active {
-    opacity: 1;
+    /* opacity: 1; */
   }
 }
 
@@ -243,7 +244,7 @@
     background: none;
 
     & svg {
-      transition: fill .2s;
+      transition: fill 0.2s;
     }
 
     & .burger {
@@ -272,18 +273,16 @@
 
     & .cart {
       & svg {
-        & :global {
-          & .a, & .b {
-            stroke: white;
-          }
+        & path {
+          stroke: white;
+        }
+      }
+    }
 
-          & .c {
-            fill: white;
-          }
-
-          & .d {
-            fill: var(--pr_color);
-          }
+    & .wishlist {
+      & svg {
+        & path {
+          stroke: white;
         }
       }
     }
@@ -294,7 +293,7 @@
       & a {
         color: var(--wht_color);
 
-        &:before {
+        &::before {
           border-bottom: 1px solid var(--wht_color);
         }
       }
@@ -313,12 +312,10 @@
   bottom: 0;
   right: 0;
   background: white;
-  z-index: 5;
   visibility: hidden;
   opacity: 0;
   padding: 4rem 7rem 2rem calc(var(--xr) * 2);
   transform: translateX(-3rem);
-  visibility: hidden;
   transition-duration: 0.4s;
   transition-property: transform opacity;
   z-index: 4;
@@ -369,12 +366,12 @@
   bottom: 0;
   z-index: -1;
   opacity: 0;
-  transition: visibility 0s ease .3s, opacity .3s;
+  transition: visibility 0s ease 0.3s, opacity 0.3s;
 
   &.active {
     visibility: visible;
-    opacity: .4;
-    transition: opacity .3s;
+    opacity: 0.4;
+    transition: opacity 0.3s;
   }
 }
 
@@ -389,16 +386,16 @@
   cursor: pointer;
   width: calc(var(--yr) * 10);
   height: calc(var(--yr) * 10);
-  transition: visibility 0s ease .3s, opacity .3s;
+  transition: visibility 0s ease 0.3s, opacity 0.3s;
   opacity: 0;
 
   &.active {
     visibility: visible;
     opacity: 1;
-    transition: visibility .3s, opacity .3s;
+    transition: visibility 0.3s, opacity 0.3s;
   }
 
-  @media(--m) {
+  @media (--m) {
     bottom: calc(var(--yr) * 8);
   }
 }
