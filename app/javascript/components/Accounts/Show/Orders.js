@@ -12,10 +12,11 @@ import styles from './Orders.module.css'
 
 Orders.propTypes = {
   orders: PropTypes.array,
+  cart: PropTypes.object,
   locale: PropTypes.string.isRequired
 }
 
-export default function Orders ({ orders, locale }) {
+export default function Orders ({ orders, locale, cart }) {
   const I18n = useI18n(locale)
 
   useEffect(() => {
@@ -28,6 +29,18 @@ export default function Orders ({ orders, locale }) {
         {I18n.t('accounts.show.orders')}
       </h2>
 
+      {cart &&
+        <div className={styles.cart}>
+          <div className={styles.number}>
+            {I18n.t('order.number', { number: cart.number })}
+          </div>
+
+          <div>
+            Ожидание ответа от банка
+          </div>
+        </div>
+      }
+
       {orders &&
         <div>
           {orders.map(order =>
@@ -37,6 +50,8 @@ export default function Orders ({ orders, locale }) {
               locale={locale}
             />
           )}
+
+          {orders.length === 0 && 'Вы пока ничего не успели купить в нашем магазине'}
         </div>
       }
     </div>

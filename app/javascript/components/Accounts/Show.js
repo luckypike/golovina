@@ -22,12 +22,17 @@ export default function Show ({ user: userJSON, locale }) {
   const user = deserialize(userJSON)
 
   const [orders, setOrders] = useState()
+  const [cart, setCart] = useState()
 
   useEffect(() => {
     const _fetch = async () => {
       const { data } = await axios.get(path('account_path', { format: 'json' }))
 
       setOrders(data.orders)
+
+      if (window.location.hash === '#payed') {
+        setCart(data.cart)
+      }
     }
 
     _fetch()
@@ -45,7 +50,7 @@ export default function Show ({ user: userJSON, locale }) {
         </div>
 
         <div className={styles.orders}>
-          <Orders locale={locale} orders={orders} />
+          <Orders locale={locale} orders={orders} cart={cart} />
         </div>
       </div>
     </div>

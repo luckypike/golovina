@@ -43,3 +43,9 @@ json.orders @orders do |order|
   #   json.extract! order.user, :title, :email, :phone
   # end
 end
+
+if @cart
+  json.cart do
+    json.partial! @cart
+  end
+end

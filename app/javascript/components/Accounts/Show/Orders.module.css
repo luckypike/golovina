@@ -21,6 +21,13 @@
   }
 }
 
+.cart {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  margin-bottom: calc(var(--yr) * var(--s2));
+  background-color: #ffe;
+}
+
 .what {
   grid-area: what;
 }
@@ -115,4 +122,8 @@
   & div {
     justify-content: flex-start;
   }
+}
+
+.cart {
+  padding: calc(var(--yr) * var(--s2)) var(--xr);
 }

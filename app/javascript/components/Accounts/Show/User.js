@@ -19,17 +19,11 @@ export default function User ({ user, locale }) {
   const handleLogout = async e => {
     e.preventDefault()
 
-    await axios.delete(
-      path('destroy_user_session_path', { format: 'json' }),
-      {
-        // params: {
-        //   authenticity_token: document.querySelector('[name="csrf-token"]').content
-        // }
-      }
+    const res = await axios.delete(
+      path('destroy_user_session_path', { format: 'json' })
     )
 
-
-    // window.location = path('root_path')
+    if (res.headers.location) window.location = res.headers.location
   }
 
   return (
@@ -82,7 +76,7 @@ export default function User ({ user, locale }) {
         </a>
       </div>
 
-      <div>
+      <div className={styles.logout}>
         <span onClick={handleLogout}>
           Выйти
         </span>

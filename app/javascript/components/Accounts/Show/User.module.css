@@ -31,3 +31,11 @@
     grid-template-columns: 7rem 1fr;
   }
 }
+
+.logout {
+  & span {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--gr_color);
+  }
+}

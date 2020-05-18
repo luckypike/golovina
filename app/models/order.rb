@@ -9,18 +9,18 @@ class Order < ApplicationRecord
 
   enum state: { cart: 0, paid: 2, archived: 3 } do
     event :pay do
-      after do
+      before do
+        self.amount = amount_calc
+        self.amount_delivery = amount_delivery_calc
+        self.payed_at = Time.current
+
         order_items.each do |item|
           item.update(amount: item.variant.price_sell)
           item.process_acts
         end
+      end
 
-        update(
-          amount: amount_calc,
-          amount_delivery: amount_delivery_calc,
-          payed_at: Time.current
-        )
-
+      after do
         save_address
 
         OrderMailer.pay(self).deliver_later

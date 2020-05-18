@@ -36,7 +36,7 @@ class SessionsController < Devise::SessionsController
   def destroy
     sign_out
 
-    head :ok
+    head :ok, location: root_path
   end
 
   private

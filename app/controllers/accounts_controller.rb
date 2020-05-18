@@ -10,6 +10,8 @@ class AccountsController < ApplicationController
         #   .limit(200)
         @orders = current_user.orders.not_cart
           .with_items.order(payed_at: :desc)
+
+        @cart = current_user.orders.cart.first
       end
     end
   end
