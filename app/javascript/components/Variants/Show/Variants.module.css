@@ -21,32 +21,28 @@
 }
 
 .variant {
+  border: 1px solid var(--sep_color);
   position: relative;
   user-select: none;
   cursor: pointer;
   width: calc(var(--yr) * 8);
   height: calc(var(--yr) * 8);
+  line-height: calc(var(--yr) * 7.5);
+  padding: calc(var(--yr) / 2);
 
   &:not(:last-child) {
     margin-right: calc(var(--yr) * 2);
   }
 
   &.active {
-    &:before {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: calc(var(--yr) * -1.5);
-      width: calc(var(--yr) * 8);
-      border-bottom: 1px solid var(--pr_color);
-    }
+    border: 1px solid var(--pr_color);
   }
 
   & > div {
     overflow: hidden;
     display: block;
-    width: calc(var(--yr) * 8);
-    height: calc(var(--yr) * 8);
+    width: calc(var(--yr) * 6.5);
+    height: calc(var(--yr) * 6.5);
     background-size: 100%;
   }
 }

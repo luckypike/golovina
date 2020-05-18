@@ -123,7 +123,7 @@
   text-align: center;
   min-width: calc(var(--yr) * 8);
   height: calc(var(--yr) * 8);
-  line-height: calc(var(--yr) * 8);
+  line-height: calc(var(--yr) * 7.5);
   overflow: hidden;
   transition: background 0.2s, box-shadow 0.4s;
 

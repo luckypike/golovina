@@ -36,10 +36,6 @@ function Kit ({ kit }) {
   return (
     <div key={kit.id} className={styles.kit}>
       <div className={styles.title}>
-        <h2>
-          {kit.title}
-        </h2>
-
         <p className={styles.additional}>
           {I18n.t('kit.variants', { count: kit.variants.length })}
         </p>
