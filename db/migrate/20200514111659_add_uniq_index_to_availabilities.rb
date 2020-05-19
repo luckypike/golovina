@@ -2,6 +2,11 @@ class AddUniqIndexToAvailabilities < ActiveRecord::Migration[6.0]
   def change
     reversible do |dir|
       dir.up do
+        execute <<-SQL
+          DELETE FROM availabilities
+          WHERE quantity IS NULL
+        SQL
+
         Act.where.not(store_id: 1).each do |act|
           availability = Availability.find_by(
             variant: act.availability.variant,
@@ -14,11 +19,6 @@ class AddUniqIndexToAvailabilities < ActiveRecord::Migration[6.0]
         Availability.where.not(store_id: 1).each do |availability|
           availability.delete if availability.acts.empty?
         end
-
-        execute <<-SQL
-          DELETE FROM availabilities
-          WHERE quantity IS NULL
-        SQL
       end
     end
 
