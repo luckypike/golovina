@@ -10,6 +10,7 @@ class AddUniqIndexToAvailabilities < ActiveRecord::Migration[6.0]
         Act.where.not(store_id: 1).each do |act|
           availability = Availability.find_by(
             variant: act.availability.variant,
+            size: act.availability.size,
             store_id: 1
           )
 
