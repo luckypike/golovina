@@ -48,6 +48,14 @@ export default function Order ({ order, locale }) {
             <Address order={order} locale={locale} />
           </div>
 
+          {order.comment &&
+            <div className={styles.comment}>
+              <strong>
+                Комментарий
+              </strong>: {order.comment}
+            </div>
+          }
+
           <div>
             <Items items={order.items} locale={locale} />
           </div>

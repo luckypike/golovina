@@ -116,3 +116,9 @@
     justify-content: flex-start;
   }
 }
+
+.comment {
+  border-bottom: 1px solid var(--sp_color);
+  padding-bottom: calc(var(--yr) * var(--s2));
+  margin-bottom: calc(var(--yr) * var(--s2));
+}

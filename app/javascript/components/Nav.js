@@ -154,7 +154,7 @@ class Nav extends Component {
         {user && user.editor &&
           <Section id="control" title="Управление" onToggle={this.toggleSection} section={section}>
             <div className={styles.sub}>
-              <a href={path('orders_path')}>Заказы и возвраты</a>
+              <a href={path('dashboard_path')}>Заказы и возвраты</a>
             </div>
 
             <div className={styles.sub}>
