@@ -202,7 +202,7 @@ function Variant ({ locale }) {
 
             <Variants variants={variants} variant={variant} className={styles.variants} />
 
-            {variant.available &&
+            {variant.availabilities.length > 0 &&
               <>
                 <div className={styles.sizesWith}>
                   <div className={styles.sizes}>
