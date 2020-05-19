@@ -71,6 +71,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     get '', to: 'dashboard#index'
     get :archived, to: 'dashboard#archived'
     get :cart, to: 'dashboard#cart'
+    get :refunds, to: 'dashboard#refunds'
   end
 
   resources :sizes

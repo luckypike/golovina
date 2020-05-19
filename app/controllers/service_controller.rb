@@ -1,15 +1,17 @@
 class ServiceController < ApplicationController
+  before_action :authorize_page
+
   def index
-    authorize :static, :index?
     redirect_to service_delivery_path
   end
 
   def return
-    authorize :static, :index?
     @user = Current.user
   end
 
-  def delivery
-    authorize :static, :index?
+  private
+
+  def authorize_page
+    authorize :page, :index?
   end
 end

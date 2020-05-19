@@ -13,6 +13,10 @@ class DashboardController < ApplicationController
     @orders = Order.cart.with_items.order(payed_at: :desc)
   end
 
+  def refunds
+    @refunds = Refund.all
+  end
+
   private
 
   def authorize_dashboard

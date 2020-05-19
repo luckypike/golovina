@@ -4,6 +4,7 @@ ru:
       index: Оплачено
       archived: Архив
       cart: Корзины
+      refunds: Возвраты
 
     index:
       title: Оплаченные заказы
@@ -13,3 +14,6 @@ ru:
 
     cart:
       title: Корзины
+
+    refunds:
+      title: Возвраты

@@ -10,4 +10,8 @@ DashboardPolicy = Struct.new :user, :dashboard do
   def archived?
     index?
   end
+
+  def refunds?
+    index?
+  end
 end

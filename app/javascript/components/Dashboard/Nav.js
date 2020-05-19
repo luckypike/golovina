@@ -26,6 +26,10 @@ export default function Nav ({ locale }) {
       <a href={path('dashboard_cart_path')} className={styles.tab}>
         {I18n.t('dashboard.nav.cart')}
       </a>
+
+      <a href={path('dashboard_refunds_path')} className={styles.tab}>
+        {I18n.t('dashboard.nav.refunds')}
+      </a>
     </div>
   )
 }
