@@ -40,8 +40,6 @@ export default function Header (props) {
   })
 
   PubSub.subscribe('update-wishlist', (msg, data) => {
-    console.log(msg)
-    console.log(data)
     setWishlist(data)
   })
 
