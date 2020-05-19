@@ -1,6 +1,6 @@
 class Variant < ApplicationRecord
   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  # include Elasticsearch::Model::Callbacks
 
   # default_scope do
   #   includes(
