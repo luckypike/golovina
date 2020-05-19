@@ -56,15 +56,19 @@
   height: calc(var(--yr) * 12);
   right: 0;
   top: 0;
-  padding: calc(var(--yr) * 3);
+  opacity: 0.4;
+  padding: calc(var(--yr) * 3.5);
+  transition: opacity 0.2s;
 
   & svg {
     display: block;
-    width: calc(var(--yr) * 6);
-    height: calc(var(--yr) * 6);
+    width: calc(var(--yr) * 5);
+    height: calc(var(--yr) * 5);
   }
 
   &.active {
+    opacity: 0.6;
+
     & svg {
       fill: var(--pr_color);
     }

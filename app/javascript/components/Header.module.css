@@ -222,7 +222,7 @@
 
 .counter {
   position: absolute;
-  top: calc(var(--yr) * 0);
+  top: calc(var(--yr) * 1);
   right: calc(var(--yr) * 1);
   width: calc(var(--yr) * 4);
   height: calc(var(--yr) * 4);
