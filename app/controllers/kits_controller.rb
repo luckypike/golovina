@@ -19,7 +19,13 @@ class KitsController < ApplicationController
       [
         :images,
         {
-          variants: { availabilities: %i[size store] }
+          variants: [
+            :images,
+            :translations,
+            :availabilities,
+            color: :translations,
+            product: %i[translations category]
+          ]
         }
       ]
     )
@@ -84,7 +90,7 @@ class KitsController < ApplicationController
 
   def kit_params
     params[:kit][:image_ids] = JSON.parse(params[:kit][:image_ids]) if params[:kit][:image_ids].present? && params[:kit][:image_ids].is_a?(String)
-    
+
     permitted =
       Kit.globalize_attribute_names \
       + %i[title created_at theme_id state latest] \

@@ -4,6 +4,12 @@ ru:
     desc: Образы от Golovina на различные случаи жизни
 
   kit:
+    variant:
+      cart:
+        add: В корзину
+        processing: Добавляем...
+
+
     variants:
       one: '%{count} товар в образе'
       few: '%{count} товара в образе'

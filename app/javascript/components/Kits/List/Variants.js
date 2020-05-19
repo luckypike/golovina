@@ -8,6 +8,7 @@ import Price from '../../Variants/Price'
 
 import { path } from '../../Routes'
 import I18n from '../../I18n'
+import { useForm } from '../../Form'
 
 import styles from './Variants.module.css'
 import buttons from '../../Buttons.module.css'
@@ -38,25 +39,47 @@ function Variant (props) {
   const [send, setSend] = useState(false)
   const { variant } = props
 
+  const {
+    pending,
+    onSubmit,
+    cancelToken
+  } = useForm()
+
   const handleCartClick = async e => {
     e.preventDefault()
 
-    if (size && !send) {
-      setSend(true)
-
-      const { data: { quantity } } = await axios.post(
-        path('cart_variant_path', { id: variant.id }),
-        {
-          size: size.id,
-          authenticity_token: document.querySelector('[name="csrf-token"]').content
-        }
-      )
-
-      PubSub.publish('update-cart', quantity)
-
-      setSend(false)
-      setAdd(true)
+    if (!size) {
+      return
     }
+
+    await axios.post(
+      path('cart_variant_path', { id: variant.id, format: 'json' }),
+      {
+        size: size.id
+      },
+      { cancelToken: cancelToken.current.token }
+    ).then(res => {
+      PubSub.publish('update-cart', res.data.quantity)
+      PubSub.publish('notification-cart', variant)
+    }).catch(_error => {
+    })
+
+    // if (size && !send) {
+    //   setSend(true)
+    //
+    //   const { data: { quantity } } = await axios.post(
+    //     path('cart_variant_path', { id: variant.id }),
+    //     {
+    //       size: size.id,
+    //       authenticity_token: document.querySelector('[name="csrf-token"]').content
+    //     }
+    //   )
+    //
+    //   PubSub.publish('update-cart', quantity)
+    //
+    //   setSend(false)
+    //   setAdd(true)
+    // }
   }
 
   return (
@@ -86,33 +109,43 @@ function Variant (props) {
           <Price sell={parseFloat(variant.price_sell)} origin={parseFloat(variant.price)} />
         </div>
 
-        {variant.state === 'active' &&
+        {variant.availabilities.length > 0 &&
           <>
             <div className={styles.sizes}>
-              {variant.availabilities.sort((a, b) => a.size.weight - b.size.weight).map(availability =>
-                <div key={availability.size.id} className={classNames(styles.size, styles[`size_${availability.size.id}`], { [styles.unavailable]: !availability.size.active, [styles.active]: availability.size === size })} onClick={() => setSize(availability.size)}>
+              {variant.availabilities.map(availability =>
+                <div
+                  key={availability.size.id}
+                  className={classNames(
+                    styles.size,
+                    styles[`size_${availability.size.id}`],
+                    { [styles.unavailable]: !availability.active, [styles.active]: size && availability.size.id === size.id }
+                  )}
+                  onClick={() => {
+                    if (availability.active) {
+                      setSize(availability.size)
+                    }
+                  }}
+                >
                   {availability.size.title}
                 </div>
               )}
             </div>
 
-            {!variant.soon &&
-              <div className={styles.buy}>
-                <div className={styles.cart}>
-                  {add &&
-                    <a className={buttons.main} href={path('cart_path')}>
-                      {I18n.t('variant.cart.checkout')}
-                    </a>
-                  }
+            <div className={styles.buy}>
+              <div className={styles.cart}>
+                {add &&
+                  <a className={buttons.main} href={path('cart_path')}>
+                    {I18n.t('variant.cart.checkout')}
+                  </a>
+                }
 
-                  {!add &&
-                    <button className={buttons.main} disabled={!size || send} onClick={handleCartClick}>
-                      {!send ? I18n.t('variant.cart.add') : I18n.t('variant.cart.processing')}
-                    </button>
-                  }
-                </div>
+                {!add &&
+                  <button className={buttons.main} disabled={!size || send} onClick={handleCartClick}>
+                    {!send ? I18n.t('kit.variant.cart.add') : I18n.t('kit.variant.cart.processing')}
+                  </button>
+                }
               </div>
-            }
+            </div>
           </>
         }
       </div>
