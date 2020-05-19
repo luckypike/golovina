@@ -1,5 +1,5 @@
-class StaticticPolicy < ApplicationPolicy
+class StatisticPolicy < ApplicationPolicy
   def index?
-    user&.is_editor?
+    user&.editor?
   end
 end
