@@ -28,7 +28,7 @@ export default function Checkout ({ locale, setCheckout, order }) {
           {I18n.t('order.cart.checkout.variants')}
         </dt>
 
-        <dd>
+        <dd className={styles.price}>
           <Price sell={parseFloat(order.amount_calc)} />
         </dd>
 

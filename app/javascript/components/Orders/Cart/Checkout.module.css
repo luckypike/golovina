@@ -17,3 +17,9 @@
   color: var(--red_color);
   margin-top: calc(var(--yr) * var(--s3));
 }
+
+.price {
+  & > div {
+    justify-content: flex-start;
+  }
+}
