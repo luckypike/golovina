@@ -44,6 +44,18 @@ export default function Order ({ order, locale }) {
 
       {active &&
         <div className={styles.details}>
+          {order.user &&
+            <div className={styles.user}>
+              <strong>
+                {order.user.title}
+              </strong>
+              <br />
+              Телефон: {order.user.phone}
+              <br />
+              Почта: {order.user.email}
+            </div>
+          }
+
           <div className={styles.address}>
             <Address order={order} locale={locale} />
           </div>

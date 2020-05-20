@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   before_action :authorize_dashboard
 
   def index
-    @orders = Order.paid.with_items.order(payed_at: :desc)
+    @orders = Order.paid.includes(:user).with_items.order(payed_at: :desc)
   end
 
   def archived

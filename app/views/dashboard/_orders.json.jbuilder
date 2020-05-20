@@ -9,6 +9,10 @@ json.array! @orders do |order|
     end
   end
 
+  json.user do
+    json.partial! order.user
+  end
+
   json.items order.items do |item|
     json.partial! item
 
