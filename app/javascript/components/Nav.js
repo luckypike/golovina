@@ -62,7 +62,7 @@ class Nav extends Component {
           </div>
 
           <div className={styles.sub}>
-            <a href={path('catalog_stayhome_path')}>#Stayhome</a>
+            <a href={path('catalog_basic_path')}>Golovina BASIC</a>
           </div>
 
           <div className={styles.sub}>

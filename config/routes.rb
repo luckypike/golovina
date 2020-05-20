@@ -34,6 +34,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     get :soon, controller: :variants
     get :premium, controller: :variants
     get :stayhome, controller: :variants
+    get 'basic', to: 'variants#stayhome'
     get :morning, controller: :variants
     get ':slug', to: 'categories#show', as: :category
     get ':slug/:id', to: 'variants#show', as: :variant

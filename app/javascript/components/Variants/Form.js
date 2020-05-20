@@ -208,7 +208,7 @@ export default function Form ({ id, product_id: productId, locale }) {
             <label>
               <div className={form.checkbox}>
                 <input type="checkbox" name="stayhome" checked={values.stayhome} onChange={handleChange} />
-                  Stayhome
+                  Basic
               </div>
             </label>
           </div>

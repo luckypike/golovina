@@ -14,7 +14,7 @@ class Stayhome extends Component {
   }
 
   componentDidMount = async () => {
-    const res = await axios.get(path('catalog_stayhome_path', { format: 'json' }))
+    const res = await axios.get(path('catalog_basic_path', { format: 'json' }))
     this.setState({ ...res.data })
   }
 

@@ -26,7 +26,7 @@ feature 'Sections page', :js do
   end
 
   it 'shows title on Stayhome' do
-    visit catalog_stayhome_path
+    visit catalog_basic_path
 
     expect(page).to have_text(I18n.t('variants.stayhome.title'))
   end
