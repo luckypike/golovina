@@ -11,6 +11,10 @@ class RefundPolicy < ApplicationPolicy
     user
   end
 
+  def show?
+    record.user == user
+  end
+
   def done?
     user&.is_editor?
   end

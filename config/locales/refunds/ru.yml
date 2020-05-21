@@ -18,6 +18,9 @@ ru:
     reason_choice: Укажите причину возврата
     submit: Оформить
 
+    show:
+      title: Заявка на возврат товара
+
     quantity:
       one: "%{count} товар на сумму %{amount}"
       few: "%{count} товара на сумму %{amount}"

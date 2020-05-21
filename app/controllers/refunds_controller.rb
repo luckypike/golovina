@@ -1,5 +1,5 @@
 class RefundsController < ApplicationController
-  before_action :set_refund, only: [:done]
+  before_action :set_refund, only: %i[done show]
 
   def index
     authorize Refund
@@ -23,6 +23,10 @@ class RefundsController < ApplicationController
     end
   end
 
+  def show
+    authorize @refund
+  end
+
   def create
     @refund = Refund.new(refund_params)
     authorize @refund
@@ -32,7 +36,7 @@ class RefundsController < ApplicationController
 
     if @refund.save
       OrderMailer.refund(@refund).deliver_later
-      head :ok, location: refunds_user_path(Current.user)
+      head :ok, location: refund_path(@refund)
     else
       render :new
     end
