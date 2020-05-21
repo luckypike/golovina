@@ -59,6 +59,7 @@
   opacity: 0.4;
   padding: calc(var(--yr) * 3.5);
   transition: opacity 0.2s;
+  z-index: 1;
 
   & svg {
     display: block;
