@@ -28,6 +28,7 @@ ru:
       international: Международная доставка
 
     quantity:
+      zero: нет товаров
       one: "%{count} товар на сумму %{amount}"
       few: "%{count} товара на сумму %{amount}"
       many: "%{count} товаров на сумму %{amount}"

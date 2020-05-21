@@ -1,6 +1,6 @@
 json.array! @orders do |order|
   json.partial! order
-  json.extract! order, :quantity
+  json.extract! order, :quantity, :updated_at
   json.amount order.amount.presence || order.amount_calc
 
   if order.delivery_city

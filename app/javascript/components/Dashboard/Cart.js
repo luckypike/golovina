@@ -6,6 +6,7 @@ import { path } from '../Routes'
 import { useI18n } from '../I18n'
 
 import Nav from './Nav'
+import Order from './Cart/Order'
 
 import page from '../Page.module.css'
 import styles from './Index.module.css'
@@ -39,9 +40,11 @@ export default function Cart ({ locale }) {
         </div>
 
         {orders && orders.map(order =>
-          <div key={order.id}>
-            {order.number}
-          </div>
+          <Order
+            key={order.id}
+            order={order}
+            locale={locale}
+          />
         )}
       </div>
     </div>

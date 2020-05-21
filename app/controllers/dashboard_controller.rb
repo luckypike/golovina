@@ -10,7 +10,9 @@ class DashboardController < ApplicationController
   end
 
   def cart
-    @orders = Order.cart.includes(:user).with_items.order(payed_at: :desc)
+    @orders = Order.cart.includes(:user).with_items
+      .where('updated_at > ?', Time.current - 3.months)
+      .order(updated_at: :desc)
   end
 
   def refunds
