@@ -163,6 +163,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     member do
       patch :checkout
       post :archive
+      post :unarchive
       get :pay
     end
   end

@@ -20,7 +20,11 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def archive?
-    user&.editor? && record.can_archive?
+    user&.editor?
+  end
+
+  def unarchive?
+    archive?
   end
 
   class Scope < Scope

@@ -1,13 +1,13 @@
 ru:
   dashboard:
     nav:
-      index: Оплачено
+      index: Заказы
       archived: Архив
       cart: Корзины
       refunds: Возвраты
 
     index:
-      title: Оплаченные заказы
+      title: Заказы
 
     archived:
       title: Архив заказов

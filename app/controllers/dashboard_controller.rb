@@ -6,11 +6,11 @@ class DashboardController < ApplicationController
   end
 
   def archived
-    @orders = Order.archived.with_items.order(payed_at: :desc)
+    @orders = Order.archived.includes(:user).with_items.order(payed_at: :desc)
   end
 
   def cart
-    @orders = Order.cart.with_items.order(payed_at: :desc)
+    @orders = Order.cart.includes(:user).with_items.order(payed_at: :desc)
   end
 
   def refunds

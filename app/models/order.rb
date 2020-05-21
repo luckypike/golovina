@@ -33,6 +33,10 @@ class Order < ApplicationRecord
     event :archive do
       transition paid: :archived
     end
+
+    event :unarchive do
+      transition archived: :paid
+    end
   end
 
   belongs_to :user, default: -> { Current.user }

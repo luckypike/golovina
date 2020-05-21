@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import axios from 'axios'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
 import 'dayjs/locale/en'
 
 import Price, { currency } from '../Variants/Price'
+import { path } from '../Routes'
 import { useI18n } from '../I18n'
 
 import styles from './Order.module.css'
+import buttons from '../Buttons.module.css'
 
 Order.propTypes = {
   order: PropTypes.object.isRequired,
@@ -19,8 +22,31 @@ export default function Order ({ order, locale }) {
   const I18n = useI18n(locale)
 
   const [active, setActive] = useState(false)
+  const [hide, setHide] = useState(false)
 
   dayjs.locale(locale)
+
+  const handleArhiveClick = async e => {
+    e.preventDefault()
+
+    axios.post(
+      path('archive_order_path', { id: order.id, format: 'json' })
+    ).then(res => {
+      setHide(true)
+    })
+  }
+
+  const handleUnarhiveClick = async e => {
+    e.preventDefault()
+
+    axios.post(
+      path('unarchive_order_path', { id: order.id, format: 'json' })
+    ).then(res => {
+      setHide(true)
+    })
+  }
+
+  if (hide) return null
 
   return (
     <div className={classNames(styles.order, { [styles.active]: active })}>
@@ -70,6 +96,28 @@ export default function Order ({ order, locale }) {
 
           <div>
             <Items items={order.items} locale={locale} />
+          </div>
+        </div>
+      }
+
+      {(order.state === 'paid' || order.state === 'archived') &&
+        <div className={styles.manage}>
+          {/* <div>
+            Указать трек номер
+          </div> */}
+
+          <div className={styles.state}>
+            {order.state === 'paid' &&
+              <button className={buttons.main} onClick={handleArhiveClick}>
+                В архив
+              </button>
+            }
+
+            {order.state === 'archived' &&
+              <button className={buttons.main} onClick={handleUnarhiveClick}>
+                В заказы
+              </button>
+            }
           </div>
         </div>
       }

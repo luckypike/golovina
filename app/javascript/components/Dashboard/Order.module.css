@@ -128,3 +128,8 @@
   padding-bottom: calc(var(--yr) * var(--s2));
   margin-bottom: calc(var(--yr) * var(--s2));
 }
+
+.manage {
+  padding: calc(var(--yr) * var(--s2)) var(--xr);
+  border-top: 1px solid var(--sp_color);
+}

@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :paid
 
-  before_action :set_order, only: %i[checkout archive pay]
+  before_action :set_order, only: %i[checkout archive unarchive pay]
   before_action :authorize_order
 
   def cart
@@ -38,9 +38,21 @@ class OrdersController < ApplicationController
   end
 
   def archive
-    authorize @order
-    @order.archive!
-    head :ok
+    if @order.paid?
+      @order.archive!
+      head :ok
+    else
+      head :unprocessable_entity
+    end
+  end
+
+  def unarchive
+    if @order.can_unarchive?
+      @order.unarchive!
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def paid
