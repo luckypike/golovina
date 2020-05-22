@@ -6,6 +6,7 @@ import { path } from '../Routes'
 import { useI18n } from '../I18n'
 
 import Nav from './Nav'
+import Refund from './Refund/Refund'
 
 import page from '../Page.module.css'
 import styles from './Index.module.css'
@@ -38,14 +39,12 @@ export default function Refunds ({ locale }) {
           <h1>{I18n.t('dashboard.refunds.title')}</h1>
         </div>
 
-        <p>
-          Временно скрыты, в работе
-        </p>
-
         {refunds && refunds.map(refund =>
-          <div key={refund.id}>
-
-          </div>
+          <Refund
+            key={refund.id}
+            refund={refund}
+            locale={locale}
+          />
         )}
       </div>
     </div>

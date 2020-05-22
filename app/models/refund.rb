@@ -31,4 +31,20 @@ class Refund < ApplicationRecord
   def month
     order.created_at.beginning_of_month
   end
+
+  class << self
+    def with_items
+      includes(
+        { order_items: [{
+          variant: [
+            :images,
+            :translations,
+            :availabilities,
+            color: :translations,
+            product: %i[translations category]
+          ]
+        }, :size] }
+      )
+    end
+  end
 end

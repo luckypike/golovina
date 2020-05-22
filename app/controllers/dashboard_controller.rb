@@ -16,7 +16,7 @@ class DashboardController < ApplicationController
   end
 
   def refunds
-    @refunds = Refund.all
+    @refunds = Refund.includes(:user).with_items.order(id: :desc)
   end
 
   private
