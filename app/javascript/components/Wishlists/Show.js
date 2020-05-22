@@ -2,12 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import { path } from '../Routes'
-import Price from '../Variants/Price'
-import List from '../Variants/List'
-
+import List from './List'
 import page from '../Page'
-
-import styles from './Show.module.css'
 
 export default function Show () {
   const [variants, setVariants] = useState()

@@ -1,0 +1,72 @@
+.root {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: calc(var(--yr) * var(--s1));
+  grid-column-gap: calc(var(--yr) * var(--s1));
+
+  @media (--s) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.item {
+  margin-bottom: calc(var(--yr) * var(--s4));
+
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * var(--s4));
+  }
+}
+
+.unpub {
+  composes: at from '../Fonts.module.css';
+  color: red;
+  font-weight: var(--fw_bold);
+}
+
+.dt {
+  position: relative;
+  text-align: center;
+
+  @media (--s) {
+    margin-bottom: calc(var(--yr) * var(--s4));
+  }
+}
+
+.title {
+  margin: 0 10%;
+
+  @media (--s) {
+    margin: 0;
+  }
+}
+
+.price {
+  margin-top: var(--yr);
+
+  & > div {
+    justify-content: center;
+  }
+}
+
+.colors {
+  composes: at from '../Fonts.module.css';
+  color: var(--gr_color);
+}
+
+.label {
+  composes: at from '../Fonts.module.css';
+  color: var(--gr_color);
+  margin-bottom: var(--yr);
+
+  &.bestseller {
+    color: var(--orng_color);
+  }
+
+  &.last {
+    color: var(--red_color);
+  }
+
+  &.latest {
+    color: var(--grn_color);
+  }
+}
