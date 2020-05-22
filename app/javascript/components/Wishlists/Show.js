@@ -23,6 +23,10 @@ export default function Show ({ locale }) {
     _fetch()
   }, [])
 
+  const handleRemove = variant => {
+    setVariants(variants.filter(v => v.id !== variant.id))
+  }
+
   return (
     <div className={page.root}>
       <div className={page.title}>
@@ -30,7 +34,7 @@ export default function Show ({ locale }) {
       </div>
 
       {variants && variants.length > 0 &&
-        <List variants={variants} locale={locale}/>
+        <List variants={variants} locale={locale} onRemove={handleRemove}/>
       }
 
       {variants && variants.length === 0 &&

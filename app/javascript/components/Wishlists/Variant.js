@@ -17,10 +17,11 @@ import buttons from '../Buttons.module.css'
 
 Variant.propTypes = {
   variant: PropTypes.object.isRequired,
-  locale: PropTypes.string.isRequired
+  locale: PropTypes.string.isRequired,
+  onRemove: PropTypes.func
 }
 
-export default function Variant ({ variant, locale }) {
+export default function Variant ({ variant, locale, onRemove }) {
   const {
     pending,
     onSubmit,
@@ -31,23 +32,17 @@ export default function Variant ({ variant, locale }) {
   const [noSize, setNoSize] = useState(false)
 
   useEffect(() => {
-    console.log(variant)
     if (variant) {
       if (variant.availabilities.length === 1 && variant.availabilities[0].size.id === 1 && variant.availabilities[0].active) {
-        console.log(variant.availabilities[0].size)
         setSize(variant.availabilities[0].size)
       } else {
         setSize()
       }
       setNoSize(false)
-
-      // PubSub.publish('notification-cart', variant)
     }
   }, [variant])
 
   const handleCartClick = async e => {
-    // e.preventDefault()
-
     if (!size) {
       setNoSize(true)
       return
@@ -73,6 +68,7 @@ export default function Variant ({ variant, locale }) {
       <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={styles.item}>
         <Image
           variant={variant}
+          onRemove={onRemove}
         />
       </a>
 

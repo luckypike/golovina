@@ -11,10 +11,11 @@ import styles from '../Variants/Images/Images.module.css'
 import WishlistImg from '!svg-react-loader?!../../images/icons/wishlist.svg'
 
 Image.propTypes = {
-  variant: PropTypes.object.isRequired
+  variant: PropTypes.object.isRequired,
+  onRemove: PropTypes.func
 }
 
-export default function Image ({ variant }) {
+export default function Image ({ variant, onRemove }) {
   const [active, setActive] = useState(variant.in_wishlist)
 
   const handleWishlistClick = async (e, variant) => {
@@ -25,6 +26,9 @@ export default function Image ({ variant }) {
     ).then(res => {
       PubSub.publish('update-wishlist', res.data.quantity)
       setActive(res.data.in_wishlist)
+      if (!res.data.in_wishlist) {
+        onRemove(variant)
+      }
     }).catch(_error => {
     })
   }
