@@ -99,6 +99,11 @@
 
 .sizesWith {
   margin-bottom: calc(var(--yr) * var(--s2));
+  text-align: center;
+
+  @media (--m) {
+    text-align: left;
+  }
 }
 
 .sizes {
@@ -178,7 +183,6 @@
 .guide {
   composes: at from '../Fonts.module.css';
   margin-bottom: calc(var(--yr) * var(--s2));
-  /* text-align: center; */
 }
 
 .noSize {
@@ -260,7 +264,6 @@
 
   @media (--m) {
     justify-content: flex-start;
-    /* margin-bottom: calc(var(--yr) * 8); */
   }
 }
 
@@ -311,7 +314,7 @@
   font-size: calc(var(--yr) * calc(var(--fs) + 0.5));
   line-height: calc(var(--yr) * 4);
 
-  @media(--m) {
+  @media (--m) {
     display: none;
   }
 }
@@ -346,7 +349,8 @@
     bottom: 0;
     z-index: 5;
 
-    & a, & .a {
+    & a,
+    & .a {
       background-color: color-mod(var(--pr_color) alpha(50%));
       cursor: pointer;
       display: block;
@@ -369,7 +373,7 @@
 .notice {
   display: flex;
 
-  @media(--m) {
+  @media (--m) {
     justify-content: flex-start;
   }
 }
@@ -379,7 +383,7 @@
   padding: var(--yr) 0;
   margin-bottom: var(--yr);
 
-  @media(--m) {
+  @media (--m) {
     text-align: left;
   }
 }
@@ -397,7 +401,7 @@
 .button {
   justify-content: center;
 
-  @media(--m) {
+  @media (--m) {
     justify-content: flex-start;
   }
 }
@@ -419,7 +423,7 @@
     }
   }
 
-  @media(--m) {
+  @media (--m) {
     grid-gap: calc(var(--yr) * 8);
   }
 
@@ -452,7 +456,7 @@
     &::before {
       display: block;
       content: '';
-      padding-top: calc(4 / 3 * 100%)
+      padding-top: calc(4 / 3 * 100%);
     }
 
     & img {
@@ -470,7 +474,7 @@
     line-height: calc(var(--yr) * var(--lh));
     margin-bottom: calc(var(--yr) * 4);
 
-    @media(--s) {
+    @media (--s) {
       line-height: calc(var(--yr) * 6);
     }
   }
@@ -481,8 +485,7 @@
     margin: 0 auto;
     line-height: calc(var(--yr) * var(--lh));
 
-
-    @media(--s) {
+    @media (--s) {
       max-width: 80%;
       line-height: calc(var(--yr) * 7);
     }

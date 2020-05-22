@@ -70,3 +70,42 @@
     color: var(--grn_color);
   }
 }
+
+.sizesWith {
+  composes: sizesWith from '../Variants/Show.module.css';
+  margin-top: calc(var(--yr) * var(--s1));
+}
+
+.sizes {
+  composes: sizes from '../Variants/Show.module.css';
+  justify-content: center;
+}
+
+.size {
+  composes: size from '../Variants/Show.module.css';
+
+  &.active {
+    box-shadow: inset 0 0 0 1px var(--pr_color);
+  }
+}
+
+.size_1 {
+  composes: size_1 from '../Variants/Show.module.css';
+}
+
+.unavailable {
+  composes: unavailable from '../Variants/Show.module.css';
+}
+
+.guide {
+  composes: guide from '../Variants/Show.module.css';
+  text-align: center !important;
+
+  & .text {
+    text-align: center;
+  }
+}
+
+.noSize {
+  composes: guide from '../Variants/Show.module.css';
+}

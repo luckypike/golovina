@@ -24,17 +24,11 @@
 
 .text {
   padding: var(--yr) 0;
-  text-align: center;
-  /* margin-bottom: var(--yr); */
 
   & span {
     cursor: pointer;
     text-decoration: underline;
     text-decoration-color: var(--gr_color);
-  }
-
-  @media (--m) {
-    text-align: left;
   }
 }
 

@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 
 import { path } from '../Routes'
 import List from './List'
 import page from '../Page'
 
-export default function Show () {
+Show.propTypes = {
+  locale: PropTypes.string.isRequired
+}
+
+export default function Show ({ locale }) {
   const [variants, setVariants] = useState()
 
   useEffect(() => {
@@ -25,7 +30,7 @@ export default function Show () {
       </div>
 
       {variants && variants.length > 0 &&
-        <List variants={variants} />
+        <List variants={variants} locale={locale}/>
       }
 
       {variants && variants.length === 0 &&
