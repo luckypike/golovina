@@ -194,7 +194,7 @@ class Variant < ApplicationRecord
 
   # TODO: Check and renew below 2 methods
   def update_category_variants_counter
-    Category.find(product.category_id_before_last_save).check_variants_counter if product.category_id_before_last_save
+    Category.find(product.category_id_before_last_save).update_variants_counter if product.category_id_before_last_save
     product.category.update_variants_counter
   end
 
