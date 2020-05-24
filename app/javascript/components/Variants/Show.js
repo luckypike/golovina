@@ -53,6 +53,9 @@ function Variant ({ locale }) {
   // const sliderElRef = useRef()
   const sliderRef = useRef()
   const imagesCountRef = useRef()
+  const kitsCountRef = useRef()
+  const kitSlidesRef = useRef()
+  const kitSliderRef = useRef()
 
   useEffect(() => {
     const _fetch = async () => {
@@ -72,13 +75,25 @@ function Variant ({ locale }) {
         sliderRef.current = null
       }
 
+      if (kitSliderRef.current) {
+        kitSliderRef.current.destroy(true)
+        kitSliderRef.current = null
+      }
+
       setVariant(variants.find(v => v.id === parseInt(id)))
+      if (variants.find(v => v.id === parseInt(id)).kits) {
+        setSection('kits')
+      }
     }
   }, [variants, id])
 
   useEffect(() => {
     if (variant) {
       imagesCountRef.current = variant.images.length
+
+      if (variant.kits) {
+        kitsCountRef.current = variant.kits.length
+      }
 
       updateDimensions()
       if (variant.availabilities.length === 1 && variant.availabilities[0].size.id === 1 && variant.availabilities[0].active) {
@@ -102,6 +117,19 @@ function Variant ({ locale }) {
     } else if (sliderRef.current) {
       sliderRef.current.destroy(true)
       sliderRef.current = null
+    }
+
+    if (kitSlidesRef.current) {
+      if (kitSliderRef.current) {
+        kitSliderRef.current.destroy(true)
+        kitSliderRef.current = null
+      }
+
+      if (!kitSliderRef.current && kitsCountRef.current > 1) {
+        kitSliderRef.current = new Siema({
+          selector: kitSlidesRef.current
+        })
+      }
     }
   }
 
@@ -252,6 +280,25 @@ function Variant ({ locale }) {
               <div className={styles.desc}>
                 <ReactMarkdown source={variant.desc} />
               </div>
+            }
+
+            {variant.kits &&
+              <Acc id="kits" title={I18n.t('variant.kits')} onToggle={toggleSection} section={section}>
+                <div className={classNames(styles.kits, { [styles.single]: variant.kits.length === 1 })}>
+                  <div className={styles.kit_slides} ref={kitSlidesRef}>
+                    {variant.kits.map((kit, i) =>
+                      <div key={kit.id} className={classNames('glide__slide', styles.kit_item)}>
+                        <div className={styles.kit_image}><img src={kit.image}/></div>
+                        <h2 className={styles.kit_title}>{I18n.t('variant.title')} {i + 1}</h2>
+                        <div className={styles.kit_items}>{I18n.t('kit_variants', { count: kit.items })}</div>
+                        <a className={classNames(styles.kit_link, buttons.main)} href={path('kit_path', { id: kit.id })}>
+                          {I18n.t('variant.more')}
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </Acc>
             }
 
             {variant.comp &&

@@ -32,6 +32,15 @@ json.variants @variants do |variant|
     end
   end
 
+  if variant.kits.active.present?
+    json.kits variant.kits.active do |kit|
+      json.id kit.id
+      json.title kit.title.present? ? kit.human_title : kit.human_title.truncate(60)
+      json.image kit.photo.thumb.url
+      json.items kit.variants.size
+    end
+  end
+
   json.can_edit policy(variant).edit?
 end
 
