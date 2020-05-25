@@ -35,8 +35,8 @@ Variant.propTypes = {
 
 function Variant (props) {
   const [size, setSize] = useState()
-  const [add, setAdd] = useState(false)
-  const [send, setSend] = useState(false)
+  // const [add, setAdd] = useState(false)
+  // const [send, setSend] = useState(false)
   const { variant } = props
 
   const {
@@ -61,6 +61,7 @@ function Variant (props) {
     ).then(res => {
       PubSub.publish('update-cart', res.data.quantity)
       PubSub.publish('notification-cart', variant)
+      setSize()
     }).catch(_error => {
     })
 
@@ -131,21 +132,19 @@ function Variant (props) {
               )}
             </div>
 
-            <div className={styles.buy}>
-              <div className={styles.cart}>
-                {add &&
-                  <a className={buttons.main} href={path('cart_path')}>
-                    {I18n.t('variant.cart.checkout')}
-                  </a>
-                }
-
-                {!add &&
-                  <button className={buttons.main} disabled={!size || send} onClick={handleCartClick}>
-                    {!send ? I18n.t('kit.variant.cart.add') : I18n.t('kit.variant.cart.processing')}
+            {variant.availabilities.filter(a => a.active).length > 0 &&
+              <div className={styles.buy}>
+                <div className={styles.cart}>
+                  <button
+                    className={classNames(buttons.main, { [buttons.pending]: pending })}
+                    disabled={!size || pending}
+                    onClick={onSubmit(handleCartClick)}
+                  >
+                    {!pending ? I18n.t('kit.variant.cart.add') : I18n.t('kit.variant.cart.processing')}
                   </button>
-                }
+                </div>
               </div>
-            </div>
+            }
           </>
         }
       </div>

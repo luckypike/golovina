@@ -21,14 +21,14 @@
 .variants {
   @media (--m) {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: calc(var(--xr) * 2);
   }
 }
 
 .variant {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 5rem 1fr;
   grid-gap: var(--xr);
   margin-bottom: calc(var(--yr) * var(--s3));
 
