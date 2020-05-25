@@ -5,7 +5,7 @@ class SearchController < ApplicationController
     respond_to do |format|
       format.html { render :index }
       format.json do
-        @records = policy_scope(Variant.not_archived).includes(product: :variants).joins(:product)
+        @records = policy_scope(Variant.for_list)
           .where(variant: { language: I18n.locale })
           .search(
             query: {
