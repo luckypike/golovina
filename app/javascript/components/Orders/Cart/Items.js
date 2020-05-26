@@ -69,6 +69,12 @@ export default function Items ({ items, checkout, setCheckout, locale, _fetch })
               </div>
             }
 
+            {item['available?'] && item.quantity > item.available &&
+              <div className={styles.preorder}>
+                {I18n.t('order.cart.items.preorder')}
+              </div>
+            }
+
             {!item['available?'] &&
               <div className={styles.noAvailable}>
                 {I18n.t('order.cart.items.noav', { count: item.available })}

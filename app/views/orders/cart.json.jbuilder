@@ -11,6 +11,7 @@ if @order
       json.variant do
         json.partial! item.variant
         json.available item.variant.available?
+        json.preorder item.variant.preorder?
 
         json.title item.variant.title_last.squish
 

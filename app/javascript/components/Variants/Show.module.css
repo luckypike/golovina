@@ -491,3 +491,10 @@
     }
   }
 }
+
+.preorder {
+  background-color: color-mod(#fff shade(2%));
+  padding: calc(var(--yr) * var(--s1)) var(--xr);
+  composes: at from '../Fonts.module.css';
+  margin-bottom: calc(var(--yr) * var(--s2));
+}

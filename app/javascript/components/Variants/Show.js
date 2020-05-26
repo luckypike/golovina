@@ -48,6 +48,7 @@ function Variant ({ locale }) {
   const [variant, setVariant] = useState()
   const [variants, setVariants] = useState()
   const [size, setSize] = useState()
+  const [preorderWarning, setPreorderWarning] = useState(false)
 
   const slidesRef = useRef()
   // const sliderElRef = useRef()
@@ -164,6 +165,8 @@ function Variant ({ locale }) {
       },
       { cancelToken: cancelToken.current.token }
     ).then(res => {
+      setSize()
+      setPreorderWarning(false)
       PubSub.publish('update-cart', res.data.quantity)
       PubSub.publish('notification-cart', variant)
     }).catch(_error => {
@@ -230,7 +233,7 @@ function Variant ({ locale }) {
 
             <Variants variants={variants} variant={variant} className={styles.variants} />
 
-            {variant.availabilities.length > 0 &&
+            {variant.availabilities.filter(a => a.active || variant.preorder).length > 0 &&
               <>
                 <div className={styles.sizesWith}>
                   <div className={styles.sizes}>
@@ -240,11 +243,12 @@ function Variant ({ locale }) {
                         className={classNames(
                           styles.size,
                           styles[`size_${availability.size.id}`],
-                          { [styles.unavailable]: !availability.active, [styles.active]: size && availability.size.id === size.id }
+                          { [styles.unavailable]: (!availability.active && !variant.preorder), [styles.active]: size && availability.size.id === size.id }
                         )}
                         onClick={() => {
-                          if (availability.active) {
+                          if (availability.active || variant.preorder) {
                             setSize(availability.size)
+                            setPreorderWarning(!availability.active)
                           }
                         }}
                       >
@@ -252,6 +256,12 @@ function Variant ({ locale }) {
                       </div>
                     )}
                   </div>
+
+                  {preorderWarning &&
+                    <div className={styles.preorder}>
+                      {I18n.t('variant.preorder')}
+                    </div>
+                  }
 
                   <div className={styles.guide}>
                     <Guide locale={locale} />

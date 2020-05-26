@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_100409) do
+ActiveRecord::Schema.define(version: 2020_05_25_171638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_100409) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "order_item_id"
     t.integer "state", default: 1
+    t.boolean "preorder", default: false
     t.index ["availability_id"], name: "index_acts_on_availability_id"
     t.index ["order_item_id"], name: "index_acts_on_order_item_id"
     t.index ["store_id"], name: "index_acts_on_store_id"
@@ -487,6 +488,8 @@ ActiveRecord::Schema.define(version: 2020_05_15_100409) do
     t.boolean "bestseller"
     t.integer "quantity", default: 0, null: false
     t.integer "acts_count", default: 0, null: false
+    t.integer "preorder", default: 0
+    t.integer "preordered", default: 0
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["last"], name: "index_variants_on_last"
     t.index ["latest"], name: "index_variants_on_latest"

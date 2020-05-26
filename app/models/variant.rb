@@ -178,6 +178,10 @@ class Variant < ApplicationRecord
     price_sell.positive? && quantity.positive?
   end
 
+  def preorder?
+    price_sell.positive? && preorder > preordered
+  end
+
   def label
     return :sold_out if sold_out?
     return :last if last

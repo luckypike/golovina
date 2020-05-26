@@ -61,6 +61,13 @@
   }
 }
 
+.preorder {
+  margin-top: calc(var(--yr) * var(--s1));
+  padding-top: calc(var(--yr) * var(--s1));
+  border-top: 1px solid var(--sp_color);
+  composes: at from '../../Fonts.module.css';
+}
+
 .noAvailable,
 .noPrice {
   font-weight: var(--fw_bold);

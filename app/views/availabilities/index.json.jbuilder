@@ -23,6 +23,10 @@ json.availabilities @availabilities do |availability|
   end
 end
 
+json.variant do
+  json.partial! @variant
+end
+
 json.sizes Size.all do |size|
   json.partial! size
 end

@@ -2,6 +2,7 @@ json.variants @variants do |variant|
   json.partial! variant
   json.extract! variant, :label, :desc, :comp
   json.available variant.available?
+  json.preorder variant.preorder?
 
   json.title variant.title_last.squish
 

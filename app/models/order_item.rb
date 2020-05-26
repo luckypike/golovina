@@ -15,8 +15,12 @@ class OrderItem < ApplicationRecord
     variant.availabilities.active.where(size: size).sum(&:quantity)
   end
 
+  def available_to_preorder
+    variant.preorder - variant.preordered
+  end
+
   def available?
-    available >= quantity
+    (available + available_to_preorder) >= quantity
   end
 
   def process_acts
@@ -41,6 +45,32 @@ class OrderItem < ApplicationRecord
 
       break if unallocated_quantity.zero?
     end
+
+    variant.reload
+
+    return unless unallocated_quantity.positive? && available_to_preorder.positive?
+
+    allocated_quantity = [unallocated_quantity, available_to_preorder].min
+
+    acts.create(
+      state: :preorder,
+      availability: availability,
+      store: Store.factory,
+      quantity: allocated_quantity
+    )
+
+    acts.create(
+      state: :paid,
+      availability: availability,
+      store: Store.factory,
+      quantity: allocated_quantity * -1
+    )
+
+    unallocated_quantity -= allocated_quantity
+
+    return if unallocated_quantity.zero?
+
+    OrderItemMailer.unallocated_quantity(self, unallocated_quantity).deliver_later
   end
 
   class << self

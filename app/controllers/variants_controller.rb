@@ -121,7 +121,7 @@ class VariantsController < ApplicationController
 
     @order_item.quantity += 1
 
-    if @variant.available? && @order_item.save
+    if (@variant.available? || @variant.preorder?) && @order_item.save
       render json: { quantity: current_user.cart.items.map(&:quantity).sum }
     else
       render json: @order_item.errors, status: :unprocessable_entity
@@ -189,7 +189,7 @@ class VariantsController < ApplicationController
   def variant_params
     permitted =
       Variant.globalize_attribute_names \
-      + %i[state code color_id price price_last created_at latest bestseller sale last pinned premium stayhome morning] \
+      + %i[state code color_id price price_last created_at latest bestseller sale last pinned premium stayhome morning preorder] \
       + [
         {
           product_attributes: Product.globalize_attribute_names \
