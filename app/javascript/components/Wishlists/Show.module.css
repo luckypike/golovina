@@ -1,15 +1,18 @@
-.list {
+.variants {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-row-gap: calc(var(--yr) * var(--s1));
-  grid-column-gap: calc(var(--yr) * var(--s1));
+  grid-row-gap: calc(var(--yr) * var(--s4));
+  grid-column-gap: var(--yr);
 
   @media (--s) {
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: var(--xr);
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: calc(var(--xr) * 2);
   }
 
   @media (--m) {
     grid-column-gap: calc(var(--xr) * 2);
+  }
+
+  @media (--l) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }

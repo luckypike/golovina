@@ -1,18 +1,37 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import PropTypes from 'prop-types'
 import Siema from 'siema'
 import classNames from 'classnames'
 
 import Variants from './List/Variants'
-import I18n from '../I18n'
+import { I18nContext } from '../I18n'
 
 import styles from './List.module.css'
+
+List.propTypes = {
+  kits: PropTypes.array
+}
+
+export default function List ({ kits }) {
+  return (
+    <div className={styles.kits}>
+      {kits.filter(kit => kit.variants.filter(variant => variant.state !== 'archived').length > 0).map(kit =>
+        <Kit
+          key={kit.id}
+          kit={kit}
+        />
+      )}
+    </div>
+  )
+}
 
 Kit.propTypes = {
   kit: PropTypes.object
 }
 
 function Kit ({ kit }) {
+  const I18n = useContext(I18nContext)
+
   const slider = useRef()
   const mount = useRef()
 
@@ -56,24 +75,10 @@ function Kit ({ kit }) {
       </div>
 
       <div className={styles.variants}>
-        <Variants variants={kit.variants} />
+        <Variants
+          variants={kit.variants}
+        />
       </div>
-    </div>
-  )
-}
-
-List.propTypes = {
-  kits: PropTypes.array
-}
-
-export default function List (props) {
-  const { kits } = props
-
-  return (
-    <div className={styles.kits}>
-      {kits.filter(kit => kit.variants.filter(variant => variant.state !== 'archived').length > 0).map(kit =>
-        <Kit key={kit.id} kit={kit}/>
-      )}
     </div>
   )
 }

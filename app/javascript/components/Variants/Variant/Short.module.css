@@ -1,0 +1,68 @@
+.root {
+  display: grid;
+  height: 100%;
+  grid-row-gap: calc(var(--yr) * var(--s1));
+  grid-template-rows: auto 1fr;
+}
+
+.link {
+  display: block;
+}
+
+.image {
+  position: relative;
+  display: block;
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: calc(4 / 3 * 100%);
+    background-color: var(--ph_color);
+  }
+
+  & img {
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+  }
+}
+
+.dt {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  margin-bottom: auto;
+}
+
+.buy {
+  margin-top: calc(var(--yr) * var(--s2));
+}
+
+.title {
+  margin: 0 calc(var(--yr) * 8);
+}
+
+.price {
+  margin-top: var(--yr);
+
+  & > div {
+    justify-content: center;
+  }
+}
+
+.wishlist {
+  composes: wishlist from '../List.module.css';
+
+  @media (--s) {
+    right: 0;
+    top: 0;
+    left: auto;
+    bottom: auto;
+  }
+}

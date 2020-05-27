@@ -18,6 +18,26 @@
   }
 }
 
+.root16 {
+  padding: calc(var(--yr) * 22) var(--xr);
+
+  @media (--s) {
+    padding: calc(var(--yr) * 40) var(--xr);
+  }
+
+  @media (--m) {
+    padding: calc(var(--yr) * 40) calc(var(--xr) * 2) calc(var(--yr) * 12);
+  }
+
+  @media (--l) {
+    padding: calc(var(--yr) * 40) calc(var(--xr) * 2);
+  }
+
+  @media (--xl) {
+    padding: calc(var(--yr) * 62) calc(var(--xr) * 2) calc(var(--yr) * 40);
+  }
+}
+
 .gray {
   background-color: var(--ph_color);
   padding: calc(var(--yr) * 12) var(--xr) calc(var(--yr) * 12);

@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 
 import { path } from '../Routes'
-import Variant from './Variant'
+import { I18nContext, useI18n } from '../I18n'
+// import Variant from './Variant'
+import Variant from '../Variants/Variant/Short'
+
 import page from '../Page.module.css'
 import styles from './Show.module.css'
 
@@ -12,6 +15,8 @@ Show.propTypes = {
 }
 
 export default function Show ({ locale }) {
+  const I18n = useI18n(locale)
+
   const [variants, setVariants] = useState()
 
   useEffect(() => {
@@ -24,29 +29,33 @@ export default function Show ({ locale }) {
     _fetch()
   }, [])
 
-  const handleRemove = variant => {
-    setVariants(variants.filter(v => v.id !== variant.id))
-  }
+  // const handleRemove = variant => {
+  //   setVariants(variants.filter(v => v.id !== variant.id))
+  // }
 
   return (
-    <div className={page.root}>
-      <div className={page.title}>
-        <h1>Избранное</h1>
+    <I18nContext.Provider value={I18n}>
+      <div className={page.root}>
+        <div className={page.title}>
+          <h1>Избранное</h1>
+        </div>
+
+        {variants && variants.length > 0 &&
+          <div className={styles.variants}>
+            {variants.map(variant =>
+              <div key={variant.id} className={styles.variant}>
+                <Variant variant={variant} />
+              </div>
+            )}
+          </div>
+        }
+
+        {variants && variants.length === 0 &&
+          <div>
+            У вас нет избранных товаров, добавляйте их в избранное чтобы потом быстрее найти их.
+          </div>
+        }
       </div>
-
-      {variants && variants.length > 0 &&
-        <div className={styles.list}>
-          {variants.map(variant =>
-            <Variant key={variant.id} variant={variant} locale={locale} onRemove={handleRemove}/>
-          )}
-        </div>
-      }
-
-      {variants && variants.length === 0 &&
-        <div>
-          У вас нет избранных товаров, добавляйте их в избранное чтобы потом быстрее найти их.
-        </div>
-      }
-    </div>
+    </I18nContext.Provider>
   )
 }

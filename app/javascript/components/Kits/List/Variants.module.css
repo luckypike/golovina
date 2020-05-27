@@ -1,39 +1,20 @@
-.image {
-  position: relative;
-  display: block;
-
-  &::before {
-    display: block;
-    content: '';
-    padding-top: calc(4 / 3 * 100%);
-    background-color: var(--ph_color);
-  }
-
-  & img {
-    left: 0;
-    top: 0;
-    position: absolute;
-    display: block;
-    width: 100%;
-  }
-}
-
 .variants {
   @media (--m) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: calc(var(--xr) * 2);
   }
+
+  @media (--l) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .variant {
-  display: grid;
-  grid-template-columns: 5rem 1fr;
-  grid-gap: var(--xr);
   margin-bottom: calc(var(--yr) * var(--s3));
 
   @media (--m) {
-    display: block;
     margin-bottom: 0;
   }
 }
@@ -68,7 +49,6 @@
 .sizes {
   margin-top: calc(var(--yr) * var(--s1));
   display: flex;
-  /* justify-content: center; */
   position: relative;
 
   @media (--m) {
