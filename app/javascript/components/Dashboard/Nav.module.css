@@ -1,6 +1,10 @@
 .tabs {
   display: flex;
-  margin-bottom: calc(var(--yr) * var(--s3));
+  margin-bottom: calc(var(--yr) * var(--s1));
+
+  &:last-child {
+    margin-bottom: calc(var(--yr) * var(--s3));
+  }
 }
 
 .tab {

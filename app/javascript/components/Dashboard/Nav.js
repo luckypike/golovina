@@ -14,22 +14,30 @@ export default function Nav ({ locale }) {
   const I18n = useI18n(locale)
 
   return (
-    <div className={styles.tabs}>
-      <a href={path('dashboard_path')} className={styles.tab}>
-        {I18n.t('dashboard.nav.index')}
-      </a>
+    <>
+      <div className={styles.tabs}>
+        <a href={path('dashboard_path')} className={styles.tab}>
+          {I18n.t('dashboard.nav.index')}
+        </a>
 
-      <a href={path('dashboard_archived_path')} className={styles.tab}>
-        {I18n.t('dashboard.nav.archived')}
-      </a>
+        <a href={path('dashboard_archived_path')} className={styles.tab}>
+          {I18n.t('dashboard.nav.archived')}
+        </a>
 
-      <a href={path('dashboard_cart_path')} className={styles.tab}>
-        {I18n.t('dashboard.nav.cart')}
-      </a>
+        <a href={path('dashboard_refunds_path')} className={styles.tab}>
+          {I18n.t('dashboard.nav.refunds')}
+        </a>
+      </div>
 
-      <a href={path('dashboard_refunds_path')} className={styles.tab}>
-        {I18n.t('dashboard.nav.refunds')}
-      </a>
-    </div>
+      <div className={styles.tabs}>
+        <a href={path('dashboard_cart_path')} className={styles.tab}>
+          {I18n.t('dashboard.nav.cart')}
+        </a>
+
+        <a href={path('dashboard_wishlists_path')} className={styles.tab}>
+          {I18n.t('dashboard.nav.wishlists')}
+        </a>
+      </div>
+    </>
   )
 }
