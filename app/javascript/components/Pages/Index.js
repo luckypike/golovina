@@ -41,13 +41,13 @@ export default function Index ({ slides, instagram, locale }) {
           </div>
         }
 
-        <div className={styles.places}>
+        {/* <div className={styles.places}>
           <a href={path('contacts_path')} >
             <div className={styles.text}>
               <div className={styles.title}>{I18n.t('static.index.contacts')}</div>
             </div>
           </a>
-        </div>
+        </div> */}
       </div>
 
       <div className={styles.footer}>

@@ -77,6 +77,12 @@ export default function Index ({ locale }) {
       </div>
 
       <div className={styles.root}>
+        <p>
+          <a href={path('new_slide_path')}>
+            Новый блок
+          </a>
+        </p>
+
         <div className={styles.slides}>
           {slides.map(slide =>
             <a href={path('edit_slide_path', { id: slide.id })} key={slide.id} className={styles.slide}>

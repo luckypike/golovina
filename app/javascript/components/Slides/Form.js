@@ -180,7 +180,10 @@ export default function Form (props) {
             {!send &&
               <>
                 <input type="submit" value="Сохранить" className={buttons.main} disabled={send} />
-                <a href={path('slide_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>
+
+                {id &&
+                  <a href={path('slide_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>
+                }
               </>
             }
           </div>

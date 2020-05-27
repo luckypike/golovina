@@ -110,6 +110,8 @@
   background-position: center;
   background-size: cover;
   position: relative;
+  display: block;
+  overflow: hidden;
 
   &::before {
     background: color-mod(#000 a(0.3));
@@ -135,6 +137,16 @@
 
     @media (--s) {
       display: block;
+    }
+  }
+
+  &:nth-child(odd) {
+    &:last-child {
+      grid-column: span 2;
+
+      &::before {
+        padding-top: calc(1 / 2 * 100%);
+      }
     }
   }
 }
