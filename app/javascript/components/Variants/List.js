@@ -6,6 +6,7 @@ import Images from './Images/Images'
 
 import { path } from '../Routes'
 import Price from './Price'
+import Wishlist from './Wishlist'
 import I18n from '../I18n'
 
 import styles from './List.module.css'
@@ -52,6 +53,12 @@ export default function List ({ variants }) {
                   +{I18n.t('variants.colors', { count: variant.colors })}
                 </div>
               }
+            </div>
+
+            <div className={styles.wishlist}>
+              <Wishlist
+                variant={variant}
+              />
             </div>
           </div>
         </a>

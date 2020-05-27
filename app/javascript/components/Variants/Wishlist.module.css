@@ -1,0 +1,22 @@
+.root {
+  @media (--s) {
+    bottom: calc(var(--yr) * -10);
+    top: auto;
+    left: calc(var(--yr) * -1);
+    right: auto;
+  }
+
+  & svg {
+    display: block;
+    width: calc(var(--yr) * 5);
+    height: calc(var(--yr) * 5);
+  }
+
+  &.active {
+    opacity: 0.6;
+
+    & svg {
+      fill: var(--pr_color);
+    }
+  }
+}

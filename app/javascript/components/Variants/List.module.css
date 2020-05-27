@@ -35,6 +35,11 @@
         }
       }
 
+      & .wishlist {
+        right: calc(var(--yr) * -1);
+        left: auto;
+      }
+
       &.single {
         & .dt {
           grid-column: 4 / span 4;
@@ -99,5 +104,25 @@
 
   &.latest {
     color: var(--grn_color);
+  }
+}
+
+.wishlist {
+  cursor: pointer;
+  position: absolute;
+  width: calc(var(--yr) * 7);
+  height: calc(var(--yr) * 7);
+  right: 0;
+  top: calc(var(--yr) * -1);
+  opacity: 0.4;
+  padding: calc(var(--yr));
+  transition: opacity 0.2s;
+  z-index: 1;
+
+  @media (--s) {
+    bottom: calc(var(--yr) * -10);
+    top: auto;
+    left: calc(var(--yr) * -1);
+    right: auto;
   }
 }

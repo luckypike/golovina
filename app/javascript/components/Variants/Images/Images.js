@@ -34,12 +34,6 @@ export default function Images ({ variant }) {
       <div className={styles.root}>
         {variant.images.length > 1 && variant.images.map((image, index) =>
           <div key={index} className={styles.image}>
-            {index === 0 &&
-              <div className={classNames(styles.wishlist, { [styles.active]: active })} onClick={e => handleWishlistClick(e, variant)}>
-                <WishlistImg />
-              </div>
-            }
-
             <img src={image.thumb} />
           </div>
         )}
@@ -47,10 +41,6 @@ export default function Images ({ variant }) {
 
       {variant.images.length === 1 &&
         <div className={styles.image}>
-          <div className={classNames(styles.wishlist, { [styles.active]: active })} onClick={e => handleWishlistClick(e, variant)}>
-            <WishlistImg />
-          </div>
-
           <img src={variant.images[0].thumb} />
         </div>
       }
@@ -58,6 +48,10 @@ export default function Images ({ variant }) {
       {variant.images.length === 0 &&
         <div className={styles.image} />
       }
+
+      {/* <div className={classNames(styles.wishlist, { [styles.active]: active })} onClick={e => handleWishlistClick(e, variant)}>
+        <WishlistImg />
+      </div> */}
     </div>
   )
 }
