@@ -34,20 +34,10 @@ export default function Image ({ variant, onRemove }) {
   }
 
   return (
-    <>
+    <div className={styles.image}>
       {variant.images.length > 0 &&
-        <div className={styles.image}>
-          <div className={classNames(styles.wishlist, { [styles.active]: active })} onClick={e => handleWishlistClick(e, variant)}>
-            <WishlistImg />
-          </div>
-
-          <img src={variant.images[0].thumb} />
-        </div>
+        <img src={variant.images[0].thumb} />
       }
-
-      {variant.images.length === 0 &&
-        <div className={styles.image} />
-      }
-    </>
+    </div>
   )
 }

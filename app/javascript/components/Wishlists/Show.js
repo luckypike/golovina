@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 
 import { path } from '../Routes'
-import List from './List'
-import page from '../Page'
+import Variant from './Variant'
+import page from '../Page.module.css'
+import styles from './Show.module.css'
 
 Show.propTypes = {
   locale: PropTypes.string.isRequired
@@ -34,7 +35,11 @@ export default function Show ({ locale }) {
       </div>
 
       {variants && variants.length > 0 &&
-        <List variants={variants} locale={locale} onRemove={handleRemove}/>
+        <div className={styles.list}>
+          {variants.map(variant =>
+            <Variant key={variant.id} variant={variant} locale={locale} onRemove={handleRemove}/>
+          )}
+        </div>
       }
 
       {variants && variants.length === 0 &&

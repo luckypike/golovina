@@ -11,8 +11,9 @@ import Guide from '../Variants/Show/Guide'
 import { path } from '../Routes'
 import Price from '../Variants/Price'
 import I18n from '../I18n'
+import Wishlist from '../Variants/Wishlist'
 
-import styles from './List.module.css'
+import styles from './Variant.module.css'
 import buttons from '../Buttons.module.css'
 
 Variant.propTypes = {
@@ -30,6 +31,7 @@ export default function Variant ({ variant, locale, onRemove }) {
 
   const [size, setSize] = useState()
   const [noSize, setNoSize] = useState(false)
+  const [preorderWarning, setPreorderWarning] = useState(false)
 
   useEffect(() => {
     if (variant) {
@@ -57,6 +59,8 @@ export default function Variant ({ variant, locale, onRemove }) {
       },
       { cancelToken: cancelToken.current.token }
     ).then(res => {
+      setSize()
+      setPreorderWarning(false)
       PubSub.publish('update-cart', res.data.quantity)
       PubSub.publish('notification-cart', variant)
     }).catch(_error => {
@@ -64,8 +68,8 @@ export default function Variant ({ variant, locale, onRemove }) {
   }
 
   return (
-    <div>
-      <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={styles.item}>
+    <div className={styles.item}>
+      <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} className={styles.image}>
         <Image
           variant={variant}
           onRemove={onRemove}
@@ -73,13 +77,13 @@ export default function Variant ({ variant, locale, onRemove }) {
       </a>
 
       <div className={styles.dt}>
-        {variant.label &&
-          <div className={classNames(styles.label, styles[variant.label])}>
-            {I18n.t(`variant.labels.${variant.label}`)}
-          </div>
-        }
+        <div className={styles.top}>
+          {variant.label &&
+            <div className={classNames(styles.label, styles[variant.label])}>
+              {I18n.t(`variant.labels.${variant.label}`)}
+            </div>
+          }
 
-        <div className={styles.desc}>
           {variant.state === 'unpub' &&
             <div className={styles.unpub}>
               {I18n.t('variant.unpub')}
@@ -95,52 +99,65 @@ export default function Variant ({ variant, locale, onRemove }) {
               <Price sell={parseFloat(variant.price_sell)} origin={parseFloat(variant.price)} />
             </div>
           }
+        </div>
 
-          {variant.availabilities.length > 0 &&
-            <>
-              <div className={styles.sizesWith}>
-                <div className={styles.sizes}>
-                  {variant.availabilities.map(availability =>
-                    <div
-                      key={availability.size.id}
-                      className={classNames(
-                        styles.size,
-                        styles[`size_${availability.size.id}`],
-                        { [styles.unavailable]: !availability.active, [styles.active]: size && availability.size.id === size.id }
-                      )}
-                      onClick={() => {
-                        if (availability.active) {
-                          setSize(availability.size)
-                        }
-                      }}
-                    >
-                      {availability.size.title}
-                    </div>
-                  )}
-                </div>
-
-                <div className={styles.guide}>
-                  <Guide locale={locale} />
-                </div>
-              </div>
-
-              <div className={styles.buy}>
-                <div className={styles.cart}>
-                  <button
-                    className={classNames(buttons.main, { [buttons.pending]: pending })}
-                    disabled={pending}
-                    onClick={onSubmit(handleCartClick)}
+        {variant.availabilities.filter(a => a.active || variant.preorder).length > 0 &&
+          <>
+            <div className={styles.sizesWith}>
+              <div className={styles.sizes}>
+                {variant.availabilities.map(availability =>
+                  <div
+                    key={availability.size.id}
+                    className={classNames(
+                      styles.size,
+                      styles[`size_${availability.size.id}`],
+                      { [styles.unavailable]: (!availability.active && !variant.preorder), [styles.active]: size && availability.size.id === size.id }
+                    )}
+                    onClick={() => {
+                      if (availability.active || variant.preorder) {
+                        setSize(availability.size)
+                        setPreorderWarning(!availability.active)
+                      }
+                    }}
                   >
-                    {pending ? I18n.t('variant.cart.adding') : I18n.t('variant.cart.add')}
-                  </button>
-
-                  {noSize &&
-                    <div className={styles.noSize}>{I18n.t('variant.size.select')}</div>
-                  }
-                </div>
+                    {availability.size.title}
+                  </div>
+                )}
               </div>
-            </>
-          }
+
+              {preorderWarning &&
+                <div className={styles.preorder}>
+                  {I18n.t('variant.preorder')}
+                </div>
+              }
+
+              <div className={styles.guide}>
+                <Guide locale={locale} />
+              </div>
+            </div>
+
+            <div className={styles.buy}>
+              <div className={styles.cart}>
+                <button
+                  className={classNames(buttons.main, { [buttons.pending]: pending })}
+                  disabled={pending}
+                  onClick={onSubmit(handleCartClick)}
+                >
+                  {!pending ? I18n.t('wishlist.variant.cart.add') : I18n.t('wishlist.variant.cart.processing')}
+                </button>
+
+                {noSize &&
+                  <div className={styles.noSize}>{I18n.t('variant.size.select')}</div>
+                }
+              </div>
+            </div>
+          </>
+        }
+
+        <div className={styles.wishlist}>
+          <Wishlist
+            variant={variant}
+          />
         </div>
       </div>
     </div>
