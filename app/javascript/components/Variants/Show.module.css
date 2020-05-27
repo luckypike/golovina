@@ -79,7 +79,12 @@
 .edit {
   margin-bottom: calc(var(--yr) * var(--s2));
   display: flex;
+  justify-content: center;
   composes: at from '../Fonts.module.css';
+
+  @media (--m) {
+    justify-content: flex-start;
+  }
 
   & a {
     cursor: pointer;
