@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 import classNames from 'classnames'
 
 import { path } from '../Routes'
@@ -15,6 +16,18 @@ Index.propTypes = {
 
 export default function Index ({ slides, instagram, locale }) {
   const I18n = useI18n(locale)
+
+  const [posts, setPosts] = useState()
+
+  useEffect(() => {
+    const _fetch = async () => {
+      const { data } = await axios.get(path('instagram_path', { format: 'json' }))
+
+      setPosts(data.posts)
+    }
+
+    _fetch()
+  }, [])
 
   return (
     <div className={styles.root}>
@@ -41,13 +54,28 @@ export default function Index ({ slides, instagram, locale }) {
           </div>
         }
 
-        {/* <div className={styles.places}>
-          <a href={path('contacts_path')} >
-            <div className={styles.text}>
-              <div className={styles.title}>{I18n.t('static.index.contacts')}</div>
-            </div>
-          </a>
-        </div> */}
+        <a target="_blank" href={instagram} rel="noopener noreferrer" className={styles.instagram}>
+          golovina.brand
+        </a>
+
+        {posts &&
+          <div className={styles.posts}>
+            {posts.map(post =>
+              <div key={post.id} className={styles.post}>
+
+                {post.media_type === 'VIDEO' &&
+                  <video autoPlay loop muted>
+                    <source src={post.media_url} />
+                  </video>
+                }
+
+                {(post.media_type === 'CAROUSEL_ALBUM' || post.media_type === 'IMAGE') &&
+                  <img src={post.media_url} />
+                }
+              </div>
+            )}
+          </div>
+        }
       </div>
 
       <div className={styles.footer}>
@@ -58,10 +86,10 @@ export default function Index ({ slides, instagram, locale }) {
           <a href="mailto:shop@golovina.store">shop@golovina.store</a>
         </div>
         <div className={styles.insta}>
-          <div>
+          {/* <div>
             {I18n.t('static.index.instagram')}
           </div>
-          <a target="_blank" href={instagram} rel="noopener noreferrer">Golovina.brand</a>
+          <a target="_blank" href={instagram} rel="noopener noreferrer">Golovina.brand</a> */}
         </div>
         <div className={styles.copy}>
           <div>© 2017 – {new Date().getFullYear()} {I18n.t('static.index.copy')}</div>

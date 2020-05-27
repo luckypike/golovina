@@ -6,6 +6,14 @@ class PagesController < ApplicationController
       .where.not(image: nil).order(weight: :asc)
   end
 
+  def instagram
+    url = "https://graph.instagram.com/me/media?fields=id,media_type,media_url,permalink&access_token=#{Rails.application.credentials.dig(:instagram, :token)}"
+
+    @posts = JSON.parse(Net::HTTP.get(URI(url)))
+
+    respond_to :json
+  end
+
   def robots
     respond_to :text
     expires_in 6.hours, public: true

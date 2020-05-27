@@ -145,35 +145,6 @@
   }
 }
 
-.places {
-  position: relative;
-  background-image: url('../../images/contacts_intro.jpg');
-  background-position: center;
-  background-size: cover;
-
-  & a {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-  }
-
-  &::before {
-    background: color-mod(#000 a(0.24));
-    display: block;
-    content: '';
-    padding-top: calc(2 / 3 * 100%);
-  }
-
-  @media (--s) {
-    &::before {
-      padding-top: calc(2 / 5 * 100%);
-    }
-  }
-}
-
 .desc {
   margin-top: calc(var(--yr) * var(--s2));
 }
@@ -243,5 +214,86 @@
 
       grid-column: 10 / span 3;
     }
+  }
+}
+
+.posts {
+  display: grid;
+  grid-gap: calc(var(--yr) * 2);
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: calc(var(--yr) * var(--s3));
+
+  @media (--s) {
+    margin-bottom: calc(var(--yr) * var(--s3) * 2);
+  }
+
+  @media (--l) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.post {
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+  & img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    display: block;
+    transform: translate(-50%, -50%);
+  }
+
+  & video {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    display: block;
+    transform: translate(-50%, -50%);
+  }
+
+  &::before {
+    background: color-mod(#000 a(0.3));
+    display: block;
+    content: '';
+    padding-top: calc(1800 / 1440 * 100%);
+  }
+
+  @media (--l) {
+    &:nth-child(n+5) {
+      display: none;
+    }
+  }
+}
+
+.instagram {
+  composes: h1 from '../Fonts.module.css';
+  display: flex;
+  justify-content: center;
+  margin: 0 auto calc(var(--yr) * var(--s2));
+  width: 9rem;
+  background-image: url('../../images/insta.svg');
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: left center;
+  padding-left: calc(var(--yr) * 6.5);
+
+  @media (--m) {
+    padding-left: calc(var(--yr) * 6.5);
+    width: 11rem;
+  }
+
+  & svg {
+    display: block;
+    height: 28px;
+    width: 28px;
+    margin-right: calc(var(--xr));
+  }
+
+  @media (--s) {
+    margin: 0 auto calc(var(--yr) * var(--s2) * 2);
   }
 }

@@ -10,4 +10,8 @@ PagePolicy = Struct.new :user, :page do
   def contacts?
     index?
   end
+
+  def instagram?
+    index?
+  end
 end
