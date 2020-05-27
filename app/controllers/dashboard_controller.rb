@@ -19,6 +19,12 @@ class DashboardController < ApplicationController
     @refunds = Refund.includes(:user).with_items.order(id: :desc)
   end
 
+  def wishlists
+    @wishlists = Wishlist.with_variant.includes(:user)
+      .where('created_at > ?', 3.months.ago)
+      .order(created_at: :desc)
+  end
+
   private
 
   def authorize_dashboard

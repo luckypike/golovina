@@ -14,4 +14,8 @@ DashboardPolicy = Struct.new :user, :dashboard do
   def refunds?
     index?
   end
+
+  def wishlists?
+    index?
+  end
 end

@@ -158,6 +158,10 @@ class Nav extends Component {
             </div>
 
             <div className={styles.sub}>
+              <a href={path('dashboard_wishlists_path')}>Избранное</a>
+            </div>
+
+            <div className={styles.sub}>
               <a href={path('collections_path')}>Коллекции</a>
             </div>
 

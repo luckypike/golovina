@@ -17,3 +17,13 @@ ru:
 
     refunds:
       title: Возвраты
+
+    wishlists:
+      title: Избранное
+
+      count:
+        zero: нет товаров
+        one: "%{count} товар"
+        few: "%{count} товара"
+        many: "%{count} товаров"
+        other: "%{count} товара"

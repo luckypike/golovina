@@ -15,8 +15,6 @@ json.variants do
       json.extract! variant.product.category, :id, :slug
     end
 
-    json.colors variant.product.variants.select(&:active?).size - 1
-
     if current_user
       json.in_wishlist(current_user.wishlists.detect { |w| w.variant_id == variant.id }.present?)
     end
