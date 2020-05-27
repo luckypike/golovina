@@ -59,9 +59,9 @@ export default function Index ({ slides, instagram, locale }) {
         </a>
 
         {posts &&
-          <div className={styles.posts}>
+          <a className={styles.posts}>
             {posts.map(post =>
-              <div key={post.id} className={styles.post}>
+              <a key={post.id} className={styles.post} target="_blank" href={post.permalink} rel="noopener noreferrer">
 
                 {post.media_type === 'VIDEO' &&
                   <video autoPlay loop muted>
@@ -72,9 +72,9 @@ export default function Index ({ slides, instagram, locale }) {
                 {(post.media_type === 'CAROUSEL_ALBUM' || post.media_type === 'IMAGE') &&
                   <img src={post.media_url} />
                 }
-              </div>
+              </a>
             )}
-          </div>
+          </a>
         }
       </div>
 
