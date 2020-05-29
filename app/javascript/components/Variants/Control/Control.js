@@ -23,7 +23,7 @@ class Control extends Component {
   render () {
     const { categories } = this.state
 
-    if(!categories) return null
+    if (!categories) return null
 
     return (
       <div className={page.gray}>
