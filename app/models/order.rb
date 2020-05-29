@@ -136,7 +136,7 @@ class Order < ApplicationRecord
             color: :translations,
             product: %i[translations category]
           ]
-        }, :size] }, :delivery_city
+        }, :size, { acts: :store }] }, :delivery_city
       )
     end
 

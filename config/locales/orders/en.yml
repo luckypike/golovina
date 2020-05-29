@@ -12,6 +12,8 @@ en:
     door: Address
     color: Color
     size: Size
+    preorder: Preorder
+    store: Store
     amount: Quantity
     international: International delivery
     gift: Gift wrap

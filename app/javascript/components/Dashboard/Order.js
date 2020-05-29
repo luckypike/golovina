@@ -211,6 +211,18 @@ function Items ({ items, locale }) {
               {item.variant.title}
             </div>
 
+            {item.preorder &&
+              <div className={styles.preorder}>
+                {I18n.t('order.preorder')}
+              </div>
+            }
+
+            {item.store &&
+              <div className={styles.store}>
+                {I18n.t('order.store')}: {item.store.title}
+              </div>
+            }
+
             <div className={styles.price}>
               <Price sell={parseFloat(item.variant.price_sell)} origin={parseFloat(item.variant.price)} />
             </div>

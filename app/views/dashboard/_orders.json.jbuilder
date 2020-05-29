@@ -15,6 +15,11 @@ json.array! @orders do |order|
 
   json.items order.items do |item|
     json.partial! item
+    json.preorder item.acts.any?(&:preorder?)
+    act = item.acts.detect(&:paid?)
+    if act
+      json.store act.store, :id, :title
+    end
 
     json.variant do
       json.partial! item.variant

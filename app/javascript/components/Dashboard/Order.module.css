@@ -37,6 +37,15 @@
   padding: 0 calc(var(--yr) * var(--s2)) var(--xr);
 }
 
+.preorder {
+  color: var(--gr_color);
+  composes: at from '../Fonts.module.css';
+}
+
+.store {
+  color: var(--gr_color);
+}
+
 .arr {
   top: calc(var(--yr) * var(--s2));
   right: var(--xr);

@@ -13,6 +13,8 @@ ru:
     door: Адрес
     color: Цвет
     size: Размер
+    preorder: Презаказ
+    store: Склад
     amount: Количество
     international: Международная доставка
     gift: Подарочная упаковка
