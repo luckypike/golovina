@@ -97,8 +97,11 @@ function Variant ({ locale }) {
       }
 
       updateDimensions()
-      if (variant.availabilities.length === 1 && variant.availabilities[0].size.id === 1 && variant.availabilities[0].active) {
-        setSize(variant.availabilities[0].size)
+      if (variant.availabilities.length === 1 && variant.availabilities[0].size.id === 1) {
+        if (variant.availabilities[0].active || variant.preorder) {
+          setSize(variant.availabilities[0].size)
+          setPreorderWarning(!variant.availabilities[0].active)
+        }
       } else {
         setSize()
       }
