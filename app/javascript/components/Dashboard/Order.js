@@ -136,6 +136,7 @@ function Address ({ order, locale }) {
   const isRussia = () => order.delivery === 'russia'
   const isDoor = () => order.delivery_option === 'door'
   const isInternational = () => order.delivery === 'international'
+  const isPickup = () => order.delivery === 'pickup'
 
   return (
     <div>
@@ -174,6 +175,12 @@ function Address ({ order, locale }) {
 
           {/* LEGACY */}
           {order.address_old && order.address_old}
+        </div>
+      }
+
+      {order.amount_delivery && !isPickup() &&
+        <div>
+          {I18n.t('order.delivery.amount')}: {currency(parseFloat(order.amount_delivery))}
         </div>
       }
 

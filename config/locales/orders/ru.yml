@@ -26,6 +26,7 @@ ru:
       pickup: Самовывоз
       russia: Доставка по России
       international: Международная доставка
+      amount: Стоимость доставки
 
     quantity:
       zero: нет товаров
