@@ -1,0 +1,62 @@
+en:
+  order:
+    cart:
+      title: Shopbag
+      empty: Your bag is empty :(
+      sum: Total price
+      color: Color
+      size: Size
+      quantity: Quantity
+      available: available
+      delete: Remove from shopbag
+      total: Total
+      checkout: Place the order
+      appledesc: You may login using AppleID. You`re name and email will be send to us automatically, and you will always be able to login by TouchId or FaceID.
+      or: Or
+
+      gift:
+        title: Gift wrap
+        desc: Gift wrapping your order - %{gift} ₽
+
+      items:
+        title: Items
+        cant: "Sorry, this product is not available right now"
+        preorder: Preorder (plus 2-3 working days)
+
+        noav:
+          zero: Out of stock
+          one: "Only %{count} item available"
+          few: "Only %{count} items available"
+          many: "Only %{count} items available"
+          other: "Only %{count} items available"
+
+      checkout:
+        title: Order information
+        variants: Products cost
+        delivery:
+          russia:
+            title: Delivery across Russia
+            value: Free
+          international:
+            title: International shipping
+            value: 2500 ₽, free shipping for 30000 ₽ purchase
+
+        submit: Checkout
+
+      shipping:
+        title: Select a shipping method
+        store:
+          title: Collect from store
+          desc: Moscow, Bolshaya Nikitskaya 21/18 str 4
+
+        russia:
+          title: Russia shipping by CDEK (free)
+          desc: More than 500 cities from 265 ₽
+          promo: "Free delivery starting from %{promo} ₽"
+          free_shipping: Free delivery
+
+        world:
+          title: International
+          desc: International shipping — 2500 ₽, free shipping for 30000 ₽ purchase
+
+        data: Shipping data

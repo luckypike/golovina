@@ -55,7 +55,7 @@ export default function Checkout ({ locale, setCheckout, order }) {
           disabled={!order['purchasable?']}
           onClick={() => setCheckout(true)}
         >
-          Оформить заказ
+          {I18n.t('order.cart.checkout.submit')}
         </button>
 
         {!order['purchasable?'] &&
