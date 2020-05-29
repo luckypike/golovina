@@ -166,12 +166,12 @@ class Variant < ApplicationRecord
   end
 
   def images_attributes=(attributes)
-    self.images = Image.where(id: attributes.map{ |attribute| attribute[:id] })
+    self.images = Image.where(id: attributes.map { |attribute| attribute[:id] })
     super
   end
 
   def sold_out?
-    quantity.zero? && acts_count.positive?
+    quantity.zero? && !preorder? && acts_count.positive?
   end
 
   def available?
