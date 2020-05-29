@@ -8,8 +8,7 @@ import 'dayjs/locale/en'
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
 
-// import Nav from './Nav'
-// import Refund from './Refund/Refund'
+import Nav from './Nav'
 
 import page from '../Page.module.css'
 import styles from './Wishlists.module.css'
@@ -39,6 +38,8 @@ export default function Refunds ({ locale }) {
   return (
     <div className={page.gray}>
       <div className={styles.root}>
+        <Nav locale={locale} />
+
         <div className={page.title}>
           <h1>{I18n.t('dashboard.wishlists.title')}</h1>
         </div>
