@@ -16,8 +16,9 @@ en:
 
     cart:
       add: Add to shopbag
-      processing: Adding...
-      checkout: Checkout
+      adding: Adding...
+
+    preorder: Обращаем ваше внимание, что на пошив данного изделия потребуется некоторое время, в связи с чем доставка вашего заказа будет увеличена на 2-3 рабочих дня
 
     title: Variant
     kits: Complement image
@@ -41,8 +42,10 @@ en:
     more: More information
     kit_select: Complement image
 
+    unpub: Unpublished
+
     labels:
-      new: New season
+      latest: New season
       bestseller: Bestseller
       sale: Sale
       last: Last size
