@@ -68,7 +68,7 @@ export default function Buy ({ variant }) {
       {canBuy() &&
         <>
           <div className={styles.sizesWith}>
-            <div className={styles.sizes}>
+            <div className={classNames(styles.sizes, 'sizes')}>
               {variant.availabilities.map(availability =>
                 <div
                   key={availability.size.id}
@@ -111,7 +111,7 @@ export default function Buy ({ variant }) {
               </button>
 
               {noSize &&
-                <div className={styles.noSize}>{I18n.t('variant.size.select')}</div>
+                <div className={classNames(styles.noSize, 'noSize')}>{I18n.t('variant.size.select')}</div>
               }
             </div>
           </div>
