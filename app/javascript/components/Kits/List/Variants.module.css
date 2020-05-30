@@ -84,10 +84,34 @@
   }
 }
 
-.title {
-  margin-right: calc(var(--yr) * 8);
+.label {
+  color: var(--gr_color);
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
 
   @media (--s) {
+    font-size: calc(var(--yr) * var(--fs));
+    text-align: center;
+  }
+
+  &.bestseller {
+    color: var(--orng_color);
+  }
+
+  &.last {
+    color: var(--red_color);
+  }
+
+  &.latest {
+    color: var(--grn_color);
+  }
+}
+
+.title {
+  margin-right: calc(var(--yr) * 8);
+  display: block;
+
+  @media (--s) {
+    margin: 0 calc(var(--yr) * 6);
     text-align: center;
   }
 }

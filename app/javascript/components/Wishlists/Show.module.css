@@ -2,14 +2,14 @@
   display: grid;
   grid-row-gap: calc(var(--yr) * var(--s4));
   grid-column-gap: var(--yr);
+  grid-template-columns: 1fr 1fr;
 
   @media (--s) {
-    grid-template-columns: 1fr 1fr;
     grid-column-gap: calc(var(--xr) * 2);
   }
 
   @media (--m) {
-    grid-column-gap: calc(var(--xr) * 2);
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   @media (--l) {

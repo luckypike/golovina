@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 // import Variant from '../../Variants/Variant/Short'
 
 import { path } from '../../Routes'
+import { I18nContext } from '../../I18n'
 
 import Wishlist from '../../Variants/Wishlist'
 import Buy from '../../Variants/Variant/Buy'
@@ -34,6 +36,8 @@ Variant.propTypes = {
 }
 
 function Variant ({ variant }) {
+  const I18n = useContext(I18nContext)
+
   return (
     <div className={styles.variant}>
       <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} className={styles.link}>
@@ -46,9 +50,15 @@ function Variant ({ variant }) {
 
       <div className={styles.dt}>
         <div className={styles.top}>
-          <div className={styles.title}>
+          {variant.label &&
+            <div className={classNames(styles.label, styles[variant.label])}>
+              {I18n.t(`variant.labels.${variant.label}`)}
+            </div>
+          }
+
+          <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} className={styles.title}>
             {variant.title}
-          </div>
+          </a>
 
           {variant.price_sell > 0 &&
             <div className={styles.price}>

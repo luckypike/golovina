@@ -4,8 +4,7 @@ import axios from 'axios'
 
 import { path } from '../Routes'
 import { I18nContext, useI18n } from '../I18n'
-// import Variant from './Variant'
-import Variant from '../Variants/Variant/Short'
+import Variant from './Variant'
 
 import page from '../Page.module.css'
 import styles from './Show.module.css'
@@ -28,10 +27,6 @@ export default function Show ({ locale }) {
 
     _fetch()
   }, [])
-
-  // const handleRemove = variant => {
-  //   setVariants(variants.filter(v => v.id !== variant.id))
-  // }
 
   return (
     <I18nContext.Provider value={I18n}>

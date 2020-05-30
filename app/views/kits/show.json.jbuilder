@@ -6,6 +6,7 @@ json.kit do
     next unless variant.active?
 
     json.partial! variant
+    json.extract! variant, :label
 
     json.available variant.available?
 
