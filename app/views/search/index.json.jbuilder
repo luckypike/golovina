@@ -1,4 +1,6 @@
 json.variants @records.each_with_hit do |variant, _hit|
+  next unless variant.active?
+
   json.partial! variant
   json.extract! variant, :label
   json.available variant.available?
