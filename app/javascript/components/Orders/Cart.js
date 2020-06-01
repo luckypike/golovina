@@ -253,7 +253,7 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
                   <div className={form.item}>
                     <label>
                       <div className={form.label}>
-                        Комментарий к заказу
+                        {I18n.t('order.cart.comment')}
                       </div>
 
                       <div className={form.input}>
@@ -279,7 +279,7 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
                   <div className={classNames(form.submit, styles.submit)}>
                     <input
                       type="submit"
-                      value={pending ? 'Оформление...' : 'Перейти к оплате'}
+                      value={pending ? I18n.t('order.cart.submitted') : I18n.t('order.cart.submit')}
                       className={classNames(buttons.main, buttons.big, { [buttons.pending]: pending })}
                       disabled={pending || !order['purchasable?']}
                     />

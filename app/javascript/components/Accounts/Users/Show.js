@@ -53,7 +53,7 @@ export default function Show ({ user: userJSON, locale }) {
   return (
     <div className={page.gray}>
       <div className={page.title}>
-        <h1>{I18n.t('accounts.users.show')}</h1>
+        <h1>{I18n.t('accounts.users.show.title')}</h1>
       </div>
 
       <div className={styles.root}>
@@ -64,7 +64,7 @@ export default function Show ({ user: userJSON, locale }) {
             <div className={form.item}>
               <label>
                 <div className={form.label}>
-                  Электронная почта
+                  {I18n.t('user.email')}
                 </div>
 
                 <div className={form.input}>
@@ -83,7 +83,7 @@ export default function Show ({ user: userJSON, locale }) {
             <div className={form.item}>
               <label>
                 <div className={form.label}>
-                  Имя
+                  {I18n.t('user.name')}
                 </div>
 
                 <div className={form.input}>
@@ -102,7 +102,7 @@ export default function Show ({ user: userJSON, locale }) {
             <div className={form.item}>
               <label>
                 <div className={form.label}>
-                  Фамилия
+                  {I18n.t('user.sname')}
                 </div>
 
                 <div className={form.input}>
@@ -121,7 +121,7 @@ export default function Show ({ user: userJSON, locale }) {
             <div className={form.item}>
               <label>
                 <div className={form.label}>
-                  Телефон
+                  {I18n.t('user.phone')}
                 </div>
 
                 <div className={form.input}>
@@ -140,7 +140,7 @@ export default function Show ({ user: userJSON, locale }) {
             <div className={classNames(form.submit, styles.submit)}>
               <input
                 type="submit"
-                value={pending ? 'Сохраняем данные...' : 'Сменить данные'}
+                value={pending ? I18n.t('accounts.users.show.submitted') : I18n.t('accounts.users.show.submit')}
                 className={classNames(buttons.main, { [buttons.pending]: pending })}
                 disabled={pending}
               />

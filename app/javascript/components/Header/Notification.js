@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import PubSub from 'pubsub-js'
 
 import Price from '../Variants/Price'
 import { path } from '../Routes'
+import { useI18n } from '../I18n'
 
 import styles from './Notification.module.css'
 import buttons from '../Buttons.module.css'
 
-// Notification.propTypes = {
-//   active: PropTypes.bool.isRequired,
-//   variant: PropTypes.object
-// }
+Notification.propTypes = {
+  locale: PropTypes.string.isRequired
+}
 
-export default function Notification () {
+export default function Notification ({ locale }) {
+  const I18n = useI18n(locale)
+
   const [active, setActive] = useState(false)
   const [variant, setVariant] = useState()
 
@@ -47,7 +49,7 @@ export default function Notification () {
       {variant &&
         <div>
           <div className={styles.message}>
-            Товар успешно добавлен в корзину
+            {I18n.t('header.notification.added')}
           </div>
 
           <div className={styles.variant}>
@@ -70,11 +72,11 @@ export default function Notification () {
 
           <div className={styles.buttons}>
             <button className={buttons.main} onClick={() => setActive(false)}>
-              Продолжить покупки
+              {I18n.t('header.notification.continue')}
             </button>
 
             <a href={path('cart_path')} className={classNames(buttons.main, buttons.black)}>
-              Перейти в корзину
+              {I18n.t('header.notification.cart')}
             </a>
           </div>
         </div>

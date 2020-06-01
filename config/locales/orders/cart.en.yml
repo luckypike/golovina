@@ -22,6 +22,7 @@ en:
         title: Items
         cant: "Sorry, this product is not available right now"
         preorder: Preorder (plus 2-3 working days)
+        change: Change shopping list
 
         noav:
           zero: Out of stock
@@ -33,18 +34,29 @@ en:
       checkout:
         title: Order information
         variants: Products cost
+        total: Total
         delivery:
+          title: Delivery cost
+          free: Free
           russia:
             title: Delivery across Russia
-            value: Free
+            value: from 265 ₽, free shipping for 10 000 ₽ purchase
           international:
             title: International shipping
-            value: 2500 ₽, free shipping for 30000 ₽ purchase
+            value: 2500 ₽, free shipping for 30 000 ₽ purchase
 
-        submit: Checkout
+        submit: Place order
 
       shipping:
         title: Select a shipping method
+        address:
+          title: Delivery address
+          country: Country
+          city: City
+          street: Street
+          number: Street number
+          appartment: Appartment
+
         store:
           title: Collect from store
           desc: Moscow, Bolshaya Nikitskaya 21/18 str 4
@@ -52,11 +64,16 @@ en:
         russia:
           title: Russia shipping by CDEK (free)
           desc: More than 500 cities from 265 ₽
-          promo: "Free delivery starting from %{promo} ₽"
-          free_shipping: Free delivery
+
+          # promo: "Free delivery starting from %{promo} ₽"
+          # free_shipping: Free delivery
 
         world:
           title: International
           desc: International shipping — 2500 ₽, free shipping for 30000 ₽ purchase
 
         data: Shipping data
+
+      comment: Comments
+      submit: To pay
+      submitted: Processing...

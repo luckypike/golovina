@@ -26,7 +26,7 @@ export default function Orders ({ orders, locale, cart }) {
   return (
     <div>
       <h2>
-        {I18n.t('accounts.show.orders')}
+        {I18n.t('accounts.show.orders.title')}
       </h2>
 
       {cart &&
@@ -36,7 +36,7 @@ export default function Orders ({ orders, locale, cart }) {
           </div>
 
           <div>
-            Ожидание ответа от банка
+            {I18n.t('accounts.show.orders.pending')}
           </div>
         </div>
       }
@@ -51,7 +51,7 @@ export default function Orders ({ orders, locale, cart }) {
             />
           )}
 
-          {orders.length === 0 && 'Вы пока ничего не успели купить в нашем магазине'}
+          {orders.length === 0 && I18n.t('accounts.show.orders.empty')}
         </div>
       }
     </div>

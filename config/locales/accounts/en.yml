@@ -2,8 +2,16 @@ en:
   accounts:
     show:
       title: My account
-      user: Account details
-      orders: Your orders
+      user:
+        title: Account details
+        edit: Edit
+        password: Change my password
+        logout: Sign out
+
+      orders:
+        title: Your orders
+        pending: Waiting bank response...
+        empty: There are not orders yet
 
     passwords:
       show: Password recovery
@@ -15,5 +23,9 @@ en:
       submiting: Changing password...
 
     users:
-      show: Edit details
+      show:
+        title: Edit details
+        submit: Change details
+        submitted: Changing details...
+
       password: Change password

@@ -63,7 +63,7 @@ export default function Password ({ user: userJSON, locale }) {
             <div className={form.item}>
               <label>
                 <div className={form.label}>
-                  Новый пароль
+                  {I18n.t('accounts.passwords.password')}
                 </div>
 
                 <div className={form.input}>
@@ -84,7 +84,7 @@ export default function Password ({ user: userJSON, locale }) {
             <div className={form.item}>
               <label>
                 <div className={form.label}>
-                  Подтверждение пароля
+                  {I18n.t('accounts.passwords.password_confirmation')}
                 </div>
 
                 <div className={form.input}>
@@ -104,7 +104,7 @@ export default function Password ({ user: userJSON, locale }) {
             <div className={classNames(form.submit, styles.submit)}>
               <input
                 type="submit"
-                value={pending ? 'Меняем пароль...' : 'Сменить пароль'}
+                value={pending ? I18n.t('accounts.passwords.submiting') : I18n.t('accounts.passwords.submit')}
                 className={classNames(buttons.main, { [buttons.pending]: pending })}
                 disabled={pending}
               />

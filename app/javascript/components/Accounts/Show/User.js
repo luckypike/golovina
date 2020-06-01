@@ -29,12 +29,12 @@ export default function User ({ user, locale }) {
   return (
     <div>
       <h2>
-        {I18n.t('accounts.show.user')}
+        {I18n.t('accounts.show.user.title')}
       </h2>
 
       <dl className={styles.dl}>
         <dt>
-          Почта
+          {I18n.t('user.email')}
         </dt>
 
         <dd>
@@ -42,7 +42,7 @@ export default function User ({ user, locale }) {
         </dd>
 
         <dt>
-          Имя
+          {I18n.t('user.name')}
         </dt>
 
         <dd>
@@ -50,7 +50,7 @@ export default function User ({ user, locale }) {
         </dd>
 
         <dt>
-          Фамилия
+          {I18n.t('user.sname')}
         </dt>
 
         <dd>
@@ -58,7 +58,7 @@ export default function User ({ user, locale }) {
         </dd>
 
         <dt>
-          Телефон
+          {I18n.t('user.phone')}
         </dt>
 
         <dd>
@@ -68,17 +68,17 @@ export default function User ({ user, locale }) {
 
       <div className={styles.buttons}>
         <a href={path('account_user_path')} className={buttons.main}>
-          Редактировать
+          {I18n.t('accounts.show.user.edit')}
         </a>
 
         <a href={path('password_account_user_path')} className={buttons.main}>
-          Сменить пароль
+          {I18n.t('accounts.show.user.password')}
         </a>
       </div>
 
       <div className={styles.logout}>
         <span onClick={handleLogout}>
-          Выйти
+          {I18n.t('accounts.show.user.logout')}
         </span>
       </div>
     </div>

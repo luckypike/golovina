@@ -37,7 +37,7 @@ export default function Address ({ errors, values, handleInputChange, setValues,
   return (
     <div className={styles.root}>
       <h2>
-        {I18n.t('order.cart.shipping.address')}
+        {I18n.t('order.cart.shipping.address.title')}
       </h2>
 
       {isRussia() &&
@@ -88,7 +88,7 @@ export default function Address ({ errors, values, handleInputChange, setValues,
           <div className={form.item}>
             <label>
               <div className={form.label}>
-                Страна
+                {I18n.t('order.cart.shipping.address.country')}
               </div>
 
               <div className={form.input}>
@@ -107,7 +107,7 @@ export default function Address ({ errors, values, handleInputChange, setValues,
           <div className={form.item}>
             <label>
               <div className={form.label}>
-                Город
+                {I18n.t('order.cart.shipping.address.city')}
               </div>
 
               <div className={form.input}>
@@ -158,7 +158,7 @@ export default function Address ({ errors, values, handleInputChange, setValues,
           <div className={form.item}>
             <label>
               <div className={form.label}>
-                Улица
+                {I18n.t('order.cart.shipping.address.street')}
               </div>
 
               <div className={form.input}>
@@ -178,7 +178,7 @@ export default function Address ({ errors, values, handleInputChange, setValues,
             <div className={classNames(form.item, styles.hai)}>
               <label>
                 <div className={form.label}>
-                  Номер дома
+                  {I18n.t('order.cart.shipping.address.number')}
                 </div>
 
                 <div className={classNames(form.input, styles.hai)}>
@@ -197,7 +197,7 @@ export default function Address ({ errors, values, handleInputChange, setValues,
             <div className={classNames(form.item, styles.hai)}>
               <label>
                 <div className={form.label}>
-                  Квартира / офис
+                  {I18n.t('order.cart.shipping.address.appartment')}
                 </div>
 
                 <div className={classNames(form.input, styles.hai)}>

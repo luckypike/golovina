@@ -32,7 +32,7 @@ export default function Show ({ locale }) {
     <I18nContext.Provider value={I18n}>
       <div className={page.root}>
         <div className={page.title}>
-          <h1>Избранное</h1>
+          <h1>{I18n.t('wishlists.show.title')}</h1>
         </div>
 
         {variants && variants.length > 0 &&
@@ -47,7 +47,7 @@ export default function Show ({ locale }) {
 
         {variants && variants.length === 0 &&
           <div>
-            У вас нет избранных товаров, добавляйте их в избранное чтобы потом быстрее найти их.
+            {I18n.t('wishlists.show.empty')}
           </div>
         }
       </div>

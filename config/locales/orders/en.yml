@@ -49,6 +49,13 @@ en:
   orders:
     title: Your orders
 
+    cart:
+      checkout:
+        notAvailable: Some items are unavailable right now. Please remove it from order to checkout.
+
+      login:
+        guest: Оформить заказ как гость
+
     states:
       orders: Orders
       refunds: Refunds

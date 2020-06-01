@@ -1,4 +1,9 @@
 en:
+  wishlists:
+    show:
+      title: Wishlist
+      empty: Your wishlist is empty. Add your favourite items to find them faster.
+
   wishlist:
     variant:
       buy: Купить

@@ -1,6 +1,6 @@
 en:
   user:
     name: Name
-    sname: Surname
-    phone: Phone number
+    sname: Last Name
+    phone: Phone
     email: Email

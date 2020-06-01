@@ -159,7 +159,7 @@ export default function Header (props) {
 
       <div className={classNames(styles.arrow, { [styles.active]: scrolling })} onClick={handleScrollUp} />
 
-      <Notification />
+      <Notification locale={props.locale} />
     </header>
   )
 }

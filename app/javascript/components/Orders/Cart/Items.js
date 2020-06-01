@@ -95,7 +95,7 @@ export default function Items ({ items, checkout, setCheckout, locale, _fetch })
       <div className={styles.checkout}>
         {checkout &&
           <span onClick={() => setCheckout(false)}>
-            Изменить список покупок
+            {I18n.t('order.cart.items.change')}
           </span>
         }
       </div>
