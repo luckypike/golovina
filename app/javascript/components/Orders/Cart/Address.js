@@ -12,6 +12,7 @@ import form from '../../Form.module.css'
 Address.propTypes = {
   errors: PropTypes.object,
   values: PropTypes.object,
+  setValues: PropTypes.func,
   handleInputChange: PropTypes.func,
   dictionaries: PropTypes.object,
   locale: PropTypes.string
@@ -78,7 +79,7 @@ export default function Address ({ errors, values, handleInputChange, setValues,
             </div>
           </label>
 
-          <Errors errors={errors.street} />
+          <Errors errors={errors.delivery_city} />
         </div>
       }
 

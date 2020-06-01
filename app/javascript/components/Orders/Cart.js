@@ -11,6 +11,7 @@ import Address from './Cart/Address'
 import UserAddresses from './Cart/UserAddresses'
 import Login from './Cart/Login'
 import Checkout from './Cart/Checkout'
+import Total from './Cart/Total'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
@@ -156,7 +157,8 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
                           setValues({
                             ...values,
                             delivery: 'pickup',
-                            delivery_option: '',
+                            delivery_option: null,
+                            delivery_city_id: null,
                             user_address_id: ''
                           })
                         }}
@@ -205,7 +207,7 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
                               styles.deliveryItem,
                               { [styles.active]: isInternational() }
                             )}
-                            onClick={() => setValues({ ...values, delivery: 'international', delivery_option: null })}
+                            onClick={() => setValues({ ...values, delivery: 'international', delivery_option: null, delivery_city_id: null })}
                           >
                             <strong>
                               {I18n.t('order.cart.shipping.world.title')}
@@ -271,6 +273,8 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
                       {I18n.t('orders.cart.checkout.notAvailable')}
                     </div>
                   }
+
+                  <Total order={order} locale={locale} values={values} delivery_cities={dictionaries.delivery_cities} />
 
                   <div className={classNames(form.submit, styles.submit)}>
                     <input

@@ -29,7 +29,7 @@ export default function Checkout ({ locale, setCheckout, order }) {
         </dt>
 
         <dd className={styles.price}>
-          <Price sell={parseFloat(order.amount_calc)} />
+          <Price sell={parseFloat(order.amount_without_delivery_calc)} />
         </dd>
 
         <dt>

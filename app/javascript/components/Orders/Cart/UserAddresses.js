@@ -49,9 +49,9 @@ export default function UserAddresses ({ addresses, cities, setNewAddress, local
           Доставка на ваш адрес
         </strong>
 
-        <div className={styles.desc}>
+        {/* <div className={styles.desc}>
           {I18n.t('order.cart.shipping.russia.desc')}
-        </div>
+        </div> */}
       </div>
 
       {addresses.map(address =>

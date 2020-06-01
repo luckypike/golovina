@@ -68,15 +68,14 @@ class Order < ApplicationRecord
   # end
 
   def amount_calc
-    amount_without_delivery_calc +
-      (international? && amount_without_delivery_calc < 30_000 ? amount_delivery_calc : 0)
+    amount_without_delivery_calc + amount_delivery_calc
   end
 
   def amount_delivery_calc
     if international?
-      2500
+      amount_without_delivery_calc < 30_000 ? 2500 : 0
     elsif russia?
-      delivery_city.send(delivery_option)
+      amount_without_delivery_calc < 10_000 ? delivery_city.send(delivery_option) : 0
     else
       0
     end
@@ -96,14 +95,6 @@ class Order < ApplicationRecord
 
   def purchasable?
     cart? && order_items.reject(&:available?).size.zero? && amount_calc.positive?
-  end
-
-  def quantity_cannot_be_greater_than_total
-    order_items.includes(variant: :availabilities).each do |order_item|
-      unless order_item.available?
-        errors.add(:order_items)
-      end
-    end
   end
 
   def save_address
