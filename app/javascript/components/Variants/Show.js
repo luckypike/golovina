@@ -97,11 +97,9 @@ function Variant ({ locale }) {
       }
 
       updateDimensions()
-      if (variant.availabilities.length === 1 && variant.availabilities[0].size.id === 1) {
-        if (variant.availabilities[0].active || variant.preorder) {
-          setSize(variant.availabilities[0].size)
-          setPreorderWarning(!variant.availabilities[0].active)
-        }
+      if (variant.availabilities.length === 1 && variant.availabilities[0].size.id === 1 && variant.availabilities[0].active) {
+        setSize(variant.availabilities[0].size)
+        setPreorderWarning(!variant.availabilities[0].active)
       } else {
         setSize()
       }
@@ -236,57 +234,55 @@ function Variant ({ locale }) {
 
             <Variants variants={variants} variant={variant} className={styles.variants} />
 
-            {variant.availabilities.filter(a => a.active || variant.preorder).length > 0 &&
-              <>
-                <div className={styles.sizesWith}>
-                  <div className={styles.sizes}>
-                    {variant.availabilities.map(availability =>
-                      <div
-                        key={availability.size.id}
-                        className={classNames(
-                          styles.size,
-                          styles[`size_${availability.size.id}`],
-                          { [styles.unavailable]: (!availability.active && !variant.preorder), [styles.active]: size && availability.size.id === size.id }
-                        )}
-                        onClick={() => {
-                          if (availability.active || variant.preorder) {
-                            setSize(availability.size)
-                            setPreorderWarning(!availability.active)
-                          }
-                        }}
-                      >
-                        {availability.size.title}
-                      </div>
+            <div className={styles.sizesWith}>
+              <div className={styles.sizes}>
+                {variant.availabilities.map(availability =>
+                  <div
+                    key={availability.size.id}
+                    className={classNames(
+                      styles.size,
+                      styles[`size_${availability.size.id}`],
+                      { [styles.unavailable]: (!availability.active && !variant.preorder), [styles.active]: size && availability.size.id === size.id }
                     )}
+                    onClick={() => {
+                      if (availability.active || variant.preorder) {
+                        setSize(availability.size)
+                        setPreorderWarning(!availability.active)
+                      }
+                    }}
+                  >
+                    {availability.size.title}
                   </div>
+                )}
+              </div>
 
-                  {preorderWarning &&
-                    <div className={styles.preorder}>
-                      {I18n.t('variant.preorder')}
-                    </div>
+              {preorderWarning &&
+                <div className={styles.preorder}>
+                  {I18n.t('variant.preorder')}
+                </div>
+              }
+
+              <div className={styles.guide}>
+                <Guide locale={locale} />
+              </div>
+            </div>
+
+            {variant.availabilities.filter(a => a.active || variant.preorder).length > 0 &&
+              <div className={styles.buy}>
+                <div className={styles.cart}>
+                  <button
+                    className={classNames(buttons.main, { [buttons.pending]: pending })}
+                    disabled={pending}
+                    onClick={onSubmit(handleCartClick)}
+                  >
+                    {pending ? I18n.t('variant.cart.adding') : I18n.t('variant.cart.add')}
+                  </button>
+
+                  {noSize &&
+                    <div className={styles.noSize}>{I18n.t('variant.size.select')}</div>
                   }
-
-                  <div className={styles.guide}>
-                    <Guide locale={locale} />
-                  </div>
                 </div>
-
-                <div className={styles.buy}>
-                  <div className={styles.cart}>
-                    <button
-                      className={classNames(buttons.main, { [buttons.pending]: pending })}
-                      disabled={pending}
-                      onClick={onSubmit(handleCartClick)}
-                    >
-                      {pending ? I18n.t('variant.cart.adding') : I18n.t('variant.cart.add')}
-                    </button>
-
-                    {noSize &&
-                      <div className={styles.noSize}>{I18n.t('variant.size.select')}</div>
-                    }
-                  </div>
-                </div>
-              </>
+              </div>
             }
 
             {variant.desc &&

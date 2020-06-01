@@ -118,7 +118,7 @@ export default function Buy ({ variant }) {
         </>
       }
 
-      {!canBuy() &&
+      {!canBuy() && variant.label !== 'sold_out' &&
         <div className={styles.sold_out}>
           {I18n.t('variant.labels.sold_out')}
         </div>
