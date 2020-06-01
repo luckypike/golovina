@@ -262,13 +262,33 @@
 }
 
 .buy {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  margin-bottom: calc(var(--yr) * var(--s3));
+  margin: calc(var(--yr) * var(--s2)) 0 calc(var(--yr) * var(--s3));
+  text-align: center;
 
-  @media (--m) {
-    justify-content: flex-start;
+  & :global {
+    & .sizes {
+      justify-content: center;
+    }
+
+    & .noSize {
+      left: 50%;
+      transform: translate(-50%, var(--yr));
+    }
+  }
+
+  @media (--s) {
+    text-align: left;
+
+    & :global {
+      & .sizes {
+        justify-content: flex-start;
+      }
+
+      & .noSize {
+        left: 0;
+        transform: translate(0, var(--yr));
+      }
+    }
   }
 }
 

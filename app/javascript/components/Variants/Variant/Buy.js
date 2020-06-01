@@ -5,6 +5,7 @@ import axios from 'axios'
 import PubSub from 'pubsub-js'
 
 import Guide from './Guide'
+import NoSize from './Buy/NoSize'
 import { path } from '../../Routes'
 import { I18nContext } from '../../I18n'
 import { useForm } from '../../Form'
@@ -33,7 +34,7 @@ export default function Buy ({ variant }) {
   const [noSize, setNoSize] = useState(false)
 
   const handleCartClick = async e => {
-    // e.preventDefault()
+    e.preventDefault()
 
     if (!size) {
       setNoSize(true)
@@ -58,64 +59,67 @@ export default function Buy ({ variant }) {
   }
 
   useEffect(() => {
+    setSize()
+    selectOneSize()
+    setNoSize(false)
+    setPreorderWarning(false)
+  }, [variant.id])
+
+  const selectOneSize = () => {
     if (variant.availabilities.length === 1 && variant.availabilities[0].size.id === 1 && variant.availabilities[0].active) {
       setSize(variant.availabilities[0].size)
     }
-  }, [])
+  }
 
   return (
     <div className={styles.root}>
-      {canBuy() &&
-        <>
-          <div className={styles.sizesWith}>
-            <div className={classNames(styles.sizes, 'sizes')}>
-              {variant.availabilities.map(availability =>
-                <div
-                  key={availability.size.id}
-                  className={classNames(
-                    styles.size,
-                    styles[`size_${availability.size.id}`],
-                    { [styles.unavailable]: (!availability.active && !variant.preorder), [styles.active]: size && availability.size.id === size.id }
-                  )}
-                  onClick={() => {
-                    if (availability.active || variant.preorder) {
-                      setSize(availability.size)
-                      setPreorderWarning(!availability.active)
-                    }
-                  }}
-                >
-                  {availability.size.title}
-                </div>
+      <div className={styles.sizesWith}>
+        <div className={classNames(styles.sizes, 'sizes')}>
+          {variant.availabilities.map(availability =>
+            <div
+              key={availability.size.id}
+              className={classNames(
+                styles.size,
+                styles[`size_${availability.size.id}`],
+                { [styles.unavailable]: (!availability.active && !variant.preorder), [styles.active]: size && availability.size.id === size.id }
               )}
+              onClick={() => {
+                if (availability.active || variant.preorder) {
+                  setSize(availability.size)
+                  setPreorderWarning(!availability.active)
+                }
+              }}
+            >
+              {availability.size.title}
             </div>
+          )}
+        </div>
 
-            {preorderWarning &&
-              <div className={styles.preorder}>
-                {I18n.t('variant.preorder')}
-              </div>
-            }
-
-            <div className={styles.guide}>
-              <Guide />
-            </div>
+        {preorderWarning &&
+          <div className={styles.preorder}>
+            {I18n.t('variant.preorder')}
           </div>
+        }
 
-          <div className={styles.buy}>
-            <div className={styles.cart}>
-              <button
-                className={classNames(buttons.main, { [buttons.pending]: pending })}
-                disabled={pending}
-                onClick={onSubmit(handleCartClick)}
-              >
-                {pending ? I18n.t('variant.cart.adding') : I18n.t('variant.cart.add')}
-              </button>
+        <div className={styles.guide}>
+          <Guide />
+        </div>
+      </div>
 
-              {noSize &&
-                <div className={classNames(styles.noSize, 'noSize')}>{I18n.t('variant.size.select')}</div>
-              }
-            </div>
+      {canBuy() &&
+        <div className={styles.buy}>
+          <div className={styles.cart}>
+            <button
+              className={classNames(buttons.main, { [buttons.pending]: pending })}
+              disabled={pending}
+              onClick={onSubmit(handleCartClick)}
+            >
+              {pending ? I18n.t('variant.cart.adding') : I18n.t('variant.cart.add')}
+            </button>
+
+            <NoSize noSize={noSize} setNoSize={setNoSize} />
           </div>
-        </>
+        </div>
       }
 
       {!canBuy() && variant.label !== 'sold_out' &&

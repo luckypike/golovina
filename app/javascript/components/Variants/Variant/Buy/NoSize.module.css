@@ -1,0 +1,58 @@
+.overlay {
+  visibility: hidden;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  opacity: 0;
+  transition: visibility 0s ease 0.3s, opacity 0.3s;
+
+  &.active {
+    visibility: visible;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+}
+
+.wrapper {
+  display: block;
+  padding: calc(var(--xr) * 4) calc(var(--xr) * 2);
+  text-align: center;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%) translateY(-50%);
+  background: white;
+  width: 100%;
+  max-width: 400px;
+  z-index: 1000;
+  visibility: hidden;
+  box-shadow: 0 0 30px 2px var(--sp_color);
+  opacity: 0;
+  transition: visibility 0s ease 0.3s, opacity 0.3s;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+}
+
+.close {
+  position: fixed;
+  cursor: pointer;
+  display: block;
+  height: calc(var(--xr) * 3);
+  width: calc(var(--yr) * 8);
+  right: calc(var(--xr) * 2 - calc(var(--yr) * 2));
+  top: calc(var(--yr) * 2);
+  padding: 16px 8px;
+}
+
+.text {
+  margin: 0 auto;
+  max-width: 80%;
+}

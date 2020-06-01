@@ -1,16 +1,10 @@
-.sizesWith {
-  /* text-align: center; */
-}
-
 .sizes {
   margin-bottom: var(--yr);
   display: flex;
-  /* justify-content: center; */
   position: relative;
 }
 
 .size {
-  /* border: 1px solid var(--sp_color); */
   box-shadow: inset 0 0 0 1px var(--sp_color);
   font-weight: var(--fw_light);
   user-select: none;
