@@ -65,7 +65,12 @@
   }
 
   & h1 {
-    margin-bottom: 0;
+    margin: 0 calc(var(--yr) * 8);
+    /* margin-bottom: 0; */
+
+    @media (--s) {
+      margin: 0;
+    }
   }
 }
 
@@ -279,7 +284,7 @@
     }
   }
 
-  @media (--s) {
+  @media (--m) {
     text-align: left;
 
     & :global {
@@ -497,9 +502,16 @@
   composes: wishlist from './List.module.css';
   right: var(--xr);
   top: auto;
-  bottom: calc(var(--yr) * -9);
+  bottom: calc(var(--yr) * -10);
 
   @media (--s) {
+    top: auto;
+    bottom: calc(var(--yr) * -10);
+    left: auto;
+    right: var(--xr);
+  }
+
+  @media (--m) {
     bottom: auto;
     top: 0;
     left: auto;
