@@ -25,7 +25,7 @@ class Order < ApplicationRecord
         save_address
 
         OrderMailer.pay(self).deliver_later
-        OrderMailer.customer_notice(self, user.email).deliver_later
+        OrderMailer.with(order: self).payed.deliver_later
       end
 
       transition cart: :paid
@@ -99,7 +99,7 @@ class Order < ApplicationRecord
   end
 
   def send_tracker
-    OrderMailer.tracker(self).deliver_later
+    OrderMailer.with(order: self).tracker.deliver_later
   end
 
   def tracker_url
@@ -107,7 +107,7 @@ class Order < ApplicationRecord
 
     case tracker_type.to_sym
     when :cdek
-      'https://cdek.ru/tracking'
+      "https://cdek.ru/tracking##{tracker_id}"
     when :ems
       "https://www.pochta.ru/tracking##{tracker_id}"
     end

@@ -1,0 +1,53 @@
+.order style="max-width: 30rem; font-family: sans-serif; font-size: 14px; line-height: 18px;"
+  .logo style="width: 106px; margin: 4rem 0;"
+    = image_tag attachments['golovina.png'].url, size: "106x36"
+
+  p
+    ' Поздравляем вас с достойным приобретением!
+
+  p
+    = @order.user.name
+    | , ваш заказ принят и находится в стадии обработки. Обычно на это требуется до 1 дня. Как только ваш заказ будет укомплектован и передан в службу доставки, мы оповестим вас.
+
+  p
+    | Номер заказа: №#{@order.number}
+    br
+    | Имя: #{@order.user.title}
+
+
+  .varinats
+    - @order.items.map do |item|
+      - variant = item.variant
+      .variant style="display: flex; margin-bottom: 20px;"
+        - image = variant.images.sort_by(&:weight_or_created).first
+        .image style="width: 60px; height: 80px; margin-right: 20px; background-color: #ddd;"
+          = image_tag image.photo.thumb.url, size: "60x80" if image
+        .text
+          = variant.title_last
+          br
+          | Размер: #{item.size.title}
+          br
+          | Цвет: #{variant.color.title}
+          br
+          | Количество: #{item.quantity}
+
+  p
+    | Стоимость: #{number_to_currency(@order.amount, locale: :ru)}
+    br
+    | Доставка: #{number_to_currency(@order.amount_delivery, locale: :ru)}
+    br
+    | Итого: #{number_to_currency(@order.payment_amount, locale: :ru)}
+
+
+  p
+    ' Благодарим вас за выбор и безупречный вкус.
+
+  p
+    | С уважением,
+    br
+    | Golovina Store
+    br
+    = link_to '+7 (985) 714-55-58', 'tel://+79857145558'
+    |
+    br
+    = link_to 'golovina.store', 'https://golovina.store'

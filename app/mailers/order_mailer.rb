@@ -13,9 +13,11 @@ class OrderMailer < ApplicationMailer
     mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:prefix] + " оплачен заказ № #{order.number}")
   end
 
-  def customer_notice order, to
-    @order = order
-    mail(to: to, subject: "Оплачен заказ № #{order.number}")
+  def payed
+    @order = params[:order]
+    attachments.inline['golovina.png'] = File.read('app/javascript/images/golovina.png')
+
+    mail(to: @order.user.email, subject: "Оплачен заказ № #{@order.number}")
   end
 
   def refund refund
@@ -23,9 +25,10 @@ class OrderMailer < ApplicationMailer
     mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: "Оформлен возрат на заказ № #{refund.order.number}")
   end
 
-  def tracker(order)
-    @order = order
+  def tracker
+    @order = params[:order]
+    attachments.inline['golovina.png'] = File.read('app/javascript/images/golovina.png')
 
-    mail(to: order.user.email, subject: "Трек номер для заказа № #{order.number}")
+    mail(to: @order.user.email, subject: "Трек номер для заказа № #{@order.number}")
   end
 end
