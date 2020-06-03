@@ -29,10 +29,13 @@
 }
 
 .label {
-  composes: at from '../Fonts.module.css';
   color: var(--gr_color);
-  margin-bottom: var(--yr);
   text-align: center;
+  font-size: calc(var(--yr) * calc(var(--fs) - 0.5));
+
+  @media (--s) {
+    font-size: calc(var(--yr) * var(--fs));
+  }
 
   @media (--m) {
     text-align: left;
@@ -297,40 +300,6 @@
   margin-bottom: calc(var(--yr) * var(--s2));
 }
 
-.wishlist {
-  position: absolute;
-  display: block;
-  padding: var(--yr);
-  user-select: none;
-  cursor: pointer;
-  right: calc(var(--xr) * -2.5);
-  top: 0;
-
-  &.active {
-    & svg {
-      & path {
-        fill: var(--pr_color);
-      }
-    }
-  }
-
-  & svg {
-    display: block;
-    width: calc(var(--yr) * 6);
-    height: calc(var(--yr) * 6);
-
-    & path {
-      fill: none;
-      stroke: var(--pr_color);
-      stroke-miterlimit: 10;
-    }
-  }
-}
-
-.cart {
-  position: relative;
-}
-
 .counter {
   position: absolute;
   z-index: 1;
@@ -522,4 +491,18 @@
   padding: calc(var(--yr) * var(--s1)) var(--xr);
   composes: at from '../Fonts.module.css';
   margin-bottom: calc(var(--yr) * var(--s2));
+}
+
+.wishlist {
+  composes: wishlist from './List.module.css';
+  right: var(--xr);
+  top: auto;
+  bottom: calc(var(--yr) * -9);
+
+  @media (--s) {
+    bottom: auto;
+    top: 0;
+    left: auto;
+    right: calc(var(--yr) * -9);
+  }
 }

@@ -6,6 +6,7 @@ import classNames from 'classnames'
 // import Glide from '@glidejs/glide'
 import Siema from 'siema'
 import ReactMarkdown from 'react-markdown'
+import Wishlist from './Wishlist'
 // import PubSub from 'pubsub-js'
 
 // import { useI18n } from '../I18n'
@@ -158,6 +159,11 @@ function Variant ({ locale }) {
                 <div className={styles.counter}>{index}/{variant.images.length}</div>
               } */}
 
+              <div className={styles.wishlist}>
+                <Wishlist
+                  variant={variant}
+                />
+              </div>
             </div>
 
             <div className={styles.rest}>

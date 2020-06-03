@@ -43,6 +43,10 @@ json.variants @variants do |variant|
   end
 
   json.can_edit policy(variant).edit?
+
+  if current_user
+    json.in_wishlist(current_user.wishlists.detect { |w| w.variant_id == variant.id }.present?)
+  end
 end
 
 # json.variants @variants do |variant|
