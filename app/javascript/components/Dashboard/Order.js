@@ -7,6 +7,7 @@ import 'dayjs/locale/ru'
 import 'dayjs/locale/en'
 
 import Price, { currency } from '../Variants/Price'
+import Tracker from './Order/Tracker'
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
 
@@ -15,10 +16,11 @@ import buttons from '../Buttons.module.css'
 
 Order.propTypes = {
   order: PropTypes.object.isRequired,
+  delivery: PropTypes.bool,
   locale: PropTypes.string.isRequired
 }
 
-export default function Order ({ order, locale }) {
+export default function Order ({ order, locale, delivery }) {
   const I18n = useI18n(locale)
 
   const [active, setActive] = useState(false)
@@ -83,7 +85,7 @@ export default function Order ({ order, locale }) {
           }
 
           <div className={styles.address}>
-            <Address order={order} locale={locale} />
+            <Address order={order} locale={locale} delivery={delivery} />
           </div>
 
           {order.comment &&
@@ -127,10 +129,11 @@ export default function Order ({ order, locale }) {
 
 Address.propTypes = {
   order: PropTypes.object.isRequired,
+  delivery: PropTypes.bool,
   locale: PropTypes.string.isRequired
 }
 
-function Address ({ order, locale }) {
+function Address ({ order, locale, delivery }) {
   const I18n = useI18n(locale)
 
   const isRussia = () => order.delivery === 'russia'
@@ -185,6 +188,7 @@ function Address ({ order, locale }) {
         </div>
       }
 
+      {delivery && <Tracker order={order} />}
     </div>
   )
 }

@@ -1,0 +1,10 @@
+.order
+  p
+    = @order.user.name
+    | , трек номер для заказа №
+    = @order.number
+    = ": #{@order.tracker_id} (#{@order.tracker_type.upcase})"
+
+  p Проверить статус можно на ссылке: #{link_to @order.tracker_url, @order.tracker_url}
+
+  p Golovina

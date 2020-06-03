@@ -27,6 +27,10 @@ class OrderPolicy < ApplicationPolicy
     archive?
   end
 
+  def delivery?
+    user&.editor?
+  end
+
   class Scope < Scope
     def resolve
       scope

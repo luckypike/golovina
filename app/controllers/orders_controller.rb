@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :paid
 
-  before_action :set_order, only: %i[checkout archive unarchive pay]
+  before_action :set_order, only: %i[checkout archive unarchive pay delivery]
   before_action :authorize_order
 
   def cart
@@ -74,6 +74,21 @@ class OrdersController < ApplicationController
     end
   end
 
+  def delivery
+    sleep 1
+
+    respond_to do |format|
+      format.json do
+        if @order.update(order_params)
+          @order.send_tracker
+          render json: @order.slice(:tracker_url), status: :ok
+        else
+          render json: @order.errors, status: :unprocessable_entity
+        end
+      end
+    end
+  end
+
   private
 
   def set_order
@@ -88,6 +103,7 @@ class OrdersController < ApplicationController
     params.require(:order).permit(
       :user_address_id,
       :delivery, :delivery_option, :delivery_city_id,
+      :tracker_id, :tracker_type,
       :country, :city,
       :street, :house, :appartment,
       :comment, :gift,

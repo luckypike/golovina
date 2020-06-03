@@ -1,0 +1,30 @@
+.root {
+  border-top: 1px solid var(--sp_color);
+  padding-top: calc(var(--yr) * var(--s2));
+  margin-top: calc(var(--yr) * var(--s1));
+}
+
+.form {
+  max-width: 24rem;
+  padding-bottom: calc(var(--yr) * var(--s3));
+}
+
+.id {
+  /* margin-bottom: 0 !important; */
+}
+
+.type {
+  & button {
+    &:not(:last-child) {
+      margin-right: var(--xr);
+    }
+  }
+}
+
+.tracker {
+  & a {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--gr_color);
+  }
+}

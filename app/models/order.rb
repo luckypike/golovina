@@ -6,6 +6,7 @@ class Order < ApplicationRecord
 
   enum delivery_option: { door: 1, storage: 2 }
   enum delivery: { pickup: 1, russia: 2, international: 3 }
+  enum tracker_type: { cdek: 1, ems: 2 }
 
   enum state: { cart: 0, paid: 2, archived: 3 } do
     event :pay do
@@ -95,6 +96,21 @@ class Order < ApplicationRecord
 
   def purchasable?
     cart? && order_items.reject(&:available?).size.zero? && amount_calc.positive?
+  end
+
+  def send_tracker
+    OrderMailer.tracker(self).deliver_later
+  end
+
+  def tracker_url
+    return unless tracker_id
+
+    case tracker_type.to_sym
+    when :cdek
+      'https://cdek.ru/tracking'
+    when :ems
+      "https://www.pochta.ru/tracking##{tracker_id}"
+    end
   end
 
   def save_address

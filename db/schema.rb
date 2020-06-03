@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_171638) do
+ActiveRecord::Schema.define(version: 2020_06_03_091526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -260,6 +260,8 @@ ActiveRecord::Schema.define(version: 2020_05_25_171638) do
     t.bigint "user_address_id"
     t.decimal "amount"
     t.decimal "amount_delivery"
+    t.integer "tracker_type"
+    t.string "tracker_id"
     t.index ["delivery_city_id"], name: "index_orders_on_delivery_city_id"
     t.index ["user_address_id"], name: "index_orders_on_user_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"

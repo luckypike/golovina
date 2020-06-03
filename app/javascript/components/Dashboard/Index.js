@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 
 import { path } from '../Routes'
-import { useI18n } from '../I18n'
+import { I18nContext, useI18n } from '../I18n'
 
 import Nav from './Nav'
 import Order from './Order'
@@ -31,22 +31,25 @@ export default function Index ({ locale }) {
   }, [])
 
   return (
-    <div className={page.gray}>
-      <div className={styles.root}>
-        <Nav locale={locale} />
+    <I18nContext.Provider value={I18n}>
+      <div className={page.gray}>
+        <div className={styles.root}>
+          <Nav locale={locale} />
 
-        <div className={page.title}>
-          <h1>{I18n.t('dashboard.index.title')}</h1>
+          <div className={page.title}>
+            <h1>{I18n.t('dashboard.index.title')}</h1>
+          </div>
+
+          {orders && orders.map(order =>
+            <Order
+              key={order.id}
+              order={order}
+              locale={locale}
+              delivery={true}
+            />
+          )}
         </div>
-
-        {orders && orders.map(order =>
-          <Order
-            key={order.id}
-            order={order}
-            locale={locale}
-          />
-        )}
       </div>
-    </div>
+    </I18nContext.Provider>
   )
 }

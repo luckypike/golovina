@@ -15,11 +15,17 @@ class OrderMailer < ApplicationMailer
 
   def customer_notice order, to
     @order = order
-    mail(to: to, subject: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:prefix] + " оплачен заказ № #{order.number}")
+    mail(to: to, subject: "Оплачен заказ № #{order.number}")
   end
 
   def refund refund
     @refund = refund
     mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: "Оформлен возрат на заказ № #{refund.order.number}")
+  end
+
+  def tracker(order)
+    @order = order
+
+    mail(to: order.user.email, subject: "Трек номер для заказа № #{order.number}")
   end
 end
