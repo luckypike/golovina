@@ -22,13 +22,13 @@ namespace :variants do
     end
   end
 
-  task images: :environment do
-    Variant.where(state: :archived).each do |variant|
-      if (Time.now - variant.updated_at) / 86400 > 59
-        variant.images.each do |image|
-          image.destroy
-        end
-      end
-    end
-  end
+  # task images: :environment do
+  #   Variant.where(state: :archived).each do |variant|
+  #     if (Time.now - variant.updated_at) / 86400 > 59
+  #       variant.images.each do |image|
+  #         image.destroy
+  #       end
+  #     end
+  #   end
+  # end
 end

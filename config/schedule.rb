@@ -23,7 +23,7 @@ job_type :rake, 'export PATH="$HOME/.rbenv/bin:$PATH"; eval "$(rbenv init -)"; c
 
 every :day, at: '00:20' do
   command "$HOME/.rbenv/shims/backup perform -t golovina"
-  rake 'variants:images'
+  # rake 'variants:images'
   rake '-s sitemap:refresh'
 end
 
