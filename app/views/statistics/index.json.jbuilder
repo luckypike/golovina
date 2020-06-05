@@ -4,7 +4,7 @@ json.items @items.group_by(&:month).sort.reverse_each do |month, month_items|
     .map(&:amount).sum(&:to_i)
 
   refund = month_items.select { |r| r.class.name == 'Refund' }
-    .map { |i| i.order_items.map(&:amount) }.flatten.sum(&:to_i)
+    .map(&:amount).flatten.sum(&:to_i)
 
   json.profit profit
   json.refund refund
