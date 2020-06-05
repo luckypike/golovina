@@ -29,7 +29,7 @@ class Refund < ApplicationRecord
   end
 
   def month
-    order.created_at.beginning_of_month
+    order.payed_at.beginning_of_month
   end
 
   class << self
