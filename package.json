@@ -2,7 +2,7 @@
   "name": "golovina",
   "private": true,
   "dependencies": {
-    "@babel/core": "^7.7.0",
+    "@babel/core": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "@glidejs/glide": "^3.2.7",
     "@rails/webpacker": "5.1.1",
