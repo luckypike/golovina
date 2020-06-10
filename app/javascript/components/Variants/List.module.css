@@ -95,11 +95,11 @@
   margin-bottom: var(--yr);
 
   &.bestseller {
-    color: var(--orng_color);
+    color: #343fa9;
   }
 
   &.sold_out {
-    color: #343fa9;
+    color: var(--orng_color);
   }
 
   &.last {

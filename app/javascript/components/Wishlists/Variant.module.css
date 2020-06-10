@@ -49,6 +49,10 @@
   }
 
   &.bestseller {
+    color: #343fa9;
+  }
+
+  &.sold_out {
     color: var(--orng_color);
   }
 
