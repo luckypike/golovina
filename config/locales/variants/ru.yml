@@ -49,7 +49,7 @@ ru:
       bestseller: Бестселлер
       sale: Sale
       last: Последний размер
-      sold_out: Распродано
+      sold_out: Скоро в наличии
 
   variants:
     premium:

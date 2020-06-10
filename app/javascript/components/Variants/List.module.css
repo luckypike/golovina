@@ -98,6 +98,10 @@
     color: var(--orng_color);
   }
 
+  &.sold_out {
+    color: #343fa9;
+  }
+
   &.last {
     color: var(--red_color);
   }
