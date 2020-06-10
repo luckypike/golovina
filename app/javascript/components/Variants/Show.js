@@ -50,6 +50,7 @@ function Variant ({ locale }) {
 
   const [variant, setVariant] = useState()
   const [variants, setVariants] = useState()
+  const [current, setCurrent] = useState(1)
   // const [size, setSize] = useState()
   // const [preorderWarning, setPreorderWarning] = useState(false)
 
@@ -107,7 +108,10 @@ function Variant ({ locale }) {
     if (slidesRef.current && window.getComputedStyle(slidesRef.current).getPropertyValue('position') === 'static') {
       if (!sliderRef.current && imagesCountRef.current > 1) {
         sliderRef.current = new Siema({
-          selector: slidesRef.current
+          selector: slidesRef.current,
+          onChange: () => {
+            setCurrent(sliderRef.current.currentSlide + 1)
+          }
         })
       }
     } else if (sliderRef.current) {
@@ -155,9 +159,11 @@ function Variant ({ locale }) {
                 <div className={styles.image} />
               }
 
-              {/* {variant.images.length > 1 &&
-                <div className={styles.counter}>{index}/{variant.images.length}</div>
-              } */}
+              {variant.images.length > 1 &&
+                <div className={styles.counter}>
+                  {current}/{variant.images.length}
+                </div>
+              }
 
               <div className={styles.wishlist}>
                 <Wishlist
