@@ -31,7 +31,7 @@ class VariantPolicy < ApplicationPolicy
     all?
   end
 
-  def morning?
+  def section?
     all?
   end
 

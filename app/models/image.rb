@@ -41,9 +41,9 @@ class Image < ApplicationRecord
       end
     end
 
-    def morning
-      Rails.cache.fetch('images/morning', expires_in: 1.hour) do
-        variants.where(morning: true).map(&:images).flatten
+    def section(section)
+      Rails.cache.fetch("images/#{section}", expires_in: 1.hour) do
+        variants.where("#{section}": true).map(&:images).flatten
       end
     end
 

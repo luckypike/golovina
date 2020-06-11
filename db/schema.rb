@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_03_091526) do
+ActiveRecord::Schema.define(version: 2020_06_11_061826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -492,6 +492,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_091526) do
     t.integer "acts_count", default: 0, null: false
     t.integer "preorder", default: 0
     t.integer "preordered", default: 0
+    t.boolean "linen", default: false
+    t.boolean "spec", default: false
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["last"], name: "index_variants_on_last"
     t.index ["latest"], name: "index_variants_on_latest"

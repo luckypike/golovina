@@ -52,6 +52,15 @@ ru:
       sold_out: Скоро в наличии
 
   variants:
+    sections:
+      linen:
+        title: Лён
+        desc:
+
+      spec:
+        title: Для особого случая
+        desc:
+
     premium:
       title: Golovina PREMIUM
       desc:

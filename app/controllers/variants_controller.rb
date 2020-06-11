@@ -81,6 +81,12 @@ class VariantsController < ApplicationController
 
     respond_to :html, :json
   end
+
+  def section
+    @variants = policy_scope(Variant.for_list).where("#{params[:section]}": true)
+
+    respond_to :html, :json
+  end
   # END TODO
 
   # TODO: Check below
@@ -189,7 +195,7 @@ class VariantsController < ApplicationController
   def variant_params
     permitted =
       Variant.globalize_attribute_names \
-      + %i[state code color_id price price_last created_at latest bestseller sale last pinned premium stayhome morning preorder] \
+      + %i[state code color_id price price_last created_at latest bestseller sale last pinned premium stayhome morning preorder linen spec] \
       + [
         {
           product_attributes: Product.globalize_attribute_names \

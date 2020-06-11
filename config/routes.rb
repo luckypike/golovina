@@ -26,6 +26,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   resources :categories, except: [:show]
 
+  get '/catalog/morning', to: redirect('/catalog')
+
   scope path: :catalog, as: :catalog do
     get '', to: 'variants#all'
     get 'control', to: 'products#control', as: :control
@@ -36,7 +38,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     get :premium, controller: :variants
     get :stayhome, controller: :variants
     get 'basic', to: 'variants#stayhome'
-    get :morning, controller: :variants
+    # get :morning, controller: :variants
+    get '(:section)', to: 'variants#section', constraints: { section: /(linen|spec)/ }, as: :section
     get ':slug', to: 'categories#show', as: :category
     get ':slug/:id', to: 'variants#show', as: :variant
   end
