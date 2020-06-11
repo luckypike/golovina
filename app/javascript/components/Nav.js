@@ -54,15 +54,23 @@ class Nav extends Component {
           </div>
 
           <div className={styles.sub}>
+            <a href={path('kits_path')}>{I18n.t('kits.title')}</a>
+          </div>
+
+          <div className={styles.sub}>
+            <a href={path('catalog_section_path', { section: 'linen' })}>{I18n.t('variants.sections.linen.title')}</a>
+          </div>
+
+          <div className={styles.sub}>
+            <a href={path('catalog_section_path', { section: 'spec' })}>{I18n.t('variants.sections.spec.title')}</a>
+          </div>
+
+          <div className={styles.sub}>
             <a href={path('catalog_premium_path')}>Golovina PREMIUM</a>
           </div>
 
           <div className={styles.sub}>
             <a href={path('catalog_basic_path')}>Golovina BASIC</a>
-          </div>
-
-          <div className={styles.sub}>
-            <a href={path('kits_path')}>{I18n.t('kits.title')}</a>
           </div>
 
           {categories.map(category =>
