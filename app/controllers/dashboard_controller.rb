@@ -25,6 +25,9 @@ class DashboardController < ApplicationController
       .order(created_at: :desc)
   end
 
+  def catalog
+  end
+
   private
 
   def authorize_dashboard

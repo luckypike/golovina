@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_061826) do
+ActiveRecord::Schema.define(version: 2020_06_19_123023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -205,11 +205,9 @@ ActiveRecord::Schema.define(version: 2020_06_11_061826) do
   create_table "kits", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "theme_id"
     t.boolean "latest", default: false
     t.integer "state", default: 0
     t.string "title"
-    t.index ["theme_id"], name: "index_kits_on_theme_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -399,6 +397,17 @@ ActiveRecord::Schema.define(version: 2020_06_11_061826) do
     t.index ["theme_id"], name: "index_themables_on_theme_id"
   end
 
+  create_table "theme_translations", force: :cascade do |t|
+    t.bigint "theme_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+    t.text "desc"
+    t.index ["locale"], name: "index_theme_translations_on_locale"
+    t.index ["theme_id"], name: "index_theme_translations_on_theme_id"
+  end
+
   create_table "themes", force: :cascade do |t|
     t.string "title"
     t.string "slug"
@@ -525,7 +534,6 @@ ActiveRecord::Schema.define(version: 2020_06_11_061826) do
   add_foreign_key "discounts", "users"
   add_foreign_key "identities", "users"
   add_foreign_key "kitables", "variants"
-  add_foreign_key "kits", "themes"
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "variants"
   add_foreign_key "order_items", "orders"

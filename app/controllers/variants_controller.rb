@@ -6,17 +6,17 @@ class VariantsController < ApplicationController
 
   # TODO: REWRITE
   def index
-    if params[:kit_id].present?
-      @selected = Variant.includes(:product, :images, :color, :kitables).where(id: params[:selected], kitables: { kit_id: params[:kit_id] }).sort_by{ |v| v.kitables.first.id }
-    else
-      @selected = Variant.includes(:product, :images, :color).where(id: params[:selected])
-    end
-
-    if params[:category_id].present?
-      @variants = Variant.includes(:product, :images, color: :translations).where.not(id: @selected.map(&:id)).where(products: {category_id: params[:category_id]}).unscope(:order).order(:state, created_at: :desc)
-    else
-      @variants = Variant.includes(:product, :images, :color).where.not(id: @selected.map(&:id)).unscope(:order).order(:state, created_at: :desc).limit(params[:q].present? ? nil : 12)
-    end
+    # if params[:kit_id].present?
+    #   @selected = Variant.includes(:product, :images, :color, :kitables).where(id: params[:selected], kitables: { kit_id: params[:kit_id] }).sort_by{ |v| v.kitables.first.id }
+    # else
+    #   @selected = Variant.includes(:product, :images, :color).where(id: params[:selected])
+    # end
+    #
+    # if params[:category_id].present?
+    #   @variants = Variant.includes(:product, :images, color: :translations).where.not(id: @selected.map(&:id)).where(products: {category_id: params[:category_id]}).unscope(:order).order(:state, created_at: :desc)
+    # else
+    #   @variants = Variant.includes(:product, :images, :color).where.not(id: @selected.map(&:id)).unscope(:order).order(:state, created_at: :desc).limit(params[:q].present? ? nil : 12)
+    # end
 
     respond_to do |format|
       format.html

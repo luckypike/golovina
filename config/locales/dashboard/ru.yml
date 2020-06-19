@@ -28,3 +28,6 @@ ru:
         few: "%{count} товара"
         many: "%{count} товаров"
         other: "%{count} товара"
+
+    catalog:
+      title: Категории и товары

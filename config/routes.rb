@@ -30,7 +30,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   scope path: :catalog, as: :catalog do
     get '', to: 'variants#all'
-    get 'control', to: 'products#control', as: :control
     get :last, controller: :variants
     get :latest, controller: :variants
     get :sale, controller: :variants
@@ -74,6 +73,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   namespace :dashboard, module: nil do
     get '', to: 'dashboard#index'
+    get :catalog, to: 'dashboard#catalog'
     get :archived, to: 'dashboard#archived'
     get :cart, to: 'dashboard#cart'
     get :refunds, to: 'dashboard#refunds'

@@ -1,15 +1,11 @@
 class Theme < ApplicationRecord
-  mount_uploader :image, ThemeUploader
+  extend FriendlyId
 
   enum state: { inactive: 0, active: 1 }
 
-  extend FriendlyId
+  # validates :state, :title_ru, presence: true
+  validates :slug, uniqueness: true, presence: true, format: { with: /\A[a-z0-9-]+\z/, message: :only_slug }
 
-  validates_presence_of :slug
-  validates_uniqueness_of :slug
-
-  friendly_id :title, use: :slugged
-
-  # has_many :products, through: :themables, source: :themable, source_type: 'Product'
-  has_many :kits
+  friendly_id :slug
+  translates :title, :desc
 end

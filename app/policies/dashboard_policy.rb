@@ -3,6 +3,10 @@ DashboardPolicy = Struct.new :user, :dashboard do
     user&.editor?
   end
 
+  def catalog?
+    index?
+  end
+
   def cart?
     index?
   end
