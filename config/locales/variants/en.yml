@@ -61,6 +61,18 @@ en:
         title: Special event
         desc:
 
+    bestseller:
+      title: Bestseller
+
+    basic:
+      title: Golovina BASIC
+
+    linen:
+      title: Linen
+
+    spec:
+      title: Special event
+
     premium:
       title: Golovina PREMIUM
       desc:

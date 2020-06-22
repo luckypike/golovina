@@ -42,52 +42,26 @@ class Nav extends Component {
 
   render () {
     const { active, section } = this.state
-    const { user, categories, themes, collections, locale, last } = this.props
+    const { user, categories, themes, collections, locale, last, nav } = this.props
 
     const I18n = useI18n(locale)
 
     return (
       <nav className={classNames(styles.root, { [styles.active]: active })}>
         <Section id="categories" title={I18n.t('header.nav.catalog')} onToggle={this.toggleSection} section={section}>
-          <div className={styles.sub}>
-            <a href={path('catalog_latest_path')}>New</a>
-          </div>
+          {nav.map((n, i) =>
+            <React.Fragment key={`${n.type}-${n.id}`}>
+              <div className={styles.sub}>
+                <a href={path('catalog_category_path', { slug: n.slug })}>{n.title}</a>
+              </div>
 
-          <div className={styles.sub}>
-            <a href={path('kits_path')}>{I18n.t('kits.title')}</a>
-          </div>
-
-          <div className={styles.sub}>
-            <a href={path('catalog_section_path', { section: 'linen' })}>{I18n.t('variants.sections.linen.title')}</a>
-          </div>
-
-          <div className={styles.sub}>
-            <a href={path('catalog_section_path', { section: 'spec' })}>{I18n.t('variants.sections.spec.title')}</a>
-          </div>
-
-          <div className={styles.sub}>
-            <a href={path('catalog_premium_path')}>Golovina PREMIUM</a>
-          </div>
-
-          <div className={styles.sub}>
-            <a href={path('catalog_basic_path')}>Golovina BASIC</a>
-          </div>
-
-          {categories.map(category =>
-            <div className={styles.sub} key={category.id}>
-              <a href={path('catalog_category_path', { slug: category.slug })}>{category.title}</a>
-            </div>
+              {i === 0 &&
+                <div className={styles.sub}>
+                  <a href={path('kits_path')}>{I18n.t('kits.title')}</a>
+                </div>
+              }
+            </React.Fragment>
           )}
-
-          {last &&
-            <div className={styles.sub}>
-              <a href={path('catalog_last_path')}>{I18n.t('variants.last.title')}</a>
-            </div>
-          }
-
-          <div className={styles.sub}>
-            <a href={path('catalog_sale_path')}>{I18n.t('variants.sale.title')}</a>
-          </div>
 
           <div className={styles.sub}>
             <a href={path('catalog_path')}>{I18n.t('variants.all.title')}</a>

@@ -1,0 +1,42 @@
+.root {
+  padding: 0 calc(var(--yr) * 4) calc(var(--yr) * var(--s2));
+}
+
+.items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: var(--xr) calc(var(--yr) * var(--s2));
+
+  @media (--s) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: calc(var(--xr) * 2) calc(var(--yr) * var(--s2));
+  }
+}
+
+.image {
+  position: relative;
+  background-color: var(--ph_color);
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: calc(4 / 3 * 100%);
+  }
+
+  & img {
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+  }
+
+  @media (--s) {
+    grid-column: auto / span 4;
+  }
+}
+
+.title {
+  composes: at from '../../Fonts.module.css';
+  margin-top: calc(var(--yr) * var(--s1));
+}

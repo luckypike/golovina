@@ -36,6 +36,9 @@ class Variant < ApplicationRecord
   # validates :code, uniqueness: true, unless: -> { code.blank? }
   # validates :price, presence: true, if: -> { active? }
 
+  has_many :themables, dependent: :destroy
+  has_many :themes, through: :themables
+
   before_save :default_values
 
   after_save :update_sizes_cache
@@ -224,7 +227,6 @@ class Variant < ApplicationRecord
           :images,
           product: %i[translations category variants]
         )
-        .order(pinned: :desc, created_at: :desc)
     end
   end
 end

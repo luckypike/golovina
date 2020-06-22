@@ -5,6 +5,10 @@ json.dictionaries do
     json.partial! store
   end
 
+  json.themes Theme.with_translations.all do |theme|
+    json.partial! theme
+  end
+
   json.sizes Size.all do |size|
     json.partial! size
   end
@@ -26,6 +30,8 @@ json.values do
   variant.globalize_attribute_names.each do |f|
     json.set! f, variant.send(f) || ''
   end
+
+  json.theme_ids variant.themes.pluck(:id)
 
   json.latest variant.latest || ''
   json.sale variant.sale || ''

@@ -61,6 +61,18 @@ ru:
         title: Для особого случая
         desc:
 
+    bestseller:
+      title: Бестселлер
+
+    basic:
+      title: Golovina BASIC
+
+    linen:
+      title: Лён
+
+    spec:
+      title: Для особого случая
+
     premium:
       title: Golovina PREMIUM
       desc:

@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
   def set_header
     @collections_nav = Collection.nav
     @categories_nav = Category.nav
+    @nav = Category.nav + Theme.nav
     @last_nav = Variant.unscoped.active.where(last: true).any?
   end
 

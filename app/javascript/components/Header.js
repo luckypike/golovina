@@ -23,6 +23,7 @@ Header.propTypes = {
   user: PropTypes.object,
   collections: PropTypes.object,
   categories: PropTypes.object,
+  nav: PropTypes.object,
   last: PropTypes.bool
 }
 
@@ -71,7 +72,7 @@ export default function Header (props) {
     }
   }, [scrolling])
 
-  const { index, categories, collections, last } = props
+  const { index, categories, collections, last, nav } = props
 
   const user = deserialize(props.user)
 
@@ -104,6 +105,7 @@ export default function Header (props) {
         <Nav
           locale={props.locale}
           categories={deserialize(categories)}
+          nav={deserialize(nav)}
           collections={deserialize(collections)}
           user={user}
           last={last}

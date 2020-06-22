@@ -26,6 +26,30 @@ class DashboardController < ApplicationController
   end
 
   def catalog
+    @items = (Category.all + Theme.all).sort_by(&:weight)
+  end
+
+  def catalog_update
+    params[:items].each do |item|
+      item[:type].constantize.find(item[:id]).update(weight: item[:weight])
+    end
+  end
+
+  def variants
+    @variants = params[:type].constantize.find(params[:id])
+      .variants.not_archived.order(weight: :asc)
+  end
+
+  def variants_update
+    @item = params[:item][:type].constantize.find(params[:item][:id])
+
+    if @item.is_a?(Category)
+      params[:variants].each do |variant|
+        Variant.find(variant[:id]).update(weight: variant[:weight])
+      end
+    elsif @item.is_a?(Theme)
+    end
+    pp params
   end
 
   private

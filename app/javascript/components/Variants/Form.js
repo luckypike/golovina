@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import classNames from 'classnames'
-import update from 'immutability-helper'
+// import classNames from 'classnames'
+// import update from 'immutability-helper'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
@@ -98,6 +98,20 @@ export default function Form ({ id, product_id: productId, locale }) {
     setValues({ ...values, [name]: value })
   }
 
+  const handleThemeChange = ({ target: { name, value, type, checked } }) => {
+    let newThemeIds = [...values.theme_ids]
+
+    const newValue = parseInt(value)
+
+    if (newThemeIds.includes(newValue)) {
+      newThemeIds = newThemeIds.filter(v => v !== newValue)
+    } else {
+      newThemeIds.push(newValue)
+    }
+
+    setValues({ ...values, theme_ids: newThemeIds })
+  }
+
   const handleImagesChange = images => {
     console.log(images)
   }
@@ -159,86 +173,22 @@ export default function Form ({ id, product_id: productId, locale }) {
             </div>
           </div>
 
-          <div className={form.el}>
-            <label>
-              <div className={form.checkbox}>
-                <input type="checkbox" name="latest" checked={values.latest} onChange={handleChange} />
-                  Новый сезон
-              </div>
-            </label>
-          </div>
+          {dictionaries.themes.map(theme =>
+            <div key={theme.id} className={form.el}>
+              <label>
+                <div className={form.checkbox}>
+                  <input
+                    type="checkbox"
+                    value={theme.id}
+                    checked={values.theme_ids.includes(theme.id)}
+                    onChange={handleThemeChange}
+                  />
 
-          <div className={form.el}>
-            <label>
-              <div className={form.checkbox}>
-                <input type="checkbox" name="bestseller" checked={values.bestseller} onChange={handleChange} />
-                  Бестселлер
-              </div>
-            </label>
-          </div>
-
-          <div className={form.el}>
-            <label>
-              <div className={form.checkbox}>
-                <input type="checkbox" name="sale" checked={values.sale} onChange={handleChange} />
-                  Sale
-              </div>
-            </label>
-          </div>
-
-          <div className={form.el}>
-            <label>
-              <div className={form.checkbox}>
-                <input type="checkbox" name="premium" checked={values.premium} onChange={handleChange} />
-                  Premium
-              </div>
-            </label>
-          </div>
-
-          <div className={form.el}>
-            <label>
-              <div className={form.checkbox}>
-                <input type="checkbox" name="linen" checked={values.linen} onChange={handleChange} />
-                  Лён
-              </div>
-            </label>
-          </div>
-
-          <div className={form.el}>
-            <label>
-              <div className={form.checkbox}>
-                <input type="checkbox" name="spec" checked={values.spec} onChange={handleChange} />
-                  Особый случай
-              </div>
-            </label>
-          </div>
-
-          <div className={form.el}>
-            <label>
-              <div className={form.checkbox}>
-                <input type="checkbox" name="stayhome" checked={values.stayhome} onChange={handleChange} />
-                  Basic
-              </div>
-            </label>
-          </div>
-
-          <div className={form.el}>
-            <label>
-              <div className={form.checkbox}>
-                <input type="checkbox" name="last" checked={values.last} onChange={handleChange} />
-                  Последний размер
-              </div>
-            </label>
-          </div>
-
-          <div className={form.el}>
-            <label>
-              <div className={form.checkbox}>
-                <input type="checkbox" name="pinned" checked={values.pinned} onChange={handleChange} />
-                  Закреплен
-              </div>
-            </label>
-          </div>
+                  {theme.title}
+                </div>
+              </label>
+            </div>
+          )}
 
           <div className={form.el}>
             <label>
@@ -353,7 +303,6 @@ export default function Form ({ id, product_id: productId, locale }) {
               </div>
             </div>
           </div>
-
 
           <div className={form.el}>
             <div className={form.label}>

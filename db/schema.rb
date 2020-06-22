@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_123023) do
+ActiveRecord::Schema.define(version: 2020_06_22_095724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -389,12 +389,13 @@ ActiveRecord::Schema.define(version: 2020_06_19_123023) do
   end
 
   create_table "themables", force: :cascade do |t|
-    t.bigint "product_id"
     t.bigint "theme_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_themables_on_product_id"
+    t.bigint "variant_id", null: false
+    t.integer "weight", default: 0
     t.index ["theme_id"], name: "index_themables_on_theme_id"
+    t.index ["variant_id"], name: "index_themables_on_variant_id"
   end
 
   create_table "theme_translations", force: :cascade do |t|
@@ -503,6 +504,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_123023) do
     t.integer "preordered", default: 0
     t.boolean "linen", default: false
     t.boolean "spec", default: false
+    t.integer "weight", default: 0
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["last"], name: "index_variants_on_last"
     t.index ["latest"], name: "index_variants_on_latest"
@@ -547,8 +549,8 @@ ActiveRecord::Schema.define(version: 2020_06_19_123023) do
   add_foreign_key "refunds", "users"
   add_foreign_key "similarables", "products"
   add_foreign_key "sizes", "sizes_groups"
-  add_foreign_key "themables", "products"
   add_foreign_key "themables", "themes"
+  add_foreign_key "themables", "variants"
   add_foreign_key "user_addresses", "delivery_cities"
   add_foreign_key "user_addresses", "users"
   add_foreign_key "variants", "colors"

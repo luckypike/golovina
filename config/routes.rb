@@ -30,16 +30,18 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   scope path: :catalog, as: :catalog do
     get '', to: 'variants#all'
-    get :last, controller: :variants
-    get :latest, controller: :variants
-    get :sale, controller: :variants
-    get :soon, controller: :variants
-    get :premium, controller: :variants
-    get :stayhome, controller: :variants
-    get 'basic', to: 'variants#stayhome'
+    # get :last, controller: :variants
+    # get :latest, controller: :variants
+    # get :sale, controller: :variants
+    # get :soon, controller: :variants
+    # get :premium, controller: :variants
+    # get :stayhome, controller: :variants
+    # get 'basic', to: 'variants#stayhome'
     # get :morning, controller: :variants
-    get '(:section)', to: 'variants#section', constraints: { section: /(linen|spec)/ }, as: :section
-    get ':slug', to: 'categories#show', as: :category
+    # get ':slug', to: 'products#category', as: :category, constraints: lambda { |request| Category.find_by_slug(request.params[:slug]).present? }
+    get ':id', to: 'themes#show', constraints: ->(request) { Theme.find_by(slug: request.params[:id]).present? }, as: :theme
+    get ':slug', to: 'categories#show', constraints: ->(request) { Category.find_by(slug: request.params[:slug]).present? }, as: :category
+    # get ':slug', to: 'categories#show', as: :category
     get ':slug/:id', to: 'variants#show', as: :variant
   end
 
@@ -73,7 +75,14 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   namespace :dashboard, module: nil do
     get '', to: 'dashboard#index'
-    get :catalog, to: 'dashboard#catalog'
+
+    namespace :catalog, module: nil do
+      get '', to: 'dashboard#catalog'
+      post '', to: 'dashboard#catalog_update'
+      get :variants, to: 'dashboard#variants'
+      post :variants, to: 'dashboard#variants_update'
+    end
+
     get :archived, to: 'dashboard#archived'
     get :cart, to: 'dashboard#cart'
     get :refunds, to: 'dashboard#refunds'

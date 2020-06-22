@@ -4,28 +4,6 @@ class VariantsController < ApplicationController
   # before_action :authorize_variant, only: %i[edit update wishlist cart]
   before_action :authorize_variant, except: :show
 
-  # TODO: REWRITE
-  def index
-    # if params[:kit_id].present?
-    #   @selected = Variant.includes(:product, :images, :color, :kitables).where(id: params[:selected], kitables: { kit_id: params[:kit_id] }).sort_by{ |v| v.kitables.first.id }
-    # else
-    #   @selected = Variant.includes(:product, :images, :color).where(id: params[:selected])
-    # end
-    #
-    # if params[:category_id].present?
-    #   @variants = Variant.includes(:product, :images, color: :translations).where.not(id: @selected.map(&:id)).where(products: {category_id: params[:category_id]}).unscope(:order).order(:state, created_at: :desc)
-    # else
-    #   @variants = Variant.includes(:product, :images, :color).where.not(id: @selected.map(&:id)).unscope(:order).order(:state, created_at: :desc).limit(params[:q].present? ? nil : 12)
-    # end
-
-    respond_to do |format|
-      format.html
-      format.json
-    end
-  end
-
-  # END TODO
-
   def show
     @category = Category.friendly.find(params[:slug])
     @variant = @category.variants.find_by!(id: params[:id])
@@ -39,65 +17,11 @@ class VariantsController < ApplicationController
     respond_to :html, :json
   end
 
-  # TODO: create new model Section instead
-  def latest
-    @variants = policy_scope(Variant.for_list).where(latest: true)
-
-    respond_to :html, :json
-  end
-
-  def sale
-    @variants = policy_scope(Variant.for_list).where(sale: true)
-
-    respond_to :html, :json
-  end
-
-  def last
-    @variants = policy_scope(Variant.for_list).where(last: true)
-
-    respond_to :html, :json
-  end
-
-  def premium
-    @variants = policy_scope(Variant.for_list).where(premium: true)
-
-    respond_to :html, :json
-  end
-
-  def stayhome
-    @variants = policy_scope(Variant.for_list).where(stayhome: true)
-
-    respond_to :html, :json
-  end
-
-  def morning
-    @variants = policy_scope(Variant.for_list).where(morning: true)
-
-    respond_to :html, :json
-  end
-
   def all
     @variants = policy_scope(Variant.for_list)
 
     respond_to :html, :json
   end
-
-  def section
-    @variants = policy_scope(Variant.for_list).where("#{params[:section]}": true)
-
-    respond_to :html, :json
-  end
-  # END TODO
-
-  # TODO: Check below
-
-  # def soon
-  #   @variants = policy_scope(Variant.not_archived)
-  #     .with_translations(I18n.available_locales)
-  #     .includes(product: :variants).available
-  #
-  #   respond_to :html, :json
-  # end
 
   def list
     authorize Variant
@@ -195,7 +119,8 @@ class VariantsController < ApplicationController
   def variant_params
     permitted =
       Variant.globalize_attribute_names \
-      + %i[state code color_id price price_last created_at latest bestseller sale last pinned premium stayhome morning preorder linen spec] \
+      + %i[state code color_id price price_last created_at] \
+      + [theme_ids: []] \
       + [
         {
           product_attributes: Product.globalize_attribute_names \

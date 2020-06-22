@@ -1,1 +1,3 @@
-json.kits @kits, partial: 'kits/kit', as: :kit
+json.variants do
+  json.partial! 'variants/list', variants: @variants
+end

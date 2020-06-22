@@ -1,0 +1,74 @@
+.root {
+  @media (--s) {
+    margin: 0 calc(2 / 12 * 100%);
+  }
+}
+
+.item {
+  background-color: white;
+
+  &.inactive {
+    opacity: 0.5;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * 4);
+  }
+}
+
+.header {
+  display: grid;
+  grid-template-columns: calc(var(--yr) * 4.5) 1fr 3rem;
+  grid-column-gap: var(--xr);
+  padding: calc(var(--yr) * 4);
+  position: relative;
+}
+
+.drag {
+  background-image: url('../../images/icons/drag.svg');
+  background-color: color-mod(var(--pr_color) alpha(50%));
+  /* position: absolute; */
+  /* left: calc(var(--yr) * 4); */
+  /* top: calc(var(--yr) * 4); */
+  height: calc(var(--yr) * 5);
+  width: calc(var(--yr) * 5);
+  cursor: row-resize;
+
+  @media (--s) {
+    margin-top: var(--yr);
+    /* top: calc(var(--yr) * 5); */
+  }
+}
+
+.title {
+  /* display: grid; */
+}
+
+.type {
+  /* position: absolute; */
+  /* bottom: 100%; */
+  /* left: 0; */
+  /* composes: at from '../Fonts.module.css'; */
+}
+
+.arr {
+  top: calc(var(--yr) * 4);
+  right: var(--xr);
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: calc(var(--yr) * 5);
+
+  @media (--s) {
+    width: 14px;
+    height: calc(var(--yr) * 7);
+  }
+
+  & polyline {
+    fill: none;
+    stroke-width: 1px;
+    stroke: var(--pr_color);
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+  }
+}
