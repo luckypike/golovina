@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import { SortableContainer, SortableElement } from 'react-sortable-hoc'
+import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc'
 
 import { path } from '../../Routes'
 
@@ -47,13 +47,13 @@ export default function Variants ({ item }) {
 
   return (
     <div className={styles.root}>
-      {variants && <List variants={variants} onSortEnd={handleSortEnd} axis="xy" /> }
+      {variants && <List variants={variants} onSortEnd={handleSortEnd} axis="xy" useDragHandle /> }
     </div>
   )
 }
 
-const Item = SortableElement(({ variant }) =>
-  <div className={styles.item}>
+const DragHandle = sortableHandle(({ variant }) =>
+  <>
     <div className={styles.image}>
       {variant.images.length > 0 &&
         <img src={variant.images[0].thumb} />
@@ -61,7 +61,19 @@ const Item = SortableElement(({ variant }) =>
     </div>
 
     <div className={styles.title}>
-      {variant.title} - {variant.id}
+      {variant.title}
+    </div>
+  </>
+)
+
+const Item = SortableElement(({ variant }) =>
+  <div className={styles.item}>
+    <DragHandle variant={variant} />
+
+    <div className={styles.edit}>
+      <a href={path('edit_variant_path', { id: variant.id })}>
+        Редактировать товар
+      </a>
     </div>
   </div>
 )

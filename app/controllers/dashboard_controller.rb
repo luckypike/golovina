@@ -36,8 +36,15 @@ class DashboardController < ApplicationController
   end
 
   def variants
-    @variants = params[:type].constantize.find(params[:id])
-      .variants.not_archived.order(weight: :asc)
+    @item = params[:type].constantize.find(params[:id])
+
+    @variants =
+      if @item.is_a?(Category)
+        @item.variants.not_archived.order(weight: :asc)
+      elsif @item.is_a?(Theme)
+        Variant.not_archived.select('variants.*, themables.weight').joins(:themables)
+          .where(themables: { theme: @item }).for_list.order('themables.weight ASC')
+      end
   end
 
   def variants_update
@@ -48,8 +55,10 @@ class DashboardController < ApplicationController
         Variant.find(variant[:id]).update(weight: variant[:weight])
       end
     elsif @item.is_a?(Theme)
+      params[:variants].each do |variant|
+        @item.themables.find_by(variant: variant[:id]).update(weight: variant[:weight])
+      end
     end
-    pp params
   end
 
   private

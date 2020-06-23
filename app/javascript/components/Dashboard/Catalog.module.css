@@ -72,3 +72,16 @@
     stroke-linejoin: miter;
   }
 }
+
+.edit {
+  margin-bottom: calc(var(--yr) * var(--s2));
+
+  & a {
+    margin-right: 1em;
+    margin-bottom: calc(var(--yr) * var(--s1));
+  }
+}
+
+.disabled {
+  opacity: 0.4;
+}

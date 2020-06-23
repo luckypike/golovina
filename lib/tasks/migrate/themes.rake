@@ -10,8 +10,19 @@ namespace :themes do
 
       slug = :stayhome if slug == :basic
 
-      variants = Variant.where("#{slug}": true)
-      theme.variants = variants
+      theme.themables.delete_all
+
+      Variant.not_archived.where("#{slug}": true).order(pinned: :desc, created_at: :desc)
+        .each_with_index do |variant, weight|
+        theme.themables.create(variant: variant, weight: weight)
+      end
+    end
+
+    Variant.order(pinned: :desc, created_at: :desc).not_archived
+      .group_by(&:category).each do |category, category_variants|
+      category_variants.each_with_index do |variant, weight|
+        variant.update(weight: weight)
+      end
     end
   end
 end

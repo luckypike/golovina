@@ -59,7 +59,7 @@ export default function Index ({ slides, instagram, locale }) {
         </a>
 
         {posts &&
-          <a className={styles.posts}>
+          <div className={styles.posts}>
             {posts.map(post =>
               <a key={post.id} className={styles.post} target="_blank" href={post.permalink} rel="noopener noreferrer">
 
@@ -74,7 +74,7 @@ export default function Index ({ slides, instagram, locale }) {
                 }
               </a>
             )}
-          </a>
+          </div>
         }
       </div>
 

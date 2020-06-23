@@ -40,3 +40,14 @@
   composes: at from '../../Fonts.module.css';
   margin-top: calc(var(--yr) * var(--s1));
 }
+
+.edit {
+  composes: at from '../../Fonts.module.css';
+  margin-top: calc(var(--yr) * var(--s1));
+
+  & a {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--gr_color);
+  }
+}

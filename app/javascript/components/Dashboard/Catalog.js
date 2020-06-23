@@ -11,6 +11,7 @@ import Variants from './Catalog/Variants'
 
 import page from '../Page.module.css'
 import styles from './Catalog.module.css'
+import buttons from '../Buttons.module.css'
 
 Catalog.propTypes = {
   locale: PropTypes.string.isRequired
@@ -50,6 +51,12 @@ export default function Catalog ({ locale }) {
         <div className={styles.root}>
           <div className={page.title}>
             <h1>{I18n.t('dashboard.catalog.title')}</h1>
+          </div>
+
+          <div className={styles.edit}>
+            <a className={buttons.main} href={path('new_variant_path')}>Добавить товар</a>
+            <a className={buttons.main} href={path('new_category_path')}>Добавить категорию</a>
+            <a className={classNames(buttons.main, styles.disabled)} disabled href="#">Добавить тему</a>
           </div>
 
           {items &&
