@@ -119,7 +119,7 @@ class VariantsController < ApplicationController
   def variant_params
     permitted =
       Variant.globalize_attribute_names \
-      + %i[state code color_id price price_last created_at] \
+      + %i[state code color_id price price_last created_at preorder] \
       + [theme_ids: []] \
       + [
         {
