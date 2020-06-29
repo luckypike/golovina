@@ -1,0 +1,5 @@
+ru:
+  theme:
+    states:
+      inactive: Скрыта
+      active: Активна

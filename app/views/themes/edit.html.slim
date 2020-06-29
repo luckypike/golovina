@@ -1,10 +1,3 @@
-.page.page_common.page_theme_form
-  h1 
-    | Редактировать настроение ##{@theme.id}
+- title @theme.title
 
-  == render 'form'
-
-  / = link_to 'Show', @theme
-  / '  |
-  / = link_to 'Back', themes_path
-
+= react_component 'Themes/Form', { id: @theme.id }

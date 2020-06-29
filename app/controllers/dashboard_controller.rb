@@ -46,8 +46,13 @@ class DashboardController < ApplicationController
           @item.variants.not_archived.order(weight: :asc)
         end
       elsif @item.is_a?(Theme)
-        Variant.not_archived.select('variants.*, themables.weight').joins(:themables)
-          .where(themables: { theme: @item }).for_list.order('themables.weight ASC')
+        if params[:archived]
+          Variant.archived.select('variants.*, themables.weight').joins(:themables)
+            .where(themables: { theme: @item }).for_list.order('themables.weight ASC')
+        else
+          Variant.not_archived.select('variants.*, themables.weight').joins(:themables)
+            .where(themables: { theme: @item }).for_list.order('themables.weight ASC')
+        end
       end
   end
 

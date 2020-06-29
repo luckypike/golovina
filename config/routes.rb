@@ -26,6 +26,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   resources :categories, except: [:show]
 
+  resources :themes, except: [:show]
+
   get '/catalog/morning', to: redirect('/catalog')
 
   scope path: :catalog, as: :catalog do

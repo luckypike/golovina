@@ -1,9 +1,0 @@
-.page.page_themes
-  - Theme::COLORS.each do |color|
-    .page_themes_theme class=color
-      .text
-        .title
-          = t "colors.index.#{color}"
-
-        .more
-          = link_to t("colors.#{color}"), '#'

@@ -48,9 +48,13 @@ export default function Variants ({ item, archived }) {
   }
 
   return (
-    <div className={styles.root}>
-      {variants && <List variants={variants} onSortEnd={handleSortEnd} axis="xy" useDragHandle /> }
-    </div>
+    <>
+      {variants && variants.length > 0 &&
+        <div className={styles.root}>
+          <List variants={variants} onSortEnd={handleSortEnd} axis="xy" useDragHandle />
+        </div>
+      }
+    </>
   )
 }
 

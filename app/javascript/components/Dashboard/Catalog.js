@@ -56,7 +56,7 @@ export default function Catalog ({ locale }) {
           <div className={styles.edit}>
             <a className={buttons.main} href={path('new_variant_path')}>Добавить товар</a>
             <a className={buttons.main} href={path('new_category_path')}>Добавить категорию</a>
-            <a className={classNames(buttons.main, styles.disabled)} disabled href="#">Добавить тему</a>
+            <a className={buttons.main}  href={path('new_theme_path')}>Добавить тему</a>
           </div>
 
           {items &&
@@ -118,6 +118,9 @@ function CatOrTheme ({ item }) {
           <div className={styles.actions}>
             {item.type === 'Category' &&
               <a href={path('edit_category_path', { id: item.id })}>Редактировать категорию</a>
+            }
+            {item.type === 'Theme' &&
+              <a href={path('edit_theme_path', { id: item.id })}>Редактировать тему</a>
             }
             <div onClick={() => setArchived(!archived)}>{archived ? 'Скрыть архивные' : 'Показать архивные'}</div>
           </div>
