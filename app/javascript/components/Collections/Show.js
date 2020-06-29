@@ -31,6 +31,7 @@ export default function Show (props) {
   let singles = []
   let full = []
 
+  if (id === 16) full = Array.from(Array(30).keys())
   if (id === 15) full = Array.from(Array(30).keys())
   if (id === 14) full = Array.from(Array(26).keys())
   if (id === 13) full = Array.from(Array(38).keys())
