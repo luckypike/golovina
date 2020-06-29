@@ -24,6 +24,18 @@
   position: relative;
 }
 
+.actions {
+  composes: at from '../Fonts.module.css';
+  padding: calc(var(--yr) * 4);
+  display: flex;
+
+  & * {
+    margin-right: calc(var(--yr) * 4);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
 .drag {
   background-image: url('../../images/icons/drag.svg');
   background-color: color-mod(var(--pr_color) alpha(50%));

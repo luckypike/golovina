@@ -8,10 +8,11 @@ import { path } from '../../Routes'
 import styles from './Variants.module.css'
 
 Variants.propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  archived: PropTypes.bool
 }
 
-export default function Variants ({ item }) {
+export default function Variants ({ item, archived }) {
   const [variants, setVariants] = useState()
 
   useEffect(() => {
@@ -19,7 +20,8 @@ export default function Variants ({ item }) {
       const { data } = await axios.get(path('dashboard_catalog_variants_path', { format: 'json' }), {
         params: {
           id: item.id,
-          type: item.type
+          type: item.type,
+          archived: archived
         }
       })
 

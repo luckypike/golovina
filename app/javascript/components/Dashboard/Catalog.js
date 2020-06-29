@@ -94,6 +94,7 @@ CatOrTheme.propTypes = {
 
 function CatOrTheme ({ item }) {
   const [active, setActive] = useState(false)
+  const [archived, setArchived] = useState(false)
 
   return (
     <>
@@ -113,9 +114,24 @@ function CatOrTheme ({ item }) {
       </div>
 
       {active &&
-        <div>
-          <Variants item={item} />
-        </div>
+        <>
+          <div className={styles.actions}>
+            {item.type === 'Category' &&
+              <a href={path('edit_category_path', { id: item.id })}>Редактировать категорию</a>
+            }
+            <div onClick={() => setArchived(!archived)}>{archived ? 'Скрыть архивные' : 'Показать архивные'}</div>
+          </div>
+
+          {archived &&
+            <div>
+              <Variants item={item} archived={archived}/>
+            </div>
+          }
+
+          <div>
+            <Variants item={item} />
+          </div>
+        </>
       }
     </>
   )

@@ -42,7 +42,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-      head :ok, location: categories_path
+      head :ok, location: dashboard_catalog_path
     else
       render json: @category.errors, status: :unprocessable_entity
     end
