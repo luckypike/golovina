@@ -161,6 +161,28 @@ export default function Form ({ id, locale }) {
             )}
           </div>
 
+          <div className={form.el}>
+            <div className={form.label}>
+              Описание
+            </div>
+
+            {I18n.available_locales.map(locale =>
+              <div className={form.gl} key={locale}>
+                <label>
+                  <div className={form.label}>
+                    {locale}
+                  </div>
+
+                  <div className={form.input}>
+                    <textarea value={values[`desc_${locale}`]} name={`desc_${locale}`} onChange={handleChange} />
+                  </div>
+                </label>
+
+                <Errors errors={errors[`desc_${locale}`]} />
+              </div>
+            )}
+          </div>
+
           <div>
             {send && 'Настройки блока сохраняются..' }
 
