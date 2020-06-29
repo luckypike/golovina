@@ -21,8 +21,8 @@ class Variants extends Component {
               <div className={styles.control}>
                 <a className={styles.edit} href={path('edit_variant_path', {id: variant.id})}/>
               </div>
-              {variant.image &&
-                <img src={variant.image} />
+              {variant.images[0] &&
+                <img src={variant.images[0].thumb} />
               }
             </div>
             <div className={styles.title}>
