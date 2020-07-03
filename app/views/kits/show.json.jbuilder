@@ -9,6 +9,7 @@ json.kit do
     json.extract! variant, :label
 
     json.available variant.available?
+    json.preorder variant.preorder?
 
     json.title variant.title_last.squish
 
