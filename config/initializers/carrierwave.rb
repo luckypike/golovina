@@ -1,17 +1,15 @@
 CarrierWave.configure do |config|
   config.fog_credentials = {
     provider: 'AWS',
-    aws_access_key_id: Rails.application.credentials[Rails.env.to_sym][:aws][:access_key_id],
-    aws_secret_access_key: Rails.application.credentials[Rails.env.to_sym][:aws][:secret_access_key],
-    region: Rails.application.credentials[Rails.env.to_sym][:aws][:region],
-    # endpoint: "https://#{Rails.application.credentials[Rails.env.to_sym][:aws][:bucket]}.s3.#{Rails.application.credentials[Rails.env.to_sym][:aws][:region]}.amazonaws.com"
+    aws_access_key_id: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :access_key_id),
+    aws_secret_access_key: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :secret_access_key),
+    endpoint: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :endpoint)
   }
 
-  config.fog_directory = Rails.application.credentials[Rails.env.to_sym][:aws][:bucket]
+  config.fog_directory = Rails.application.credentials.dig(Rails.env.to_sym, :aws, :bucket)
   config.fog_public = true
-  # config.asset_host = 'https://' + Rails.application.credentials[Rails.env.to_sym][:aws][:host]
   config.fog_authenticated_url_expiration = 12.hours
-  config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" } # optional, defaults to {}
+  config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" }
 end
 
 module CarrierWave
