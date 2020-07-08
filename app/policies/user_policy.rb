@@ -1,4 +1,8 @@
 class UserPolicy < ApplicationPolicy
+  def index?
+    user&.is_editor?
+  end
+
   def orders?
     user == record
   end

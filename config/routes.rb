@@ -63,6 +63,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     get :auth, controller: :sessions, as: :auth_user_session
   end
 
+  resources :users, only: :index
+
   resource :account, only: :show do
     scope module: :accounts do
       resource :password, only: %i[show update]
