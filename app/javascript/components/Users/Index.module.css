@@ -1,4 +1,7 @@
 .user {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  max-width: 30rem;
+  grid-template-columns: 1fr 4rem 2rem;
+  border-bottom: 1px solid var(--sp_color);
+  padding: calc(var(--yr) * var(--s1)) 0;
 }

@@ -30,15 +30,15 @@ export default function Index () {
           {users.map((user, index) =>
             <div key={index} className={styles.user}>
               <div>
-                1) {user.name}, {user.email}
+                {user.title}, {user.email}
               </div>
 
               <div>
-                2) {user.summa}
+                {user.summa}
               </div>
 
               <div>
-                3) {user.quantity}
+                {user.quantity}
               </div>
             </div>
           )}

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     authorize User
 
-    @users = User.common
+    @users = User.common.includes(:orders)
   end
 
   def orders
