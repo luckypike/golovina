@@ -1,21 +1,77 @@
 .item {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-bottom: 1px solid var(--sep_color);
-  padding-bottom: calc(var(--yr) * var(--s1));
+  grid-template-columns: 20% 1fr 1fr 1fr;
+  padding: calc(var(--yr) * var(--s1));
   margin-bottom: calc(var(--yr) * var(--s1));
+
+  @media (--s) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .tables {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  padding: calc(var(--yr) * var(--s1));
+  grid-template-columns: 20% 1fr 1fr 1fr;
   margin-bottom: calc(var(--yr) * var(--s2));
+
+  @media (--s) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .refund {
   color: var(--red_color);
 }
 
-.profit, .refund, .result {
+.profit,
+.refund,
+.result {
   justify-self: flex-start;
+}
+
+.proceeds {
+  justify-self: flex-start;
+}
+
+.ids {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: span 2;
+}
+
+.arr {
+  cursor: pointer;
+  top: calc(var(--yr) * var(--s1));
+  right: 10px;
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: calc(var(--yr) * 5);
+
+  @media (--s) {
+    width: 14px;
+    right: var(--xr);
+    height: calc(var(--yr) * 7);
+  }
+
+  & polyline {
+    fill: none;
+    stroke-width: 1px;
+    stroke: var(--pr_color);
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+  }
+}
+
+.container {
+  background-color: #fff;
+}
+
+.day {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: calc(var(--yr) * var(--s1));
+  margin-bottom: calc(var(--yr) * var(--s1));
 }

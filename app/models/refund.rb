@@ -32,6 +32,10 @@ class Refund < ApplicationRecord
     order.payed_at.beginning_of_month
   end
 
+  def day
+    order.payed_at.beginning_of_day
+  end
+
   class << self
     def with_items
       includes(

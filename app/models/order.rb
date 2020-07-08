@@ -94,6 +94,10 @@ class Order < ApplicationRecord
     payed_at.beginning_of_month
   end
 
+  def day
+    payed_at.beginning_of_day
+  end
+
   def purchasable?
     cart? && order_items.reject(&:available?).size.zero? && amount_calc.positive?
   end
