@@ -1,12 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:orders, :refunds]
 
-  def index
-    authorize User
-
-    @users = User.common.includes(:orders)
-  end
-
   def orders
     authorize @user
 

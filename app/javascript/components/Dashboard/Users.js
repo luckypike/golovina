@@ -11,7 +11,7 @@ export default function Index () {
 
   useEffect(() => {
     const _fetch = async () => {
-      const { data: { users } } = await axios.get(path('users_path', { format: 'json' }))
+      const { data: { users } } = await axios.get(path('dashboard_users_path', { format: 'json' }))
 
       setUsers(users)
     }

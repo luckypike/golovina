@@ -35,6 +35,10 @@ class DashboardController < ApplicationController
     end
   end
 
+  def users
+    @users = User.common.includes(:orders)
+  end
+
   def variants
     @item = params[:type].constantize.find(params[:id])
 

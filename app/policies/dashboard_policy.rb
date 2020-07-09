@@ -34,4 +34,8 @@ DashboardPolicy = Struct.new :user, :dashboard do
   def wishlists?
     index?
   end
+
+  def users?
+    index?
+  end
 end
