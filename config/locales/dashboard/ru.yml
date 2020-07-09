@@ -6,6 +6,7 @@ ru:
       cart: Корзины
       refunds: Возвраты
       wishlists: Избранное
+      users: Пользователи
 
     index:
       title: Заказы

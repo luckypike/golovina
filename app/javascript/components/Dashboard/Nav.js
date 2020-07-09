@@ -37,6 +37,10 @@ export default function Nav ({ locale }) {
         <a href={path('dashboard_wishlists_path')} className={styles.tab}>
           {I18n.t('dashboard.nav.wishlists')}
         </a>
+
+        <a href={path('dashboard_users_path')} className={styles.tab}>
+          {I18n.t('dashboard.nav.users')}
+        </a>
       </div>
     </>
   )
