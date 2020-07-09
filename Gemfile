@@ -41,8 +41,8 @@ gem 'delayed_job_active_record'
 gem 'react-rails'
 gem 'webpacker'
 
-gem 'fast_jsonapi', github: 'fast-jsonapi/fast_jsonapi'
 gem 'jbuilder'
+gem 'jsonapi-serializer'
 
 gem 'sitemap_generator'
 

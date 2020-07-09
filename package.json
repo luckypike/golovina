@@ -23,7 +23,6 @@
     "normalize.css": "^8.0.0",
     "prop-types": "^15.7.2",
     "pubsub-js": "^1.7.0",
-    "query-string": "^5.1.0",
     "rails-erb-loader": "^5.5.2",
     "react": "^16.13.1",
     "react-animate-height": "^2.0.8",
