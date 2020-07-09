@@ -54,7 +54,7 @@ function Item ({ item }) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.item}>
+      <div className={styles.item} onClick={() => setActive(!active)}>
         <div className={styles.month}>
           {item.month}
         </div>
@@ -71,7 +71,7 @@ function Item ({ item }) {
           <Price sell={item.result} />
         </div>
 
-        <svg viewBox="0 0 10 20" className={styles.arr} onClick={() => setActive(!active)}>
+        <svg viewBox="0 0 10 20" className={styles.arr}>
           <polyline points="1 8 5 12 9 8" />
         </svg>
       </div>
@@ -84,9 +84,7 @@ function Item ({ item }) {
                 {day.date}
               </div>
 
-              <div className={styles.proceeds}>
-                <Price sell={day.profit} />
-              </div>
+              <Price sell={day.profit} />
 
               <div className={styles.ids}>
                 {day.ids.length > 1 &&

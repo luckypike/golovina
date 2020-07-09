@@ -1,6 +1,7 @@
 .item {
   position: relative;
   display: grid;
+  cursor: pointer;
   grid-template-columns: 20% 1fr 1fr 1fr;
   padding: calc(var(--yr) * var(--s1));
   margin-bottom: calc(var(--yr) * var(--s1));
@@ -31,10 +32,6 @@
   justify-self: flex-start;
 }
 
-.proceeds {
-  justify-self: flex-start;
-}
-
 .ids {
   display: flex;
   flex-wrap: wrap;
@@ -42,7 +39,6 @@
 }
 
 .arr {
-  cursor: pointer;
   top: calc(var(--yr) * var(--s1));
   right: 10px;
   position: absolute;
