@@ -27,7 +27,7 @@ module CarrierWave
         return img unless img.mime_type.match /image\/jpeg/
         img.combine_options do |c|
           c.fuzz '2%'
-          c.fill '#f8f8f8'
+          c.fill '#c8c8c8'
           c.opaque 'white'
         end
         img
