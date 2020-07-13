@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_135227) do
+ActiveRecord::Schema.define(version: 2020_07_13_214957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -487,18 +487,14 @@ ActiveRecord::Schema.define(version: 2020_06_29_135227) do
     t.text "desc"
     t.decimal "price"
     t.decimal "price_last"
-    t.boolean "sale", default: false
-    t.boolean "latest", default: false
     t.boolean "pinned", default: false
     t.text "comp"
     t.boolean "soon", default: false
     t.string "code"
-    t.boolean "last", default: false
     t.boolean "show", default: true
     t.boolean "premium"
     t.boolean "stayhome"
     t.boolean "morning"
-    t.boolean "bestseller"
     t.integer "quantity", default: 0, null: false
     t.integer "acts_count", default: 0, null: false
     t.integer "preorder", default: 0
@@ -507,12 +503,9 @@ ActiveRecord::Schema.define(version: 2020_06_29_135227) do
     t.boolean "spec", default: false
     t.integer "weight", default: 0
     t.index ["color_id"], name: "index_variants_on_color_id"
-    t.index ["last"], name: "index_variants_on_last"
-    t.index ["latest"], name: "index_variants_on_latest"
     t.index ["pinned"], name: "index_variants_on_pinned"
     t.index ["product_id", "color_id"], name: "index_variants_on_product_id_and_color_id", unique: true
     t.index ["product_id"], name: "index_variants_on_product_id"
-    t.index ["sale"], name: "index_variants_on_sale"
     t.index ["state"], name: "index_variants_on_state"
   end
 

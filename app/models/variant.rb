@@ -185,12 +185,16 @@ class Variant < ApplicationRecord
     price_sell.positive? && preorder > preordered
   end
 
+  def theme?(theme)
+    themes.select{ |t| t.slug == theme.to_s }.size.positive?
+  end
+
   def label
     return :sold_out if sold_out?
-    return :last if last
-    return :bestseller if bestseller
-    return :latest if latest
-    return :sale if sale
+    return :last if theme?(:last)
+    return :bestseller if theme?(:bestseller)
+    return :latest if theme?(:latest)
+    return :sale if theme?(:sale)
   end
 
   private
@@ -224,7 +228,7 @@ class Variant < ApplicationRecord
     def for_list
       with_translations(I18n.available_locales)
         .includes(
-          :images,
+          :themes, :images,
           product: %i[translations category variants]
         )
     end
