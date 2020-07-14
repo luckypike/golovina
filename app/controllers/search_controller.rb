@@ -10,7 +10,8 @@ class SearchController < ApplicationController
               bool: {
                 must: {
                   multi_match: {
-                    query: params[:q]
+                    query: params[:q],
+                    operator: :and
                   }
                 }
               }
