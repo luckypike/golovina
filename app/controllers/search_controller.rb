@@ -16,6 +16,7 @@ class SearchController < ApplicationController
                 }
               }
             },
+            size: 100,
             highlight: {
               fields: {
                 'desc': {
