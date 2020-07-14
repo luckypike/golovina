@@ -33,15 +33,15 @@ json.values do
 
   json.theme_ids variant.themes.pluck(:id)
 
-  json.latest variant.latest || ''
-  json.sale variant.sale || ''
-  json.bestseller variant.bestseller || ''
-  json.last variant.last || ''
-  json.pinned variant.pinned || ''
-  json.premium variant.premium || ''
-  json.spec variant.spec || false
-  json.linen variant.linen || false
-  json.stayhome variant.stayhome || ''
+  # json.latest variant.latest || ''
+  # json.sale variant.sale || ''
+  # json.bestseller variant.bestseller || ''
+  # json.last variant.last || ''
+  # json.pinned variant.pinned || ''
+  # json.premium variant.premium || ''
+  # json.spec variant.spec || false
+  # json.linen variant.linen || false
+  # json.stayhome variant.stayhome || ''
 
   json.state variant.state || ''
   json.code variant.code || ''
