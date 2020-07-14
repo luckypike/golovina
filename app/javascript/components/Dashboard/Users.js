@@ -4,7 +4,7 @@ import axios from 'axios'
 import { path } from '../Routes'
 
 import page from '../Page.module.css'
-import styles from './Index.module.css'
+import styles from './Users.module.css'
 
 export default function Index () {
   const [users, setUsers] = useState()

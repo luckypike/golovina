@@ -1,3 +1,9 @@
+.users {
+  @media (--m) {
+    margin: 0 calc(2 / 12 * 100%);
+  }
+}
+
 .user {
   display: grid;
   max-width: 30rem;
