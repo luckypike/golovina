@@ -1,7 +1,3 @@
-json.user do
-  json.partial! @user
-end
-
 json.orders @orders do |order|
   json.partial! order
   json.extract! order, :amount, :quantity

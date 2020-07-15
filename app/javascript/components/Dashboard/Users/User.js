@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { deserialize } from 'jsonapi-deserializer'
 import axios from 'axios'
 
 import { path } from '../../Routes'
@@ -11,28 +12,26 @@ import styles from './User.module.css'
 import page from '../../Page.module.css'
 
 User.propTypes = {
-  id: PropTypes.number,
+  user: PropTypes.object.isRequired,
   locale: PropTypes.string.isRequired
 }
 
-export default function User ({ id, locale }) {
-  const [user, setUser] = useState()
+export default function User ({ user: userJSON, locale }) {
+  const user = deserialize(userJSON)
+
   const [orders, setOrders] = useState()
   const [refunds, setRefunds] = useState()
 
   useEffect(() => {
     const _loadAsyncData = async () => {
-      const { data } = await axios.get(path('dashboard_user_path', { id: id, format: 'json' }))
+      const { data } = await axios.get(path('dashboard_user_path', { id: user.id, format: 'json' }))
 
-      setUser(data.user)
       setOrders(data.orders)
       setRefunds(data.refunds)
     }
 
     _loadAsyncData()
   }, [])
-
-  if (!user) return null
 
   return (
     <div className={page.gray}>
@@ -66,7 +65,7 @@ export default function User ({ id, locale }) {
             </dt>
 
             <dd>
-              {user.s_name}
+              {user.sname}
             </dd>
 
             <dt>
