@@ -5,6 +5,7 @@ json.users @users.sort_by{ |u| u.orders.reject(&:cart?).map(&:amount).sum(&:to_i
 
   orders = user.orders.reject(&:cart?).map(&:amount).sum(&:to_i)
 
+  json.refunds user.refunds
   json.summa orders
 
   json.quantity user.orders.reject(&:cart?).size

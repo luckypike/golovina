@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
-import { path } from '../Routes'
-import { useI18n } from '../I18n'
+import { path } from '../../Routes'
+import { useI18n } from '../../I18n'
 
-import Nav from './Nav'
+import Nav from '../Nav'
 
-import page from '../Page.module.css'
+import page from '../../Page.module.css'
 import styles from './Users.module.css'
 
 Users.propTypes = {

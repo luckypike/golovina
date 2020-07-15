@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
-import { path } from '../Routes'
+import { path } from '../../Routes'
 
-import Orders from '../Accounts/Show/Orders'
+import Orders from '../../Accounts/Show/Orders'
+import Refund from '../Refund/Refund'
 
 import styles from './User.module.css'
-import page from '../Page.module.css'
+import page from '../../Page.module.css'
 
 User.propTypes = {
   id: PropTypes.number,
@@ -16,12 +17,16 @@ User.propTypes = {
 
 export default function User ({ id, locale }) {
   const [user, setUser] = useState()
+  const [orders, setOrders] = useState()
+  const [refunds, setRefunds] = useState()
 
   useEffect(() => {
     const _loadAsyncData = async () => {
-      const { data: { user } } = await axios.get(path('dashboard_user_path', { id: id, format: 'json' }))
+      const { data } = await axios.get(path('dashboard_user_path', { id: id, format: 'json' }))
 
-      setUser(user)
+      setUser(data.user)
+      setOrders(data.orders)
+      setRefunds(data.refunds)
     }
 
     _loadAsyncData()
@@ -75,12 +80,24 @@ export default function User ({ id, locale }) {
         </div>
 
         <div className={styles.orders}>
-          <h2>Заказы</h2>
+          <div className={styles.title}>
+            Заказы
+          </div>
+
+          <Orders orders={orders} locale={locale} />
         </div>
 
-        <div className={styles.refunds}>
-          <h2>Возвраты</h2>
-        </div>
+        {refunds && refunds.length > 0 &&
+          <div className={styles.refunds}>
+            <div className={styles.title}>
+              Возвраты
+            </div>
+
+            {refunds.map(refund =>
+              <Refund refund={refund} locale={locale} key={refund.id} />
+            )}
+          </div>
+        }
       </div>
     </div>
   )

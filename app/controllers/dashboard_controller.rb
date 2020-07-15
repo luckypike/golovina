@@ -40,7 +40,18 @@ class DashboardController < ApplicationController
     @users = User.common.includes(:orders)
   end
 
-  def user; end
+  def user
+    respond_to do |format|
+      format.html
+      format.json do
+        @orders = @user.orders.not_cart
+          .with_items.order(payed_at: :desc)
+
+        @refunds = @user.refunds
+          .with_items.order(id: :desc)
+      end
+    end
+  end
 
   def variants
     @item = params[:type].constantize.find(params[:id])

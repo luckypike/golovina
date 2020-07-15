@@ -6,6 +6,7 @@
 
 .user {
   border-bottom: 1px solid var(--sp_color);
+  margin-bottom: calc(var(--yr) * var(--s3));
 }
 
 .dl {
@@ -29,10 +30,19 @@
 
 .orders {
   margin: 0 0 calc(var(--yr) * var(--s3));
-  border-bottom: 1px solid var(--sp_color);
+  /* border-bottom: 1px solid var(--sp_color); */
+
+  & h2 {
+    display: none;
+  }
 }
 
 .refunds {
   margin: 0 0 calc(var(--yr) * var(--s3));
-  border-bottom: 1px solid var(--sp_color);
+  /* border-bottom: 1px solid var(--sp_color); */
+}
+
+.title {
+  composes: h2 from '../../Fonts.module.css';
+  margin: 0 0 calc(var(--yr) * var(--s2));
 }
