@@ -1,4 +1,5 @@
 json.users @users.sort_by{ |u| u.orders.reject(&:cart?).map(&:amount).sum(&:to_i) }.reverse_each.first(50) do |user|
+  json.id user.id
   json.title user.title
   json.email user.email
 

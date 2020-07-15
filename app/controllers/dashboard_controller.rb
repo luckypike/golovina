@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   before_action :authorize_dashboard
+  before_action :set_user, only: %i[user]
 
   def index
     @orders = Order.paid.includes(:user).with_items.order(payed_at: :desc)
@@ -39,6 +40,8 @@ class DashboardController < ApplicationController
     @users = User.common.includes(:orders)
   end
 
+  def user; end
+
   def variants
     @item = params[:type].constantize.find(params[:id])
 
@@ -75,6 +78,10 @@ class DashboardController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def authorize_dashboard
     authorize :dashboard

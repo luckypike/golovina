@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 
 import { path } from '../Routes'
+import { useI18n } from '../I18n'
+
+import Nav from './Nav'
 
 import page from '../Page.module.css'
 import styles from './Users.module.css'
 
-export default function Index () {
+Users.propTypes = {
+  locale: PropTypes.string.isRequired
+}
+
+export default function Users ({ locale }) {
+  const I18n = useI18n(locale)
+
   const [users, setUsers] = useState()
 
   useEffect(() => {
@@ -21,14 +31,16 @@ export default function Index () {
 
   return (
     <div className={page.gray}>
-      <div className={page.title}>
-        <h1>Пользователи</h1>
-      </div>
+      <div className={styles.root}>
+        <Nav locale={locale} />
 
-      {users &&
-        <div className={styles.users}>
-          {users.map((user, index) =>
-            <div key={index} className={styles.user}>
+        <div className={page.title}>
+          <h1>{I18n.t('dashboard.users.title')}</h1>
+        </div>
+
+        {users && users.map(user =>
+          <a href={path('dashboard_user_path', { id: user.id })} key={user.id}>
+            <div className={styles.user}>
               <div>
                 {user.title}, {user.email}
               </div>
@@ -41,9 +53,9 @@ export default function Index () {
                 {user.quantity}
               </div>
             </div>
-          )}
-        </div>
-      }
+          </a>
+        )}
+      </div>
     </div>
   )
 }

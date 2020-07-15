@@ -90,6 +90,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     get :refunds, to: 'dashboard#refunds'
     get :wishlists, to: 'dashboard#wishlists'
     get :users, to: 'dashboard#users'
+    get '/users/:id', to: 'dashboard#user', as: 'user'
   end
 
   resources :sizes

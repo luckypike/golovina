@@ -23,6 +23,9 @@ ru:
     wishlists:
       title: Избранное
 
+    users:
+      title: Пользователи
+
       count:
         zero: нет товаров
         one: "%{count} товар"

@@ -38,4 +38,8 @@ DashboardPolicy = Struct.new :user, :dashboard do
   def users?
     index?
   end
+
+  def user?
+    index?
+  end
 end
