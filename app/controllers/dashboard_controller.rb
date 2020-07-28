@@ -42,7 +42,10 @@ class DashboardController < ApplicationController
 
   def user
     respond_to do |format|
-      format.html
+      format.html do
+        @addresses = @user.user_addresses
+      end
+
       format.json do
         @orders = @user.orders.not_cart
           .with_items.order(payed_at: :desc)
