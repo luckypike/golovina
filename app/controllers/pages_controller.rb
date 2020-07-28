@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   def instagram
     url = "https://graph.instagram.com/me/media?fields=id,media_type,media_url,permalink&access_token=#{Rails.application.credentials.dig(:instagram, :token)}"
 
-    @posts = JSON.parse(Net::HTTP.get(URI(url)))
+    @posts = JSON.parse(Net::HTTP.get(URI(url))).with_indifferent_access
 
     respond_to :json
   end
