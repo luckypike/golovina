@@ -30,3 +30,7 @@ end
 every 5.minutes do
   rake 'jobs:workoff'
 end
+
+every 15.minutes do
+  rake 'variants:convert_video'
+end

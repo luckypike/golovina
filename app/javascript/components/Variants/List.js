@@ -19,7 +19,7 @@ export default function List ({ variants }) {
   return (
     <div className={styles.root}>
       {variants.map((variant, _) =>
-        <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={classNames(styles.item, { [styles.single]: variant.images.length < 2 })}>
+        <a href={path('catalog_variant_path', { slug: variant.category.slug, id: variant.id })} key={variant.id} className={classNames(styles.item, { [styles.single]: variant.images.length < 2 && !variant.video })}>
           <Images
             variant={variant}
           />

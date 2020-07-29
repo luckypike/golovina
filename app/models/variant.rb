@@ -32,6 +32,9 @@ class Variant < ApplicationRecord
   has_many :sizes, through: :availabilities
   has_many :acts, through: :availabilities
 
+  has_one_attached :video
+  has_one_attached :video_mp4
+
   validates :color, uniqueness: { scope: :product_id }
   # validates :code, uniqueness: true, unless: -> { code.blank? }
   # validates :price, presence: true, if: -> { active? }
@@ -228,6 +231,7 @@ class Variant < ApplicationRecord
     def for_list
       with_translations(I18n.available_locales)
         .includes(
+          :video_mp4_attachment,
           :themes, :images,
           product: %i[translations category variants]
         )

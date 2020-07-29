@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-// import classNames from 'classnames'
+import classNames from 'classnames'
 // import update from 'immutability-helper'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
 import { Errors } from '../Form'
 import Images from '../Images/Images'
+import Video from './Form/Video'
 
 import page from '../Page.module.css'
 import form from '../Form.module.css'
@@ -380,12 +381,22 @@ export default function Form ({ id, product_id: productId, locale }) {
             </div>
           </div>
 
+          <div className={form.el}>
+            {/* <div className={form.label}>
+              Видео
+            </div> */}
+
+            <div className={form.input}>
+              <Video values={values} setValues={setValues} filename={variant.video && variant.video.filename} />
+            </div>
+          </div>
+
           <div>
             {send && 'Настройки товара сохраняются..' }
 
             {!send &&
               <>
-                <input type="submit" value="Сохранить" className={buttons.main} disabled={send} />
+                <input type="submit" value="Сохранить" className={classNames(buttons.main, buttons.big)} disabled={send} />
 
                 {id &&
                   <a href={path('category_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>

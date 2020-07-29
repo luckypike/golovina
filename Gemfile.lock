@@ -64,6 +64,22 @@ GEM
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     ast (2.4.1)
+    aws-eventstream (1.1.0)
+    aws-partitions (1.345.0)
+    aws-sdk-core (3.104.3)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.239.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.36.0)
+      aws-sdk-core (~> 3, >= 3.99.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.75.0)
+      aws-sdk-core (~> 3, >= 3.104.1)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.2.1)
+      aws-eventstream (~> 1, >= 1.0.2)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -195,6 +211,7 @@ GEM
     ipaddress (0.8.3)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    jmespath (1.4.0)
     jsonapi-serializer (2.0.0)
       activesupport (>= 4.2)
     jwt (2.2.1)
@@ -365,6 +382,8 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     stateful_enum (0.6.0)
+    streamio-ffmpeg (3.0.2)
+      multi_json (~> 1.8)
     temple (0.8.2)
     thor (1.0.1)
     thread_safe (0.3.6)
@@ -404,6 +423,7 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   addressable
+  aws-sdk-s3
   bootsnap
   capistrano
   capistrano-passenger
@@ -449,6 +469,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen
   stateful_enum
+  streamio-ffmpeg
   web-console
   webdrivers
   webpacker

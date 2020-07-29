@@ -23,7 +23,7 @@ json.dictionaries do
     json.colors color.colors.sort_by(&:title) do |child_color|
       json.partial! child_color
     end
-  end
+  end  
 end
 
 json.values do
@@ -70,4 +70,7 @@ json.values do
     json.preview image.photo.preview.url
     json.favourite image.favourite
   end
+
+
+  json.video variant.video.signed_id if variant.video.attached?
 end

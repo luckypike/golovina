@@ -12,9 +12,11 @@ gem 'friendly_id'
 
 gem 'inline_svg'
 
+gem 'aws-sdk-s3', require: false
 gem 'carrierwave'
 gem 'fog-aws'
 gem 'mini_magick'
+gem 'streamio-ffmpeg'
 
 gem 'meta-tags'
 

@@ -10,6 +10,10 @@ json.array! variants do |variant|
     json.thumb image.photo.thumb.url
   end
 
+  if variant.video_mp4.attached?
+    json.video variant.video_mp4.key
+  end
+
   json.category do
     json.extract! variant.product.category, :id, :slug
   end
