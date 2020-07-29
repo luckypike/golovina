@@ -82,7 +82,7 @@ function Video ({ src }) {
 
   return (
     <div className={classNames(styles.video, { [styles.play]: play })} onClick={handleClick}>
-      <video ref={videoRef} loop>
+      <video ref={videoRef} loop playsInline preload="auto">
         <source src={src} type="video/mp4" />
       </video>
     </div>
