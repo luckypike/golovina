@@ -21,7 +21,7 @@ en:
       items:
         title: Items
         cant: "Sorry, this product is not available right now"
-        preorder: Preorder (plus 5 working days)
+        preorder: Preorder (plus 2-3 working days)
         change: Change shopping list
 
         noav:
