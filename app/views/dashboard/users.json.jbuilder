@@ -13,3 +13,7 @@ json.users @users.sort_by{ |u| u.orders.reject(&:cart?).map(&:amount).sum(&:to_i
     json.partial! order
   end
 end
+
+json.all @users do |user|
+  json.partial! user
+end

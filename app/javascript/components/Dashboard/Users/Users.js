@@ -9,6 +9,7 @@ import Nav from '../Nav'
 
 import page from '../../Page.module.css'
 import styles from './Users.module.css'
+import form from '../../Form.module.css'
 
 Users.propTypes = {
   locale: PropTypes.string.isRequired
@@ -18,16 +19,24 @@ export default function Users ({ locale }) {
   const I18n = useI18n(locale)
 
   const [users, setUsers] = useState()
+  const [all, setAll] = useState()
+
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     const _fetch = async () => {
-      const { data: { users } } = await axios.get(path('dashboard_users_path', { format: 'json' }))
+      const { data: { users, all } } = await axios.get(path('dashboard_users_path', { format: 'json' }))
 
       setUsers(users)
+      setAll(all)
     }
 
     _fetch()
   }, [])
+
+  const handleChange = e => {
+    setSearch(e.target.value.toString())
+  }
 
   return (
     <div className={page.gray}>
@@ -38,24 +47,61 @@ export default function Users ({ locale }) {
           <h1>{I18n.t('dashboard.users.title')}</h1>
         </div>
 
-        {users && users.map(user =>
-          <a href={path('dashboard_user_path', { id: user.id })} key={user.id}>
-            <div className={styles.user}>
-              <div>
-                {user.title}, {user.email}
-              </div>
-
-              <div>
-                {user.summa}
-              </div>
-
-              <div>
-                {user.quantity}
-              </div>
+        <form>
+          <label className={form.el}>
+            <div className={form.input}>
+              <input
+                autoFocus
+                type="text"
+                value={search}
+                onChange={handleChange}
+                name="search"
+                placeholder="Найти пользователя"
+              />
             </div>
-          </a>
+          </label>
+        </form>
+
+        {search && all &&
+          all.filter(u => u.s_name !== null).filter(i => i.phone !== null).filter(usr => usr.s_name.toLowerCase().includes(search.toLowerCase()) || usr.email.toLowerCase().includes(search.toLowerCase()) || usr.phone.toLowerCase().includes(search.toLowerCase())).map(user =>
+            <User
+              key={user.id}
+              user={user}
+            />
+          )
+        }
+
+        {!search && users && users.map(user =>
+          <User
+            key={user.id}
+            user={user}
+          />
         )}
       </div>
     </div>
+  )
+}
+
+User.propTypes = {
+  user: PropTypes.object
+}
+
+function User ({ user }) {
+  return (
+    <a href={path('dashboard_user_path', { id: user.id })}>
+      <div className={styles.user}>
+        <div>
+          {user.title}, {user.email}
+        </div>
+
+        <div>
+          {user.summa}
+        </div>
+
+        <div>
+          {user.quantity}
+        </div>
+      </div>
+    </a>
   )
 }
