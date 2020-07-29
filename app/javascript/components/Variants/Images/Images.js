@@ -51,7 +51,7 @@ export default function Images ({ variant }) {
         {variant.video &&
           <div className={styles.image}>
             <Video
-              src={`https://golovina.store/video/${variant.video}.mp4`}
+              src={`https://golovina.store/video/${variant.video}.mp4#t=0.1`}
             />
           </div>
         }
@@ -82,7 +82,7 @@ function Video ({ src }) {
 
   return (
     <div className={classNames(styles.video, { [styles.play]: play })} onClick={handleClick}>
-      <video ref={videoRef} loop playsInline preload="auto">
+      <video ref={videoRef} loop playsInline preload="metadata">
         <source src={src} type="video/mp4" />
       </video>
     </div>
