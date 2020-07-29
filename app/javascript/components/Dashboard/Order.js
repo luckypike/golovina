@@ -74,9 +74,11 @@ export default function Order ({ order, locale, delivery }) {
         <div className={styles.details}>
           {order.user &&
             <div className={styles.user}>
-              <strong>
-                {order.user.title}
-              </strong>
+              <a href={path('dashboard_user_path', { id: order.user.id })}>
+                <strong>
+                  {order.user.title}
+                </strong>
+              </a>
               <br />
               Телефон: {order.user.phone}
               <br />
