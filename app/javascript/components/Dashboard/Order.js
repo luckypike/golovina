@@ -152,7 +152,12 @@ function Address ({ order, locale, delivery }) {
           {!order.address_old &&
             <>
               {isDoor() &&
-                [order.delivery_city.title, order.street, order.house, order.appartment].filter(Boolean).join(', ')
+                <dl className={styles.dl}>
+                  <dt>{I18n.t('order.city')}:</dt>
+                  <dd>{[order.delivery_city.title].filter(Boolean)}</dd>
+                  <dt>{I18n.t('order.door')}:</dt>
+                  <dd>{[order.street, 'д. ' + order.house, 'кв. ' + order.appartment].join(', ')}</dd>
+                </dl>
               }
 
               {!isDoor() &&
@@ -172,7 +177,14 @@ function Address ({ order, locale, delivery }) {
         <div>
           {!order.address_old &&
             <>
-              {[order.country, order.city, order.street, order.house, order.appartment].filter(Boolean).join(', ')}
+              <dl className={styles.dl}>
+                <dt>{I18n.t('order.country')}:</dt>
+                <dd>{[order.country].filter(Boolean)}</dd>
+                <dt>{I18n.t('order.city')}:</dt>
+                <dd>{[order.city].filter(Boolean)}</dd>
+                <dt>{I18n.t('order.door')}:</dt>
+                <dd>{[order.street, 'д. ' + order.house, 'кв. ' + order.appartment].join(', ')}</dd>
+              </dl>
             </>
           }
 

@@ -142,3 +142,13 @@
   padding: calc(var(--yr) * var(--s2)) var(--xr);
   border-top: 1px solid var(--sp_color);
 }
+
+.dl {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  margin: 0;
+}
+
+dd {
+  margin-left: var(--xr);
+}

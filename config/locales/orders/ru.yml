@@ -11,6 +11,8 @@ ru:
     phone: Телефон
     storage: Точка выдачи
     door: Адрес
+    country: Страна
+    city: Город
     color: Цвет
     size: Размер
     preorder: Предзаказ

@@ -10,6 +10,8 @@ en:
     delivery: Delivery
     storage: Point of delivery
     door: Address
+    country: Country
+    city: City
     color: Color
     size: Size
     preorder: Preorder
