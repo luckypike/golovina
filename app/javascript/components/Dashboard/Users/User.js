@@ -36,7 +36,7 @@ export default function User ({ user: userJSON, locale }) {
   return (
     <div className={page.gray}>
       <div className={page.title}>
-        <h1>Личные кабинет</h1>
+        <h1>Личный кабинет</h1>
       </div>
 
       <div className={styles.root}>
