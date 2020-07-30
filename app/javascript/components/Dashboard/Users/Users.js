@@ -35,7 +35,7 @@ export default function Users ({ locale }) {
   }, [])
 
   const handleChange = e => {
-    setSearch(e.target.value.toString())
+    setSearch(e.target.value.toLowerCase())
   }
 
   return (
@@ -63,7 +63,10 @@ export default function Users ({ locale }) {
         </form>
 
         {search && all &&
-          all.filter(u => u.s_name !== null).filter(i => i.phone !== null).filter(usr => usr.s_name.toLowerCase().includes(search.toLowerCase()) || usr.email.toLowerCase().includes(search.toLowerCase()) || usr.phone.toLowerCase().includes(search.toLowerCase())).map(user =>
+          all.filter(usr =>
+            usr.s_name.toLowerCase().includes(search) ||
+            usr.email.toLowerCase().includes(search) ||
+            usr.phone.toLowerCase().includes(search)).map(user =>
             <User
               key={user.id}
               user={user}

@@ -16,4 +16,8 @@ end
 
 json.all @users do |user|
   json.partial! user
+
+  json.email user.email || ''
+  json.s_name user.s_name || ''
+  json.phone user.phone || ''
 end
