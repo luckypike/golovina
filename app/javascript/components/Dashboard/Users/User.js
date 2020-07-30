@@ -13,13 +13,11 @@ import page from '../../Page.module.css'
 
 User.propTypes = {
   user: PropTypes.object.isRequired,
-  locale: PropTypes.string.isRequired,
-  addresses: PropTypes.object.isRequired
+  locale: PropTypes.string.isRequired
 }
 
-export default function User ({ user: userJSON, locale, addresses: addressesJSON }) {
+export default function User ({ user: userJSON, locale }) {
   const user = deserialize(userJSON)
-  const addresses = deserialize(addressesJSON)
 
   const [orders, setOrders] = useState()
   const [refunds, setRefunds] = useState()
@@ -79,11 +77,11 @@ export default function User ({ user: userJSON, locale, addresses: addressesJSON
             </dd>
 
             <dt>
-              {addresses.length > 1 ? 'Адреса' : 'Адрес'}
+              {user.addresses.length > 1 ? 'Адреса' : 'Адрес'}
             </dt>
 
             <dd>
-              {addresses.map((address, i) =>
+              {user.addresses.map((address, i) =>
                 <dd key={i}>
                   {address.country + (address.country ? ', ' : '')}
                   {address.city + (address.city ? ', ' : '')}

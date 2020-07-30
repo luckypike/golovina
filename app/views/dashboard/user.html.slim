@@ -1,1 +1,1 @@
-= react_component 'Dashboard/Users/User', { user: UserSerializer.new(@user).serializable_hash, addresses: UserAddressesSerializer.new(@addresses).serializable_hash }
+= react_component 'Dashboard/Users/User', { user: UserSerializer.new(@user, { params: { with_addresses: true } }).serializable_hash }

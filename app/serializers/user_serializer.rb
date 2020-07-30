@@ -10,4 +10,8 @@ class UserSerializer
   attribute :reset_password_token, if: proc { |_record, params|
     params && params[:with_reset_password_token]
   }
+
+  attribute :addresses, if: proc { |_record, params|
+    params && params[:with_addresses]
+  }
 end
