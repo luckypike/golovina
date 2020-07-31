@@ -133,7 +133,7 @@ export default function Form ({ id, product_id: productId, locale }) {
   return (
     <div className={page.gray}>
       <div className={page.title}>
-        <h1>{variant ? `Редактирование: ${variant.title}` : 'Новый товар'}</h1>
+        <h1>{variant.title ? `Редактирование: ${variant.title}` : 'Новый товар'}</h1>
       </div>
 
       <div>
