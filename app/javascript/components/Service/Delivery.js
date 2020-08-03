@@ -142,7 +142,7 @@ function EN () {
           International Delivery
         </strong>
         <br />
-        Shipping cost – 2500 RUB (delivery company EMS).
+        Shipping cost – 2800 RUB (delivery company EMS).
         <br />
         Delivery period – from 7 to 12 days (depending on the region).
       </p>
