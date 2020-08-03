@@ -76,7 +76,7 @@ class Order < ApplicationRecord
     if international?
       amount_without_delivery_calc < 30_000 ? 2800 : 0
     elsif russia?
-      amount_without_delivery_calc < 10_000 ? delivery_city.send(delivery_option) : 0
+      amount_without_delivery_calc < 20_000 ? delivery_city.send(delivery_option) : 0
     else
       0
     end
