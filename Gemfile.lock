@@ -61,6 +61,10 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    airbrake (10.0.5)
+      airbrake-ruby (~> 4.13)
+    airbrake-ruby (4.15.0)
+      rbtree3 (~> 0.5)
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     ast (2.4.1)
@@ -302,6 +306,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    rbtree3 (0.6.0)
     react-rails (2.6.1)
       babel-transpiler (>= 0.7.0)
       connection_pool
@@ -423,6 +428,7 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   addressable
+  airbrake
   aws-sdk-s3
   bootsnap
   capistrano

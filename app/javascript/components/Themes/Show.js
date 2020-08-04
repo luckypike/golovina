@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 
 import { path } from '../Routes'
-import I18n from '../I18n'
+import ErrorBoundary from '../ErrorBoundary'
+// import I18n from '../I18n'
 
 import List from '../Variants/List'
 
@@ -27,16 +28,18 @@ export default function Show ({ theme }) {
   }, [])
 
   return (
-    <div className={page.root}>
-      <div className={page.title}>
-        <h1>{theme.title}</h1>
-      </div>
+    <ErrorBoundary>
+      <div className={page.root}>
+        <div className={page.title}>
+          <h1>{theme.title}</h1>
+        </div>
 
-      <div>
-        {variants &&
-          <List variants={variants} />
-        }
+        <div>
+          {variants &&
+            <List variants={variants} />
+          }
+        </div>
       </div>
-    </div>
+    </ErrorBoundary>
   )
 }

@@ -2,6 +2,7 @@
   "name": "golovina",
   "private": true,
   "dependencies": {
+    "@airbrake/browser": "^1.4.0",
     "@babel/core": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "@glidejs/glide": "^3.2.7",
