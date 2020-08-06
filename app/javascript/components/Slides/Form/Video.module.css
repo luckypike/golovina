@@ -1,0 +1,9 @@
+.button {
+  margin-top: calc(var(--yr) * var(--s1));
+
+  & span {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--gr_color);
+  }
+}

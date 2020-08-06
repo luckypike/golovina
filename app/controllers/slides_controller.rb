@@ -54,7 +54,11 @@ class SlidesController < ApplicationController
   end
 
   def slide_params
-    permitted = Slide.globalize_attribute_names + %i[weight link image]
+    permitted =
+      Slide.globalize_attribute_names \
+       + %i[weight link image] \
+       + %i[video] \
+
     params.require(:slide).permit(*permitted)
   end
 end

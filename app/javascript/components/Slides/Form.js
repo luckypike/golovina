@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
+import classNames from 'classnames'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
 import { Errors } from '../Form'
-// import { useAxios } from '../Axios'
+import Video from './Form/Video'
 
 import page from '../Page.module.css'
 import form from '../Form.module.css'
@@ -24,11 +25,18 @@ export default function Form (props) {
   const { id } = props
 
   const [values, setValues] = useState()
+  const [slide, setSlide] = useState()
 
   useEffect(() => {
     const _fetch = async () => {
-      const { data: { values } } = await axios.get(id ? path('edit_slide_path', { id, format: 'json' }) : path('new_slide_path', { format: 'json' }))
+      const {
+        data: {
+          values,
+          slide
+        }
+      } = await axios.get(id ? path('edit_slide_path', { id, format: 'json' }) : path('new_slide_path', { format: 'json' }))
 
+      setSlide(slide)
       setValues(values)
     }
 
@@ -50,7 +58,7 @@ export default function Form (props) {
 
     const params = new FormData()
     params.append('authenticity_token', document.querySelector('[name="csrf-token"]').content)
-    Object.entries(values).map(([ key, value ]) => {
+    Object.entries(values).map(([key, value]) => {
       params.append(`slide[${key}]`, value)
     })
 
@@ -126,6 +134,20 @@ export default function Form (props) {
 
           <div className={form.el}>
             <div className={form.label}>
+              Видео
+            </div>
+
+            <div className={form.input}>
+              <Video
+                values={values}
+                setValues={setValues}
+                filename={slide.video && slide.video.filename}
+              />
+            </div>
+          </div>
+
+          <div className={form.el}>
+            <div className={form.label}>
               Текст в блоке
             </div>
 
@@ -179,7 +201,7 @@ export default function Form (props) {
 
             {!send &&
               <>
-                <input type="submit" value="Сохранить" className={buttons.main} disabled={send} />
+                <input type="submit" value="Сохранить" className={classNames(buttons.main, buttons.big)} disabled={send} />
 
                 {id &&
                   <a href={path('slide_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>

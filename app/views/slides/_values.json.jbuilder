@@ -5,6 +5,7 @@ json.values do
 
   json.weight slide.weight || Slide.order(weight: :desc).first.weight + 1
   json.link slide.link || ''
+  json.video slide.video.signed_id if slide.video.attached?
 
   # json.translations slide.translations do |translation|
   #   json.locale translation.locale
