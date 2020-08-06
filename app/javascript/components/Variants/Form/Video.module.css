@@ -7,3 +7,10 @@
     text-decoration-color: var(--gr_color);
   }
 }
+
+.delete {
+  cursor: pointer;
+  margin-left: 2em;
+  text-decoration: underline;
+  text-decoration-color: var(--gr_color);
+}

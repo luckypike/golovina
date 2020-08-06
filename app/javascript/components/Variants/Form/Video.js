@@ -38,27 +38,41 @@ export default function Video ({ values, setValues, filename }) {
     getRootProps, getInputProps, isDragActive
   } = useDropzone({ onDrop: handlePhotoUpload, multiple: false })
 
+  const handleDelete = (e) => {
+    e.preventDefault()
+
+    setValues({ ...values, video: null, video_mp4: null })
+    setVideo(null)
+  }
+
   return (
-    <div className={classNames(styles.dropzone, { [styles.drag]: isDragActive })} {...getRootProps()}>
-      <input {...getInputProps()} />
-
-      {uploading && !video &&
-        <div className={styles.notify}>
-          Загрузка видео...
-        </div>
-      }
-
+    <div>
       {video &&
         <div className={styles.notify}>
           Загружено видео: {video}
+
+          <span className={styles.delete} onClick={handleDelete}>
+            Удалить видео
+          </span>
         </div>
       }
 
-      <div className={styles.button}>
-        <span>
-          Прикрепить видео
-        </span>
+      <div className={classNames(styles.dropzone, { [styles.drag]: isDragActive })} {...getRootProps()}>
+        <input {...getInputProps()} />
+
+        {uploading && !video &&
+          <div className={styles.notify}>
+            Загрузка видео...
+          </div>
+        }
+
+        <div className={styles.button}>
+          <span>
+            Загрузить видео
+          </span>
+        </div>
       </div>
     </div>
+
   )
 }
