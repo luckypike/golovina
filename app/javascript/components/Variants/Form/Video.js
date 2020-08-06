@@ -32,7 +32,7 @@ export default function Video ({ values, setValues, filename }) {
         // const encodedPath = Buffer.from(`s3://${aws.bucket}/${blob.key}`).toString('base64').replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_')
       }
     })
-  }, [])
+  }, [values])
 
   const {
     getRootProps, getInputProps, isDragActive
