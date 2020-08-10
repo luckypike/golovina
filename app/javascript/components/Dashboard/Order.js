@@ -197,7 +197,7 @@ function Address ({ order, locale, delivery }) {
 
       {order.amount_delivery && !isPickup() &&
         <div>
-          {I18n.t('order.delivery.amount')}: {isInternational() ? currency(2800) : currency(parseFloat(order.delivery_city[order.delivery_option])) }
+          {I18n.t('order.delivery.amount')}: {isInternational() ? currency(2500) : currency(parseFloat(order.delivery_city[order.delivery_option])) }
           {parseFloat(order.amount_delivery) === 0 && ' (бесплатная доставка)'}
         </div>
       }

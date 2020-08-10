@@ -23,11 +23,11 @@ export default function Total ({ order, locale, delivery_cities: deliveryCities,
   let amountDelivery = false
 
   if (isRussia() && values.delivery_city_id && values.delivery_option) {
-    amountDelivery = order.amount_without_delivery_calc < 20000 ? deliveryCities.find(c => c.id === values.delivery_city_id)[values.delivery_option] : 0
+    amountDelivery = order.amount_without_delivery_calc < 10000 ? deliveryCities.find(c => c.id === values.delivery_city_id)[values.delivery_option] : 0
   }
 
   if (isInternational()) {
-    amountDelivery = order.amount_without_delivery_calc < 30000 ? 2800 : 0
+    amountDelivery = order.amount_without_delivery_calc < 30000 ? 2500 : 0
   }
 
   return (

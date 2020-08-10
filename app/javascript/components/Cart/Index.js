@@ -415,7 +415,7 @@ export default function Index ({ locale, appleid, user }) {
                 <h2>
                   {I18n.t('cart.total')}
                   <div className={styles.price}>
-                    <Price sell={parseFloat(price.sell) + (isInternational() ? (parseFloat(price.sell) > 30000 ? 0 : 2800) : (isRussia() && !isPromo() ? city[values.delivery_option] : 0)) + (values.gift ? price.gift : 0)} />
+                    <Price sell={parseFloat(price.sell) + (isInternational() ? (parseFloat(price.sell) > 30000 ? 0 : 2500) : (isRussia() && !isPromo() ? city[values.delivery_option] : 0)) + (values.gift ? price.gift : 0)} />
                   </div>
                 </h2>
               }
