@@ -32,6 +32,9 @@ class SlidesController < ApplicationController
   def update
     authorize @slide
 
+    params[:slide][:video_mp4] = nil if slide_params[:video_mp4] == 'null'
+    params[:slide][:video] = nil if slide_params[:video] == 'null'
+
     if @slide.update(slide_params)
       head :ok, location: slides_path
     else
@@ -57,7 +60,7 @@ class SlidesController < ApplicationController
     permitted =
       Slide.globalize_attribute_names \
        + %i[weight link image] \
-       + %i[video] \
+       + %i[video video_mp4]
 
     params.require(:slide).permit(*permitted)
   end
