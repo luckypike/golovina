@@ -18,8 +18,10 @@ json.items refund.order_items do |item|
       json.thumb image.photo.thumb.url
     end
 
-    json.category do
-      json.extract! item.variant.product.category, :id, :slug
+    if item.variant.product.category
+      json.category do
+        json.extract! item.variant.product.category, :id, :slug
+      end
     end
 
     json.color do
