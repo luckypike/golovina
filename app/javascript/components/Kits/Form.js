@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 import classNames from 'classnames'
-import update from 'immutability-helper'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
@@ -13,41 +13,131 @@ import page from '../Page.module.css'
 import form from '../Form.module.css'
 import control from './Control/Control.module.css'
 
-class Form extends React.Component {
-  state = {
-    kit: {
-      variants: [],
-    },
-    values: {
-      state: 'active',
-      images: [],
-      image_ids: null,
-      images_attributes: [],
-      variant_ids: [],
-    },
-  }
+Form.propTypes = {
+  id: PropTypes.number,
+  locale: PropTypes.string
+}
 
-  componentDidMount() {
-    if (this.props.id) {
-      this._loadAsyncData(this.props.id)
+export default function Form ({ id, locale }) {
+  const I18n = useI18n(locale)
+
+  const [values, setValues] = useState()
+  const [kit, setKit] = useState()
+  const [categories, setCategories] = useState()
+
+  useEffect(() => {
+    const _fetch = async () => {
+      const {
+        data: {
+          kit,
+          values
+        }
+      } = await axios.get(path('edit_kit_path', { id, format: 'json' }))
+
+      setValues(values)
+      setKit(kit)
     }
-    this.getProducts()
+
+    _fetch()
+    _getProducts()
+  }, [id])
+
+  const _getProducts = async () => {
+    const {
+      data: {
+        categories
+      }
+    } = await axios.get(path('list_variants_path', { format: 'json' }))
+
+    setCategories(categories)
   }
 
-  render () {
-    const { title, id, locale } = this.props
-    const { values, kit, categories } = this.state
-    const I18n = useI18n(locale)
+  const handleChange = ({ target: { name, value, type, checked } }) => {
+    value = type === 'checkbox' ? checked : value
 
-    return (
-      <div className={page.gray}>
-        <div className={page.title}>
-          <h1>{kit ? `Редактирование образа` : 'Новый образ'}</h1>
-        </div>
+    setValues({ ...values, [name]: value })
+  }
 
-        <div className={classNames(form.root, form.tight)}>
-          <form onSubmit={this.handleSubmit}>
+  const [send, setSend] = useState(false)
+  const [errors, setErrors] = useState({})
 
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    if (send) {
+      return null
+    } else {
+      setErrors({})
+      setSend(true)
+    }
+
+    const params = {
+      kit: values,
+      authenticity_token: document.querySelector('[name="csrf-token"]').content
+    }
+
+    if (id) {
+      _handleUpdate(params)
+    } else {
+      _handleCreate(params)
+    }
+  }
+
+  const _handleUpdate = async params => {
+    await axios.patch(
+      path('kit_path', { id }), params
+    ).then(res => {
+      window.location = res.headers.location
+    }).catch((error) => {
+      setErrors(error.response.data)
+      setSend(false)
+    })
+  }
+
+  const _handleCreate = async params => {
+    await axios.post(
+      path('kits_path'), params
+    ).then(res => {
+      window.location = res.headers.location
+    }).catch((error) => {
+      setErrors(error.response.data)
+      setSend(false)
+    })
+  }
+
+  const handleCategoryClick = (id) => {
+    const newCategories = [...categories]
+    const key = categories.findIndex(c => c.id === id)
+
+    newCategories[key].active = !newCategories[key].active
+
+    setCategories(newCategories)
+  }
+
+  const handleVariantClick = (variant) => {
+    let variants = [...kit.variants]
+
+    if (variants.map(v => v.id).includes(variant.id)) {
+      variants = variants.filter(v => v.id !== variant.id)
+    } else {
+      variants.push(variant)
+    }
+
+    setKit({ ...kit, variants: variants })
+    setValues({ ...values, variant_ids: variants.map(v => v.id) })
+  }
+
+  if (!values) return null
+
+  return (
+    <div className={page.gray}>
+      <div className={page.title}>
+        <h1>{kit ? 'Редактирование образа' : 'Новый образ'}</h1>
+      </div>
+
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div className={form.el}>
             {I18n.available_locales.map(locale =>
               <div className={form.gl} key={locale}>
                 <label>
@@ -60,7 +150,7 @@ class Form extends React.Component {
                       type="text"
                       value={values[`title_${locale}`]}
                       name={`title_${locale}`}
-                      onChange={this.handleInputChange}
+                      onChange={handleChange}
                       placeholder="Заполните название товара..."
                     />
                   </div>
@@ -68,203 +158,103 @@ class Form extends React.Component {
 
               </div>
             )}
+          </div>
 
-            {kit && kit.variants &&
-              <div className={form.input}>
-                <div className={form.label}>Товары в образе</div>
-                <div className={control.kit_variants}>
-                  {kit.variants.map(variant =>
-                    <div key={variant.id}>{variant.title}</div>
-                  )}
-                </div>
-              </div>
-            }
-            {categories &&
-              categories.map((category, index) =>
-                <div key={category.id} className={classNames(control.category, {[control.active]: category.active})}>
-                  <div className={control.title} onClick={() => this.handleCategoryClick(category.id)}>
-                    {category.title}
-                    {kit && kit.variants && kit.variants.filter(v => v.category == category.id).length > 0 &&
-                      <div className={control.selected}>({kit.variants.filter(v => v.category == category.id).length})</div>
-                    }
-                  </div>
-                  <div className={control.variants}>
-                    {category.variants &&
-                      category.variants.map(variant =>
-                        <div key={variant.id} className={classNames(control.item, {[control.active]: values.variant_ids.includes(variant.id)})} onClick={() => this.handleVariantClick(variant)}>
-                          <div className={control.image}>
-                            <div className={control.selected} />
-                            <img src={variant.thumb}/>
-                          </div>
-                          <div>{variant.title}</div>
-                        </div>
-                      )
-                    }
-                  </div>
-                </div>
-              )
-            }
-
+          {kit && kit.variants &&
             <div className={form.input}>
-              <div className={form.label}>
-                Изображения
-              </div>
-              <Images images={values.images} onImagesChange={this.handleImagesChange}/>
-            </div>
-
-            <div className={form.input}>
-              <div className={form.input_input}>
-                <div className={form.radio}>
-                  <div className={form.label}>
-                    Статус
-                  </div>
-
-                  <div className={form.options}>
-                    <label>
-                      <input type="radio" name="state" checked={'active' == values.state} value="active" onChange={this.handleInputChange} />
-                      Активный
-                    </label>
-
-                    <label>
-                      <input type="radio" name="state" checked={'archived' == values.state} value="archived" onChange={this.handleInputChange} />
-                      Архив
-                    </label>
-                  </div>
-                </div>
+              <div className={form.label}>Товары в образе</div>
+              <div className={control.kit_variants}>
+                {kit.variants.map(variant =>
+                  <div key={variant.id}>{variant.title}</div>
+                )}
               </div>
             </div>
-
-            <div>
-              <input className={buttons.main} type="submit" value="Сохранить" disabled={!this.canSubmit()} />
-            </div>
-          </form>
-
-        </div>
-      </div>
-    )
-  }
-
-  _loadAsyncData(id) {
-    this._asyncRequest = axios.CancelToken.source();
-
-    axios.get(path('edit_kit_path', {id: id, format: 'json' }), { authenticity_token: document.querySelector('[name="csrf-token"]').content})
-      .then(res => {
-        this.setState({
-          kit: res.data.kit,
-          values: {
-            title_en: res.data.kit.title_en,
-            title_ru: res.data.kit.title_ru,
-            state: res.data.kit.state,
-            images: res.data.kit.images,
-            image_ids: res.data.kit.images.map(i => i.id),
-            variant_ids: res.data.kit.variants.map(v => v.id)
           }
-        });
 
-        this._asyncRequest = null;
-      });
-  }
+          {categories &&
+            categories.map((category, index) =>
+              <div key={category.id} className={classNames(control.category, { [control.active]: category.active })}>
+                <div className={control.title} onClick={() => handleCategoryClick(category.id)}>
+                  {category.title}
+                  {kit && kit.variants && kit.variants.filter(v => v.category === category.id).length > 0 &&
+                    <div className={control.selected}>({kit.variants.filter(v => v.category === category.id).length})</div>
+                  }
+                </div>
 
-  handleInputChange = event => {
-    const target = event.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
+                <div className={control.variants}>
+                  {category.variants &&
+                    category.variants.map(variant =>
+                      <div key={variant.id} className={classNames(control.item, {[control.active]: values.variant_ids.includes(variant.id)})} onClick={() => handleVariantClick(variant)}>
+                        <div className={control.image}>
+                          <div className={control.selected} />
+                          <img src={variant.thumb}/>
+                        </div>
+                        <div>{variant.title}</div>
+                      </div>
+                    )
+                  }
+                </div>
+              </div>
+            )
+          }
 
-    this.setState(state => ({
-      values: { ...state.values, [name]: value }
-    }))
-  }
+          {/* <div className={form.el}>
+            <div className={form.label}>
+              Изображения
+            </div>
+            <Images images={values.images} onImagesChange={this.handleImagesChange}/>
+          </div> */}
 
+          <div className={form.el}>
+            <div className={form.label}>
+              Изображения
+            </div>
 
-  handleSubmit = event => {
-    if (this.props.id) {
-      this._handleUpdate()
-    }
-    else {
-      this._handleCreate()
-    }
-    event.preventDefault()
-  }
+            <div className={form.input}>
+              <Images
+                images={values.images_attributes}
+                onImagesChange={
+                  images => setValues({
+                    ...values,
+                    images_attributes: images.map((i, index) => ({ id: i.id, weight: index + 1 })),
+                    image_ids: images.map(i => i.id)
+                  })
+                }
+              />
+            </div>
+          </div>
 
-  canSubmit = () => {
-    return (
-      this.state.values.variant_ids
-    );
-  }
+          <div className={form.el}>
+            <div className={form.label}>
+              Статус
+            </div>
 
-  handleCategoryClick = (id) => {
-    let key = this.state.categories.findIndex(c => c.id == id)
+            <div className={form.radio}>
+              <div className={form.options}>
+                <label>
+                  <input type="radio" name="state" checked={ values.state === 'active' } value="active" onChange={handleChange} />
+                  Активный
+                </label>
 
-    const categories = update(this.state.categories, {
-      [key]: {
-        active: {
-          $set: !this.state.categories[key].active
-        }
-      }
-    });
+                <label>
+                  <input type="radio" name="state" checked={ values.state === 'archived' } value="archived" onChange={handleChange} />
+                  Архив
+                </label>
+              </div>
+            </div>
+          </div>
 
-    this.setState(state => ({
-      categories: categories
-    }))
-  }
+          <div>
+            {send && 'Настройки образа сохраняются..' }
 
-  handleVariantClick = (variant) => {
-    let variants = this.state.kit.variants
-
-    if (variants.map(v => v.id).includes(variant.id)) {
-      variants = variants.filter(v => v.id !== variant.id)
-    }
-    else {
-      variants.push(variant)
-    }
-
-    this.setState(state => ({
-      values: { ...state.values,
-        variant_ids: variants.map(v => v.id)
-      },
-      kit: { ...state.kit,
-        variants: variants
-      }
-    }))
-  }
-
-  _handleUpdate = async () => {
-    const res = await axios.patch(
-      path('kit_path', { id: this.props.id }),
-      { kit: this.state.values, authenticity_token: document.querySelector('[name="csrf-token"]').content }
-    )
-
-    if(res.headers.location) window.location = res.headers.location
-  }
-
-  _handleCreate = async () => {
-    const res = await axios.post(
-      path('kits_path'),
-      { kit: this.state.values, authenticity_token: document.querySelector('[name="csrf-token"]').content }
-    )
-
-    if(res.headers.location) window.location = res.headers.location
-  }
-
-  getProducts = inputValue => {
-    return axios.get(
-      path('list_variants_path', {format: 'json' }), { params: { q: inputValue } }).then(res => {
-        this.setState({
-          categories: res.data.categories
-        });
-
-        this._asyncRequest = null;
-      });
-  }
-
-  handleImagesChange = (images) => {
-    this.setState(state => ({
-      values: { ...state.values,
-        image_ids: images.map(i => i.id),
-        images_attributes: images.map((i, index) => ({id:i.id, weight: index+1}))
-      }
-    }))
-  }
+            {!send &&
+              <>
+                <input type="submit" value="Сохранить" className={classNames(buttons.main, buttons.big)} disabled={send || canSubmit() />} />
+              </>
+            }
+          </div>
+        </form>
+      </div>
+    </div>
+  )
 }
-
-export default Form
