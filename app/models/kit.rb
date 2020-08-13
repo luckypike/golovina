@@ -10,6 +10,9 @@ class Kit < ApplicationRecord
   has_many :images, as: :imagable, dependent: :destroy
   accepts_nested_attributes_for :images
 
+  has_one_attached :video
+  has_one_attached :video_mp4
+
   validates :state, presence: true
 
   translates :title

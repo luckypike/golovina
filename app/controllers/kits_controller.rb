@@ -97,11 +97,12 @@ class KitsController < ApplicationController
       + [
         image_ids: %i[]
       ] \
+      + %i[video video_mp4] \
       + [
         variant_ids: %i[]
       ] \
       + [
-        images_attributes: %i[id weight]
+        images_attributes: %i[id weight favourite]
       ]
 
     # params.require(:kit).permit(:title, :created_at, :theme_id, :state, :latest, image_ids: [], variant_ids: [], images_attributes: [:weight, :id])

@@ -1,4 +1,6 @@
 json.values do
+  json.extract! kit, :state
+
   kit.globalize_attribute_names.each do |f|
     json.set! f, kit.send(f) || ''
   end

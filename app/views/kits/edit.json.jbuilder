@@ -7,6 +7,8 @@ json.kit do
     json.thumb variant.images.first.photo.preview.url if variant.images.size.positive?
     json.category variant.product.category_id
   end
+
+  json.video @kit.video, :filename if @kit.video.attached?
 end
 
 json.partial! 'values', kit: @kit

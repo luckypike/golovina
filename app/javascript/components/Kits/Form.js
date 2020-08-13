@@ -7,6 +7,7 @@ import { path } from '../Routes'
 import { useI18n } from '../I18n'
 
 import Images from '../Images/Images'
+import Video from '../Variants/Form/Video'
 
 import buttons from '../Buttons.module.css'
 import page from '../Page.module.css'
@@ -32,10 +33,10 @@ export default function Form ({ id, locale }) {
           kit,
           values
         }
-      } = await axios.get(path('edit_kit_path', { id, format: 'json' }))
+      } = await axios.get(id ? path('edit_kit_path', { id, format: 'json' }) : path('new_kit_path', { format: 'json' }))
 
-      setValues(values)
       setKit(kit)
+      setValues(values)
     }
 
     _fetch()
@@ -226,6 +227,16 @@ export default function Form ({ id, locale }) {
 
           <div className={form.el}>
             <div className={form.label}>
+              Видео
+            </div>
+
+            <div className={form.input}>
+              <Video values={values} setValues={setValues} filename={kit.video && kit.video.filename} />
+            </div>
+          </div>
+
+          <div className={form.el}>
+            <div className={form.label}>
               Статус
             </div>
 
@@ -249,7 +260,7 @@ export default function Form ({ id, locale }) {
 
             {!send &&
               <>
-                <input type="submit" value="Сохранить" className={classNames(buttons.main, buttons.big)} disabled={send || canSubmit() />} />
+                <input type="submit" value="Сохранить" className={classNames(buttons.main, buttons.big)} disabled={send} />
               </>
             }
           </div>
