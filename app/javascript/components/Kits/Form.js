@@ -23,6 +23,7 @@ export default function Form ({ id, locale }) {
   const I18n = useI18n(locale)
 
   const [values, setValues] = useState()
+  const [dictionaries, setDictionaries] = useState()
   const [kit, setKit] = useState()
   const [categories, setCategories] = useState()
 
@@ -31,12 +32,14 @@ export default function Form ({ id, locale }) {
       const {
         data: {
           kit,
-          values
+          values,
+          dictionaries
         }
       } = await axios.get(id ? path('edit_kit_path', { id, format: 'json' }) : path('new_kit_path', { format: 'json' }))
 
       setKit(kit)
       setValues(values)
+      setDictionaries(dictionaries)
     }
 
     _fetch()
@@ -128,7 +131,7 @@ export default function Form ({ id, locale }) {
     setValues({ ...values, variant_ids: variants.map(v => v.id) })
   }
 
-  if (!values) return null
+  if (!values || !dictionaries) return null
 
   return (
     <div className={page.gray}>
@@ -199,12 +202,23 @@ export default function Form ({ id, locale }) {
             )
           }
 
-          {/* <div className={form.el}>
-            <div className={form.label}>
-              Изображения
-            </div>
-            <Images images={values.images} onImagesChange={this.handleImagesChange}/>
-          </div> */}
+          <div className={form.el}>
+            <label>
+              <div className={form.label}>
+                Категория
+              </div>
+
+              <div className={form.input}>
+                <select name="category_id" onChange={handleChange} value={values.category_id}>
+                  <option>Выберите категорию...</option>
+
+                  {dictionaries.categories.map(category =>
+                    <option key={category.id} value={category.id}>{category.title}</option>
+                  )}
+                </select>
+              </div>
+            </label>
+          </div>
 
           <div className={form.el}>
             <div className={form.label}>

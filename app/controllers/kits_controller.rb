@@ -93,7 +93,7 @@ class KitsController < ApplicationController
 
     permitted =
       Kit.globalize_attribute_names \
-      + %i[title created_at theme_id state latest] \
+      + %i[title created_at theme_id state latest category_id] \
       + [
         image_ids: %i[]
       ] \

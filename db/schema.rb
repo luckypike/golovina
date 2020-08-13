@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_100354) do
+ActiveRecord::Schema.define(version: 2020_08_13_154647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,6 +230,8 @@ ActiveRecord::Schema.define(version: 2020_07_28_100354) do
     t.boolean "latest", default: false
     t.integer "state", default: 0
     t.string "title"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_kits_on_category_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -552,6 +554,7 @@ ActiveRecord::Schema.define(version: 2020_07_28_100354) do
   add_foreign_key "discounts", "users"
   add_foreign_key "identities", "users"
   add_foreign_key "kitables", "variants"
+  add_foreign_key "kits", "categories"
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "variants"
   add_foreign_key "order_items", "orders"

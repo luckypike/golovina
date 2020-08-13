@@ -13,6 +13,8 @@ class Kit < ApplicationRecord
   has_one_attached :video
   has_one_attached :video_mp4
 
+  belongs_to :category, optional: true
+
   validates :state, presence: true
 
   translates :title
