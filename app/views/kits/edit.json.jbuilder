@@ -8,7 +8,7 @@ json.kit do
     json.category variant.product.category_id
   end
 
-  json.video @kit.video, :filename if @kit.video.attached?
+  # json.video @kit.video, :filename if @kit.video.attached?
 end
 
 json.partial! 'values', kit: @kit

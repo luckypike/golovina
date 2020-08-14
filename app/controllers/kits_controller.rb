@@ -97,7 +97,7 @@ class KitsController < ApplicationController
       + [
         image_ids: %i[]
       ] \
-      + %i[video video_mp4] \
+      + %i[video video_mp4 video_poster] \
       + [
         variant_ids: %i[]
       ] \
