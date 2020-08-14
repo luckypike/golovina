@@ -5,6 +5,7 @@ import classNames from 'classnames'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
+import { AwsContext } from '../Aws'
 
 import Images from '../Images/Images'
 import Video from '../Variants/Form/Video'
@@ -16,10 +17,11 @@ import control from './Control/Control.module.css'
 
 Form.propTypes = {
   id: PropTypes.number,
-  locale: PropTypes.string
+  locale: PropTypes.string,
+  aws: PropTypes.object
 }
 
-export default function Form ({ id, locale }) {
+export default function Form ({ id, locale, aws }) {
   const I18n = useI18n(locale)
 
   const [values, setValues] = useState()
@@ -134,152 +136,154 @@ export default function Form ({ id, locale }) {
   if (!values || !dictionaries) return null
 
   return (
-    <div className={page.gray}>
-      <div className={page.title}>
-        <h1>{kit ? 'Редактирование образа' : 'Новый образ'}</h1>
-      </div>
+    <AwsContext.Provider value={aws}>
+      <div className={page.gray}>
+        <div className={page.title}>
+          <h1>{kit ? 'Редактирование образа' : 'Новый образ'}</h1>
+        </div>
 
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div className={form.el}>
-            {I18n.available_locales.map(locale =>
-              <div className={form.gl} key={locale}>
-                <label>
-                  <div className={form.label}>
-                    {locale}
-                  </div>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div className={form.el}>
+              {I18n.available_locales.map(locale =>
+                <div className={form.gl} key={locale}>
+                  <label>
+                    <div className={form.label}>
+                      {locale}
+                    </div>
 
-                  <div className={form.input}>
-                    <input
-                      type="text"
-                      value={values[`title_${locale}`]}
-                      name={`title_${locale}`}
-                      onChange={handleChange}
-                      placeholder="Заполните название товара..."
-                    />
-                  </div>
-                </label>
+                    <div className={form.input}>
+                      <input
+                        type="text"
+                        value={values[`title_${locale}`]}
+                        name={`title_${locale}`}
+                        onChange={handleChange}
+                        placeholder="Заполните название товара..."
+                      />
+                    </div>
+                  </label>
 
-              </div>
-            )}
-          </div>
-
-          {kit && kit.variants &&
-            <div className={form.input}>
-              <div className={form.label}>Товары в образе</div>
-              <div className={control.kit_variants}>
-                {kit.variants.map(variant =>
-                  <div key={variant.id}>{variant.title}</div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
-          }
 
-          {categories &&
-            categories.map((category, index) =>
-              <div key={category.id} className={classNames(control.category, { [control.active]: category.active })}>
-                <div className={control.title} onClick={() => handleCategoryClick(category.id)}>
-                  {category.title}
-                  {kit && kit.variants && kit.variants.filter(v => v.category === category.id).length > 0 &&
-                    <div className={control.selected}>({kit.variants.filter(v => v.category === category.id).length})</div>
-                  }
-                </div>
-
-                <div className={control.variants}>
-                  {category.variants &&
-                    category.variants.map(variant =>
-                      <div key={variant.id} className={classNames(control.item, {[control.active]: values.variant_ids.includes(variant.id)})} onClick={() => handleVariantClick(variant)}>
-                        <div className={control.image}>
-                          <div className={control.selected} />
-                          <img src={variant.thumb}/>
-                        </div>
-                        <div>{variant.title}</div>
-                      </div>
-                    )
-                  }
+            {kit && kit.variants &&
+              <div className={form.input}>
+                <div className={form.label}>Товары в образе</div>
+                <div className={control.kit_variants}>
+                  {kit.variants.map(variant =>
+                    <div key={variant.id}>{variant.title}</div>
+                  )}
                 </div>
               </div>
-            )
-          }
+            }
 
-          <div className={form.el}>
-            <label>
+            {categories &&
+              categories.map((category, index) =>
+                <div key={category.id} className={classNames(control.category, { [control.active]: category.active })}>
+                  <div className={control.title} onClick={() => handleCategoryClick(category.id)}>
+                    {category.title}
+                    {kit && kit.variants && kit.variants.filter(v => v.category === category.id).length > 0 &&
+                      <div className={control.selected}>({kit.variants.filter(v => v.category === category.id).length})</div>
+                    }
+                  </div>
+
+                  <div className={control.variants}>
+                    {category.variants &&
+                      category.variants.map(variant =>
+                        <div key={variant.id} className={classNames(control.item, {[control.active]: values.variant_ids.includes(variant.id)})} onClick={() => handleVariantClick(variant)}>
+                          <div className={control.image}>
+                            <div className={control.selected} />
+                            <img src={variant.thumb}/>
+                          </div>
+                          <div>{variant.title}</div>
+                        </div>
+                      )
+                    }
+                  </div>
+                </div>
+              )
+            }
+
+            <div className={form.el}>
+              <label>
+                <div className={form.label}>
+                  Категория
+                </div>
+
+                <div className={form.input}>
+                  <select name="category_id" onChange={handleChange} value={values.category_id}>
+                    <option>Выберите категорию...</option>
+
+                    {dictionaries.categories.map(category =>
+                      <option key={category.id} value={category.id}>{category.title}</option>
+                    )}
+                  </select>
+                </div>
+              </label>
+            </div>
+
+            <div className={form.el}>
               <div className={form.label}>
-                Категория
+                Изображения
               </div>
 
               <div className={form.input}>
-                <select name="category_id" onChange={handleChange} value={values.category_id}>
-                  <option>Выберите категорию...</option>
-
-                  {dictionaries.categories.map(category =>
-                    <option key={category.id} value={category.id}>{category.title}</option>
-                  )}
-                </select>
-              </div>
-            </label>
-          </div>
-
-          <div className={form.el}>
-            <div className={form.label}>
-              Изображения
-            </div>
-
-            <div className={form.input}>
-              <Images
-                images={values.images_attributes}
-                onImagesChange={
-                  images => setValues({
-                    ...values,
-                    images_attributes: images.map((i, index) => ({ id: i.id, weight: index + 1 })),
-                    image_ids: images.map(i => i.id)
-                  })
-                }
-              />
-            </div>
-          </div>
-
-          <div className={form.el}>
-            <div className={form.label}>
-              Видео
-            </div>
-
-            <div className={form.input}>
-              <Video values={values} setValues={setValues} filename={kit.video && kit.video.filename} />
-            </div>
-          </div>
-
-          <div className={form.el}>
-            <div className={form.label}>
-              Статус
-            </div>
-
-            <div className={form.radio}>
-              <div className={form.options}>
-                <label>
-                  <input type="radio" name="state" checked={ values.state === 'active' } value="active" onChange={handleChange} />
-                  Активный
-                </label>
-
-                <label>
-                  <input type="radio" name="state" checked={ values.state === 'archived' } value="archived" onChange={handleChange} />
-                  Архив
-                </label>
+                <Images
+                  images={values.images_attributes}
+                  onImagesChange={
+                    images => setValues({
+                      ...values,
+                      images_attributes: images.map((i, index) => ({ id: i.id, weight: index + 1 })),
+                      image_ids: images.map(i => i.id)
+                    })
+                  }
+                />
               </div>
             </div>
-          </div>
 
-          <div>
-            {send && 'Настройки образа сохраняются..' }
+            <div className={form.el}>
+              <div className={form.label}>
+                Видео
+              </div>
 
-            {!send &&
-              <>
-                <input type="submit" value="Сохранить" className={classNames(buttons.main, buttons.big)} disabled={send} />
-              </>
-            }
-          </div>
-        </form>
+              <div className={form.input}>
+                <Video values={values} setValues={setValues} filename={kit.video && kit.video.filename} />
+              </div>
+            </div>
+
+            <div className={form.el}>
+              <div className={form.label}>
+                Статус
+              </div>
+
+              <div className={form.radio}>
+                <div className={form.options}>
+                  <label>
+                    <input type="radio" name="state" checked={ values.state === 'active' } value="active" onChange={handleChange} />
+                    Активный
+                  </label>
+
+                  <label>
+                    <input type="radio" name="state" checked={ values.state === 'archived' } value="archived" onChange={handleChange} />
+                    Архив
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              {send && 'Настройки образа сохраняются..' }
+
+              {!send &&
+                <>
+                  <input type="submit" value="Сохранить" className={classNames(buttons.main, buttons.big)} disabled={send} />
+                </>
+              }
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </AwsContext.Provider>
   )
 }
