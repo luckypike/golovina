@@ -6,6 +6,7 @@ import classNames from 'classnames'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
+import { AwsContext } from '../Aws'
 import { Errors } from '../Form'
 import Images from '../Images/Images'
 import Video from './Form/Video'
@@ -18,10 +19,11 @@ import styles from './Form.module.css'
 Form.propTypes = {
   id: PropTypes.number,
   product_id: PropTypes.number,
-  locale: PropTypes.string
+  locale: PropTypes.string,
+  aws: PropTypes.object
 }
 
-export default function Form ({ id, product_id: productId, locale }) {
+export default function Form ({ id, product_id: productId, locale, aws }) {
   const I18n = useI18n(locale)
 
   const [values, setValues] = useState()
@@ -131,154 +133,185 @@ export default function Form ({ id, product_id: productId, locale }) {
   if (!values || !dictionaries) return null
 
   return (
-    <div className={page.gray}>
-      <div className={page.title}>
-        <h1>{variant.title ? `Редактирование: ${variant.title}` : 'Новый товар'}</h1>
-      </div>
+    <AwsContext.Provider value={aws}>
+      <div className={page.gray}>
+        <div className={page.title}>
+          <h1>{variant.title ? `Редактирование: ${variant.title}` : 'Новый товар'}</h1>
+        </div>
 
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div className={form.el}>
-            <label>
-              <div className={form.label}>
-                Статус
-              </div>
-
-              <div className={form.input}>
-                <select name="state" onChange={handleChange} value={values.state}>
-                  {dictionaries.states.map(state =>
-                    <option key={state} value={state}>{I18n.t(`variant.states.${state}`)}</option>
-                  )}
-                </select>
-              </div>
-            </label>
-
-            <div className={form.hint}>
-              Неопубликованные товары видны только редакторам, размещенные становятся видны всем, а архивные скрываются ото всех и найти их можно только через управление.
-            </div>
-          </div>
-
-          <div className={styles.group}>
-            <Product
-              errors={errors}
-              dictionaries={dictionaries}
-              locale={locale}
-              productValues={values.product_attributes}
-              onValuesChange={
-                productValues => setValues({ ...values, product_attributes: productValues })
-              }
-            />
-
-            <div className={form.hint}>
-              Общие параметры товара, изменение приведёт к смене названия и категори по всех цветов.
-            </div>
-          </div>
-
-          {dictionaries.themes.map(theme =>
-            <div key={theme.id} className={form.el}>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div className={form.el}>
               <label>
-                <div className={form.checkbox}>
-                  <input
-                    type="checkbox"
-                    value={theme.id}
-                    checked={values.theme_ids.includes(theme.id)}
-                    onChange={handleThemeChange}
-                  />
+                <div className={form.label}>
+                  Статус
+                </div>
 
-                  {theme.title}
+                <div className={form.input}>
+                  <select name="state" onChange={handleChange} value={values.state}>
+                    {dictionaries.states.map(state =>
+                      <option key={state} value={state}>{I18n.t(`variant.states.${state}`)}</option>
+                    )}
+                  </select>
                 </div>
               </label>
+
+              <div className={form.hint}>
+                Неопубликованные товары видны только редакторам, размещенные становятся видны всем, а архивные скрываются ото всех и найти их можно только через управление.
+              </div>
             </div>
-          )}
 
-          <div className={form.el}>
-            <label>
-              <div className={form.label}>
-                Артикул
+            <div className={styles.group}>
+              <Product
+                errors={errors}
+                dictionaries={dictionaries}
+                locale={locale}
+                productValues={values.product_attributes}
+                onValuesChange={
+                  productValues => setValues({ ...values, product_attributes: productValues })
+                }
+              />
+
+              <div className={form.hint}>
+                Общие параметры товара, изменение приведёт к смене названия и категори по всех цветов.
               </div>
+            </div>
 
-              <div className={form.input}>
-                <input
-                  type="text"
-                  value={values.code}
-                  name="code"
-                  onChange={handleChange}
-                  placeholder="Укажите артикул если есть..."
-                />
+            {dictionaries.themes.map(theme =>
+              <div key={theme.id} className={form.el}>
+                <label>
+                  <div className={form.checkbox}>
+                    <input
+                      type="checkbox"
+                      value={theme.id}
+                      checked={values.theme_ids.includes(theme.id)}
+                      onChange={handleThemeChange}
+                    />
+
+                    {theme.title}
+                  </div>
+                </label>
               </div>
-            </label>
+            )}
 
-            <Errors errors={errors.code} />
-          </div>
-
-          <div className={form.el}>
-            <label>
-              <div className={form.label}>
-                Стоимость
-              </div>
-
-              <div className={form.input}>
-                <input
-                  type="text"
-                  value={values.price}
-                  name="price"
-                  onChange={handleChange}
-                  placeholder="Укажите стоимость..."
-                />
-              </div>
-            </label>
-
-            <Errors errors={errors.price} />
-          </div>
-
-          <div className={form.el}>
-            <label>
-              <div className={form.label}>
-                Стоимость со скидкой
-              </div>
-
-              <div className={form.input}>
-                <input
-                  type="text"
-                  value={values.price_last}
-                  name="price_last"
-                  onChange={handleChange}
-                />
-              </div>
-            </label>
-
-            <Errors errors={errors.price_last} />
-          </div>
-
-          <div className={form.el}>
-            <label>
-              <div className={form.label}>
-                Цвет
-              </div>
-
-              <div className={form.input}>
-                <select name="color_id" onChange={handleChange} value={values.color_id}>
-                  <option>Выберите цвет...</option>
-
-                  {dictionaries.colors.map(color =>
-                    <optgroup key={color.id} label={color.title}>
-                      {color.colors.map(color =>
-                        <option key={color.id} value={color.id}>{color.title}</option>
-                      )}
-                    </optgroup>
-                  )}
-                </select>
-              </div>
-            </label>
-
-            <Errors errors={errors.color} />
-          </div>
-
-          <div className={styles.group}>
             <div className={form.el}>
-              <h2 className={form.label}>
-                Название товара в конкретном цвете
-              </h2>
+              <label>
+                <div className={form.label}>
+                  Артикул
+                </div>
+
+                <div className={form.input}>
+                  <input
+                    type="text"
+                    value={values.code}
+                    name="code"
+                    onChange={handleChange}
+                    placeholder="Укажите артикул если есть..."
+                  />
+                </div>
+              </label>
+
+              <Errors errors={errors.code} />
+            </div>
+
+            <div className={form.el}>
+              <label>
+                <div className={form.label}>
+                  Стоимость
+                </div>
+
+                <div className={form.input}>
+                  <input
+                    type="text"
+                    value={values.price}
+                    name="price"
+                    onChange={handleChange}
+                    placeholder="Укажите стоимость..."
+                  />
+                </div>
+              </label>
+
+              <Errors errors={errors.price} />
+            </div>
+
+            <div className={form.el}>
+              <label>
+                <div className={form.label}>
+                  Стоимость со скидкой
+                </div>
+
+                <div className={form.input}>
+                  <input
+                    type="text"
+                    value={values.price_last}
+                    name="price_last"
+                    onChange={handleChange}
+                  />
+                </div>
+              </label>
+
+              <Errors errors={errors.price_last} />
+            </div>
+
+            <div className={form.el}>
+              <label>
+                <div className={form.label}>
+                  Цвет
+                </div>
+
+                <div className={form.input}>
+                  <select name="color_id" onChange={handleChange} value={values.color_id}>
+                    <option>Выберите цвет...</option>
+
+                    {dictionaries.colors.map(color =>
+                      <optgroup key={color.id} label={color.title}>
+                        {color.colors.map(color =>
+                          <option key={color.id} value={color.id}>{color.title}</option>
+                        )}
+                      </optgroup>
+                    )}
+                  </select>
+                </div>
+              </label>
+
+              <Errors errors={errors.color} />
+            </div>
+
+            <div className={styles.group}>
+              <div className={form.el}>
+                <h2 className={form.label}>
+                  Название товара в конкретном цвете
+                </h2>
+
+                {I18n.available_locales.map(locale =>
+                  <div className={form.gl} key={locale}>
+                    <label>
+                      <div className={form.label}>
+                        {locale}
+                      </div>
+
+                      <div className={form.input}>
+                        <input
+                          type="text"
+                          value={values[`title_${locale}`]}
+                          name={`title_${locale}`}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </label>
+                  </div>
+                )}
+
+                <div className={form.hint}>
+                  Название для выбранного цвета, можно оставить пустым — тогда будет браться общее название товара.
+                </div>
+              </div>
+            </div>
+
+            <div className={form.el}>
+              <div className={form.label}>
+                Описание
+              </div>
 
               {I18n.available_locales.map(locale =>
                 <div className={form.gl} key={locale}>
@@ -288,125 +321,100 @@ export default function Form ({ id, product_id: productId, locale }) {
                     </div>
 
                     <div className={form.input}>
-                      <input
-                        type="text"
-                        value={values[`title_${locale}`]}
-                        name={`title_${locale}`}
-                        onChange={handleChange}
-                      />
+                      <textarea value={values[`desc_${locale}`]} name={`desc_${locale}`} onChange={handleChange} />
                     </div>
                   </label>
                 </div>
               )}
-
-              <div className={form.hint}>
-                Название для выбранного цвета, можно оставить пустым — тогда будет браться общее название товара.
-              </div>
-            </div>
-          </div>
-
-          <div className={form.el}>
-            <div className={form.label}>
-              Описание
             </div>
 
-            {I18n.available_locales.map(locale =>
-              <div className={form.gl} key={locale}>
-                <label>
-                  <div className={form.label}>
-                    {locale}
-                  </div>
-
-                  <div className={form.input}>
-                    <textarea value={values[`desc_${locale}`]} name={`desc_${locale}`} onChange={handleChange} />
-                  </div>
-                </label>
-              </div>
-            )}
-          </div>
-
-          <div className={form.el}>
-            <div className={form.label}>
-              Состав
-            </div>
-
-            {I18n.available_locales.map(locale =>
-              <div className={form.gl} key={locale}>
-                <label>
-                  <div className={form.label}>
-                    {locale}
-                  </div>
-
-                  <div className={form.input}>
-                    <textarea value={values[`comp_${locale}`]} name={`comp_${locale}`} onChange={handleChange} />
-                  </div>
-                </label>
-              </div>
-            )}
-          </div>
-
-          {id &&
             <div className={form.el}>
-              <label>
-                <div className={form.label}>
-                  Дата создания
+              <div className={form.label}>
+                Состав
+              </div>
+
+              {I18n.available_locales.map(locale =>
+                <div className={form.gl} key={locale}>
+                  <label>
+                    <div className={form.label}>
+                      {locale}
+                    </div>
+
+                    <div className={form.input}>
+                      <textarea value={values[`comp_${locale}`]} name={`comp_${locale}`} onChange={handleChange} />
+                    </div>
+                  </label>
                 </div>
-
-                <div className={form.input}>
-                  <input
-                    type="datetime-local"
-                    value={values.created_at}
-                    name="created_at"
-                    onChange={handleChange}
-                  />
-                </div>
-              </label>
-
-              <Errors errors={errors.price_last} />
-            </div>
-          }
-
-          <div className={form.el}>
-            <div className={form.label}>
-              Изображения
+              )}
             </div>
 
-            <div className={form.input}>
-              <Images
-                images={values.images_attributes}
-                onImagesChange={
-                  images => setValues({ ...values, images_attributes: images.map((i, index) => ({ id: i.id, weight: index + 1, favourite: i.favourite })) })
-                }
-              />
-            </div>
-          </div>
+            {id &&
+              <div className={form.el}>
+                <label>
+                  <div className={form.label}>
+                    Дата создания
+                  </div>
 
-          <div className={form.el}>
-            {/* <div className={form.label}>
-              Видео
-            </div> */}
+                  <div className={form.input}>
+                    <input
+                      type="datetime-local"
+                      value={values.created_at}
+                      name="created_at"
+                      onChange={handleChange}
+                    />
+                  </div>
+                </label>
 
-            <div className={form.input}>
-              <Video values={values} setValues={setValues} filename={variant.video && variant.video.filename} />
-            </div>
-          </div>
-
-          <div>
-            {send && 'Настройки товара сохраняются..' }
-
-            {!send &&
-              <>
-                <input type="submit" value="Сохранить" className={classNames(buttons.main, buttons.big)} disabled={send} />
-
-                {id &&
-                  <a href={path('category_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>
-                }
-              </>
+                <Errors errors={errors.price_last} />
+              </div>
             }
-          </div>
-        </form>
+
+            <div className={form.el}>
+              <div className={form.label}>
+                Изображения
+              </div>
+
+              <div className={form.input}>
+                <Images
+                  images={values.images_attributes}
+                  onImagesChange={
+                    images => setValues({ ...values, images_attributes: images.map((i, index) => ({ id: i.id, weight: index + 1, favourite: i.favourite })) })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className={form.el}>
+              <div className={form.label}>
+                Видео
+              </div>
+
+              <div className={form.input}>
+                <Video
+                  values={values}
+                  setValues={setValues}
+                  filename={variant.video && variant.video.filename}
+                />
+              </div>
+            </div>
+
+            <div>
+              {send && 'Настройки товара сохраняются..' }
+
+              {!send &&
+                <>
+                  <input type="submit" value="Сохранить" className={classNames(buttons.main, buttons.big)} disabled={send} />
+
+                  {id &&
+                    <a href={path('category_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>
+                  }
+                </>
+              }
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </AwsContext.Provider>
   )
 }
 

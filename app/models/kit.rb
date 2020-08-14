@@ -12,6 +12,7 @@ class Kit < ApplicationRecord
 
   has_one_attached :video
   has_one_attached :video_mp4
+  has_one_attached :video_poster
 
   belongs_to :category, optional: true
 

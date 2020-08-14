@@ -1,3 +1,54 @@
+.root {
+  display: flex;
+}
+
+.poster {
+  margin-right: var(--xr);
+  position: relative;
+  width: 76px;
+  background-color: #fff;
+  box-shadow: inset 0 0 0 1px var(--sp_color);
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: calc(4 / 3 * 100%);
+  }
+}
+
+.video {
+  margin-right: var(--xr);
+  position: relative;
+  width: 76px;
+  background-color: #fff;
+  box-shadow: inset 0 0 0 1px var(--sp_color);
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: calc(4 / 3 * 100%);
+  }
+}
+
+.dropzone {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.uploading {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: url(../../../images/icons/oval.svg) no-repeat center;
+  background-size: 2rem;
+}
+
 .button {
   margin-top: calc(var(--yr) * var(--s1));
 
@@ -10,7 +61,50 @@
 
 .delete {
   cursor: pointer;
-  margin-left: 2em;
-  text-decoration: underline;
-  text-decoration-color: var(--gr_color);
+  position: absolute;
+  background: #000 url(../../../images/icons/delete.svg) center no-repeat;
+  width: 24px;
+  height: 24px;
+  right: var(--yr);
+  top: var(--yr);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  composes: at from '../../Fonts.module.css';
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.uploaded {
+  composes: at from '../../Fonts.module.css';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  & .text {
+    color: green;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.thumb {
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }

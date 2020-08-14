@@ -34,6 +34,7 @@ class Variant < ApplicationRecord
 
   has_one_attached :video
   has_one_attached :video_mp4
+  has_one_attached :video_poster
 
   validates :color, uniqueness: { scope: :product_id }
   # validates :code, uniqueness: true, unless: -> { code.blank? }

@@ -7,6 +7,10 @@ I18n.available_locales = %i[ru en]
 class I18nComponentMount < React::Rails::ComponentMount
   def react_component(name, props = {}, options = {}, &block)
     props[:locale] = I18n.locale
+    props[:aws] = {
+      endpoint: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :endpoint),
+      bucket: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :bucket)
+    }
 
     # props[:i18n] = {
     #   locale: I18n.locale,
