@@ -17,6 +17,8 @@ class Kit < ApplicationRecord
 
   validates :state, presence: true
 
+  after_save :update_category_variants_counter
+
   translates :title
   globalize_accessors locales: I18n.available_locales, attributes: %i[title]
 
@@ -30,5 +32,29 @@ class Kit < ApplicationRecord
 
   def photo
     images[0].photo.presence || nil
+  end
+
+  def update_category_variants_counter
+    Category.find(category_id_before_last_save).update_variants_counter if category_id_before_last_save
+    category.update_variants_counter
+  end
+
+  class << self
+    def for_list
+      with_translations(I18n.available_locales)
+        .includes(
+          :video_mp4_attachment,
+          :images,
+          {
+          variants: [
+            :images,
+            :translations,
+            :availabilities,
+            color: :translations,
+            product: %i[translations category]
+          ]
+        }
+        )
+    end
   end
 end

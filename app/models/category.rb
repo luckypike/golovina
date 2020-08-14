@@ -7,6 +7,7 @@ class Category < ApplicationRecord
 
   has_many :products, dependent: :nullify
   has_many :variants, through: :products
+  has_many :kits
 
   validates :state, :title_ru, presence: true
   validates :slug, uniqueness: true, presence: true, format: { with: /\A[a-z0-9-]+\z/, message: :only_slug }
@@ -22,7 +23,7 @@ class Category < ApplicationRecord
   end
 
   def update_variants_counter
-    update_attribute(:variants_counter, variants.active.size)
+    update_attribute(:variants_counter, variants.active.size + kits.active.size)
   end
 
   class << self

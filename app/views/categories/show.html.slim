@@ -1,5 +1,5 @@
 - title @category.title
-- description @variants.map(&:title_last).join(', ')
+- description (@kits.map(&:human_title) + @variants.map(&:title_last)).join(', ')
 - set_meta_tags og: { \
   image: Image.category(@category).map{ |image| image.photo.large.url } \
 }
