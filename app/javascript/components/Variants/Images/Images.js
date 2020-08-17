@@ -52,7 +52,7 @@ export default function Images ({ variant }) {
           <div className={styles.image}>
             {variant.video_poster &&
               <Video
-                poster={`https://golovina.store/video/${variant.video_poster}`}
+                poster={`https://golovina.store/${variant.video_poster}`}
                 src={`https://golovina.store/video/${variant.video}.mp4#t=0.1`}
               />
             }
