@@ -22,7 +22,7 @@ class OrderMailer < ApplicationMailer
 
   def refund refund
     @refund = refund
-    mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: "Оформлен возрат на заказ № #{refund.order.number}")
+    mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: "Оформлен возврат на заказ № #{refund.order.number}")
   end
 
   def tracker
