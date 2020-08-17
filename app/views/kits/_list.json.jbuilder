@@ -5,7 +5,7 @@ json.array! kits do |kit|
 
   if kit.video_mp4.attached?
     json.video kit.video_mp4.key
-    json.video_poster kit.video_poster.key
+    json.video_poster kit.video_poster.key if kit.video_poster.present?
   end
 
   json.variants kit.variants do |variant|
