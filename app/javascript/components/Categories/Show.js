@@ -5,8 +5,7 @@ import axios from 'axios'
 import { path } from '../Routes'
 import { I18nContext, useI18n } from '../I18n'
 
-import List from '../Variants/List'
-import List2 from '../Kits/List2'
+import List from './List'
 
 import page from '../Page'
 
@@ -18,14 +17,13 @@ Show.propTypes = {
 export default function Show (props) {
   const I18n = useI18n(props.locale)
   const category = props.category
-  const [kits, setKits] = useState(null)
-  const [variants, setVariants] = useState(null)
+  const [object, setObject] = useState(null)
 
   useEffect(() => {
     const _loadAsyncData = async () => {
-      const { data: { kits, variants } } = await axios.get(path('catalog_category_path', { slug: category.slug, format: 'json' }))
-      setKits(kits)
-      setVariants(variants)
+      const { data: { object } } = await axios.get(path('catalog_category_path', { slug: category.slug, format: 'json' }))
+
+      setObject(object)
     }
 
     _loadAsyncData()
@@ -40,14 +38,11 @@ export default function Show (props) {
           </h1>
         </div>
 
-        <div>
-          {kits &&
-            <List2 kits={kits} />
-          }
-          {variants &&
-            <List variants={variants} />
-          }
-        </div>
+        {object &&
+          <List
+            object={object}
+          />
+        }
       </div>
     </I18nContext.Provider>
   )

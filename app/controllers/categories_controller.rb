@@ -18,6 +18,8 @@ class CategoriesController < ApplicationController
 
     @variants = policy_scope(@category.variants.order(weight: :asc).for_list)
 
+    @object = @kits + @variants
+
     respond_to :html, :json
   end
 
