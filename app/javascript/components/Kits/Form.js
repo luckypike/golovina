@@ -213,7 +213,7 @@ export default function Form ({ id, locale, aws }) {
 
                 <div className={form.input}>
                   <select name="category_id" onChange={handleChange} value={values.category_id}>
-                    <option>Выберите категорию...</option>
+                    <option value=''>Выберите категорию...</option>
 
                     {dictionaries.categories.map(category =>
                       <option key={category.id} value={category.id}>{category.title}</option>
