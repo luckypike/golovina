@@ -10,7 +10,7 @@
 = react_component \
   'Pages/Index',
   { \
-    slides: @slides.map{ |slide| slide.slice(:id, :name, :link, :link_relative).merge({ image: slide.image.large.url }) },
+    slides: SlideSerializer.new(@slides).serializable_hash,
     instagram: Rails.application.credentials[Rails.env.to_sym][:instagram] \
   },
   { \

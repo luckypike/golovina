@@ -33,12 +33,6 @@ end
 
 every 15.minutes do
   rake 'variants:convert_video'
-end
-
-every 15.minutes do
   rake 'slides:convert_video'
-end
-
-every 15.minutes do
   rake 'kits:convert_video'
 end
