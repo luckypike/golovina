@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
 import { Errors } from '../Form'
-import Video from './Form/Video'
+import Video from '../Variants/Form/Video'
 
 import page from '../Page.module.css'
 import form from '../Form.module.css'
@@ -21,18 +21,17 @@ export default function Form (props) {
   const image = useRef()
 
   const I18n = useI18n(props.locale)
-  // const axios = useAxios()
   const { id } = props
 
-  const [values, setValues] = useState()
   const [slide, setSlide] = useState()
+  const [values, setValues] = useState()
 
   useEffect(() => {
     const _fetch = async () => {
       const {
         data: {
-          values,
-          slide
+          slide,
+          values
         }
       } = await axios.get(id ? path('edit_slide_path', { id, format: 'json' }) : path('new_slide_path', { format: 'json' }))
 

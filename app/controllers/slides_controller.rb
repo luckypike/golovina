@@ -14,6 +14,9 @@ class SlidesController < ApplicationController
   end
 
   def create
+    params[:slide][:video_mp4] = nil if slide_params[:video_mp4] == 'null'
+    params[:slide][:video] = nil if slide_params[:video] == 'null'
+
     @slide = Slide.new(slide_params)
 
     authorize @slide
