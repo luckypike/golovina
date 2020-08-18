@@ -10,13 +10,11 @@ import styles from './Video.module.css'
 
 Video.propTypes = {
   values: PropTypes.object.isRequired,
-  setValues: PropTypes.func.isRequired,
-  filename: PropTypes.string
+  setValues: PropTypes.func.isRequired
 }
 
-export default function Video ({ values, setValues, filename }) {
+export default function Video ({ values, setValues }) {
   const [uploading, setUploading] = useState(false)
-  const [video, setVideo] = useState(filename)
 
   const handlePhotoUpload = useCallback(async acceptedFiles => {
     const url = '/rails/active_storage/direct_uploads.json'
@@ -41,18 +39,10 @@ export default function Video ({ values, setValues, filename }) {
     e.preventDefault()
 
     setValues({ ...values, video: null, video_mp4: null })
-    setVideo(null)
   }
 
   return (
     <div className={styles.root}>
-      {video &&
-        <div className={styles.notify}>
-          Загружено видео: {video}
-
-        </div>
-      }
-
       <Poster
         values={values}
         setValues={setValues}

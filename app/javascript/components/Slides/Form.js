@@ -140,7 +140,6 @@ export default function Form (props) {
               <Video
                 values={values}
                 setValues={setValues}
-                filename={slide.video && slide.video.filename}
               />
             </div>
           </div>

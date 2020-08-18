@@ -393,7 +393,6 @@ export default function Form ({ id, product_id: productId, locale, aws }) {
                 <Video
                   values={values}
                   setValues={setValues}
-                  filename={variant.video && variant.video.filename}
                 />
               </div>
             </div>

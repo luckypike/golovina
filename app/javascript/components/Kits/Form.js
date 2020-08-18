@@ -248,7 +248,7 @@ export default function Form ({ id, locale, aws }) {
               </div>
 
               <div className={form.input}>
-                <Video values={values} setValues={setValues} filename={kit.video && kit.video.filename} />
+                <Video values={values} setValues={setValues} />
               </div>
             </div>
 
