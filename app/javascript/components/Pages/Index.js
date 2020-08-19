@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import classNames from 'classnames'
@@ -112,14 +112,32 @@ Slide.propTypes = {
 }
 
 function Slide ({ slide, slideClassName }) {
+  const videRef = useRef()
+
+  useEffect(() => {
+    if (videRef.current) {
+      if (videRef.current.paused) {
+        videRef.current.play()
+      }
+    }
+  }, [])
+
+  const handleClick = e => {
+    if (videRef.current && videRef.current.paused) {
+      videRef.current.play()
+      e.preventDefault()
+    }
+  }
+
   return (
     <a
       href={slide.link_relative}
-      className={slideClassName}
+      className={classNames(slideClassName, { [styles.slideVideo]: slide.video_mp4 })}
+      onClick={handleClick}
       style={{ backgroundImage: (slide.image && !slide.video_mp4 ? `url(${slide.image})` : null) }}
     >
       {slide.video_mp4 &&
-        <video className={styles.video} loop playsInline autoPlay preload="metadata">
+        <video ref={videRef} className={styles.video} loop playsInline autoPlay muted preload="metadata">
           <source src={`https://golovina.store/video/${slide.video_mp4.key}.mp4`} type="video/mp4" />
         </video>
       }
