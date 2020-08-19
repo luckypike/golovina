@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import classNames from 'classnames'
+import { deserialize } from 'jsonapi-deserializer'
 
 import { path } from '../Routes'
 import ErrorBoundary from '../ErrorBoundary'
@@ -10,12 +11,14 @@ import { useI18n } from '../I18n'
 import styles from './Index.module.css'
 
 Index.propTypes = {
-  slides: PropTypes.array,
+  slides: PropTypes.object,
   instagram: PropTypes.string,
   locale: PropTypes.string
 }
 
-export default function Index ({ slides, instagram, locale }) {
+export default function Index ({ slides: slidesJSON, instagram, locale }) {
+  const slides = deserialize(slidesJSON)
+
   const I18n = useI18n(locale)
 
   const [posts, setPosts] = useState()
@@ -34,24 +37,24 @@ export default function Index ({ slides, instagram, locale }) {
     <ErrorBoundary>
       <div className={styles.root}>
         <div className={classNames(styles.slides, { [styles.single]: slides.length === 1 })} id="slides">
-          {slides.slice(0, 2).map((slide, _) =>
-            <a href={slide.link_relative} key={_} className={styles.slide} style={{ backgroundImage: `url(${slide.image})` }}>
-              <div className={styles.text}>
-                <div className={styles.title}>{slide.name}</div>
-              </div>
-            </a>
+          {slides.slice(0, 2).map(slide =>
+            <Slide
+              key={slide.id}
+              slide={slide}
+              slideClassName={styles.slide}
+            />
           )}
         </div>
 
         <div className={styles.content}>
           {slides.length > 2 &&
             <div className={styles.subslides}>
-              {slides.slice(2, slides.length).map((slide, _) =>
-                <a key={_} href={slide.link_relative} className={styles.subslide} style={{ backgroundImage: `url(${slide.image})` }}>
-                  <div className={styles.text}>
-                    <div className={styles.title}>{slide.name}</div>
-                  </div>
-                </a>
+              {slides.slice(2, slides.length).map(slide =>
+                <Slide
+                  key={slide.id}
+                  slide={slide}
+                  slideClassName={styles.subslide}
+                />
               )}
             </div>
           }
@@ -100,5 +103,29 @@ export default function Index ({ slides, instagram, locale }) {
         </div>
       </div>
     </ErrorBoundary>
+  )
+}
+
+Slide.propTypes = {
+  slide: PropTypes.object,
+  slideClassName: PropTypes.string
+}
+
+function Slide ({ slide, slideClassName }) {
+  return (
+    <a
+      href={slide.link_relative}
+      className={slideClassName}
+      style={{ backgroundImage: (slide.image && !slide.video_mp4 ? `url(${slide.image})` : null) }}
+    >
+      {slide.video_mp4 &&
+        <video className={styles.video} loop playsInline autoPlay preload="metadata">
+          <source src={`https://golovina.store/video/${slide.video_mp4.key}.mp4`} type="video/mp4" />
+        </video>
+      }
+      <div className={styles.text}>
+        <div className={styles.title}>{slide.name}</div>
+      </div>
+    </a>
   )
 }

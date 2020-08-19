@@ -13,6 +13,9 @@ namespace :kits do
       .each do |kit|
         mp4_video_path = Rails.root.join("tmp/video/#{kit.video.key}.mp4")
         video = FFMPEG::Movie.new(kit.video.service_url)
+
+        next unless video.valid?
+
         File.delete(mp4_video_path) if File.exist?(mp4_video_path)
         video.transcode(
           mp4_video_path.to_s,

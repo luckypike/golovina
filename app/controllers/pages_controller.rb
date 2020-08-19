@@ -3,6 +3,7 @@ class PagesController < ApplicationController
 
   def index
     @slides = Slide.with_translations(I18n.available_locales)
+      .includes(:video_mp4_attachment)
       .where.not(image: nil).order(weight: :asc)
   end
 
