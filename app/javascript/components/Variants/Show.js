@@ -147,7 +147,33 @@ function Variant ({ locale }) {
             <div className={styles.images}>
               {variant.images.length > 0 &&
                 <div className={styles.slides} ref={slidesRef}>
-                  {variant.images.map(image =>
+                  {variant.video &&
+                    <div className={styles.image}>
+                      <img src={variant.images[1].large} />
+                    </div>
+                  }
+
+                  {variant.video &&
+                    <div className={styles.image}>
+                      <Video
+                        src={`https://golovina.store/video/${variant.video}.mp4#t=0.1`}
+                      />
+                    </div>
+                  }
+
+                  {variant.video && variant.images.filter((i, index) => index > 1).map((image, i) =>
+                    <div className={styles.image} key={image.id}>
+                      <img src={image.large} />
+                    </div>
+                  )}
+
+                  {!variant.video && variant.images.filter((i, index) => index !== 0).map((image, i) =>
+                    <div className={styles.image} key={image.id}>
+                      <img src={image.large} />
+                    </div>
+                  )}
+
+                  {variant.images.filter((i, index) => index === 0).map(image =>
                     <div className={styles.image} key={image.id}>
                       <img src={image.large} />
                     </div>
@@ -271,5 +297,30 @@ function Variant ({ locale }) {
         }
       </div>
     </I18nContext.Provider>
+  )
+}
+
+Video.propTypes = {
+  src: PropTypes.string.isRequired
+}
+
+function Video ({ src }) {
+  const videoRef = useRef()
+  const [play, setPlay] = useState(false)
+
+  const handleClick = e => {
+    if (!play) {
+      setPlay(true)
+      videoRef.current.play()
+      e.preventDefault()
+    }
+  }
+
+  return (
+    <div className={classNames(styles.video, { [styles.play]: play })} onClick={handleClick}>
+      <video ref={videoRef} loop playsInline preload="metadata">
+        <source src={src} type="video/mp4" />
+      </video>
+    </div>
   )
 }

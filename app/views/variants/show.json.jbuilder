@@ -47,6 +47,10 @@ json.variants @variants do |variant|
   if current_user
     json.in_wishlist(current_user.wishlists.detect { |w| w.variant_id == variant.id }.present?)
   end
+
+  if variant.video_mp4.attached?
+    json.video variant.video_mp4.key
+  end
 end
 
 # json.variants @variants do |variant|
