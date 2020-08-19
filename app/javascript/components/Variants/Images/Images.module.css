@@ -100,7 +100,7 @@
     display: block;
   }
 
-  &::after {
+  /* &::after {
     content: '';
     width: 100%;
     height: 100%;
@@ -123,5 +123,5 @@
     &::after {
       opacity: 0;
     }
-  }
+  } */
 }

@@ -156,7 +156,7 @@ function Variant ({ locale }) {
                   {variant.video &&
                     <div className={styles.image}>
                       <Video
-                        src={`https://golovina.store/video/${variant.video}.mp4#t=0.1`}
+                        src={`https://golovina.store/video/${variant.video}.mp4`}
                       />
                     </div>
                   }
@@ -306,19 +306,10 @@ Video.propTypes = {
 
 function Video ({ src }) {
   const videoRef = useRef()
-  const [play, setPlay] = useState(false)
-
-  const handleClick = e => {
-    if (!play) {
-      setPlay(true)
-      videoRef.current.play()
-      e.preventDefault()
-    }
-  }
 
   return (
-    <div className={classNames(styles.video, { [styles.play]: play })} onClick={handleClick}>
-      <video ref={videoRef} loop playsInline preload="metadata">
+    <div className={styles.video}>
+      <video ref={videoRef} loop playsInline autoPlay preload="metadata">
         <source src={src} type="video/mp4" />
       </video>
     </div>

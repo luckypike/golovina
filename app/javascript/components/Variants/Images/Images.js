@@ -56,17 +56,9 @@ export default function Images ({ variant }) {
 
         {variant.video && !variant.video_hide &&
           <div className={styles.image}>
-            {variant.video_poster &&
-              <Video
-                poster={`https://golovina.store/${variant.video_poster}`}
-                src={`https://golovina.store/video/${variant.video}.mp4#t=0.1`}
-              />
-            }
-            {!variant.video_poster &&
-              <Video
-                src={`https://golovina.store/video/${variant.video}.mp4#t=0.1`}
-              />
-            }
+            <Video
+              src={`https://golovina.store/video/${variant.video}.mp4`}
+            />
           </div>
         }
       </div>
@@ -85,19 +77,10 @@ Video.propTypes = {
 
 function Video ({ src, poster }) {
   const videoRef = useRef()
-  const [play, setPlay] = useState(false)
-
-  const handleClick = e => {
-    if (!play) {
-      setPlay(true)
-      videoRef.current.play()
-      e.preventDefault()
-    }
-  }
 
   return (
-    <div className={classNames(styles.video, { [styles.play]: play })} onClick={handleClick}>
-      <video ref={videoRef} loop playsInline preload="metadata" poster={poster}>
+    <div className={classNames(styles.video)}>
+      <video ref={videoRef} loop playsInline autoPlay preload="metadata" muted>
         <source src={src} type="video/mp4" />
       </video>
     </div>
