@@ -38,17 +38,23 @@ export default function Images ({ variant }) {
           </div>
         )}
 
-        {(variant.images.length === 1 || variant.images.length > 1 && variant.video) &&
+        {(variant.images.length === 1 || variant.images.length > 1 && variant.video && !variant.video_hide) &&
           <div className={styles.image}>
             <img src={variant.images[0].thumb} />
           </div>
         }
 
+        {variant.images.length > 1 && variant.video && variant.video_hide && variant.images.map((image, index) =>
+          <div key={index} className={styles.image}>
+            <img src={image.thumb} />
+          </div>
+        )}
+
         {variant.images.length === 0 &&
           <div className={styles.image} />
         }
 
-        {variant.video &&
+        {variant.video && !variant.video_hide &&
           <div className={styles.image}>
             {variant.video_poster &&
               <Video

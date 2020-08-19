@@ -77,4 +77,6 @@ json.values do
     json.video_poster variant.video_poster.signed_id
     json.video_poster_key variant.video_poster.key
   end
+
+  json.video_hide variant.video_hide || ''
 end

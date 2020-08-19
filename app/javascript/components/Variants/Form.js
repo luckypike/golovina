@@ -395,6 +395,22 @@ export default function Form ({ id, product_id: productId, locale, aws }) {
                   setValues={setValues}
                 />
               </div>
+
+              <div className={styles.video_hide}>
+                <label>
+                  <div className={form.checkbox}>
+                    <input
+                      type="checkbox"
+                      value={values.video_hide}
+                      name="video_hide"
+                      onChange={handleChange}
+                      checked={values.video_hide}
+                    />
+
+                    Скрыть видео в списке
+                  </div>
+                </label>
+              </div>
             </div>
 
             <div>

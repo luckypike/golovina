@@ -120,7 +120,7 @@ class VariantsController < ApplicationController
     permitted =
       Variant.globalize_attribute_names \
       + %i[state code color_id price price_last created_at preorder] \
-      + %i[video video_mp4 video_poster] \
+      + %i[video video_mp4 video_poster video_hide] \
       + [theme_ids: []] \
       + [
         {

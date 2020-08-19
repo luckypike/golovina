@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_154647) do
+ActiveRecord::Schema.define(version: 2020_08_18_143051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -525,6 +525,7 @@ ActiveRecord::Schema.define(version: 2020_08_13_154647) do
     t.boolean "linen", default: false
     t.boolean "spec", default: false
     t.integer "weight", default: 0
+    t.boolean "video_hide", default: false
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["pinned"], name: "index_variants_on_pinned"
     t.index ["product_id", "color_id"], name: "index_variants_on_product_id_and_color_id", unique: true
