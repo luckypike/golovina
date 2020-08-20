@@ -167,6 +167,28 @@ export default function Form (props) {
           </div>
 
           <div className={form.el}>
+            <div className={form.label}>
+              Описание в блоке
+            </div>
+
+            {I18n.available_locales.map(locale =>
+              <div className={form.gl} key={locale}>
+                <label>
+                  <div className={form.label}>
+                    {locale}
+                  </div>
+
+                  <div className={form.input}>
+                    <input value={values[`desc_${locale}`]} name={`desc_${locale}`} onChange={handleChange} />
+                  </div>
+                </label>
+
+                <Errors errors={errors[`desc_${locale}`]} />
+              </div>
+            )}
+          </div>
+
+          <div className={form.el}>
             <label>
               <div className={form.label}>
                 Ссылка с блока

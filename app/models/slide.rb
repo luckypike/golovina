@@ -1,6 +1,6 @@
 class Slide < ApplicationRecord
-  translates :name
-  globalize_accessors locales: I18n.available_locales, attributes: [:name]
+  translates :name, :desc
+  globalize_accessors locales: I18n.available_locales, attributes: %i[name desc]
 
   validates :name_ru, :link, presence: true
 
