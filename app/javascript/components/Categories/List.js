@@ -21,7 +21,7 @@ export default function List ({ object }) {
       {object.kits &&
         <div className={styles.kits}>
           {object.kits.filter(kit => kit.variants.filter(variant => variant.state !== 'archived').length > 0).map(kit =>
-            <a href={path('kit_path', { id: kit.id })} key={kit.id} className={classNames(styles.item, { [styles.single]: kit.images.length < 2 && !kit.video })}>
+            <a href={path('kit_path', { id: kit.id })} key={kit.id} className={classNames(styles.item, { [styles.single]: kit.images.length === 1 || kit.video })}>
               <Kit
                 key={kit.id}
                 kit={kit}

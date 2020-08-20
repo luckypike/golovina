@@ -31,7 +31,7 @@ export default function Images ({ variant }) {
 
   return (
     <div className={classNames(styles.images, {
-      [styles.single]: (variant.images.length < 2 && !variant.video) || (variant.images.length === 0 && variant.video),
+      [styles.single]: (variant.images.length < 2 && !variant.video) || (variant.images.length < 2 && variant.video),
       [styles.twice]: (variant.images.length >= 1 && variant.video) || (variant.images.length > 1 && !variant.video)
     })}>
       <div className={styles.root}>
