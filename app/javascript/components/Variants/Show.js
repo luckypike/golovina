@@ -145,43 +145,85 @@ function Variant ({ locale }) {
         {variant && variants &&
           <div className={styles.root}>
             <div className={styles.images}>
-              {variant.images.length > 0 &&
-                <div className={styles.slides} ref={slidesRef}>
-                  {variant.video &&
-                    <div className={styles.image}>
-                      <img src={variant.images[1].large} />
-                    </div>
-                  }
+              <div className={styles.slides} ref={slidesRef}>
+                {variant.video && variant.images.length === 0 &&
+                  <div className={styles.image}>
+                    <Video
+                      src={`https://golovina.store/video/${variant.video}.mp4`}
+                    />
+                  </div>
+                }
 
-                  {variant.video &&
+                {variant.video && variant.images.length === 1 &&
+                  <>
+                    <div className={styles.image}>
+                      <img src={variant.images[0].large} />
+                    </div>
+
                     <div className={styles.image}>
                       <Video
                         src={`https://golovina.store/video/${variant.video}.mp4`}
                       />
                     </div>
-                  }
+                  </>
+                }
 
-                  {variant.video && variant.images.filter((i, index) => index > 1).map((image, i) =>
-                    <div className={styles.image} key={image.id}>
-                      <img src={image.large} />
+                {variant.video && variant.images.length === 2 &&
+                  <>
+                    <div className={styles.image}>
+                      <img src={variant.images[1].large} />
                     </div>
-                  )}
 
-                  {!variant.video && variant.images.filter((i, index) => index !== 0).map((image, i) =>
-                    <div className={styles.image} key={image.id}>
-                      <img src={image.large} />
+                    <div className={styles.image}>
+                      <Video
+                        src={`https://golovina.store/video/${variant.video}.mp4`}
+                      />
                     </div>
-                  )}
 
-                  {variant.images.filter((i, index) => index === 0).map(image =>
-                    <div className={styles.image} key={image.id}>
-                      <img src={image.large} />
+                    <div className={styles.image}>
+                      <img src={variant.images[0].large} />
                     </div>
-                  )}
-                </div>
-              }
+                  </>
+                }
 
-              {variant.images.length < 1 &&
+                {variant.video && variant.images.length > 2 &&
+                  <>
+                    <div className={styles.image}>
+                      <img src={variant.images[1].large} />
+                    </div>
+
+                    <div className={styles.image}>
+                      <Video
+                        src={`https://golovina.store/video/${variant.video}.mp4`}
+                      />
+                    </div>
+
+                    {variant.images.filter((i, index) => index > 1).map((image, i) =>
+                      <div className={styles.image} key={image.id}>
+                        <img src={image.large} />
+                      </div>
+                    )}
+
+                    <div className={styles.image}>
+                      <img src={variant.images[0].large} />
+                    </div>
+                  </>
+                }
+
+                {!variant.video && variant.images.filter((i, index) => index !== 0).map((image, i) =>
+                  <div className={styles.image} key={image.id}>
+                    <img src={image.large} />
+                  </div>
+                )}
+
+                {!variant.video && variant.images.filter((i, index) => index === 0).map(image =>
+                  <div className={styles.image} key={image.id}>
+                    <img src={image.large} />
+                  </div>
+                )}
+              </div>
+
+              {variant.images.length < 1 && !variant.video &&
                 <div className={styles.image} />
               }
 
