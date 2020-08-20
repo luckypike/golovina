@@ -185,9 +185,15 @@ function Variant ({ locale }) {
                 <div className={styles.image} />
               }
 
-              {variant.images.length > 1 &&
+              {variant.images.length > 1 && !variant.video &&
                 <div className={styles.counter}>
                   {current}/{variant.images.length}
+                </div>
+              }
+
+              {variant.images.length > 1 && variant.video &&
+                <div className={styles.counter}>
+                  {current}/{variant.images.length + 1}
                 </div>
               }
 
