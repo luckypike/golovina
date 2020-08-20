@@ -31,7 +31,7 @@ export default function Show (props) {
 
   return (
     <I18nContext.Provider value={I18n}>
-      <div className={page.root16}>
+      <div className={page.root}>
         <div className={page.title}>
           <h1>
             {category.title}
