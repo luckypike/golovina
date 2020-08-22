@@ -3,8 +3,9 @@
   margin-right: calc(var(--xr) * -1);
   position: relative;
 
-  @media (--m) {
+  @media (--s) {
     margin: 0;
+    grid-column: auto / span 5;
   }
 }
 

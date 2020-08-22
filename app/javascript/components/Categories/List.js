@@ -6,6 +6,7 @@ import { path } from '../Routes'
 import I18n from '../I18n'
 
 import Images from '../Variants/Images/Images'
+import KitsImages from '../Kits/List/Images'
 import Price from '../Variants/Price'
 import Wishlist from '../Variants/Wishlist'
 
@@ -54,8 +55,9 @@ Kit.propTypes = {
 function Kit ({ kit }) {
   return (
     <>
-      <Images
-        variant={kit}
+      <KitsImages
+        images={kit.images}
+        video={kit.video}
       />
 
       <div className={styles.dt}>

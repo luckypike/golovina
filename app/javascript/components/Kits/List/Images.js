@@ -63,7 +63,7 @@ function Video ({ src }) {
 
   return (
     <div className={styles.video}>
-      <video ref={videoRef} loop playsInline autoPlay preload="metadata">
+      <video ref={videoRef} loop playsInline muted autoPlay preload="metadata">
         <source src={src} type="video/mp4" />
       </video>
     </div>
