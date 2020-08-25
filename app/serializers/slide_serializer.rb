@@ -1,7 +1,7 @@
 class SlideSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :id, :name, :link, :link_relative
+  attributes :id, :name, :link, :link_relative, :desc
 
   attribute :image do |slide|
     slide.image.large.url

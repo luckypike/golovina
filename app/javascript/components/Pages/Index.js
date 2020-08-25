@@ -142,7 +142,15 @@ function Slide ({ slide, slideClassName }) {
         </video>
       }
       <div className={styles.text}>
-        <div className={styles.title}>{slide.name}</div>
+        <div className={styles.title}>
+          {slide.name}
+        </div>
+
+        {slide.desc &&
+          <div className={styles.desc}>
+            {slide.desc}
+          </div>
+        }
       </div>
     </a>
   )

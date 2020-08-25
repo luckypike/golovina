@@ -142,14 +142,6 @@
       font-weight: var(--fw_light);
     }
   }
-
-  & .desc {
-    display: none;
-
-    @media (--s) {
-      display: block;
-    }
-  }
 }
 
 .video {
@@ -162,7 +154,7 @@
 }
 
 .desc {
-  margin-top: calc(var(--yr) * var(--s2));
+  margin-top: calc(var(--yr) * var(--s1));
 }
 
 .footer {
