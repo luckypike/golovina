@@ -81,8 +81,10 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     namespace :catalog, module: nil do
       get '', to: 'dashboard#catalog'
       post '', to: 'dashboard#catalog_update'
-      get :variants, to: 'dashboard#variants'
-      post :variants, to: 'dashboard#variants_update'
+      get :items, to: 'dashboard#items'
+      post :items, to: 'dashboard#items_update'
+      # get :variants, to: 'dashboard#variants'
+      # post :variants, to: 'dashboard#variants_update'
     end
 
     get :archived, to: 'dashboard#archived'

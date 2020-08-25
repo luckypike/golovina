@@ -14,11 +14,8 @@ class CategoriesController < ApplicationController
     @category = Category.friendly.find(params[:slug])
     authorize @category
 
-    @kits = @category.kits.order(id: :asc).for_list
-
-    @variants = policy_scope(@category.variants.order(weight: :asc).for_list)
-
-    @object = @kits + @variants
+    @kits = @category.kits.for_list
+    @variants = policy_scope(@category.variants.for_list)
 
     respond_to :html, :json
   end

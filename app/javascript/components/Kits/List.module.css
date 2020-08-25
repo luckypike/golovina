@@ -31,6 +31,15 @@
   }
 }
 
+.slider {
+  margin-left: calc(var(--xr) * -1);
+  margin-right: calc(var(--xr) * -1);
+
+  @media (--s) {
+    margin: 0;
+  }
+}
+
 .image {
   overflow: hidden;
   position: relative;

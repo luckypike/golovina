@@ -7,7 +7,8 @@ import { SortableContainer, SortableElement, sortableHandle } from 'react-sortab
 import { path } from '../Routes'
 import { I18nContext, useI18n } from '../I18n'
 
-import Variants from './Catalog/Variants'
+// import Variants from './Catalog/Variants'
+import Items from './Catalog/Items'
 
 import page from '../Page.module.css'
 import styles from './Catalog.module.css'
@@ -56,7 +57,7 @@ export default function Catalog ({ locale }) {
           <div className={styles.edit}>
             <a className={buttons.main} href={path('new_variant_path')}>Добавить товар</a>
             <a className={buttons.main} href={path('new_category_path')}>Добавить категорию</a>
-            <a className={buttons.main}  href={path('new_theme_path')}>Добавить тему</a>
+            <a className={buttons.main} href={path('new_theme_path')}>Добавить тему</a>
           </div>
 
           {items &&
@@ -67,18 +68,6 @@ export default function Catalog ({ locale }) {
     </I18nContext.Provider>
   )
 }
-
-// Item.propTypes = {
-//   item: PropTypes.object.isRequired
-// }
-//
-// function Item ({ item }) {
-//   return (
-//     <div className={styles.item}>
-//       {`${item.type} — ${item.id}`}
-//     </div>
-//   )
-// }
 
 const DragHandle = sortableHandle(() => <div className={styles.drag} />)
 
@@ -127,12 +116,12 @@ function CatOrTheme ({ item }) {
 
           {archived &&
             <div>
-              <Variants item={item} archived={archived}/>
+              <Items item={item} archived={archived}/>
             </div>
           }
 
           <div>
-            <Variants item={item} />
+            <Items item={item} />
           </div>
         </>
       }

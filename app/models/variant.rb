@@ -63,6 +63,8 @@ class Variant < ApplicationRecord
   has_many :kits, through: :kitables
   has_many :notifications, dependent: :destroy
 
+  delegate :category, to: :product
+
   settings do
     mappings dynamic: false do
       indexes :desc, fields: {

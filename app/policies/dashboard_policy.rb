@@ -7,17 +7,17 @@ DashboardPolicy = Struct.new :user, :dashboard do
     index?
   end
 
-  def variants?
-    catalog?
-  end
-
   def catalog_update?
     catalog?
   end
 
-  def variants_update?
-    variants?
-  end
+  # def variants?
+  #   catalog?
+  # end
+  #
+  # def variants_update?
+  #   variants?
+  # end
 
   def cart?
     index?
@@ -41,5 +41,13 @@ DashboardPolicy = Struct.new :user, :dashboard do
 
   def user?
     index?
+  end
+
+  def items?
+    catalog?
+  end
+
+  def items_update?
+    items?
   end
 end

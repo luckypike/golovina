@@ -27,6 +27,14 @@ class Kit < ApplicationRecord
     title.present? ? title : variants.map(&:title_last).to_sentence.downcase.upcase_first
   end
 
+  def title_last
+    title.presence || variants.map(&:title_last).to_sentence.downcase.upcase_first
+  end
+
+  def price_sell
+    variants.map(&:price_sell).sum
+  end
+
   def entity_created_at
     created_at
   end

@@ -5,7 +5,7 @@ import axios from 'axios'
 import { path } from '../Routes'
 import { I18nContext, useI18n } from '../I18n'
 
-import List from './List'
+import List from '../Catalog/List'
 
 import page from '../Page'
 
@@ -14,16 +14,16 @@ Show.propTypes = {
   locale: PropTypes.string.isRequired
 }
 
-export default function Show (props) {
-  const I18n = useI18n(props.locale)
-  const category = props.category
-  const [object, setObject] = useState(null)
+export default function Show ({ locale, category }) {
+  const I18n = useI18n(locale)
+
+  const [items, setItems] = useState()
 
   useEffect(() => {
     const _loadAsyncData = async () => {
-      const { data: { object } } = await axios.get(path('catalog_category_path', { slug: category.slug, format: 'json' }))
+      const { data } = await axios.get(path('catalog_category_path', { slug: category.slug, format: 'json' }))
 
-      setObject(object)
+      setItems(data.items)
     }
 
     _loadAsyncData()
@@ -38,9 +38,9 @@ export default function Show (props) {
           </h1>
         </div>
 
-        {object &&
+        {items &&
           <List
-            object={object}
+            items={items}
           />
         }
       </div>

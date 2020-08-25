@@ -56,15 +56,56 @@ class DashboardController < ApplicationController
     end
   end
 
-  def variants
+  # def variants
+  #   @item = params[:type].constantize.find(params[:id])
+  #
+  #   @variants =
+  #     if @item.is_a?(Category)
+  #       if params[:archived]
+  #         @item.variants.archived.order(weight: :asc)
+  #       else
+  #         @item.variants.not_archived.order(weight: :asc)
+  #       end
+  #     elsif @item.is_a?(Theme)
+  #       if params[:archived]
+  #         Variant.archived.select('variants.*, themables.weight').joins(:themables)
+  #           .where(themables: { theme: @item }).for_list.order('themables.weight ASC')
+  #       else
+  #         Variant.not_archived.select('variants.*, themables.weight').joins(:themables)
+  #           .where(themables: { theme: @item }).for_list.order('themables.weight ASC')
+  #       end
+  #     end
+  # end
+
+  # def variants_update
+  #   @item = params[:item][:type].constantize.find(params[:item][:id])
+  #
+  #   if @item.is_a?(Category)
+  #     params[:variants].each do |variant|
+  #       Variant.find(variant[:id]).update(weight: variant[:weight])
+  #     end
+  #   elsif @item.is_a?(Theme)
+  #     params[:variants].each do |variant|
+  #       @item.themables.find_by(variant: variant[:id]).update(weight: variant[:weight])
+  #     end
+  #   end
+  # end
+
+  def items
     @item = params[:type].constantize.find(params[:id])
 
-    @variants =
+    @items =
       if @item.is_a?(Category)
         if params[:archived]
-          @item.variants.archived.order(weight: :asc)
+          (
+            @item.variants.archived.order(weight: :asc) +
+            @item.kits.archived.order(weight: :asc)
+          ).sort_by(&:weight)
         else
-          @item.variants.not_archived.order(weight: :asc)
+          (
+            @item.variants.not_archived.order(weight: :asc) +
+            @item.kits.not_archived.order(weight: :asc)
+          ).sort_by(&:weight)
         end
       elsif @item.is_a?(Theme)
         if params[:archived]
@@ -77,16 +118,16 @@ class DashboardController < ApplicationController
       end
   end
 
-  def variants_update
+  def items_update
     @item = params[:item][:type].constantize.find(params[:item][:id])
 
     if @item.is_a?(Category)
-      params[:variants].each do |variant|
-        Variant.find(variant[:id]).update(weight: variant[:weight])
+      params[:items].each do |i|
+        i[:type].constantize.find_by(id: i[:id]).update(weight: i[:weight])
       end
     elsif @item.is_a?(Theme)
-      params[:variants].each do |variant|
-        @item.themables.find_by(variant: variant[:id]).update(weight: variant[:weight])
+      params[:items].each do |i|
+        @item.themables.find_by(variant: i[:id]).update(weight: i[:weight])
       end
     end
   end

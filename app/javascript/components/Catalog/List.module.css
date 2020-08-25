@@ -1,0 +1,132 @@
+.item {
+  display: grid;
+  grid-row-gap: calc(var(--yr) * var(--s1));
+  margin-bottom: calc(var(--yr) * var(--s4));
+
+  @media (--s) {
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: calc(var(--xr) * 2);
+
+    & .dt {
+      grid-column: auto / span 4;
+      align-self: flex-end;
+      text-align: left;
+    }
+
+    & .price {
+      & > div {
+        justify-content: flex-start;
+      }
+    }
+
+    &:nth-child(even) {
+      & .label {
+        text-align: right;
+      }
+
+      & .dt {
+        order: -2;
+        text-align: right;
+      }
+
+      & .price {
+        & > div {
+          justify-content: flex-end;
+        }
+      }
+
+      & .wishlist {
+        right: calc(var(--yr) * -1);
+        left: auto;
+      }
+
+      &.single {
+        & .dt {
+          grid-column: 4 / span 4;
+        }
+      }
+    }
+  }
+
+  @media (--m) {
+    margin-bottom: calc(var(--yr) * calc(var(--s4) * 2));
+  }
+}
+
+.unpub {
+  composes: at from '../Fonts.module.css';
+  color: red;
+  font-weight: var(--fw_bold);
+}
+
+.dt {
+  position: relative;
+  text-align: center;
+
+  @media (--s) {
+    margin-bottom: calc(var(--yr) * var(--s4));
+  }
+}
+
+.title {
+  margin: 0 10%;
+
+  @media (--s) {
+    margin: 0;
+  }
+}
+
+.price {
+  margin-top: var(--yr);
+
+  & > div {
+    justify-content: center;
+  }
+}
+
+.colors {
+  composes: at from '../Fonts.module.css';
+  color: var(--gr_color);
+}
+
+.label {
+  composes: at from '../Fonts.module.css';
+  color: var(--gr_color);
+  margin-bottom: var(--yr);
+
+  &.bestseller {
+    color: #343fa9;
+  }
+
+  &.sold_out {
+    color: var(--orng_color);
+  }
+
+  &.last {
+    color: var(--red_color);
+  }
+
+  &.latest {
+    color: var(--grn_color);
+  }
+}
+
+.wishlist {
+  cursor: pointer;
+  position: absolute;
+  width: calc(var(--yr) * 7);
+  height: calc(var(--yr) * 7);
+  right: 0;
+  top: calc(var(--yr) * -1);
+  opacity: 0.4;
+  padding: calc(var(--yr));
+  transition: opacity 0.2s;
+  z-index: 1;
+
+  @media (--s) {
+    bottom: calc(var(--yr) * -10);
+    top: auto;
+    left: calc(var(--yr) * -1);
+    right: auto;
+  }
+}
