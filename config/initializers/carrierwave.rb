@@ -6,8 +6,7 @@ CarrierWave.configure do |config|
     endpoint: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :endpoint)
   }
 
-  # config.fog_directory = Rails.application.credentials.dig(Rails.env.to_sym, :aws, :bucket)
-  config.fog_directory = 'golovina-production'
+  config.fog_directory = Rails.application.credentials.dig(Rails.env.to_sym, :aws, :bucket)
   config.fog_public = true
   config.fog_authenticated_url_expiration = 12.hours
   config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" }
