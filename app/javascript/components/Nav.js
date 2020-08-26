@@ -50,17 +50,9 @@ class Nav extends Component {
       <nav className={classNames(styles.root, { [styles.active]: active })}>
         <Section id="categories" title={I18n.t('header.nav.catalog')} onToggle={this.toggleSection} section={section}>
           {nav.map((n, i) =>
-            <React.Fragment key={`${n.type}-${n.id}`}>
-              <div className={styles.sub}>
-                <a href={path('catalog_category_path', { slug: n.slug })}>{n.title}</a>
-              </div>
-
-              {i === 0 &&
-                <div className={styles.sub}>
-                  <a href={path('kits_path')}>{I18n.t('kits.title')}</a>
-                </div>
-              }
-            </React.Fragment>
+            <div className={styles.sub} key={`${n.type}-${n.id}`}>
+              <a href={path('catalog_category_path', { slug: n.slug })}>{n.title}</a>
+            </div>
           )}
 
           <div className={styles.sub}>
