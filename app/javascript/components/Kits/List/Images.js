@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
+import { Waypoint } from 'react-waypoint'
 
 import styles from './Images.module.css'
 
@@ -61,11 +62,21 @@ Video.propTypes = {
 function Video ({ src }) {
   const videoRef = useRef()
 
+  const handleEnter = () => {
+    videoRef.current.play()
+  }
+
+  const handleLeave = () => {
+    videoRef.current.pause()
+  }
+
   return (
     <div className={styles.video}>
-      <video ref={videoRef} loop playsInline muted autoPlay preload="metadata">
-        <source src={src} type="video/mp4" />
-      </video>
+      <Waypoint onEnter={handleEnter} onLeave={handleLeave}>
+        <video ref={videoRef} loop playsInline muted preload="metadata">
+          <source src={src} type="video/mp4" />
+        </video>
+      </Waypoint>
     </div>
   )
 }

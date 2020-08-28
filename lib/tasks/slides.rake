@@ -20,9 +20,9 @@ namespace :slides do
         video.transcode(
           mp4_video_path.to_s,
           {
-            resolution: '900x1200', video_bitrate: 1500, video_bitrate_tolerance: 200,
+            resolution: '900x1200', video_bitrate: 1700,
             aspect: 0.75,
-            custom: %w[-an -vf scale=900:-1,crop=900:1200:0:ih/2-600]
+            custom: %w[-an -vf scale='max(900,ih/4*3)':'max(1200,iw/3*4)',crop=900:1200:iw/2-450:ih/2-600]
           }
         )
 
