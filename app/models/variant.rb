@@ -67,11 +67,6 @@ class Variant < ApplicationRecord
 
   settings do
     mappings dynamic: false do
-      indexes :desc, fields: {
-        ru: { analyzer: :russian, type: :text },
-        en: { analyzer: :english, type: :text }
-      }
-
       indexes :product, type: 'object' do
         indexes :title, fields: {
           ru: { analyzer: :russian, type: :text },
