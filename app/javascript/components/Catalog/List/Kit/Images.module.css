@@ -1,0 +1,92 @@
+.slider {
+  position: relative;
+
+  @media (--s) {
+    grid-column: auto / span 5;
+  }
+}
+
+.image {
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: calc(4 / 3 * 100%);
+    background-color: var(--ph_color);
+  }
+
+  & img {
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+  }
+}
+
+.nav {
+  display: none;
+  color: white;
+  position: absolute;
+  z-index: 2;
+  bottom: calc(var(--yr) * var(--s2));
+  right: calc(var(--yr) * var(--s2));
+  padding-right: 0;
+
+  &.isSlide {
+    display: block;
+  }
+}
+
+.video {
+  left: 0;
+  top: 0;
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  & video {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    opacity: 0;
+    background: url(./Play.svg) center no-repeat;
+    background-size: 48px;
+    transition: background 0.3s, opacity 0.3s;
+
+    @media (--s) {
+      background-size: 64px;
+    }
+  }
+
+  &.paused {
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+.poster {
+  left: 0;
+  top: 0;
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+}

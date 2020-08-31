@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { path } from '../Routes'
 
 import Images from '../Variants/Images/Images'
-import KitsImages from '../Kits/List/Images'
+import Kit from './List/Kit'
 import Price from '../Variants/Price'
 import Wishlist from '../Variants/Wishlist'
 import { I18nContext } from '../I18n'
@@ -26,48 +26,6 @@ export default function List ({ items }) {
         </React.Fragment>
       )}
     </div>
-  )
-}
-
-Kit.propTypes = {
-  kit: PropTypes.object
-}
-
-function Kit ({ kit }) {
-  const I18n = useContext(I18nContext)
-
-  return (
-    <a
-      href={path('kit_path', { id: kit.id })}
-      className={classNames(styles.item, styles.single)}
-    >
-      <KitsImages
-        images={kit.images}
-        video={kit.video}
-      />
-
-      <div className={styles.dt}>
-        <div className={styles.desc}>
-          <div className={styles.title}>
-            {kit.title}
-          </div>
-
-          {kit.price_sell > 0 &&
-            <div className={styles.price}>
-              <Price
-                sell={parseFloat(kit.price_sell)}
-              />
-            </div>
-          }
-
-          {kit.variants.length > 0 &&
-            <div className={styles.colors}>
-              {I18n.t('kit.variants', { count: kit.variants.length })}
-            </div>
-          }
-        </div>
-      </div>
-    </a>
   )
 }
 

@@ -3,6 +3,7 @@ json.array! items do |item|
   json.type item.class.name
   json.title item.title_last.squish
   json.video item.video_mp4.key if item.video_mp4.attached?
+  json.poster item.video_poster.key if item.video_poster.attached?
 
   json.category do
     json.extract! item.category, :id, :slug
