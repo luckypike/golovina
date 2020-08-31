@@ -11,10 +11,12 @@ import { I18nContext } from '../../I18n'
 import styles from '../List.module.css'
 
 Kit.propTypes = {
-  kit: PropTypes.object
+  kit: PropTypes.object,
+  played: PropTypes.integer,
+  setPlayed: PropTypes.func
 }
 
-export default function Kit ({ kit }) {
+export default function Kit ({ kit, played, setPlayed }) {
   const I18n = useContext(I18nContext)
 
   return (
@@ -26,6 +28,8 @@ export default function Kit ({ kit }) {
         images={kit.images}
         poster={kit.poster}
         video={kit.video}
+        played={played}
+        setPlayed={setPlayed}
       />
 
       <div className={styles.dt}>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
@@ -17,11 +17,19 @@ List.propTypes = {
 }
 
 export default function List ({ items }) {
+  const [played, setPlayed] = useState(0)
+
   return (
     <div>
       {items.map(item =>
         <React.Fragment key={`${item.type}_${item.id}`}>
-          {item.type === 'Kit' && <Kit kit={item} />}
+          {item.type === 'Kit' &&
+            <Kit
+              kit={item}
+              played={played}
+              setPlayed={setPlayed}
+            />
+          }
           {item.type === 'Variant' && <Variant variant={item} />}
         </React.Fragment>
       )}

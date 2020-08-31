@@ -10,11 +10,13 @@ import styles from './Images.module.css'
 Images.propTypes = {
   images: PropTypes.array,
   video: PropTypes.string,
-  poster: PropTypes.string
+  poster: PropTypes.string,
+  played: PropTypes.integer,
+  setPlayed: PropTypes.func
   // handleClick: PropTypes.func.isRequired
 }
 
-export default function Images ({ images, video, poster }) {
+export default function Images ({ images, video, poster, played, setPlayed }) {
   const [sliderRef] = useKeenSlider({
     initial: 0,
     slideChanged (s) {
@@ -45,6 +47,8 @@ export default function Images ({ images, video, poster }) {
           <Video
             poster={poster && `https://storage.yandexcloud.net/golovina-production/${poster}`}
             src={`https://golovina.store/video/${video}.mp4`}
+            played={played}
+            setPlayed={setPlayed}
           />
         </div>
       }
@@ -60,19 +64,29 @@ export default function Images ({ images, video, poster }) {
 
 Video.propTypes = {
   src: PropTypes.string.isRequired,
-  poster: PropTypes.string
+  poster: PropTypes.string,
+  played: PropTypes.boolean,
+  setPlayed: PropTypes.func
 }
 
-function Video ({ src, poster }) {
+function Video ({ src, poster, played, setPlayed }) {
   const videoRef = useRef()
   const [play, setPlay] = useState(false)
 
   const handleEnter = () => {
-    videoRef.current.play()
+    if (played === 0 && !play) {
+      videoRef.current.play()
+      setPlayed(1)
+      setPlay(true)
+    }
   }
 
   const handleLeave = () => {
-    videoRef.current.pause()
+    if (played === 1 && play) {
+      videoRef.current.pause()
+      setPlayed(0)
+      setPlay(false)
+    }
   }
 
   const handleClick = e => {
@@ -88,7 +102,7 @@ function Video ({ src, poster }) {
 
   return (
     <div className={classNames(styles.video, { [styles.paused]: !play })} onClick={handleClick}>
-      <Waypoint onEnter={handleEnter} onLeave={handleLeave}>
+      <Waypoint onEnter={handleEnter} onLeave={handleLeave} topOffset={'54%'} bottomOffset={'45%'}>
         <video
           ref={videoRef}
           loop
