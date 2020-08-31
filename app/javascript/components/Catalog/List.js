@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import { path } from '../Routes'
+import { VideoContext } from './VideoContext'
 
 import Images from '../Variants/Images/Images'
 import Kit from './List/Kit'
@@ -20,20 +21,26 @@ export default function List ({ items }) {
   const [played, setPlayed] = useState(0)
 
   return (
-    <div>
-      {items.map(item =>
-        <React.Fragment key={`${item.type}_${item.id}`}>
-          {item.type === 'Kit' &&
-            <Kit
-              kit={item}
-              played={played}
-              setPlayed={setPlayed}
-            />
-          }
-          {item.type === 'Variant' && <Variant variant={item} />}
-        </React.Fragment>
-      )}
-    </div>
+    <VideoContext.Provider
+      value={{
+        played, setPlayed
+      }}
+    >
+      <div>
+        {items.map(item =>
+          <React.Fragment key={`${item.type}_${item.id}`}>
+            {item.type === 'Kit' &&
+              <Kit
+                kit={item}
+                played={played}
+                setPlayed={setPlayed}
+              />
+            }
+            {item.type === 'Variant' && <Variant variant={item} />}
+          </React.Fragment>
+        )}
+      </div>
+    </VideoContext.Provider>
   )
 }
 

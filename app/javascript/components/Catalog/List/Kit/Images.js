@@ -1,22 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
 import { Waypoint } from 'react-waypoint'
 
+import { VideoContext } from '../../VideoContext'
+
 import styles from './Images.module.css'
 
 Images.propTypes = {
   images: PropTypes.array,
   video: PropTypes.string,
-  poster: PropTypes.string,
-  played: PropTypes.integer,
-  setPlayed: PropTypes.func
-  // handleClick: PropTypes.func.isRequired
+  poster: PropTypes.string
 }
 
-export default function Images ({ images, video, poster, played, setPlayed }) {
+export default function Images ({ images, video, poster }) {
   const [sliderRef] = useKeenSlider({
     initial: 0,
     slideChanged (s) {
@@ -47,8 +46,6 @@ export default function Images ({ images, video, poster, played, setPlayed }) {
           <Video
             poster={poster && `https://storage.yandexcloud.net/golovina-production/${poster}`}
             src={`https://golovina.store/video/${video}.mp4`}
-            played={played}
-            setPlayed={setPlayed}
           />
         </div>
       }
@@ -64,12 +61,12 @@ export default function Images ({ images, video, poster, played, setPlayed }) {
 
 Video.propTypes = {
   src: PropTypes.string.isRequired,
-  poster: PropTypes.string,
-  played: PropTypes.boolean,
-  setPlayed: PropTypes.func
+  poster: PropTypes.string
 }
 
-function Video ({ src, poster, played, setPlayed }) {
+function Video ({ src, poster }) {
+  const { played, setPlayed } = useContext(VideoContext)
+
   const videoRef = useRef()
   const [play, setPlay] = useState(false)
 
