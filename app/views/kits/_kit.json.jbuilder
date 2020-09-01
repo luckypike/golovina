@@ -1,1 +1,1 @@
-json.extract! kit, :id, :state
+json.extract! kit, :id, :state, :video_hide

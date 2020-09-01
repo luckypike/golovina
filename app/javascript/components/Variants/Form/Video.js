@@ -43,10 +43,10 @@ export default function Video ({ values, setValues }) {
 
   return (
     <div className={styles.root}>
-      <Poster
+      {/* <Poster
         values={values}
         setValues={setValues}
-      />
+      /> */}
 
       <div className={styles.video}>
         {values.video &&

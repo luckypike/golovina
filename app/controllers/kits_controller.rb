@@ -4,7 +4,9 @@ class KitsController < ApplicationController
 
   def control
     authorize Kit
-    @kits = Kit.includes(:images, :variants).order(created_at: :desc)
+    @kits = Kit
+      .for_list
+      .order(created_at: :desc)
 
     respond_to do |format|
       format.html
@@ -97,7 +99,7 @@ class KitsController < ApplicationController
       + [
         image_ids: %i[]
       ] \
-      + %i[video video_mp4 video_poster] \
+      + %i[video video_mp4 video_poster video_hide] \
       + [
         variant_ids: %i[]
       ] \

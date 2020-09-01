@@ -26,6 +26,7 @@ export default function Kit ({ kit }) {
         images={kit.images}
         poster={kit.poster}
         video={kit.video}
+        videoHide={kit.video_hide}
       />
 
       <div className={styles.dt}>

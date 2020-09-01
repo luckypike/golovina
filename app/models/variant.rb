@@ -221,7 +221,10 @@ class Variant < ApplicationRecord
           :images,
           availabilities: :size,
           color: %i[translations],
-          product: %i[translations category category],
+          product: [
+            :translations,
+            { category: :translations }
+          ],
           kits: %i[translations images variants]
         )
     end

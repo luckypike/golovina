@@ -25,8 +25,5 @@ json.values do
 
   json.video kit.video.signed_id if kit.video.attached?
 
-  if kit.video_poster.attached?
-    json.video_poster kit.video_poster.signed_id
-    json.video_poster_key kit.video_poster.key
-  end
+  json.video_hide kit.video_hide || ''
 end

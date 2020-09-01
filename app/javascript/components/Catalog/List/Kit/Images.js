@@ -12,10 +12,11 @@ import styles from './Images.module.css'
 Images.propTypes = {
   images: PropTypes.array,
   video: PropTypes.string,
-  poster: PropTypes.string
+  poster: PropTypes.string,
+  videoHide: PropTypes.bool
 }
 
-export default function Images ({ images, video, poster }) {
+export default function Images ({ images, video, poster, videoHide }) {
   const [sliderRef] = useKeenSlider({
     initial: 0,
     slideChanged (s) {
@@ -41,7 +42,7 @@ export default function Images ({ images, video, poster }) {
         {current} / { isSlides() }
       </div>
 
-      {video &&
+      {video && !videoHide &&
         <div className={classNames('keen-slider__slide', styles.image)}>
           <Video
             poster={poster && `https://storage.yandexcloud.net/golovina-production/${poster}`}
@@ -51,9 +52,20 @@ export default function Images ({ images, video, poster }) {
       }
 
       {images && images.map((image, index) =>
-        <div key={index} className={classNames('keen-slider__slide', styles.image)}>
-          <img src={image.thumb} />
-        </div>
+        <React.Fragment key={image.id}>
+          <div className={classNames('keen-slider__slide', styles.image)}>
+            <img src={image.thumb} />
+          </div>
+
+          {index === 0 && video && videoHide &&
+            <div className={classNames('keen-slider__slide', styles.image)}>
+              <Video
+                poster={poster && `https://storage.yandexcloud.net/golovina-production/${poster}`}
+                src={`https://golovina.store/video/${video}.mp4`}
+              />
+            </div>
+          }
+        </React.Fragment>
       )}
     </div>
   )

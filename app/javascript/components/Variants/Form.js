@@ -407,7 +407,7 @@ export default function Form ({ id, product_id: productId, locale, aws }) {
                       checked={values.video_hide}
                     />
 
-                    Скрыть видео в списке
+                    Скрыть видео в категориях
                   </div>
                 </label>
               </div>
