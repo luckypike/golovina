@@ -111,6 +111,11 @@ function Video ({ src, poster }) {
 
   return (
     <div className={classNames(styles.video, { [styles.paused]: !play })} onClick={handleClick}>
+      <img
+        className={styles.poster}
+        src={poster}
+      />
+
       <Waypoint onEnter={handleEnter} onLeave={handleLeave} topOffset={'54%'} bottomOffset={'45%'}>
         <video
           ref={videoRef}
@@ -118,7 +123,6 @@ function Video ({ src, poster }) {
           playsInline
           muted
           preload="metadata"
-          poster={poster}
           onPlay={() => setPlay(true)}
           onPause={() => setPlay(false)}
         >
