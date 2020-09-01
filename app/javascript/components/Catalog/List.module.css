@@ -2,6 +2,7 @@
   display: grid;
   grid-row-gap: calc(var(--yr) * var(--s1));
   margin-bottom: calc(var(--yr) * var(--s4));
+  position: relative;
 
   @media (--s) {
     grid-template-columns: repeat(12, 1fr);
