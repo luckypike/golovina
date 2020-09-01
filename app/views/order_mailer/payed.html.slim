@@ -25,6 +25,9 @@
         .text
           = variant.title_last
           br
+          - if item.acts.any?(&:preorder?)
+            span style="font-size: 0.75rem; display: inline-block; margin: 0.4rem 0; color: #333;" Обращаем ваше внимание, что на пошив данного изделия потребуется некоторое время, в связи с чем доставка вашего заказа будет увеличена на 2-3 рабочих дня
+            br
           | Размер: #{item.size.title}
           br
           | Цвет: #{variant.color.title}
