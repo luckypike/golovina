@@ -69,25 +69,25 @@ export default function Images ({ images, video, poster, videoHide }) {
             }
           </React.Fragment>
         )}
-      </div>
 
-      <div className={styles.pn} onClick={e => e.preventDefault()}>
-        <div
-          onClick={e => e.preventDefault() || slider.prev()}
-          className={classNames(styles.prev, { [styles.inactive]: slider && current === 1 })}
-        >
-          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 22L10 14L18 6" stroke="#fafafa" strokeWidth="1.5" />
-          </svg>
-        </div>
+        <div className={styles.pn} onClick={e => e.preventDefault()}>
+          <div
+            onClick={e => e.preventDefault() || slider.prev()}
+            className={classNames(styles.prev, { [styles.inactive]: slider && current === 1 })}
+          >
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 22L10 14L18 6" stroke="#fafafa" strokeWidth="1.5" />
+            </svg>
+          </div>
 
-        <div
-          onClick={e => e.preventDefault() || slider.next()}
-          className={classNames(styles.next, { [styles.inactive]: slider && current === slider.details().size })}
-        >
-          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 22L18 14L10 6" stroke="#fafafa" strokeWidth="1.5" />
-          </svg>
+          <div
+            onClick={e => e.preventDefault() || slider.next()}
+            className={classNames(styles.next, { [styles.inactive]: slider && current === slider.details().size })}
+          >
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 22L18 14L10 6" stroke="#fafafa" strokeWidth="1.5" />
+            </svg>
+          </div>
         </div>
       </div>
     </>
