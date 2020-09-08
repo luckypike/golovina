@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
     @category = Category.friendly.find(params[:slug])
     authorize @category
 
-    @kits = @category.kits.for_list
+    @kits = @category.kits.active.for_list
     @variants = policy_scope(@category.variants.for_list)
 
     respond_to :html, :json
