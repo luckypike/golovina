@@ -18,7 +18,7 @@ en:
       add: Add to shopbag
       adding: Adding...
 
-    preorder: Please note that the tailoring takes some time, so the delivery of your order will be increased by 2-3 working days.
+    preorder: Please note that the tailoring takes some time, so the delivery of your order will be increased by 3-4 working days.
 
     title: Variant
     kits: Complement image
@@ -82,7 +82,7 @@ en:
       desc:
 
     stayhome:
-      title: '#Stayhome'
+      title: "#Stayhome"
       desc:
 
     latest:
