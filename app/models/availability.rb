@@ -4,7 +4,7 @@ class Availability < ApplicationRecord
 
   belongs_to :variant
   belongs_to :size
-  has_many :acts
+  has_many :acts, dependent: :restrict_with_error
   # belongs_to :store
 
   # after_save :check_variant
@@ -16,6 +16,7 @@ class Availability < ApplicationRecord
     self.quantity = quantity.to_i
   end
 
+  before_destroy :destroy_manual_acts, prepend: true
 
   # def check_variant
   #   variant.check_state
@@ -23,5 +24,13 @@ class Availability < ApplicationRecord
 
   def active?
     quantity&.positive?
+  end
+
+  private
+
+  def destroy_manual_acts
+    return if active? || acts.size != acts.manual.size
+
+    acts.destroy_all
   end
 end
