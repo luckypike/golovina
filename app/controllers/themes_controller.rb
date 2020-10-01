@@ -59,7 +59,7 @@ class ThemesController < ApplicationController
   end
 
   def theme_params
-    permitted = Theme.globalize_attribute_names + %i[slug image recency]
+    permitted = Theme.globalize_attribute_names + %i[slug image recency state]
     params.require(:theme).permit(*permitted)
   end
 end
