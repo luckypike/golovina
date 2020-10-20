@@ -70,7 +70,7 @@ export default function Order ({ order, locale, delivery }) {
         </svg>
       </div>
 
-      <div className={classNames(styles.details, { [styles.hide]: !active })}>
+      <div className={classNames(styles.details, { [styles.hide]: false })}>
         {order.user &&
           <div className={styles.user}>
             <a href={path('dashboard_user_path', { id: order.user.id })}>
@@ -248,9 +248,11 @@ function Items ({ items, locale }) {
               {I18n.t('order.color')}: {item.variant.color.title}
             </div>
 
-            <div className={styles.size}>
-              {I18n.t('order.size')}: {item.size.title}
-            </div>
+            {item.size &&
+              <div className={styles.size}>
+                {I18n.t('order.size')}: {item.size.title}
+              </div>
+            }
 
             <div className={styles.quantity}>
               {I18n.t('order.amount')}: {item.quantity}
