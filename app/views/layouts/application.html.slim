@@ -10,7 +10,7 @@ html lang=I18n.locale
     = tag('meta', { name: 'yandex-verification', content: '67fd84d3a4242f7f' })
 
     = javascript_pack_tag 'app', async: true
-    = stylesheet_pack_tag 'app'
+    = stylesheet_pack_tag 'app', media: :all
 
     = stylesheet_link_tag 'https://use.typekit.net/crp6yvg.css' unless Rails.env.test?
 

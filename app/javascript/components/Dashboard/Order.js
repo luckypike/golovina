@@ -70,39 +70,37 @@ export default function Order ({ order, locale, delivery }) {
         </svg>
       </div>
 
-      {active &&
-        <div className={styles.details}>
-          {order.user &&
-            <div className={styles.user}>
-              <a href={path('dashboard_user_path', { id: order.user.id })}>
-                <strong>
-                  {order.user.title}
-                </strong>
-              </a>
-              <br />
-              Телефон: {order.user.phone}
-              <br />
-              Почта: {order.user.email}
-            </div>
-          }
-
-          <div className={styles.address}>
-            <Address order={order} locale={locale} delivery={delivery} />
-          </div>
-
-          {order.comment &&
-            <div className={styles.comment}>
+      <div className={classNames(styles.details, { [styles.hide]: !active })}>
+        {order.user &&
+          <div className={styles.user}>
+            <a href={path('dashboard_user_path', { id: order.user.id })}>
               <strong>
-                Комментарий
-              </strong>: {order.comment}
-            </div>
-          }
-
-          <div>
-            <Items items={order.items} locale={locale} />
+                {order.user.title}
+              </strong>
+            </a>
+            <br />
+            Телефон: {order.user.phone}
+            <br />
+            Почта: {order.user.email}
           </div>
+        }
+
+        <div className={styles.address}>
+          <Address order={order} locale={locale} delivery={delivery} />
         </div>
-      }
+
+        {order.comment &&
+          <div className={styles.comment}>
+            <strong>
+              Комментарий
+            </strong>: {order.comment}
+          </div>
+        }
+
+        <div>
+          <Items items={order.items} locale={locale} />
+        </div>
+      </div>
 
       {(order.state === 'paid' || order.state === 'archived') &&
         <div className={styles.manage}>

@@ -56,6 +56,10 @@
     padding: calc(var(--yr) * 12) calc(2 / 16 * 100%) calc(var(--yr) * 16);
     margin-top: calc(var(--yr) * 62);
   }
+
+  @media print {
+    margin-top: 0;
+  }
 }
 
 .text {

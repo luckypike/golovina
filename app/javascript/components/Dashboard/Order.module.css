@@ -35,6 +35,14 @@
 
 .details {
   padding: 0 calc(var(--yr) * var(--s2)) var(--xr);
+
+  &.hide {
+    display: none;
+
+    @media print {
+      display: block;
+    }
+  }
 }
 
 .preorder {
@@ -141,6 +149,10 @@
 .manage {
   padding: calc(var(--yr) * var(--s2)) var(--xr);
   border-top: 1px solid var(--sp_color);
+
+  @media print {
+    display: none;
+  }
 }
 
 .dl {

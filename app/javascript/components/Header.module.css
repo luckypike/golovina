@@ -7,7 +7,7 @@
   padding-top: 0;
   width: 100%;
   z-index: 10;
-  transition: height 0.2s, background .2s;
+  transition: height 0.2s, background 0.2s;
 
   &.noad {
     top: 0;
@@ -20,7 +20,8 @@
       top: calc(var(--yr) * 1.5);
     }
 
-    & .burger, & .caw {
+    & .burger,
+    & .caw {
       top: 0;
     }
   }
@@ -32,10 +33,10 @@
       top: calc(var(--yr) * 7.5);
     }
 
-    & .burger, & .caw {
+    & .burger,
+    & .caw {
       top: calc(var(--yr) * 6);
     }
-
 
     &.scrolling {
       height: calc(var(--yr) * 16);
@@ -44,7 +45,8 @@
         top: calc(var(--yr) * 3.5);
       }
 
-      & .burger, & .caw {
+      & .burger,
+      & .caw {
         top: calc(var(--yr) * 2);
       }
     }
@@ -52,6 +54,10 @@
 
   @media (--l) {
     background: none;
+  }
+
+  @media print {
+    display: none;
   }
 }
 
@@ -162,7 +168,7 @@
 
   @media (--s) {
     display: flex;
-    composes: at from './Fonts.module.css';
+    composes: at from "./Fonts.module.css";
   }
 }
 

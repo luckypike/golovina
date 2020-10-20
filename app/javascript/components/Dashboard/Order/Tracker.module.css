@@ -2,6 +2,10 @@
   border-top: 1px solid var(--sp_color);
   padding-top: calc(var(--yr) * var(--s2));
   margin-top: calc(var(--yr) * var(--s1));
+
+  @media print {
+    display: none;
+  }
 }
 
 .form {

@@ -10,6 +10,7 @@ import Order from './Order'
 
 import page from '../Page.module.css'
 import styles from './Index.module.css'
+import buttons from '../Buttons.module.css'
 
 Index.propTypes = {
   locale: PropTypes.string.isRequired
@@ -30,6 +31,10 @@ export default function Index ({ locale }) {
     _fetch()
   }, [])
 
+  const handlePrint = () => {
+    window.print()
+  }
+
   return (
     <I18nContext.Provider value={I18n}>
       <div className={page.gray}>
@@ -38,6 +43,10 @@ export default function Index ({ locale }) {
 
           <div className={page.title}>
             <h1>{I18n.t('dashboard.index.title')}</h1>
+          </div>
+
+          <div className={styles.print}>
+            <button className={buttons.main} onClick={handlePrint}>Напечатать</button>
           </div>
 
           {orders && orders.map(order =>
