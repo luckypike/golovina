@@ -148,6 +148,14 @@
   }
 }
 
+.email {
+  margin-bottom: calc(var(--yr) * 2);
+
+  & a {
+    text-decoration: underline;
+  }
+}
+
 .schedule {
   margin-bottom: calc(var(--yr) * 2);
 

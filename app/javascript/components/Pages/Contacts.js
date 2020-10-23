@@ -34,6 +34,13 @@ class Contacts extends Component {
                     <br/>
                     Телефон: <a href="tel:+79857145558">+7 985 714-55-58</a>
                   </div>
+
+                  <div className={styles.email}>
+                    Интернет-магазин: <a href="mailto:shop@golovina.store">shop@golovina.store</a>
+                    <br />
+                    Сотрудничество: <a href="mailto:pr@golovina.store">pr@golovina.store</a>
+                  </div>
+
                   <div className={styles.schedule}>Ежедневно с 13:00 до 21:00</div>
                   <a className={styles.way} href="https://yandex.ru/maps/org/87679230211" target="_blank" rel="noopener noreferrer">Схема проезда</a>
                 </>
