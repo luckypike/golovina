@@ -461,12 +461,6 @@ ActiveRecord::Schema.define(version: 2020_11_13_161734) do
     t.index ["slug"], name: "index_themes_on_slug", unique: true
   end
 
-  create_table "user", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "sname", null: false
-    t.integer "state", null: false
-  end
-
   create_table "user_addresses", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "delivery_city_id"
