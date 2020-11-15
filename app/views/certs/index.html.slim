@@ -1,1 +1,6 @@
-= react_component 'Certs/Index'
+- title t('certs.index.title')
+
+= react_component 'Certs/Index', { \
+  discounts: [10_000, 15_000, 30_000],
+  user: UserSerializer.new(current_user).serializable_hash \
+}
