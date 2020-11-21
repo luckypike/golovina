@@ -26,7 +26,11 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   resources :categories, except: [:show]
 
-  resources :certs, only: [:index, :create]
+  resources :certs, only: [:index, :create] do
+    member do
+      get :pay
+    end
+  end
 
   resources :themes, except: [:show]
 

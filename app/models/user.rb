@@ -26,7 +26,9 @@ class User < ApplicationRecord
 
   validates :email,
     presence: true, uniqueness: true,
-    format: { with: URI::MailTo::EMAIL_REGEXP }
+    format: { with: URI::MailTo::EMAIL_REGEXP, allow_blank: true }
+
+  after_save :generate_password_and_notify
 
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
@@ -71,6 +73,14 @@ class User < ApplicationRecord
       errors.add(:password, :blank)
       false
     end
+  end
+
+  def generate_password_and_notify
+    return unless saved_change_to_attribute?(:state, from: 'guest', to: 'common')
+
+    password = Devise.friendly_token.first(8)
+    update!(password: password)
+    RegisterMailer.order_mailer(password, self).deliver_now
   end
 
   class << self

@@ -1,56 +1,63 @@
-.certs {
-  @media (--m) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: var(--xr);
+.root {
+  display: grid;
+  grid-row-gap: calc(var(--yr) * 16);
+
+  @media (--s) {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: calc(var(--xr) * 2);
   }
+}
+
+.certs {
+  max-width: 33rem;
 }
 
 .cert {
-  max-width: 18rem;
-  margin: 0 auto;
-
-  @media (--m) {
-    margin: 0;
-    max-width: none;
-  }
-}
-
-.card {
-  position: relative;
+  box-shadow: inset 0 0 0 1px color-mod(var(--sp_color) shade(2%));
   background-color: var(--ph_color);
-  margin-bottom: calc(var(--yr) * var(--s4));
+  cursor: pointer;
+  padding: calc(var(--yr) * var(--s1)) var(--xr) calc(var(--yr) * var(--s2));
+  transition: box-shadow 0.4s;
 
-  &::before {
-    display: block;
-    content: '';
-    padding-top: calc(54 / 86 * 100%);
+  &:not(:last-child) {
+    margin-bottom: calc(var(--yr) * var(--s2));
+  }
+
+  &.active {
+    box-shadow: inset 0 0 0 2px var(--pr_color);
   }
 }
 
-.logo {
-  position: absolute;
-  left: 50%;
-  top: calc(var(--yr) * 5);
-  width: 40%;
-  transform: translateX(-50%);
+.user {
+  max-width: 33rem;
+  position: relative;
 
-  & svg {
-    display: block;
+  & .overlay {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #f9f9f9;
+    opacity: 0;
+    transition: 0.5s opacity, 0s z-index 0.5s;
+  }
+
+  &.inactive {
+    & .overlay {
+      z-index: 1;
+      opacity: 0.7;
+      transition: 0.5s opacity;
+    }
   }
 }
 
 .amount {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   composes: h1 from '../Fonts.module.css';
 }
 
-.buy {
-  position: absolute;
-  left: 50%;
-  bottom: var(--xr);
-  transform: translateX(-50%);
+.desc {
+  composes: at from '../Fonts.module.css';
 }

@@ -19,6 +19,7 @@ import buttons from '../Buttons.module.css'
 
 Index.propTypes = {
   discounts: PropTypes.array,
+  user: PropTypes.object,
   locale: PropTypes.string.isRequired
 }
 
@@ -40,11 +41,12 @@ export default function Index ({ locale, discounts, user: userJSON }) {
   } = useForm({
     discount: '',
     email: '',
+    user_id: user?.id,
     user_attributes: {
-      name: '',
-      sname: '',
-      phone: '',
-      email: ''
+      name: user?.name,
+      sname: user?.sname,
+      phone: user?.phone,
+      email: user?.email
     }
   })
 
@@ -58,17 +60,24 @@ export default function Index ({ locale, discounts, user: userJSON }) {
     })
   }
 
+  const handleDiscountChange = value => {
+    setValues({
+      ...values,
+      discount: value
+    })
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-      const { data } = await axios.post(
+      const { headers } = await axios.post(
         path('certs_path', { format: 'json' }),
         { cert: values },
         { cancelToken: cancelToken.current.token }
       )
 
-      console.log(data)
+      if (headers.location && window) window.location = headers.location
     } catch (error) {
       setErrors(error.response.data)
     }
@@ -76,39 +85,38 @@ export default function Index ({ locale, discounts, user: userJSON }) {
 
   return (
     <I18nContext.Provider value={I18n}>
-      <div className={page.root}>
+      <div className={page.gray}>
         <div className={page.title}>
           <h1>
             {I18n.t('certs.index.title')}
           </h1>
         </div>
 
-        {values.discount === '' && (
+        <div className={styles.root}>
           <div className={styles.certs}>
+            <p>
+              Чтобы купить сертификат необходимо выбрать сумму из доступных вараинтов: {discounts.map(discount => currency(discount)).join(', ')}.
+              Укажите ваши данные. Заполните почту получателя если вы хотите чтобы электронный сертификат был выслан ему.
+            </p>
+
             {discounts.map(discount =>
-              <div key={discount} className={styles.cert}>
-                <div className={styles.card}>
-                  <div className={styles.logo}>
-                    <Logo />
-                  </div>
-
-                  <div className={styles.amount}>
+              <div key={discount} className={cn(styles.cert, { [styles.active]: values.discount === discount })} onClick={() => handleDiscountChange(discount)}>
+                <div className={styles.amount}>
+                  <strong>
                     {currency(discount)}
-                  </div>
+                  </strong>
+                </div>
 
-                  <div className={styles.buy}>
-                    <button className={buttons.main} onClick={() => setValues({ ...values, discount })}>
-                      Купить
-                    </button>
-                  </div>
+                <div className={styles.desc}>
+                  Можно добавить краткое описание к сертификату
                 </div>
               </div>
             )}
           </div>
-        )}
 
-        {values.discount !== '' && (
-          <div>
+          <div className={cn(styles.user, { [styles.inactive]: values.discount === '' })}>
+            <div className={styles.overlay} />
+
             <form className={cn(form.root, styles.form)} onSubmit={onSubmit(handleSubmit)}>
               <h2>
                 {I18n.t('certs.index.user')}
@@ -180,7 +188,7 @@ export default function Index ({ locale, discounts, user: userJSON }) {
               </div>
             </form>
           </div>
-        )}
+        </div>
       </div>
     </I18nContext.Provider>
   )

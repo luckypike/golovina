@@ -6,4 +6,8 @@ class CertPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def pay?
+    true
+  end
 end

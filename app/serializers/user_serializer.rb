@@ -7,6 +7,10 @@ class UserSerializer
   attribute :common, &:common?
   attribute :editor, &:editor?
 
+  attribute :email do |user|
+    user.guest_email? ? '' : user.email
+  end
+
   attribute :reset_password_token, if: proc { |_record, params|
     params && params[:with_reset_password_token]
   }
