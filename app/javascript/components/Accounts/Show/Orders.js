@@ -148,7 +148,7 @@ function Address ({ order, locale }) {
         <div>
           {!order.address_old &&
             <>
-              {[order.country, order.city, order.street, order.house, order.appartment].filter(Boolean).join(', ')}
+              {[order.zip, order.country, order.city, order.street, order.house, order.appartment].filter(Boolean).join(', ')}
             </>
           }
 

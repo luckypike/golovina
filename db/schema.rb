@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_045350) do
+ActiveRecord::Schema.define(version: 2020_11_21_074849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -286,6 +286,7 @@ ActiveRecord::Schema.define(version: 2020_09_01_045350) do
     t.decimal "amount_delivery"
     t.integer "tracker_type"
     t.string "tracker_id"
+    t.string "zip"
     t.index ["delivery_city_id"], name: "index_orders_on_delivery_city_id"
     t.index ["user_address_id"], name: "index_orders_on_user_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -461,6 +462,7 @@ ActiveRecord::Schema.define(version: 2020_09_01_045350) do
     t.string "city"
     t.string "country"
     t.integer "delivery_option"
+    t.string "zip"
     t.index ["delivery_city_id"], name: "index_user_addresses_on_delivery_city_id"
     t.index ["user_id"], name: "index_user_addresses_on_user_id"
   end

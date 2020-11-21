@@ -11,6 +11,7 @@ ru:
     phone: Телефон
     storage: Точка выдачи
     door: Адрес
+    zip: Индекс
     country: Страна
     city: Город
     color: Цвет

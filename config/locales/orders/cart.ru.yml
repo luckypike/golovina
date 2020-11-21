@@ -51,6 +51,7 @@ ru:
         title: Выберите способ получения
         address:
           title: Укажите адрес доставки
+          zip: Индекс
           country: Страна
           city: Город
           street: Улица

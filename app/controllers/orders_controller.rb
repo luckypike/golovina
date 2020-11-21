@@ -104,7 +104,7 @@ class OrdersController < ApplicationController
       :user_address_id,
       :delivery, :delivery_option, :delivery_city_id,
       :tracker_id, :tracker_type,
-      :country, :city,
+      :country, :city, :zip,
       :street, :house, :appartment,
       :comment, :gift,
       user_attributes: %i[name sname email phone]

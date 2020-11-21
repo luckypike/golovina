@@ -52,7 +52,7 @@ class Order < ApplicationRecord
 
   validates :street, :house, :appartment, presence: true, if: -> { (russia? && door?) || international? }
   validates :delivery_city, :delivery_option, presence: true, if: -> { russia? }
-  validates :country, :city, presence: true, if: -> { international? }
+  validates :country, :city, :zip, presence: true, if: -> { international? }
 
   validates :delivery, presence: true, if: :to_pay
 
@@ -125,6 +125,7 @@ class Order < ApplicationRecord
         delivery_option: delivery_option,
         delivery_city: delivery_city,
         user: user,
+        zip: zip,
         country: country,
         city: city,
         street: street,

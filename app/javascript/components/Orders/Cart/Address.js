@@ -88,6 +88,25 @@ export default function Address ({ errors, values, handleInputChange, setValues,
           <div className={form.item}>
             <label>
               <div className={form.label}>
+                {I18n.t('order.cart.shipping.address.zip')}
+              </div>
+
+              <div className={form.input}>
+                <input
+                  type="text"
+                  value={values.zip}
+                  name="zip"
+                  onChange={handleInputChange}
+                />
+              </div>
+            </label>
+
+            <Errors errors={errors.zip} />
+          </div>
+
+          <div className={form.item}>
+            <label>
+              <div className={form.label}>
                 {I18n.t('order.cart.shipping.address.country')}
               </div>
 

@@ -70,7 +70,7 @@ export default function Order ({ order, locale, delivery }) {
         </svg>
       </div>
 
-      <div className={classNames(styles.details, { [styles.hide]: false })}>
+      <div className={styles.details}>
         {order.user &&
           <div className={styles.user}>
             <a href={path('dashboard_user_path', { id: order.user.id })}>
@@ -178,6 +178,8 @@ function Address ({ order, locale, delivery }) {
           {!order.address_old &&
             <>
               <dl className={styles.dl}>
+                <dt>{I18n.t('order.zip')}:</dt>
+                <dd>{[order.zip].filter(Boolean)}</dd>
                 <dt>{I18n.t('order.country')}:</dt>
                 <dd>{[order.country].filter(Boolean)}</dd>
                 <dt>{I18n.t('order.city')}:</dt>

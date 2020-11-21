@@ -35,13 +35,10 @@
 
 .details {
   padding: 0 calc(var(--yr) * var(--s2)) var(--xr);
+  display: none;
 
-  &.hide {
-    display: none;
-
-    @media print {
-      display: block;
-    }
+  @media print {
+    display: block;
   }
 }
 
@@ -77,6 +74,14 @@
 }
 
 .order.active {
+  & .details {
+    display: block;
+  }
+
+  & .manage {
+    display: block;
+  }
+
   & .arr {
     transform: rotateX(180deg);
   }
@@ -149,6 +154,7 @@
 .manage {
   padding: calc(var(--yr) * var(--s2)) var(--xr);
   border-top: 1px solid var(--sp_color);
+  display: none;
 
   @media print {
     display: none;

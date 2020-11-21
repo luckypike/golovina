@@ -6,5 +6,5 @@ class UserAddress < ApplicationRecord
 
   validates :street, :house, :appartment, presence: true, if: -> { door? || !delivery_city }
   validates :delivery_option, presence: true, if: :delivery_city
-  validates :country, :city, presence: true, unless: :delivery_city
+  validates :country, :city, :zip, presence: true, unless: :delivery_city
 end

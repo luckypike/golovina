@@ -51,6 +51,7 @@ en:
         title: Select a shipping method
         address:
           title: Delivery address
+          zip: Zip code
           country: Country
           city: City
           street: Street

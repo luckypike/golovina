@@ -37,6 +37,7 @@ if @order
 
   json.values do
     json.country @order.country || ''
+    json.zip @order.zip || ''
     json.city @order.city || ''
     json.street @order.street || ''
     json.house @order.house || ''
