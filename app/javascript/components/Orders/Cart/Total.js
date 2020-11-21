@@ -27,7 +27,7 @@ export default function Total ({ order, locale, delivery_cities: deliveryCities,
   }
 
   if (isInternational()) {
-    amountDelivery = order.amount_without_delivery_calc < 45000 ? 2800 : 0
+    amountDelivery = 2800
   }
 
   return (

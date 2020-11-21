@@ -43,7 +43,7 @@ en:
             value: from 265 ₽, free shipping for 15 000 ₽ purchase
           international:
             title: International shipping
-            value: 2800 ₽, free shipping for 45 000 ₽ purchase
+            value: 2800 ₽
 
         submit: Place order
 
@@ -71,7 +71,7 @@ en:
 
         world:
           title: International
-          desc: International shipping — 2800 ₽, free shipping for 45 000 ₽ purchase
+          desc: International shipping — 2800 ₽
 
         data: Shipping data
 
