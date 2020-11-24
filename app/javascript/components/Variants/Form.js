@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import classNames from 'classnames'
+import dayjs from 'dayjs'
 // import update from 'immutability-helper'
 
 import { path } from '../Routes'
@@ -113,10 +114,6 @@ export default function Form ({ id, product_id: productId, locale, aws }) {
     }
 
     setValues({ ...values, theme_ids: newThemeIds })
-  }
-
-  const handleImagesChange = images => {
-    console.log(images)
   }
 
   const handleDestroy = async e => {
@@ -348,7 +345,7 @@ export default function Form ({ id, product_id: productId, locale, aws }) {
               )}
             </div>
 
-            {id &&
+            {id && (
               <div className={form.el}>
                 <label>
                   <div className={form.label}>
@@ -365,9 +362,29 @@ export default function Form ({ id, product_id: productId, locale, aws }) {
                   </div>
                 </label>
 
-                <Errors errors={errors.price_last} />
+                <Errors errors={errors.created_at} />
               </div>
-            }
+            )}
+
+            <div className={form.el}>
+              <label>
+                <div className={form.label}>
+                  Дата публикации
+                </div>
+
+                <div className={form.input}>
+                  <input
+                    type="date"
+                    value={values.published_at}
+                    min={dayjs().subtract(1, 'day').format('YYYY-MM-DD')}
+                    name="published_at"
+                    onChange={handleChange}
+                  />
+                </div>
+              </label>
+
+              <Errors errors={errors.published_at} />
+            </div>
 
             <div className={form.el}>
               <div className={form.label}>
@@ -414,17 +431,17 @@ export default function Form ({ id, product_id: productId, locale, aws }) {
             </div>
 
             <div>
-              {send && 'Настройки товара сохраняются..' }
+              {send && 'Настройки товара сохраняются..'}
 
-              {!send &&
+              {!send && (
                 <>
                   <input type="submit" value="Сохранить" className={classNames(buttons.main, buttons.big)} disabled={send} />
 
-                  {id &&
+                  {id && (
                     <a href={path('category_path', { id })} onClick={handleDestroy} className={buttons.destroy}>Удалить</a>
-                  }
+                  )}
                 </>
-              }
+              )}
             </div>
           </form>
         </div>

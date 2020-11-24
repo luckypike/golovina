@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import dayjs from 'dayjs'
 
 import Images from './Images/Images'
 
@@ -47,6 +48,12 @@ export default function List ({ variants }) {
                   <Price sell={parseFloat(variant.price_sell)} origin={parseFloat(variant.price)} />
                 </div>
               }
+
+              {variant.published_at && (
+                <div className={styles.published_at}>
+                  {I18n.t('variant.published_at', { published_at: dayjs(variant.published_at).format('DD.MM.YY') })}
+                </div>
+              )}
 
               {variant.colors > 0 &&
                 <div className={styles.colors}>

@@ -60,6 +60,12 @@
   font-weight: var(--fw_bold);
 }
 
+.published_at {
+  composes: at from '../Fonts.module.css';
+  color: var(--gr_color);
+  margin-bottom: var(--yr);
+}
+
 .dt {
   position: relative;
   text-align: center;

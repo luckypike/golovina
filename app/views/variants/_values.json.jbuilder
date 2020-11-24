@@ -49,6 +49,7 @@ json.values do
   json.price_last variant.price_last || ''
   json.color_id variant.color_id || ''
   json.created_at variant.created_at ? variant.created_at.strftime('%FT%H:%M') : ''
+  json.published_at variant.published_at ? variant.published_at.strftime('%Y-%m-%d') : ''
 
   json.product_attributes do
     variant.product.globalize_attribute_names.each do |f|

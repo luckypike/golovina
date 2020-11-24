@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import axios from 'axios'
 import PubSub from 'pubsub-js'
+import dayjs from 'dayjs'
 
 import Guide from './Guide'
 import NoSize from './Buy/NoSize'
@@ -23,7 +24,7 @@ export default function Buy ({ variant }) {
   const [size, setSize] = useState()
   const [preorderWarning, setPreorderWarning] = useState(false)
 
-  const canBuy = () => variant.availabilities.filter(a => a.active || variant.preorder).length > 0
+  const canBuy = () => !variant.published_at && variant.price_sell > 0 && variant.availabilities.filter(a => a.active || variant.preorder).length > 0
 
   const {
     pending,
@@ -122,11 +123,13 @@ export default function Buy ({ variant }) {
         </div>
       }
 
-      {!canBuy() && variant.label !== 'sold_out' &&
+      {!canBuy() && (
         <div className={styles.sold_out}>
-          {I18n.t('variant.labels.sold_out')}
+          {variant.published_at && I18n.t('variant.published_at', { published_at: dayjs(variant.published_at).format('DD.MM.YY') })}
+
+          {!variant.published_at && I18n.t('variant.labels.sold_out')}
         </div>
-      }
+      )}
     </div>
   )
 }

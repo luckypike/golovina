@@ -17,7 +17,6 @@ json.array! items do |item|
       json.thumb image.photo.thumb.url
     end
 
-
     json.variants item.variants do |variant|
       next unless variant.active?
 

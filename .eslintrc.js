@@ -1,28 +1,25 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es6': true
+  env: {
+    browser: true,
+    es6: true
   },
-  'extends': [
+  extends: [
     'standard',
     'plugin:react/recommended'
   ],
-  'globals': {
-    'Atomics': 'readonly',
-    'SharedArrayBuffer': 'readonly'
-  },
-  'parser': 'babel-eslint',
-  'parserOptions': {
-    'ecmaFeatures': {
-      'jsx': true
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
     },
-    'ecmaVersion': 2018,
-    'sourceType': 'module'
+    ecmaVersion: 2018,
+    sourceType: 'module'
   },
-  'plugins': [
+  plugins: [
     'react'
   ],
-  'rules': {
-    'import/no-webpack-loader-syntax': 'off'
+  rules: {
+    'import/no-webpack-loader-syntax': 'off',
+    'jsx-quotes': [2, 'prefer-double']
   }
 }
