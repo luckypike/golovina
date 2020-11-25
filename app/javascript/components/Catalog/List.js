@@ -87,7 +87,8 @@ function Variant ({ variant }) {
 
           {variant.published_at && (
             <div className={styles.published_at}>
-              {I18n.t('variant.published_at', { published_at: dayjs(variant.published_at).format('DD.MM.YY') })}
+              {variant.published_at !== true && dayjs(variant.published_at) > dayjs() && I18n.t('variant.published_at', { published_at: dayjs(variant.published_at).format('DD.MM.YY') })}
+              {variant.published_at === true && I18n.t('variant.published_soon')}
             </div>
           )}
 

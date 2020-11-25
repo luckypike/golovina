@@ -125,7 +125,8 @@ export default function Buy ({ variant }) {
 
       {!canBuy() && (
         <div className={styles.sold_out}>
-          {variant.published_at && I18n.t('variant.published_at', { published_at: dayjs(variant.published_at).format('DD.MM.YY') })}
+          {variant.published_at && variant.published_at !== true && dayjs(variant.published_at) > dayjs() && I18n.t('variant.published_at', { published_at: dayjs(variant.published_at).format('DD.MM.YY') })}
+          {variant.published_at && variant.published_at === true && I18n.t('variant.published_soon')}
 
           {!variant.published_at && I18n.t('variant.labels.sold_out')}
         </div>

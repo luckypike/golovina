@@ -43,7 +43,8 @@ ru:
     kit_select: Дополнить образ
 
     unpub: Неопубликован
-    published_at: В продаже с %{published_at}
+    published_at: В наличии с %{published_at}
+    published_soon: Скоро в наличии
 
     labels:
       latest: Новый сезон
