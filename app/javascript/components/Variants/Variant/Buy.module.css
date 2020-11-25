@@ -43,6 +43,21 @@
   }
 }
 
+.size_20 {
+  font-size: 0;
+
+  &::before {
+    background: url(../../../images/icons/petite.svg);
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
 .unavailable {
   color: var(--sp_color);
   position: relative;
