@@ -210,13 +210,7 @@ function Variant ({ locale }) {
                   </>
                 }
 
-                {!variant.video && variant.images.filter((i, index) => index !== 0).map((image, i) =>
-                  <div className={styles.image} key={image.id}>
-                    <img src={image.large} />
-                  </div>
-                )}
-
-                {!variant.video && variant.images.filter((i, index) => index === 0).map(image =>
+                {!variant.video && variant.images.map((image, i) =>
                   <div className={styles.image} key={image.id}>
                     <img src={image.large} />
                   </div>
