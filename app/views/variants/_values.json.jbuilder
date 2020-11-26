@@ -80,4 +80,5 @@ json.values do
   end
 
   json.video_hide variant.video_hide || ''
+  json.single variant.single || ''
 end

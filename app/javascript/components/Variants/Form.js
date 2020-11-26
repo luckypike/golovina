@@ -402,6 +402,22 @@ export default function Form ({ id, product_id: productId, locale, aws }) {
             </div>
 
             <div className={form.el}>
+              <label>
+                <div className={form.checkbox}>
+                  <input
+                    type="checkbox"
+                    name="single"
+                    value={values.single}
+                    checked={values.single}
+                    onChange={handleChange}
+                  />
+
+                  Только одно фото в категории
+                </div>
+              </label>
+            </div>
+
+            <div className={form.el}>
               <div className={form.label}>
                 Видео
               </div>
