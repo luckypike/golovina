@@ -43,6 +43,8 @@ en:
     kit_select: Complement image
 
     unpub: Unpublished
+    published_at: Available at %{published_at}
+    published_soon: Available soon
 
     labels:
       latest: New season
