@@ -6,7 +6,7 @@ class Order < ApplicationRecord
 
   enum delivery_option: { door: 1, storage: 2 }
   enum delivery: { pickup: 1, russia: 2, international: 3 }
-  enum tracker_type: { cdek: 1, ems: 2 }
+  enum tracker_type: { cdek: 1, ems: 2, ups: 3 }
 
   enum state: { cart: 0, paid: 2, archived: 3 } do
     event :pay do
@@ -110,6 +110,8 @@ class Order < ApplicationRecord
     return unless tracker_id
 
     case tracker_type.to_sym
+    when :ups
+      "https://www.ups.com/ru/ru/SearchResults.page?q=#{tracker_id}"
     when :cdek
       "https://cdek.ru/tracking##{tracker_id}"
     when :ems
