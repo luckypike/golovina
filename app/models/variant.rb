@@ -80,6 +80,10 @@ class Variant < ApplicationRecord
           en: { analyzer: :english, type: :text }
         }
       end
+
+      indexes :sizes, type: 'object' do
+        indexes :size, analyzer: :english, type: :text
+      end
     end
   end
 
@@ -87,7 +91,8 @@ class Variant < ApplicationRecord
     as_json(
       include: {
         product: { only: :title },
-        color: { only: :title }
+        color: { only: :title },
+        sizes: { only: :size }
       }
     )
   end
