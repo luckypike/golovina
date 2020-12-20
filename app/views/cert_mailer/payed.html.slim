@@ -1,0 +1,29 @@
+.order style="max-width: 30rem; font-family: sans-serif; font-size: 14px; line-height: 18px;"
+  .logo style="width: 106px; margin: 4rem 0;"
+    = image_tag attachments['golovina.png'].url, size: "106x36"
+
+  p
+    ' Поздравляем вас с достойным приобретением!
+
+  p
+    = @cert.user.name
+    | , ваш сертификат успешно оплачен и активирован, им можно воспользоваться в любое время.
+
+  p
+    | Номер сертификата:
+    strong
+      => @cert.code
+
+
+  p
+    ' Благодарим вас за выбор.
+
+  p
+    | С уважением,
+    br
+    | Golovina Store
+    br
+    = link_to '+7 (985) 714-55-58', 'tel://+79857145558'
+    |
+    br
+    = link_to 'golovina.store', 'https://golovina.store'

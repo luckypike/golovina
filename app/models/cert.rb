@@ -8,4 +8,9 @@ class Cert < ApplicationRecord
   # validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   accepts_nested_attributes_for :user, update_only: true
+
+
+  def number
+    "#{id}-C"
+  end
 end

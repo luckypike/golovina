@@ -187,6 +187,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
 
     member do
+      post :cert
       post :delivery
       patch :checkout
       post :archive

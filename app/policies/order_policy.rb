@@ -11,6 +11,10 @@ class OrderPolicy < ApplicationPolicy
     user == record.user
   end
 
+  def cert?
+    user == record.user
+  end
+
   def index?
     user&.editor?
   end

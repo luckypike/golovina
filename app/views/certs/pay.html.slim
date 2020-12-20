@@ -1,12 +1,12 @@
 css:
   #payment_gateway {
-    / display: none;
+    display: none;
   }
 
 = form_tag Rails.application.credentials[Rails.env.to_sym][:payment][:gateway], method: :post, id: :payment_gateway do |f|
   = text_field_tag(:sum, @cert.discount)
   = text_field_tag(:clientid, "#{@cert.user.title} / #{@cert.user.id}")
-  = text_field_tag(:orderid, "#{@cert.id} / C")
+  = text_field_tag(:orderid, "#{@cert.id}-C")
   = text_field_tag(:lang, I18n.locale)
   = text_field_tag(:client_phone, @cert.user.phone)
   = text_field_tag(:user_result_callback, account_url)

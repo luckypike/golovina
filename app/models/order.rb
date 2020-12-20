@@ -49,6 +49,7 @@ class Order < ApplicationRecord
 
   belongs_to :user_address, optional: true
   belongs_to :delivery_city, optional: true
+  belongs_to :cert, optional: true
 
   validates :street, :house, :appartment, presence: true, if: -> { (russia? && door?) || international? }
   validates :delivery_city, :delivery_option, presence: true, if: -> { russia? }
@@ -69,7 +70,10 @@ class Order < ApplicationRecord
   # end
 
   def amount_calc
-    amount_without_delivery_calc + amount_delivery_calc
+    temp = amount_without_delivery_calc + amount_delivery_calc - amount_discount
+    return 0 unless temp.positive?
+
+    temp
   end
 
   def amount_delivery_calc
@@ -80,6 +84,12 @@ class Order < ApplicationRecord
     else
       0
     end
+  end
+
+  def amount_discount
+    return cert.discount if cert&.amount&.positive?
+
+    0
   end
 
   def amount_without_delivery_calc

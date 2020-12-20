@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :paid
 
-  before_action :set_order, only: %i[checkout archive unarchive pay delivery]
+  before_action :set_order, only: %i[checkout archive unarchive pay delivery cert]
   before_action :authorize_order
 
   def cart
@@ -57,20 +57,48 @@ class OrdersController < ApplicationController
 
   def paid
     if Digest::MD5.hexdigest(params.slice(:id, :sum, :clientid, :orderid).values.push(Rails.application.credentials[Rails.env.to_sym][:payment][:key]).join('')) == params[:key]
-      order = Order.find(params[:orderid])
 
-      if order.cart?
-        order.update(payment_id: params[:id], payment_amount: params[:sum])
-        order.pay!
-      end
+      if params[:orderid].last == 'C'
+        cert = Cert.find(params[:orderid].slice(0..-3))
+        cert.update(
+          payment_id: params[:id],
+          payment_amount: params[:sum],
+          payed_at: Time.current
+        )
 
-      if order.paid?
         render inline: ('OK ' + Digest::MD5.hexdigest(params[:id] + Rails.application.credentials[Rails.env.to_sym][:payment][:key]))
       else
-        head :ok
+        order = Order.find(params[:orderid])
+
+        if order.cart?
+          order.update(payment_id: params[:id], payment_amount: params[:sum])
+          order.pay!
+        end
+
+        if order.paid?
+          render inline: ('OK ' + Digest::MD5.hexdigest(params[:id] + Rails.application.credentials[Rails.env.to_sym][:payment][:key]))
+        else
+          head :ok
+        end
       end
     else
       head :unprocessable_entity
+    end
+  end
+
+  def cert
+    cert = Cert.find_by(code: params[:code].upcase.strip)
+    if cert
+      if cert.amount.positive?
+        @order.cert = cert
+        @order.save
+
+        head :ok
+      else
+        render json: [I18n.t('cert.errors.wrong_amount')], status: :unprocessable_entity
+      end
+    else
+      render json: [I18n.t('cert.errors.wrong_code')], status: :unprocessable_entity
     end
   end
 

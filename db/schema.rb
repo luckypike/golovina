@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_154657) do
+ActiveRecord::Schema.define(version: 2020_12_20_164503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,9 @@ ActiveRecord::Schema.define(version: 2020_11_15_154657) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "email"
+    t.string "payment_id"
+    t.decimal "payment_amount"
+    t.datetime "payed_at"
     t.index ["user_id"], name: "index_certs_on_user_id"
   end
 
@@ -298,6 +301,8 @@ ActiveRecord::Schema.define(version: 2020_11_15_154657) do
     t.decimal "amount_delivery"
     t.integer "tracker_type"
     t.string "tracker_id"
+    t.bigint "cert_id"
+    t.index ["cert_id"], name: "index_orders_on_cert_id"
     t.index ["delivery_city_id"], name: "index_orders_on_delivery_city_id"
     t.index ["user_address_id"], name: "index_orders_on_user_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -577,6 +582,7 @@ ActiveRecord::Schema.define(version: 2020_11_15_154657) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "sizes"
   add_foreign_key "order_items", "variants"
+  add_foreign_key "orders", "certs"
   add_foreign_key "orders", "delivery_cities"
   add_foreign_key "orders", "user_addresses"
   add_foreign_key "orders", "users"

@@ -34,6 +34,7 @@ ru:
       checkout:
         title: Информация о заказе
         variants: Стоимость товаров
+        discount: Скидка
         total: Итого
         delivery:
           title: Стоимость доставки

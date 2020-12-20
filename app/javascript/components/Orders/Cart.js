@@ -12,6 +12,7 @@ import UserAddresses from './Cart/UserAddresses'
 import Login from './Cart/Login'
 import Checkout from './Cart/Checkout'
 import Total from './Cart/Total'
+import Discount from './Cart/Discount'
 
 import { path } from '../Routes'
 import { useI18n } from '../I18n'
@@ -118,6 +119,8 @@ export default function Cart ({ appleid, locale, user: userJSON }) {
               setCheckout={setCheckout}
               _fetch={_fetch}
             />
+
+            <Discount order={order} locale={locale} />
           </div>
 
           <div className={styles.checkout}>

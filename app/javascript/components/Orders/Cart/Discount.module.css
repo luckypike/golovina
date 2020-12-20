@@ -1,0 +1,20 @@
+.root {
+  max-width: 33rem;
+  margin-left: auto;
+}
+
+.form {
+  max-width: 15rem;
+}
+
+.active {
+  & span {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--gr_color);
+  }
+}
+
+.code {
+  text-transform: uppercase;
+}

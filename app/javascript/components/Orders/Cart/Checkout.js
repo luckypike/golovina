@@ -32,6 +32,18 @@ export default function Checkout ({ locale, setCheckout, order }) {
           <Price sell={parseFloat(order.amount_without_delivery_calc)} />
         </dd>
 
+        {order.amount_discount && (
+          <>
+            <dt>
+              {I18n.t('order.cart.checkout.discount')}
+            </dt>
+
+            <dd className={styles.price}>
+              <Price sell={parseFloat(order.amount_discount * -1)} />
+            </dd>
+          </>
+        )}
+
         <dt>
           {I18n.t('order.cart.checkout.delivery.russia.title')}
         </dt>

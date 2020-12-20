@@ -52,4 +52,10 @@
   background-color: var(--pr_color);
   color: #fff;
   box-shadow: none;
+
+  &:hover {
+    &:not(:disabled) {
+      background-color: #555;
+    }
+  }
 }
