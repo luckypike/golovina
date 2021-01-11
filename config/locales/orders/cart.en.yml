@@ -21,8 +21,7 @@ en:
       items:
         title: Items
         cant: "Sorry, this product is not available right now"
-        # preorder: Preorder (plus 5-6 working days)
-        preorder: Pre-order. Sewing after January 10th
+        preorder: Preorder (plus 5-6 working days)
         change: Change shopping list
 
         noav:
