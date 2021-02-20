@@ -76,7 +76,8 @@ class Order < ApplicationRecord
     if international?
       2_800
     elsif russia?
-      amount_without_delivery_calc < 15_000 ? delivery_city.send(delivery_option) : 0
+      # amount_without_delivery_calc < 15_000 ? delivery_city.send(delivery_option) : 0
+      delivery_city.send(delivery_option)
     else
       0
     end
@@ -124,16 +125,16 @@ class Order < ApplicationRecord
       current_user_address = user_address
       current_user_address ||= build_user_address
       current_user_address.assign_attributes({
-        delivery_option: delivery_option,
-        delivery_city: delivery_city,
-        user: user,
-        zip: zip,
-        country: country,
-        city: city,
-        street: street,
-        house: house,
-        appartment: appartment
-      })
+                                               delivery_option: delivery_option,
+                                               delivery_city: delivery_city,
+                                               user: user,
+                                               zip: zip,
+                                               country: country,
+                                               city: city,
+                                               street: street,
+                                               house: house,
+                                               appartment: appartment
+                                             })
 
       current_user_address.save!
     end
