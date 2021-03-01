@@ -40,8 +40,7 @@ en:
           free: Free
           russia:
             title: Delivery across Russia
-            # value: from 265 ₽, free shipping for 15 000 ₽ purchase
-            value: from 265 ₽
+            value: from 265 ₽, free shipping for 15 000 ₽ purchase
           international:
             title: International shipping
             value: 2800 ₽
