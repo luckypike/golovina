@@ -77,7 +77,7 @@ export default function Show (props) {
                   {
                     [styles.landscape]: image.width > image.height,
                     [styles.single]: singles.includes(index),
-                    [styles.full]: full.includes(index)
+                    [styles.full]: full.includes(index) || id >= 13
                   }
                 )
               }
