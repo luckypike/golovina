@@ -98,7 +98,6 @@ export default function Index ({ slides: slidesJSON, instagram, locale }) {
           </div>
           <div className={styles.copy}>
             <div>© 2017 – {new Date().getFullYear()} {I18n.t('static.index.copy')}</div>
-            <div>{I18n.t('static.index.made_by')} <a href="https://luckypike.com/" target="_blank" rel="noopener noreferrer">L..IKE</a></div>
           </div>
         </div>
       </div>
@@ -134,7 +133,7 @@ function Slide ({ slide, slideClassName }) {
       href={slide.link_relative}
       className={classNames(slideClassName, { [styles.slideVideo]: slide.video_mp4 })}
       onClick={handleClick}
-      style={{ backgroundImage: (slide.image && !slide.video_mp4 ? `url(${slide.image})` : null) }}
+      style={{ backgroundImage: (slide.image && !slide.video_mp4 ? `url(${slide.image}) ` : null) }}
     >
       {slide.video_mp4 &&
         <video ref={videRef} className={styles.video} loop playsInline autoPlay muted preload="metadata">
