@@ -1,6 +1,8 @@
 class Collection < ApplicationRecord
   extend FriendlyId
 
+  enum state: { inactive: 0, active: 1 }
+
   validates :slug, :title, presence: true
   validates :slug, uniqueness: true
 
@@ -14,7 +16,7 @@ class Collection < ApplicationRecord
 
   class << self
     def nav
-      with_translations(I18n.available_locales)
+      with_translations(I18n.available_locales).active
         .order(weight: :asc, id: :desc)
     end
   end
