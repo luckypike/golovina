@@ -4,7 +4,7 @@ if @order
     json.extract! @order, :amount_calc, :amount_without_delivery_calc,
       :amount_delivery_calc, :purchasable?
 
-    json.items @items do |item|
+    json.items(@items.select { |i| i.variant.product.category.present? }) do |item|
       json.partial! item
       json.extract! item, :price_sell, :available, :available?
 
