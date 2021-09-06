@@ -16,10 +16,6 @@
   &.scrolling {
     height: calc(var(--yr) * 12);
 
-    & .logo {
-      top: calc(var(--yr) * 1.5);
-    }
-
     & .burger,
     & .caw {
       top: 0;
@@ -28,10 +24,6 @@
 
   @media (--s) {
     height: calc(var(--yr) * 24);
-
-    & .logo {
-      top: calc(var(--yr) * 7.5);
-    }
 
     & .burger,
     & .caw {
@@ -42,7 +34,7 @@
       height: calc(var(--yr) * 16);
 
       & .logo {
-        top: calc(var(--yr) * 3.5);
+        /* top: calc(var(--yr) * 3.5); */
       }
 
       & .burger,
@@ -64,8 +56,8 @@
 .logo {
   position: absolute;
   left: 50%;
-  top: calc(var(--yr) * 3.5);
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
   transition: top 0.2s;
 
@@ -79,7 +71,7 @@
     width: 82px;
     height: 28px;
 
-    @media (--s) {
+    @media (min-width: 375px) {
       width: 106px;
       height: 36px;
     }
