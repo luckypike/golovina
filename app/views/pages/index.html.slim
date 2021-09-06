@@ -1,7 +1,4 @@
-- set_meta_tags title: "Golovina — #{t('header.meta.title')}", site: nil
-- description 'Интернет-магазин женской одежды Golovina'
-- keywords ['мята', 'минт стор', 'mintstore', 'mint store', 'golovina', 'головина']
-
+- set_meta_tags title: "Golovinamari — #{t('header.meta.title')}", site: nil
 - set_meta_tags og: { image: @slides.map{ |i| asset_url(i.image.large.url) } }
 
 - set_meta_tags alternate: I18n.available_locales.map { |locale| [locale, locale_url_for(:root_url, locale)] }.to_h

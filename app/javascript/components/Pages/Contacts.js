@@ -66,7 +66,7 @@ class Contacts extends Component {
 
         <div className={styles.intro}>
           <div className={styles.brand}>
-            <a href={instagram} className={styles.name}>Golovina.brand</a>
+            <a href={instagram} className={styles.name}>@golovinamari_</a>
             <div className={styles.desc}>{I18n.t('static.index.instagram')}</div>
           </div>
         </div>
