@@ -15,7 +15,7 @@ module Users
       identity = Identity.where(provider: :apple, uid: auth['sub']).first_or_initialize
 
       if identity.new_record?
-        auth['email'] ||= "guest_#{Devise.friendly_token.first(10)}@golovina.store"
+        auth['email'] ||= "guest_#{Devise.friendly_token.first(10)}@golovinamari.com"
         user = User.where(email: auth['email']).first_or_initialize(name: name['firstName'], sname: name['lastName'], state: :common)
         user.identities << identity
         user.save!(validate: false)

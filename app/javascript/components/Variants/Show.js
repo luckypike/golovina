@@ -149,7 +149,7 @@ function Variant ({ locale }) {
                 {variant.video && variant.images.length === 0 &&
                   <div className={styles.image}>
                     <Video
-                      src={`https://golovina.store/video/${variant.video}.mp4`}
+                      src={`https://golovinamari.com/video/${variant.video}.mp4`}
                     />
                   </div>
                 }
@@ -162,7 +162,7 @@ function Variant ({ locale }) {
 
                     <div className={styles.image}>
                       <Video
-                        src={`https://golovina.store/video/${variant.video}.mp4`}
+                        src={`https://golovinamari.com/video/${variant.video}.mp4`}
                       />
                     </div>
                   </>
@@ -176,7 +176,7 @@ function Variant ({ locale }) {
 
                     <div className={styles.image}>
                       <Video
-                        src={`https://golovina.store/video/${variant.video}.mp4`}
+                        src={`https://golovinamari.com/video/${variant.video}.mp4`}
                       />
                     </div>
 
@@ -194,7 +194,7 @@ function Variant ({ locale }) {
 
                     <div className={styles.image}>
                       <Video
-                        src={`https://golovina.store/video/${variant.video}.mp4`}
+                        src={`https://golovinamari.com/video/${variant.video}.mp4`}
                       />
                     </div>
 

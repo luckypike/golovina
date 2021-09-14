@@ -126,11 +126,11 @@ export default function Header (props) {
 
       <div className={styles.caw}>
         <div className={styles.lang}>
-          <a className={classNames({ [styles.active]: props.locale === 'ru' })} href="https://golovina.store/" >
+          <a className={classNames({ [styles.active]: props.locale === 'ru' })} href="https://golovinamari.com/" >
             Рус
           </a>
           /
-          <a className={classNames({ [styles.active]: props.locale === 'en' })} href="https://en.golovina.store/">
+          <a className={classNames({ [styles.active]: props.locale === 'en' })} href="https://en.golovinamari.com/">
             Eng
           </a>
         </div>

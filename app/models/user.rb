@@ -84,7 +84,7 @@ class User < ApplicationRecord
     end
 
     def guest_email
-      "guest_#{Devise.friendly_token.first(10)}@golovina.store"
+      "guest_#{Devise.friendly_token.first(10)}@golovinamari.com"
     end
   end
 

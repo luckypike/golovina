@@ -41,7 +41,7 @@ export default function Images ({ images, video }) {
       {video &&
         <div className={classNames('keen-slider__slide', styles.image)}>
           <Video
-            src={`https://golovina.store/video/${video}.mp4`}
+            src={`https://golovinamari.com/video/${video}.mp4`}
           />
         </div>
       }

@@ -48,7 +48,7 @@ export default function Images ({ images, video, poster, videoHide }) {
           <div className={classNames('keen-slider__slide', styles.image)}>
             <Video
               poster={poster && `https://storage.yandexcloud.net/golovina-production/${poster}`}
-              src={`https://golovina.store/video/${video}.mp4`}
+              src={`https://golovinamari.com/video/${video}.mp4`}
             />
           </div>
         }
@@ -63,7 +63,7 @@ export default function Images ({ images, video, poster, videoHide }) {
               <div className={classNames('keen-slider__slide', styles.image)}>
                 <Video
                   poster={poster && `https://storage.yandexcloud.net/golovina-production/${poster}`}
-                  src={`https://golovina.store/video/${video}.mp4`}
+                  src={`https://golovinamari.com/video/${video}.mp4`}
                 />
               </div>
             }

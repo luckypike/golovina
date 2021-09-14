@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 // import axios from 'axios'
@@ -60,7 +60,7 @@ export default function Images ({ variant }) {
         {variant.video && !variant.video_hide &&
           <div className={styles.image}>
             <Video
-              src={`https://golovina.store/video/${variant.video}.mp4`}
+              src={`https://golovinamari.com/video/${variant.video}.mp4`}
             />
           </div>
         }

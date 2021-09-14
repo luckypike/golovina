@@ -60,7 +60,7 @@ export default function Index ({ slides: slidesJSON, instagram, locale }) {
           }
 
           <a target="_blank" href={instagram} rel="noopener noreferrer" className={styles.instagram}>
-            golovina.brand
+            golovinamari_
           </a>
 
           {posts &&
@@ -88,7 +88,7 @@ export default function Index ({ slides: slidesJSON, instagram, locale }) {
             <div>
               {I18n.t('static.index.email')}
             </div>
-            <a href="mailto:shop@golovina.store">shop@golovina.store</a>
+            <a href="mailto:shop@golovinamari.com">shop@golovinamari.com</a>
           </div>
           <div className={styles.insta}>
             {/* <div>
@@ -137,7 +137,7 @@ function Slide ({ slide, slideClassName }) {
     >
       {slide.video_mp4 &&
         <video ref={videRef} className={styles.video} loop playsInline autoPlay muted preload="metadata">
-          <source src={`https://golovina.store/video/${slide.video_mp4.key}.mp4`} type="video/mp4" />
+          <source src={`https://golovinamari.com/video/${slide.video_mp4.key}.mp4`} type="video/mp4" />
         </video>
       }
       <div className={styles.text}>

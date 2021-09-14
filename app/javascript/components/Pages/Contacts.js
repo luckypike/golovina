@@ -36,9 +36,9 @@ class Contacts extends Component {
                   </div>
 
                   <div className={styles.email}>
-                    Интернет-магазин: <a href="mailto:shop@golovina.store">shop@golovina.store</a>
+                    Интернет-магазин: <a href="mailto:shop@golovinamari.com">shop@golovinamari.com</a>
                     <br />
-                    Сотрудничество: <a href="mailto:pr@golovina.store">pr@golovina.store</a>
+                    Сотрудничество: <a href="mailto:pr@golovinamari.com">pr@golovinamari.com</a>
                   </div>
 
                   <div className={styles.schedule}>Ежедневно с 13:00 до 21:00</div>

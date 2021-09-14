@@ -166,11 +166,11 @@ class Nav extends Component {
         }
 
         <div className={styles.lang}>
-          <a className={classNames({ [styles.active]: locale === 'ru' })} href="https://golovina.store/" >
+          <a className={classNames({ [styles.active]: locale === 'ru' })} href="https://golovinamari.com/" >
             Рус
           </a>
           /
-          <a className={classNames({ [styles.active]: locale === 'en' })} href="https://en.golovina.store/">
+          <a className={classNames({ [styles.active]: locale === 'en' })} href="https://en.golovinamari.com/">
             Eng
           </a>
         </div>
