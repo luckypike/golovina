@@ -29,8 +29,8 @@ module Users
       end
 
       if current_user&.guest?
-        # Cart.where(user: Current.user).update_all(user_id: user.id)
-        # Wishlist.where(user: Current.user).update_all(user_id: user.id)
+        user.cart.destroy
+        current_user.cart.update(user_id: user.id)
       end
 
       sign_in user
