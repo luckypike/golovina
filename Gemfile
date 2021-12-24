@@ -58,7 +58,7 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'elasticsearch-ruby'
 
-gem 'airbrake'
+gem 'bugsnag'
 
 group :development, :test do
   # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
