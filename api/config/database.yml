@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV.fetch('DATABASE_HOST', :localhost) %>
+  port: <%= ENV.fetch('DATABASE_PORT', 5432) %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS', 5) %>
+  username: <%= ENV.fetch('DATABASE_USERNAME', :postgres) %>
+  password: <%= ENV.fetch('DATABASE_PASSWORD', :postgres) %>
+
+development:
+  <<: *default
+  database: <%= ENV.fetch('DATABASE_NAME_DEV', 'golovina-dev') %>
+
+test:
+  <<: *default
+  database: <%= ENV.fetch('DATABASE_NAME_TEST', 'golovina-test') %>
+
+production: &production
+  <<: *default
+  database: <%= ENV.fetch('DATABASE_NAME', 'golovina') %>

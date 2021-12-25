@@ -10,8 +10,6 @@ gem 'slim-rails'
 
 gem 'friendly_id'
 
-gem 'inline_svg'
-
 gem 'aws-sdk-s3', require: false
 gem 'carrierwave'
 gem 'fog-aws'
@@ -28,8 +26,6 @@ gem 'devise'
 gem 'jwt'
 gem 'pundit'
 
-gem 'active_link_to'
-
 gem 'globalize'
 gem 'globalize-accessors'
 gem 'i18n-js'
@@ -38,7 +34,7 @@ gem 'rails-i18n'
 gem 'enum_help'
 gem 'stateful_enum'
 
-gem 'delayed_job_active_record'
+gem 'sidekiq'
 
 gem 'react-rails'
 gem 'webpacker'
@@ -47,10 +43,6 @@ gem 'jbuilder'
 gem 'jsonapi-serializer'
 
 gem 'sitemap_generator'
-
-gem 'whenever', require: false
-
-gem 'exception_notification'
 
 gem 'bootsnap', require: false
 

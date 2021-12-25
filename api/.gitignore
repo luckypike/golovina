@@ -10,7 +10,6 @@
 # Ignore bundler config.
 .bundle
 .local
-.env
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -24,7 +23,6 @@
 .byebug_history
 
 public/uploads
-/config/database.yml
 /config/secrets.yml
 /public/packs
 /public/packs-test
