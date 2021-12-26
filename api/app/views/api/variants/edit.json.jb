@@ -1,0 +1,7 @@
+json = {
+  state: @variant.state
+}
+
+json.merge!(@variant.globalize_attribute_names.map { |f| [f, @variant.send(f)] }.to_h)
+
+json

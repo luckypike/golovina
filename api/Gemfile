@@ -26,6 +26,9 @@ gem 'devise'
 gem 'jwt'
 gem 'pundit'
 
+gem "service_actor-rails"
+gem 'dry-validation'
+
 gem 'globalize'
 gem 'globalize-accessors'
 gem 'i18n-js'
@@ -40,6 +43,7 @@ gem 'react-rails'
 gem 'webpacker'
 
 gem 'jbuilder'
+gem 'jb'
 gem 'jsonapi-serializer'
 
 gem 'sitemap_generator'

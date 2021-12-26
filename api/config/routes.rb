@@ -1,6 +1,11 @@
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   root 'pages#index'
 
+  namespace :api, defaults: { format: :json }, format: false do
+    resource :session, only: %i[show destroy]
+    resources :variants, only: %i[edit create update]
+  end
+
   get :robots, to: 'pages#robots'
   get :contacts, to: 'pages#contacts'
   get :instagram, to: 'pages#instagram'
