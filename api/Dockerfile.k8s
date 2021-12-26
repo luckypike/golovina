@@ -1,0 +1,16 @@
+FROM ruby:3.0.3-alpine
+
+RUN mkdir -p /app
+WORKDIR /app
+
+ENV GEM_HOME /app/.local/ruby/3.0
+ENV PATH "/app/.local/ruby/3.0/bin:${PATH}"
+
+RUN apk update && apk add bash git curl openssh g++ make python3 python2 imagemagick yarn nodejs tzdata postgresql-dev postgresql-client vim
+
+COPY . /app
+RUN gem install bundler
+RUN bundle config set --local without development test
+RUN bundle install
+
+EXPOSE 3000
