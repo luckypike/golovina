@@ -1,0 +1,49 @@
+:root {
+  --xr: 1rem;
+  --yr: 0.25rem;
+
+  --fs-base: calc(var(--yr) * 3.5);
+  --lh-base: calc(var(--yr) * 4);
+  /* --fs-cap: calc(var(--yr) * 3); */
+
+  --theme-bg-color: 255, 255, 255;
+  --theme-fg-primary-color: 20, 20, 20;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --theme-bg-color: 32, 33, 36;
+    --theme-fg-primary-color: 225, 224, 224;
+  }
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: var(--fs-base);
+  background: rgb(var(--theme-bg-color));
+  color: rgb(var(--theme-fg-primary-color));
+}
+
+a {
+  color: inherit;
+}
+
+body,
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+#__next > main {
+  display: flex;
+  padding: calc(var(--yr) * 22) 0;
+  flex: 1 0 auto;
+  flex-direction: column;
+}

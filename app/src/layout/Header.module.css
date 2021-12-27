@@ -1,0 +1,36 @@
+.root {
+  height: calc(var(--yr) * 16);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  /* transition: height 0.2s, background 0.2s; */
+}
+
+.left {
+  position: absolute;
+  display: flex;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: top 0.2s;
+}
+
+
+.right {
+  position: absolute;
+  display: flex;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}

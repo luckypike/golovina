@@ -1,0 +1,29 @@
+.root {
+  display: block;
+  padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
+}
+
+.svg {
+  display: block;
+  width: calc(var(--yr) * 6);
+  height: calc(var(--yr) * 6);
+  fill: none;
+  stroke: rgb(var(--theme-fg-primary-color));
+  stroke-miterlimit: 10;
+  stroke-linejoin: round;
+}
+
+.counter {
+  position: absolute;
+  top: calc(var(--yr) * 1);
+  right: calc(var(--yr) * 1);
+  width: calc(var(--yr) * 4);
+  height: calc(var(--yr) * 4);
+  line-height: calc(var(--yr) * 4);
+  font-size: calc(var(--yr) * 2.5);
+  text-align: center;
+  background-color: rgb(var(--theme-fg-primary-color));
+  color: rgb(var(--theme-bg-color));
+  border-radius: 50%;
+  overflow: hidden;
+}

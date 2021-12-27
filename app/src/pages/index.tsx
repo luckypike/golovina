@@ -5,9 +5,7 @@ import Link from 'next/link'
 const IndexPage: NextPage = () => {
   return (
     <div>
-      <main>
-        INDEX
-      </main>
+      <main>INDEX</main>
 
       <p>
         <Link href="/about">About</Link>
@@ -26,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // console.log(data)
 
   return {
-    props: {}
+    props: {},
   }
 }
 
