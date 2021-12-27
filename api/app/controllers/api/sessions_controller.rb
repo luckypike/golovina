@@ -3,7 +3,7 @@
 module Api
   class SessionsController < Api::ApplicationController
     def show
-      render json: current_user
+      authorize :session
     end
   end
 end
