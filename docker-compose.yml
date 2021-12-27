@@ -20,6 +20,28 @@ services:
     stdin_open: true
     tty: true
 
+  api-go: &api-go
+    build: ./api-go
+    environment:
+      HISTFILE: /app/tmp/.bash_history
+    volumes:
+      - ./api-go:/app
+      - go-build:/root/.cache/go-build
+      - go-modules:/go/pkg/mod
+    ports:
+      - 3001:3000
+
+  air-go: &air-go
+    image: cosmtrek/air
+    command: "air init"
+    working_dir: /app
+    volumes:
+      - ./api-go:/app
+      - go-build:/root/.cache/go-build
+      - go-modules:/go/pkg/mod
+    ports:
+      - 3001:3000
+
   pg:
     image: postgres:13-alpine
     environment:
@@ -37,6 +59,8 @@ services:
       - redis:/data
 
 volumes:
+  go-build:
+  go-modules:
   postgres:
     name: golovina-api-pg
   redis:
