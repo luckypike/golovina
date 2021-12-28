@@ -24,6 +24,8 @@ services:
     build: ./api-go
     environment:
       HISTFILE: /app/tmp/.bash_history
+    env_file:
+      - .env
     volumes:
       - ./api-go:/app
       - go-build:/root/.cache/go-build
@@ -35,6 +37,8 @@ services:
     image: cosmtrek/air
     command: "air init"
     working_dir: /app
+    env_file:
+      - .env
     volumes:
       - ./api-go:/app
       - go-build:/root/.cache/go-build
