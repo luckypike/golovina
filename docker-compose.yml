@@ -23,6 +23,7 @@ services:
   api-go: &api-go
     build: ./api-go
     environment:
+      DATABASE_HOST: pg
       HISTFILE: /app/tmp/.bash_history
     env_file:
       - .env
@@ -37,6 +38,8 @@ services:
     image: cosmtrek/air
     command: "air init"
     working_dir: /app
+    environment:
+      DATABASE_HOST: pg
     env_file:
       - .env
     volumes:

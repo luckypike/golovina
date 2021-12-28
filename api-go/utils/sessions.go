@@ -13,6 +13,12 @@ import (
 )
 
 func Decrypt(cookie string) float64 {
+	defer func() {
+		if r := recover(); r != nil {
+			return
+		}
+	}()
+
 	secret := pbkdf2.Key([]byte(os.Getenv("RAILS_SECRET_KEY")), []byte(os.Getenv("RAILS_SALT")), 1000, 32, sha1.New)
 
 	block, _ := aes.NewCipher(secret)
