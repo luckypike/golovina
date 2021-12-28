@@ -12,7 +12,7 @@ import (
 	"golang.org/x/crypto/pbkdf2"
 )
 
-func Decrypt(cookie string) float64 {
+func Decrypt(cookie string) int {
 	defer func() {
 		if r := recover(); r != nil {
 			return
@@ -39,5 +39,5 @@ func Decrypt(cookie string) float64 {
 	b, _ := base64.StdEncoding.DecodeString(mp["_rails"].(map[string]interface{})["message"].(string))
 	json.Unmarshal(b, &mp)
 
-	return mp["warden.user.user.key"].([]interface{})[0].([]interface{})[0].(float64)
+	return int(mp["warden.user.user.key"].([]interface{})[0].([]interface{})[0].(float64))
 }
