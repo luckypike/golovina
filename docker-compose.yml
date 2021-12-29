@@ -40,6 +40,8 @@ services:
     working_dir: /app
     environment:
       DATABASE_HOST: pg
+    depends_on:
+      - pg
     env_file:
       - .env
     volumes:

@@ -6,6 +6,7 @@ import (
 	"crypto/sha1"
 	"encoding/base64"
 	"encoding/json"
+	"net/url"
 	"os"
 	"strings"
 
@@ -19,6 +20,7 @@ func Decrypt(cookie string) int {
 		}
 	}()
 
+	cookie, _ = url.QueryUnescape(cookie)
 	secret := pbkdf2.Key([]byte(os.Getenv("RAILS_SECRET_KEY")), []byte(os.Getenv("RAILS_SALT")), 1000, 32, sha1.New)
 
 	block, _ := aes.NewCipher(secret)
