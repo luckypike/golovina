@@ -40,6 +40,9 @@ services:
     working_dir: /app
     environment:
       DATABASE_HOST: pg
+      DATABASE_NAME: golovina-dev
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
     depends_on:
       - pg
     env_file:

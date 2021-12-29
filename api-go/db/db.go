@@ -12,7 +12,14 @@ var db *gorm.DB
 var err error
 
 func Connect() {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s", os.Getenv("DATABASE_HOST"), "postgres", "postgres", "golovina-dev", "5432")
+	dsn := fmt.Sprintf(
+		"host=%s user=%s password=%s dbname=%s port=%s",
+		os.Getenv("DATABASE_HOST"),
+		os.Getenv("DATABASE_USERNAME"),
+		os.Getenv("DATABASE_PASSWORD"),
+		os.Getenv("DATABASE_NAME"),
+		"5432",
+	)
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 }
 
