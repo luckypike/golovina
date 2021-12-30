@@ -44,7 +44,7 @@ jobs:
           build-args: |
             RAILS_ENV=production
             RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
-            DATABASE_HOST=postgres
+            DATABASE_HOST=localhost
           push: true
           tags: |
             bragovo/golovina-api:latest
