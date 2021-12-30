@@ -12,5 +12,7 @@ COPY . /app
 RUN gem install bundler
 RUN bundle config set --local without development test
 RUN bundle install
+RUN bundle exec rails assets:precompile
+RUN bundle exec rails webpacker:compile
 
 EXPOSE 3000
