@@ -49,4 +49,4 @@ jobs:
           file: ./api-go/Dockerfile.k8s
           push: true
           tags: |
-            bragovo/golovina-api-go:latest
+            bragovo/golovina-fastapi:latest
