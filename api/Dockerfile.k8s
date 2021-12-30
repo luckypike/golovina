@@ -10,6 +10,7 @@ RUN apk update && apk add bash git curl openssh g++ make python3 python2 imagema
 
 COPY . /app
 RUN gem install bundler
+RUN yarn install
 RUN bundle config set --local without development test
 RUN bundle install
 RUN bundle exec rails assets:precompile
