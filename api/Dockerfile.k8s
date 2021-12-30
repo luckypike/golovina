@@ -18,7 +18,7 @@ RUN yarn install
 RUN bundle config set --local without development test
 RUN bundle install
 # RUN bundle exec rake db:create
-RUN bundle exec rake db:migrate
+# RUN bundle exec rake db:migrate
 RUN bundle exec rails assets:precompile
 RUN bundle exec rails webpacker:compile
 
