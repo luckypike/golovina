@@ -5,10 +5,10 @@ WORKDIR /app
 
 ENV GEM_HOME /app/.local/ruby/3.0
 ENV PATH "/app/.local/ruby/3.0/bin:${PATH}"
-ENV RAILS_ENV production
 
 ARG RAILS_MASTER_KEY
 ARG RAILS_ENV
+ARG DATABASE_HOST
 
 RUN apk update && apk add bash git curl openssh g++ make python3 python2 imagemagick yarn nodejs tzdata postgresql-dev postgresql-client vim
 
@@ -17,7 +17,7 @@ RUN gem install bundler
 RUN yarn install
 RUN bundle config set --local without development test
 RUN bundle install
-RUN bundle exec rake db:create
+# RUN bundle exec rake db:create
 RUN bundle exec rake db:migrate
 RUN bundle exec rails assets:precompile
 RUN bundle exec rails webpacker:compile
