@@ -95,12 +95,6 @@ Rails.application.configure do
     'X-Content-Type-Options' => 'nosniff'
   }
 
-  config.middleware.use ExceptionNotification::Rack,
-    email: {
-      email_prefix: "[ERROR][golovina] ",
-      sender_address: %{"Luckybot" <#{Rails.application.credentials[Rails.env.to_sym][:mail][:username]}>},
-      exception_recipients: %w{log@luckypike.com}
-    }
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
   # middleware. The `delay` is used to determine how long to wait after a write
