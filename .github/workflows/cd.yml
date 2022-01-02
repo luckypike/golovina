@@ -82,7 +82,7 @@ jobs:
       - uses: docker/build-push-action@v2
         with:
           context: ./app
-          file: ./api-go/Dockerfile.k8s
+          file: ./app/Dockerfile.k8s
           push: true
           tags: |
             bragovo/golovina-app:latest
