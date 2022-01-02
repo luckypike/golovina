@@ -9,7 +9,7 @@ import { RootStore, SessionData } from '../services/stores/RootStore'
 import 'normalize.css'
 import '../css/app.css'
 
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = process.env.API_URL
 
 function AppPage({ Component, pageProps, sessionData }: AppProps & { sessionData: SessionData }) {
   const [rootStore] = useState(new RootStore(sessionData))
@@ -28,7 +28,7 @@ AppPage.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext)
 
   axios.defaults.headers.common.Cookie = appContext.ctx.req?.headers.cookie ?? ''
-  axios.defaults.baseURL = 'http://localhost:3000/api'
+  axios.defaults.baseURL = process.env.API_URL_SSR
 
   const { data } = await axios.get('/session')
 
