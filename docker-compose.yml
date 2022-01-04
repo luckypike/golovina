@@ -20,21 +20,21 @@ services:
     stdin_open: true
     tty: true
 
-  api-go: &api-go
-    build: ./api-go
+  fastapi: &fastapi
+    build: ./fastapi
     environment:
       DATABASE_HOST: pg
       HISTFILE: /app/tmp/.bash_history
     env_file:
       - .env
     volumes:
-      - ./api-go:/app
+      - ./fastapi:/app
       - go-build:/root/.cache/go-build
       - go-modules:/go/pkg/mod
     ports:
       - 3001:3000
 
-  air-go: &air-go
+  air: &air
     image: cosmtrek/air
     command: "air init"
     working_dir: /app
@@ -48,7 +48,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./api-go:/app
+      - ./fastapi:/app
       - go-build:/root/.cache/go-build
       - go-modules:/go/pkg/mod
     ports:
