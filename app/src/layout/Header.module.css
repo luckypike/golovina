@@ -5,6 +5,7 @@
   left: 0;
   width: 100%;
   z-index: 10;
+  background: rgb(var(--theme-bg-primary-color));
   /* transition: height 0.2s, background 0.2s; */
 }
 

@@ -13,10 +13,10 @@ const AboutPage: NextPage = () => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return {
-    props: {},
-  }
-}
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   return {
+//     props: {},
+//   }
+// }
 
 export default AboutPage

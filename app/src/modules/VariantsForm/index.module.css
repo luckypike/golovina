@@ -1,0 +1,10 @@
+.root {
+  flex-grow: 1;
+  background: rgb(var(--theme-bg-secondary-color));
+  padding: var(--yr-xl) var(--xr);
+}
+
+.title {
+  text-align: center;
+  margin: 0 0 var(--yr-m);
+}

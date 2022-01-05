@@ -5,4 +5,5 @@
 
 .svg {
   display: block;
+  fill: rgb(var(--theme-fg-primary-color));
 }

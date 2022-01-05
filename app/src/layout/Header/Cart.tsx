@@ -19,7 +19,7 @@ export const Cart: FC = observer(() => {
         <path d="M9 8.25a3 3 0 116 0" />
       </svg>
 
-      {cart > 0 && <div className={s.counter}>{cart}</div>}
+      {cart > 0 && <div className={s.counter}>{cart > 9 ? '9+' : cart}</div>}
     </a>
   )
 })

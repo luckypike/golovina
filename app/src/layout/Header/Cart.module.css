@@ -19,11 +19,12 @@
   right: calc(var(--yr) * 1);
   width: calc(var(--yr) * 4);
   height: calc(var(--yr) * 4);
-  line-height: calc(var(--yr) * 4);
-  font-size: calc(var(--yr) * 2.5);
+  line-height: var(--lh-at);
+  font-size: var(--fs-at);
+  font-weight: 600;
   text-align: center;
   background-color: rgb(var(--theme-fg-primary-color));
-  color: rgb(var(--theme-bg-color));
+  color: rgb(var(--theme-bg-primary-color));
   border-radius: 50%;
   overflow: hidden;
 }
