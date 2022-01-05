@@ -4,7 +4,7 @@ services:
     working_dir: /app/api
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     environment:
-      RAILS_ENV: development
+      # RAILS_ENV: development
       DATABASE_HOST: pg
       REDIS_HOST: redis
       HISTFILE: /app/.local/.bash_history
