@@ -8,6 +8,10 @@ services:
       DATABASE_HOST: pg
       REDIS_HOST: redis
       HISTFILE: /app/.local/.bash_history
+      ELASTICSEARCH_URL: es
+      S3_URL: http://localhost:3002/s3
+    tmpfs:
+      - /tmp
     volumes:
       - nfsmount:/app
     ports:
@@ -16,7 +20,9 @@ services:
       - .env
     depends_on:
       - pg
+      - nginx
       - redis
+      - es
     stdin_open: true
     tty: true
 
@@ -70,9 +76,26 @@ services:
     volumes:
       - redis:/data
 
+  es:
+    image: elasticsearch:7.16.2
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      # - ./api/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./api/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - 3002:80
+
 volumes:
   go-build:
   go-modules:
+  elasticsearch:
+    name: golovina-api-es
   postgres:
     name: golovina-api-pg
   redis:
