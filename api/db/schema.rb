@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_01_134415) do
+ActiveRecord::Schema.define(version: 2022_01_07_085849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,16 @@ ActiveRecord::Schema.define(version: 2021_06_01_134415) do
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "acts", force: :cascade do |t|
@@ -85,8 +94,8 @@ ActiveRecord::Schema.define(version: 2021_06_01_134415) do
     t.integer "state", default: 0
     t.integer "weight", default: 0
     t.boolean "empty", default: false
-    t.integer "variants_counter"
     t.boolean "front"
+    t.integer "variants_and_kits_count"
     t.index ["parent_category_id"], name: "index_categories_on_parent_category_id"
   end
 
@@ -203,6 +212,8 @@ ActiveRecord::Schema.define(version: 2021_06_01_134415) do
     t.integer "height"
     t.integer "width"
     t.boolean "favourite", default: false
+    t.boolean "active"
+    t.boolean "processed"
     t.index ["imagable_type", "imagable_id"], name: "index_images_on_imagable_type_and_imagable_id"
   end
 
@@ -513,27 +524,23 @@ ActiveRecord::Schema.define(version: 2021_06_01_134415) do
     t.boolean "out_of_stock", default: false
     t.integer "state"
     t.jsonb "sizes_cache"
-    t.text "desc"
     t.decimal "price"
     t.decimal "price_last"
     t.boolean "pinned", default: false
-    t.text "comp"
     t.boolean "soon", default: false
     t.string "code"
     t.boolean "show", default: true
-    t.boolean "premium"
-    t.boolean "stayhome"
-    t.boolean "morning"
     t.integer "quantity", default: 0, null: false
     t.integer "acts_count", default: 0, null: false
     t.integer "preorder", default: 0
     t.integer "preordered", default: 0
-    t.boolean "linen", default: false
-    t.boolean "spec", default: false
     t.integer "weight", default: 0
     t.boolean "video_hide", default: false
     t.date "published_at"
     t.boolean "single", default: false
+    t.bigint "category_id"
+    t.integer "images_count"
+    t.index ["category_id"], name: "index_variants_on_category_id"
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["pinned"], name: "index_variants_on_pinned"
     t.index ["product_id", "color_id"], name: "index_variants_on_product_id_and_color_id", unique: true
@@ -551,6 +558,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_134415) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "acts", "availabilities"
   add_foreign_key "acts", "order_items"
   add_foreign_key "acts", "stores"
@@ -581,6 +589,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_134415) do
   add_foreign_key "themables", "variants"
   add_foreign_key "user_addresses", "delivery_cities"
   add_foreign_key "user_addresses", "users"
+  add_foreign_key "variants", "categories"
   add_foreign_key "variants", "colors"
   add_foreign_key "variants", "products"
   add_foreign_key "wishlists", "users"

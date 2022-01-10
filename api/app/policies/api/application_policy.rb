@@ -4,6 +4,10 @@ module Api
   class ApplicationPolicy
     attr_reader :user, :record
 
+    def new?
+      create?
+    end
+
     def edit?
       update?
     end

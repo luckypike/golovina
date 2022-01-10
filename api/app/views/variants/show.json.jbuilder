@@ -6,10 +6,13 @@ json.variants @variants do |variant|
 
   json.title variant.title_last.squish
 
-  json.images variant.images.sort_by(&:weight_or_created).each do |image|
+  json.images variant.images.order(weight: :asc).each do |image|
     json.id image.id
-    json.thumb image.photo.thumb.url
-    json.large image.photo.large.url
+
+    if image.file.attached?
+      json.thumb image.thumb_url
+      json.large image.large_url
+    end
   end
 
   json.color do
@@ -21,7 +24,7 @@ json.variants @variants do |variant|
   end
 
   json.category do
-    json.extract! variant.product.category, :id, :slug
+    json.extract! variant.category, :id, :slug
   end
 
   json.availabilities(variant.availabilities.sort_by { |a| a.size.weight }) do |availability|

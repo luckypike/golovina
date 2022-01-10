@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+{
+  id: @cmd.image.id
+}

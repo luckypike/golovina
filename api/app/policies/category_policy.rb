@@ -32,7 +32,7 @@ class CategoryPolicy < ApplicationPolicy
       if user&.is_editor?
         scope.all
       else
-        scope.active.where.not(variants_counter: 0)
+        scope.active.where.not(variants_and_kits_count: 0)
       end
     end
   end

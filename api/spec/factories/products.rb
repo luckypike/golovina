@@ -1,6 +1,6 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-  factory :product do
-    sequence(:title) { |n| "product#{n}" }
-    category
+  factory :product, class: Api::Product do
   end
 end

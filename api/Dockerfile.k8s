@@ -10,7 +10,7 @@ ARG RAILS_MASTER_KEY
 ARG RAILS_ENV
 ENV DATABASE_HOST 172.17.0.1
 
-RUN apk update && apk add bash git curl openssh g++ make python3 python2 imagemagick yarn nodejs tzdata postgresql-dev postgresql-client vim
+RUN apk update && apk add bash git curl openssh g++ make python3 python2 imagemagick vips-dev yarn nodejs tzdata postgresql-dev postgresql-client vim
 
 COPY . /app
 RUN gem install bundler

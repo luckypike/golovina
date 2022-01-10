@@ -1,8 +1,8 @@
 - title @category.title
 - description (@kits.map(&:human_title) + @variants.map(&:title_last)).join(', ')
-- set_meta_tags og: { \
-  image: Image.category(@category).map{ |image| image.photo.large.url } \
-}
+/ - set_meta_tags og: { \
+/   image: Image.category(@category).map{ |image| image.photo.large.url } \
+/ }
 
 - set_meta_tags alternate: I18n.available_locales.map { |locale| [locale, locale_url_for(:catalog_category_url, locale, slug: @category.slug)] }.to_h
 - set_meta_tags canonical: locale_url_for(:catalog_category_url, I18n.locale, slug: @category.slug)

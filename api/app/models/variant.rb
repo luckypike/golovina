@@ -1,6 +1,6 @@
 class Variant < ApplicationRecord
   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  # include Elasticsearch::Model::Callbacks
 
   # default_scope do
   #   includes(
@@ -21,11 +21,11 @@ class Variant < ApplicationRecord
   accepts_nested_attributes_for :product
   has_many :variants, through: :product
 
-  has_one :category, through: :product
+  belongs_to :category
 
   belongs_to :color
 
-  has_many :images, as: :imagable, dependent: :destroy
+  has_many :images, as: :imagable, dependent: :destroy, class_name: 'Api::Image'
   accepts_nested_attributes_for :images
 
   has_many :availabilities, dependent: :destroy
@@ -46,7 +46,7 @@ class Variant < ApplicationRecord
   before_save :default_values
 
   after_save :update_sizes_cache
-  after_save :update_category_variants_counter
+  after_commit :variant_index, on: %i[create update]
 
   translates :desc, :comp, :title
   globalize_accessors locales: I18n.available_locales, attributes: %i[desc comp title]
@@ -62,8 +62,6 @@ class Variant < ApplicationRecord
   has_many :kitables, dependent: :destroy
   has_many :kits, through: :kitables
   has_many :notifications, dependent: :destroy
-
-  delegate :category, to: :product
 
   settings do
     mappings dynamic: false do
@@ -209,14 +207,12 @@ class Variant < ApplicationRecord
     self.state = state.presence || :unpub
   end
 
-  # TODO: Check and renew below 2 methods
-  def update_category_variants_counter
-    Category.find(product.category_id_before_last_save).update_variants_counter if product.category_id_before_last_save
-    product.category.update_variants_counter
-  end
-
   def update_sizes_cache
     update_column(:sizes_cache, sizes.map(&:id))
+  end
+
+  def variant_index
+    VariantProcessJob.perform_later(variant: self)
   end
 
   class << self

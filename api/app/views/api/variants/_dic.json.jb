@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+{
+  states: Variant.states.map { |key, _id| { id: key, title: t("variant.states.#{key}") } },
+  themes: Theme.with_translations.all.map { |t| t.slice(:id, :title) },
+  sizes: Size.all.map { |s| s.slice(:id, :title) },
+  categories: Category.with_translations.all.sort_by(&:title).map { |c| c.slice(:id, :title) }
+}

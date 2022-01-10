@@ -1,9 +1,16 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   root 'pages#index'
 
   namespace :api, defaults: { format: :json }, format: false do
     resource :session, only: %i[show destroy]
-    resources :variants, only: %i[edit create update]
+    resources :variants, only: %i[new edit create update]
+    resources :images, only: %i[create] do
+      collection do
+        post :touch
+      end
+    end
   end
 
   get :robots, to: 'pages#robots'

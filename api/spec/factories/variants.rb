@@ -1,8 +1,13 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-  factory :variant do
+  factory :variant, class: 'Api::Variant' do
     product
     color
-    price { 5000 }
+    category
+    title_ru { Faker::Commerce.product_name }
+    state { :active }
+    # price { 5000 }
 
     # trait :with_availability do
     #   transient do

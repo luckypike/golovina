@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 6.1'
 
 gem 'pg', '~> 1.0'
 gem 'puma', '~> 5.5'
@@ -15,6 +15,7 @@ gem 'carrierwave'
 gem 'fog-aws'
 gem 'mini_magick'
 gem 'streamio-ffmpeg'
+gem 'image_processing'
 
 gem 'meta-tags'
 
@@ -57,35 +58,25 @@ gem 'elasticsearch-ruby'
 gem 'bugsnag'
 
 group :development, :test do
-  # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
   gem 'rspec-rails'
-
-  gem 'rails-controller-testing'
-
-  gem 'capybara'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'shoulda-matchers'
-  # gem 'capybara-screenshot'
-  # gem 'selenium-webdriver'
+  gem 'webmock'
 
-  gem 'webdrivers'
+  # TODO: remove it
+  gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 end
 
 group :development do
   gem 'listen'
-  gem 'web-console'
+  # gem 'web-console'
 
   gem 'spring'
-  gem 'spring-watcher-listen'
+  # gem 'spring-watcher-listen'
 
   gem 'letter_opener'
 
   gem 'rubocop-rails', require: false
-
-  gem 'capistrano', require: false
-  gem 'capistrano-passenger', require: false
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-rbenv', require: false
+  gem 'rubocop-rspec', require: false
 end

@@ -1,0 +1,6 @@
+# frozen_string_literal: true
+
+@cmd.blob.as_json(root: false, methods: :signed_id).merge(
+  upload_url: @cmd.blob.service_url_for_direct_upload,
+  upload_headers: @cmd.blob.service_headers_for_direct_upload
+)

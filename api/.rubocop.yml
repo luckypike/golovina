@@ -1,25 +1,35 @@
 require: rubocop-rails
 
-Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
+AllCops:
+  NewCops: enable
 
 Style/Documentation:
   Enabled: false
 
-Layout/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
-
-Layout/ArgumentAlignment:
-  EnforcedStyle: with_fixed_indentation
-
-Metrics/MethodLength:
-  Max: 15
-
-Metrics/LineLength:
-  Max: 90
-
 Metrics/BlockLength:
-  ExcludedMethods: ['describe', 'context', 'enum', 'feature']
+  Exclude:
+    - spec/**/*_spec.rb
+
+# Style/ClassAndModuleChildren:
+#   EnforcedStyle: compact
+
+# Style/FrozenStringLiteralComment:
+#   Enabled: false
+
+# Style/Documentation:
+#   Enabled: false
+
+# Layout/MultilineMethodCallIndentation:
+#   EnforcedStyle: indented
+
+# Layout/ArgumentAlignment:
+#   EnforcedStyle: with_fixed_indentation
+
+# Metrics/MethodLength:
+#   Max: 15
+
+# Metrics/LineLength:
+#   Max: 90
+
+# Metrics/BlockLength:
+#   ExcludedMethods: ['describe', 'context', 'enum', 'feature']

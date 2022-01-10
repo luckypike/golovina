@@ -44,8 +44,8 @@ class Kit < ApplicationRecord
   end
 
   def update_category_variants_counter
-    Category.find(category_id_before_last_save).update_variants_counter if category_id_before_last_save
-    category.update_variants_counter if category
+    CategoryProcessJob.perform_later(category: Api::Category.find(category_id_before_last_save)) if category_id_before_last_save
+    CategoryProcessJob.perform_later(category: Api::Category.find(category_id))
   end
 
   class << self
