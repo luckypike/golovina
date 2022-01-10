@@ -12,6 +12,7 @@ import { ImagesDropzoneStore } from '../ImagesDropzone/store'
 type Values = {
   category_id: number
   color_id: number
+  state: string
   title_ru: string
   title_en: string
   desc_ru: string
@@ -22,6 +23,7 @@ type Values = {
 }
 
 interface Dic {
+  states: { id: number; title: string }[]
   themes: { id: number; title: string }[]
   sizes: { id: number; title: string }[]
   categories: { id: number; title: string }[]
@@ -79,6 +81,21 @@ export const VariantsForm: FC = () => {
       <form onSubmit={handleSubmit(onSubmit)} className={sf.root}>
         <div className={sf.el}>
           <label className={sf.it}>
+            <div className={sf.lb}>Статус</div>
+            <select required className={sf.in} {...register('state')}>
+              {dic.states.map((state) => (
+                <option key={state.id} value={state.id}>
+                  {state.title}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          {/* <div className={sf.er}>Ошибка!!1 Сделай что нибудь!</div> */}
+        </div>
+
+        <div className={sf.el}>
+          <label className={sf.it}>
             <div className={sf.lb}>Название * (RU)</div>
             <input className={sf.in} {...register('title_ru')} />
           </label>
@@ -98,7 +115,7 @@ export const VariantsForm: FC = () => {
         <div className={sf.el}>
           <label className={sf.it}>
             <div className={sf.lb}>Категория</div>
-            <select required className={sf.in} {...register('category_id')}>
+            <select className={sf.in} {...register('category_id')}>
               <option disabled selected value="" />
               {dic.categories.map((category) => (
                 <option key={category.id} value={category.id}>
@@ -111,6 +128,10 @@ export const VariantsForm: FC = () => {
           {/* <div className={sf.er}>Ошибка!!1 Сделай что нибудь!</div> */}
         </div>
 
+        <p>
+          <input {...register('color_id')} />
+        </p>
+
         <div className={sf.el}>
           <label className={sf.it}>
             <div className={sf.lb}>Описание</div>
@@ -119,24 +140,6 @@ export const VariantsForm: FC = () => {
 
           {/* <div className={sf.er}>Ошибка!!1 Сделай что нибудь!</div> */}
         </div>
-
-        <p>
-          <input {...register('category_id')} />
-          <input {...register('color_id')} />
-        </p>
-
-        <div>
-          <input {...register('title_ru')} />
-        </div>
-
-        <p>
-          Неопубликованные товары видны только редакторам, размещенные становятся видны всем, а архивные скрываются ото
-          всех и найти их можно только через управление.
-        </p>
-
-        <input {...register('title_en')} />
-        <input {...register('desc_ru')} />
-        <input {...register('desc_en')} />
 
         <div>
           <ImagesDropzone store={store} />
