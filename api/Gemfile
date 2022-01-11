@@ -17,6 +17,8 @@ gem 'mini_magick'
 gem 'streamio-ffmpeg'
 gem 'image_processing'
 
+gem 'figaro'
+
 gem 'meta-tags'
 
 gem 'redcarpet'

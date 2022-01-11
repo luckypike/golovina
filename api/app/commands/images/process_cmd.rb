@@ -12,10 +12,11 @@ module Images
     private
 
     def variant_process(image)
-      return unless image.imagable.is_a?(Api::Variant)
+      return unless image.imagable.is_a?(Variant)
 
       variant_image_process(image)
-      VariantProcessJob.perform_later(variant: image.imagable)
+      # TODO: temporary user Api::Variant.find
+      VariantProcessJob.perform_later(variant: Api::Variant.find(image.imagable.id))
     end
 
     def variant_image_process(image)
