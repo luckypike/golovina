@@ -8,8 +8,8 @@ class I18nComponentMount < React::Rails::ComponentMount
   def react_component(name, props = {}, options = {}, &block)
     props[:locale] = I18n.locale
     props[:aws] = {
-      endpoint: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :endpoint),
-      bucket: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :bucket)
+      endpoint: ENV['aws_endpoint'],
+      bucket: ENV['aws_bucket']
     }
 
     # props[:i18n] = {

@@ -61,7 +61,7 @@ export default function Show (props) {
 
       {collection.text &&
         <div className={styles.text}>
-          <ReactMarkdown source={collection.text} />
+          <ReactMarkdown children={collection.text} />
         </div>
       }
 

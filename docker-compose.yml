@@ -28,6 +28,8 @@ services:
 
   fastapi: &fastapi
     build: ./fastapi
+    profiles:
+      - donotstart
     environment:
       DATABASE_HOST: pg
       HISTFILE: /app/tmp/.bash_history
