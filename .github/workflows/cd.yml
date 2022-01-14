@@ -44,6 +44,8 @@ jobs:
           build-args: |
             RAILS_ENV=production
             RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
+            aws_access_key_id=dummy_aws_access_key_id
+            aws_secret_access_key=dummy_aws_secret_access_key
           push: true
           tags: |
             bragovo/golovina-api:latest
