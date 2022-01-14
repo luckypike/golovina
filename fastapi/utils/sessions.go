@@ -21,7 +21,7 @@ func Decrypt(cookie string) int {
 	}()
 
 	cookie, _ = url.QueryUnescape(cookie)
-	secret := pbkdf2.Key([]byte(os.Getenv("RAILS_SECRET_KEY")), []byte(os.Getenv("RAILS_SALT")), 1000, 32, sha1.New)
+	secret := pbkdf2.Key([]byte(os.Getenv("SECRET_KEY_BASE")), []byte(os.Getenv("RAILS_SALT")), 1000, 32, sha1.New)
 
 	block, _ := aes.NewCipher(secret)
 	aesgcm, _ := cipher.NewGCM(block)
