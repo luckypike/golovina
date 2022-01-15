@@ -20,3 +20,9 @@
   fill: rgb(var(--theme-fg-primary-color));
   transition: 0.2s fill;
 }
+
+@media (--m) {
+  .root {
+    margin-left: calc(var(--yr) * -2);
+  }
+}

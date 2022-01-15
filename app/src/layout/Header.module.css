@@ -6,7 +6,13 @@
   width: 100%;
   z-index: 10;
   background: rgb(var(--theme-bg-primary-color));
-  /* transition: height 0.2s, background 0.2s; */
+  transition: height 0.3s, backdrop-filter 0.2s, background-color 0.2s;
+}
+
+@media (--s) {
+  .root {
+    height: calc(var(--yr) * 24);
+  }
 }
 
 .left {
@@ -17,6 +23,11 @@
   transform: translateY(-50%);
 }
 
+@media (--m) {
+  .left {
+    left: calc(var(--xr) * 2);
+  }
+}
 
 .logo {
   position: absolute;
@@ -27,11 +38,29 @@
   transition: top 0.2s;
 }
 
-
 .right {
   position: absolute;
   display: flex;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
+}
+
+
+@media (--m) {
+  .right {
+    right: calc(var(--xr) * 1);
+  }
+}
+
+.scrolling {
+  height: calc(var(--yr) * 12);
+  backdrop-filter: blur(2px);
+  background: rgba(var(--theme-bg-primary-color), 0.7);
+}
+
+@media (--s) {
+  .scrolling {
+    height: calc(var(--yr) * 16);
+  }
 }

@@ -32,6 +32,9 @@
   }
 }
 
+@custom-media --s (min-width: 45em);
+@custom-media --m (min-width: 60em);
+
 *,
 ::after,
 ::before {
@@ -67,6 +70,11 @@ body,
   flex-direction: column;
 }
 
+@media (--s) {
+  #__next > main {
+    padding-top: calc(var(--yr) * 40);
+  }
+}
 
 h1 {
   margin: 0;
