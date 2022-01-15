@@ -44,3 +44,20 @@ select.in:invalid {
   margin: var(--yr-xs) 0 0 0;
   color: red;
 }
+
+.sb {
+  margin: var(--yr-m) 0 0;
+}
+
+.sbt {
+  margin: 0 0 var(--yr-s) 0;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+}
+
+.radio > *:first-child {
+  margin-right: var(--yr);
+}

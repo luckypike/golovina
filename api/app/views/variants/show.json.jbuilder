@@ -6,7 +6,7 @@ json.variants @variants do |variant|
 
   json.title variant.title_last.squish
 
-  json.images variant.images.order(weight: :asc).each do |image|
+  json.images variant.images.where(active: true).order(weight: :asc).each do |image|
     json.id image.id
 
     if image.file.attached?

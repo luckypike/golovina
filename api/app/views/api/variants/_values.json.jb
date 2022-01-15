@@ -5,6 +5,10 @@ json = {
   state: variant.state,
   category_id: variant.category_id,
   color_id: variant.color_id,
+  price: variant.price&.round,
+  price_last: variant.price_last&.round,
+  code: variant.code,
+  published_at: variant.published_at,
   images: []
 }
 

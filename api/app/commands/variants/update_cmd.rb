@@ -7,7 +7,7 @@ module Variants
     output :variant
 
     def call
-      params = validate_contract!(UpdateContract, variant_params)
+      params = validate_contract!(UpdateContract, variant_params.compact)
       category_prev_id = variant.category_id
 
       self.variant = update_variant(variant, params)

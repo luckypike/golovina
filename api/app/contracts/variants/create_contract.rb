@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Variants
-  class CreateContract < ApplicationContract
+  class CreateContract < CreateOrUpdateContract
     params do
       optional(:product_id).maybe(:integer)
 
@@ -15,6 +15,11 @@ module Variants
       optional(:desc_en).maybe(:string)
       optional(:comp_ru).maybe(:string)
       optional(:comp_en).maybe(:string)
+
+      optional(:price).maybe(:integer)
+      optional(:price_last).maybe(:integer)
+      optional(:code).maybe(:string)
+      optional(:published_at).maybe(:date)
 
       optional(:images).maybe(:array).each do
         hash do
