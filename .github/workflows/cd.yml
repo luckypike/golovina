@@ -46,6 +46,7 @@ jobs:
             RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
             aws_access_key_id=dummy_aws_access_key_id
             aws_secret_access_key=dummy_aws_secret_access_key
+            secret_key_base=dummy_secret_key_base
           push: true
           tags: |
             bragovo/golovina-api:latest
