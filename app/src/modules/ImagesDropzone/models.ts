@@ -8,3 +8,11 @@ export interface TouchData {
 export interface CreateData {
   id: number
 }
+
+export interface ImageData {
+  id: number
+  key: string
+  src: string
+  weight: number
+  active: boolean
+}

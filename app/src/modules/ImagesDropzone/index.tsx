@@ -24,7 +24,7 @@ export const ImagesDropzone: FC<{ store: ImagesDropzoneStore }> = observer(({ st
           byte_size: file.size,
         })
 
-        store.addImage(touchData.key, URL.createObjectURL(file), false, 0, {
+        store.addImage(0, touchData.key, URL.createObjectURL(file), false, 0, {
           file,
           url: touchData.upload_url,
           signed_id: touchData.signed_id,

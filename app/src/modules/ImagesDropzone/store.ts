@@ -1,12 +1,18 @@
 import axios from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
-import { CreateData } from './models'
+import { CreateData, ImageData } from './models'
 
 export class ImagesDropzoneStore {
   images: Record<string, ImageDropzoneStore> = {}
 
-  addImage = (key: string, src: string, active: boolean, weight: number, upload?: UploadData) => {
-    this.images[key] = new ImageDropzoneStore(this, key, src, active, weight, upload)
+  addImage = (id: number, key: string, src: string, active: boolean, weight: number, upload?: UploadData) => {
+    this.images[key] = new ImageDropzoneStore(this, id, key, src, active, weight, upload)
+  }
+
+  addImages = (images: ImageData[]) => {
+    images.map(image => {
+      this.addImage(image.id, image.key, image.src, image.active, image.weight)
+    })
   }
 
   constructor() {
@@ -31,9 +37,11 @@ export class ImagesDropzoneStore {
     )
   }
 
-  get toParams(): { id: number; weight: number; active: boolean }[] {
+  get toParams(): { id: number; key: string; weight: number; active: boolean, src: string }[] {
     return Object.entries(this.images).map(([key, image]) => ({
       id: image.id,
+      key: key,
+      src: image.src,
       active: image.active,
       weight: image.weight,
     }))
@@ -51,12 +59,14 @@ export class ImageDropzoneStore {
 
   constructor(
     imageDropzoneStore: ImagesDropzoneStore,
+    id: number,
     key: string,
     src: string,
     active: boolean,
     weight: number,
     upload?: UploadData
   ) {
+    this.id = id
     this.key = key
     this.src = src
     this.active = active

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { entries } from '../../models'
+import { entries, ErrorsData } from '../../models'
 
 import s from './index.module.css'
 import sf from '../../layout/form.module.css'
@@ -19,7 +19,7 @@ type Values = {
   desc_en: string
   comp_ru: string
   comp_en: string
-  images: { id: number; weight: number; active: boolean }[]
+  images: { id: number; key: string; src: string; weight: number; active: boolean }[]
 }
 
 interface Dic {
@@ -40,7 +40,7 @@ export const VariantsForm: FC = () => {
     register,
     handleSubmit,
     setValue,
-    watch,
+    setError,
     formState: { errors },
   } = useForm<Values>()
   const [dic, setDic] = useState<Dic>()
@@ -54,19 +54,21 @@ export const VariantsForm: FC = () => {
         : await axios.get<FormData>('/variants/new', { params: { product_id } })
       entries(data.values).forEach(([key, value]) => setValue(key, value))
       setDic(data.dic)
+      store.addImages(data.values.images)
     }
 
     _fetch()
   }, [id, product_id])
 
   const onSubmit: SubmitHandler<Values> = async (data) => {
-    // setValue('images', store.toParams)
     data = { ...data, images: store.toParams }
 
     try {
       id ? await axios.put(`/variants/${id}`, data) : await axios.post('/variants', { ...data, product_id })
-    } catch ({ response: { data } }) {
-      console.log(data)
+    } catch ({ response: { data: { errors: errorsData } } }) {
+      entries(errorsData as Record<keyof Values, string[]>).forEach(([name, messages]) => {
+        messages.map(message => setError(name, { type: 'manual', message }))
+      })
     }
   }
 
@@ -91,7 +93,7 @@ export const VariantsForm: FC = () => {
             </select>
           </label>
 
-          {/* <div className={sf.er}>Ошибка!!1 Сделай что нибудь!</div> */}
+          {errors.state && <div className={sf.er}>{errors.state.message}</div>}
         </div>
 
         <div className={sf.el}>
@@ -100,7 +102,7 @@ export const VariantsForm: FC = () => {
             <input className={sf.in} {...register('title_ru')} />
           </label>
 
-          {/* <div className={sf.er}>Ошибка!!1 Сделай что нибудь!</div> */}
+          {errors.title_ru && <div className={sf.er}>{errors.title_ru.message}</div>}
         </div>
 
         <div className={sf.el}>
@@ -109,14 +111,14 @@ export const VariantsForm: FC = () => {
             <input className={sf.in} {...register('title_en')} />
           </label>
 
-          {/* <div className={sf.er}>Ошибка!!1 Сделай что нибудь!</div> */}
+          {errors.title_en && <div className={sf.er}>{errors.title_en.message}</div>}
         </div>
 
         <div className={sf.el}>
           <label className={sf.it}>
             <div className={sf.lb}>Категория</div>
             <select className={sf.in} {...register('category_id')}>
-              <option disabled selected value="" />
+              <option disabled value="" />
               {dic.categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.title}
@@ -125,7 +127,7 @@ export const VariantsForm: FC = () => {
             </select>
           </label>
 
-          {/* <div className={sf.er}>Ошибка!!1 Сделай что нибудь!</div> */}
+          {errors.category_id && <div className={sf.er}>{errors.category_id.message}</div>}
         </div>
 
         <p>
@@ -138,7 +140,7 @@ export const VariantsForm: FC = () => {
             <textarea className={sf.in} {...register('desc_ru')} />
           </label>
 
-          {/* <div className={sf.er}>Ошибка!!1 Сделай что нибудь!</div> */}
+          {errors.desc_ru && <div className={sf.er}>{errors.desc_ru.message}</div>}
         </div>
 
         <div>

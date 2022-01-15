@@ -2,9 +2,24 @@
 
 json = {
   id: variant.id,
-  state: variant.state
+  state: variant.state,
+  category_id: variant.category_id,
+  color_id: variant.color_id,
+  images: []
 }
 
 json.merge!(variant.globalize_attribute_names.index_with { |f| variant.send(f) })
+
+Api::Image.where(imagable_type: 'Variant', imagable_id: variant.id).each do |image|
+  json[:images].push(
+    {
+      id: image.id,
+      weight: image.weight,
+      active: image.active,
+      key: image.uuid,
+      src: image.thumb_url
+    }
+  )
+end
 
 json
