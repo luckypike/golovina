@@ -27,7 +27,7 @@ json.array! items do |item|
     json.available item.available?
     json.colors item.product.variants.select(&:active?).size - 1
 
-    json.images item.images.order(weight: :asc).limit(2).each do |image|
+    json.images item.images.active_and_ordered.limit(2).each do |image|
       json.id image.id
       json.thumb image.thumb_url if image.file.attached?
     end

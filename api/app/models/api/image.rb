@@ -2,10 +2,13 @@
 
 module Api
   class Image < ApplicationRecord
-    has_one_attached :file
     belongs_to :imagable, polymorphic: true, optional: true
 
     validates :uuid, :file, presence: true
+
+    scope :active_and_ordered, -> { where(active: true, processed: true).order(weight: :asc) }
+
+    has_one_attached :file
 
     # TODO: use named variants after upgrade to 7.x
     def thumb_url

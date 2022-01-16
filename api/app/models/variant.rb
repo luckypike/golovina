@@ -212,7 +212,7 @@ class Variant < ApplicationRecord
   end
 
   def variant_index
-    VariantProcessJob.perform_later(variant: self)
+    VariantProcessJob.perform_later(variant: Api::Variant.find(id))
   end
 
   class << self
