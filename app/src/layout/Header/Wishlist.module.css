@@ -1,6 +1,8 @@
 .root {
   display: block;
   padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
+  transition: opacity 0.3s;
+  position: relative;
 }
 
 .svg {
@@ -11,4 +13,24 @@
   stroke: rgb(var(--theme-fg-primary-color));
   stroke-miterlimit: 10;
   stroke-linejoin: round;
+}
+
+.inactive {
+  opacity: 0.3;
+}
+
+.counter {
+  position: absolute;
+  top: calc(var(--yr) * 1);
+  right: calc(var(--yr) * 1);
+  width: calc(var(--yr) * 4);
+  height: calc(var(--yr) * 4);
+  line-height: var(--lh-at);
+  font-size: var(--fs-at);
+  font-weight: 600;
+  text-align: center;
+  background-color: rgb(var(--theme-fg-primary-color));
+  color: rgb(var(--theme-bg-primary-color));
+  border-radius: 50%;
+  overflow: hidden;
 }

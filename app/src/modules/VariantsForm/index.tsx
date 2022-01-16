@@ -70,6 +70,7 @@ export const VariantsForm: FC = () => {
 
     try {
       id ? await axios.put(`/variants/${id}`, data) : await axios.post('/variants', { ...data, product_id })
+      window.location.href = '/dashboard/catalog'
     } catch ({ response: { data: { errors: errorsData } } }) {
       entries(errorsData as Record<keyof Values, string[]>).forEach(([name, messages]) => {
         messages.map(message => setError(name, { type: 'manual', message }))
@@ -111,7 +112,7 @@ export const VariantsForm: FC = () => {
 
         <div className={sf.el}>
           <label className={sf.it}>
-            <div className={sf.lb}>Категория</div>
+            <div className={sf.lb}>Категория *</div>
             <select className={sf.in} {...register('category_id')}>
               <option disabled value="" />
               {dic.categories.map((category) => (
@@ -127,14 +128,14 @@ export const VariantsForm: FC = () => {
 
         <div className={sf.el}>
           <label className={sf.it}>
-            <div className={sf.lb}>Цвет</div>
+            <div className={sf.lb}>Цвет *</div>
             <select className={sf.in} {...register('color_id')}>
               <option disabled value="" />
               {dic.colors.filter(c => !c.parent_color_id).map((color) => (
                 <optgroup key={color.id} label={color.title}>
                   {dic.colors.filter(c => c.parent_color_id === color.id).map((subColor) => (
                     <option key={subColor.id} value={subColor.id}>
-                      {subColor.title}
+                      {subColor.title} #{subColor.id}
                     </option>
                   ))}
                 </optgroup>

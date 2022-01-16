@@ -1,6 +1,8 @@
 .root {
   display: block;
   padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
+  transition: opacity 0.3s;
+  position: relative;
 }
 
 .svg {
@@ -11,6 +13,10 @@
   stroke: rgb(var(--theme-fg-primary-color));
   stroke-miterlimit: 10;
   stroke-linejoin: round;
+}
+
+.inactive {
+  opacity: 0.3;
 }
 
 .counter {
