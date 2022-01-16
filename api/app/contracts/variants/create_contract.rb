@@ -21,7 +21,7 @@ module Variants
       optional(:code).maybe(:string)
       optional(:published_at).maybe(:date)
 
-      optional(:images).maybe(:array).each do
+      optional(:images).value(:array).each do
         hash do
           required(:id).filled(:integer)
           required(:weight).filled(:integer)

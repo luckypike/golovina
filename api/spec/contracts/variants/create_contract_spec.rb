@@ -39,26 +39,26 @@ RSpec.describe Variants::CreateContract, :aggregate_failures do
       end
     end
 
-    context 'with all params' do
+    context 'with all and extra params' do
       let(:params) do
         {
-          product_id: 1, category_id: 1, color_id: 1, state: 'active',
+          product_id: 1, category_id: 1, color_id: 1, state: 'active', extra: 'Extra',
           title_ru: 'Title ru', title_en: 'Title en', desc_ru: 'Desc ru', desc_en: 'Desc en',
           comp_ru: 'Comp ru', comp_en: 'Comp en', price: 123, price_last: 122, code: 'Code',
           published_at: Time.current.to_date, images: [
-            { id: 1, weight: 1, active: true },
-            { id: 2, weight: 2, active: false }
+            { id: 1, weight: 1, active: true, key: 'Key' },
+            { id: 2, weight: 2, active: false, src: 'Src' }
           ]
         }
       end
 
       it do
         expect(subject).to be_success
-        expect(subject.to_h).to include(
+        expect(subject.to_h.keys).to contain_exactly(
           :product_id, :category_id, :color_id, :state, :title_ru, :title_en, :desc_ru, :desc_en,
           :comp_ru, :comp_en, :price, :price_last, :code, :published_at, :images
         )
-        expect(subject.to_h[:images].first).to include(:id, :weight, :active)
+        expect(subject.to_h[:images].first.keys).to contain_exactly(:id, :weight, :active)
       end
     end
   end
