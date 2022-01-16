@@ -90,6 +90,9 @@ jobs:
         with:
           context: ./app
           file: ./app/Dockerfile.k8s
+          build-args: |
+            NEXT_PUBLIC_API_URL=/api
+            NEXT_PUBLIC_BUGSNAG_API_KEY=${{ secrets.NEXT_PUBLIC_BUGSNAG_API_KEY }}
           push: true
           tags: |
             bragovo/golovina-app:latest

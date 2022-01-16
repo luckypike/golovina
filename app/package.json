@@ -8,6 +8,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@bugsnag/js": "^7.14.1",
+    "@bugsnag/plugin-react": "^7.14.0",
     "axios": "^0.24.0",
     "classcat": "^5.0.3",
     "mobx": "^6.3.10",
