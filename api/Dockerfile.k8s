@@ -9,6 +9,8 @@ ENV PATH "/app/.local/ruby/3.0/bin:${PATH}"
 ARG RAILS_MASTER_KEY
 ARG RAILS_ENV
 ARG SECRET_KEY_BASE
+ARG aws_access_key_id
+ARG aws_secret_access_key
 ENV DATABASE_HOST 172.17.0.1
 
 RUN apk update && apk add bash git curl openssh g++ make python3 python2 imagemagick vips-dev yarn nodejs tzdata postgresql-dev postgresql-client vim
