@@ -44,6 +44,8 @@ jobs:
           build-args: |
             RAILS_ENV=production
             RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
+            s3_access_key_id=dummy_aws_access_key_id
+            s3_secret_access_key=dummy_aws_secret_access_key
             aws_access_key_id=dummy_aws_access_key_id
             aws_secret_access_key=dummy_aws_secret_access_key
             SECRET_KEY_BASE=dummy_secret_key_base
