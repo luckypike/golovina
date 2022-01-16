@@ -3,7 +3,7 @@ name: Build Image
 on:
   push:
     branches:
-      - cd-2
+      - "3.0.0"
 
 jobs:
   dockerhub:
