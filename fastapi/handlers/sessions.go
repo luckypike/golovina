@@ -32,11 +32,16 @@ func ShowSession(c echo.Context) error {
 	var cart sql.NullInt64
 	db.Debug().Model(&models.Order{}).
 		Joins("LEFT JOIN order_items ON order_items.order_id = orders.id").
-		Where(&models.Order{UserID: user.ID}).Select("sum(order_items.quantity)").
+		Where(&models.Order{UserID: user.ID}, "user_id").Select("sum(order_items.quantity)").
 		Scan(&cart)
 
 	var wishlist int64
-	db.Debug().Model(&models.Wishlist{}).Where(&models.Wishlist{UserID: user.ID}).Count(&wishlist)
+	db.Debug().Model(&models.Wishlist{}).
+		Joins("LEFT JOIN variants ON variants.id = wishlists.variant_id").
+		Where(&models.Wishlist{UserID: user.ID}, "user_id").
+		Where("variants.category_id IS NOT NULL").
+		Where("variants.state = ?", 1).
+		Count(&wishlist)
 
 	return c.JSON(http.StatusOK, Session{Id: user.ID, Name: user.Name, Cart: cart.Int64, Wishlist: wishlist})
 }
