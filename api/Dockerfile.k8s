@@ -14,6 +14,7 @@ ARG aws_secret_access_key
 ARG s3_access_key_id
 ARG s3_secret_access_key
 ARG s3_endpoint
+ARG s3_bucket
 ENV DATABASE_HOST 172.17.0.1
 
 RUN apk update && apk add bash git curl openssh g++ make python3 python2 imagemagick vips-dev yarn nodejs tzdata postgresql-dev postgresql-client vim
