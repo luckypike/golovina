@@ -11,10 +11,11 @@ import (
 )
 
 type Session struct {
-	Id       uint   `json:"id"`
-	Name     string `json:"email"`
-	Cart     int64  `json:"cart"`
-	Wishlist int64  `json:"wishlist"`
+	Id         uint       `json:"id"`
+	Name       string     `json:"email"`
+	Cart       int64      `json:"cart"`
+	Wishlist   int64      `json:"wishlist"`
+	Categories []category `json:"categories"`
 }
 
 func ShowSession(c echo.Context) error {
@@ -43,5 +44,42 @@ func ShowSession(c echo.Context) error {
 		Where("variants.state = ?", 1).
 		Count(&wishlist)
 
-	return c.JSON(http.StatusOK, Session{Id: user.ID, Name: user.Name, Cart: cart.Int64, Wishlist: wishlist})
+	categoryTranslations := []models.CategoryTranslation{}
+	db.Debug().
+		Joins("INNER JOIN categories c ON category_translations.category_id = c.id AND c.state = 1").
+		Where(&models.CategoryTranslation{Locale: "ru"}).
+		Order("weight asc").
+		Find(&categoryTranslations)
+
+	return c.JSON(
+		http.StatusOK,
+		Session{
+			Id:         user.ID,
+			Name:       user.Name,
+			Cart:       cart.Int64,
+			Wishlist:   wishlist,
+			Categories: formatCategories(categoryTranslations),
+		},
+	)
+}
+
+type category struct {
+	Id    uint   `json:"id"`
+	Title string `json:"title"`
+}
+
+func formatCategories(categoryTranslations []models.CategoryTranslation) []category {
+	var categories []category
+
+	for _, categoryTranslation := range categoryTranslations {
+		categories = append(
+			categories,
+			category{
+				categoryTranslation.CategoryID,
+				categoryTranslation.Title,
+			},
+		)
+	}
+
+	return categories
 }
