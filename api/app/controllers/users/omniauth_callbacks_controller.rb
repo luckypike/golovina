@@ -34,6 +34,7 @@ module Users
       end
 
       sign_in user
+      Rails.logger.info(after_sign_in_path_for(user))
       redirect_to after_sign_in_path_for(user)
     end
 
