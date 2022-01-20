@@ -4324,10 +4324,10 @@ just-extend@^5.0.0:
   resolved "https://registry.yarnpkg.com/just-extend/-/just-extend-5.1.1.tgz#4f33b1fc719964f816df55acc905776694b713ab"
   integrity sha512-b+z6yF1d4EOyDgylzQo5IminlUmzSeqR1hs/bzjBNjuGras4FXq/6TrzjxfN0j+TmI0ltJzTNlqXUMCniciwKQ==
 
-keen-slider@^6.6.2:
-  version "6.6.2"
-  resolved "https://registry.yarnpkg.com/keen-slider/-/keen-slider-6.6.2.tgz#c71c7cde73e2ebe28fd11564a1e7b1cbc0438f31"
-  integrity sha512-ddvhuHIE/QH0neEBFnL/IdLB6GBjeuOLttwusZ3oaOvj8Ut8GzHkaVNuP+6Ur8CO/0pcEIYEEo4BpBzo39rsPw==
+keen-slider@^5.2.2:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/keen-slider/-/keen-slider-5.5.1.tgz#1493f552eadf0f5b8229defd83c626eb6dd58c13"
+  integrity sha512-QXGZGt5Hbe0YufR/RYbOG03MmOk43RQEXqkkSvjr8ZS67sVR7LRp5RIvJALfjl+A7BnHNr1wd1QBOemwy65Lfw==
 
 killable@^1.0.1:
   version "1.0.1"
