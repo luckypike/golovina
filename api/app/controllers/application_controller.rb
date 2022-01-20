@@ -62,6 +62,8 @@ class ApplicationController < ActionController::Base
   end
 
   def store_user_location!
+    Rails.logger.info('ZZZ')
+    Rails.logger.info(request.fullpath)
     store_location_for(:user, request.fullpath)
   end
 end
