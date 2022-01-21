@@ -30,6 +30,9 @@ module Golovina
       url: "redis://#{ENV.fetch('REDIS_HOST', :localhost)}:#{ENV.fetch('REDIS_PORT', 6379)}/#{ENV.fetch('REDIS_CACHE_DB', 1)}"
     }
 
+    # TODO: Remove it
+    config.action_dispatch.cookies_same_site_protection = nil
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
