@@ -41,6 +41,7 @@ gem 'enum_help'
 gem 'stateful_enum'
 
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
 gem 'hiredis'
 
 gem 'react-rails'

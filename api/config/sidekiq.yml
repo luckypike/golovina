@@ -1,0 +1,12 @@
+---
+# :verbose: true
+:concurrency: 4
+:timeout: 25
+
+:queues:
+  - default
+
+:schedule:
+  instagram_update:
+    cron: '0 0 * * * *'   # Runs every hour
+    class: InstagramUpdateJob
