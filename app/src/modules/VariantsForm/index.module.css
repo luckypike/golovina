@@ -1,0 +1,16 @@
+.root {
+  flex-grow: 1;
+  background: rgb(var(--theme-bg-secondary-color));
+  padding: var(--yr-xl) var(--xr);
+}
+
+@media (--m) {
+  .root {
+    padding: var(--yr-xl) calc(var(--xr) * 2);
+  }
+}
+
+.title {
+  text-align: center;
+  margin: 0 0 var(--yr-m);
+}

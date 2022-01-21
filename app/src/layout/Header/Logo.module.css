@@ -1,0 +1,9 @@
+.root {
+  width: 106px;
+  height: 36px;
+}
+
+.svg {
+  display: block;
+  fill: rgb(var(--theme-fg-primary-color));
+}

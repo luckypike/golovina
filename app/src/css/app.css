@@ -1,0 +1,84 @@
+:root {
+  --xr: 1rem;
+  --yr: 0.25rem;
+
+  --fs-base: calc(var(--yr) * 3);
+  --lh-base: calc(var(--yr) * 5);
+  --fs-h1: calc(var(--yr) * 4);
+  --lh-h1: calc(var(--yr) * 7);
+  --fs-at: calc(var(--yr) * 2.5);
+  --lh-at: calc(var(--yr) * 4);
+  /* --fs-cap: calc(var(--yr) * 3); */
+
+  --yr-xs: calc(var(--yr) * 2);
+  --yr-s: calc(var(--yr) * 3);
+  --yr-m: calc(var(--yr) * 6);
+  --yr-l: calc(var(--yr) * 9);
+  --yr-xl: calc(var(--yr) * 12);
+
+  --theme-bg-primary-color: 255, 255, 255;
+  --theme-bg-secondary-color: 248, 248, 248;
+  --theme-fg-primary-color: 20, 20, 20;
+  --theme-fg-hint-color: 120, 120, 120;
+  --theme-sp-color: 222, 222, 222;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --theme-bg-primary-color: 32, 33, 36;
+    --theme-bg-secondary-color: 39, 40, 43;
+    --theme-fg-primary-color: 225, 224, 224;
+    --theme-sp-color: 66, 66, 66;
+  }
+}
+
+@custom-media --s (min-width: 45em);
+@custom-media --m (min-width: 60em);
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  /* font-family: 'Jost', sans-serif; */
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  background: rgb(var(--theme-bg-primary-color));
+  color: rgb(var(--theme-fg-primary-color));
+}
+
+a {
+  color: inherit;
+}
+
+body,
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+#__next > main {
+  display: flex;
+  padding-top: calc(var(--yr) * 22);
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+@media (--s) {
+  #__next > main {
+    padding-top: calc(var(--yr) * 40);
+  }
+}
+
+h1 {
+  margin: 0;
+  font-weight: inherit;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+}

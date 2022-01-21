@@ -77,7 +77,7 @@ export default function Interview (props) {
         </div>
 
         <div className={styles.text}>
-          <ReactMarkdown source={text} />
+          <ReactMarkdown children={text} />
         </div>
       </div>
     </div>

@@ -7,13 +7,13 @@ json.variants @records.each_with_hit do |variant, _hit|
 
   json.title variant.title_last.squish
 
-  json.images variant.images.sort_by(&:weight_or_created).first(2).each do |image|
+  json.images variant.images.order(weight: :asc).limit(2).each do |image|
     json.id image.id
-    json.thumb image.photo.thumb.url
+    json.thumb image.thumb_url
   end
 
   json.category do
-    json.extract! variant.product.category, :id, :slug
+    json.extract! variant.category, :id, :slug
   end
 
   json.colors variant.product.variants.select(&:active?).size - 1

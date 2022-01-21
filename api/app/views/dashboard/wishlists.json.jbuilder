@@ -11,13 +11,15 @@ json.wishlists @wishlists.group_by(&:user) do |user, user_wishlists|
 
       json.title wishlist.variant.title_last.squish
 
-      json.images wishlist.variant.images.sort_by(&:weight_or_created).each do |image|
+      json.images wishlist.variant.images.active_and_ordered.each do |image|
         json.id image.id
-        json.thumb image.photo.thumb.url
+        json.thumb image.thumb_url if image.file.attached?
       end
 
-      json.category do
-        json.extract! wishlist.variant.product.category, :id, :slug
+      if wishlist.variant.category
+        json.category do
+          json.extract! wishlist.variant.category, :id, :slug
+        end
       end
 
       json.color do

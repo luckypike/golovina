@@ -27,13 +27,11 @@ json.array! items do |item|
     json.available item.available?
     json.colors item.product.variants.select(&:active?).size - 1
 
-    json.images item.images.sort_by(&:weight_or_created).first(2).each do |image|
+    json.images item.images.active_and_ordered.limit(2).each do |image|
       json.id image.id
-      json.thumb image.photo.thumb.url
+      json.thumb image.thumb_url if image.file.attached?
     end
 
-    if current_user
-      json.in_wishlist(current_user.wishlists.detect { |w| w.variant_id == item.id }.present?)
-    end
+    current_user && json.in_wishlist(current_user.wishlists.detect { |w| w.variant_id == item.id }.present?)
   end
 end

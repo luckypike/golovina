@@ -1,0 +1,28 @@
+.root {
+  /* width: calc(var(--yr) * 12);
+  height: calc(var(--yr) * 12); */
+
+  /* padding: calc(var(--yr) * 3); */
+  padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
+  margin-left: calc(var(--yr) * 2);
+  user-select: none;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.svg {
+  display: block;
+  width: calc(var(--yr) * 6);
+  height: calc(var(--yr) * 6);
+}
+
+.svg rect {
+  fill: rgb(var(--theme-fg-primary-color));
+  transition: 0.2s fill;
+}
+
+@media (--m) {
+  .root {
+    margin-left: calc(var(--yr) * -2);
+  }
+}

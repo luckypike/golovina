@@ -28,12 +28,18 @@ module Users
         user = identity.user
       end
 
+      Rails.logger.info('Omniauth: current_user', current_user&.as_json)
+      Rails.logger.info('Omniauth: current_user.cart', current_user&.cart.as_json)
+      Rails.logger.info('Omniauth: user', user&.as_json)
+      Rails.logger.info('Omniauth: user.cart', user&.cart.as_json)
+
       if current_user&.guest?
         user.cart.destroy
         current_user.cart.update(user_id: user.id)
       end
 
       sign_in user
+      Rails.logger.info(after_sign_in_path_for(user))
       redirect_to after_sign_in_path_for(user)
     end
 

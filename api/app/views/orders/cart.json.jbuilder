@@ -15,9 +15,9 @@ if @order
 
         json.title item.variant.title_last.squish
 
-        json.images item.variant.images.sort_by(&:weight_or_created).each do |image|
+        json.images item.variant.images.order(weight: :asc).limit(1).each do |image|
           json.id image.id
-          json.thumb image.photo.thumb.url
+          json.thumb image.thumb_url if image.file.attached?
         end
 
         json.category do

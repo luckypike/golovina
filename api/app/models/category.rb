@@ -5,8 +5,8 @@ class Category < ApplicationRecord
 
   enum state: { inactive: 0, active: 1 }
 
-  has_many :products, dependent: :nullify
-  has_many :variants, through: :products
+  # has_many :products, dependent: :nullify
+  has_many :variants
   has_many :kits
 
   validates :state, :title_ru, presence: true
@@ -16,20 +16,20 @@ class Category < ApplicationRecord
   globalize_accessors locales: I18n.available_locales, attributes: %i[title desc]
   friendly_id :slug
 
+  def variants_counter
+    variants_and_kits_count
+  end
+
   class << self
     def nav
       with_translations(I18n.available_locales).active.order(weight: :asc)
     end
   end
 
-  def update_variants_counter
-    update_attribute(:variants_counter, variants.active.size + kits.active.size)
-  end
-
   class << self
     def nav
       with_translations(I18n.available_locales).active
-        .where.not(variants_counter: 0).order(weight: :asc)
+        .where.not(variants_and_kits_count: 0).order(weight: :asc)
     end
   end
 end

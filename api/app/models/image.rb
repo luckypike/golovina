@@ -1,5 +1,6 @@
 class Image < ApplicationRecord
   mount_uploader :photo, PhotoUploader
+  has_one_attached :file
 
   belongs_to :imagable, polymorphic: true, optional: true
 

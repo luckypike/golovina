@@ -1,0 +1,29 @@
+# frozen_string_literal: true
+
+json = {
+  id: variant.id,
+  state: variant.state,
+  category_id: variant.category_id,
+  color_id: variant.color_id,
+  price: variant.price&.round,
+  price_last: variant.price_last&.round,
+  code: variant.code,
+  published_at: variant.published_at,
+  images: []
+}
+
+json.merge!(variant.globalize_attribute_names.index_with { |f| variant.send(f) })
+
+Api::Image.where(imagable_type: 'Variant', imagable_id: variant.id).each do |image|
+  json[:images].push(
+    {
+      id: image.id,
+      weight: image.weight,
+      active: image.active,
+      key: image.uuid,
+      src: image.thumb_url
+    }
+  )
+end
+
+json

@@ -335,7 +335,7 @@ class Variant extends Component {
 
             {variant.desc &&
               <div className={styles.desc}>
-                <ReactMarkdown source={variant.desc} />
+                <ReactMarkdown children={variant.desc} />
               </div>
             }
 
@@ -361,7 +361,7 @@ class Variant extends Component {
 
               {variant.comp &&
                 <Acc id="desc" title={I18n.t('variant.comp')} onToggle={this.toggleSection} section={section}>
-                  <ReactMarkdown source={variant.comp} />
+                  <ReactMarkdown children={variant.comp} />
                 </Acc>
               }
 

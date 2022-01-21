@@ -3,7 +3,7 @@ name: Build Image
 on:
   push:
     branches:
-      - cd
+      - "3.0.0"
 
 jobs:
   dockerhub:
@@ -16,18 +16,83 @@ jobs:
     needs: dockerhub
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: golovina
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
-      - uses: actions/checkout@v2
       - uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - uses: actions/checkout@v2
       - uses: docker/build-push-action@v2
         with:
           context: ./api
           file: ./api/Dockerfile.k8s
+          build-args: |
+            RAILS_ENV=production
+            RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
+            s3_access_key_id=dummy_aws_access_key_id
+            s3_secret_access_key=dummy_aws_secret_access_key
+            s3_endpoint=https://example.com/dummy
+            s3_bucket=dummy_bucket
+            aws_access_key_id=dummy_aws_access_key_id
+            aws_secret_access_key=dummy_aws_secret_access_key
+            SECRET_KEY_BASE=dummy_secret_key_base
           push: true
           tags: |
             bragovo/golovina-api:latest
           # bragovo/golovina-api:${{ github.event.release.tag_name }}
+
+  build-and-push-fastapi-image:
+    needs: dockerhub
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - uses: actions/checkout@v2
+      - uses: docker/build-push-action@v2
+        with:
+          context: ./fastapi
+          file: ./fastapi/Dockerfile.k8s
+          push: true
+          tags: |
+            bragovo/golovina-fastapi:latest
+
+  build-and-push-app-image:
+    needs: dockerhub
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - uses: actions/checkout@v2
+      - uses: docker/build-push-action@v2
+        with:
+          context: ./app
+          file: ./app/Dockerfile.k8s
+          build-args: |
+            NEXT_PUBLIC_API_URL=/api
+            NEXT_PUBLIC_BUGSNAG_API_KEY=${{ secrets.NEXT_PUBLIC_BUGSNAG_API_KEY }}
+          push: true
+          tags: |
+            bragovo/golovina-app:latest

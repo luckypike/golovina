@@ -16,8 +16,6 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current
-    # sign_in(User.find(3997))
-    # sign_in(User.find(145))
     Current.user = current_user
   end
 
@@ -62,6 +60,7 @@ class ApplicationController < ActionController::Base
   end
 
   def store_user_location!
+    Rails.logger.info(session.inspect)
     store_location_for(:user, request.fullpath)
   end
 end

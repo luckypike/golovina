@@ -35,13 +35,13 @@ export default function Kit ({ kit }) {
             {kit.title}
           </div>
 
-          {kit.price_sell > 0 &&
+          {/* {kit.price_sell > 0 &&
             <div className={styles.price}>
               <Price
                 sell={parseFloat(kit.price_sell)}
               />
             </div>
-          }
+          } */}
 
           {kit.variants.length > 0 &&
             <div className={styles.colors}>

@@ -19,14 +19,5 @@ describe Accounts::UsersController do
 
       it { should redirect_to(new_user_session_path) }
     end
-
-    context 'by common user' do
-      before do
-        sign_in common_user
-        get :show
-      end
-
-      it { should render_template('show') }
-    end
   end
 end

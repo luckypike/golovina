@@ -7,6 +7,7 @@ class WishlistsController < ApplicationController
       format.json do
         @variants = Wishlist.with_variant
           .where(user: current_user, variants: { state: [:active] })
+          .where.not(variants: { category: nil })
           .order(created_at: :asc)
           .map(&:variant)
       end

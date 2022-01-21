@@ -1,0 +1,13 @@
+.root {
+  display: block;
+  padding: calc(var(--yr) * 3) calc(var(--yr) * 2);
+}
+
+.svg {
+  display: block;
+  width: calc(var(--yr) * 6);
+  height: calc(var(--yr) * 6);
+  fill: none;
+  stroke: rgb(var(--theme-fg-primary-color));
+  stroke-miterlimit: 10;
+}

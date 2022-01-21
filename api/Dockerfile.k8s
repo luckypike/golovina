@@ -6,11 +6,27 @@ WORKDIR /app
 ENV GEM_HOME /app/.local/ruby/3.0
 ENV PATH "/app/.local/ruby/3.0/bin:${PATH}"
 
-RUN apk update && apk add bash git curl openssh g++ make python3 python2 imagemagick yarn nodejs tzdata postgresql-dev postgresql-client vim
+ARG RAILS_MASTER_KEY
+ARG RAILS_ENV
+ARG SECRET_KEY_BASE
+ARG aws_access_key_id
+ARG aws_secret_access_key
+ARG s3_access_key_id
+ARG s3_secret_access_key
+ARG s3_endpoint
+ARG s3_bucket
+ENV DATABASE_HOST 172.17.0.1
+
+RUN apk update && apk add bash git curl openssh g++ make python3 python2 imagemagick vips-dev yarn nodejs tzdata postgresql-dev postgresql-client vim
 
 COPY . /app
 RUN gem install bundler
+RUN yarn install
 RUN bundle config set --local without development test
 RUN bundle install
+# RUN bundle exec rake db:create
+# RUN bundle exec rake db:migrate
+RUN bundle exec rails assets:precompile
+RUN bundle exec rails webpacker:compile
 
 EXPOSE 3000
