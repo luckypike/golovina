@@ -1,9 +1,8 @@
 name: Build Image
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
   dockerhub:
@@ -53,8 +52,7 @@ jobs:
             SECRET_KEY_BASE=dummy_secret_key_base
           push: true
           tags: |
-            bragovo/golovina-api:latest
-          # bragovo/golovina-api:${{ github.event.release.tag_name }}
+            bragovo/golovina-api:${{ github.event.release.tag_name }}
 
   build-and-push-fastapi-image:
     needs: dockerhub
@@ -73,7 +71,7 @@ jobs:
           file: ./fastapi/Dockerfile.k8s
           push: true
           tags: |
-            bragovo/golovina-fastapi:latest
+            bragovo/golovina-fastapi:${{ github.event.release.tag_name }}
 
   build-and-push-app-image:
     needs: dockerhub
@@ -95,4 +93,5 @@ jobs:
             NEXT_PUBLIC_BUGSNAG_API_KEY=${{ secrets.NEXT_PUBLIC_BUGSNAG_API_KEY }}
           push: true
           tags: |
-            bragovo/golovina-app:latest
+            bragovo/golovina-app:${{ github.event.release.tag_name }}
+
