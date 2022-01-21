@@ -5,7 +5,7 @@ json.categories @variants.group_by{|v| v.product.category}.each do |category, va
   json.variants variants.each do |variant|
     json.id variant.id
     json.title "#{variant.title_last} - #{variant.color.title}"
-    json.thumb variant.images.first.photo.preview.url if variant.images.size > 0
+    json.thumb variant.images.active_and_ordered.first.photo.thumb.url if variant.images.active_and_ordered.size > 0
     json.category variant.product.category_id
   end
 end
