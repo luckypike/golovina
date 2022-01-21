@@ -30,5 +30,14 @@ module Api
 
       ENV.fetch('S3_URL', '/') + "/#{key}.jpg"
     end
+
+    # TODO: Remove this bypass
+    def weight_or_created
+      weight
+    end
+
+    def photo
+      OpenStruct.new(thumb: OpenStruct.new(url: thumb_url))
+    end
   end
 end

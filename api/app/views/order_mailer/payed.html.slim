@@ -19,9 +19,9 @@
     - @order.items.map do |item|
       - variant = item.variant
       .variant style="display: flex; margin-bottom: 20px;"
-        - image = variant.images.sort_by(&:weight_or_created).first
+        - image = variant.images.active_and_ordered.first
         .image style="width: 60px; height: 80px; margin-right: 20px; background-color: #ddd;"
-          = image_tag image.photo.thumb.url, size: "60x80" if image
+          = image_tag image.thumb_url, size: "60x80" if image && image.file.attached?
         .text
           = variant.title_last
           br
