@@ -53,6 +53,7 @@ jobs:
           push: true
           tags: |
             bragovo/golovina-api:${{ github.event.release.tag_name }}
+            bragovo/golovina-api:latest
 
   build-and-push-fastapi-image:
     needs: dockerhub
@@ -72,6 +73,7 @@ jobs:
           push: true
           tags: |
             bragovo/golovina-fastapi:${{ github.event.release.tag_name }}
+            bragovo/golovina-fastapi:latest
 
   build-and-push-app-image:
     needs: dockerhub
@@ -94,4 +96,5 @@ jobs:
           push: true
           tags: |
             bragovo/golovina-app:${{ github.event.release.tag_name }}
+            bragovo/golovina-app:latest
 
