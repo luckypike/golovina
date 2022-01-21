@@ -4,6 +4,10 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   root 'pages#index'
 
   namespace :api, defaults: { format: :json }, format: false do
+    namespace :pages do
+      get :index
+    end
+
     resource :session, only: %i[show destroy]
     resources :variants, only: %i[new edit create update]
     resources :images, only: %i[create] do

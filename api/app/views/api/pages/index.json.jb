@@ -1,0 +1,20 @@
+# frozen_string_literal: true
+
+{
+  slides: @slides.map do |slide|
+    {
+      id: slide.id,
+      name: slide.name,
+      desc: slide.desc,
+      link: slide.link,
+      link_relative: slide.link_relative,
+      image: slide.image.large.url,
+      key: slide.video_mp4.attached? && slide.video_mp4.key
+    }
+  end,
+  instagram: @instagram.map do |post|
+    {
+      id: 'qqq'
+    }
+  end
+}

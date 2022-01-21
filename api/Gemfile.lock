@@ -142,6 +142,7 @@ GEM
       dry-core (~> 0.5, >= 0.5)
       dry-initializer (~> 3.0)
       dry-schema (~> 1.8, >= 1.8.0)
+    e2mmap (0.1.0)
     elasticsearch (7.16.1)
       elasticsearch-api (= 7.16.1)
       elasticsearch-transport (= 7.16.1)
@@ -161,6 +162,8 @@ GEM
     enum_help (0.0.17)
       activesupport (>= 3.0.0)
     erubi (1.10.0)
+    et-orbi (1.2.6)
+      tzinfo
     excon (0.89.0)
     execjs (2.8.1)
     factory_bot (6.2.0)
@@ -211,6 +214,9 @@ GEM
     formatador (0.3.0)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
+    fugit (1.5.2)
+      et-orbi (~> 1.1, >= 1.1.8)
+      raabro (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
     globalize (6.0.1)
@@ -221,6 +227,7 @@ GEM
       globalize (>= 5.0.0)
     hashdiff (1.0.1)
     hashie (5.0.0)
+    hiredis (0.6.3)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     i18n-js (3.9.0)
@@ -267,12 +274,6 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
-    nokogiri (1.12.5-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.12.5-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.12.5-x86_64-linux)
-      racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.21.0)
     parser (3.1.0.0)
@@ -283,6 +284,7 @@ GEM
       nio4r (~> 2.0)
     pundit (2.1.1)
       activesupport (>= 3.0.0)
+    raabro (1.4.0)
     racc (1.6.0)
     rack (2.2.3)
     rack-proxy (0.7.0)
@@ -384,6 +386,8 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
+    rufus-scheduler (3.8.0)
+      fugit (~> 1.1, >= 1.1.6)
     semantic_logger (4.9.0)
       concurrent-ruby (~> 1.0)
     semantic_range (3.0.0)
@@ -397,6 +401,13 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    sidekiq-scheduler (3.1.0)
+      e2mmap
+      redis (>= 3, < 5)
+      rufus-scheduler (~> 3.2)
+      sidekiq (>= 3)
+      thwait
+      tilt (>= 1.4.0)
     sitemap_generator (6.1.2)
       builder (~> 3.0)
     slim (4.1.0)
@@ -421,6 +432,8 @@ GEM
     temple (0.8.2)
     thor (1.1.0)
     thrift (0.15.0)
+    thwait (0.2.0)
+      e2mmap
     tilt (2.0.10)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -467,6 +480,7 @@ DEPENDENCIES
   friendly_id
   globalize
   globalize-accessors
+  hiredis
   i18n-js
   image_processing
   jb
@@ -492,6 +506,7 @@ DEPENDENCIES
   service_actor-rails
   shoulda-matchers
   sidekiq
+  sidekiq-scheduler
   sitemap_generator
   slim-rails
   spring

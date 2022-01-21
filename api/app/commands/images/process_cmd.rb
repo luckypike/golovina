@@ -12,7 +12,7 @@ module Images
     private
 
     def variant_process(image)
-      return unless image.imagable.is_a?(Variant)
+      return unless image.imagable.is_a?(Variant) || image.imagable.is_a?(Api::Variant)
 
       variant_image_process(image)
       # TODO: temporary user Api::Variant.find
