@@ -57,7 +57,7 @@
   .order_items
     - @order.order_items.each do |item|
       div
-        = image_tag(item.variant.images.first.photo.preview.url)
+        = image_tag(item.variant.images.first.thumb_url)
         p
           strong
             = item.variant.title_last
