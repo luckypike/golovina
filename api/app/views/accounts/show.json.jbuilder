@@ -18,13 +18,15 @@ json.orders @orders do |order|
 
       json.title item.variant.title_last.squish
 
-      json.images item.variant.images.sort_by(&:weight_or_created).each do |image|
+      json.images item.variant.images.active_and_ordered.each do |image|
         json.id image.id
-        json.thumb image.photo.thumb.url
+        json.thumb image.photo.thumb.url if image.file.attached?
       end
 
-      json.category do
-        json.extract! item.variant.product.category, :id, :slug
+      if item.variant.category
+        json.category do
+          json.extract! item.variant.category, :id, :slug
+        end
       end
 
       json.color do

@@ -13,14 +13,14 @@ json.items refund.order_items do |item|
 
     json.title item.variant.title_last.squish
 
-    json.images item.variant.images.sort_by(&:weight_or_created).each do |image|
+    json.images item.variant.images.active_and_ordered.each do |image|
       json.id image.id
-      json.thumb image.photo.thumb.url
+      json.thumb image.photo.thumb.url if image.file.attached?
     end
 
-    if item.variant.product.category
+    if item.variant.category
       json.category do
-        json.extract! item.variant.product.category, :id, :slug
+        json.extract! item.variant.category, :id, :slug
       end
     end
 
