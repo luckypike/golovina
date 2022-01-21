@@ -8,9 +8,7 @@ class PagesController < ApplicationController
   end
 
   def instagram
-    url = "https://graph.instagram.com/me/media?fields=id,media_type,media_url,permalink&access_token=#{ENV['INSTAGRAM_API_KEY']}"
-
-    @posts = JSON.parse(Net::HTTP.get(URI(url))).with_indifferent_access
+    @posts = Rails.cache.read('instagram')
 
     respond_to :json
   end
