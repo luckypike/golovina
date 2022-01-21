@@ -20,7 +20,7 @@ json.orders @orders do |order|
 
       json.images item.variant.images.active_and_ordered.each do |image|
         json.id image.id
-        json.thumb image.photo.thumb.url if image.file.attached?
+        json.thumb image.thumb_url if image.file.attached?
       end
 
       if item.variant.category
