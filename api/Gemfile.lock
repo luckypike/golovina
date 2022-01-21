@@ -221,6 +221,7 @@ GEM
       globalize (>= 5.0.0)
     hashdiff (1.0.1)
     hashie (5.0.0)
+    hiredis (0.6.3)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     i18n-js (3.9.0)
@@ -467,6 +468,7 @@ DEPENDENCIES
   friendly_id
   globalize
   globalize-accessors
+  hiredis
   i18n-js
   image_processing
   jb

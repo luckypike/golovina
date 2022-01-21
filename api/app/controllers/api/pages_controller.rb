@@ -2,8 +2,19 @@
 
 module Api
   class PagesController < Api::ApplicationController
+    before_action :authorize_page
+
     def index
-      render json: current_user
+      @slides = Slide.with_translations(I18n.available_locales).includes(:video_mp4_attachment)
+        .where.not(image: nil).order(weight: :asc)
+
+      @instagram = Rails.cache.read('instagram') || []
+    end
+
+    private
+
+    def authorize_page
+      authorize :page
     end
   end
 end

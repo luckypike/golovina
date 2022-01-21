@@ -10,6 +10,9 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*_spec.rb
 
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
 # Style/ClassAndModuleChildren:
 #   EnforcedStyle: compact
 
@@ -18,9 +21,6 @@ Metrics/BlockLength:
 
 # Style/Documentation:
 #   Enabled: false
-
-# Layout/MultilineMethodCallIndentation:
-#   EnforcedStyle: indented
 
 # Layout/ArgumentAlignment:
 #   EnforcedStyle: with_fixed_indentation

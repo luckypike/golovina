@@ -2,34 +2,22 @@ import axios from 'axios'
 import type { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { Index } from '../modules/Index'
 
 const IndexPage: NextPage = () => {
-  const router = useRouter()
-
   return (
-    <div>
-      <main>INDEX</main>
-
-      <p>
-        <Link href="/about">About</Link>
-        <button onClick={() => router.push({ pathname: '/about' })}>push to about</button>
-      </p>
-    </div>
+    <Index />
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   // const { cookie } = context.req.headers
-//   // console.log(axios.defaults.headers.common.Cookie)
-//   // console.log('IND')
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { data } = await axios.get('/pages/index')
 
-//   // const { data } = await axios.get('/session')
+  console.log(data)
 
-//   // console.log(data)
-
-//   return {
-//     props: {},
-//   }
-// }
+  return {
+    props: {},
+  }
+}
 
 export default IndexPage

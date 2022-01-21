@@ -26,6 +26,9 @@ module Golovina
 
     config.active_job.queue_adapter = :sidekiq
     config.active_storage.variant_processor = :vips
+    config.cache_store = :redis_cache_store, {
+      url: "redis://#{ENV.fetch('REDIS_HOST', :localhost)}:#{ENV.fetch('REDIS_PORT', 6379)}/#{ENV.fetch('REDIS_DB', 1)}"
+    }
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

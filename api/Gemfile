@@ -41,6 +41,7 @@ gem 'enum_help'
 gem 'stateful_enum'
 
 gem 'sidekiq'
+gem 'hiredis'
 
 gem 'react-rails'
 gem 'webpacker'
@@ -67,6 +68,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'webmock'
+  # gem 'mock_redis'
 
   # TODO: remove it
   gem 'shoulda-matchers'
