@@ -58,7 +58,7 @@ class User < ApplicationRecord
   end
 
   def guest_email?
-    email.match(/guest_.*?@golovina\.store/i)
+    email.match(/guest_.*?@golovina\.store/i) || email.match(/guest_.*?@golovinamari\.com/i) || email.match(/.+?@privaterelay\.appleid\.com/i)
   end
 
   def reset_password(new_password, new_password_confirmation)
