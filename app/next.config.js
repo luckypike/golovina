@@ -9,10 +9,6 @@ module.exports = {
         destination: 'http://localhost:3001/api/session'
       },
       {
-        source: '/api/rails/active_storage/direct_uploads.json',
-        destination: 'http://localhost:3000/rails/active_storage/direct_uploads.json'
-      },
-      {
         source: '/api/:path*',
         destination: 'http://localhost:3000/api/:path*'
       },

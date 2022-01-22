@@ -45,7 +45,7 @@ AppPage.getInitialProps = async (appContext: AppContext) => {
 
   if (appContext.ctx.req) {
     config = {
-      baseURL: process.env.API_URL,
+      baseURL: process.env.FASTAPI_URL,
       headers: { Cookie: appContext.ctx.req?.headers.cookie ?? '' },
     }
   }

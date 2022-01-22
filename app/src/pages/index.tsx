@@ -2,21 +2,27 @@ import axios from 'axios'
 import type { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Index } from '../modules/Index'
+import { useEffect, useState } from 'react'
+import { getIndexData, Index } from '../modules/Index'
+import { IndexContext } from '../modules/Index/context'
+import { IndexData } from '../modules/Index/models'
+import { IndexStore } from '../modules/Index/store'
 
-const IndexPage: NextPage = () => {
+const IndexPage: NextPage<{ data: IndexData }> = ({ data }) => {
+  const [store] = useState(() => new IndexStore(data))
+
   return (
-    <Index />
+    <IndexContext.Provider value={store}>
+      <Index />
+    </IndexContext.Provider>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { data } = await axios.get('/pages/index')
-
-  console.log(data)
+  const indexData = await getIndexData()
 
   return {
-    props: {},
+    props: { data: indexData }
   }
 }
 

@@ -12,9 +12,7 @@
       key: slide.video_mp4.attached? && slide.video_mp4.key
     }
   end,
-  instagram: @instagram.map do |post|
-    {
-      id: 'qqq'
-    }
+  instagram: @instagram[0..5].map do |post|
+    post.slice(:id, :media_type, :media_url, :permalink)
   end
 }

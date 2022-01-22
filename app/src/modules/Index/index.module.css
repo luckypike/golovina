@@ -1,0 +1,4 @@
+.root {
+  padding: 0 var(--xr);
+  margin-top: calc(var(--yr-m) * -1);
+}
