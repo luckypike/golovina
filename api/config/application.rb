@@ -32,8 +32,6 @@ module Golovina
 
     # TODO: Remove it
     config.action_dispatch.cookies_same_site_protection = nil
-    config.action_controller.urlsafe_csrf_tokens = false
-    config.action_dispatch.ssl_default_redirect_status = 307
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

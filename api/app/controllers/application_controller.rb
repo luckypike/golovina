@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current
+    # session['init'] = true
     Current.user = current_user
   end
 
@@ -60,7 +61,14 @@ class ApplicationController < ActionController::Base
   end
 
   def store_user_location!
-    Rails.logger.info(session.inspect)
+    # Rails.logger.info(session.inspect)
     store_location_for(:user, request.fullpath)
+  end
+
+  def append_info_to_payload(payload)
+    super
+    payload[:current_user] = current_user
+    payload[:session] = session.as_json
+    payload[:cookies] = cookies.as_json
   end
 end

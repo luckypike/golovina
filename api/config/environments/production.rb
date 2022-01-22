@@ -95,6 +95,7 @@ Rails.application.configure do
     $stdout.sync = true
     config.rails_semantic_logger.add_file_appender = false
     config.rails_semantic_logger.format = :json
+    config.rails_semantic_logger.quiet_assets = true
     config.semantic_logger.add_appender(io: $stdout, formatter: config.rails_semantic_logger.format)
   end
 
