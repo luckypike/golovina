@@ -66,7 +66,7 @@ export default function Form (props) {
   }
 
   const _handleUpdate = async params => {
-    await axios.patch(
+    await axios.put(
       path('color_path', { id }), params
     ).then(res => {
       window.location = res.headers.location

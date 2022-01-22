@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current
+    Rails.logger.info('request', request.fullpath)
+    Rails.logger.info('request', request.original_url)
+    Rails.logger.info('request', request.headers['Cookie'])
+
     # session['init'] = true
     Current.user = current_user
   end
