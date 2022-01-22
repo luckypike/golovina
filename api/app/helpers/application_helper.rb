@@ -1,8 +1,8 @@
 module ApplicationHelper
   def appleid
     {
-      client_id: Rails.application.credentials[Rails.env.to_sym][:appleid][:client_id],
-      redirect_uri: URI(Rails.application.credentials[Rails.env.to_sym][:appleid][:redirect_uri])
+      client_id: Figaro.env.appleid_client_id,
+      redirect_uri: URI(Figaro.env.appleid_redirect_uri)
     }
   end
 
