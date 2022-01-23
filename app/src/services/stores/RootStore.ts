@@ -11,10 +11,15 @@ export class RootStore {
     cart: 0,
     wishlist: 0,
   }
+  headerInvert = false
 
   constructor(sessionData: SessionData) {
     this.sessionData = sessionData
 
     makeAutoObservable(this)
+  }
+
+  setHeaderInvert = (headerInvert: boolean) => {
+    this.headerInvert = headerInvert
   }
 }

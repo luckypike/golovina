@@ -21,12 +21,12 @@ function AppPage({ Component, pageProps, sessionData }: AppProps & { sessionData
 
   return (
     <ErrorBoundary FallbackComponent={ErrorView}>
-    <RootContext.Provider value={rootStore}>
-      <Header />
-      <main className="main">
-        <Component {...pageProps} />
-      </main>
-    </RootContext.Provider>
+      <RootContext.Provider value={rootStore}>
+        <Header />
+        <main className="main">
+          <Component {...pageProps} />
+        </main>
+      </RootContext.Provider>
     </ErrorBoundary>
   )
 }

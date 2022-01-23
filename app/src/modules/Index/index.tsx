@@ -14,7 +14,10 @@ import { Instagram } from "./Instagram";
 export const Index: FC = () => {
   return (
     <div className={s.root}>
-      <Slides />
+      <div className={s.slides}>
+        <Slides />
+      </div>
+
       <Instagram />
     </div>
   )

@@ -6,9 +6,9 @@
 }
 
 @media (--s) {
-  .root {
+  .primary {
     grid-template-columns: repeat(2, 1fr);
-    margin-bottom: calc(var(--yr--m) * 2);
+    margin: 0 calc(var(--xr) * -1) calc(var(--yr-m) * 2);
   }
 }
 
@@ -28,6 +28,7 @@
 }
 
 .slide {
+  background-color: rgba(0, 0, 0, 0.6);
   background-position: center;
   background-size: cover;
   position: relative;
@@ -56,4 +57,20 @@
   z-index: 2;
   max-width: 340px;
   width: 80%;
+}
+
+.title {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+}
+
+@media (--s) {
+  .title {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+  }
+}
+
+.desc {
+  margin-top: var(--yr-xs);
 }

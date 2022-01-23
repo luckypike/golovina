@@ -8,9 +8,12 @@ import { Wishlist } from './Header/Wishlist'
 import { Cart } from './Header/Cart'
 
 import s from './Header.module.css'
+import { observer } from 'mobx-react-lite'
+import { useRootContext } from '../services/useRootContext'
 
-export const Header: FC = () => {
+export const Header: FC = observer(() => {
   const [scrolling, setScrolling] = useState(false)
+  const rootStore = useRootContext()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +30,7 @@ export const Header: FC = () => {
   }, [scrolling]);
 
   return (
-    <header className={cc([s.root, { [s.scrolling]: scrolling }])}>
+    <header className={cc([s.root, { [s.scrolling]: scrolling, [s.invert]: rootStore.headerInvert }])}>
       <div className={s.left}>
         <Nav />
         <Search />
@@ -43,4 +46,4 @@ export const Header: FC = () => {
       </div>
     </header>
   )
-}
+})

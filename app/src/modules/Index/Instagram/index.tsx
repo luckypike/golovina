@@ -4,6 +4,7 @@ import { useIndexContext } from "../context";
 import cc from 'classcat'
 
 import s from './index.module.css';
+import InstaIcon from './insta.svg'
 import { InstagramData } from "../models";
 
 export const Instagram: FC = observer(() => {
@@ -11,6 +12,11 @@ export const Instagram: FC = observer(() => {
 
   return (
     <div className={s.root}>
+      <a target="_blank" href="https://www.instagram.com/golovinamari_/" rel="noopener noreferrer" className={s.link}>
+        <InstaIcon />
+        golovinamari_
+      </a>
+
       <div className={s.items}>
         {instagram.map(item =>
           <Item key={item.id} item={item} />
@@ -19,7 +25,6 @@ export const Instagram: FC = observer(() => {
     </div>
   )
 })
-
 
 const Item: FC<{ item: InstagramData }> = ({ item }) => {
   return (

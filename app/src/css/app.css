@@ -25,7 +25,12 @@
 
 @media (--s) {
   :root {
-    --yr-m: calc(var(--yr) * 8);
+    --fs-h1: calc(var(--yr) * 6);
+    --lh-h1: calc(var(--yr) * 8);
+
+    --yr-xs: calc(var(--yr) * 3);
+    --yr-s: calc(var(--yr) * 6);
+    --yr-m: calc(var(--yr) * 9);
   }
 }
 

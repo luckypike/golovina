@@ -3,6 +3,23 @@
   /* margin-top: calc(var(--yr-m) * -1); */
 }
 
+.link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  font-weight: 600;
+  justify-content: center;
+  margin: 0 auto var(--yr-s);
+}
+
+.link svg {
+  display: block;
+  width: 1.125em;
+  height: 1.125em;
+  margin-right: var(--yr-xs);
+}
 
 .items {
   display: grid;

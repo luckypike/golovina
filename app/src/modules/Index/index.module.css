@@ -1,4 +1,20 @@
 .root {
   padding: 0 var(--xr);
-  margin-top: calc(var(--yr-m) * -1);
+  margin: calc(var(--yr-m) * -1) 0 var(--yr-xl);
+}
+
+@media (--s) {
+  .root {
+    margin: calc(var(--yr) * -40) 0 var(--yr-xl);
+  }
+}
+
+.slides {
+  margin: 0 0 var(--yr-m);
+}
+
+@media (--s) {
+  .slides {
+    margin: 0 0 calc(var(--yr-m) * 2);
+  }
 }

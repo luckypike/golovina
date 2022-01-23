@@ -1,17 +1,24 @@
 .root {
   height: calc(var(--yr) * 16);
   position: fixed;
+  color: rgb(var(--theme-fg-primary-color));
   top: 0;
   left: 0;
   width: 100%;
   z-index: 10;
   background: rgb(var(--theme-bg-primary-color));
   transition: height 0.3s, backdrop-filter 0.2s, background-color 0.2s;
+  user-select: none;
 }
 
 @media (--s) {
   .root {
     height: calc(var(--yr) * 24);
+    background: none;
+  }
+
+  .invert {
+    color: white;
   }
 }
 
@@ -62,5 +69,7 @@
 @media (--s) {
   .scrolling {
     height: calc(var(--yr) * 16);
+    background: none;
+    backdrop-filter: none;
   }
 }
