@@ -6,6 +6,7 @@ import '@glidejs/glide/dist/css/glide.core'
 import axios from 'axios'
 
 window.axiosActive = 0
+window.dataLayer = window.dataLayer || []
 
 axios.interceptors.request.use((config) => {
   window.axiosActive += 1
