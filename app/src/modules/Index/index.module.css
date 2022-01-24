@@ -9,6 +9,12 @@
   }
 }
 
+@media (--m) {
+  .root {
+    padding: 0 calc(var(--xr) * 2);
+  }
+}
+
 .slides {
   margin: 0 0 var(--yr-m);
 }

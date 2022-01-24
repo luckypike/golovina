@@ -4,6 +4,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { BugsnagPluginReactResult } from '@bugsnag/plugin-react'
 
 import { Header } from '../layout/Header'
+import { Footer } from '../layout/Footer'
 import { RootContext } from '../services/useRootContext'
 import { RootStore, SessionData } from '../services/stores/RootStore'
 import Bugsnag from '../lib/bugsnag'
@@ -23,9 +24,12 @@ function AppPage({ Component, pageProps, sessionData }: AppProps & { sessionData
     <ErrorBoundary FallbackComponent={ErrorView}>
       <RootContext.Provider value={rootStore}>
         <Header />
+
         <main className="main">
           <Component {...pageProps} />
         </main>
+
+        <Footer />
       </RootContext.Provider>
     </ErrorBoundary>
   )

@@ -25,15 +25,12 @@
   display: grid;
   grid-gap: calc(var(--yr) * 2);
   grid-template-columns: 1fr 1fr 1fr;
-  /* margin-bottom: calc(var(--yr) * var(--s3)); */
+}
 
-  /* @media (--s) {
-    margin-bottom: calc(var(--yr) * var(--s3) * 2);
+@media (--l) {
+  .items {
+    grid-template-columns: repeat(6, 1fr);
   }
-
-  @media (--l) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  } */
 }
 
 .item {

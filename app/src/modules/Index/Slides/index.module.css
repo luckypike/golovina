@@ -12,6 +12,12 @@
   }
 }
 
+@media (--m) {
+  .primary {
+    margin: 0 calc(var(--xr) * -2) calc(var(--yr-m) * 2);
+  }
+}
+
 .secondary {
   display: grid;
   grid-gap: calc(var(--yr) * 2);
@@ -25,6 +31,12 @@
   @media (--l) {
     grid-template-columns: repeat(4, 1fr);
   } */
+}
+
+@media (--l) {
+  .secondary {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .slide {
@@ -45,6 +57,12 @@
   /* @media (--l) {
     padding-top: calc(6 / 5 * 100%);
   } */
+}
+
+@media (--l) {
+  .slide::before {
+    padding-top: calc(6 / 5 * 100%);
+  }
 }
 
 .text {
