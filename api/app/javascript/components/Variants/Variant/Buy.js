@@ -55,6 +55,7 @@ export default function Buy ({ variant }) {
       setPreorderWarning(false)
       PubSub.publish('update-cart', res.data.quantity)
       PubSub.publish('notification-cart', variant)
+      window.dataLayer.push(variant)
     }).catch(_error => {
     })
   }
