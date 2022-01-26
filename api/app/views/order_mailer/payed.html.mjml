@@ -1,21 +1,65 @@
-<mjml>
+<mjml lang="ru">
   <mj-head>
-    <mj-font name="Nunito Sans" href="https://fonts.googleapis.com/css2?family=Nunito+Sans" />
+    <mj-font name="Nunito Sans" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" />
+
+    <mj-attributes>
+      <mj-text css-class="all" padding="10px 16px" />
+      <mj-divider padding="10px 16px" />
+      <mj-all font-family="inherit" color="inherit" font-size="14px" line-height="20px" />
+      <mj-section padding="0 0 16px" />
+    </mj-attributes>
 
     <mj-style>
-      .main {
+      body {
+        background-color: #e2dedd;
+      }
+
+      .body {
+        padding: 32px 0;
+      }
+
+      .all {
         font-family: Nunito Sans, Arial;
-        font-size: 16px;
-        line-height: 20px;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      .logo-white {
+        display: none;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #54595e;
+        }
+
+        .logo-white {
+          display: block;
+        }
+
+        .logo-black {
+          display: none;
+        }
+
+        .all {
+          color: #fff;
+        }
       }
     </mj-style>
   </mj-head>
 
-  <mj-body css-class="main">
+  <mj-body css-class="body">
+    <mj-section>
+      <mj-column>
+        <mj-image css-class="logo-black" src="<%= attachments['logo-black.png'].url%>" width="106px" height="36px" />
+        <mj-image css-class="logo-white" src="<%= attachments['logo-white.png'].url%>" width="106px" height="36px" />
+      </mj-column>
+    </mj-section>
     <mj-section>
       <mj-column>
         <mj-text>Здравствуйте!</mj-text>
         <mj-text>Спасибо, что совершили покупку в Golovina Mari.</mj-text>
+        <mj-text>Как только посылка с вашим заказом будет передана в службу доставки, вы получите письмо с информацией для отслеживании. Если у вас возникли вопросы, свяжитесь с нами по телефону +7 (985) 714-55-58</mj-text>
 
         <mj-divider></mj-divider>
       </mj-column>
