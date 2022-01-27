@@ -4,6 +4,6 @@ class OrderMailerPreview < ActionMailer::Preview
   end
 
   def payed
-    OrderMailer.with(order: Order.last).payed
+    OrderMailer.with(order: Order.international.archived.last).payed
   end
 end

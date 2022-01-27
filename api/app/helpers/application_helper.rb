@@ -1,8 +1,8 @@
 module ApplicationHelper
   def appleid
     {
-      client_id: Figaro.env.appleid_client_id,
-      redirect_uri: URI(Figaro.env.appleid_redirect_uri)
+      client_id: Figaro.env.appleid_client_id!,
+      redirect_uri: URI(Figaro.env.appleid_redirect_uri!)
     }
   end
 
