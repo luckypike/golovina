@@ -26,6 +26,7 @@ class OrderMailer < ApplicationMailer
         '#a9431e'
       end
     @order = params[:order]
+    @fast = @order.russia? && @order.door? && @order.delivery_city.fast?
     attachments.inline['logo-white.png'] = File.read('public/logo-white.png')
     attachments.inline['logo-black.png'] = File.read('public/logo-black.png')
 
