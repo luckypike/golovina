@@ -21,7 +21,7 @@ if @order
         end
 
         json.category do
-          json.extract! item.variant.product.category, :id, :slug
+          json.extract! item.variant.category, :id, :slug
         end
 
         json.color do
