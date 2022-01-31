@@ -1,0 +1,99 @@
+<mjml lang="ru">
+  <mj-head>
+    <mj-font name="Nunito Sans" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" />
+
+    <mj-attributes>
+      <mj-text css-class="all" padding="0 16px 10px" />
+      <mj-divider padding="10px 16px" css-class="divider" border-width="1px" border-color="#888" />
+      <mj-all font-family="inherit" color="inherit" font-size="14px" line-height="20px" />
+      <mj-table css-class="all" />
+      <mj-section padding="0 0 16px" />
+    </mj-attributes>
+
+    <mj-style>
+      body {
+        background-color: #e2dedd;
+      }
+
+      table td {
+        vertical-align: top;
+      }
+
+      strong {
+        font-weight: 600;
+      }
+
+      .body {
+        padding: 32px 0;
+      }
+
+      .all {
+        font-family: Nunito Sans, Arial;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      .logo-white {
+        display: none;
+      }
+
+      .row {
+        margin: 0;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #54595e;
+        }
+
+        .logo-white {
+          display: block;
+        }
+
+        .logo-black {
+          display: none;
+        }
+
+        .all {
+          color: #fff;
+        }
+      }
+    </mj-style>
+  </mj-head>
+
+  <mj-body css-class="body">
+    <mj-section>
+      <mj-column>
+        <mj-image css-class="logo-black" src="<%= attachments['logo-black.png'].url%>" width="106px" height="36px" />
+        <mj-image css-class="logo-white" src="<%= attachments['logo-white.png'].url%>" width="106px" height="36px" />
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-text>Здравствуйте!</mj-text>
+        <mj-text>Ваш заказ № <%= @order.number %> в пути и скоро будет доставлен!</mj-text>
+
+        <mj-text>
+          Служба доставки вашего заказа <%= @order.tracker_type.upcase %>
+        </mj-text>
+
+        <mj-text>
+          Номер посылки для отслеживания на сайте оператора: 130400500.
+          <br>
+          Вы можете отследить статус заказа по этой
+          ссылке: <a href="<%= @order.tracker_url %>"><%= @order.tracker_url %></a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-spacer height="32px" />
+        <mj-text align="center">
+          Ваша Golovina Mari
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
