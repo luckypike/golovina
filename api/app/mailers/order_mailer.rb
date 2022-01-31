@@ -40,7 +40,8 @@ class OrderMailer < ApplicationMailer
 
   def tracker
     @order = params[:order]
-    attachments.inline['golovina.png'] = File.read('app/javascript/images/golovina.png')
+    attachments.inline['logo-white.png'] = File.read('public/logo-white.png')
+    attachments.inline['logo-black.png'] = File.read('public/logo-black.png')
 
     mail(to: @order.user.email, subject: "Трек номер для заказа № #{@order.number}")
   end
