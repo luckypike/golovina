@@ -1,0 +1,190 @@
+<mjml lang="ru">
+  <mj-head>
+    <mj-font name="Nunito Sans" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" />
+
+    <mj-attributes>
+      <mj-text css-class="all" padding="0 16px 10px" />
+      <mj-divider padding="10px 16px" css-class="divider" border-width="1px" border-color="#888" />
+      <mj-all font-family="inherit" color="inherit" font-size="14px" line-height="20px" />
+      <mj-table css-class="all" />
+      <mj-section padding="0 0 16px" />
+    </mj-attributes>
+
+    <mj-style>
+      body {
+        background-color: #e2dedd;
+      }
+
+      table td {
+        vertical-align: top;
+      }
+
+      strong {
+        font-weight: 600;
+      }
+
+      .body {
+        padding: 32px 0;
+      }
+
+      .all {
+        font-family: Nunito Sans, Arial;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      .logo-white {
+        display: none;
+      }
+
+      .row {
+        margin: 0;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #54595e;
+        }
+
+        .logo-white {
+          display: block;
+        }
+
+        .logo-black {
+          display: none;
+        }
+
+        .all {
+          color: #fff;
+        }
+      }
+    </mj-style>
+  </mj-head>
+
+  <mj-body css-class="body">
+    <mj-section>
+      <mj-column>
+        <mj-image css-class="logo-black" src="<%= attachments['logo-black.png'].url%>" width="106px" height="36px" />
+        <mj-image css-class="logo-white" src="<%= attachments['logo-white.png'].url%>" width="106px" height="36px" />
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-text>Здравствуйте!</mj-text>
+        <mj-text>Спасибо, что совершили покупку в Golovina Mari.</mj-text>
+
+        <mj-text>
+          <% if @order.pickup?  %>
+            Как только Ваш заказ будет укомплектован и готов к самовывозу, мы свяжемся с Вами.
+            Забрать заказ можно ежедневно с 13:00 до 21:00 по адресу: Большая Никитская, 21/18 с4
+          <% elsif @fast  %>
+            Как только Ваш заказ будет собран и готов к отправке, мы свяжемся с вами, чтобы уточнить детали доставки.
+            Если у вас возникли вопросы, свяжитесь с нами по телефону +7 (985) 714-55-58
+          <% else  %>
+            Как только посылка с вашим заказом будет передана в службу доставки, вы получите письмо с информацией
+            для отслеживании.
+          <% end %>
+        </mj-text>
+
+        <mj-text>
+          Если у вас возникли вопросы, свяжитесь с нами по телефону +7 (985) 714-55-58
+        </mj-text>
+
+        <mj-divider></mj-divider>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-text>Номер заказ: <%= @order.number %></mj-text>
+        <mj-text>Дата: <%= l(@order.payed_at.to_date) %></mj-text>
+        <mj-text>Имя: <%= @order.user.title %></mj-text>
+        <mj-text>Email: <%= @order.user.email %></mj-text>
+        <mj-text>Телефон: <%= @order.user.phone %></mj-text>
+
+        <% if @order.international? %>
+          <mj-text>Способ доставки: Международная доставка</mj-text>
+          <mj-text>
+            Адрес доставки:
+            <br>
+            <%= @order.zip %>, <%= @order.country %>, <%= @order.city %>
+            <br>
+            <%= @order.street %> <%= @order.house %>, <%= @order.appartment %>
+          </mj-text>
+        <% end %>
+
+        <% if @order.russia? %>
+          <mj-text>Способ доставки: <%= @order.door? ? 'до двери' : 'до отделения' %></mj-text>
+
+          <% if @order.door? %>
+            <mj-text>
+              Адрес доставки:
+              <br>
+              <%= @order.delivery_city.title %>, <%= @order.street %> <%= @order.house %>, <%= @order.appartment %>
+            </mj-text>
+          <% end %>
+        <% end %>
+
+        <mj-text>Способ оплаты: оплата на сайте</mj-text>
+        <mj-divider></mj-divider>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-table>
+          <%= @order.items.map do |item| %>
+            <% variant = item.variant %>
+            <% image = variant.images.active_and_ordered.first %>
+
+            <tr>
+              <td width="70px">
+                <% if image && image.file.attached? %>
+                  <img width="60px" height="80px" src="<%= image.thumb_url %>" style="margin: 0 0 16px;"  />
+                <% end %>
+              </td>
+
+              <td>
+                <strong><%= variant.title_last %></strong>
+                <br />
+                Размер: <%= item.size.title %>
+                <br />
+                Цвет: <%= variant.color.title %>
+                <br />
+                Количество: <%= item.quantity %>
+              </td>
+
+              <td align="right" style="white-space: nowrap; padding-left: 10px;">
+                <%= number_to_currency(item.amount, locale: :ru, precision: 0) %>
+              </td>
+            </tr>
+          <% end %>
+        </mj-table>
+
+        <mj-spacer height="16px" />
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-text align="right">
+          Стоимость: <%= number_to_currency(@order.amount, locale: :ru, precision: 0) %>
+          <br />
+          Доставка: <%= number_to_currency(@order.amount_delivery, locale: :ru, precision: 0) %>
+          <br />
+          Итого: <%= number_to_currency(@order.payment_amount, locale: :ru, precision: 0) %>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-spacer height="32px" />
+        <mj-text align="center">
+          Ваша Golovina Mari
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
