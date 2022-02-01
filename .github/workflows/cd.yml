@@ -41,6 +41,7 @@ jobs:
           context: ./api
           file: ./api/Dockerfile.k8s
           build-args: |
+            APP_VERSION=${{ github.event.release.tag_name }}
             RAILS_ENV=production
             RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
             s3_access_key_id=dummy_aws_access_key_id
