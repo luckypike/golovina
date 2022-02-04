@@ -73,3 +73,23 @@
     backdrop-filter: none;
   }
 }
+
+
+.overlay {
+  visibility: hidden;
+  background: rgb(var(--theme-bg-primary-color));
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 11;
+  opacity: 0;
+  transition: visibility 0s ease 0.3s, opacity 0.3s;
+}
+
+.overlay.active {
+  visibility: visible;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}

@@ -6,6 +6,7 @@ import { Nav } from './Header/Nav'
 import { Search } from './Header/Search'
 import { Wishlist } from './Header/Wishlist'
 import { Cart } from './Header/Cart'
+import { Menu } from './Header/Menu'
 
 import s from './Header.module.css'
 import { observer } from 'mobx-react-lite'
@@ -14,6 +15,7 @@ import { useRootContext } from '../services/useRootContext'
 export const Header: FC = observer(() => {
   const [scrolling, setScrolling] = useState(false)
   const rootStore = useRootContext()
+  const { layoutStore } = rootStore
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,28 +24,37 @@ export const Header: FC = observer(() => {
       } else if (window.scrollY !== 0 && !scrolling) {
         setScrolling(true)
       }
-    };
-    window.addEventListener("scroll", handleScroll);
+    }
+    window.addEventListener('scroll', handleScroll)
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scrolling]);
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [scrolling])
 
   return (
-    <header className={cc([s.root, { [s.scrolling]: scrolling, [s.invert]: rootStore.headerInvert }])}>
-      <div className={s.left}>
-        <Nav />
-        <Search />
-      </div>
+    <>
+      <header className={cc([s.root, { [s.scrolling]: scrolling, [s.invert]: rootStore.headerInvert }])}>
+        <div className={s.left}>
+          <Nav />
+          <Search />
+        </div>
 
-      <div className={s.logo}>
-        <Logo />
-      </div>
+        <div className={s.logo}>
+          <Logo />
+        </div>
 
-      <div className={s.right}>
-        <Wishlist />
-        <Cart />
-      </div>
-    </header>
+        <div className={s.right}>
+          <Wishlist />
+          <Cart />
+        </div>
+      </header>
+
+      <Menu />
+
+      <div
+        className={cc([s.overlay, { [s.active]: layoutStore.activeNav }])}
+        onClick={() => layoutStore.setActiveNav(false)}
+      />
+    </>
   )
 })

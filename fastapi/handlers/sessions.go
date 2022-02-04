@@ -10,12 +10,20 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type Session struct {
+type session struct {
 	Id         uint       `json:"id"`
 	Name       string     `json:"email"`
 	Cart       int64      `json:"cart"`
 	Wishlist   int64      `json:"wishlist"`
-	Categories []category `json:"categories"`
+	Categories []nav_item `json:"categories"`
+	Themes     []nav_item `json:"themes"`
+}
+
+type nav_item struct {
+	Id     uint   `json:"id"`
+	Title  string `json:"title"`
+	Slug   string `json:"slug"`
+	Weight int    `json:"weight"`
 }
 
 func ShowSession(c echo.Context) error {
@@ -44,42 +52,33 @@ func ShowSession(c echo.Context) error {
 		Where("variants.state = ?", 1).
 		Count(&wishlist)
 
-	categoryTranslations := []models.CategoryTranslation{}
+	var categories []nav_item
 	db.Debug().
-		Joins("INNER JOIN categories c ON category_translations.category_id = c.id AND c.state = 1").
-		Where(&models.CategoryTranslation{Locale: "ru"}).
-		Order("weight asc").
-		Find(&categoryTranslations)
+		Table("category_translations ct").
+		Select("c.id, ct.title, c.slug, c.weight").
+		Joins("INNER JOIN categories c ON ct.category_id = c.id").
+		Where("ct.locale = ? AND c.state = ?", "ru", 1).
+		Order("c.weight asc").
+		Find(&categories)
+
+	var themes []nav_item
+	db.Debug().
+		Table("theme_translations tt").
+		Select("t.id, tt.title, t.weight").
+		Joins("INNER JOIN themes t ON tt.theme_id = t.id").
+		Where("tt.locale = ? AND t.state = ?", "ru", 1).
+		Order("t.weight asc").
+		Find(&themes)
 
 	return c.JSON(
 		http.StatusOK,
-		Session{
+		session{
 			Id:         user.ID,
 			Name:       user.Name,
 			Cart:       cart.Int64,
 			Wishlist:   wishlist,
-			Categories: formatCategories(categoryTranslations),
+			Categories: categories,
+			Themes:     themes,
 		},
 	)
-}
-
-type category struct {
-	Id    uint   `json:"id"`
-	Title string `json:"title"`
-}
-
-func formatCategories(categoryTranslations []models.CategoryTranslation) []category {
-	var categories []category
-
-	for _, categoryTranslation := range categoryTranslations {
-		categories = append(
-			categories,
-			category{
-				categoryTranslation.CategoryID,
-				categoryTranslation.Title,
-			},
-		)
-	}
-
-	return categories
 }

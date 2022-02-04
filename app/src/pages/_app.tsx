@@ -36,7 +36,7 @@ function AppPage({ Component, pageProps, sessionData }: AppProps & { sessionData
 }
 
 const ErrorView: FC = () => {
-  return (<div>ERROR PAGE</div>)
+  return <div>ERROR PAGE</div>
 }
 
 AppPage.getInitialProps = async (appContext: AppContext) => {
@@ -45,12 +45,18 @@ AppPage.getInitialProps = async (appContext: AppContext) => {
   let config: AxiosRequestConfig = {
     baseURL: process.env.NEXT_PUBLIC_API_URL,
     withCredentials: true,
+    headers: {
+      'X-Locale': appContext.ctx.locale ?? '',
+    },
   }
 
   if (appContext.ctx.req) {
     config = {
       baseURL: process.env.FASTAPI_URL,
-      headers: { Cookie: appContext.ctx.req?.headers.cookie ?? '' },
+      headers: {
+        Cookie: appContext.ctx.req?.headers.cookie ?? '',
+        'X-Locale': appContext.ctx.locale ?? '',
+      },
     }
   }
 

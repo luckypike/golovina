@@ -1,0 +1,29 @@
+.root {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: rgb(var(--theme-bg-primary-color));
+  visibility: hidden;
+  opacity: 0;
+  padding: 4rem 7rem 2rem calc(var(--xr) * 2);
+  transform: translateX(-3rem);
+  transition-duration: 0.4s;
+  transition-property: transform opacity;
+  z-index: 12;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+@media (--s) {
+  .root {
+    width: 20rem;
+  }
+}
+
+.root.active {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+}
