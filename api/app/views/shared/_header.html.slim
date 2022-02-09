@@ -1,13 +1,9 @@
 = react_component( \
   'Header',
   { \
-    # categories: Category.for_header.as_json(only: %i[id slug title]),
     nav: NavSerializer.new(@nav.sort_by(&:weight)).serializable_hash,
-    categories: CategorySerializer.new(@categories_nav).serializable_hash,
-    collections: CollectionSerializer.new(@collections_nav).serializable_hash,
     index: current_page?(root_path),
     user: UserSerializer.new(current_user).serializable_hash,
-    last: @last_nav,
     wishlist: Wishlist.joins(:variant).where(user: current_user, variants: { state: :active }).size,
     cart: current_user&.orders&.cart&.first&.quantity \
   }, { \

@@ -42,7 +42,7 @@ class Nav extends Component {
 
   render () {
     const { active, section } = this.state
-    const { user, categories, themes, collections, locale, last, nav } = this.props
+    const { user, locale, nav } = this.props
 
     const I18n = useI18n(locale)
 
@@ -60,36 +60,19 @@ class Nav extends Component {
           </div>
         </Section>
 
-        <Section id="collections" title={I18n.t('header.nav.collections')} onToggle={this.toggleSection} section={section}>
-          {collections.map(collection =>
-            <div className={classNames(styles.sub)} key={collection.id}>
-              <a href={path('collection_path', { id: collection.slug })}>
-                <div>
-                  {collection.title}
-                </div>
-                {collection.desc &&
-                  <div className={styles.collection}>
-                    {collection.desc}
-                  </div>
-                }
-              </a>
-            </div>
-          )}
-        </Section>
-
         <Section id="brand" title={I18n.t('header.nav.about')} onToggle={this.toggleSection} section={section}>
           <div className={styles.sub}>
-            <a href="/posts/1">{I18n.t('header.nav.interview')}</a>
+            <a href={path('about_path')}>{I18n.t('header.nav.phil')}</a>
+          </div>
+
+          <div className={styles.sub}>
+            <a href={path('collections_path')}>{I18n.t('header.nav.collections')}</a>
+          </div>
+
+          <div className={styles.sub}>
+            <a href={path('contacts_path')}>{I18n.t('header.nav.contacts')}</a>
           </div>
         </Section>
-
-        <div className={classNames(styles.section)}>
-          <div className={styles.title}>
-            <a href={path('contacts_path')}>
-              {I18n.t('header.nav.contacts')}
-            </a>
-          </div>
-        </div>
 
         <Section id="service" title={I18n.t('header.nav.service.title')} onToggle={this.toggleSection} section={section}>
           <div className={styles.sub}>
@@ -125,10 +108,6 @@ class Nav extends Component {
 
             <div className={styles.sub}>
               <a href={path('dashboard_catalog_path')}>Категории и товары</a>
-            </div>
-
-            <div className={styles.sub}>
-              <a href={path('collections_path')}>Коллекции</a>
             </div>
 
             <div className={styles.sub}>

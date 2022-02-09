@@ -42,8 +42,8 @@ class CollectionsController < ApplicationController
 
   def index
     authorize Collection
-
-    @collections = Collection.all
+    collection = Collection.active.order(weight: :asc, id: :desc).first
+    redirect_to collection_path(id: collection.slug), status: :found
   end
 
   private
