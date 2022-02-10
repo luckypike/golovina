@@ -1,1 +1,5 @@
-| About
+- set_meta_tags title: t('header.nav.phil')
+- description 'Философия Golovina Mari'
+- keywords ['golovina', 'головина']
+
+= react_component 'Pages/About', {}, { prerender: Rails.env.production? }
