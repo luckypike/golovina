@@ -5,11 +5,12 @@ import { useRootContext } from '../../services/useRootContext'
 import s from './Menu.module.css'
 import { useTranslations } from 'next-intl'
 import AnimateHeight from 'react-animate-height'
+import { observer } from 'mobx-react-lite'
 
-export const Menu: FC = () => {
+export const Menu: FC = observer(() => {
   const t = useTranslations('Menu');
   const rootStore = useRootContext()
-  const { layoutStore, sessionData } = rootStore
+  const { layoutStore, sessionData, isAuth } = rootStore
   const [section, setSection] = useState<string>()
 
   const nav = useMemo(() => {
@@ -37,9 +38,21 @@ export const Menu: FC = () => {
         <div className={s.sub}><a href="#">{t('service.delivery')}</a></div>
         <div className={s.sub}><a href="#">{t('service.return')}</a></div>
       </Section>
+
+      <div className={s.section}>
+        <div className={s.title}>
+          {isAuth &&
+            <a href="/account">{t('account')}</a>
+          }
+
+          {!isAuth &&
+            <a href="/login">{t('login')}</a>
+          }
+        </div>
+      </div>
     </div>
   )
-}
+})
 
 
 const Section: FC<{ section: string | undefined, name: string, setSection: Dispatch<SetStateAction<string | undefined>>, duration: number }> = ({ section, setSection, name, children, duration }) => {

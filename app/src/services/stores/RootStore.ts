@@ -2,6 +2,11 @@ import { makeAutoObservable, runInAction } from 'mobx'
 import { LayoutStore } from '../../layout/store'
 
 export interface SessionData {
+  user: {
+    id: number
+    state: number
+    editor: boolean
+  }
   wishlist: number
   cart: number
   categories: { id: number, title: string, slug: string, weight: number }[]
@@ -10,6 +15,11 @@ export interface SessionData {
 
 export class RootStore {
   sessionData: SessionData = {
+    user: {
+      id: 0,
+      state: 0,
+      editor: false
+    },
     cart: 0,
     wishlist: 0,
     categories: [],
@@ -26,5 +36,9 @@ export class RootStore {
 
   setHeaderInvert = (headerInvert: boolean) => {
     this.headerInvert = headerInvert
+  }
+
+  get isAuth() {
+    return this.sessionData.user.id > 0 && this.sessionData.user.state > 0
   }
 }

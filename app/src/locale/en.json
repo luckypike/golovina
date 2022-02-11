@@ -15,6 +15,7 @@
       "delivery": "Delivery Information",
       "return": "Return & Refund"
     },
-    "login": "Login"
+    "login": "Login",
+    "account": "Account"
   }
 }
