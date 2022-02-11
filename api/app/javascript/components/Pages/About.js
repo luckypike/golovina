@@ -3,16 +3,12 @@ import React from 'react'
 import WWImg from './whole-world.png'
 
 import page from '../Page'
-import I18n from '../I18n'
+// import I18n from '../I18n'
 import styles from './About.module.css'
 
 export default function About () {
   return (
     <div className={page.root}>
-      <div className={page.title}>
-        <h1>{I18n.t('header.nav.phil')}</h1>
-      </div>
-
       <div className={page.text}>
         <p>
           Golovina Mari — бренд о женской свободе, силе, легкости, зрелости, притягательности и самоиронии.

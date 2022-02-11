@@ -27,9 +27,9 @@
 .ww {
   display: block;
   margin: 0 auto calc(var(--yr) * var(--s2));
-  max-width: 80%;
+  max-width: 75%;
 
   @media (--s) {
-    max-width: 50%;
+    max-width: 35%;
   }
 }
