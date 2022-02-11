@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"database/sql"
+	"fmt"
 	"golovina/db"
 	"golovina/models"
 	"golovina/utils"
@@ -31,6 +32,13 @@ func ShowSession(c echo.Context) error {
 	cookie, err := c.Cookie("_golovina_session")
 	userId := 0
 
+	var locale string = c.Request().Header.Get("X-Locale")
+	if locale != "ru" && locale != "en" {
+		locale = "ru"
+	}
+
+	fmt.Println("X-Locale", locale)
+
 	if err == nil {
 		userId = utils.Decrypt(cookie.Value)
 	}
@@ -57,7 +65,7 @@ func ShowSession(c echo.Context) error {
 		Table("category_translations ct").
 		Select("c.id, ct.title, c.slug, c.weight").
 		Joins("INNER JOIN categories c ON ct.category_id = c.id").
-		Where("ct.locale = ? AND c.state = ?", "ru", 1).
+		Where("ct.locale = ? AND c.state = ? AND variants_and_kits_count > ?", locale, 1, 0).
 		Order("c.weight asc").
 		Find(&categories)
 
@@ -66,7 +74,7 @@ func ShowSession(c echo.Context) error {
 		Table("theme_translations tt").
 		Select("t.id, tt.title, t.weight").
 		Joins("INNER JOIN themes t ON tt.theme_id = t.id").
-		Where("tt.locale = ? AND t.state = ?", "ru", 1).
+		Where("tt.locale = ? AND t.state = ?", locale, 1).
 		Order("t.weight asc").
 		Find(&themes)
 

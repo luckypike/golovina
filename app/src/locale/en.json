@@ -1,0 +1,20 @@
+{
+  "Menu": {
+    "catalog": {
+      "title": "Online Shop",
+      "all": "View All"
+    },
+    "about": {
+      "title": "About",
+      "phil": "Philosophy",
+      "collections": "Collection",
+      "contacts": "Salon"
+    },
+    "service": {
+      "title": "Customer Service",
+      "delivery": "Delivery Information",
+      "return": "Return & Refund"
+    },
+    "login": "Login"
+  }
+}

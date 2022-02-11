@@ -1,7 +1,8 @@
 import App, { AppContext, AppProps } from 'next/app'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import axios, { AxiosRequestConfig } from 'axios'
 import { BugsnagPluginReactResult } from '@bugsnag/plugin-react'
+import { IntlMessages, NextIntlProvider } from 'next-intl'
 
 import { Header } from '../layout/Header'
 import { Footer } from '../layout/Footer'
@@ -17,19 +18,21 @@ const ErrorBoundary = plugin.createErrorBoundary(React)
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL
 
-function AppPage({ Component, pageProps, sessionData }: AppProps & { sessionData: SessionData }) {
+function AppPage({ Component, pageProps, sessionData, localeData }: AppProps & { sessionData: SessionData, localeData: IntlMessages }) {
   const [rootStore] = useState(new RootStore(sessionData))
 
   return (
     <ErrorBoundary FallbackComponent={ErrorView}>
       <RootContext.Provider value={rootStore}>
-        <Header />
+        <NextIntlProvider messages={localeData}>
+          <Header />
 
-        <main className="main">
-          <Component {...pageProps} />
-        </main>
+          <main className="main">
+            <Component {...pageProps} />
+          </main>
 
-        <Footer />
+          <Footer />
+        </NextIntlProvider>
       </RootContext.Provider>
     </ErrorBoundary>
   )
@@ -41,12 +44,13 @@ const ErrorView: FC = () => {
 
 AppPage.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext)
+  const locale = appContext.ctx.locale ?? 'ru'
 
   let config: AxiosRequestConfig = {
     baseURL: process.env.NEXT_PUBLIC_API_URL,
     withCredentials: true,
     headers: {
-      'X-Locale': appContext.ctx.locale ?? '',
+      'X-Locale': locale,
     },
   }
 
@@ -55,13 +59,15 @@ AppPage.getInitialProps = async (appContext: AppContext) => {
       baseURL: process.env.FASTAPI_URL,
       headers: {
         Cookie: appContext.ctx.req?.headers.cookie ?? '',
-        'X-Locale': appContext.ctx.locale ?? '',
+        'X-Locale': locale,
       },
     }
   }
 
+  const localeData = (await import(`../locale/${locale}.json`)).default
+
   const { data: sessionData } = await axios.get<SessionData>('/session', config)
-  return { ...appProps, sessionData }
+  return { ...appProps, sessionData, localeData }
 }
 
 export default AppPage

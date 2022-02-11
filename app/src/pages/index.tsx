@@ -34,7 +34,7 @@ const IndexPage: NextPage<{ data: IndexData }> = ({ data }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const indexData = await getIndexData()
+  const indexData = await getIndexData(context.locale)
 
   return {
     props: { data: indexData }

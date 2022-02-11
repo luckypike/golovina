@@ -23,8 +23,8 @@ export const Index: FC = () => {
   )
 }
 
-export const getIndexData = async () => {
-  const { data } = await axios.get<IndexData>('/pages/index', defaultServerSideConfig)
+export const getIndexData = async (locale?: string) => {
+  const { data } = await axios.get<IndexData>('/pages/index', defaultServerSideConfig(locale))
 
   return data
 }
