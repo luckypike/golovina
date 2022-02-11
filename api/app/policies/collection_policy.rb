@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CollectionPolicy < ApplicationPolicy
   def index?
-    update?
+    true
   end
 
   def show?

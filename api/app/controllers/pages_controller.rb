@@ -5,6 +5,8 @@ class PagesController < ApplicationController
     @slides = Slide.with_translations(I18n.available_locales)
       .includes(:video_mp4_attachment)
       .where.not(image: nil).order(weight: :asc)
+
+    set_meta_tags 'facebook-domain-verification': 'gq1zcts3t1t3zp0vuyh34su8tqowbk'
   end
 
   def instagram

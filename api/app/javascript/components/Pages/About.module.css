@@ -1,0 +1,35 @@
+.content {
+  color: var(--pr_color);
+  font-size: calc(var(--yr) * var(--fs));
+  line-height: calc(var(--yr) * 5);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+  margin-bottom: 1rem;
+
+  @media (--s) {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2.5rem;
+  }
+}
+
+
+.quote {
+  margin: 0 0 calc(var(--yr) * var(--s2));
+  text-align: right;
+
+  & blockquote {
+    font-style: italic;
+    margin: 0 0 calc(var(--yr) * var(--s1));
+  }
+}
+
+.ww {
+  display: block;
+  margin: 0 auto calc(var(--yr) * var(--s2));
+  max-width: 75%;
+
+  @media (--s) {
+    max-width: 35%;
+  }
+}
