@@ -3,6 +3,10 @@ SessionPolicy = Struct.new :user, :session do
     create?
   end
 
+  def show?
+    true
+  end
+
   def create?
     true
   end

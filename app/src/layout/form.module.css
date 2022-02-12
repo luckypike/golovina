@@ -61,3 +61,12 @@ select.in:invalid {
 .radio > *:first-child {
   margin-right: var(--yr);
 }
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox > *:first-child {
+  margin-right: var(--yr);
+}
