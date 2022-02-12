@@ -5,6 +5,7 @@ json = {
   state: variant.state,
   category_id: variant.category_id,
   color_id: variant.color_id,
+  theme_ids: variant.theme_ids.map(&:to_s),
   price: variant.price&.round,
   price_last: variant.price_last&.round,
   code: variant.code,

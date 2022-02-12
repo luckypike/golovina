@@ -15,7 +15,7 @@ json.array! variants do |variant|
   end
 
   json.category do
-    json.extract! variant.product.category, :id, :slug
+    json.extract! variant.category, :id, :slug
   end
 
   json.colors variant.product.variants.select(&:active?).size - 1

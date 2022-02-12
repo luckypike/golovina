@@ -8,6 +8,7 @@ module Variants
       required(:color_id).filled(:integer)
       required(:category_id).filled(:integer)
       required(:state).filled(:string)
+      optional(:theme_ids).array(:integer)
 
       required(:title_ru).filled(:string)
       optional(:title_en).maybe(:string)

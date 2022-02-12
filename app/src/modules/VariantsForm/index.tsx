@@ -13,6 +13,7 @@ import { ImagesDropzoneStore } from '../ImagesDropzone/store'
 type Values = {
   category_id: number
   color_id: number
+  theme_ids: number[]
   state: string
   title_ru: string
   title_en: string
@@ -121,6 +122,21 @@ export const VariantsForm: FC = () => {
                 </option>
               ))}
             </select>
+          </label>
+
+          {errors.category_id && <div className={sf.er}>{errors.category_id.message}</div>}
+        </div>
+
+        <div className={sf.el}>
+          <label className={sf.it}>
+            <div className={sf.lb}>Тема</div>
+
+            {dic.themes.map((theme) => (
+              <label key={theme.id} className={cc([sf.lb, sf.checkbox])}>
+                <input {...register("theme_ids")} type="checkbox" value={theme.id} />
+                {theme.title}
+              </label>
+            ))}
           </label>
 
           {errors.category_id && <div className={sf.er}>{errors.category_id.message}</div>}
