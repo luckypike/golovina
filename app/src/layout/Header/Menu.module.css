@@ -84,3 +84,28 @@
   margin-bottom: calc(var(--yr) * 2);
   display: block;
 }
+
+.close {
+  position: fixed;
+  right: calc(var(--xr) * 2 - calc(var(--yr) * 2));
+  top: calc(var(--yr) * 2);
+  padding: 16px 8px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.close svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.close line {
+  stroke: rgb(var(--theme-fg-primary-color))
+}
+
+@media (--s) {
+  .close {
+    position: absolute;
+  }
+}

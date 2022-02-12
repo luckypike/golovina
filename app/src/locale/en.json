@@ -16,6 +16,17 @@
       "return": "Return & Refund"
     },
     "login": "Login",
-    "account": "Account"
+    "account": "Account",
+    "admin": {
+      "title": "Admin"
+    }
+  },
+  "About": {
+    "p1": "Golovina Mari is a brand devoted to women and their freedom, strength, light, maturity, magnetism, and humor.",
+    "p2": "Intriguing details and cuts combine to form an unmistakable style. The colors are serious, monochromatic, and confident. Lines and shapes highlight the wearer’s beauty and femininity. Each collection focuses on universal and thoughtful items that come together to form a timeless wardrobe of quality essentials. These are clothes that can change how we feel. Make us confident. Open our minds. Fill us with a lust for life.",
+    "bq": "“Every woman is unique and beautiful, but not all of us have a chance to discover our best face to show the world. I feel enormous joy when my clothes help a woman transform. No item overshadows her or calls attention to itself; instead, they highlight her natural beauty. This is a silent kind of magic. When all of these elements come together, they let a woman flourish, making her an inspiration to others.”",
+    "at": "— Maria Golovina.",
+    "p3": "The brand’s basic statements. Variety creates a perfect harmony.  For us, unity comes from diversity. Inside, all of us are menageries of colored glass. Each glass is simultaneously beautiful, special, vulnerable, and strong. Still, they must come together to create a singular pattern and shine in all their glory.",
+    "p4": "A spiritual and sensual experience. Intellect and emotions. Spontaneity. People and big cities; new opportunities and the lust for life. We find inspiration in the many faces we show the world. We create a single, harmonious form from the infinitude of rhythms of our world."
   }
 }

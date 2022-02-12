@@ -6,11 +6,12 @@ import s from './Menu.module.css'
 import { useTranslations } from 'next-intl'
 import AnimateHeight from 'react-animate-height'
 import { observer } from 'mobx-react-lite'
+import Link from 'next/link'
 
 export const Menu: FC = observer(() => {
   const t = useTranslations('Menu');
   const rootStore = useRootContext()
-  const { layoutStore, sessionData, isAuth } = rootStore
+  const { layoutStore, sessionData, isAuth, isEditor } = rootStore
   const [section, setSection] = useState<string>()
 
   const nav = useMemo(() => {
@@ -19,24 +20,31 @@ export const Menu: FC = observer(() => {
 
   return (
     <div className={cc([s.root, { [s.active]: layoutStore.activeNav }])}>
+      <div className={s.close} onClick={() => layoutStore.setActiveNav(false)}>
+        <svg viewBox="0 0 16 16">
+          <line x1="1" y1="1" x2="15" y2="15" />
+          <line x1="1" y1="15" x2="15" y2="1" />
+        </svg>
+      </div>
+
       {nav.length > 0 &&
       <Section setSection={setSection} section={section} name="catalog" duration={600}>
         {nav.map(n =>
-          <div key={n.id} className={s.sub}><a href="#">{n.title}</a></div>
+          <div key={n.id} className={s.sub}><a href={`/catalog/${n.slug}`}>{n.title}</a></div>
         )}
-        <div className={s.sub}><a href="#">{t('catalog.all')}</a></div>
+        <div className={s.sub}><a href="/catalog/all">{t('catalog.all')}</a></div>
       </Section>
       }
 
       <Section setSection={setSection} section={section} name="about" duration={400}>
-        <div className={s.sub}><a href="#">{t('about.phil')}</a></div>
-        <div className={s.sub}><a href="#">{t('about.collections')}</a></div>
-        <div className={s.sub}><a href="#">{t('about.contacts')}</a></div>
+        <div className={s.sub}><Link href="/about">{t('about.phil')}</Link></div>
+        <div className={s.sub}><a href="/collections">{t('about.collections')}</a></div>
+        <div className={s.sub}><a href="/contacts">{t('about.contacts')}</a></div>
       </Section>
 
       <Section setSection={setSection} section={section} name="service" duration={350}>
-        <div className={s.sub}><a href="#">{t('service.delivery')}</a></div>
-        <div className={s.sub}><a href="#">{t('service.return')}</a></div>
+        <div className={s.sub}><a href="/service/delivery">{t('service.delivery')}</a></div>
+        <div className={s.sub}><a href="/service/return">{t('service.return')}</a></div>
       </Section>
 
       <div className={s.section}>
@@ -50,6 +58,16 @@ export const Menu: FC = observer(() => {
           }
         </div>
       </div>
+
+      {isEditor &&
+        <Section setSection={setSection} section={section} name="admin" duration={450}>
+          <div className={s.sub}><a href="/dashboard">Заказы и возвраты</a></div>
+          <div className={s.sub}><a href="/dashboard/catalog">Категории и товары</a></div>
+          <div className={s.sub}><a href="/kits/control">Образы</a></div>
+          <div className={s.sub}><a href="/colors">Цвета</a></div>
+          <div className={s.sub}><a href="/statistics">Статистика</a></div>
+        </Section>
+      }
     </div>
   )
 })

@@ -41,4 +41,8 @@ export class RootStore {
   get isAuth() {
     return this.sessionData.user.id > 0 && this.sessionData.user.state > 0
   }
+
+  get isEditor() {
+    return this.isAuth && this.sessionData.user.editor
+  }
 }

@@ -1,5 +1,5 @@
 import App, { AppContext, AppProps } from 'next/app'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import axios, { AxiosRequestConfig } from 'axios'
 import { BugsnagPluginReactResult } from '@bugsnag/plugin-react'
 import { IntlMessages, NextIntlProvider } from 'next-intl'
@@ -12,6 +12,7 @@ import Bugsnag from '../lib/bugsnag'
 
 import 'normalize.css'
 import '../css/app.css'
+import router from 'next/router'
 
 const plugin = Bugsnag.getPlugin('react') as BugsnagPluginReactResult
 const ErrorBoundary = plugin.createErrorBoundary(React)
@@ -20,6 +21,18 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL
 
 function AppPage({ Component, pageProps, sessionData, localeData }: AppProps & { sessionData: SessionData, localeData: IntlMessages }) {
   const [rootStore] = useState(new RootStore(sessionData))
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      rootStore.layoutStore.setActiveNav(false)
+    }
+
+    router.events.on('routeChangeStart', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange)
+    }
+  }, [rootStore.layoutStore])
 
   return (
     <ErrorBoundary FallbackComponent={ErrorView}>

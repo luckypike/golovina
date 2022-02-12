@@ -1,0 +1,42 @@
+.root {
+  margin: 0 var(--xr);
+}
+
+@media (--m)  {
+  .root {
+    margin: 0 calc(var(--xr) * 2);
+  }
+}
+
+@media (--l) {
+  .root {
+    margin: 0 calc(3 / 16 * 100%);
+  }
+}
+
+/* @media (--m)  {
+  .root {
+    padding: 0 calc(var(--xr) * 2);
+  }
+} */
+
+.quote {
+  margin: 0 0 calc(var(--yr) * var(--s2));
+  text-align: right;
+}
+
+.quote blockquote {
+  font-style: italic;
+  margin: 0 0 calc(var(--yr) * var(--s1));
+}
+
+/* .ww {
+  display: block;
+  margin: 0 auto calc(var(--yr) * var(--s2));
+  max-width: 50%;
+
+
+  @media (--s) {
+    max-width: 35%;
+  }
+} */
