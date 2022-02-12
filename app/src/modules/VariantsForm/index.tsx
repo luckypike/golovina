@@ -61,7 +61,6 @@ export const VariantsForm: FC = () => {
       entries(data.values).forEach(([key, value]) => setValue(key, value))
       setDic(data.dic)
       store.addImages(data.values.images)
-      console.log(data.values)
     }
 
     _fetch()
