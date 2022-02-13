@@ -11,5 +11,9 @@ module ApplicationExceptionHandler
     rescue_from Pundit::NotAuthorizedError do |e|
       render json: { errors: e.message }, status: :unauthorized
     end
+
+    rescue_from I18n::InvalidLocale do |e|
+      head :bad_request
+    end
   end
 end

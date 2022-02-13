@@ -1,0 +1,26 @@
+.root {
+  padding: 0 var(--xr);
+  margin: calc(var(--yr-m) * -1) 0 var(--yr-xl);
+}
+
+@media (--s) {
+  .root {
+    margin: calc(var(--yr) * -40) 0 var(--yr-xl);
+  }
+}
+
+@media (--m) {
+  .root {
+    padding: 0 calc(var(--xr) * 2);
+  }
+}
+
+.slides {
+  margin: 0 0 var(--yr-m);
+}
+
+@media (--s) {
+  .slides {
+    margin: 0 0 calc(var(--yr-m) * 2);
+  }
+}

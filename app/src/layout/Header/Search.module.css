@@ -8,6 +8,6 @@
   width: calc(var(--yr) * 6);
   height: calc(var(--yr) * 6);
   fill: none;
-  stroke: rgb(var(--theme-fg-primary-color));
+  stroke: currentColor;
   stroke-miterlimit: 10;
 }

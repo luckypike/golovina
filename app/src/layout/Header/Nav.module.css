@@ -17,7 +17,7 @@
 }
 
 .svg rect {
-  fill: rgb(var(--theme-fg-primary-color));
+  fill: currentColor;
   transition: 0.2s fill;
 }
 

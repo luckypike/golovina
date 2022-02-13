@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_28_122317) do
+ActiveRecord::Schema.define(version: 2022_02_03_163017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2022_01_28_122317) do
     t.boolean "front"
     t.integer "variants_and_kits_count"
     t.index ["parent_category_id"], name: "index_categories_on_parent_category_id"
+    t.index ["state"], name: "index_categories_on_state"
   end
 
   create_table "category_translations", force: :cascade do |t|
@@ -462,6 +463,7 @@ ActiveRecord::Schema.define(version: 2022_01_28_122317) do
     t.string "image"
     t.datetime "recency"
     t.index ["slug"], name: "index_themes_on_slug", unique: true
+    t.index ["state"], name: "index_themes_on_state"
   end
 
   create_table "tokens", force: :cascade do |t|

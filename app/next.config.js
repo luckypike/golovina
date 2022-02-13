@@ -9,14 +9,29 @@ module.exports = {
         destination: 'http://localhost:3001/api/session'
       },
       {
-        source: '/api/rails/active_storage/direct_uploads.json',
-        destination: 'http://localhost:3000/rails/active_storage/direct_uploads.json'
-      },
-      {
         source: '/api/:path*',
         destination: 'http://localhost:3000/api/:path*'
       },
     ]
+  },
+  i18n: {
+    locales: ['en', 'ru'],
+    defaultLocale: 'ru',
+    localeDetection: false,
+    domains: [
+      {
+        domain: 'golovinamari.local', defaultLocale: 'ru',
+      },
+      {
+        domain: 'en.golovinamari.local', defaultLocale: 'en',
+      },
+      // {
+      //   domain: 'golovinamari.local', defaultLocale: 'fr',
+      // },
+      // {
+      //   domain: 'en.golovinamari.local', defaultLocale: 'en', locales: ['en'], http: true,
+      // }
+    ],
   },
   webpack(config) {
     config.module.rules.push({

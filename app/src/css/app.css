@@ -8,6 +8,8 @@
   --lh-h1: calc(var(--yr) * 7);
   --fs-at: calc(var(--yr) * 2.5);
   --lh-at: calc(var(--yr) * 4);
+  --fs-mt: calc(var(--yr) * 2.5);
+  --lh-mt: calc(var(--yr) * 4);
   /* --fs-cap: calc(var(--yr) * 3); */
 
   --yr-xs: calc(var(--yr) * 2);
@@ -23,17 +25,34 @@
   --theme-sp-color: 222, 222, 222;
 }
 
+@media (--s) {
+  :root {
+    --fs-base: calc(var(--yr) * 3.5);
+    --lh-base: calc(var(--yr) * 7);
+    --fs-h1: calc(var(--yr) * 6);
+    --lh-h1: calc(var(--yr) * 8);
+    --fs-at: calc(var(--yr) * 3);
+    --lh-at: calc(var(--yr) * 5);
+
+    --yr-xs: calc(var(--yr) * 3);
+    --yr-s: calc(var(--yr) * 6);
+    --yr-m: calc(var(--yr) * 9);
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --theme-bg-primary-color: 32, 33, 36;
     --theme-bg-secondary-color: 39, 40, 43;
     --theme-fg-primary-color: 225, 224, 224;
     --theme-sp-color: 66, 66, 66;
+
   }
 }
 
 @custom-media --s (min-width: 45em);
 @custom-media --m (min-width: 60em);
+@custom-media --l (min-width: 80em);
 
 *,
 ::after,
@@ -74,6 +93,10 @@ body,
   #__next > main {
     padding-top: calc(var(--yr) * 40);
   }
+}
+
+p {
+  margin: 0 0 var(--yr-s);
 }
 
 h1 {
