@@ -57,6 +57,7 @@
 .arr {
   display: block;
   width: 10px;
+  height: 20px;
   line-height: inherit;
   margin-left: calc(var(--xr) / 2);
   flex-shrink: 0;
