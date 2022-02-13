@@ -49,10 +49,12 @@ func ShowSession(c echo.Context) error {
 	db.First(&user_data, userId)
 
 	var cart sql.NullInt64
-	db.Debug().Model(&models.Order{}).
-		Joins("LEFT JOIN order_items ON order_items.order_id = orders.id").
-		Where(&models.Order{UserID: user_data.ID}, "user_id").Select("sum(order_items.quantity)").
-		Scan(&cart)
+	db.Debug().
+		Table("order_items oi").
+		Joins("INNER JOIN variants v ON v.id = oi.variant_id").
+		Joins("INNER JOIN orders o ON oi.order_id = o.id").
+		Where("o.user_id = ? AND v.state = ?", user_data.ID, 1).
+		Select("sum(oi.quantity)").Scan(&cart)
 
 	var wishlist int64
 	db.Debug().Model(&models.Wishlist{}).
