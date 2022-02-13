@@ -15,7 +15,7 @@ export const Menu: FC = observer(() => {
   const [section, setSection] = useState<string>()
 
   const nav = useMemo(() => {
-    return [...sessionData.categories, ...sessionData.themes]
+    return [...sessionData.categories, ...sessionData.themes].sort((a, b) => a.weight - b.weight)
   }, [sessionData.categories, sessionData.themes])
 
   return (
