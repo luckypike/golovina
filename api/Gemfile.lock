@@ -272,6 +272,7 @@ GEM
     msgpack (1.4.4)
     multi_json (1.15.0)
     multipart-post (2.1.1)
+    newrelic_rpm (8.4.0)
     nio4r (2.5.8)
     nokogiri (1.13.1-aarch64-linux)
       racc (~> 1.4)
@@ -499,6 +500,7 @@ DEPENDENCIES
   meta-tags
   mini_magick
   mjml-rails
+  newrelic_rpm
   pg (~> 1.0)
   puma (~> 5.5)
   pundit

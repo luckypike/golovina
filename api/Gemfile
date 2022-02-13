@@ -61,6 +61,7 @@ gem 'elasticsearch-rails'
 gem 'elasticsearch-ruby'
 
 gem 'bugsnag'
+gem 'newrelic_rpm'
 
 gem 'amazing_print'
 gem 'rails_semantic_logger'

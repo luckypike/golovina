@@ -1,0 +1,20 @@
+common: &default_settings
+  license_key: <%= ENV['NEW_RELIC_API_KEY'] %>
+  app_name: <%= ENV['NEW_RELIC_APP_NAME'] %>
+
+  distributed_tracing:
+    enabled: true
+
+  # Logging level for log/newrelic_agent.log
+  log_level: warn
+
+development:
+  <<: *default_settings
+  monitor_mode: false
+
+test:
+  <<: *default_settings
+  monitor_mode: false
+
+production:
+  <<: *default_settings
