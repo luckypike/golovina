@@ -31,6 +31,13 @@ export const Header: FC = observer(() => {
     }
   }, [scrolling])
 
+  const handleScrollUp = () =>  {
+    if (document) {
+      const top = Math.max(document.body.scrollTop, document.documentElement.scrollTop)
+      if (top > 0) window.scroll({ top: 0, left: 0, behavior: 'smooth' })
+    }
+  }
+
   return (
     <>
       <header className={cc([s.root, { [s.scrolling]: scrolling, [s.invert]: rootStore.headerInvert }])}>
@@ -55,6 +62,12 @@ export const Header: FC = observer(() => {
         className={cc([s.overlay, { [s.active]: layoutStore.activeNav }])}
         onClick={() => layoutStore.setActiveNav(false)}
       />
+
+      <div className={cc([s.top, { [s.scrolling]: scrolling }])} onClick={handleScrollUp}>
+        <svg viewBox="0 0 32 32">
+          <polyline points="10 19 16 13 22 19"/>
+        </svg>
+      </div>
     </>
   )
 })

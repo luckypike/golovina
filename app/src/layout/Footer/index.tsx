@@ -1,7 +1,9 @@
+import { useTranslations } from 'next-intl';
 import { FC, useEffect, useState } from 'react'
 import s from './index.module.css'
 
 export const Footer: FC = () => {
+  const t = useTranslations('Footer');
   const [scrolling, setScrolling] = useState(false)
 
   useEffect(() => {
@@ -20,13 +22,16 @@ export const Footer: FC = () => {
   }, [scrolling]);
 
   return (
-    <header className={s.root}>
+    <footer className={s.root}>
       <div className={s.left}>
+        {t('send')}
+        <br />
+        <a href="mailto:shop@golovinamari.com">shop@golovinamari.com</a>
       </div>
 
       <div className={s.right}>
-        &copy; 2017 — 2022 Мария Головина
+        &copy; 2017 — 2022 {t('copy')}
       </div>
-    </header>
+    </footer>
   )
 }

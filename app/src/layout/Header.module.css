@@ -60,20 +60,19 @@
   }
 }
 
-.scrolling {
+.root.scrolling {
   height: calc(var(--yr) * 12);
   backdrop-filter: blur(2px);
   background: rgba(var(--theme-bg-primary-color), 0.7);
 }
 
 @media (--s) {
-  .scrolling {
+  .root.scrolling {
     height: calc(var(--yr) * 16);
     background: none;
     backdrop-filter: none;
   }
 }
-
 
 .overlay {
   visibility: hidden;
@@ -92,4 +91,34 @@
   visibility: visible;
   opacity: 0.7;
   transition: opacity 0.3s;
+}
+
+.top {
+  position: fixed;
+  cursor: pointer;
+  width: calc(var(--yr) * 10);
+  height: calc(var(--yr) * 10);
+  margin-left: calc(var(--yr) * -5);
+  bottom: var(--yr-s);
+  left: 50%;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(50%);
+  transition: opacity 0.3s, visibility 0s ease 0.3s, transform 0.3s;
+}
+
+.top.scrolling {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.top svg {
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-miterlimit: 10;
+  stroke-linejoin: round;
 }

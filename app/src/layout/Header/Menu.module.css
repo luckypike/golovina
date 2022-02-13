@@ -31,6 +31,7 @@
 
 .section {
   margin-bottom: var(--yr);
+  line-height: calc(var(--yr) * 5);
 }
 
 .section a {
@@ -47,7 +48,7 @@
   width: 100%;
   cursor: pointer;
   font-size: calc(var(--yr) * 2.75);
-  line-height: var(--lh-base);
+  line-height: inherit;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   padding: calc(var(--yr) * 1.5) 0;
@@ -56,7 +57,7 @@
 .arr {
   display: block;
   width: 10px;
-  line-height: var(--lh-base);
+  line-height: inherit;
   margin-left: calc(var(--xr) / 2);
   flex-shrink: 0;
 }
@@ -75,7 +76,7 @@
 
 .subs {
   font-size: calc(var(--yr) * 2.5);
-  line-height: var(--lh-base);
+  line-height: inherit;
   text-transform: uppercase;
   letter-spacing: 0.2em;
 }

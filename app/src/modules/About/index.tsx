@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { useTranslations } from "next-intl";
+import Image from 'next/image'
 
+import wwImg from './whole-world.png'
 import s from './index.module.css'
 
 export const About: FC = () => {
@@ -23,8 +25,8 @@ export const About: FC = () => {
         <figcaption>{t('at')}</figcaption>
       </figure>
 
-      <div>
-        {/* <img className={styles.ww} src={WWImg} /> */}
+      <div className={s.ww}>
+        <Image src={wwImg} alt="THE WHOLE WORLD IN YOU" layout="responsive" />
       </div>
 
       <p>

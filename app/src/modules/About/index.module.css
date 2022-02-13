@@ -14,12 +14,6 @@
   }
 }
 
-/* @media (--m)  {
-  .root {
-    padding: 0 calc(var(--xr) * 2);
-  }
-} */
-
 .quote {
   margin: 0 0 calc(var(--yr) * var(--s2));
   text-align: right;
@@ -30,13 +24,14 @@
   margin: 0 0 calc(var(--yr) * var(--s1));
 }
 
-/* .ww {
-  display: block;
-  margin: 0 auto calc(var(--yr) * var(--s2));
+.ww {
+  /* display: block; */
+  margin: 0 auto var(--yr-s);
   max-width: 50%;
+}
 
-
-  @media (--s) {
+@media (--s) {
+  .ww {
     max-width: 35%;
   }
-} */
+}

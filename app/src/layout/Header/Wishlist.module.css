@@ -25,8 +25,8 @@
   right: calc(var(--yr) * 1);
   width: calc(var(--yr) * 4);
   height: calc(var(--yr) * 4);
-  line-height: var(--lh-at);
-  font-size: var(--fs-at);
+  line-height: var(--lh-mt);
+  font-size: var(--fs-mt);
   font-weight: 600;
   text-align: center;
   background-color: rgb(var(--theme-fg-primary-color));
