@@ -1,18 +1,20 @@
-import App, { AppContext, AppProps } from 'next/app'
 import React, { FC, useEffect, useState } from 'react'
+import App, { AppContext, AppProps } from 'next/app'
+import router from 'next/router'
+import Script from 'next/script'
 import axios, { AxiosRequestConfig } from 'axios'
 import { BugsnagPluginReactResult } from '@bugsnag/plugin-react'
 import { IntlMessages, NextIntlProvider } from 'next-intl'
 
 import { Header } from '../layout/Header'
 import { Footer } from '../layout/Footer'
+import { Metrics } from '../modules/Metrics'
 import { RootContext } from '../services/useRootContext'
 import { RootStore, SessionData } from '../services/stores/RootStore'
 import Bugsnag from '../lib/bugsnag'
 
 import 'normalize.css'
 import '../css/app.css'
-import router from 'next/router'
 
 const plugin = Bugsnag.getPlugin('react') as BugsnagPluginReactResult
 const ErrorBoundary = plugin.createErrorBoundary(React)
@@ -45,6 +47,7 @@ function AppPage({ Component, pageProps, sessionData, localeData }: AppProps & {
           </main>
 
           <Footer />
+          <Metrics />
         </NextIntlProvider>
       </RootContext.Provider>
     </ErrorBoundary>

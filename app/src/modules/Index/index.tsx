@@ -1,19 +1,21 @@
 import axios from "axios";
-import { observer } from "mobx-react-lite";
-import Link from "next/link";
-import { FC, useEffect, useState } from "react";
+import Head from "next/head";
+import { FC } from "react";
 import { defaultServerSideConfig } from "../../constants";
-import { IndexContext, useIndexContext } from "./context";
 import { IndexData } from "./models";
 import { Slides } from "./Slides";
-import { IndexStore } from "./store";
 
 import s from './index.module.css'
 import { Instagram } from "./Instagram";
 
+
 export const Index: FC = () => {
   return (
     <div className={s.root}>
+      <Head>
+        <meta name="facebook-domain-verification" content="gq1zcts3t1t3zp0vuyh34su8tqowbk" />
+      </Head>
+
       <div className={s.slides}>
         <Slides />
       </div>
