@@ -74,7 +74,7 @@ func ShowSession(c echo.Context) error {
 	var themes []nav_item
 	db.Debug().
 		Table("theme_translations tt").
-		Select("t.id, tt.title, t.weight").
+		Select("t.id, tt.title, t.weight, t.slug").
 		Joins("INNER JOIN themes t ON tt.theme_id = t.id").
 		Where("tt.locale = ? AND t.state = ?", locale, 1).
 		Order("t.weight asc").
