@@ -2,7 +2,7 @@
 
 module Api
   class ApplicationController < ActionController::API
-    include Pundit
+    include Pundit::Authorization
     include ApplicationExceptionHandler
 
     after_action :verify_authorized
