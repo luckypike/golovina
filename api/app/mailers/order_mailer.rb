@@ -14,8 +14,21 @@ class OrderMailer < ApplicationMailer
   end
 
   def payed
+    @season_color =
+      case Time.current.month
+      when 1..2, 12
+        '#53565a'
+      when 3..5
+        '#dfc2c3'
+      when 6..8
+        '#656635'
+      when 9..11
+        '#a9431e'
+      end
     @order = params[:order]
-    attachments.inline['golovina.png'] = File.read('app/javascript/images/golovina.png')
+    @fast = @order.russia? && @order.door? && @order.delivery_city.fast?
+    attachments.inline['logo-white.png'] = File.read('public/logo-white.png')
+    attachments.inline['logo-black.png'] = File.read('public/logo-black.png')
 
     mail(to: @order.user.email, subject: "Оплачен заказ № #{@order.number}")
   end
@@ -27,7 +40,8 @@ class OrderMailer < ApplicationMailer
 
   def tracker
     @order = params[:order]
-    attachments.inline['golovina.png'] = File.read('app/javascript/images/golovina.png')
+    attachments.inline['logo-white.png'] = File.read('public/logo-white.png')
+    attachments.inline['logo-black.png'] = File.read('public/logo-black.png')
 
     mail(to: @order.user.email, subject: "Трек номер для заказа № #{@order.number}")
   end

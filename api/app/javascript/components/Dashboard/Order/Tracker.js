@@ -59,7 +59,7 @@ export default function Tracker ({ order }) {
           {!values.tracker_type &&
             <div className={styles.type}>
               <button onClick={() => setValues({ ...values, tracker_type: 'cdek' })} className={buttons.main}>CDEK</button>
-              {/* <button onClick={() => setValues({ ...values, tracker_type: 'ems' })} className={buttons.main}>EMS</button> */}
+              <button onClick={() => setValues({ ...values, tracker_type: 'ems' })} className={buttons.main}>EMS</button>
               <button onClick={() => setValues({ ...values, tracker_type: 'ups' })} className={buttons.main}>UPS</button>
             </div>
           }

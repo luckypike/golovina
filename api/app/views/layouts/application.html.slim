@@ -13,6 +13,7 @@ html lang=I18n.locale
     = stylesheet_pack_tag 'app', media: :all
 
     = stylesheet_link_tag 'https://use.typekit.net/crp6yvg.css' unless Rails.env.test?
+    = render '/shared/h'
 
   body
     / = react_component 'Ad' unless cookies[:noad]

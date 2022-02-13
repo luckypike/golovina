@@ -19,6 +19,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   get :robots, to: 'pages#robots'
   get :contacts, to: 'pages#contacts'
+  get :about, to: 'pages#about'
   get :instagram, to: 'pages#instagram'
 
   get :wishlist, to: 'wishlists#show'
