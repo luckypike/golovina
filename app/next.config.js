@@ -20,17 +20,11 @@ module.exports = {
     localeDetection: false,
     domains: [
       {
-        domain: 'golovinamari.local', defaultLocale: 'ru',
+        domain: 'golovinamari.com', defaultLocale: 'ru',
       },
       {
-        domain: 'en.golovinamari.local', defaultLocale: 'en',
-      },
-      // {
-      //   domain: 'golovinamari.local', defaultLocale: 'fr',
-      // },
-      // {
-      //   domain: 'en.golovinamari.local', defaultLocale: 'en', locales: ['en'], http: true,
-      // }
+        domain: 'en.golovinamari.com', defaultLocale: 'en',
+      }
     ],
   },
   webpack(config) {
