@@ -15,6 +15,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         post :touch
       end
     end
+
+    get :status, to: 'status#index'
   end
 
   get :robots, to: 'pages#robots'
