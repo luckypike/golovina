@@ -7,6 +7,7 @@
   outline: none;
   box-shadow: inset 0 0 0 1px var(--sep_color);
   border: 0;
+  color: #000;
   background-color: white;
   line-height: inherit;
   padding: calc(var(--yr) * 1.5) var(--xr);
@@ -52,4 +53,10 @@
   background-color: var(--pr_color);
   color: #fff;
   box-shadow: none;
+
+  &:hover {
+    &:not(:disabled) {
+      background-color: var(--pr_color);
+    }
+  }
 }
