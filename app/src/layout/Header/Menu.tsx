@@ -65,6 +65,7 @@ export const Menu: FC = observer(() => {
           <div className={s.sub}><a href="/dashboard/catalog">Категории и товары</a></div>
           <div className={s.sub}><a href="/kits/control">Образы</a></div>
           <div className={s.sub}><a href="/colors">Цвета</a></div>
+          <div className={s.sub}><a href="/slides">Слайды</a></div>
           <div className={s.sub}><a href="/statistics">Статистика</a></div>
         </Section>
       }
