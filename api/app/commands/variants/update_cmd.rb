@@ -12,6 +12,7 @@ module Variants
 
       self.variant = update_variant(variant, params)
       process_variant(variant, category_prev_id)
+      process_images(variant)
     end
 
     private

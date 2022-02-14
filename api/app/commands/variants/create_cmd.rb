@@ -10,6 +10,7 @@ module Variants
 
       self.variant = create_variant(params)
       process_variant(variant)
+      process_images(variant)
     end
 
     private

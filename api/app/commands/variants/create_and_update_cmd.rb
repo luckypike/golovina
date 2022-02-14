@@ -9,6 +9,12 @@ module Variants
       VariantProcessJob.perform_later(variant: variant)
     end
 
+    def process_images(variant)
+      Api::Image.where(imagable_type: 'Variant', imagable_id: variant.id).each do |image|
+        ImageProcessJob.perform_later(image: image)
+      end
+    end
+
     def validate_and_save(variant)
       validate_entity!(variant)
       variant.save!
@@ -23,8 +29,6 @@ module Variants
         image.imagable_id = variant.id
         validate_entity!(image)
         image.save!
-
-        ImageProcessJob.perform_later(image: image)
       end
     end
   end
