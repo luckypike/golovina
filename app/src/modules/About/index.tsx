@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useTranslations } from "next-intl";
 import Image from 'next/image'
+import Head from "next/head";
 
 import wwImg from './whole-world.png'
 import s from './index.module.css'
@@ -10,6 +11,10 @@ export const About: FC = () => {
 
   return (
     <div className={s.root}>
+      <Head>
+        <title>{t('title')}</title>
+      </Head>
+
       <p>
         {t('p1')}
       </p>

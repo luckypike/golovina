@@ -1,0 +1,89 @@
+.root {
+  margin: 0 var(--xr);
+}
+
+@media (--m)  {
+  .root {
+    margin: 0 calc(var(--xr) * 2);
+  }
+}
+
+@media (--l) {
+  .root {
+    margin: 0 calc(3 / 16 * 100%);
+  }
+}
+
+.title {
+  text-align: center;
+  margin: 0 0 var(--yr-s);
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.name {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin: 0 0 var(--yr-xs);
+}
+
+.studio {
+  margin: 0 0 var(--yr-m);
+}
+
+.map {
+  margin: var(--yr-s) 0 0;
+}
+
+.way {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.insta {
+  margin: var(--yr-xl) 0 0;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  text-align: center;
+}
+
+.instagram {
+  font-size: calc(var(--yr) * 4);
+  line-height: calc(var(--yr) * 6);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 var(--yr-xs);
+}
+
+@media(--s) {
+  .insta {
+    margin: calc(var(--yr-xl) * 2) 0 0;
+  }
+
+  .instagram {
+    font-size: calc(var(--yr) * 5.5);
+    line-height: calc(var(--yr) * 8);
+  }
+}
+
+@media(--s) {
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: calc(1 / 10 * 100%);
+    align-items: center;
+  }
+
+  .studio {
+    margin: 0;
+    order: 1;
+  }
+
+  .text {
+    text-align: right;
+  }
+}

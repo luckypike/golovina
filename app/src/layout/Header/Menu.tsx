@@ -39,7 +39,7 @@ export const Menu: FC = observer(() => {
       <Section setSection={setSection} section={section} name="about" duration={400}>
         <div className={s.sub}><Link href="/about">{t('about.phil')}</Link></div>
         <div className={s.sub}><a href="/collections">{t('about.collections')}</a></div>
-        <div className={s.sub}><a href="/contacts">{t('about.contacts')}</a></div>
+        <div className={s.sub}><Link href="/contacts">{t('about.contacts')}</Link></div>
       </Section>
 
       <Section setSection={setSection} section={section} name="service" duration={350}>
