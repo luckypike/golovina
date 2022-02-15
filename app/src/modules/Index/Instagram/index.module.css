@@ -23,7 +23,8 @@
 
 .items {
   display: grid;
-  grid-gap: calc(var(--yr) * 2);
+  grid-gap: 1px;
+  /* grid-gap: calc(var(--yr) * 2); */
   grid-template-columns: 1fr 1fr 1fr;
 }
 
@@ -44,7 +45,8 @@
   background: color-mod(#000 a(0.3));
   display: block;
   content: '';
-  padding-top: calc(1800 / 1440 * 100%);
+  padding: 100% 0 0;
+  /* padding-top: calc(1800 / 1440 * 100%); */
 }
 
 
