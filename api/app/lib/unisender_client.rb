@@ -16,8 +16,7 @@ class UnisenderClient
     delegate :client, to: :instance
 
     def subscribe(params)
-      response = client.get('/ru/api/subscribe', **params)
-      pp response.body
+      client.get('/ru/api/subscribe', **params)
     end
   end
 end

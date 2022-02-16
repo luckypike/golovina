@@ -5,6 +5,11 @@ RSpec.describe Subscriptions::ProcessCmd, :aggregate_failures do
   let(:subscription) { create(:subscription) }
 
   describe '#call' do
+    before do
+      stub_request(:get, "https://api.unisender.com/ru/api/subscribe")
+        .with(query: hash_including({}))
+    end
+
     it do
       subject
 
