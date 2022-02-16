@@ -5,9 +5,10 @@ RSpec.describe Subscriptions::CreateCmd, :aggregate_failures do
 
   describe '#call' do
     context 'with valid params' do
+      let(:email) { 'user@example.com' }
       let(:params) do
         {
-          email: 'user@example.com',
+          email: "#{email.upcase} ",
           first_name: 'Beth',
           last_name: 'Smith',
           date_of_birth: Time.current.to_date
@@ -17,7 +18,7 @@ RSpec.describe Subscriptions::CreateCmd, :aggregate_failures do
       it do
         should be_success
 
-        expected_subscription = Subscription.find_by!(email: params[:email])
+        expected_subscription = Subscription.find_by!(email: email)
         expect(expected_subscription.first_name).to eq(params[:first_name])
         expect(expected_subscription.last_name).to eq(params[:last_name])
         expect(expected_subscription.date_of_birth).to eq(params[:date_of_birth])
@@ -25,6 +26,14 @@ RSpec.describe Subscriptions::CreateCmd, :aggregate_failures do
 
       it { expect { subject }.to change { Subscription.all.size }.by(1) }
       it { expect { subject }.to have_enqueued_job(SubscriptionProcessJob) }
+
+      context 'when user already exists' do
+        before do
+          create(:subscription, email: 'user@example.com')
+        end
+
+        it { expect { subject }.to raise_error(ServiceActor::Failure) }
+      end
     end
   end
 end

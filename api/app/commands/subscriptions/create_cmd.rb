@@ -3,7 +3,6 @@
 module Subscriptions
   class CreateCmd < ApplicationCmd
     input :subscription_params
-          :subsсription_params
 
     def call
       params = validate_contract!(CreateContract, subscription_params)

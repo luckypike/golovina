@@ -8,7 +8,10 @@ class ApplicationContract < Dry::Validation::Contract
   EMAIL_REGEX = /\A[^@,\s]+@[^@,\s]+\.[^@,\s]+\z/.freeze
 
   TypeContainer = Dry::Schema::TypeContainer.new
-  TypeContainer.register('params.email', Dry::Types['strict.string'].constrained(format: EMAIL_REGEX))
+  TypeContainer.register(
+    'params.email',
+    Dry::Types['strict.string'].constrained(format: EMAIL_REGEX).constructor { |str| str.downcase.squish }
+  )
 
   config.messages.top_namespace = 'contracts'
   config.messages.default_locale = I18n.default_locale
