@@ -19,7 +19,8 @@
     "account": "Account",
     "admin": {
       "title": "Admin"
-    }
+    },
+    "subscribe": "Скидка 10% за подписку на рассылку"
   },
   "Footer": {
     "send": "Send us an email",
@@ -43,5 +44,13 @@
     "email": "Online shop",
     "map": "Map",
     "follow": "Follow us on Instagram"
+  },
+  "Subscribe": {
+    "title": "Subscribe",
+    "email": "E-mail",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "date_of_birth": "Date of birth",
+    "subscribe": "Subscribe"
   }
 }

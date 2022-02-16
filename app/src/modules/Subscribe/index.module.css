@@ -1,0 +1,15 @@
+.root {
+  margin: 0 var(--xr);
+}
+
+@media (--m)  {
+  .root {
+    margin: 0 calc(var(--xr) * 2);
+  }
+}
+
+@media (--l) {
+  .root {
+    margin: 0 calc(3 / 16 * 100%);
+  }
+}
