@@ -6,6 +6,10 @@ ru:
       date?: только дата
       int?: только числа
 
+      format?:
+        value:
+          email: только email
+
       variant:
         price_empty?: не указана начальная
         price_last_gt?: должна быть меньше чем начальная
