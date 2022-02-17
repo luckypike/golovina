@@ -25,6 +25,8 @@
   --theme-fg-primary-color: 20, 20, 20;
   --theme-fg-hint-color: 120, 120, 120;
   --theme-sp-color: 222, 222, 222;
+
+  --theme-bg-primary-color-hover: 245, 245, 245;
 }
 
 @media (--s) {
@@ -49,8 +51,10 @@
     --theme-bg-primary-color: 32, 33, 36;
     --theme-bg-secondary-color: 39, 40, 43;
     --theme-fg-primary-color: 225, 224, 224;
+    --theme-fg-hint-color: 120, 120, 120;
     --theme-sp-color: 66, 66, 66;
 
+    --theme-bg-primary-color-hover: 42, 42, 42;
   }
 }
 

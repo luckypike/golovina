@@ -20,7 +20,7 @@
     "admin": {
       "title": "Admin"
     },
-    "subscribe": "Скидка 5% за подписку на рассылку"
+    "subscribe": "5% discount for newsletter subscription"
   },
   "Footer": {
     "send": "Send us an email",
@@ -52,6 +52,7 @@
     "first_name": "First name",
     "last_name": "Last name",
     "date_of_birth": "Date of birth",
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "submitted": "Thanks for subscribing"
   }
 }

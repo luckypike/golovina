@@ -52,7 +52,8 @@
     "first_name": "Имя",
     "last_name": "Фамилия",
     "date_of_birth": "Дата рождения",
-    "subscribe": "Подписаться"
+    "subscribe": "Подписаться",
+    "submitted": "Спасибо за подписку"
   }
 }
 

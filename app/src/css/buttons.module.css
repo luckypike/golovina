@@ -1,0 +1,25 @@
+.main {
+  appearance: none;
+  display: inline-block;
+  width: auto;
+  margin: 0;
+  border: 0;
+  padding: var(--yr-xs) var(--xr);
+  font-size: var(--fs-at);
+  line-height: 1.75rem;
+  outline: none;
+  font-family: inherit;
+  font-weight: 400;
+  background: rgb(var(--theme-bg-primary-color));
+  color: rgb(var(--theme-fg-primary-color));
+  box-shadow: inset 0 0 0 1px rgb(var(--theme-sp-color));
+  transition: background-color 0.3s;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+}
+
+.main:hover {
+  background: rgb(var(--theme-bg-primary-color-hover));
+}
