@@ -109,15 +109,9 @@ export default function Header (props) {
       </div>
 
       <div className={styles.logo}>
-        {!index &&
-          <a href={path('root_path')}>
-            <Logo />
-          </a>
-        }
-
-        {index &&
+        <a href={path('root_path')}>
           <Logo />
-        }
+        </a>
       </div>
 
       <div className={styles.caw}>

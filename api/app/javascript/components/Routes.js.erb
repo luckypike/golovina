@@ -6,6 +6,7 @@ import { generatePath } from 'react-router'
 import querystring from 'querystring'
 
 const Routes = <%= Rails.application.routes.routes.reject{ |route| ['rails/info', 'rails/mailers', nil].include?(route.defaults[:controller])}.select(&:name).map{ |route| ["#{route.name}_path", route.path.spec.to_s.gsub('(.:format)', '.:format?').gsub(/\((\/:.+)\)/, '\1?')] }.to_h.to_json %>
+Routes['root_path'] = "/"
 
 const path = (route, params = {}, json = false) => {
   const { hash, query, ...attr } = params

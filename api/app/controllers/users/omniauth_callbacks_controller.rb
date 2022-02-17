@@ -38,7 +38,7 @@ module Users
     end
 
     def failure
-      redirect_to root_path
+      redirect_to '/'
     end
   end
 end

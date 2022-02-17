@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
-  root 'pages#index'
-
   namespace :api, defaults: { format: :json }, format: false do
     namespace :pages do
       get :index
@@ -22,12 +20,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   end
 
   get :robots, to: 'pages#robots'
-  get :contacts, to: 'pages#contacts'
-  get :about, to: 'pages#about'
-  get :instagram, to: 'pages#instagram'
-
   get :wishlist, to: 'wishlists#show'
-
   get :search, to: 'search#index'
 
   resources :variants, except: [:show] do
@@ -48,8 +41,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   resources :categories, except: [:show]
 
   resources :themes, except: [:show]
-
-  get '/catalog/morning', to: redirect('/catalog')
 
   scope path: :catalog, as: :catalog do
     get '', to: 'variants#all'
@@ -183,12 +174,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   resources :posts
 
   resources :statistics
-
-  resources :promos do
-    collection do
-      get :last
-    end
-  end
 
   resources :refunds do
     member do

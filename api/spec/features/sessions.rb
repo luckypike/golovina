@@ -11,7 +11,7 @@ feature 'Signing in' do
     click_button 'Войти'
     wait_for_ajax
 
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq('/')
   end
 
   scenario 'with wrong credentials', :js do
@@ -35,7 +35,7 @@ feature 'Signing in' do
     click_button 'Подтвердить телефон'
     wait_for_ajax
 
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq('/')
   end
 
   scenario 'with phone with wrong code', :js do

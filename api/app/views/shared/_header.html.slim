@@ -2,7 +2,7 @@
   'Header',
   { \
     nav: NavSerializer.new(@nav.sort_by(&:weight)).serializable_hash,
-    index: current_page?(root_path),
+    index: false,
     user: UserSerializer.new(current_user).serializable_hash,
     wishlist: Wishlist.joins(:variant).where(user: current_user, variants: { state: :active }).size,
     cart: current_user&.orders&.cart&.first&.quantity \
