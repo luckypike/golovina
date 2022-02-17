@@ -1,15 +1,31 @@
 .root {
-  margin: 0 var(--xr);
+  background: rgb(var(--theme-bg-secondary-color));
+  flex-grow: 1;
+  padding: var(--yr-xl) var(--xr);
 }
 
 @media (--m)  {
   .root {
-    margin: 0 calc(var(--xr) * 2);
+    padding: var(--yr-xl) calc(var(--xr) * 2);
   }
 }
 
 @media (--l) {
   .root {
-    margin: 0 calc(3 / 16 * 100%);
+    padding: var(--yr-xl) calc(3 / 16 * 100%);
   }
 }
+
+@media (--s)  {
+  .main {
+    margin: 0 calc(3 / 12 * 100%);
+  }
+}
+
+.desc {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  margin: 0 0 var(--yr-l);
+  text-align: center;
+}
+

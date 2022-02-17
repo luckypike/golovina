@@ -1,12 +1,14 @@
 import { FC } from "react";
 import { useTranslations } from "next-intl";
 import Head from "next/head";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, Controller } from "react-hook-form";
 
 import s from './index.module.css'
 import sf from '../../layout/form.module.css'
 import { entries } from "../../models";
 import axios from "axios";
+import Cleave from 'cleave.js/react';
+import { useRouter } from "next/router";
 
 type Values = {
   email: string
@@ -16,18 +18,19 @@ type Values = {
 }
 
 export const Subscribe: FC = () => {
+  const { locale } = useRouter()
+
   const {
     register,
     handleSubmit,
     setValue,
+    control,
     setError,
     formState: { errors },
   } = useForm<Values>()
   const t = useTranslations('Subscribe');
 
   const onSubmit: SubmitHandler<Values> = async (data) => {
-    console.log(data)
-
     try {
       await axios.post('/subscriptions', data)
     } catch ({ response: { data: { errors: errorsData } } }) {
@@ -45,6 +48,10 @@ export const Subscribe: FC = () => {
 
 
       <div className={s.main}>
+        <div className={s.desc}>
+          {t('desc')}
+        </div>
+
         <form onSubmit={handleSubmit(onSubmit)} className={sf.root} noValidate>
           <div className={sf.el}>
             <label className={sf.it}>
@@ -76,7 +83,11 @@ export const Subscribe: FC = () => {
           <div className={sf.el}>
             <label className={sf.it}>
               <div className={sf.lb}>{t('date_of_birth')}</div>
-              <input className={sf.in} type="date" {...register('date_of_birth')} />
+              <Controller
+                control={control}
+                name="date_of_birth"
+                render={({ field }) => <Cleave placeholder={locale === "ru" ? "дд.мм.гггг" : "mm/dd/yyyy"} className={sf.in} {...field} options={{ date: true, delimiter: (locale === "ru" ? '.' : '/' ),datePattern: (locale === "ru" ? ['d', 'm', 'Y'] : ['m', 'd', 'Y']) }} />}
+              />
             </label>
 
             {errors.date_of_birth && <div className={sf.er}>{errors.date_of_birth.message}</div>}

@@ -6,6 +6,8 @@
   --lh-base: calc(var(--yr) * 5);
   --fs-h1: calc(var(--yr) * 4);
   --lh-h1: calc(var(--yr) * 7);
+  --fs-h2: calc(var(--yr) * 3.5);
+  --lh-h2: calc(var(--yr) * 6);
   --fs-at: calc(var(--yr) * 2.5);
   --lh-at: calc(var(--yr) * 4);
   --fs-mt: calc(var(--yr) * 2.5);
@@ -31,6 +33,8 @@
     --lh-base: calc(var(--yr) * 7);
     --fs-h1: calc(var(--yr) * 6);
     --lh-h1: calc(var(--yr) * 8);
+    --fs-h2: calc(var(--yr) * 5);
+    --lh-h2: calc(var(--yr) * 7);
     --fs-at: calc(var(--yr) * 3);
     --lh-at: calc(var(--yr) * 5);
 
