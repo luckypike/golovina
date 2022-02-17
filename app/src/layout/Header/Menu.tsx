@@ -69,6 +69,10 @@ export const Menu: FC = observer(() => {
           <div className={s.sub}><a href="/statistics">Статистика</a></div>
         </Section>
       }
+
+      {/* <div className={cc(s.subscribe)}>
+        <Link href="/subscribe">{t('subscribe')}</Link>
+      </div> */}
     </div>
   )
 })

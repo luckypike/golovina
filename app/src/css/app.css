@@ -6,6 +6,8 @@
   --lh-base: calc(var(--yr) * 5);
   --fs-h1: calc(var(--yr) * 4);
   --lh-h1: calc(var(--yr) * 7);
+  --fs-h2: calc(var(--yr) * 3.5);
+  --lh-h2: calc(var(--yr) * 6);
   --fs-at: calc(var(--yr) * 2.5);
   --lh-at: calc(var(--yr) * 4);
   --fs-mt: calc(var(--yr) * 2.5);
@@ -23,6 +25,8 @@
   --theme-fg-primary-color: 20, 20, 20;
   --theme-fg-hint-color: 120, 120, 120;
   --theme-sp-color: 222, 222, 222;
+
+  --theme-bg-primary-color-hover: 245, 245, 245;
 }
 
 @media (--s) {
@@ -31,6 +35,8 @@
     --lh-base: calc(var(--yr) * 7);
     --fs-h1: calc(var(--yr) * 6);
     --lh-h1: calc(var(--yr) * 8);
+    --fs-h2: calc(var(--yr) * 5);
+    --lh-h2: calc(var(--yr) * 7);
     --fs-at: calc(var(--yr) * 3);
     --lh-at: calc(var(--yr) * 5);
 
@@ -45,8 +51,10 @@
     --theme-bg-primary-color: 32, 33, 36;
     --theme-bg-secondary-color: 39, 40, 43;
     --theme-fg-primary-color: 225, 224, 224;
+    --theme-fg-hint-color: 120, 120, 120;
     --theme-sp-color: 66, 66, 66;
 
+    --theme-bg-primary-color-hover: 42, 42, 42;
   }
 }
 

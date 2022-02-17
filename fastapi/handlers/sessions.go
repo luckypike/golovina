@@ -51,9 +51,8 @@ func ShowSession(c echo.Context) error {
 	var cart sql.NullInt64
 	db.Debug().
 		Table("order_items oi").
-		Joins("INNER JOIN variants v ON v.id = oi.variant_id").
-		Joins("INNER JOIN orders o ON oi.order_id = o.id").
-		Where("o.user_id = ? AND v.state = ?", user_data.ID, 1).
+		Joins("INNER JOIN orders o ON oi.order_id = o.id AND o.state = ? AND o.user_id = ?", 0, user_data.ID).
+		Joins("INNER JOIN variants v ON v.id = oi.variant_id AND v.state = ?", 1).
 		Select("sum(oi.quantity)").Scan(&cart)
 
 	var wishlist int64

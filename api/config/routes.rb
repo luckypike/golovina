@@ -16,6 +16,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       end
     end
 
+    resources :subscriptions, only: %i[create]
+
     get :status, to: 'status#index'
   end
 

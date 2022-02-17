@@ -1,8 +1,10 @@
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react'
 import s from './index.module.css'
 
 export const Footer: FC = () => {
+  const { pathname } = useRouter()
   const t = useTranslations('Footer');
   const [scrolling, setScrolling] = useState(false)
 
@@ -20,6 +22,8 @@ export const Footer: FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrolling]);
+
+  if (pathname === '/subscribe') return null
 
   return (
     <footer className={s.root}>

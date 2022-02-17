@@ -12,6 +12,7 @@
     "@bugsnag/plugin-react": "^7.16.1",
     "axios": "^0.25.0",
     "classcat": "^5.0.3",
+    "cleave.js": "^1.6.0",
     "mobx": "^6.3.13",
     "mobx-react-lite": "^3.2.3",
     "next": "12.0.10",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^6.2.1",
+    "@types/cleave.js": "^1.4.6",
     "@types/node": "17.0.17",
     "@types/react": "17.0.39",
     "@types/spark-md5": "^3.0.2",

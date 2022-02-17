@@ -111,3 +111,15 @@
     position: absolute;
   }
 }
+
+.subscribe {
+  margin-top: var(--yr-xl);
+  font-size: calc(var(--yr) * 2.5);
+  line-height: calc(var(--yr) * 5);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.subscribe a {
+  text-decoration: none;
+}
