@@ -23,7 +23,7 @@ export const Footer: FC = () => {
     };
   }, [scrolling]);
 
-  if (pathname === '/subscribe') return null
+  if (['/subscribe', '/cart'].includes(pathname)) return null
 
   return (
     <footer className={s.root}>

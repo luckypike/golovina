@@ -1,0 +1,17 @@
+.root {
+  background: rgb(var(--theme-bg-secondary-color));
+  flex-grow: 1;
+  padding: var(--yr-xl) var(--xr);
+}
+
+@media (--m)  {
+  .root {
+    padding: var(--yr-xl) calc(var(--xr) * 2);
+  }
+}
+
+@media (--l) {
+  .root {
+    padding: var(--yr-xl) calc(3 / 16 * 100%);
+  }
+}

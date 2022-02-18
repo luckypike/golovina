@@ -15,6 +15,10 @@ FactoryBot.define do
       editor { true }
     end
 
+    trait :guest do
+      state { :guest }
+    end
+
     factory :guest_user do
       email { User.guest_email }
       state { :guest }

@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+{
+  order: @cmd.order.slice(:id),
+  order_items: @cmd.order_items.map do |item|
+    {
+      id: item.id,
+      quantity: item.quantity,
+      size: item.size.slice(:id, :title),
+      variant: {
+        title: item.variant.title,
+        price: item.variant.price,
+        price_last: item.variant.price_last,
+        color: item.variant.color.slice(:id, :title),
+      }
+    }
+  end
+}

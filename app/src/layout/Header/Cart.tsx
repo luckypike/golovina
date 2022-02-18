@@ -1,7 +1,9 @@
-import { observer } from 'mobx-react-lite'
 import { FC } from 'react'
-import { useRootContext } from '../../services/useRootContext'
+import Link from 'next/link'
+import { observer } from 'mobx-react-lite'
 import cc from 'classcat'
+
+import { useRootContext } from '../../services/useRootContext'
 
 import s from './Cart.module.css'
 
@@ -17,11 +19,12 @@ export const Cart: FC = observer(() => {
     <>
       {cart > 0 &&
         (
-          <a href="/cart" className={s.root}>
-            <Icon />
-
-            <div className={s.counter}>{cart > 9 ? '9+' : cart}</div>
-          </a>
+          <Link href="/cart">
+            <a className={s.root}>
+              <Icon />
+              <div className={s.counter}>{cart > 9 ? '9+' : cart}</div>
+            </a>
+          </Link>
         )
       }
 

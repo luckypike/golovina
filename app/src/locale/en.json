@@ -54,5 +54,8 @@
     "date_of_birth": "Date of birth",
     "subscribe": "Subscribe",
     "submitted": "Thanks for subscribing"
+  },
+  "Cart": {
+    "title": "Cart"
   }
 }
