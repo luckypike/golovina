@@ -27,6 +27,7 @@
   --theme-sp-color: 222, 222, 222;
 
   --theme-bg-primary-color-hover: 245, 245, 245;
+  --red-color: 204, 12, 47;
 }
 
 @media (--s) {
@@ -112,4 +113,11 @@ h1 {
   font-weight: inherit;
   font-size: var(--fs-h1);
   line-height: var(--lh-h1);
+}
+
+h2 {
+  margin: 0;
+  font-weight: inherit;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
 }

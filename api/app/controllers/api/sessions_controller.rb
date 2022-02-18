@@ -3,7 +3,7 @@
 module Api
   class SessionsController < Api::ApplicationController
     def show
-      authorize :session
+      authorize %i[api session]
     end
   end
 end

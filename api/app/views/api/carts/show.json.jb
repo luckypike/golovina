@@ -1,17 +1,32 @@
 # frozen_string_literal: true
 
+order = @cmd.order
+
 {
-  order: @cmd.order.slice(:id),
+  order: order && {
+    id: order.id,
+    promo_code: order.promo_code && {
+      id: order.promo_code.id
+    },
+    price_final: order.price_final.to_f,
+    price: order.price.to_f
+  },
   order_items: @cmd.order_items.map do |item|
+    # TODO: remove this
+    image = Api::Image.where(imagable_type: 'Variant', imagable_id: item.variant_id).active_and_ordered.first
     {
       id: item.id,
       quantity: item.quantity,
+      price: item.price.to_f,
+      price_final: item.price_final.to_f,
       size: item.size.slice(:id, :title),
       variant: {
         title: item.variant.title,
-        price: item.variant.price,
-        price_last: item.variant.price_last,
         color: item.variant.color.slice(:id, :title),
+        image: {
+          id: image.id,
+          src: image.thumb_url
+        }
       }
     }
   end

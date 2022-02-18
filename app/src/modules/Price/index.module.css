@@ -1,0 +1,13 @@
+.final, .price {
+  display: inline-block;
+}
+
+.price {
+  margin: 0 0 0 calc(var(--yr) * 3);
+  color: rgb(var(--theme-fg-hint-color));
+  text-decoration: line-through;
+}
+
+.final.discount {
+  color: rgb(var(--red-color));
+}

@@ -15,9 +15,9 @@ module Api
 
     private
 
-    def authorize(record, query = nil)
-      super([:api, record], query)
-    end
+    # def authorize(record, query = nil)
+    #   super([:api, record], query)
+    # end
 
     def current_user
       # TODO: remove this

@@ -1,0 +1,9 @@
+.root {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.input {
+  padding-right: var(--yr);
+  flex: 1;
+}

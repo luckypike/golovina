@@ -56,6 +56,14 @@
     "submitted": "Thanks for subscribing"
   },
   "Cart": {
-    "title": "Cart"
+    "title": "Cart",
+    "color": "Color",
+    "size": "Size",
+    "qnt": "Quantity"
+  },
+  "PromoCode": {
+    "placeholder": "Promo code",
+    "apply": "Apply",
+    "error": "Promo code not found"
   }
 }

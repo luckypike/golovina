@@ -7,8 +7,16 @@ module Carts
     output :order_items
 
     def call
-      self.order = user.orders.cart.first
-      self.order_items = order.order_items.joins(:variant)
+      self.order = user.orders.state_cart.first
+      self.order_items = find_order_items(order)
+    end
+
+    private
+
+    def find_order_items(order)
+      return [] unless order
+
+      order.order_items.joins(:variant)
         .includes(:size, variant: [:translations, { color: :translations }])
         .where(variants: { state: :active })
     end

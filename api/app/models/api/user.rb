@@ -2,6 +2,6 @@
 
 module Api
   class User < ApplicationRecord
-    has_many :orders
+    has_many :orders, dependent: :restrict_with_exception
   end
 end

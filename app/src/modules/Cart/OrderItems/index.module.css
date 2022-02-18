@@ -1,0 +1,15 @@
+.item {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  grid-gap: var(--xr);
+  margin-bottom: var(--yr-m);
+}
+
+.title {
+  font-weight: 600;
+}
+
+.image img {
+  display: block;
+  max-width: 6rem;
+}

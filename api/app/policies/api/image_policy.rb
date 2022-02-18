@@ -7,7 +7,7 @@ module Api
     end
 
     def update?
-      user&.is_editor?
+      user&.editor?
     end
 
     def touch?

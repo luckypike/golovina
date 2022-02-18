@@ -12,8 +12,12 @@ module ApplicationExceptionHandler
       render json: { errors: e.message }, status: :unauthorized
     end
 
-    rescue_from I18n::InvalidLocale do |e|
+    rescue_from I18n::InvalidLocale do
       head :bad_request
+    end
+
+    rescue_from ActiveRecord::RecordNotFound do
+      head :not_found
     end
   end
 end
