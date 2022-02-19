@@ -9,6 +9,7 @@ export interface OrderData {
   price_final: number
   promo_code?: {
     id: number
+    title: string
   }
 }
 

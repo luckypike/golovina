@@ -9,11 +9,11 @@ module Api
     belongs_to :promo_code, optional: true
 
     def price
-      order_items.sum(&:price)
+      order_items.joins(:variant).where(variants: { state: :active }).sum(&:price)
     end
 
     def price_final
-      temp = order_items.sum(&:price_final)
+      temp = order_items.joins(:variant).where(variants: { state: :active }).sum(&:price_final)
       temp = promo_code.apply(temp) if promo_code
       temp
     end

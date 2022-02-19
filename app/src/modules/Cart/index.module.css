@@ -20,3 +20,19 @@
   text-align: center;
   margin: 0 0 var(--yr-s);
 }
+
+.order_items {
+  margin: 0 0 var(--yr-xl);
+}
+
+.summary, .promo_code {
+  margin: 0 0 var(--yr-m);
+}
+
+@media (--s) {
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: calc(var(--xr) * 2);
+  }
+}

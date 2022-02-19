@@ -6,7 +6,8 @@ order = @cmd.order
   order: order && {
     id: order.id,
     promo_code: order.promo_code && {
-      id: order.promo_code.id
+      id: order.promo_code.id,
+      title: order.promo_code.title
     },
     price_final: order.price_final.to_f,
     price: order.price.to_f

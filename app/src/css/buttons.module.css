@@ -24,3 +24,7 @@
 .main:hover {
   background: rgb(var(--theme-bg-primary-color-hover));
 }
+
+.s {
+  padding: var(--yr) var(--xr);
+}

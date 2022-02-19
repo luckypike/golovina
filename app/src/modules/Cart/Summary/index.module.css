@@ -1,0 +1,16 @@
+.title {
+  margin: 0 0 var(--yr-s);
+}
+
+.dl {
+  margin: 0 0 var(--yr-xs);
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+}
+
+.dt {
+  font-weight: 600;
+  padding-right: var(--xr);
+}
+
+

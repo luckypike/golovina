@@ -59,11 +59,29 @@
     "title": "Cart",
     "color": "Color",
     "size": "Size",
-    "qnt": "Quantity"
+    "qnt": "Quantity",
+    "summary": {
+      "title": "Order information",
+      "order_items": "Products cost",
+      "delivery": {
+        "russia": {
+          "title": "Delivery across Russia",
+          "value": "from 265 ₽"
+        },
+        "international": {
+          "title": "International shipping",
+          "value": "2800 ₽"
+        }
+      }
+    },
+    "checkout": "Place order"
   },
   "PromoCode": {
-    "placeholder": "Promo code",
+    "title": "Promo code",
     "apply": "Apply",
+    "applied": "Promo code applied",
+    "delete": "Remove",
+    "placeholder": "Promo code",
     "error": "Promo code not found"
   }
 }

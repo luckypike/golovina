@@ -1,9 +1,36 @@
 .root {
   display: flex;
   flex-wrap: nowrap;
+  max-width: 18rem;
+}
+
+.title {
+  margin: 0 0 var(--yr-s);
 }
 
 .input {
   padding-right: var(--yr);
   flex: 1;
+}
+
+.applied {
+  display: flex;
+}
+
+.remove {
+  margin: 0 0 0 auto;
+}
+
+.button {
+  cursor: pointer;
+  display: block;
+  appearance: none;
+  background: none;
+  border: 0;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  text-decoration: underline;
 }

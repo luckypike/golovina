@@ -70,3 +70,8 @@ select.in:invalid {
 .checkbox > *:first-child {
   margin-right: var(--yr);
 }
+
+
+.s {
+  padding: var(--yr) var(--xr);
+}

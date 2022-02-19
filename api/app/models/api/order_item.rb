@@ -5,6 +5,12 @@ module Api
     belongs_to :size
     belongs_to :variant
 
-    delegate :price, :price_final, to: :variant
+    def price
+      variant.price * quantity
+    end
+
+    def price_final
+      variant.price_final * quantity
+    end
   end
 end

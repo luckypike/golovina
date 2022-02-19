@@ -11,11 +11,12 @@ import { PromoCode } from "./PromoCode";
 import { Summary } from "./Summary";
 
 import s from './index.module.css'
+import sb from '../../css/buttons.module.css'
 
 export const Cart: FC = observer(() => {
   const t = useTranslations('Cart');
   const store = useCartContext()
-  const { order } = store
+  const { order, reload } = store
 
   useEffect(() => {
     const _fetch = async () => {
@@ -23,8 +24,11 @@ export const Cart: FC = observer(() => {
       store.setData(data)
     }
 
-    _fetch()
-  }, [store])
+    if (reload) {
+      _fetch()
+    }
+
+  }, [store, reload])
 
   return (
     <div className={s.root}>
@@ -37,20 +41,24 @@ export const Cart: FC = observer(() => {
       </div>
 
       <div className={s.main}>
-        <div>
+        <div className={s.order_items}>
           <OrderItems />
         </div>
 
         {order &&
-          <>
-            <div>
+          <div className={s.aside}>
+            <div className={s.promo_code}>
+              <PromoCode />
+            </div>
+
+            <div className={s.summary}>
               <Summary />
             </div>
 
             <div>
-              <PromoCode />
+              <button className={sb.main} type="button">{t('checkout')}</button>
             </div>
-          </>
+          </div>
         }
       </div>
     </div>

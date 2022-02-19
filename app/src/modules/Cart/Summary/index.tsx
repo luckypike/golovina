@@ -15,11 +15,21 @@ export const Summary: FC = observer(() => {
 
   return (
     <div>
-      <h2>{t('summary')}</h2>
+      <h2 className={s.title}>{t('summary.title')}</h2>
 
-      <div>
-        <div></div>
-        <div><Price price={order.price} priceFinal={order.price_final} /></div>
+      <div className={s.dl}>
+        <div className={s.dt}>{t('summary.order_items')}</div>
+        <div className={s.dd}><Price price={order.price} priceFinal={order.price_final} /></div>
+      </div>
+
+      <div className={s.dl}>
+        <div className={s.dt}>{t('summary.delivery.russia.title')}</div>
+        <div className={s.dd}>{t('summary.delivery.russia.value')}</div>
+      </div>
+
+      <div className={s.dl}>
+        <div className={s.dt}>{t('summary.delivery.international.title')}</div>
+        <div className={s.dd}>{t('summary.delivery.international.value')}</div>
       </div>
     </div>
   )

@@ -2,7 +2,11 @@
   display: grid;
   grid-template-columns: 6rem 1fr;
   grid-gap: var(--xr);
-  margin-bottom: var(--yr-m);
+
+}
+
+.item:not(:last-child) {
+  margin: 0 0 var(--yr-s);
 }
 
 .title {

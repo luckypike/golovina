@@ -9,7 +9,7 @@ module Carts
       def call
         params = validate_contract!(ApplyContract, promo_code_params)
         order = Api::Order.state_cart.find_by!(user: user)
-        promo_code = find_promo_code(params[:title])
+        promo_code = find_promo_code(params[:title].downcase)
         order.update(promo_code: promo_code)
       end
 
