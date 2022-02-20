@@ -74,7 +74,8 @@
         }
       }
     },
-    "checkout": "Place order"
+    "login": "Place order",
+    "checkout": "Continue as guest"
   },
   "PromoCode": {
     "title": "Promo code",
@@ -83,5 +84,8 @@
     "delete": "Remove",
     "placeholder": "Promo code",
     "error": "Promo code not found"
+  },
+  "AppleID": {
+    "sign_in": "Sign in Apple ID"
   }
 }

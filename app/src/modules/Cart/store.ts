@@ -1,10 +1,11 @@
 import { makeAutoObservable } from 'mobx'
-import { CartData, OrderData, OrderItemData } from './models'
+import { CartData, OrderData, OrderItemData, Step } from './models'
 
 export class CartStore {
   order?: OrderData = undefined
   order_items: OrderItemData[] = []
   reload = true
+  step: Step = 'login'
 
   constructor() {
     makeAutoObservable(this)
@@ -18,5 +19,9 @@ export class CartStore {
 
   setReload = (reload: boolean) => {
     this.reload = reload
+  }
+
+  setStep = (step: Step) => {
+    this.step = step
   }
 }

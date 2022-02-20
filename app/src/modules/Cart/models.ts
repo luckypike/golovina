@@ -34,3 +34,5 @@ export interface OrderItemData {
     }
   }
 }
+
+export type Step = 'cart' | 'login' | 'checkout'
