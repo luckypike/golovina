@@ -13,4 +13,6 @@
   padding-right: var(--xr);
 }
 
-
+.submit {
+  margin: var(--yr-m) 0 0;
+}

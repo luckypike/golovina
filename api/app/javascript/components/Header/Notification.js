@@ -75,7 +75,7 @@ export default function Notification ({ locale }) {
               {I18n.t('header.notification.continue')}
             </button>
 
-            <a href={path('cart_path')} className={classNames(buttons.main, buttons.black)}>
+            <a href="/cart" className={classNames(buttons.main, buttons.black)}>
               {I18n.t('header.notification.cart')}
             </a>
           </div>

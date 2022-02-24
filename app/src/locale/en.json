@@ -60,7 +60,7 @@
     "color": "Color",
     "size": "Size",
     "qnt": "Quantity",
-    "summary": {
+    "Summary": {
       "title": "Order information",
       "order_items": "Products cost",
       "delivery": {
@@ -72,10 +72,50 @@
           "title": "International shipping",
           "value": "2800 ₽"
         }
-      }
+      },
+      "login": "Place order",
+      "checkout": "Continue as guest"
     },
-    "login": "Place order",
-    "checkout": "Continue as guest"
+    "Login":  {
+      "submit": "Continue as guest"
+    },
+    "Checkout": {
+      "title": "Shipping data",
+      "name": "First name",
+      "sname": "Last name",
+      "phone": "Phone",
+      "email": "Email",
+      "comment": "Comment",
+      "submit": "To delivery address"
+    },
+    "Delivery": {
+      "title": "Select a shipping method",
+      "address": "Delivery address",
+      "submit": "To checkout",
+      "pickup": {
+        "title": "Collect from store",
+        "desc": "Moscow, Bolshaya Nikitskaya 21/18 str 4"
+      },
+      "russia": {
+        "title": "Russia shipping by CDEK",
+        "desc": "More than 500 cities from 265 ₽"
+      },
+      "international": {
+        "title": "International",
+        "desc": "International shipping — 2800 ₽"
+      },
+      "delivery_city_id": "City",
+      "delivery_option": {
+        "door": "Доставка до двери ({days} дн.)",
+        "storage": "Доставка до точки выдачи ({days} дн.)"
+      },
+      "zip": "Zip code",
+      "country": "Country",
+      "city": "City",
+      "street": "Street",
+      "house": "Street number",
+      "appartment": "Appartment"
+    }
   },
   "PromoCode": {
     "title": "Promo code",

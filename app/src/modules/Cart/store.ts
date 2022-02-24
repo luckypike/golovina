@@ -5,7 +5,7 @@ export class CartStore {
   order?: OrderData = undefined
   order_items: OrderItemData[] = []
   reload = true
-  step: Step = 'login'
+  step: Step = 'cart'
 
   constructor() {
     makeAutoObservable(this)

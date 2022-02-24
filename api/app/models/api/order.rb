@@ -3,6 +3,8 @@
 module Api
   class Order < ApplicationRecord
     enum state: { cart: 0, paid: 2, archived: 3 }, _prefix: true
+    enum delivery: { pickup: 1, russia: 2, international: 3 }, _prefix: true
+    enum delivery_option: { door: 1, storage: 2 }, _prefix: true
 
     has_many :order_items, dependent: :restrict_with_exception
     belongs_to :user

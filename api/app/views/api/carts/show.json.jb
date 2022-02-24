@@ -1,16 +1,25 @@
 # frozen_string_literal: true
 
 order = @cmd.order
+user = @cmd.order.user
 
 {
   order: order && {
     id: order.id,
+    user: user && {
+      id: user.id,
+      phone: user.phone,
+      full_name: user.full_name
+    },
+    comment: order.comment,
     promo_code: order.promo_code && {
       id: order.promo_code.id,
       title: order.promo_code.title
     },
     price_final: order.price_final.to_f,
-    price: order.price.to_f
+    price: order.price.to_f,
+    delivery: order.delivery,
+    delivery_option: order.delivery_option
   },
   order_items: @cmd.order_items.map do |item|
     # TODO: remove this

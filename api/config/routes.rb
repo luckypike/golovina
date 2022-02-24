@@ -19,6 +19,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :subscriptions, only: %i[create]
     resource :cart, only: %i[show] do
       member do
+        post :checkout
+        post :delivery
         post :promo_code, action: :apply_promo_code
         delete :promo_code, action: :delete_promo_code
       end

@@ -6,10 +6,17 @@ ru:
       date?: только дата
       int?: только числа
       hash?: нужно обязательно заполнить
+      type?: неверное значение
 
       format?:
+        failure: неверный формат
         value:
           email: только email
+          phone: только телефон
+
+      rules:
+        delivery:
+          key?: нужно выбрать способ получения
 
       variant:
         price_empty?: не указана начальная

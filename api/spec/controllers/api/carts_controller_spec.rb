@@ -89,4 +89,62 @@ RSpec.describe Api::CartsController, :aggregate_failures do
       end
     end
   end
+
+  describe 'POST #checkout' do
+    subject(:cmd) { post :checkout, params: params }
+
+    let(:params) { { format: :json } }
+
+    before { allow(Carts::CheckoutCmd).to receive(:call).and_return(true) }
+
+    context 'with user' do
+      let(:user) { create(:user) }
+
+      before do
+        sign_in(user)
+        create(:api_order, :cart, user: user)
+      end
+
+      it do
+        expect(cmd).to have_http_status(:no_content)
+        expect(Carts::CheckoutCmd).to have_received(:call)
+      end
+    end
+
+    context 'without user' do
+      it do
+        expect(cmd).to have_http_status(:unauthorized)
+        expect(Carts::CheckoutCmd).not_to have_received(:call)
+      end
+    end
+  end
+
+  describe 'POST #delivery' do
+    subject(:cmd) { post :delivery, params: params }
+
+    let(:params) { { format: :json } }
+
+    before { allow(Carts::DeliveryCmd).to receive(:call).and_return(true) }
+
+    context 'with user' do
+      let(:user) { create(:user) }
+
+      before do
+        sign_in(user)
+        create(:api_order, :cart, user: user)
+      end
+
+      it do
+        expect(cmd).to have_http_status(:no_content)
+        expect(Carts::DeliveryCmd).to have_received(:call)
+      end
+    end
+
+    context 'without user' do
+      it do
+        expect(cmd).to have_http_status(:unauthorized)
+        expect(Carts::DeliveryCmd).not_to have_received(:call)
+      end
+    end
+  end
 end

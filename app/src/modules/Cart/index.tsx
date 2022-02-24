@@ -11,16 +11,19 @@ import { CartData } from "./models";
 import { OrderItems } from "./OrderItems";
 import { PromoCode } from "./PromoCode";
 import { Summary } from "./Summary";
+import { Login } from "./Login";
+import { Checkout } from "./Checkout";
+import { Delivery } from "./Delivery";
+
 
 import s from './index.module.css'
 import sb from '../../css/buttons.module.css'
-import { Login } from "./Login";
-
+import { Pay } from "./Pay";
 
 export const Cart: FC = observer(() => {
   const t = useTranslations('Cart');
   const store = useCartContext()
-  const { isAuth } = useRootContext()
+  const { sessionData: { user } } = useRootContext()
   const router = useRouter()
   const { order, reload, step, setStep } = store
 
@@ -30,12 +33,12 @@ export const Cart: FC = observer(() => {
       store.setData(data)
     }
 
-    if (!isAuth) {
+    if (user.id < 1) {
       router.replace('/')
     } else if (reload) {
       _fetch()
     }
-  }, [store, reload, isAuth, router])
+  }, [store, reload, user, router])
 
   return (
     <div className={s.root}>
@@ -63,10 +66,6 @@ export const Cart: FC = observer(() => {
                 <div className={s.summary}>
                   <Summary />
                 </div>
-
-                <div>
-                  <button className={sb.main} type="button" onClick={() => setStep('login')}>{t('login')}</button>
-                </div>
               </>
             }
 
@@ -80,6 +79,17 @@ export const Cart: FC = observer(() => {
               </>
             }
 
+            {step === 'delivery' &&
+              <Delivery />
+            }
+
+            {step === 'checkout' &&
+              <Checkout />
+            }
+
+            {step === 'pay' &&
+              <Pay />
+            }
           </div>
         </div>
       }

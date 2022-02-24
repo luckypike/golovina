@@ -9,6 +9,10 @@ module.exports = {
         destination: 'http://localhost:3001/api/session'
       },
       {
+        source: '/api/delivery_cities',
+        destination: 'http://localhost:3001/api/delivery_cities'
+      },
+      {
         source: '/api/:path*',
         destination: 'http://localhost:3000/api/:path*'
       },

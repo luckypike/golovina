@@ -121,3 +121,8 @@ h2 {
   font-size: var(--fs-h2);
   line-height: var(--lh-h2);
 }
+
+
+strong {
+  font-weight: 600;
+}

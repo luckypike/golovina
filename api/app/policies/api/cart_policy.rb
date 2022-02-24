@@ -13,5 +13,13 @@ module Api
     def delete_promo_code?
       apply_promo_code?
     end
+
+    def checkout?
+      show?
+    end
+
+    def delivery?
+      show?
+    end
   end
 end

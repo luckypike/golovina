@@ -5,8 +5,16 @@ export interface CartData {
 
 export interface OrderData {
   id: number
+  user?: {
+    id: number
+    phone: string
+    full_name: string
+  }
+  comment: string
   price: number
   price_final: number
+  delivery: string
+  delivery_option: string
   promo_code?: {
     id: number
     title: string
@@ -35,4 +43,13 @@ export interface OrderItemData {
   }
 }
 
-export type Step = 'cart' | 'login' | 'checkout'
+export type Step = 'cart' | 'login' | 'delivery' |'checkout' | 'pay'
+
+export interface DeliveryCityData {
+  id: number
+  title: string
+  door?: number
+  door_days?: string
+  storage?: number
+  storage_days?: string
+}

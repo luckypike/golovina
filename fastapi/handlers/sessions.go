@@ -6,6 +6,7 @@ import (
 	"golovina/models"
 	"golovina/utils"
 	"net/http"
+	"regexp"
 
 	"github.com/labstack/echo/v4"
 )
@@ -26,9 +27,13 @@ type nav_item struct {
 }
 
 type user struct {
-	Id     uint `json:"id"`
-	State  int  `json:"state"`
-	Editor bool `json:"editor"`
+	Id     uint   `json:"id"`
+	State  int    `json:"state"`
+	Editor bool   `json:"editor"`
+	Phone  string `json:"phone"`
+	Email  string `json:"email"`
+	Name   string `json:"name"`
+	Sname  string `json:"sname"`
 }
 
 func ShowSession(c echo.Context) error {
@@ -47,6 +52,12 @@ func ShowSession(c echo.Context) error {
 
 	var user_data models.User
 	db.First(&user_data, userId)
+
+	is_guest_email, _ := regexp.MatchString("guest_(.+)@golovinamari.com", user_data.Email)
+	is_private_relay_email, _ := regexp.MatchString("(.+)@privaterelay.appleid.com", user_data.Email)
+	if is_guest_email || is_private_relay_email {
+		user_data.Email = ""
+	}
 
 	var cart sql.NullInt64
 	db.Debug().
@@ -88,6 +99,10 @@ func ShowSession(c echo.Context) error {
 				Id:     user_data.ID,
 				State:  user_data.State,
 				Editor: user_data.Editor,
+				Name:   user_data.Name,
+				Sname:  user_data.Sname,
+				Email:  user_data.Email,
+				Phone:  user_data.Phone,
 			},
 			Cart:       cart.Int64,
 			Wishlist:   wishlist,

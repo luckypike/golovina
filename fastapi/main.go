@@ -25,6 +25,7 @@ func main() {
 	db.Connect()
 
 	e.GET("/api/session", handlers.ShowSession)
+	e.GET("/api/delivery_cities", handlers.IndeDeliveryCities)
 
 	e.Logger.Fatal(e.Start(":3000"))
 }

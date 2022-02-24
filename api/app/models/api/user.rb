@@ -7,7 +7,11 @@ module Api
     has_many :identities, dependent: :destroy
     has_many :orders, dependent: :restrict_with_exception
 
-    validates :email, presence: true, uniqueness: true
+    validates :email, :phone, presence: true, uniqueness: true
     validates :state, presence: true
+
+    def full_name
+      [name, sname].join(' ')
+    end
   end
 end
