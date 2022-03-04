@@ -32,7 +32,7 @@ export const Menu: FC = observer(() => {
         {nav.map(n =>
           <div key={n.id} className={s.sub}><a href={`/catalog/${n.slug}`}>{n.title}</a></div>
         )}
-        <div className={s.sub}><a href="/catalog/all">{t('catalog.all')}</a></div>
+        <div className={s.sub}><a href="/catalog">{t('catalog.all')}</a></div>
       </Section>
       }
 
