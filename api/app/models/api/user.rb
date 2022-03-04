@@ -7,7 +7,8 @@ module Api
     has_many :identities, dependent: :destroy
     has_many :orders, dependent: :restrict_with_exception
 
-    validates :email, :phone, presence: true, uniqueness: true
+    validates :email, presence: true, uniqueness: true
+    validates :phone, uniqueness: true, allow_blank: true
     validates :state, presence: true
 
     def full_name

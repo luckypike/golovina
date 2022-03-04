@@ -117,6 +117,7 @@ RSpec.describe Sessions::SignInWithAppleIdCmd, :aggregate_failures do
       let(:email) { 'abc123@privaterelay.appleid.com' }
 
       before do
+        create(:api_user, phone: nil)
         user = create(:api_user, email: 'email@example.com', name: 'Rick', sname: 'Sanchez')
         create(:identity, user: user, uid: token_params['sub'])
       end
