@@ -21,5 +21,9 @@ module Api
     def delivery?
       show?
     end
+
+    def delete_order_item?
+      show?
+    end
   end
 end

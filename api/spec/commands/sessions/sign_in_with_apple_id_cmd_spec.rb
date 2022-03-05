@@ -135,6 +135,21 @@ RSpec.describe Sessions::SignInWithAppleIdCmd, :aggregate_failures do
       end
     end
 
+    context 'when user was inactive' do
+      let(:email) { 'email@example.com' }
+
+      before do
+        user = create(:api_user, email: email, state: :guest)
+        create(:identity, user: user, uid: token_params['sub'])
+      end
+
+      it do
+        expect(cmd).to be_success
+        expect(Api::User.find_by(email: 'email@example.com').slice(:email, :state))
+          .to match({ email: 'email@example.com', state: 'active' })
+      end
+    end
+
     context 'when referer not from apple' do
       let(:referer) { 'https://example.com' }
 

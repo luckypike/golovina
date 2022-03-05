@@ -23,6 +23,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         post :delivery
         post :promo_code, action: :apply_promo_code
         delete :promo_code, action: :delete_promo_code
+        delete 'order_items/:id', action: :delete_order_item
       end
     end
 

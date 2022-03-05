@@ -25,6 +25,7 @@
   cursor: pointer;
   display: block;
   appearance: none;
+  color: inherit;
   background: none;
   border: 0;
   font-size: inherit;

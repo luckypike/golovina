@@ -1,16 +1,26 @@
 import { FC } from "react";
+import axios from "axios";
 import { observer } from "mobx-react-lite";
 import { useTranslations } from "next-intl";
 
 import { useCartContext } from "../context";
-
-import s from './index.module.css'
 import { Price } from "../../Price";
 
+import s from './index.module.css'
 
 export const OrderItems: FC = observer(() => {
   const t = useTranslations('Cart');
-  const { order, order_items } = useCartContext()
+  const { order_items, setStep, step, setReload } = useCartContext()
+
+  const handleDelete = async (order_item_id: number) => {
+    console.log(order_item_id)
+    try {
+      await axios.delete(`/cart/order_items/${order_item_id}`)
+      setReload(true)
+    } catch {
+      // setError('title', { message: t('arghh') })
+    }
+  }
 
   return (
     <div>
@@ -40,9 +50,21 @@ export const OrderItems: FC = observer(() => {
             <div className={s.qnt}>
               {t('qnt')}: {order_item.quantity}
             </div>
+
+            {step === 'cart' &&
+              <div>
+                <button onClick={() => handleDelete(order_item.id)} className={s.delete} type="button">{t('delete')}</button>
+              </div>
+            }
           </div>
         </div>
       )}
+
+      {step !== 'cart' &&
+        <div>
+          <button onClick={() => setStep('cart')} className={s.button} type="button">{t('change')}</button>
+        </div>
+      }
     </div>
   )
 })

@@ -17,7 +17,7 @@ import { Delivery } from "./Delivery";
 
 
 import s from './index.module.css'
-import sb from '../../css/buttons.module.css'
+// import sb from '../../css/buttons.module.css'
 import { Pay } from "./Pay";
 
 export const Cart: FC = observer(() => {
@@ -25,7 +25,7 @@ export const Cart: FC = observer(() => {
   const store = useCartContext()
   const { sessionData: { user } } = useRootContext()
   const router = useRouter()
-  const { order, reload, step, setStep } = store
+  const { order, reload, step, order_items } = store
 
   useEffect(() => {
     const _fetch = async () => {
@@ -50,7 +50,7 @@ export const Cart: FC = observer(() => {
         <h1>{t('title')}</h1>
       </div>
 
-      {order &&
+      {order && order_items.length > 0 &&
         <div className={s.main}>
           <div className={s.order_items}>
             <OrderItems />
@@ -70,13 +70,7 @@ export const Cart: FC = observer(() => {
             }
 
             {step === 'login' &&
-              <>
-                <Login />
-
-                <div>
-                  <button className={sb.main} type="button" onClick={() => setStep('checkout')}>{t('checkout')}</button>
-                </div>
-              </>
+              <Login />
             }
 
             {step === 'delivery' &&

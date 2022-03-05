@@ -60,6 +60,8 @@
     "color": "Color",
     "size": "Size",
     "qnt": "Quantity",
+    "change": "Change shopping list",
+    "delete": "Remove from cart",
     "Summary": {
       "title": "Order information",
       "order_items": "Products cost",
@@ -77,7 +79,9 @@
       "checkout": "Continue as guest"
     },
     "Login":  {
-      "submit": "Continue as guest"
+      "submit": "Continue as guest",
+      "desc": "You may login using AppleID. You`re name and email will be send to us automatically, and you will always be able to login by TouchId or FaceID.",
+      "or": "Or"
     },
     "Checkout": {
       "title": "Shipping data",

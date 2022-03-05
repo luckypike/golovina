@@ -3,7 +3,7 @@
 module Api
   class CartsController < Api::ApplicationController
     before_action :authorize_cart
-    before_action :set_order, only: %i[checkout delivery]
+    before_action :set_order, only: %i[checkout delivery delete_order_item]
 
     def show
       @cmd = Carts::ShowCmd.call(user: current_user)
@@ -15,6 +15,11 @@ module Api
 
     def delete_promo_code
       Carts::PromoCodes::DeleteCmd.call(user: current_user)
+    end
+
+    def delete_order_item
+      @order_item = @order.order_items.find(params[:id])
+      Carts::DeleteOrderItemCmd.call(order_item: @order_item)
     end
 
     def checkout

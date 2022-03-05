@@ -17,3 +17,18 @@
   display: block;
   max-width: 6rem;
 }
+
+.button, .delete {
+  cursor: pointer;
+  display: block;
+  appearance: none;
+  color: inherit;
+  background: none;
+  border: 0;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  text-decoration: underline;
+}

@@ -14,6 +14,7 @@ module Api
         user_params: parse_user_params
       )
 
+      sign_in(::User.find(@cmd.user.id))
       redirect_to params[:return_uri].presence || '/'
     end
 

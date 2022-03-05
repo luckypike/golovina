@@ -59,7 +59,7 @@ module Sessions
     end
 
     def move_cart(user)
-      return unless current_user&.guest?
+      return unless current_user&.state_guest?
 
       user.orders.state_cart.first&.destroy
       current_user.orders.state_cart.first&.update(user_id: user.id)

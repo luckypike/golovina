@@ -6,7 +6,7 @@ module Api
     enum delivery: { pickup: 1, russia: 2, international: 3 }, _prefix: true
     enum delivery_option: { door: 1, storage: 2 }, _prefix: true
 
-    has_many :order_items, dependent: :restrict_with_exception
+    has_many :order_items, dependent: :destroy
     belongs_to :user
     belongs_to :promo_code, optional: true
 
