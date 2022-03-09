@@ -29,16 +29,12 @@ json.kit do
       json.thumb image.thumb_url if image.file.attached?
     end
 
-    json.category do
-      json.extract! variant.product.category, :id, :slug
-    end
-
     json.product do
       json.partial! variant.product
     end
 
     json.category do
-      json.extract! variant.product.category, :id, :slug
+      json.extract! variant.category, :id, :slug
     end
 
     json.availabilities(variant.availabilities.sort_by { |a| a.size.weight }) do |availability|
