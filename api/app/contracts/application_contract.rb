@@ -2,12 +2,12 @@
 
 class ApplicationContract < Dry::Validation::Contract
   # https://en.wikipedia.org/wiki/E.164
-  PHONE_NUMBER_REGEX = /\A\+\d{11,15}\z/.freeze
+  PHONE_NUMBER_REGEX = /\A\+\d{11,15}\z/
 
   # Regexp to check emails against
-  EMAIL_REGEX = /\A[^@,\s]+@[^@,\s]+\.[^@,\s]+\z/.freeze
+  EMAIL_REGEX = /\A[^@,\s]+@[^@,\s]+\.[^@,\s]+\z/
 
-  ZIP_REGEX = /\A[0-9]+\z/.freeze
+  ZIP_REGEX = /\A[0-9]+\z/
 
   TypeContainer = Dry::Schema::TypeContainer.new
   TypeContainer.register(

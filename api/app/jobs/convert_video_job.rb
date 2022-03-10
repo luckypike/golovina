@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 class ConvertVideoJob < ApplicationJob
   queue_as :default
 
-  def perform(object)
+  # TODO: Check this method
+  def perform(object) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     object.update(video_mp4: nil, video_poster: nil)
 
     tmp_dir = Rails.root.join('tmp/video')
