@@ -25,7 +25,14 @@ export const Cart: FC = observer(() => {
   const store = useCartContext()
   const { sessionData: { user } } = useRootContext()
   const router = useRouter()
-  const { order, reload, step, order_items } = store
+  const { order, reload, step, setStep, order_items } = store
+
+  useEffect(() => {
+    // TODO: Find another way for this
+    if(router.asPath === '/cart#checkout') {
+      setStep('checkout')
+    }
+  }, [router, setStep])
 
   useEffect(() => {
     const _fetch = async () => {

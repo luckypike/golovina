@@ -15,7 +15,11 @@ module Api
       )
 
       sign_in(::User.find(@cmd.user.id))
-      redirect_to params[:return_uri].presence || '/'
+
+      # TODO: Rewrite it
+      redirect_uri = params[:return_uri].presence || '/'
+      redirect_uri = '/cart#checkout' if redirect_uri == '/cart'
+      redirect_to redirect_uri
     end
 
     private
