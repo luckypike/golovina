@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Subscriptions::CreateCmd, :aggregate_failures do
-  subject { described_class.call(subscription_params: params) }
+  subject(:cmd) { described_class.call(subscription_params: params) }
 
   describe '#call' do
     context 'with valid params' do
@@ -16,7 +16,7 @@ RSpec.describe Subscriptions::CreateCmd, :aggregate_failures do
       end
 
       it do
-        should be_success
+        expect(cmd).to be_success
 
         expected_subscription = Subscription.find_by!(email: email)
         expect(expected_subscription.first_name).to eq(params[:first_name])
@@ -24,15 +24,15 @@ RSpec.describe Subscriptions::CreateCmd, :aggregate_failures do
         expect(expected_subscription.date_of_birth).to eq(params[:date_of_birth])
       end
 
-      it { expect { subject }.to change { Subscription.all.size }.by(1) }
-      it { expect { subject }.to have_enqueued_job(SubscriptionProcessJob) }
+      it { expect { cmd }.to change { Subscription.all.size }.by(1) }
+      it { expect { cmd }.to have_enqueued_job(SubscriptionProcessJob) }
 
       context 'when user already exists' do
         before do
           create(:subscription, email: 'user@example.com')
         end
 
-        it { expect { subject }.to raise_error(ServiceActor::Failure) }
+        it { expect { cmd }.to raise_error(ServiceActor::Failure) }
       end
     end
   end

@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
 RSpec.describe Variants::UpdateContract, :aggregate_failures do
-  subject { described_class.new.call(**params) }
+  subject(:cmd) { described_class.new.call(**params) }
 
   describe '#call' do
     context 'with required params' do
       let(:params) { { id: 1 } }
 
-      it { should be_success }
+      it { is_expected.to be_success }
     end
 
     context 'without required params' do
       let(:params) { { foo: :bar } }
 
       it do
-        expect(subject).to be_failure
-        expect(subject.errors.to_h).to include(:id)
+        expect(cmd).to be_failure
+        expect(cmd.errors.to_h).to include(:id)
       end
     end
 
@@ -23,8 +23,8 @@ RSpec.describe Variants::UpdateContract, :aggregate_failures do
       let(:params) { { id: 1, category_id: nil, title_ru: '', color_id: 'qqq' } }
 
       it do
-        expect(subject).to be_failure
-        expect(subject.errors.to_h).to include(:category_id, :title_ru, :color_id)
+        expect(cmd).to be_failure
+        expect(cmd.errors.to_h).to include(:category_id, :title_ru, :color_id)
       end
     end
 
@@ -42,37 +42,40 @@ RSpec.describe Variants::UpdateContract, :aggregate_failures do
       end
 
       it do
-        expect(subject).to be_success
-        expect(subject.to_h.keys).to contain_exactly(
+        expect(cmd).to be_success
+      end
+
+      it do
+        expect(cmd.to_h.keys).to contain_exactly(
           :id, :category_id, :color_id, :state, :title_ru, :title_en, :desc_ru, :desc_en,
           :comp_ru, :comp_en, :price, :price_last, :code, :published_at, :images
         )
-        expect(subject.to_h[:images].first.keys).to contain_exactly(:id, :weight, :active)
+        expect(cmd.to_h[:images].first.keys).to contain_exactly(:id, :weight, :active)
       end
     end
 
     context 'when price_last gt then price' do
       let(:params) { { id: 1, price: 1000, price_last: 1001 } }
 
-      it { should be_failure }
+      it { is_expected.to be_failure }
     end
 
     context 'when price_last eq price' do
       let(:params) { { id: 1, price: 1000, price_last: 1000 } }
 
-      it { should be_failure }
+      it { is_expected.to be_failure }
     end
 
     context 'when price_last present and price is empty' do
       let(:params) { { id: 1, price: '', price_last: 1000 } }
 
-      it { should be_failure }
+      it { is_expected.to be_failure }
     end
 
     context 'when price_last present and price present' do
       let(:params) { { id: 1, price: 1001, price_last: 1000 } }
 
-      it { should be_success }
+      it { is_expected.to be_success }
     end
   end
 end

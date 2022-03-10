@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Categories::ProcessCmd, :aggregate_failures do
-  subject { described_class.call(category: category) }
+  subject(:cmd) { described_class.call(category: category) }
+
   let(:category) { create(:category) }
 
   describe '#call' do
@@ -11,7 +12,7 @@ RSpec.describe Categories::ProcessCmd, :aggregate_failures do
     end
 
     it do
-      subject
+      cmd
       expect(category.reload.variants_and_kits_count).to eq 5
     end
   end

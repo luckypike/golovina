@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe Variants::CreateCmd, :aggregate_failures do
+  subject(:cmd) { described_class.call(variant_params: params) }
+
   let(:category) { create(:category) }
   let(:color) { create(:color) }
-  subject { described_class.call(variant_params: params) }
 
   describe '#call' do
     context 'with valid params' do
@@ -15,16 +16,17 @@ RSpec.describe Variants::CreateCmd, :aggregate_failures do
           }
         end
 
-        it { should be_success }
-        it { expect(subject.variant.slice(:title_ru, :color_id, :category_id, :state)).to match(params) }
+        it { is_expected.to be_success }
+        it { expect(cmd.variant.slice(:title_ru, :color_id, :category_id, :state)).to match(params) }
+
         it do
-          expect { subject }
+          expect { cmd }
             .to change { Api::Variant.all.size }.by(1)
             .and change { Api::Product.all.size }.by(1)
         end
 
         it do
-          expect { subject }.to have_enqueued_job(VariantProcessJob)
+          expect { cmd }.to have_enqueued_job(VariantProcessJob)
         end
       end
 
@@ -41,10 +43,11 @@ RSpec.describe Variants::CreateCmd, :aggregate_failures do
           create(:product, id: product_id)
         end
 
-        it { should be_success }
-        it { expect(subject.variant.slice(:title_ru, :color_id, :category_id, :product_id, :state)).to match(params) }
+        it { is_expected.to be_success }
+        it { expect(cmd.variant.slice(:title_ru, :color_id, :category_id, :product_id, :state)).to match(params) }
+
         it do
-          expect { subject }
+          expect { cmd }
             .to change { Api::Variant.all.size }.by(1)
             .and change { Api::Product.all.size }.by(0)
         end

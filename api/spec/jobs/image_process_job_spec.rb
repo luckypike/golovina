@@ -2,7 +2,8 @@
 
 RSpec.describe ImageProcessJob, :aggregate_failures do
   describe '#perform' do
-    subject { described_class.perform_now(image: image) }
+    subject(:cmd) { described_class.perform_now(image: image) }
+
     let(:image) { build(:image) }
 
     before do
@@ -10,7 +11,7 @@ RSpec.describe ImageProcessJob, :aggregate_failures do
     end
 
     it do
-      subject
+      cmd
 
       expect(Images::ProcessCmd).to have_received(:call).with(image: image)
     end

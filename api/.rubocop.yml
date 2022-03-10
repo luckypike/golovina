@@ -12,9 +12,9 @@ AllCops:
     - app/models/api/**/*.rb
     - app/policies/api/**/*.rb
     - app/views/api/**/*.rb
-    - spec/app/commands/**/*.rb
-    - spec/app/contracts/**/*.rb
-    - spec/app/jobs/**/*.rb
+    - spec/commands/**/*.rb
+    - spec/contracts/**/*.rb
+    - spec/jobs/**/*.rb
 
 Style/Documentation:
   Enabled: false
@@ -25,6 +25,9 @@ Metrics/BlockLength:
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
+
+NestedGroups:
+  Max: 4
 
 # Style/ClassAndModuleChildren:
 #   EnforcedStyle: compact
