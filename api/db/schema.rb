@@ -335,7 +335,6 @@ ActiveRecord::Schema.define(version: 2022_02_23_111617) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "colors", array: true
-    t.bigint "kind_id"
     t.integer "state_manual", default: 0
     t.string "title"
     t.boolean "sale", default: false
@@ -348,7 +347,6 @@ ActiveRecord::Schema.define(version: 2022_02_23_111617) do
     t.boolean "pinned", default: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["colors"], name: "index_products_on_colors", using: :gin
-    t.index ["kind_id"], name: "index_products_on_kind_id"
   end
 
   create_table "promo_codes", force: :cascade do |t|
