@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :delivery_city do
-    sequence(:title) { |n| "City #{n}" }
+    title { Faker::Address.city }
     door { 100 }
     door_days { '3-4' }
     storage { 80 }

@@ -22,8 +22,8 @@ export const Pay: FC = observer(() => {
   return (
     <div>
       <form ref={formRef} action={process.env.NEXT_PUBLIC_PAYKEEPER_GAYEWAY} method="post" className={s.form}>
-        <input name="sum" value={1000} />
-        <input name="clientid" value={order.user.id} />
+        <input name="sum" value={order.price_final + (order.price_delivery ?? 0)} />
+        <input name="clientid" value={`${order.user.full_name} / ${order.user.id}`} />
         <input name="orderid" value={order.id} />
         <input name="lang" value={router.locale} />
         <input name="client_phone" value={order.user.phone} />

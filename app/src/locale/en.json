@@ -118,7 +118,13 @@
       "city": "City",
       "street": "Street",
       "house": "Street number",
-      "appartment": "Appartment"
+      "appartment": "Appartment",
+      "summary": {
+        "order": "Products cost",
+        "russia": "Delivery across Russia",
+        "international": "International shipping",
+        "total": "Total"
+      }
     }
   },
   "PromoCode": {

@@ -4,7 +4,10 @@ RSpec.describe Api::SessionsController do
   describe '#apple' do
     subject(:cmd) { post :apple, params: params }
 
-    before { allow(Sessions::SignInWithAppleIdCmd).to receive(:call).and_return(true) }
+    let(:user) { create(:user) }
+    let(:sign_in_with_apple_cmd) { instance_double('SignInWithAppleIdCmd', { user: user }) }
+
+    before { allow(Sessions::SignInWithAppleIdCmd).to receive(:call).and_return(sign_in_with_apple_cmd) }
 
     context 'when user auth first time' do
       let(:user_params) { { name: { firstName: 'F', lastName: 'L' } } }
@@ -31,7 +34,7 @@ RSpec.describe Api::SessionsController do
       let(:params) { { return_uri: '/cart' } }
 
       it { expect(cmd).to have_http_status(:found) }
-      it { expect(cmd).to redirect_to('/cart') }
+      it { expect(cmd).to redirect_to('/cart#checkout') }
     end
 
     context 'when user auth second time' do

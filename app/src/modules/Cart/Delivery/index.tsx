@@ -1,8 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import Select from 'react-select'
-import Script from "next/script";
-import { AppleID } from "../../AppleID";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
@@ -13,7 +11,8 @@ import s from './index.module.css'
 import sf from '../../../layout/form.module.css'
 import sb from '../../../css/buttons.module.css'
 import { useCartContext } from "../context";
-import { DeliveryCityData } from "../models";
+import { DeliveryCityData, WatchDeliveryOption } from "../models";
+import { Summary } from "./Summary";
 
 type Values = {
   delivery: string
@@ -29,7 +28,7 @@ type Values = {
 
 export const Delivery: FC = observer(() => {
   const t = useTranslations('Cart.Delivery');
-  const { order, setStep } = useCartContext()
+  const { order, setStep, setReload } = useCartContext()
   const {
     register,
     handleSubmit,
@@ -38,12 +37,13 @@ export const Delivery: FC = observer(() => {
     clearErrors,
     watch,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<Values>()
 
   const onSubmit: SubmitHandler<Values> = async (data) => {
     try {
       await axios.post('/cart/delivery', data)
+      setReload(true)
       setStep('pay')
     } catch ({ response: { data: { errors: errorsData } } }) {
       entries(errorsData as Record<keyof Values, string[]>).forEach(([name, messages]) => {
@@ -54,6 +54,7 @@ export const Delivery: FC = observer(() => {
 
   const watchDelivery = watch('delivery')
   const watchDeliveryCityId = watch('delivery_city_id')
+  const watchDeliveryOption = watch('delivery_option')
 
   useEffect(() => {
     setValue('zip', '')
@@ -75,7 +76,7 @@ export const Delivery: FC = observer(() => {
     _fetch()
   }, [])
 
-  const [deliveryOptions, setDeliveryOption] = useState<{ id: string, title: string }[]>([])
+  const [deliveryOptions, setDeliveryOption] = useState<WatchDeliveryOption[]>([])
 
   return (
     <div>
@@ -175,19 +176,21 @@ export const Delivery: FC = observer(() => {
                       setValue('delivery_city_id', option.id)
                       clearErrors('delivery_city_id')
 
-                      let temp_delivery_options: { id: string, title: string }[] = []
+                      let temp_delivery_options: WatchDeliveryOption[] = []
 
-                      if (option.door_days) {
+                      if (option.door_days && option.door) {
                         temp_delivery_options.push({
                           id: 'door',
-                          title: t('delivery_option.door', { days: option.door_days })
+                          title: t('delivery_option.door', { days: option.door_days }),
+                          price: option.door
                         })
                       }
 
-                      if (option.storage_days) {
+                      if (option.storage_days && option.storage) {
                         temp_delivery_options.push({
                           id: 'storage',
-                          title: t('delivery_option.storage', { days: option.storage_days })
+                          title: t('delivery_option.storage', { days: option.storage_days }),
+                          price: option.storage
                         })
                       }
 
@@ -259,8 +262,12 @@ export const Delivery: FC = observer(() => {
           </>
         }
 
+        <div className={s.summary}>
+          <Summary watchDelivery={watchDelivery} deliveryOption={deliveryOptions.find(i => i.id === watchDeliveryOption)} />
+        </div>
+
         <div>
-          <button className={sb.main} type="submit">{t('submit')}</button>
+          <button className={sb.main} disabled={isSubmitting} type="submit">{t('submit')}</button>
         </div>
       </form>
     </div>

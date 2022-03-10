@@ -18,6 +18,7 @@ user = @cmd.order.user
     },
     price_final: order.price_final.to_f,
     price: order.price.to_f,
+    price_delivery: order.price_delivery.to_f,
     delivery: order.delivery,
     delivery_option: order.delivery_option
   },

@@ -57,7 +57,7 @@ export const Cart: FC = observer(() => {
         <h1>{t('title')}</h1>
       </div>
 
-      {order && order_items.length > 0 &&
+      {order && order_items.length > 0 && step !== 'pay' &&
         <div className={s.main}>
           <div className={s.order_items}>
             <OrderItems />
@@ -87,12 +87,12 @@ export const Cart: FC = observer(() => {
             {step === 'checkout' &&
               <Checkout />
             }
-
-            {step === 'pay' &&
-              <Pay />
-            }
           </div>
         </div>
+      }
+
+      {step === 'pay' &&
+        <Pay />
       }
     </div>
   )

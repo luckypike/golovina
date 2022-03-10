@@ -16,6 +16,10 @@ module.exports = {
         source: '/api/:path*',
         destination: 'http://localhost:3000/api/:path*'
       },
+      {
+        source: '/orders/paid',
+        destination: 'http://localhost:3000/orders/paid'
+      },
     ]
   },
   i18n: {

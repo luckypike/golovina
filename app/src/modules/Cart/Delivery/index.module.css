@@ -35,3 +35,7 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: var(--xr);
 }
+
+.summary {
+  margin: 0 0 var(--yr-m);
+}

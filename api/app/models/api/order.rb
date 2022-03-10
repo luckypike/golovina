@@ -8,6 +8,7 @@ module Api
 
     has_many :order_items, dependent: :destroy
     belongs_to :user
+    belongs_to :delivery_city, optional: true
     belongs_to :promo_code, optional: true
 
     def price
@@ -18,6 +19,16 @@ module Api
       temp = order_items.joins(:variant).where(variants: { state: :active }).sum(&:price_final)
       temp = promo_code.apply(temp) if promo_code
       temp
+    end
+
+    def price_delivery
+      if delivery_international?
+        2_800
+      elsif delivery_russia?
+        return delivery_city[delivery_option] if delivery_city && delivery_option
+      else
+        0
+      end
     end
   end
 end

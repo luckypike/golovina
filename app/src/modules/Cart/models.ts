@@ -13,6 +13,7 @@ export interface OrderData {
   comment: string
   price: number
   price_final: number
+  price_delivery?: number
   delivery: string
   delivery_option: string
   promo_code?: {
@@ -52,4 +53,10 @@ export interface DeliveryCityData {
   door_days?: string
   storage?: number
   storage_days?: string
+}
+
+export interface WatchDeliveryOption {
+  id: string
+  title: string
+  price: number
 }

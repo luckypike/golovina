@@ -31,7 +31,7 @@ export const Checkout: FC = observer(() => {
     handleSubmit,
     control,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<Values>({
     defaultValues: {
       name: user.name,
@@ -110,7 +110,7 @@ export const Checkout: FC = observer(() => {
         </div>
 
         <div>
-          <button className={sb.main} type="submit">{t('submit')}</button>
+          <button className={sb.main} disabled={isSubmitting} type="submit">{t('submit')}</button>
         </div>
       </form>
     </div>
