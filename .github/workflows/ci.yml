@@ -2,15 +2,16 @@ name: CI
 
 on: push
 
-
 jobs:
-  codacy-coverage-reporter:
+  codacy-analysis-cli:
+    name: Codacy Analysis CLI
     runs-on: ubuntu-latest
-    name: Codacy
     steps:
-      - uses: actions/checkout@v2
-      - name: Run codacy-coverage-reporter
-        uses: codacy/codacy-coverage-reporter-action@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@master
         with:
           api-token: ${{ secrets.CODACY_API_TOKEN }}
-          coverage-reports: cobertura.xml
+          upload: true
