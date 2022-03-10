@@ -49,12 +49,12 @@ jobs:
           - 6379:6379
 
     steps:
-      - run: sudo apt-get install -y libvips
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           working-directory: api
           bundler-cache: true
+      - run: sudo apt-get install -y libvips
       - run: bundle exec rake db:create
       - run: bundle exec rake db:migrate
       - name: RSpec
