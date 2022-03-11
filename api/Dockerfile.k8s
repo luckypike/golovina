@@ -7,7 +7,6 @@ ENV GEM_HOME /app/.local/ruby/3.0
 ENV PATH "/app/.local/ruby/3.0/bin:${PATH}"
 
 ARG APP_VERSION
-ARG RAILS_MASTER_KEY
 ARG RAILS_ENV
 ARG SECRET_KEY_BASE
 ARG aws_access_key_id
@@ -28,7 +27,9 @@ RUN bundle config set --local without development test
 RUN bundle install
 # RUN bundle exec rake db:create
 # RUN bundle exec rake db:migrate
-RUN bundle exec rails assets:precompile
-RUN bundle exec rails webpacker:compile
+RUN --mount=type=secret,id=RAILS_MASTER_KEY,dst=./config/master.key \
+  bundle exec rails assets:precompile
+RUN --mount=type=secret,id=RAILS_MASTER_KEY,dst=./config/master.key \
+  bundle exec rails webpacker:compile
 
 EXPOSE 3000
