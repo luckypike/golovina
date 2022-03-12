@@ -10,6 +10,7 @@ import s from './index.module.css'
 export const Pay: FC = observer(() => {
   const { order } = useCartContext()
   const router = useRouter()
+  const t = useTranslations('Cart.Pay');
 
   if (!order || !order.user) return null
 
@@ -28,6 +29,8 @@ export const Pay: FC = observer(() => {
         <input name="lang" value={router.locale} />
         <input name="client_phone" value={order.user.phone} />
       </form>
+
+      <div className={s.processing}>{t('processing')}</div>
     </div>
   )
 })

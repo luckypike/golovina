@@ -267,7 +267,7 @@ export const Delivery: FC = observer(() => {
         </div>
 
         <div>
-          <button className={sb.main} disabled={isSubmitting} type="submit">{t('submit')}</button>
+          <button className={cc([sb.main, { [sb.submitting]: isSubmitting }])} disabled={isSubmitting} type="submit">{t('submit')}</button>
         </div>
       </form>
     </div>

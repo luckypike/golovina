@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import axios from "axios";
 import { Controller, SubmitHandler, useForm, useWatch } from "react-hook-form";
@@ -110,7 +110,7 @@ export const Checkout: FC = observer(() => {
         </div>
 
         <div>
-          <button className={sb.main} disabled={isSubmitting} type="submit">{t('submit')}</button>
+          <button className={cc([sb.main, { [sb.submitting]: isSubmitting }])} disabled={isSubmitting} type="submit">{t('submit')}</button>
         </div>
       </form>
     </div>
