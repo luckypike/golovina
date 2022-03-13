@@ -52,6 +52,8 @@
     "first_name": "First name",
     "last_name": "Last name",
     "date_of_birth": "Date of birth",
+    "confirm": "I confirm that I have read and understand the",
+    "confirm_url": "privacy policy.",
     "subscribe": "Subscribe",
     "submitted": "Thanks for subscribing"
   },
@@ -140,5 +142,8 @@
   },
   "AppleID": {
     "sign_in": "Sign in Apple ID"
+  },
+  "PrivacyPolicy": {
+    "title": "Privacy policy"
   }
 }

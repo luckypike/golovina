@@ -2,20 +2,22 @@ import { FC, useState } from "react";
 import { useTranslations } from "next-intl";
 import Head from "next/head";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import cc from 'classcat'
+import { useRouter } from "next/router";
+import axios from "axios";
+import Cleave from 'cleave.js/react';
 
 import s from './index.module.css'
 import sf from '../../layout/form.module.css'
 import sb from '../../css/buttons.module.css'
 import { entries } from "../../models";
-import axios from "axios";
-import Cleave from 'cleave.js/react';
-import { useRouter } from "next/router";
 
 type Values = {
   email: string
   first_name: string
   last_name: string
   date_of_birth: string
+  confirm: boolean
 }
 
 export const Subscribe: FC = () => {
@@ -27,7 +29,7 @@ export const Subscribe: FC = () => {
     handleSubmit,
     control,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<Values>()
   const t = useTranslations('Subscribe');
 
@@ -102,8 +104,19 @@ export const Subscribe: FC = () => {
                 {errors.date_of_birth && <div className={sf.er}>{errors.date_of_birth.message}</div>}
               </div>
 
+              <div className={sf.el}>
+                <label className={cc([sf.lb, sf.checkbox])}>
+                  <input {...register("confirm")} type="checkbox" />
+                  <span>
+                    {t('confirm')} <a target="_blank" href="/privacy-policy">{t('confirm_url')}</a>.
+                  </span>
+                </label>
+
+                {errors.confirm && <div className={sf.er}>{errors.confirm.message}</div>}
+              </div>
+
               <div>
-                <button className={sb.main} type="submit">{t('subscribe')}</button>
+                <button className={cc([sb.main, { [sb.submitting]: isSubmitting }])} disabled={isSubmitting} type="submit">{t('subscribe')}</button>
               </div>
             </form>
           </>

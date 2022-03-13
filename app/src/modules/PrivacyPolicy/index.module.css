@@ -1,0 +1,38 @@
+.root {
+  margin: 0 var(--xr);
+  font-size: var(--fs-at);
+  line-height: var(--lh-at);
+}
+
+@media (--m)  {
+  .root {
+    margin: 0 calc(var(--xr) * 2);
+  }
+}
+
+@media (--l) {
+  .root {
+    margin: 0 calc(3 / 16 * 100%);
+  }
+}
+
+.title {
+  margin: 0 0 var(--yr-m);
+}
+
+.root ul {
+  margin: 0;
+  padding: 0;
+}
+
+.root li {
+  display: block;
+}
+
+.root ul ul {
+  margin: 0 0 var(--yr-s) var(--xr);
+}
+
+.root ul ul li {
+  margin: var(--yr-xs) 0 0 ;
+}

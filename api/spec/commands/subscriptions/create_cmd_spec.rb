@@ -11,7 +11,8 @@ RSpec.describe Subscriptions::CreateCmd, :aggregate_failures do
           email: "#{email.upcase} ",
           first_name: 'Beth',
           last_name: 'Smith',
-          date_of_birth: Time.current.to_date
+          date_of_birth: Time.current.to_date,
+          confirm: true
         }
       end
 

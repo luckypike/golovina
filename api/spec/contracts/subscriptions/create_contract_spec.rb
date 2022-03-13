@@ -10,7 +10,8 @@ RSpec.describe Subscriptions::CreateContract, :aggregate_failures do
           email: 'user@example.com',
           first_name: 'Summer',
           last_name: 'Smith',
-          date_of_birth: '2000-01-01'
+          date_of_birth: '2000-01-01',
+          confirm: true
         }
       end
 
@@ -22,7 +23,7 @@ RSpec.describe Subscriptions::CreateContract, :aggregate_failures do
 
       it do
         expect(cmd).to be_failure
-        expect(cmd.errors.to_h).to include(:email, :first_name, :last_name, :date_of_birth)
+        expect(cmd.errors.to_h).to include(:email, :first_name, :last_name, :date_of_birth, :confirm)
       end
     end
 
@@ -32,7 +33,8 @@ RSpec.describe Subscriptions::CreateContract, :aggregate_failures do
           email: 'user@example',
           first_name: 'Summer',
           last_name: 'Smith',
-          date_of_birth: '2000-01-01'
+          date_of_birth: '2000-01-01',
+          confirm: true
         }
       end
 
@@ -48,13 +50,31 @@ RSpec.describe Subscriptions::CreateContract, :aggregate_failures do
           email: 'user@example.com',
           first_name: 'Summer',
           last_name: 'Smith',
-          date_of_birth: '2000-0101'
+          date_of_birth: '2000-0101',
+          confirm: true
         }
       end
 
       it do
         expect(cmd).to be_failure
         expect(cmd.errors.to_h).to include(:date_of_birth)
+      end
+    end
+
+    context 'with invalid confirm' do
+      let(:params) do
+        {
+          email: 'user@example.com',
+          first_name: 'Summer',
+          last_name: 'Smith',
+          date_of_birth: '2000-01-01',
+          confirm: false
+        }
+      end
+
+      it do
+        expect(cmd).to be_failure
+        expect(cmd.errors.to_h).to include(:confirm)
       end
     end
   end
