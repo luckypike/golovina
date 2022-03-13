@@ -140,7 +140,7 @@ export default function Header (props) {
           }
         </a>
 
-        <a href={path('cart_path')} className={classNames(styles.cart, { [styles.active]: cart > 0 })}>
+        <a href="/cart" className={classNames(styles.cart, { [styles.active]: cart > 0 })}>
           <CartImg />
 
           {cart > 0 &&

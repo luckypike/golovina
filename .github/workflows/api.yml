@@ -1,0 +1,61 @@
+name: API CI
+
+on: [push]
+
+defaults:
+  run:
+    working-directory: api
+
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          working-directory: api
+          bundler-cache: true
+      - name: Rubocop
+        run: bundle exec rubocop --parallel
+
+  rspec:
+    runs-on: ubuntu-latest
+
+    env:
+      RAILS_ENV: test
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          working-directory: api
+          bundler-cache: true
+      - run: sudo apt-get install -y libvips
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:migrate
+      - name: RSpec
+        run: bundle exec rspec

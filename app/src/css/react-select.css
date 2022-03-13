@@ -1,0 +1,59 @@
+.golovina-select__control {
+  border-radius: 0 !important;
+  background: rgb(var(--theme-bg-primary-color)) !important;
+  color: rgb(var(--theme-fg-primary-color)) !important;
+  box-shadow: inset 0 0 0 1px rgb(var(--theme-sp-color)) !important;
+  appearance: none !important;
+  /* display: block !important; */
+  width: 100% !important;
+  margin: 0 !important;
+  border: 0 !important;
+  /* padding: var(--yr-xs) var(--xr) !important; */
+  font-size: 1rem !important;
+  line-height: 1.75rem !important;
+}
+
+.golovina-select__value-container {
+  /* padding: 0 !important; */
+  padding: var(--yr-xs) var(--xr) !important;
+}
+
+.golovina-select__input-container {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.golovina-select__indicator {
+  padding: var(--yr-xs) !important;
+}
+
+.golovina-select__indicator-separator {
+  display: none;
+}
+
+.golovina-select__menu {
+  background: rgb(var(--theme-bg-primary-color)) !important;
+  box-shadow: 0 0 0 1px rgb(var(--theme-sp-color)) !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+
+.golovina-select__menu-list  {
+  padding: 0 !important;
+}
+
+.golovina-select__option--is-focused {
+  background: red !important;
+  background: rgb(var(--theme-sp-color)) !important;
+
+}
+
+/*
+outline: none;
+font-family: inherit;
+font-weight: 400;
+background: rgb(var(--theme-bg-primary-color));
+color: rgb(var(--theme-fg-primary-color));
+resize: vertical;
+box-shadow: inset 0 0 0 1px rgb(var(--theme-sp-color));
+transition: box-shadow 0.3s; */

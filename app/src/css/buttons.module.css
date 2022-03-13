@@ -6,6 +6,7 @@
   border: 0;
   padding: var(--yr-xs) var(--xr);
   font-size: var(--fs-at);
+  position: relative;
   line-height: 1.75rem;
   outline: none;
   font-family: inherit;
@@ -18,8 +19,37 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   cursor: pointer;
+  white-space: nowrap;
 }
 
-.main:hover {
+.main:disabled {
+  cursor: not-allowed;
+  /* pointer-events: all !important; */
+  opacity: 0.5;
+
+}
+
+.main:hover:not(:disabled) {
   background: rgb(var(--theme-bg-primary-color-hover));
+}
+
+.s {
+  padding: var(--yr) var(--xr);
+}
+
+.main::after {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  content: '';
+  background: rgb(var(--theme-bg-primary-color-hover)) url(../icons/dots.svg) center no-repeat;
+  background-size: auto 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.submitting::after {
+  opacity: 1;
 }

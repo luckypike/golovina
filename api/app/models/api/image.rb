@@ -37,7 +37,8 @@ module Api
     end
 
     def photo
-      OpenStruct.new(thumb: OpenStruct.new(url: thumb_url))
+      # TODO: remove this
+      OpenStruct.new(thumb: OpenStruct.new(url: thumb_url)) # rubocop:disable Style/OpenStructUse
     end
   end
 end

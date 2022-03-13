@@ -1,0 +1,54 @@
+.root {
+  width: 15em;
+}
+
+.button {
+  appearance: none;
+  display: flex;
+  justify-content: center;
+  width: auto;
+  margin: 0;
+  border: 0;
+  position: relative;
+  padding: var(--yr) var(--xr);
+  font-size: var(--fs-mt);
+  line-height: 1.75rem;
+  outline: none;
+  font-family: inherit;
+  font-weight: 400;
+  background: #000;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.logo {
+  display: block;
+  margin-right: calc(var(--yr) * 2);
+  width: 1rem;
+  height: 1.75rem;
+}
+
+.button::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  background: #444 url(./dots.svg) center no-repeat;
+  background-size: auto 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.disabled::after {
+  opacity: 1;
+}

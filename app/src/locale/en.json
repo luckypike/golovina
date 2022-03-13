@@ -52,7 +52,98 @@
     "first_name": "First name",
     "last_name": "Last name",
     "date_of_birth": "Date of birth",
+    "confirm": "I confirm that I have read and understand the",
+    "confirm_url": "privacy policy.",
     "subscribe": "Subscribe",
     "submitted": "Thanks for subscribing"
+  },
+  "Cart": {
+    "title": "Cart",
+    "color": "Color",
+    "size": "Size",
+    "qnt": "Quantity",
+    "change": "Change shopping list",
+    "delete": "Remove from cart",
+    "Summary": {
+      "title": "Order information",
+      "order_items": "Products cost",
+      "delivery": {
+        "russia": {
+          "title": "Delivery across Russia",
+          "value": "from 265 ₽"
+        },
+        "international": {
+          "title": "International shipping",
+          "value": "2800 ₽"
+        }
+      },
+      "login": "Place order",
+      "checkout": "Continue as guest"
+    },
+    "Login":  {
+      "submit": "Continue as guest",
+      "desc": "You may login using AppleID. You`re name and email will be send to us automatically, and you will always be able to login by TouchId or FaceID.",
+      "or": "Or"
+    },
+    "Checkout": {
+      "title": "Shipping data",
+      "name": "First name",
+      "sname": "Last name",
+      "phone": "Phone",
+      "email": "Email",
+      "comment": "Comment",
+      "submit": "To delivery address"
+    },
+    "Delivery": {
+      "title": "Select a shipping method",
+      "address": "Delivery address",
+      "submit": "To checkout",
+      "pickup": {
+        "title": "Collect from store",
+        "desc": "Moscow, Bolshaya Nikitskaya 21/18 str 4"
+      },
+      "russia": {
+        "title": "Russia shipping by CDEK",
+        "desc": "More than 500 cities from 265 ₽"
+      },
+      "international": {
+        "title": "International",
+        "desc": "International shipping — 2800 ₽"
+      },
+      "delivery_city_id": "City",
+      "delivery_option": {
+        "door": "Доставка до двери ({days} дн.)",
+        "storage": "Доставка до точки выдачи ({days} дн.)"
+      },
+      "zip": "Zip code",
+      "country": "Country",
+      "city": "City",
+      "street": "Street",
+      "house": "Street number",
+      "appartment": "Appartment",
+      "summary": {
+        "order": "Products cost",
+        "russia": "Delivery across Russia",
+        "international": "International shipping",
+        "total": "Total"
+      }
+    },
+    "Pay": {
+      "processing": "Generate bank payment, please wait.."
+    }
+  },
+  "PromoCode": {
+    "title": "Promo code",
+    "apply": "Apply",
+    "applied": "Promo code applied",
+    "delete": "Remove",
+    "placeholder": "Promo code",
+    "error": "Promo code not found"
+  },
+  "AppleID": {
+    "sign_in": "Sign in Apple ID"
+  },
+  "PrivacyPolicy": {
+    "title": "Privacy policy"
   }
 }

@@ -2,7 +2,7 @@
 
 RSpec.describe Tokens::IgUpdateJob, :aggregate_failures do
   describe '#perform' do
-    subject { described_class.perform_now }
+    subject(:cmd) { described_class.perform_now }
 
     before do
       allow(Tokens::IgUpdateCmd).to receive(:call).and_return(true)
@@ -13,7 +13,7 @@ RSpec.describe Tokens::IgUpdateJob, :aggregate_failures do
     end
 
     it do
-      subject
+      cmd
 
       expect(Tokens::IgUpdateCmd).to have_received(:call).with(token: a_kind_of(Token))
     end

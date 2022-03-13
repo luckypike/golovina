@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Instagram::UpdateCmd, :aggregate_failures do
-  subject { described_class.call }
+  subject(:cmd) { described_class.call }
+
   let(:access_token) { Random.hex }
   let(:token) { create(:token, key: :instagram, value: access_token) }
 
@@ -25,7 +26,7 @@ RSpec.describe Instagram::UpdateCmd, :aggregate_failures do
       let(:data) { [{ id: '12345' }] }
 
       it do
-        subject
+        cmd
 
         expect(Rails.cache.read('instagram')).to match(data)
       end
@@ -40,7 +41,7 @@ RSpec.describe Instagram::UpdateCmd, :aggregate_failures do
       end
 
       it do
-        expect { subject }.to raise_error(StandardError)
+        expect { cmd }.to raise_error(StandardError)
       end
     end
 
@@ -49,7 +50,7 @@ RSpec.describe Instagram::UpdateCmd, :aggregate_failures do
       let(:response) { {} }
 
       it do
-        expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+        expect { cmd }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

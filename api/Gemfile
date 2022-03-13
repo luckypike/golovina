@@ -51,6 +51,7 @@ gem 'hiredis'
 gem 'react-rails'
 gem 'webpacker'
 
+gem 'oj'
 gem 'jbuilder'
 gem 'jb'
 gem 'jsonapi-serializer'

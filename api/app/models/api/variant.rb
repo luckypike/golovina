@@ -17,5 +17,9 @@ module Api
     globalize_accessors locales: I18n.available_locales, attributes: %i[desc comp title]
 
     validates :title_ru, :state, presence: true
+
+    def price_final
+      [price, price_last].compact.min
+    end
   end
 end

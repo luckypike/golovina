@@ -15,6 +15,7 @@ import Bugsnag from '../lib/bugsnag'
 
 import 'normalize.css'
 import '../css/app.css'
+import '../css/react-select.css'
 
 const plugin = Bugsnag.getPlugin('react') as BugsnagPluginReactResult
 const ErrorBoundary = plugin.createErrorBoundary(React)

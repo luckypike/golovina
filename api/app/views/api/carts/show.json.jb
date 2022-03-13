@@ -1,0 +1,44 @@
+# frozen_string_literal: true
+
+order = @cmd.order
+user = @cmd.order.user
+
+{
+  order: order && {
+    id: order.id,
+    user: user && {
+      id: user.id,
+      phone: user.phone,
+      full_name: user.full_name
+    },
+    comment: order.comment,
+    promo_code: order.promo_code && {
+      id: order.promo_code.id,
+      title: order.promo_code.title
+    },
+    price_final: order.price_final.to_f,
+    price: order.price.to_f,
+    price_delivery: order.price_delivery.to_f,
+    delivery: order.delivery,
+    delivery_option: order.delivery_option
+  },
+  order_items: @cmd.order_items.map do |item|
+    # TODO: remove this
+    image = Api::Image.where(imagable_type: 'Variant', imagable_id: item.variant_id).active_and_ordered.first
+    {
+      id: item.id,
+      quantity: item.quantity,
+      price: item.price.to_f,
+      price_final: item.price_final.to_f,
+      size: item.size.slice(:id, :title),
+      variant: {
+        title: item.variant.title,
+        color: item.variant.color.slice(:id, :title),
+        image: {
+          id: image.id,
+          src: image.thumb_url
+        }
+      }
+    }
+  end
+}

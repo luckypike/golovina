@@ -5,5 +5,9 @@ module Api
     def show?
       true
     end
+
+    def apple?
+      true
+    end
   end
 end

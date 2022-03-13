@@ -284,6 +284,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
+    oj (3.13.11)
     orm_adapter (0.5.0)
     parallel (1.21.0)
     parser (3.1.0.0)
@@ -467,6 +468,7 @@ GEM
 PLATFORMS
   aarch64-linux-musl
   arm64-darwin-20
+  arm64-darwin-21
   x86_64-darwin-21
   x86_64-linux-musl
 
@@ -505,6 +507,7 @@ DEPENDENCIES
   mini_magick
   mjml-rails
   newrelic_rpm
+  oj
   pg (~> 1.0)
   puma (~> 5.5)
   pundit

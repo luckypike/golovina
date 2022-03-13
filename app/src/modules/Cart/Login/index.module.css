@@ -1,0 +1,44 @@
+.root {
+  text-align: center;
+}
+
+.appleid {
+  display: inline-block;
+  margin: 0 auto var(--yr-xs);
+}
+
+.desc {
+  font-size: var(--fs-at);
+  line-height: var(--lh-at);
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+.or {
+  font-size: var(--fs-at);
+  line-height: var(--lh-at);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: var(--yr-m) auto;
+  position: relative;
+  width: 4rem;
+  text-align: center;
+}
+
+.or::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: 5rem;
+  border-top: 1px solid rgb(var(--theme-sp-color));
+}
+
+.or::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 5rem;
+  border-top: 1px solid rgb(var(--theme-sp-color));
+}

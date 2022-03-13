@@ -7,6 +7,7 @@ module Subscriptions
       required(:first_name).filled(:string)
       required(:last_name).filled(:string)
       required(:date_of_birth).filled(:date)
+      required(:confirm).filled(true)
     end
   end
 end

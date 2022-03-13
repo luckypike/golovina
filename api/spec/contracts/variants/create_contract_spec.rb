@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
 RSpec.describe Variants::CreateContract, :aggregate_failures do
-  subject { described_class.new.call(**params) }
+  subject(:cmd) { described_class.new.call(**params) }
 
   describe '#call' do
     context 'with required params' do
       let(:params) { { category_id: 1, color_id: 1, state: 'active', title_ru: 'Title ru' } }
 
-      it { should be_success }
+      it { is_expected.to be_success }
     end
 
     context 'without required params' do
       let(:params) { { foo: :bar } }
 
       it do
-        expect(subject).to be_failure
-        expect(subject.errors.to_h).to include(:category_id, :color_id, :state, :title_ru)
+        expect(cmd).to be_failure
+        expect(cmd.errors.to_h).to include(:category_id, :color_id, :state, :title_ru)
       end
     end
 
@@ -27,15 +27,15 @@ RSpec.describe Variants::CreateContract, :aggregate_failures do
         }
       end
 
-      it { should be_success }
+      it { is_expected.to be_success }
     end
 
     context 'with wrong params' do
       let(:params) { { category_id: nil, title_ru: '', color_id: 'qqq' } }
 
       it do
-        expect(subject).to be_failure
-        expect(subject.errors.to_h).to include(:category_id, :title_ru, :color_id)
+        expect(cmd).to be_failure
+        expect(cmd.errors.to_h).to include(:category_id, :title_ru, :color_id)
       end
     end
 
@@ -53,12 +53,15 @@ RSpec.describe Variants::CreateContract, :aggregate_failures do
       end
 
       it do
-        expect(subject).to be_success
-        expect(subject.to_h.keys).to contain_exactly(
+        expect(cmd).to be_success
+      end
+
+      it do
+        expect(cmd.to_h.keys).to contain_exactly(
           :product_id, :category_id, :color_id, :state, :title_ru, :title_en, :desc_ru, :desc_en,
           :comp_ru, :comp_en, :price, :price_last, :code, :published_at, :images
         )
-        expect(subject.to_h[:images].first.keys).to contain_exactly(:id, :weight, :active)
+        expect(cmd.to_h[:images].first.keys).to contain_exactly(:id, :weight, :active)
       end
     end
   end

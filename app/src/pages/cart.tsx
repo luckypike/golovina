@@ -1,15 +1,17 @@
-import type { GetServerSideProps, NextPage } from 'next'
-import Link from 'next/link'
+import type { NextPage } from 'next'
+import { useState } from 'react'
+
+import { Cart } from '../modules/Cart'
+import { CartContext } from '../modules/Cart/context'
+import { CartStore } from '../modules/Cart/store'
 
 const CartPage: NextPage = () => {
-  return (
-    <div>
-      <main>Cart</main>
+  const [store] = useState(new CartStore())
 
-      <p>
-        <Link href="/">Index</Link>
-      </p>
-    </div>
+  return (
+    <CartContext.Provider value={store}>
+      <Cart />
+    </CartContext.Provider>
   )
 }
 

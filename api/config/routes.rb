@@ -6,7 +6,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       get :index
     end
 
-    resource :session, only: %i[show destroy]
+    resource :session, only: %i[show destroy] do
+      post :apple
+    end
     resources :variants, only: %i[new edit create update]
     resources :images, only: %i[create] do
       collection do
@@ -15,6 +17,15 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
 
     resources :subscriptions, only: %i[create]
+    resource :cart, only: %i[show] do
+      member do
+        post :checkout
+        post :delivery
+        post :promo_code, action: :apply_promo_code
+        delete :promo_code, action: :delete_promo_code
+        delete 'order_items/:id', action: :delete_order_item
+      end
+    end
 
     get :status, to: 'status#index'
   end
@@ -196,8 +207,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   end
 
   resources :order_items, only: %i[destroy]
-
-  get :cart, to: 'orders#cart'
 
   resources :slides, except: [:show]
 end

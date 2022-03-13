@@ -1,24 +1,12 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :paid
 
   before_action :set_order, only: %i[checkout archive unarchive pay delivery]
   before_action :authorize_order
 
-  def cart
-    return unless user_signed_in?
-
-    respond_to do |format|
-      format.html
-      format.json do
-        @order = current_user.cart
-        @items = @order.items.with_variant.with_size
-      end
-    end
-  end
-
   def checkout
-    sleep 1
-
     @order.assign_attributes({ to_pay: true })
     @order.user.assign_attributes({ state: :common })
 

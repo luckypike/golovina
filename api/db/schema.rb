@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_17_144929) do
+ActiveRecord::Schema.define(version: 2022_02_23_111617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,6 +182,8 @@ ActiveRecord::Schema.define(version: 2022_02_17_144929) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "fast", default: false
+    t.index ["fast"], name: "index_delivery_cities_on_fast"
+    t.index ["title"], name: "index_delivery_cities_on_title"
   end
 
   create_table "discounts", force: :cascade do |t|
@@ -301,7 +303,9 @@ ActiveRecord::Schema.define(version: 2022_02_17_144929) do
     t.integer "tracker_type"
     t.string "tracker_id"
     t.string "zip"
+    t.bigint "promo_code_id"
     t.index ["delivery_city_id"], name: "index_orders_on_delivery_city_id"
+    t.index ["promo_code_id"], name: "index_orders_on_promo_code_id"
     t.index ["state"], name: "index_orders_on_state"
     t.index ["user_address_id"], name: "index_orders_on_user_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -331,7 +335,6 @@ ActiveRecord::Schema.define(version: 2022_02_17_144929) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "colors", array: true
-    t.bigint "kind_id"
     t.integer "state_manual", default: 0
     t.string "title"
     t.boolean "sale", default: false
@@ -344,7 +347,16 @@ ActiveRecord::Schema.define(version: 2022_02_17_144929) do
     t.boolean "pinned", default: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["colors"], name: "index_products_on_colors", using: :gin
-    t.index ["kind_id"], name: "index_products_on_kind_id"
+  end
+
+  create_table "promo_codes", force: :cascade do |t|
+    t.integer "discount", null: false
+    t.decimal "value", null: false
+    t.integer "state", null: false
+    t.string "title", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["title"], name: "index_promo_codes_on_title", unique: true
   end
 
   create_table "promo_translations", force: :cascade do |t|
@@ -602,6 +614,7 @@ ActiveRecord::Schema.define(version: 2022_02_17_144929) do
   add_foreign_key "order_items", "sizes"
   add_foreign_key "order_items", "variants"
   add_foreign_key "orders", "delivery_cities"
+  add_foreign_key "orders", "promo_codes"
   add_foreign_key "orders", "user_addresses"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"

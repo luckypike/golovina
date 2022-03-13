@@ -14,7 +14,7 @@ module Api
     private
 
     def authorize_page
-      authorize :page
+      authorize %i[api page]
     end
   end
 end

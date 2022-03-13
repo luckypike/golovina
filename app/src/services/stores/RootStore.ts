@@ -6,6 +6,10 @@ export interface SessionData {
     id: number
     state: number
     editor: boolean
+    name: string
+    sname: string
+    email: string
+    phone: string
   }
   wishlist: number
   cart: number
@@ -17,6 +21,10 @@ export class RootStore {
   sessionData: SessionData = {
     user: {
       id: 0,
+      name: '',
+      sname: '',
+      email: '',
+      phone: '',
       state: 0,
       editor: false
     },

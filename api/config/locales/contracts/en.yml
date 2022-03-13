@@ -1,0 +1,24 @@
+ru:
+  contracts:
+    errors:
+      key?: must be filled
+      filled?: must be filled
+      date?: only date
+      int?: only digits
+      hash?: must be filled
+      type?: wrong value
+      true?: must be selected
+
+      format?:
+        failure: wrong format
+        value:
+          email: only email
+          phone: only phone
+
+      rules:
+        delivery:
+          key?: select delivery
+
+      variant:
+        price_empty?: не указана начальная
+        price_last_gt?: должна быть меньше чем начальная
