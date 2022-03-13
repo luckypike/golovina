@@ -2,7 +2,7 @@
   margin: 0 var(--xr);
 }
 
-@media (--m)  {
+@media (--m) {
   .root {
     margin: 0 calc(var(--xr) * 2);
   }
@@ -59,7 +59,7 @@
   margin: 0 0 var(--yr-xs);
 }
 
-@media(--s) {
+@media (--s) {
   .insta {
     margin: calc(var(--yr-xl) * 2) 0 0;
   }
@@ -70,7 +70,7 @@
   }
 }
 
-@media(--s) {
+@media (--s) {
   .main {
     display: grid;
     grid-template-columns: 1fr 1fr;

@@ -65,7 +65,7 @@ export const Header: FC = observer(() => {
 
       <div className={cc([s.top, { [s.scrolling]: scrolling }])} onClick={handleScrollUp}>
         <svg viewBox="0 0 32 32">
-          <polyline points="10 19 16 13 22 19"/>
+          <polyline points="10 19 16 13 22 19" />
         </svg>
       </div>
     </>

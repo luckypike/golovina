@@ -4,7 +4,7 @@ import { makeAutoObservable } from 'mobx'
 export class LayoutStore {
   activeNav = false
 
-  constructor () {
+  constructor() {
     makeAutoObservable(this)
   }
 

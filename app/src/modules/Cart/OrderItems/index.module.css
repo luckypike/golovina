@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 6rem 1fr;
   grid-gap: var(--xr);
-
 }
 
 .item:not(:last-child) {
@@ -18,7 +17,8 @@
   max-width: 6rem;
 }
 
-.button, .delete {
+.button,
+.delete {
   cursor: pointer;
   display: block;
   appearance: none;

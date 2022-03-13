@@ -38,7 +38,6 @@
   position: relative;
   display: block;
   overflow: hidden;
-
 }
 
 .item::before {
@@ -48,7 +47,6 @@
   padding: 100% 0 0;
   /* padding-top: calc(1800 / 1440 * 100%); */
 }
-
 
 .item > img {
   position: absolute;

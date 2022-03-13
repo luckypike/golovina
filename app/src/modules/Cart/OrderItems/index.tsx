@@ -24,16 +24,14 @@ export const OrderItems: FC = observer(() => {
 
   return (
     <div>
-      {orderItems?.map(orderItem =>
+      {orderItems?.map((orderItem) => (
         <div key={orderItem.id} className={s.item}>
           <div className={s.image}>
             <img src={orderItem.variant.image.src} alt={orderItem.variant.title} />
           </div>
 
           <div className={s.main}>
-            <div className={s.title}>
-              {orderItem.variant.title}
-            </div>
+            <div className={s.title}>{orderItem.variant.title}</div>
 
             <div className={s.price}>
               <Price price={orderItem.price} priceFinal={orderItem.price_final} />
@@ -51,20 +49,24 @@ export const OrderItems: FC = observer(() => {
               {t('qnt')}: {orderItem.quantity}
             </div>
 
-            {step === 'cart' &&
+            {step === 'cart' && (
               <div>
-                <button onClick={async () => await handleDelete(orderItem.id)} className={s.delete} type="button">{t('delete')}</button>
+                <button onClick={async () => await handleDelete(orderItem.id)} className={s.delete} type="button">
+                  {t('delete')}
+                </button>
               </div>
-            }
+            )}
           </div>
         </div>
-      )}
+      ))}
 
-      {step !== 'cart' &&
+      {step !== 'cart' && (
         <div>
-          <button onClick={() => setStep('cart')} className={s.button} type="button">{t('change')}</button>
+          <button onClick={() => setStep('cart')} className={s.button} type="button">
+            {t('change')}
+          </button>
         </div>
-      }
+      )}
     </div>
   )
 })

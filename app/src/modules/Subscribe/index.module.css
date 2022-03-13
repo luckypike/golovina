@@ -4,7 +4,7 @@
   padding: var(--yr-xl) var(--xr);
 }
 
-@media (--m)  {
+@media (--m) {
   .root {
     padding: var(--yr-xl) calc(var(--xr) * 2);
   }
@@ -16,7 +16,7 @@
   }
 }
 
-@media (--s)  {
+@media (--s) {
   .main {
     margin: 0 calc(3 / 12 * 100%);
   }
@@ -28,4 +28,3 @@
   margin: 0 0 var(--yr-l);
   text-align: center;
 }
-

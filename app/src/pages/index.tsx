@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const indexData = await getIndexData(context.locale)
 
   return {
-    props: { data: indexData }
+    props: { data: indexData },
   }
 }
 

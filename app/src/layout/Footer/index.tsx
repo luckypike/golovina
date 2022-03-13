@@ -33,9 +33,7 @@ export const Footer: FC = () => {
         <a href="mailto:shop@golovinamari.com">shop@golovinamari.com</a>
       </div>
 
-      <div className={s.right}>
-        &copy; 2017 — 2022 {t('copy')}
-      </div>
+      <div className={s.right}>&copy; 2017 — 2022 {t('copy')}</div>
     </footer>
   )
 }

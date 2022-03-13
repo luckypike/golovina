@@ -7,7 +7,7 @@ export class CartStore {
   reload = true
   step: Step = 'cart'
 
-  constructor () {
+  constructor() {
     makeAutoObservable(this)
   }
 

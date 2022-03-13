@@ -2,7 +2,7 @@
   margin: 0 var(--xr);
 }
 
-@media (--m)  {
+@media (--m) {
   .root {
     margin: 0 calc(var(--xr) * 2);
   }

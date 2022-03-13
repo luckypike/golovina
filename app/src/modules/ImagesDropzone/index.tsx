@@ -21,14 +21,14 @@ export const ImagesDropzone: FC<{ store: ImagesDropzoneStore }> = observer(({ st
           filename: file.name,
           checksum: btoa(spark.end(true)),
           content_type: file.type || 'application/octet-stream',
-          byte_size: file.size
+          byte_size: file.size,
         })
 
         store.addImage(0, touchData.key, URL.createObjectURL(file), false, 0, {
           file,
           url: touchData.upload_url,
           signed_id: touchData.signed_id,
-          headers: touchData.upload_headers
+          headers: touchData.upload_headers,
         })
       }
 
@@ -36,7 +36,10 @@ export const ImagesDropzone: FC<{ store: ImagesDropzoneStore }> = observer(({ st
     })
   }, [])
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: handleImagesUpload, multiple: true })
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: handleImagesUpload,
+    multiple: true,
+  })
 
   return (
     <ImagesDropzoneContext.Provider value={store}>

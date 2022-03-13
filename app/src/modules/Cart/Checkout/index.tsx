@@ -23,7 +23,9 @@ interface Values {
 }
 
 export const Checkout: FC = observer(() => {
-  const { sessionData: { user } } = useRootContext()
+  const {
+    sessionData: { user },
+  } = useRootContext()
   const { order, setStep } = useCartContext()
   const t = useTranslations('Cart.Checkout')
   const {
@@ -31,24 +33,28 @@ export const Checkout: FC = observer(() => {
     handleSubmit,
     control,
     setError,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
   } = useForm<Values>({
     defaultValues: {
       name: user.name,
       sname: user.sname,
       email: user.email,
       phone: user.phone,
-      comment: order?.comment
-    }
+      comment: order?.comment,
+    },
   })
 
   const onSubmit: SubmitHandler<Values> = async (data) => {
     try {
       await axios.post('/cart/checkout', data)
       setStep('delivery')
-    } catch ({ response: { data: { errors: errorsData } } }) {
+    } catch ({
+      response: {
+        data: { errors: errorsData },
+      },
+    }) {
       entries(errorsData as Record<keyof Values, string[]>).forEach(([name, messages]) => {
-        messages.map(message => setError(name, { type: 'manual', message }))
+        messages.map((message) => setError(name, { type: 'manual', message }))
       })
     }
   }
@@ -57,16 +63,14 @@ export const Checkout: FC = observer(() => {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={sf.el}>
-          <h2 className={cc([s.header, s.sp])}>
-            {t('title')}
-          </h2>
+          <h2 className={cc([s.header, s.sp])}>{t('title')}</h2>
 
           <label className={sf.it}>
             <div className={sf.lb}>{t('name')}</div>
             <input className={sf.in} type="text" {...register('name')} />
           </label>
 
-          {(errors.name != null) && <div className={sf.er}>{errors.name.message}</div>}
+          {errors.name != null && <div className={sf.er}>{errors.name.message}</div>}
         </div>
 
         <div className={sf.el}>
@@ -75,7 +79,7 @@ export const Checkout: FC = observer(() => {
             <input className={sf.in} type="text" {...register('sname')} />
           </label>
 
-          {(errors.sname != null) && <div className={sf.er}>{errors.sname.message}</div>}
+          {errors.sname != null && <div className={sf.er}>{errors.sname.message}</div>}
         </div>
 
         <div className={sf.el}>
@@ -84,7 +88,7 @@ export const Checkout: FC = observer(() => {
             <input className={sf.in} type="text" {...register('email')} />
           </label>
 
-          {(errors.email != null) && <div className={sf.er}>{errors.email.message}</div>}
+          {errors.email != null && <div className={sf.er}>{errors.email.message}</div>}
         </div>
 
         <div className={sf.el}>
@@ -94,12 +98,23 @@ export const Checkout: FC = observer(() => {
             <Controller
               control={control}
               name="phone"
-              render={({ field }) => <Cleave className={sf.in} {...field} type="tel" options={{ numeral: true, prefix: '+', numeralThousandsGroupStyle: 'none' }} />}
+              render={({ field }) => (
+                <Cleave
+                  className={sf.in}
+                  {...field}
+                  type="tel"
+                  options={{
+                    numeral: true,
+                    prefix: '+',
+                    numeralThousandsGroupStyle: 'none',
+                  }}
+                />
+              )}
             />
             {/* <input className={sf.in} type="text" {...register('phone')} /> */}
           </label>
 
-          {(errors.phone != null) && <div className={sf.er}>{errors.phone.message}</div>}
+          {errors.phone != null && <div className={sf.er}>{errors.phone.message}</div>}
         </div>
 
         <div className={sf.el}>
@@ -110,7 +125,9 @@ export const Checkout: FC = observer(() => {
         </div>
 
         <div>
-          <button className={cc([sb.main, { [sb.submitting]: isSubmitting }])} disabled={isSubmitting} type="submit">{t('submit')}</button>
+          <button className={cc([sb.main, { [sb.submitting]: isSubmitting }])} disabled={isSubmitting} type="submit">
+            {t('submit')}
+          </button>
         </div>
       </form>
     </div>

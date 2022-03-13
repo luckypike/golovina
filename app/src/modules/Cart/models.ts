@@ -44,7 +44,7 @@ export interface OrderItemData {
   }
 }
 
-export type Step = 'cart' | 'login' | 'delivery' |'checkout' | 'pay'
+export type Step = 'cart' | 'login' | 'delivery' | 'checkout' | 'pay'
 
 export interface DeliveryCityData {
   id: number

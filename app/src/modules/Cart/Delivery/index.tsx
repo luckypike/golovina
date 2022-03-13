@@ -36,7 +36,7 @@ export const Delivery: FC = observer(() => {
     clearErrors,
     watch,
     setError,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
   } = useForm<Values>()
 
   const onSubmit: SubmitHandler<Values> = async (data) => {
@@ -44,9 +44,13 @@ export const Delivery: FC = observer(() => {
       await axios.post('/cart/delivery', data)
       setReload(true)
       setStep('pay')
-    } catch ({ response: { data: { errors: errorsData } } }) {
+    } catch ({
+      response: {
+        data: { errors: errorsData },
+      },
+    }) {
       entries(errorsData as Record<keyof Values, string[]>).forEach(([name, messages]) => {
-        messages.map(message => setError(name, { type: 'manual', message }))
+        messages.map((message) => setError(name, { type: 'manual', message }))
       })
     }
   }
@@ -80,65 +84,55 @@ export const Delivery: FC = observer(() => {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={sf.el}>
-          <h2 className={s.header}>
-            {t('title')}
-          </h2>
+          <h2 className={s.header}>{t('title')}</h2>
 
           <div
             className={cc([s.delivery, { [s.active]: watchDelivery === 'pickup' }])}
-            onClick={() => { setValue('delivery', 'pickup') }}
+            onClick={() => {
+              setValue('delivery', 'pickup')
+            }}
           >
-            <strong>
-              {t('pickup.title')}
-            </strong>
+            <strong>{t('pickup.title')}</strong>
 
-            <div className={s.desc}>
-              {t('pickup.desc')}
-            </div>
+            <div className={s.desc}>{t('pickup.desc')}</div>
           </div>
 
           <div
             className={cc([s.delivery, { [s.active]: watchDelivery === 'russia' }])}
-            onClick={() => { setValue('delivery', 'russia') }}
+            onClick={() => {
+              setValue('delivery', 'russia')
+            }}
           >
-            <strong>
-              {t('russia.title')}
-            </strong>
+            <strong>{t('russia.title')}</strong>
 
-            <div className={s.desc}>
-              {t('russia.desc')}
-            </div>
+            <div className={s.desc}>{t('russia.desc')}</div>
           </div>
 
           <div
             className={cc([s.delivery, { [s.active]: watchDelivery === 'international' }])}
-            onClick={() => { setValue('delivery', 'international') }}
+            onClick={() => {
+              setValue('delivery', 'international')
+            }}
           >
-            <strong>
-              {t('international.title')}
-            </strong>
+            <strong>{t('international.title')}</strong>
 
-            <div className={s.desc}>
-              {t('international.desc')}
-            </div>
+            <div className={s.desc}>{t('international.desc')}</div>
           </div>
 
-          {(errors.delivery != null) && <div className={sf.er}>{errors.delivery.message}</div>}
+          {errors.delivery != null && <div className={sf.er}>{errors.delivery.message}</div>}
         </div>
 
-        {watchDelivery === 'international' &&
+        {watchDelivery === 'international' && (
           <>
             <div className={sf.el}>
-              <h2 className={cc([s.header, s.sp])}>
-                {t('address')}
-              </h2>
+              <h2 className={cc([s.header, s.sp])}>{t('address')}</h2>
 
               <label className={sf.it}>
                 <div className={sf.lb}>{t('country')}</div>
                 <input className={sf.in} type="text" {...register('country')} />
               </label>
 
-              {(errors.country != null) && <div className={sf.er}>{errors.country.message}</div>}
+              {errors.country != null && <div className={sf.er}>{errors.country.message}</div>}
             </div>
 
             <div className={sf.el}>
@@ -147,17 +141,15 @@ export const Delivery: FC = observer(() => {
                 <input className={sf.in} type="text" {...register('city')} />
               </label>
 
-              {(errors.city != null) && <div className={sf.er}>{errors.city.message}</div>}
+              {errors.city != null && <div className={sf.er}>{errors.city.message}</div>}
             </div>
           </>
-        }
+        )}
 
-        {watchDelivery === 'russia' &&
+        {watchDelivery === 'russia' && (
           <>
             <div className={sf.el}>
-              <h2 className={cc([s.header, s.sp])}>
-                {t('address')}
-              </h2>
+              <h2 className={cc([s.header, s.sp])}>{t('address')}</h2>
 
               <label className={sf.it}>
                 <div className={sf.lb}>{t('delivery_city_id')}</div>
@@ -179,16 +171,20 @@ export const Delivery: FC = observer(() => {
                       if (option.door_days && option.door) {
                         tempDeliveryOptions.push({
                           id: 'door',
-                          title: t('delivery_option.door', { days: option.door_days }),
-                          price: option.door
+                          title: t('delivery_option.door', {
+                            days: option.door_days,
+                          }),
+                          price: option.door,
                         })
                       }
 
                       if (option.storage_days && option.storage) {
                         tempDeliveryOptions.push({
                           id: 'storage',
-                          title: t('delivery_option.storage', { days: option.storage_days }),
-                          price: option.storage
+                          title: t('delivery_option.storage', {
+                            days: option.storage_days,
+                          }),
+                          price: option.storage,
                         })
                       }
 
@@ -202,7 +198,7 @@ export const Delivery: FC = observer(() => {
                 />
               </label>
 
-              {(errors.delivery_city_id != null) && <div className={sf.er}>{errors.delivery_city_id.message}</div>}
+              {errors.delivery_city_id != null && <div className={sf.er}>{errors.delivery_city_id.message}</div>}
             </div>
 
             <div className={sf.el}>
@@ -213,12 +209,14 @@ export const Delivery: FC = observer(() => {
                 </label>
               ))}
 
-              {(errors.delivery_option != null) && (errors.delivery_city_id == null) && <div className={sf.er}>{errors.delivery_option.message}</div>}
+              {errors.delivery_option != null && errors.delivery_city_id == null && (
+                <div className={sf.er}>{errors.delivery_option.message}</div>
+              )}
             </div>
           </>
-        }
+        )}
 
-        {(watchDelivery === 'russia' || watchDelivery === 'international') &&
+        {(watchDelivery === 'russia' || watchDelivery === 'international') && (
           <>
             <div className={sf.el}>
               <label className={sf.it}>
@@ -226,7 +224,7 @@ export const Delivery: FC = observer(() => {
                 <input className={sf.in} type="text" {...register('zip')} />
               </label>
 
-              {(errors.zip != null) && <div className={sf.er}>{errors.zip.message}</div>}
+              {errors.zip != null && <div className={sf.er}>{errors.zip.message}</div>}
             </div>
 
             <div className={sf.el}>
@@ -235,7 +233,7 @@ export const Delivery: FC = observer(() => {
                 <input className={sf.in} type="text" {...register('street')} />
               </label>
 
-              {(errors.street != null) && <div className={sf.er}>{errors.street.message}</div>}
+              {errors.street != null && <div className={sf.er}>{errors.street.message}</div>}
             </div>
 
             <div className={s.row}>
@@ -245,7 +243,7 @@ export const Delivery: FC = observer(() => {
                   <input className={sf.in} type="text" {...register('house')} />
                 </label>
 
-                {(errors.house != null) && <div className={sf.er}>{errors.house.message}</div>}
+                {errors.house != null && <div className={sf.er}>{errors.house.message}</div>}
               </div>
 
               <div className={sf.el}>
@@ -254,18 +252,23 @@ export const Delivery: FC = observer(() => {
                   <input className={sf.in} type="text" {...register('appartment')} />
                 </label>
 
-                {(errors.appartment != null) && <div className={sf.er}>{errors.appartment.message}</div>}
+                {errors.appartment != null && <div className={sf.er}>{errors.appartment.message}</div>}
               </div>
             </div>
           </>
-        }
+        )}
 
         <div className={s.summary}>
-          <Summary watchDelivery={watchDelivery} deliveryOption={deliveryOptions.find(i => i.id === watchDeliveryOption)} />
+          <Summary
+            watchDelivery={watchDelivery}
+            deliveryOption={deliveryOptions.find((i) => i.id === watchDeliveryOption)}
+          />
         </div>
 
         <div>
-          <button className={cc([sb.main, { [sb.submitting]: isSubmitting }])} disabled={isSubmitting} type="submit">{t('submit')}</button>
+          <button className={cc([sb.main, { [sb.submitting]: isSubmitting }])} disabled={isSubmitting} type="submit">
+            {t('submit')}
+          </button>
         </div>
       </form>
     </div>

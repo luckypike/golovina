@@ -22,7 +22,9 @@ import { Pay } from './Pay'
 export const Cart: FC = observer(() => {
   const t = useTranslations('Cart')
   const store = useCartContext()
-  const { sessionData: { user } } = useRootContext()
+  const {
+    sessionData: { user },
+  } = useRootContext()
   const router = useRouter()
   const { order, reload, step, setStep, orderItems } = store
 
@@ -56,14 +58,14 @@ export const Cart: FC = observer(() => {
         <h1>{t('title')}</h1>
       </div>
 
-      {(order != null) && orderItems.length > 0 && step !== 'pay' &&
+      {order != null && orderItems.length > 0 && step !== 'pay' && (
         <div className={s.main}>
           <div className={s.order_items}>
             <OrderItems />
           </div>
 
           <div className={s.aside}>
-            {step === 'cart' &&
+            {step === 'cart' && (
               <>
                 <div className={s.promo_code}>
                   <PromoCode />
@@ -73,26 +75,18 @@ export const Cart: FC = observer(() => {
                   <Summary />
                 </div>
               </>
-            }
+            )}
 
-            {step === 'login' &&
-              <Login />
-            }
+            {step === 'login' && <Login />}
 
-            {step === 'delivery' &&
-              <Delivery />
-            }
+            {step === 'delivery' && <Delivery />}
 
-            {step === 'checkout' &&
-              <Checkout />
-            }
+            {step === 'checkout' && <Checkout />}
           </div>
         </div>
-      }
+      )}
 
-      {step === 'pay' &&
-        <Pay />
-      }
+      {step === 'pay' && <Pay />}
     </div>
   )
 })

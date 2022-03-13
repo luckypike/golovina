@@ -13,8 +13,13 @@ export interface SessionData {
   }
   wishlist: number
   cart: number
-  categories: Array<{ id: number, title: string, slug: string, weight: number }>
-  themes: Array<{ id: number, title: string, slug: string, weight: number }>
+  categories: Array<{
+    id: number
+    title: string
+    slug: string
+    weight: number
+  }>
+  themes: Array<{ id: number; title: string; slug: string; weight: number }>
 }
 
 export class RootStore {
@@ -26,18 +31,18 @@ export class RootStore {
       email: '',
       phone: '',
       state: 0,
-      editor: false
+      editor: false,
     },
     cart: 0,
     wishlist: 0,
     categories: [],
-    themes: []
+    themes: [],
   }
 
   headerInvert = false
   layoutStore = new LayoutStore()
 
-  constructor (sessionData: SessionData) {
+  constructor(sessionData: SessionData) {
     this.sessionData = sessionData
 
     makeAutoObservable(this)
@@ -47,11 +52,11 @@ export class RootStore {
     this.headerInvert = headerInvert
   }
 
-  get isAuth (): boolean {
+  get isAuth(): boolean {
     return this.sessionData.user.id > 0 && this.sessionData.user.state > 0
   }
 
-  get isEditor (): Boolean {
+  get isEditor(): Boolean {
     return this.isAuth && this.sessionData.user.editor
   }
 }

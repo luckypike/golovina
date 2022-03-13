@@ -1,7 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class DocumentPage extends Document {
-  render (): JSX.Element {
+  render(): JSX.Element {
     return (
       <Html lang="ru">
         <Head>

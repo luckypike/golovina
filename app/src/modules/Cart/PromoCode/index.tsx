@@ -23,7 +23,7 @@ export const PromoCode: FC = observer(() => {
     handleSubmit,
     setValue,
     setError,
-    formState: { errors }
+    formState: { errors },
   } = useForm<Values>()
 
   const onSubmit: SubmitHandler<Values> = async (data) => {
@@ -51,26 +51,34 @@ export const PromoCode: FC = observer(() => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2 className={s.title}>{t('title')}</h2>
 
-      {(order.promo_code != null) &&
+      {order.promo_code != null && (
         <div className={s.applied}>
-          <div>{t('applied')}: {order.promo_code.title.toUpperCase()}</div>
-          <div className={s.remove}><button className={s.button} type="button" onClick={handleDelete}>{t('delete')}</button></div>
+          <div>
+            {t('applied')}: {order.promo_code.title.toUpperCase()}
+          </div>
+          <div className={s.remove}>
+            <button className={s.button} type="button" onClick={handleDelete}>
+              {t('delete')}
+            </button>
+          </div>
         </div>
-      }
+      )}
 
-      {(order.promo_code == null) &&
+      {order.promo_code == null && (
         <div className={s.root}>
           <div className={s.input}>
             <input placeholder={t('placeholder')} className={cc([sf.in, sf.s])} type="text" {...register('title')} />
           </div>
 
           <div>
-            <button className={cc([sb.main, sb.s])} type="submit">{t('apply')}</button>
+            <button className={cc([sb.main, sb.s])} type="submit">
+              {t('apply')}
+            </button>
           </div>
         </div>
-      }
+      )}
 
-      {(errors.title != null) && <div className={sf.er}>{errors.title.message}</div>}
+      {errors.title != null && <div className={sf.er}>{errors.title.message}</div>}
     </form>
   )
 })

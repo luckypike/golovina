@@ -10,31 +10,27 @@ import s from './Cart.module.css'
 export const Cart: FC = observer(() => {
   const rootStore = useRootContext()
   const {
-    sessionData: { cart }
+    sessionData: { cart },
   } = rootStore
 
   // console.log(session.cart)
 
   return (
     <>
-      {cart > 0 &&
-        (
-          <Link href="/cart">
-            <a className={s.root}>
-              <Icon />
-              <div className={s.counter}>{cart > 9 ? '9+' : cart}</div>
-            </a>
-          </Link>
-        )
-      }
-
-      {cart < 1 &&
-        (
-          <div className={cc([s.root, s.inactive])}>
+      {cart > 0 && (
+        <Link href="/cart">
+          <a className={s.root}>
             <Icon />
-          </div>
-        )
-      }
+            <div className={s.counter}>{cart > 9 ? '9+' : cart}</div>
+          </a>
+        </Link>
+      )}
+
+      {cart < 1 && (
+        <div className={cc([s.root, s.inactive])}>
+          <Icon />
+        </div>
+      )}
     </>
   )
 })

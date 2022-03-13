@@ -34,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^5.14.0",
     "eslint": "8.9.0",
     "eslint-config-next": "12.0.10",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^21.0.1",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
@@ -43,7 +44,7 @@
     "postcss-custom-media": "^8.0.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^7.3.3",
-    "prettier": "2.5.1",
+    "prettier": "^2.5.1",
     "typescript": "4.5.5"
   }
 }

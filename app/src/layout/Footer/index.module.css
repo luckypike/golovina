@@ -13,7 +13,7 @@
   text-align: center;
 }
 
-@media (--m)  {
+@media (--m) {
   .root {
     margin: var(--yr-s) calc(var(--xr) * 2) calc(var(--yr) * 22);
   }
@@ -36,5 +36,5 @@
 }
 
 .top {
-  display:
+  display: ;
 }

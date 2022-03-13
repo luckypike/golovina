@@ -2,24 +2,24 @@
 
 module.exports = {
   reactStrictMode: true,
-  async rewrites () {
+  async rewrites() {
     return [
       {
         source: '/api/session',
-        destination: 'http://localhost:3001/api/session'
+        destination: 'http://localhost:3001/api/session',
       },
       {
         source: '/api/delivery_cities',
-        destination: 'http://localhost:3001/api/delivery_cities'
+        destination: 'http://localhost:3001/api/delivery_cities',
       },
       {
         source: '/api/:path*',
-        destination: 'http://localhost:3000/api/:path*'
+        destination: 'http://localhost:3000/api/:path*',
       },
       {
         source: '/orders/paid',
-        destination: 'http://localhost:3000/orders/paid'
-      }
+        destination: 'http://localhost:3000/orders/paid',
+      },
     ]
   },
   i18n: {
@@ -28,20 +28,22 @@ module.exports = {
     localeDetection: false,
     domains: [
       {
-        domain: 'golovinamari.com', defaultLocale: 'ru'
+        domain: 'golovinamari.com',
+        defaultLocale: 'ru',
       },
       {
-        domain: 'en.golovinamari.com', defaultLocale: 'en'
-      }
-    ]
+        domain: 'en.golovinamari.com',
+        defaultLocale: 'en',
+      },
+    ],
   },
-  webpack (config) {
+  webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack']
+      use: ['@svgr/webpack'],
     })
 
     return config
-  }
+  },
 }

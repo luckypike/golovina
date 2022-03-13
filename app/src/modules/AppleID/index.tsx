@@ -25,9 +25,7 @@ export const AppleID: FC<{ returnUri: string }> = ({ returnUri }) => {
       <a className={cc([s.button, { [s.disabled]: clicked }])} onClick={handleClick} href={url}>
         <AppleImg className={s.logo} />
 
-        <span>
-          {t('sign_in')}
-        </span>
+        <span>{t('sign_in')}</span>
       </a>
     </div>
   )

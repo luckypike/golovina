@@ -31,13 +31,26 @@ export const Contacts: FC = () => {
             <br />
             {t('opening_hours')}
             <br />
-            {t('phone_number')}: <a className={s.link} href="tel:+79857145558">+7 985 714-55-58</a>
+            {t('phone_number')}:{' '}
+            <a className={s.link} href="tel:+79857145558">
+              +7 985 714-55-58
+            </a>
             <br />
-            {t('email')}: <a className={s.link} href="mailto:shop@golovinamari.com">shop@golovinamari.com</a>
+            {t('email')}:{' '}
+            <a className={s.link} href="mailto:shop@golovinamari.com">
+              shop@golovinamari.com
+            </a>
           </div>
 
           <div className={s.map}>
-            <a className={s.way} href="https://yandex.ru/maps/org/87679230211" target="_blank" rel="noopener noreferrer">{t('map')}</a>
+            <a
+              className={s.way}
+              href="https://yandex.ru/maps/org/87679230211"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('map')}
+            </a>
           </div>
         </div>
       </div>

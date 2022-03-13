@@ -21,7 +21,15 @@ const ErrorBoundary = plugin.createErrorBoundary(React)
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL
 
-function AppPage ({ Component, pageProps, sessionData, localeData }: AppProps & { sessionData: SessionData, localeData: IntlMessages }): JSX.Element {
+function AppPage({
+  Component,
+  pageProps,
+  sessionData,
+  localeData,
+}: AppProps & {
+  sessionData: SessionData
+  localeData: IntlMessages
+}): JSX.Element {
   const [rootStore] = useState(new RootStore(sessionData))
 
   useEffect(() => {
@@ -66,8 +74,8 @@ AppPage.getInitialProps = async (appContext: AppContext) => {
     baseURL: process.env.NEXT_PUBLIC_API_URL,
     withCredentials: true,
     headers: {
-      'X-Locale': locale
-    }
+      'X-Locale': locale,
+    },
   }
 
   if (appContext.ctx.req != null) {
@@ -75,8 +83,8 @@ AppPage.getInitialProps = async (appContext: AppContext) => {
       baseURL: process.env.FASTAPI_URL,
       headers: {
         Cookie: appContext.ctx.req?.headers.cookie ?? '',
-        'X-Locale': locale
-      }
+        'X-Locale': locale,
+      },
     }
   }
 

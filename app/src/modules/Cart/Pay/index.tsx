@@ -12,7 +12,7 @@ export const Pay: FC = observer(() => {
   const router = useRouter()
   const t = useTranslations('Cart.Pay')
 
-  if ((order == null) || (order.user == null)) return null
+  if (order == null || order.user == null) return null
 
   const formRef = useRef<HTMLFormElement>(null)
   useEffect(() => {

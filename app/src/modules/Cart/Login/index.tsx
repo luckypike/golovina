@@ -18,14 +18,14 @@ export const Login: FC = observer(() => {
         <AppleID returnUri="/cart" />
       </div>
 
-      <div className={s.desc}>
-        {t('desc')}
-      </div>
+      <div className={s.desc}>{t('desc')}</div>
 
       <div className={s.or}>{t('or')}</div>
 
       <div className={s.checkout}>
-        <button className={sb.main} type="button" onClick={() => setStep('checkout')}>{t('submit')}</button>
+        <button className={sb.main} type="button" onClick={() => setStep('checkout')}>
+          {t('submit')}
+        </button>
       </div>
     </div>
   )
