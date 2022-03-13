@@ -1,13 +1,13 @@
-import { FC } from "react";
-import { useTranslations } from "next-intl";
+import { FC } from 'react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import Head from "next/head";
+import Head from 'next/head'
 
 import wwImg from './whole-world.png'
 import s from './index.module.css'
 
 export const About: FC = () => {
-  const t = useTranslations('About');
+  const t = useTranslations('About')
 
   return (
     <div className={s.root}>

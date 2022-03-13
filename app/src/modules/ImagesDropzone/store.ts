@@ -10,12 +10,12 @@ export class ImagesDropzoneStore {
   }
 
   addImages = (images: ImageData[]) => {
-    images.map(image => {
+    images.forEach(image => {
       this.addImage(image.id, image.key, image.src, image.active, image.weight)
     })
   }
 
-  constructor() {
+  constructor () {
     makeAutoObservable(this)
   }
 
@@ -28,7 +28,7 @@ export class ImagesDropzoneStore {
       .map(([key, image], i) => image.setWeight(i + 1))
   }
 
-  get currentWeight(): number {
+  get currentWeight (): number {
     return Math.max(
       ...Object.entries(this.images)
         .filter(([k, image]) => image.active)
@@ -37,13 +37,13 @@ export class ImagesDropzoneStore {
     )
   }
 
-  get toParams(): { id: number; key: string; weight: number; active: boolean, src: string }[] {
+  get toParams (): Array<{ id: number, key: string, weight: number, active: boolean, src: string }> {
     return Object.entries(this.images).map(([key, image]) => ({
       id: image.id,
       key: key,
       src: image.src,
       active: image.active,
-      weight: image.weight,
+      weight: image.weight
     }))
   }
 }
@@ -57,7 +57,7 @@ export class ImageDropzoneStore {
   active: boolean
   imageDropzoneStore: ImagesDropzoneStore
 
-  constructor(
+  constructor (
     imageDropzoneStore: ImagesDropzoneStore,
     id: number,
     key: string,
@@ -75,8 +75,8 @@ export class ImageDropzoneStore {
     makeAutoObservable(this, { imageDropzoneStore: false })
     this.imageDropzoneStore = imageDropzoneStore
 
-    if (upload) {
-      this.upload(upload)
+    if (upload != null) {
+      void this.upload(upload)
     }
   }
 
@@ -86,7 +86,7 @@ export class ImageDropzoneStore {
 
     const { data: createData } = await axios.post<CreateData>('/images', {
       file: upload.signed_id,
-      uuid: this.key,
+      uuid: this.key
     })
 
     runInAction(() => {

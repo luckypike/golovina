@@ -2,7 +2,7 @@
 
 module.exports = {
   reactStrictMode: true,
-  async rewrites() {
+  async rewrites () {
     return [
       {
         source: '/api/session',
@@ -19,7 +19,7 @@ module.exports = {
       {
         source: '/orders/paid',
         destination: 'http://localhost:3000/orders/paid'
-      },
+      }
     ]
   },
   i18n: {
@@ -28,14 +28,14 @@ module.exports = {
     localeDetection: false,
     domains: [
       {
-        domain: 'golovinamari.com', defaultLocale: 'ru',
+        domain: 'golovinamari.com', defaultLocale: 'ru'
       },
       {
-        domain: 'en.golovinamari.com', defaultLocale: 'en',
+        domain: 'en.golovinamari.com', defaultLocale: 'en'
       }
-    ],
+    ]
   },
-  webpack(config) {
+  webpack (config) {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
@@ -43,5 +43,5 @@ module.exports = {
     })
 
     return config
-  },
+  }
 }

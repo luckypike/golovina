@@ -1,22 +1,21 @@
-import { FC, useEffect, useRef } from "react";
-import { observer } from "mobx-react-lite";
-import { useTranslations } from "next-intl";
+import { FC, useEffect, useRef } from 'react'
+import { observer } from 'mobx-react-lite'
+import { useTranslations } from 'next-intl'
 
-import { useCartContext } from "../context";
-import { useRouter } from "next/router";
+import { useCartContext } from '../context'
+import { useRouter } from 'next/router'
 
 import s from './index.module.css'
 
 export const Pay: FC = observer(() => {
   const { order } = useCartContext()
   const router = useRouter()
-  const t = useTranslations('Cart.Pay');
+  const t = useTranslations('Cart.Pay')
 
-  if (!order || !order.user) return null
-
+  if ((order == null) || (order.user == null)) return null
 
   const formRef = useRef<HTMLFormElement>(null)
-  useEffect(() =>  {
+  useEffect(() => {
     formRef.current?.submit()
   }, [])
 

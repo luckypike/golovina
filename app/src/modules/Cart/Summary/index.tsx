@@ -1,21 +1,20 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-import { useTranslations } from "next-intl";
+import { FC } from 'react'
+import { observer } from 'mobx-react-lite'
+import { useTranslations } from 'next-intl'
 
-import { useCartContext } from "../context";
-import { Price } from "../../Price";
-import { useRootContext } from "../../../services/useRootContext";
-
+import { useCartContext } from '../context'
+import { Price } from '../../Price'
+import { useRootContext } from '../../../services/useRootContext'
 
 import s from './index.module.css'
 import sb from '../../../css/buttons.module.css'
 
 export const Summary: FC = observer(() => {
-  const t = useTranslations('Cart.Summary');
+  const t = useTranslations('Cart.Summary')
   const { order, setStep } = useCartContext()
   const { isAuth } = useRootContext()
 
-  if (!order) return null
+  if (order == null) return null
 
   return (
     <div>

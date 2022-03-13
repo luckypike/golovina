@@ -10,7 +10,7 @@ import s from './Cart.module.css'
 export const Cart: FC = observer(() => {
   const rootStore = useRootContext()
   const {
-    sessionData: { cart },
+    sessionData: { cart }
   } = rootStore
 
   // console.log(session.cart)

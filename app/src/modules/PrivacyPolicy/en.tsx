@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC } from 'react'
 
-import s from './index.module.css';
+import s from './index.module.css'
 
 export const PrivacyPolicyEn: FC = () => {
   return (

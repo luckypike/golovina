@@ -18,7 +18,7 @@ export const Header: FC = observer(() => {
   const { layoutStore } = rootStore
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       if (window.scrollY === 0 && scrolling) {
         setScrolling(false)
       } else if (window.scrollY !== 0 && !scrolling) {
@@ -31,8 +31,8 @@ export const Header: FC = observer(() => {
     }
   }, [scrolling])
 
-  const handleScrollUp = () =>  {
-    if (document) {
+  const handleScrollUp = (): void => {
+    if (document !== null) {
       const top = Math.max(document.body.scrollTop, document.documentElement.scrollTop)
       if (top > 0) window.scroll({ top: 0, left: 0, behavior: 'smooth' })
     }

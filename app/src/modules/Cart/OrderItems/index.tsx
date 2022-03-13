@@ -1,21 +1,21 @@
-import { FC } from "react";
-import axios from "axios";
-import { observer } from "mobx-react-lite";
-import { useTranslations } from "next-intl";
+import { FC } from 'react'
+import axios from 'axios'
+import { observer } from 'mobx-react-lite'
+import { useTranslations } from 'next-intl'
 
-import { useCartContext } from "../context";
-import { Price } from "../../Price";
+import { useCartContext } from '../context'
+import { Price } from '../../Price'
 
 import s from './index.module.css'
 
 export const OrderItems: FC = observer(() => {
-  const t = useTranslations('Cart');
-  const { order_items, setStep, step, setReload } = useCartContext()
+  const t = useTranslations('Cart')
+  const { orderItems, setStep, step, setReload } = useCartContext()
 
-  const handleDelete = async (order_item_id: number) => {
-    console.log(order_item_id)
+  const handleDelete = async (orderItemId: number): Promise<void> => {
+    console.log(orderItemId)
     try {
-      await axios.delete(`/cart/order_items/${order_item_id}`)
+      await axios.delete(`/cart/order_items/${orderItemId}`)
       setReload(true)
     } catch {
       // setError('title', { message: t('arghh') })
@@ -24,36 +24,36 @@ export const OrderItems: FC = observer(() => {
 
   return (
     <div>
-      {order_items?.map(order_item =>
-        <div key={order_item.id} className={s.item}>
+      {orderItems?.map(orderItem =>
+        <div key={orderItem.id} className={s.item}>
           <div className={s.image}>
-            <img src={order_item.variant.image.src} alt={order_item.variant.title} />
+            <img src={orderItem.variant.image.src} alt={orderItem.variant.title} />
           </div>
 
           <div className={s.main}>
             <div className={s.title}>
-              {order_item.variant.title}
+              {orderItem.variant.title}
             </div>
 
             <div className={s.price}>
-              <Price price={order_item.price} priceFinal={order_item.price_final} />
+              <Price price={orderItem.price} priceFinal={orderItem.price_final} />
             </div>
 
             <div className={s.color}>
-              {t('color')}: {order_item.variant.color.title}
+              {t('color')}: {orderItem.variant.color.title}
             </div>
 
             <div className={s.size}>
-              {t('size')}: {order_item.size.title}
+              {t('size')}: {orderItem.size.title}
             </div>
 
             <div className={s.qnt}>
-              {t('qnt')}: {order_item.quantity}
+              {t('qnt')}: {orderItem.quantity}
             </div>
 
             {step === 'cart' &&
               <div>
-                <button onClick={() => handleDelete(order_item.id)} className={s.delete} type="button">{t('delete')}</button>
+                <button onClick={async () => await handleDelete(orderItem.id)} className={s.delete} type="button">{t('delete')}</button>
               </div>
             }
           </div>

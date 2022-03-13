@@ -1,21 +1,21 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-import { useTranslations } from "next-intl";
+import { FC } from 'react'
+import { observer } from 'mobx-react-lite'
+import { useTranslations } from 'next-intl'
 
-import { useCartContext } from "../../context";
-import { Price } from "../../../Price";
+import { useCartContext } from '../../context'
+import { Price } from '../../../Price'
 
 import s from './index.module.css'
-import { WatchDeliveryOption } from "../../models";
+import { WatchDeliveryOption } from '../../models'
 // import sb from '../../../css/buttons.module.css'
 
 export const Summary: FC<{ watchDelivery: string, deliveryOption?: WatchDeliveryOption }> = observer(({ watchDelivery, deliveryOption }) => {
-  const t = useTranslations('Cart.Delivery.summary');
+  const t = useTranslations('Cart.Delivery.summary')
   const { order } = useCartContext()
 
-  if (!order) return null
+  if (order == null) return null
 
-  const deliveryPrice = watchDelivery === 'international' ? 2800 : (deliveryOption ? deliveryOption.price : 0)
+  const deliveryPrice = watchDelivery === 'international' ? 2800 : ((deliveryOption != null) ? deliveryOption.price : 0)
 
   return (
     <>

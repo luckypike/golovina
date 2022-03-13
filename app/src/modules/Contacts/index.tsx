@@ -1,13 +1,13 @@
-import { FC } from "react";
-import { useTranslations } from "next-intl";
-import Head from "next/head";
+import { FC } from 'react'
+import { useTranslations } from 'next-intl'
+import Head from 'next/head'
 
 import studioImg from './studio.jpg'
 import s from './index.module.css'
-import Image from "next/image";
+import Image from 'next/image'
 
 export const Contacts: FC = () => {
-  const t = useTranslations('Contacts');
+  const t = useTranslations('Contacts')
 
   return (
     <div className={s.root}>

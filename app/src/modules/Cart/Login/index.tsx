@@ -1,19 +1,16 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-import Script from "next/script";
-import { AppleID } from "../../AppleID";
-import { useTranslations } from "next-intl";
+import { FC } from 'react'
+import { observer } from 'mobx-react-lite'
+import { useTranslations } from 'next-intl'
 
-import { useCartContext } from "../context";
-// import { useRootContext } from "../../../services/useRootContext";
+import { AppleID } from '../../AppleID'
+import { useCartContext } from '../context'
 
 import s from './index.module.css'
 import sb from '../../../css/buttons.module.css'
 
 export const Login: FC = observer(() => {
-  const t = useTranslations('Cart.Login');
+  const t = useTranslations('Cart.Login')
   const { setStep } = useCartContext()
-  // const { isAuth } = useRootContext()
 
   return (
     <div className={s.root}>

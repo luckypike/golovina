@@ -1,11 +1,10 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-import { useIndexContext } from "../context";
-import cc from 'classcat'
+import { FC } from 'react'
+import { observer } from 'mobx-react-lite'
+import { useIndexContext } from '../context'
 
-import s from './index.module.css';
+import s from './index.module.css'
 import InstaIcon from './insta.svg'
-import { InstagramData } from "../models";
+import { InstagramData } from '../models'
 
 export const Instagram: FC = observer(() => {
   const { instagram } = useIndexContext()

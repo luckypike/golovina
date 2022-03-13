@@ -1,13 +1,12 @@
-import axios from "axios";
-import Head from "next/head";
-import { FC } from "react";
-import { defaultServerSideConfig } from "../../constants";
-import { IndexData } from "./models";
-import { Slides } from "./Slides";
+import axios from 'axios'
+import Head from 'next/head'
+import { FC } from 'react'
+import { defaultServerSideConfig } from '../../constants'
+import { IndexData } from './models'
+import { Slides } from './Slides'
 
 import s from './index.module.css'
-import { Instagram } from "./Instagram";
-
+import { Instagram } from './Instagram'
 
 export const Index: FC = () => {
   return (
@@ -25,7 +24,7 @@ export const Index: FC = () => {
   )
 }
 
-export const getIndexData = async (locale?: string) => {
+export const getIndexData = async (locale?: string): Promise<IndexData> => {
   const { data } = await axios.get<IndexData>('/pages/index', defaultServerSideConfig(locale))
 
   return data

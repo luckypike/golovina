@@ -1,15 +1,16 @@
 import { Dispatch, FC, SetStateAction, useMemo, useState } from 'react'
 import cc from 'classcat'
-import { useRootContext } from '../../services/useRootContext'
-
-import s from './Menu.module.css'
 import { useTranslations } from 'next-intl'
 import AnimateHeight from 'react-animate-height'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
+import { useRootContext } from '../../services/useRootContext'
+
+import s from './Menu.module.css'
+
 export const Menu: FC = observer(() => {
-  const t = useTranslations('Menu');
+  const t = useTranslations('Menu')
   const rootStore = useRootContext()
   const { layoutStore, sessionData, isAuth, isEditor } = rootStore
   const [section, setSection] = useState<string>()
@@ -77,9 +78,8 @@ export const Menu: FC = observer(() => {
   )
 })
 
-
 const Section: FC<{ section: string | undefined, name: string, setSection: Dispatch<SetStateAction<string | undefined>>, duration: number }> = ({ section, setSection, name, children, duration }) => {
-  const t = useTranslations('Menu');
+  const t = useTranslations('Menu')
   const isActive = useMemo(() => section === name, [section, name])
 
   return (

@@ -1,10 +1,9 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-import { useIndexContext } from "../context";
-import cc from 'classcat'
+import { FC } from 'react'
+import { observer } from 'mobx-react-lite'
+import { useIndexContext } from '../context'
 
-import s from './index.module.css';
-import { SlideData } from "../models";
+import s from './index.module.css'
+import { SlideData } from '../models'
 
 export const Slides: FC = observer(() => {
   const { slides } = useIndexContext()
@@ -26,13 +25,12 @@ export const Slides: FC = observer(() => {
   )
 })
 
-
 const Slide: FC<{ slide: SlideData }> = ({ slide }) => {
   return (
     <a
       href={slide.link_relative}
       className={s.slide}
-      style={{ backgroundImage: (slide.image  ? `url(${slide.image})` : undefined) }}
+      style={{ backgroundImage: (slide.image ? `url(${slide.image})` : undefined) }}
     >
       <div className={s.text}>
         <div className={s.title}>

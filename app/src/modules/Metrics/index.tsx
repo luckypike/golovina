@@ -1,8 +1,8 @@
-import { FC } from "react"
-import Script from "next/script"
+import { FC } from 'react'
+import Script from 'next/script'
 
 export const Metrics: FC = () => {
-  if (process.env.NODE_ENV !== "production") return null
+  if (process.env.NODE_ENV !== 'production') return null
 
   return (
     <>

@@ -1,18 +1,18 @@
-import { FC, useState } from "react";
-import { useTranslations } from "next-intl";
-import Head from "next/head";
-import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { FC, useState } from 'react'
+import { useTranslations } from 'next-intl'
+import Head from 'next/head'
+import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 import cc from 'classcat'
-import { useRouter } from "next/router";
-import axios from "axios";
-import Cleave from 'cleave.js/react';
+import { useRouter } from 'next/router'
+import axios from 'axios'
+import Cleave from 'cleave.js/react'
 
 import s from './index.module.css'
 import sf from '../../layout/form.module.css'
 import sb from '../../css/buttons.module.css'
-import { entries } from "../../models";
+import { entries } from '../../models'
 
-type Values = {
+interface Values {
   email: string
   first_name: string
   last_name: string
@@ -29,9 +29,9 @@ export const Subscribe: FC = () => {
     handleSubmit,
     control,
     setError,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting }
   } = useForm<Values>()
-  const t = useTranslations('Subscribe');
+  const t = useTranslations('Subscribe')
 
   const onSubmit: SubmitHandler<Values> = async (data) => {
     try {
@@ -70,7 +70,7 @@ export const Subscribe: FC = () => {
                   <input className={sf.in} type="email" {...register('email')} />
                 </label>
 
-                {errors.email && <div className={sf.er}>{errors.email.message}</div>}
+                {(errors.email != null) && <div className={sf.er}>{errors.email.message}</div>}
               </div>
 
               <div className={sf.el}>
@@ -79,7 +79,7 @@ export const Subscribe: FC = () => {
                   <input className={sf.in} type="text" {...register('first_name')} />
                 </label>
 
-                {errors.first_name && <div className={sf.er}>{errors.first_name.message}</div>}
+                {(errors.first_name != null) && <div className={sf.er}>{errors.first_name.message}</div>}
               </div>
 
               <div className={sf.el}>
@@ -88,7 +88,7 @@ export const Subscribe: FC = () => {
                   <input className={sf.in} type="text" {...register('last_name')} />
                 </label>
 
-                {errors.last_name && <div className={sf.er}>{errors.last_name.message}</div>}
+                {(errors.last_name != null) && <div className={sf.er}>{errors.last_name.message}</div>}
               </div>
 
               <div className={sf.el}>
@@ -97,22 +97,22 @@ export const Subscribe: FC = () => {
                   <Controller
                     control={control}
                     name="date_of_birth"
-                    render={({ field }) => <Cleave placeholder={locale === "ru" ? "дд.мм.гггг" : "mm/dd/yyyy"} className={sf.in} {...field} options={{ date: true, delimiter: (locale === "ru" ? '.' : '/' ),datePattern: (locale === "ru" ? ['d', 'm', 'Y'] : ['m', 'd', 'Y']) }} />}
+                    render={({ field }) => <Cleave placeholder={locale === 'ru' ? 'дд.мм.гггг' : 'mm/dd/yyyy'} className={sf.in} {...field} options={{ date: true, delimiter: (locale === 'ru' ? '.' : '/'), datePattern: (locale === 'ru' ? ['d', 'm', 'Y'] : ['m', 'd', 'Y']) }} />}
                   />
                 </label>
 
-                {errors.date_of_birth && <div className={sf.er}>{errors.date_of_birth.message}</div>}
+                {(errors.date_of_birth != null) && <div className={sf.er}>{errors.date_of_birth.message}</div>}
               </div>
 
               <div className={sf.el}>
                 <label className={cc([sf.lb, sf.checkbox])}>
-                  <input {...register("confirm")} type="checkbox" />
+                  <input {...register('confirm')} type="checkbox" />
                   <span>
                     {t('confirm')} <a target="_blank" href="/privacy-policy">{t('confirm_url')}</a>.
                   </span>
                 </label>
 
-                {errors.confirm && <div className={sf.er}>{errors.confirm.message}</div>}
+                {(errors.confirm != null) && <div className={sf.er}>{errors.confirm.message}</div>}
               </div>
 
               <div>
