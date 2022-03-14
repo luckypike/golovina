@@ -95,6 +95,9 @@ jobs:
           build-args: |
             NEXT_PUBLIC_API_URL=/api
             NEXT_PUBLIC_BUGSNAG_API_KEY=${{ secrets.NEXT_PUBLIC_BUGSNAG_API_KEY }}
+            NEXT_PUBLIC_APPLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_APPLE_CLIENT_ID }}
+            NEXT_PUBLIC_APPLE_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_APPLE_REDIRECT_URI }}
+            NEXT_PUBLIC_PAYKEEPER_GAYEWAY=${{ secrets.NEXT_PUBLIC_PAYKEEPER_GAYEWAY }}
           push: true
           tags: |
             bragovo/golovina-app:${{ github.event.release.tag_name }}
