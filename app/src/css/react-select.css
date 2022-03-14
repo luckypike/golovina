@@ -38,14 +38,13 @@
   border: 0 !important;
 }
 
-.golovina-select__menu-list  {
+.golovina-select__menu-list {
   padding: 0 !important;
 }
 
 .golovina-select__option--is-focused {
   background: red !important;
   background: rgb(var(--theme-sp-color)) !important;
-
 }
 
 /*

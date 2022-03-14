@@ -1,8 +1,7 @@
-import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
-import axios from 'axios'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class DocumentPage extends Document {
-  render() {
+  render(): JSX.Element {
     return (
       <Html lang="ru">
         <Head>

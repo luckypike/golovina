@@ -4,7 +4,7 @@
   line-height: var(--lh-at);
 }
 
-@media (--m)  {
+@media (--m) {
   .root {
     margin: 0 calc(var(--xr) * 2);
   }
@@ -34,5 +34,5 @@
 }
 
 .root ul ul li {
-  margin: var(--yr-xs) 0 0 ;
+  margin: var(--yr-xs) 0 0;
 }

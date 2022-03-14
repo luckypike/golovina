@@ -1,11 +1,9 @@
-import type {  NextPage } from 'next'
+import type { NextPage } from 'next'
 
 import { Contacts } from '../modules/Contacts'
 
 const ContactsPage: NextPage = () => {
-  return (
-    <Contacts />
-  )
+  return <Contacts />
 }
 
 export default ContactsPage

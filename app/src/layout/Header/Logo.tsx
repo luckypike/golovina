@@ -11,19 +11,19 @@ export const Logo: FC = () => {
 
   return (
     <>
-      {router.asPath === '/' &&
+      {router.asPath === '/' && (
         <div className={s.root}>
           <LogoImg className={s.svg} />
         </div>
-      }
+      )}
 
-      {router.asPath !== '/' &&
+      {router.asPath !== '/' && (
         <Link href="/">
           <a className={s.root}>
             <LogoImg className={s.svg} />
           </a>
         </Link>
-      }
+      )}
     </>
   )
 }

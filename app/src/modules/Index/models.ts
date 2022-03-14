@@ -1,5 +1,5 @@
 export interface IndexData {
-  slides: SlideData[],
+  slides: SlideData[]
   instagram: InstagramData[]
 }
 
@@ -8,7 +8,7 @@ export interface SlideData {
   desc: string
   name: string
   link_relative: string
-  image: string
+  image?: string
 }
 
 export interface InstagramData {

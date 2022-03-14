@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import App, { AppContext, AppProps } from 'next/app'
 import router from 'next/router'
-import Script from 'next/script'
 import axios, { AxiosRequestConfig } from 'axios'
 import { BugsnagPluginReactResult } from '@bugsnag/plugin-react'
 import { IntlMessages, NextIntlProvider } from 'next-intl'
@@ -22,11 +21,19 @@ const ErrorBoundary = plugin.createErrorBoundary(React)
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL
 
-function AppPage({ Component, pageProps, sessionData, localeData }: AppProps & { sessionData: SessionData, localeData: IntlMessages }) {
+function AppPage({
+  Component,
+  pageProps,
+  sessionData,
+  localeData,
+}: AppProps & {
+  sessionData: SessionData
+  localeData: IntlMessages
+}): JSX.Element {
   const [rootStore] = useState(new RootStore(sessionData))
 
   useEffect(() => {
-    const handleRouteChange = () => {
+    const handleRouteChange = (): void => {
       rootStore.layoutStore.setActiveNav(false)
     }
 
@@ -71,7 +78,7 @@ AppPage.getInitialProps = async (appContext: AppContext) => {
     },
   }
 
-  if (appContext.ctx.req) {
+  if (appContext.ctx.req != null) {
     config = {
       baseURL: process.env.FASTAPI_URL,
       headers: {

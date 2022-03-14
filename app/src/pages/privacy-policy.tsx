@@ -1,11 +1,9 @@
-import type {  NextPage } from 'next'
+import type { NextPage } from 'next'
 
 import { PrivacyPolicy } from '../modules/PrivacyPolicy'
 
 const PrivacyPocilyPage: NextPage = () => {
-  return (
-    <PrivacyPolicy />
-  )
+  return <PrivacyPolicy />
 }
 
 export default PrivacyPocilyPage

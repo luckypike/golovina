@@ -26,7 +26,6 @@
   cursor: not-allowed;
   /* pointer-events: all !important; */
   opacity: 0.5;
-
 }
 
 .main:hover:not(:disabled) {

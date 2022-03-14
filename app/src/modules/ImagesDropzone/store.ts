@@ -10,7 +10,7 @@ export class ImagesDropzoneStore {
   }
 
   addImages = (images: ImageData[]) => {
-    images.map(image => {
+    images.forEach((image) => {
       this.addImage(image.id, image.key, image.src, image.active, image.weight)
     })
   }
@@ -37,7 +37,13 @@ export class ImagesDropzoneStore {
     )
   }
 
-  get toParams(): { id: number; key: string; weight: number; active: boolean, src: string }[] {
+  get toParams(): Array<{
+    id: number
+    key: string
+    weight: number
+    active: boolean
+    src: string
+  }> {
     return Object.entries(this.images).map(([key, image]) => ({
       id: image.id,
       key: key,
@@ -75,8 +81,8 @@ export class ImageDropzoneStore {
     makeAutoObservable(this, { imageDropzoneStore: false })
     this.imageDropzoneStore = imageDropzoneStore
 
-    if (upload) {
-      this.upload(upload)
+    if (upload != null) {
+      void this.upload(upload)
     }
   }
 

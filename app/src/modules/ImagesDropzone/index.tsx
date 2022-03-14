@@ -2,7 +2,7 @@ import axios from 'axios'
 import { observer } from 'mobx-react-lite'
 import SparkMD5 from 'spark-md5'
 import cc from 'classcat'
-import { FC, useCallback, useState } from 'react'
+import { FC, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { ImagesDropzoneContext, useImagesDropzoneContext } from './context'
 import { ImageDropzoneStore, ImagesDropzoneStore } from './store'
@@ -12,8 +12,8 @@ import { TouchData } from './models'
 
 export const ImagesDropzone: FC<{ store: ImagesDropzoneStore }> = observer(({ store }) => {
   const handleImagesUpload = useCallback(async (files: File[]) => {
-    files.map((file) => {
-      const _touch = async (file: File) => {
+    files.forEach((file) => {
+      const _touch = async (file: File): Promise<void> => {
         const fileBuffer = await file.arrayBuffer()
         const spark = new SparkMD5.ArrayBuffer()
         spark.append(fileBuffer)
@@ -32,11 +32,14 @@ export const ImagesDropzone: FC<{ store: ImagesDropzoneStore }> = observer(({ st
         })
       }
 
-      _touch(file)
+      void _touch(file)
     })
   }, [])
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: handleImagesUpload, multiple: true })
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: handleImagesUpload,
+    multiple: true,
+  })
 
   return (
     <ImagesDropzoneContext.Provider value={store}>

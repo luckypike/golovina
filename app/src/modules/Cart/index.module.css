@@ -4,13 +4,13 @@
   padding: var(--yr-xl) var(--xr) calc(var(--yr) * 16);
 }
 
-@media (--s)  {
+@media (--s) {
   .root {
     padding: var(--yr-xl) var(--xr) calc(var(--yr) * 22);
   }
 }
 
-@media (--m)  {
+@media (--m) {
   .root {
     padding: var(--yr-xl) calc(var(--xr) * 2) calc(var(--yr) * 22);
   }

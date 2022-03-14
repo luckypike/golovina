@@ -33,7 +33,7 @@
 
 .state.active {
   box-shadow: inset 0 0 0 2px #fff;
-  background: rgba(255, 255, 255, 0.9)
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .loading {

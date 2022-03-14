@@ -1,13 +1,13 @@
-import { FC } from "react";
-import { useTranslations } from "next-intl";
+import { FC } from 'react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import Head from "next/head";
+import Head from 'next/head'
 
 import wwImg from './whole-world.png'
 import s from './index.module.css'
 
 export const About: FC = () => {
-  const t = useTranslations('About');
+  const t = useTranslations('About')
 
   return (
     <div className={s.root}>
@@ -15,18 +15,12 @@ export const About: FC = () => {
         <title>{t('title')}</title>
       </Head>
 
-      <p>
-        {t('p1')}
-      </p>
+      <p>{t('p1')}</p>
 
-      <p>
-        {t('p2')}
-      </p>
+      <p>{t('p2')}</p>
 
       <figure className={s.quote}>
-        <blockquote>
-          {t('bq')}
-        </blockquote>
+        <blockquote>{t('bq')}</blockquote>
         <figcaption>{t('at')}</figcaption>
       </figure>
 
@@ -34,17 +28,11 @@ export const About: FC = () => {
         <Image src={wwImg} alt="THE WHOLE WORLD IN YOU" layout="responsive" />
       </div>
 
-      <p>
-        {t('p3')}
-      </p>
+      <p>{t('p3')}</p>
 
-      <p>
-        {t('p4')}
-      </p>
+      <p>{t('p4')}</p>
 
-      <p>
-        THE WHOLE WORLD IN YOU
-      </p>
+      <p>THE WHOLE WORLD IN YOU</p>
     </div>
   )
 }
