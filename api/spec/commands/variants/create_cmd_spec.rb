@@ -6,12 +6,12 @@ RSpec.describe Variants::CreateCmd, :aggregate_failures do
   let(:category) { create(:category) }
   let(:color) { create(:color) }
 
-  describe '#call' do
-    context 'with valid params' do
-      context 'without product_id' do
+  describe "#call" do
+    context "with valid params" do
+      context "without product_id" do
         let(:params) do
           {
-            title_ru: Faker::Commerce.product_name, state: 'unpub',
+            title_ru: Faker::Commerce.product_name, state: "unpub",
             color_id: color.id, category_id: category.id
           }
         end
@@ -30,11 +30,11 @@ RSpec.describe Variants::CreateCmd, :aggregate_failures do
         end
       end
 
-      context 'with product_id' do
+      context "with product_id" do
         let(:product_id) { 1 }
         let(:params) do
           {
-            title_ru: Faker::Commerce.product_name, state: 'unpub',
+            title_ru: Faker::Commerce.product_name, state: "unpub",
             color_id: color.id, category_id: category.id, product_id: product_id
           }
         end

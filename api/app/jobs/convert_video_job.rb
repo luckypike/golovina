@@ -7,7 +7,7 @@ class ConvertVideoJob < ApplicationJob
   def perform(object) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     object.update(video_mp4: nil, video_poster: nil)
 
-    tmp_dir = Rails.root.join('tmp/video')
+    tmp_dir = Rails.root.join("tmp/video")
     Dir.mkdir(tmp_dir) unless Dir.exist?(tmp_dir)
 
     video = FFMPEG::Movie.new(object.video.service_url)

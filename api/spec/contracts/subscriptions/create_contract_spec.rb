@@ -3,14 +3,14 @@
 RSpec.describe Subscriptions::CreateContract, :aggregate_failures do
   subject(:cmd) { described_class.new.call(**params) }
 
-  describe '#call' do
-    context 'with required params' do
+  describe "#call" do
+    context "with required params" do
       let(:params) do
         {
-          email: 'user@example.com',
-          first_name: 'Summer',
-          last_name: 'Smith',
-          date_of_birth: '2000-01-01',
+          email: "user@example.com",
+          first_name: "Summer",
+          last_name: "Smith",
+          date_of_birth: "2000-01-01",
           confirm: true
         }
       end
@@ -18,7 +18,7 @@ RSpec.describe Subscriptions::CreateContract, :aggregate_failures do
       it { is_expected.to be_success }
     end
 
-    context 'without required params' do
+    context "without required params" do
       let(:params) { { foo: :bar } }
 
       it do
@@ -27,13 +27,13 @@ RSpec.describe Subscriptions::CreateContract, :aggregate_failures do
       end
     end
 
-    context 'with invalid email' do
+    context "with invalid email" do
       let(:params) do
         {
-          email: 'user@example',
-          first_name: 'Summer',
-          last_name: 'Smith',
-          date_of_birth: '2000-01-01',
+          email: "user@example",
+          first_name: "Summer",
+          last_name: "Smith",
+          date_of_birth: "2000-01-01",
           confirm: true
         }
       end
@@ -44,13 +44,13 @@ RSpec.describe Subscriptions::CreateContract, :aggregate_failures do
       end
     end
 
-    context 'with invalid date' do
+    context "with invalid date" do
       let(:params) do
         {
-          email: 'user@example.com',
-          first_name: 'Summer',
-          last_name: 'Smith',
-          date_of_birth: '2000-0101',
+          email: "user@example.com",
+          first_name: "Summer",
+          last_name: "Smith",
+          date_of_birth: "2000-0101",
           confirm: true
         }
       end
@@ -61,13 +61,13 @@ RSpec.describe Subscriptions::CreateContract, :aggregate_failures do
       end
     end
 
-    context 'with invalid confirm' do
+    context "with invalid confirm" do
       let(:params) do
         {
-          email: 'user@example.com',
-          first_name: 'Summer',
-          last_name: 'Smith',
-          date_of_birth: '2000-01-01',
+          email: "user@example.com",
+          first_name: "Summer",
+          last_name: "Smith",
+          date_of_birth: "2000-01-01",
           confirm: false
         }
       end

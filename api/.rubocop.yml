@@ -1,6 +1,7 @@
 require:
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-performance
 
 AllCops:
   NewCops: enable
@@ -28,6 +29,9 @@ Layout/MultilineMethodCallIndentation:
 
 NestedGroups:
   Max: 4
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
 
 # Style/ClassAndModuleChildren:
 #   EnforcedStyle: compact

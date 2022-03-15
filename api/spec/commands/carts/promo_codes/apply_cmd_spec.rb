@@ -7,8 +7,8 @@ RSpec.describe Carts::PromoCodes::ApplyCmd, :aggregate_failures do
   let(:params) { nil }
   let!(:order) { create(:api_order, :cart, user: user) }
 
-  describe '#call' do
-    context 'when promo_code is valid' do
+  describe "#call" do
+    context "when promo_code is valid" do
       let(:promo_code) { create(:promo_code) }
       let(:params) { { title: promo_code.title } }
 
@@ -18,14 +18,14 @@ RSpec.describe Carts::PromoCodes::ApplyCmd, :aggregate_failures do
       end
     end
 
-    context 'when promo_code is inactive' do
+    context "when promo_code is inactive" do
       let(:promo_code) { create(:promo_code, state: :inactive) }
       let(:params) { { title: promo_code.title } }
 
       it { expect { cmd }.to raise_error(ActiveRecord::RecordNotFound) }
     end
 
-    context 'without order' do
+    context "without order" do
       let(:another_user) { create(:api_user) }
       let(:promo_code) { create(:promo_code, state: :inactive) }
       let(:params) { { title: promo_code.title } }
@@ -35,11 +35,11 @@ RSpec.describe Carts::PromoCodes::ApplyCmd, :aggregate_failures do
       it { expect { cmd }.to raise_error(ActiveRecord::RecordNotFound) }
     end
 
-    context 'without promo code' do
+    context "without promo code" do
       it { expect { cmd }.to raise_error(ServiceActor::Failure) }
     end
 
-    context 'with nil params' do
+    context "with nil params" do
       let(:params) { nil }
 
       it { expect { cmd }.to raise_error(ServiceActor::Failure) }

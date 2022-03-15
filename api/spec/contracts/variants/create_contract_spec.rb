@@ -3,14 +3,14 @@
 RSpec.describe Variants::CreateContract, :aggregate_failures do
   subject(:cmd) { described_class.new.call(**params) }
 
-  describe '#call' do
-    context 'with required params' do
-      let(:params) { { category_id: 1, color_id: 1, state: 'active', title_ru: 'Title ru' } }
+  describe "#call" do
+    context "with required params" do
+      let(:params) { { category_id: 1, color_id: 1, state: "active", title_ru: "Title ru" } }
 
       it { is_expected.to be_success }
     end
 
-    context 'without required params' do
+    context "without required params" do
       let(:params) { { foo: :bar } }
 
       it do
@@ -19,10 +19,10 @@ RSpec.describe Variants::CreateContract, :aggregate_failures do
       end
     end
 
-    context 'with nil optional params' do
+    context "with nil optional params" do
       let(:params) do
         {
-          category_id: 1, color_id: 1, state: 'active', title_ru: 'Title ru',
+          category_id: 1, color_id: 1, state: "active", title_ru: "Title ru",
           title_en: nil, code: nil, published_at: nil
         }
       end
@@ -30,8 +30,8 @@ RSpec.describe Variants::CreateContract, :aggregate_failures do
       it { is_expected.to be_success }
     end
 
-    context 'with wrong params' do
-      let(:params) { { category_id: nil, title_ru: '', color_id: 'qqq' } }
+    context "with wrong params" do
+      let(:params) { { category_id: nil, title_ru: "", color_id: "qqq" } }
 
       it do
         expect(cmd).to be_failure
@@ -39,15 +39,15 @@ RSpec.describe Variants::CreateContract, :aggregate_failures do
       end
     end
 
-    context 'with all and extra params' do
+    context "with all and extra params" do
       let(:params) do
         {
-          product_id: 1, category_id: 1, color_id: 1, state: 'active', extra: 'Extra',
-          title_ru: 'Title ru', title_en: 'Title en', desc_ru: 'Desc ru', desc_en: 'Desc en',
-          comp_ru: 'Comp ru', comp_en: 'Comp en', price: 123, price_last: 122, code: 'Code',
+          product_id: 1, category_id: 1, color_id: 1, state: "active", extra: "Extra",
+          title_ru: "Title ru", title_en: "Title en", desc_ru: "Desc ru", desc_en: "Desc en",
+          comp_ru: "Comp ru", comp_en: "Comp en", price: 123, price_last: 122, code: "Code",
           published_at: Time.current.to_date, images: [
-            { id: 1, weight: 1, active: true, key: 'Key' },
-            { id: 2, weight: 2, active: false, src: 'Src' }
+            { id: 1, weight: 1, active: true, key: "Key" },
+            { id: 2, weight: 2, active: false, src: "Src" }
           ]
         }
       end

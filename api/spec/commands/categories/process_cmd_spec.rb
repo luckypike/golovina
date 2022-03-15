@@ -5,7 +5,7 @@ RSpec.describe Categories::ProcessCmd, :aggregate_failures do
 
   let(:category) { create(:category) }
 
-  describe '#call' do
+  describe "#call" do
     before do
       create_list(:variant, 3, category: category)
       create_list(:kit, 2, category: category)

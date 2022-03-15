@@ -5,7 +5,7 @@ RSpec.describe Variants::ProcessCmd, :aggregate_failures do
 
   let(:variant) { create(:variant) }
 
-  describe '#call' do
+  describe "#call" do
     before do
       create_list(:image, 3, processed: true, imagable: variant)
       create_list(:image, 3, processed: false, imagable: variant)

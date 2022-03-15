@@ -5,8 +5,8 @@ RSpec.describe Carts::DeliveryCmd, :aggregate_failures do
 
   let(:user) { create(:api_user) }
 
-  describe '#call' do
-    context 'when order is correct and valid params' do
+  describe "#call" do
+    context "when order is correct and valid params" do
       let(:order) { create(:api_order, :cart, user: user) }
       let(:delivery_params) { {} }
 

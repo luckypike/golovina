@@ -6,7 +6,8 @@ module Subscriptions
 
     def call
       params = validate_contract!(CreateContract, subscription_params)
-      params.merge!(locale: I18n.locale, state: :requested)
+      params[:locale] = I18n.locale
+      params[:state] = :requested
 
       subscription = build_subscription(params.except(:confirm))
       validate_and_save_subscription(subscription)

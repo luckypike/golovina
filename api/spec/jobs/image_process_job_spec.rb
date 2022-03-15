@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe ImageProcessJob, :aggregate_failures do
-  describe '#perform' do
+  describe "#perform" do
     subject(:cmd) { described_class.perform_now(image: image) }
 
     let(:image) { build(:image) }

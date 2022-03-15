@@ -387,6 +387,9 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.15.2)
       parser (>= 3.0.1.1)
+    rubocop-performance (1.13.3)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
     rubocop-rails (2.13.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
@@ -518,6 +521,7 @@ DEPENDENCIES
   react-rails
   redcarpet
   rspec-rails
+  rubocop-performance
   rubocop-rails
   rubocop-rspec
   service_actor-rails

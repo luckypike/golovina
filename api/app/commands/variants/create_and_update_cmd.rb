@@ -10,7 +10,7 @@ module Variants
     end
 
     def process_images(variant)
-      Api::Image.where(imagable_type: 'Variant', imagable_id: variant.id).each do |image|
+      Api::Image.where(imagable_type: "Variant", imagable_id: variant.id).each do |image|
         ImageProcessJob.perform_later(image: image)
       end
     end
@@ -25,7 +25,7 @@ module Variants
         image = Api::Image.find(params[:id])
         image.assign_attributes(params.except(:id))
         image.processed = false
-        image.imagable_type = 'Variant'
+        image.imagable_type = "Variant"
         image.imagable_id = variant.id
         validate_entity!(image)
         image.save!

@@ -2,8 +2,8 @@
 
 module Carts
   class DeliveryContract < ApplicationContract
-    Deliveries = Dry::Types['strict.string'].enum(*Api::Order.deliveries.keys)
-    DeliveryOptions = Dry::Types['strict.string'].enum(*Api::Order.delivery_options.keys)
+    Deliveries = Dry::Types["strict.string"].enum(*Api::Order.deliveries.keys)
+    DeliveryOptions = Dry::Types["strict.string"].enum(*Api::Order.delivery_options.keys)
 
     params do
       required(:delivery).filled(Deliveries)
@@ -19,11 +19,11 @@ module Carts
     end
 
     rule(:delivery_city_id) do
-      key.failure(:filled?) if value.blank? && values[:delivery] == 'russia'
+      key.failure(:filled?) if value.blank? && values[:delivery] == "russia"
     end
 
     rule(:delivery_option) do
-      key.failure(:filled?) if value.blank? && values[:delivery] == 'russia'
+      key.failure(:filled?) if value.blank? && values[:delivery] == "russia"
     end
 
     rule(:zip) do

@@ -12,7 +12,7 @@ module Api
     validates :state, presence: true
 
     def full_name
-      [name, sname].join(' ')
+      [name, sname].join(" ")
     end
   end
 end

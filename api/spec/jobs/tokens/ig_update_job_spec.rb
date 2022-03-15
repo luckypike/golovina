@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Tokens::IgUpdateJob, :aggregate_failures do
-  describe '#perform' do
+  describe "#perform" do
     subject(:cmd) { described_class.perform_now }
 
     before do

@@ -6,7 +6,7 @@ RSpec.describe Images::ProcessCmd, :aggregate_failures do
   let(:variant) { create(:variant) }
   let(:image) { create(:image, imagable: variant) }
 
-  describe '#call' do
+  describe "#call" do
     it do
       expect { cmd }.to have_enqueued_job(VariantProcessJob).with(variant: variant)
     end

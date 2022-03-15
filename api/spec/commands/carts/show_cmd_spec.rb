@@ -5,7 +5,7 @@ RSpec.describe Carts::ShowCmd, :aggregate_failures do
 
   let(:user) { create(:api_user) }
 
-  describe '#call' do
+  describe "#call" do
     # TODO: Add some test
     xit do
       cmd

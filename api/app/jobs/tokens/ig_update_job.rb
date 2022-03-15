@@ -5,7 +5,7 @@ module Tokens
     queue_as :default
 
     def perform
-      Token.where(key: :instagram).where('expires_at < ?', Time.current).each do |token|
+      Token.where(key: :instagram).where("expires_at < ?", Time.current).each do |token|
         Tokens::IgUpdateCmd.call(token: token)
       end
     end

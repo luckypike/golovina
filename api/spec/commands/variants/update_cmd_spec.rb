@@ -5,7 +5,7 @@ RSpec.describe Variants::UpdateCmd, :aggregate_failures do
 
   let(:variant) { create(:variant) }
 
-  describe '#call' do
+  describe "#call" do
     # context 'with valid params' do
     #   let(:params) do
     #     {

@@ -6,7 +6,7 @@ module Subscriptions
 
     def call
       UnisenderClient.subscribe(
-        fields: { email: subscription.email, Name: [subscription.first_name, subscription.last_name].join(' ') },
+        fields: { email: subscription.email, Name: [subscription.first_name, subscription.last_name].join(" ") },
         double_optin: 3,
         list_ids: [Figaro.env.send("unisender_list_#{subscription.locale}!")]
       )

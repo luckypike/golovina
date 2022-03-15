@@ -6,7 +6,7 @@ RSpec.describe Instagram::UpdateCmd, :aggregate_failures do
   let(:access_token) { Random.hex }
   let(:token) { create(:token, key: :instagram, value: access_token) }
 
-  describe '#call' do
+  describe "#call" do
     before do
       stub_request(
         :get,
@@ -14,29 +14,29 @@ RSpec.describe Instagram::UpdateCmd, :aggregate_failures do
       ).to_return(response)
     end
 
-    context 'when IG returns 200' do
+    context "when IG returns 200" do
       let(:response) do
         {
           status: 200,
           body: { data: data }.to_json,
-          headers: { content_type: 'application/json' }
+          headers: { content_type: "application/json" }
         }
       end
 
-      let(:data) { [{ id: '12345' }] }
+      let(:data) { [{ id: "12345" }] }
 
       it do
         cmd
 
-        expect(Rails.cache.read('instagram')).to match(data)
+        expect(Rails.cache.read("instagram")).to match(data)
       end
     end
 
-    context 'when IG returns errors' do
+    context "when IG returns errors" do
       let(:response) do
         {
           status: 400,
-          body: 'Sorry, this content isn\'t available right now'
+          body: "Sorry, this content isn't available right now"
         }
       end
 
@@ -45,7 +45,7 @@ RSpec.describe Instagram::UpdateCmd, :aggregate_failures do
       end
     end
 
-    context 'when token not found' do
+    context "when token not found" do
       let(:token) { create(:token, key: :ig, value: access_token) }
       let(:response) { {} }
 

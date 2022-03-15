@@ -21,15 +21,15 @@ module Images
 
     def variant_image_process(image)
       image.file.variant(
-        resize_to_fill: [210, 280], saver: { quality: 85 }, convert: 'jpg'
+        resize_to_fill: [210, 280], saver: { quality: 85 }, convert: "jpg"
       ).processed
 
       image.file.variant(
-        resize_to_fill: [3000, 4000], saver: { quality: 85 }, convert: 'jpg'
+        resize_to_fill: [3000, 4000], saver: { quality: 85 }, convert: "jpg"
       ).processed
 
       image.file.variant(
-        resize_to_fill: [1500, 2000], saver: { quality: 85 }, convert: 'jpg'
+        resize_to_fill: [1500, 2000], saver: { quality: 85 }, convert: "jpg"
       ).processed
     end
   end

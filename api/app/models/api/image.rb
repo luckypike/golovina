@@ -15,20 +15,20 @@ module Api
       key = file.variant(
         resize_to_fill: [1500, 2000],
         saver: { quality: 85 },
-        convert: 'jpg'
+        convert: "jpg"
       ).processed.key
 
-      ENV.fetch('S3_URL', '/') + "/#{key}.jpg"
+      ENV.fetch("S3_URL", "/") + "/#{key}.jpg"
     end
 
     def large_url
       key = file.variant(
         resize_to_fill: [3000, 4000],
         saver: { quality: 85 },
-        convert: 'jpg'
+        convert: "jpg"
       ).processed.key
 
-      ENV.fetch('S3_URL', '/') + "/#{key}.jpg"
+      ENV.fetch("S3_URL", "/") + "/#{key}.jpg"
     end
 
     # TODO: Remove this bypass
