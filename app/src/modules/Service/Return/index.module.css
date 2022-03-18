@@ -1,0 +1,24 @@
+.root {
+  margin: 0 var(--xr) var(--yr-l);
+}
+
+@media (--m) {
+  .root {
+    margin: 0 calc(var(--xr) * 2) var(--yr-l);
+  }
+}
+
+@media (--l) {
+  .root {
+    margin: 0 calc(3 / 16 * 100%) var(--yr-l);
+  }
+}
+
+.title {
+  margin: 0 0 var(--yr-m);
+  text-align: center;
+}
+
+.root h2 {
+  margin: 0 0 var(--yr-xs);
+}

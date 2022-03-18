@@ -1,0 +1,28 @@
+.root {
+  background: rgb(var(--theme-bg-secondary-color));
+  flex-grow: 1;
+  padding: var(--yr-xl) var(--xr) calc(var(--yr) * 16);
+}
+
+@media (--s) {
+  .root {
+    padding: var(--yr-xl) var(--xr) calc(var(--yr) * 22);
+  }
+}
+
+@media (--m) {
+  .root {
+    padding: var(--yr-xl) calc(var(--xr) * 2) calc(var(--yr) * 22);
+  }
+}
+
+@media (--l) {
+  .root {
+    padding: var(--yr-xl) calc(3 / 16 * 100%);
+  }
+}
+
+.title {
+  margin: 0 0 var(--yr-m);
+  text-align: center;
+}

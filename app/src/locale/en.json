@@ -145,5 +145,16 @@
   },
   "PrivacyPolicy": {
     "title": "Privacy policy"
+  },
+  "Service": {
+    "Delivery": {
+      "title": "Payment & Delivery"
+    },
+    "Return": {
+      "title": "Returns & Refunds"
+    }
+  },
+  "NewRefund": {
+    "title": "Refund"
   }
 }

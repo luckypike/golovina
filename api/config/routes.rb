@@ -125,9 +125,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   scope format: false do
     namespace 'service', module: nil do
-      get '', to: 'service#index'
-      get 'delivery', to: 'service#delivery'
-      get 'return', to: 'service#return'
       get 'refund', to: 'refunds#refund', format: :json
     end
   end
