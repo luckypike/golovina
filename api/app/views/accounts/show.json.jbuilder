@@ -1,7 +1,7 @@
 json.orders @orders do |order|
   json.partial! order
-  json.extract! order, :amount, :quantity
-  json.amount order.amount.presence || order.amount_calc
+  json.extract! order, :quantity
+  json.amount order.payment_amount.presence || order.amount.presence || order.amount_calc
 
   if order.delivery_city
     json.delivery_city do
