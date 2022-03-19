@@ -65,6 +65,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: paambaati/codeclimate-action@v2.2.4
+    - uses: paambaati/codeclimate-action@v3
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
