@@ -59,3 +59,12 @@ jobs:
       - run: bundle exec rake db:migrate
       - name: RSpec
         run: bundle exec rspec
+
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: paambaati/codeclimate-action@v2.2.4
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
