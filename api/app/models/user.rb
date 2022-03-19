@@ -31,10 +31,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
 
-  def remember_me
-    true
-  end
-
   def admin?
     id == 1
   end
