@@ -57,7 +57,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./fastapi:/app
+      - ./fastapi:/app:cached
       - go-build:/root/.cache/go-build
       - go-modules:/go/pkg/mod
     ports:
