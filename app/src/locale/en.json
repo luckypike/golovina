@@ -98,6 +98,8 @@
       "title": "Select a shipping method",
       "address": "Delivery address",
       "submit": "To checkout",
+      "select": "Select city...",
+      "noOptions": "Nothing found",
       "pickup": {
         "title": "Collect from store",
         "desc": "Moscow, Bolshaya Nikitskaya 21/18 str 4"

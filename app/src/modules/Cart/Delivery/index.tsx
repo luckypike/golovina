@@ -155,6 +155,8 @@ export const Delivery: FC = observer(() => {
                 <div className={sf.lb}>{t('delivery_city_id')}</div>
 
                 <Select
+                  placeholder={t('select')}
+                  noOptionsMessage={() => t('noOptions')}
                   classNamePrefix="golovina-select"
                   options={cities}
                   getOptionLabel={(option) => option.title}
@@ -203,7 +205,7 @@ export const Delivery: FC = observer(() => {
 
             <div className={sf.el}>
               {deliveryOptions.map((deliveryOption) => (
-                <label key={deliveryOption.id} className={cc([sf.lb, sf.checkbox])}>
+                <label key={deliveryOption.id} className={cc([sf.lb, sf.radio])}>
                   <input {...register('delivery_option')} type="radio" value={deliveryOption.id} />
                   {deliveryOption.title}
                 </label>
