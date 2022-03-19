@@ -49,6 +49,7 @@ class Order < ApplicationRecord
 
   belongs_to :user_address, optional: true
   belongs_to :delivery_city, optional: true
+  belongs_to :promo_code, optional: true
 
   validates :street, :house, :appartment, presence: true, if: -> { (russia? && door?) || international? }
   validates :delivery_city, :delivery_option, presence: true, if: -> { russia? }
@@ -69,7 +70,9 @@ class Order < ApplicationRecord
   # end
 
   def amount_calc
-    amount_without_delivery_calc + amount_delivery_calc
+    temp = amount_without_delivery_calc + amount_delivery_calc
+    temp = promo_code.apply(temp) if promo_code
+    temp
   end
 
   def amount_delivery_calc
