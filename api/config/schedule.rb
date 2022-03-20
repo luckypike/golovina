@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use this file to easily define all of your cron jobs.
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
@@ -32,7 +34,7 @@
 # end
 
 every 15.minutes do
-  rake 'variants:convert_video'
-  rake 'slides:convert_video'
-  rake 'kits:convert_videos'
+  rake "variants:convert_video"
+  rake "slides:convert_video"
+  rake "kits:convert_videos"
 end

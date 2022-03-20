@@ -13,6 +13,7 @@ AllCops:
     - app/models/api/**/*.rb
     - app/policies/api/**/*.rb
     - app/views/api/**/*.rb
+    - config/**/*.rb
     - spec/commands/**/*.rb
     - spec/contracts/**/*.rb
     - spec/jobs/**/*.rb
