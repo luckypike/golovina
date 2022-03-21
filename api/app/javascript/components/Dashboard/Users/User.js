@@ -6,7 +6,6 @@ import axios from 'axios'
 import { path } from '../../Routes'
 
 import Orders from '../../Accounts/Show/Orders'
-import Refund from '../Refund/Refund'
 
 import styles from './User.module.css'
 import page from '../../Page.module.css'
@@ -102,7 +101,7 @@ export default function User ({ user: userJSON, locale }) {
           <Orders orders={orders} locale={locale} />
         </div>
 
-        {refunds && refunds.length > 0 &&
+        {/* {refunds && refunds.length > 0 &&
           <div className={styles.refunds}>
             <div className={styles.title}>
               Возвраты
@@ -112,7 +111,7 @@ export default function User ({ user: userJSON, locale }) {
               <Refund refund={refund} locale={locale} key={refund.id} />
             )}
           </div>
-        }
+        } */}
       </div>
     </div>
   )
