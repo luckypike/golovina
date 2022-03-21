@@ -1,0 +1,25 @@
+name: APP CI
+
+on: push
+
+defaults:
+  run:
+    working-directory: app
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: yarn --frozen-lockfile
+      - run: yarn eslint .
+
+
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: yarn --frozen-lockfile
+      - run: yarn prettier -c .

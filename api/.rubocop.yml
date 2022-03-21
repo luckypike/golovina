@@ -13,8 +13,10 @@ AllCops:
     - app/models/api/**/*.rb
     - app/policies/api/**/*.rb
     - app/views/api/**/*.rb
+    - config/**/*.rb
     - spec/commands/**/*.rb
     - spec/contracts/**/*.rb
+    - spec/controllers/api/**/*.rb
     - spec/jobs/**/*.rb
 
 Style/Documentation:
@@ -23,6 +25,7 @@ Style/Documentation:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*_spec.rb
+    - ./**/*.json.jb
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented

@@ -1,0 +1,41 @@
+# frozen_string_literal: true
+
+{
+  refunds: @refunds.map do |refund|
+    order = refund.order
+    {
+      id: refund.id,
+      state: refund.state,
+      created_at_fancy: l(refund.created_at),
+      order_id: order.id,
+      reason: refund.reason,
+      detail: refund.detail,
+      user: {
+        full_name: refund.user.full_name,
+        phone: refund.user.phone,
+        email: refund.user.email
+      },
+      refund_order_items: refund.refund_order_items.map do |refund_order_item|
+        order_item = refund_order_item.order_item
+        variant = order_item.variant
+        image = Api::Image.where(imagable_type: "Variant", imagable_id: variant.id).active_and_ordered.first
+        {
+          id: refund_order_item,
+          order_item: {
+            id: order_item.id,
+            amount: order_item.amount.to_f,
+            size: order_item.size.slice(:id, :title),
+            variant: {
+              title: variant.title,
+              color: variant.color.slice(:id, :title),
+              image: image && {
+                id: image.id,
+                src: image.thumb_url
+              }
+            }
+          }
+        }
+      end
+    }
+  end
+}

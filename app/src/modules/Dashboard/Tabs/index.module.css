@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--fs-at);
+  line-height: var(--lh-at);
+  margin: 0 0 var(--yr-m);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.root a {
+  display: block;
+  text-decoration: none;
+}
+
+.root a:not(:last-child) {
+  margin-right: var(--xr);
+}

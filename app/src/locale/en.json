@@ -77,8 +77,7 @@
           "value": "2800 ₽"
         }
       },
-      "login": "Place order",
-      "checkout": "Continue as guest"
+      "submit": "Place order"
     },
     "Login": {
       "submit": "Continue as guest",
@@ -147,5 +146,65 @@
   },
   "PrivacyPolicy": {
     "title": "Privacy policy"
+  },
+  "Service": {
+    "Delivery": {
+      "title": "Payment & Delivery"
+    },
+    "Return": {
+      "title": "Returns & Refunds",
+      "refund": "Create a refund",
+      "login": "Login for refund"
+    }
+  },
+  "NewRefund": {
+    "title": "Refund",
+    "desc": "Select the order, which one you would like to refund",
+    "order": "#{id} at {paid_at} ({amount})",
+    "check": "Select the products, you would like to refund",
+    "size": "Size",
+    "color": "Color",
+    "reason": {
+      "title": "Select refund reason",
+      "size": "Size doesn't fit",
+      "defect": "Product has a defect",
+      "color": "Color doesn't match",
+      "other": "Other"
+    },
+    "detail": "Describe the reason",
+    "submit": "Submit",
+    "submitted": "Заявка на возврат товара № {id} зарегистрирована. Мы скоро с вами свяжемся для уточнения."
+  },
+  "Dashboard": {
+    "Tabs": {
+      "orders": "Orders",
+      "archived": "Archive",
+      "refunds": "Refunds",
+      "carts": "Carts",
+      "wishlists": "Wishlists",
+      "users": "Users"
+    },
+    "Refunds": {
+      "title": "Refunds",
+      "loading": "Load refunds list...",
+      "state": {
+        "active": "New",
+        "archived": "Archived"
+      },
+      "what": "{count, plural, =1 {# item} other {# item}} on {amount}",
+      "full_name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "size": "Size",
+      "color": "Color",
+      "reason": {
+        "title": "Reason",
+        "size": "Size doesn't fit",
+        "defect": "Product has a defect",
+        "color": "Color doesn't match",
+        "other": "Other"
+      },
+      "archive": "Archive"
+    }
   }
 }

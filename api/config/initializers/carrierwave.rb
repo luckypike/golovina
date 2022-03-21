@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 CarrierWave.configure do |config|
   config.fog_credentials = {
-    provider: 'AWS',
-    aws_access_key_id: ENV['aws_access_key_id'],
-    aws_secret_access_key: ENV['aws_secret_access_key'],
-    endpoint: ENV['aws_endpoint']
+    provider: "AWS",
+    aws_access_key_id: ENV["aws_access_key_id"],
+    aws_secret_access_key: ENV["aws_secret_access_key"],
+    endpoint: ENV["aws_endpoint"]
   }
 
-  config.fog_directory = ENV['aws_bucket']
+  config.fog_directory = ENV["aws_bucket"]
   config.fog_public = true
   config.fog_authenticated_url_expiration = 12.hours
   config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" }
@@ -24,11 +26,12 @@ module CarrierWave
 
     def gray
       manipulate! do |img|
-        return img unless img.mime_type.match /image\/jpeg/
+        return img unless img.mime_type.include?("image/jpeg")
+
         img.combine_options do |c|
-          c.fuzz '2%'
-          c.fill '#f8f8f8'
-          c.opaque 'white'
+          c.fuzz "2%"
+          c.fill "#f8f8f8"
+          c.opaque "white"
         end
         img
       end
@@ -36,7 +39,8 @@ module CarrierWave
 
     def optimize
       manipulate! do |img|
-        return img unless img.mime_type.match /image\/jpeg/
+        return img unless img.mime_type.include?("image/jpeg")
+
         img.strip
         img.combine_options do |c|
           c.quality "80"
@@ -55,7 +59,8 @@ module CarrierWave
 
     def optimize_slide(quality)
       manipulate! do |img|
-        return img unless img.mime_type.match /image\/jpeg/
+        return img unless img.mime_type.include?("image/jpeg")
+
         img.strip
         img.combine_options do |c|
           c.quality quality.to_s

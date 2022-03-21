@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :variant, class: 'Api::Variant' do
+  factory :variant, class: "Api::Variant" do
     product
     color
     category

@@ -30,7 +30,7 @@ ru:
 
     state:
       active: Новый
-      done: Завершен
+      archived: Завершен
 
     reason:
       sizes: Не подошел размер

@@ -1,21 +1,11 @@
+# frozen_string_literal: true
+
 class Refund < ApplicationRecord
-  enum state: { active: 1, done: 2 } do
-    event :do do
-      after do
-        order_items.each do |item|
-          item.repayment = true
-          item.save
-        end
-      end
-
-      transition active: :done
-    end
-  end
-
+  enum state: { active: 1, archived: 2 }
   enum reason: { sizes: 1, defect: 2, color: 3, other: 0 }
 
-  has_many :order_items
-  accepts_nested_attributes_for :order_items
+  has_many :refund_order_items, dependent: :destroy, class_name: "Api::RefundOrderItem"
+  has_many :order_items, through: :refund_order_items
 
   belongs_to :user, default: -> { Current.user }
   belongs_to :order
@@ -25,7 +15,7 @@ class Refund < ApplicationRecord
   end
 
   def amount
-    @amount ||= order_items.map(&:price_sell).sum
+    @amount ||= order_items.sum(&:price_final)
   end
 
   def month
@@ -43,9 +33,7 @@ class Refund < ApplicationRecord
           variant: [
             :images,
             :translations,
-            :availabilities,
-            color: :translations,
-            product: %i[translations category]
+            color: :translations
           ]
         }, :size] }
       )

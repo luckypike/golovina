@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_23_111617) do
+ActiveRecord::Schema.define(version: 2022_03_20_093922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -378,6 +378,15 @@ ActiveRecord::Schema.define(version: 2022_02_23_111617) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "refund_order_items", force: :cascade do |t|
+    t.bigint "refund_id", null: false
+    t.bigint "order_item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_item_id"], name: "index_refund_order_items_on_order_item_id"
+    t.index ["refund_id"], name: "index_refund_order_items_on_refund_id"
+  end
+
   create_table "refunds", force: :cascade do |t|
     t.integer "state"
     t.integer "reason"
@@ -618,6 +627,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_111617) do
   add_foreign_key "orders", "user_addresses"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
+  add_foreign_key "refund_order_items", "order_items"
+  add_foreign_key "refund_order_items", "refunds"
   add_foreign_key "refunds", "orders"
   add_foreign_key "refunds", "users"
   add_foreign_key "similarables", "products"
