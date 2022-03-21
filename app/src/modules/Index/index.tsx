@@ -6,7 +6,7 @@ import { IndexData } from './models'
 import { Slides } from './Slides'
 
 import s from './index.module.css'
-import { Instagram } from './Instagram'
+// import { Instagram } from './Instagram'
 
 export const Index: FC = () => {
   return (
@@ -19,7 +19,7 @@ export const Index: FC = () => {
         <Slides />
       </div>
 
-      <Instagram />
+      {/* <Instagram /> */}
     </div>
   )
 }

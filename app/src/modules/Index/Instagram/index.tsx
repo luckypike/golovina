@@ -35,6 +35,7 @@ const Item: FC<{ item: InstagramData }> = ({ item }) => {
       )}
 
       {(item.media_type === 'CAROUSEL_ALBUM' || item.media_type === 'IMAGE') && (
+        // eslint-disable-next-line @next/next/no-img-element
         <img src={item.media_url} alt="Instapost" />
       )}
     </a>

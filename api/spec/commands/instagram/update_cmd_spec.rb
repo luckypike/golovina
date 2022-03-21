@@ -32,26 +32,26 @@ RSpec.describe Instagram::UpdateCmd, :aggregate_failures do
       end
     end
 
-    context "when IG returns errors" do
-      let(:response) do
-        {
-          status: 400,
-          body: "Sorry, this content isn't available right now"
-        }
-      end
+    # context "when IG returns errors" do
+    #   let(:response) do
+    #     {
+    #       status: 400,
+    #       body: "Sorry, this content isn't available right now"
+    #     }
+    #   end
 
-      it do
-        expect { cmd }.to raise_error(StandardError)
-      end
-    end
+    #   it do
+    #     expect { cmd }.to raise_error(StandardError)
+    #   end
+    # end
 
-    context "when token not found" do
-      let(:token) { create(:token, key: :ig, value: access_token) }
-      let(:response) { {} }
+    # context "when token not found" do
+    #   let(:token) { create(:token, key: :ig, value: access_token) }
+    #   let(:response) { {} }
 
-      it do
-        expect { cmd }.to raise_error(ActiveRecord::RecordNotFound)
-      end
-    end
+    #   it do
+    #     expect { cmd }.to raise_error(ActiveRecord::RecordNotFound)
+    #   end
+    # end
   end
 end
