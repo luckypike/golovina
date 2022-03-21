@@ -82,6 +82,11 @@
   color: orange;
 }
 
+.created_at {
+  margin-left: var(--xr);
+  color: rgb(var(--theme-fg-hint-color));
+}
+
 .archive {
   margin: var(--yr-xs) 0 0;
 }

@@ -6,6 +6,7 @@
     {
       id: refund.id,
       state: refund.state,
+      created_at_fancy: l(refund.created_at),
       order_id: order.id,
       reason: refund.reason,
       detail: refund.detail,
