@@ -11,6 +11,7 @@ import { priceFormat } from '../Price'
 import s from './index.module.css'
 import sf from '../../layout/form.module.css'
 import sb from '../../css/buttons.module.css'
+import Head from 'next/head'
 
 const NewRefund: FC = () => {
   const t = useTranslations('NewRefund')
@@ -70,6 +71,10 @@ const NewRefund: FC = () => {
 
   return (
     <div className={s.root}>
+      <Head>
+        <title>{t('title')}</title>
+      </Head>
+
       <h1 className={s.title}>{t('title')}</h1>
 
       {submitted !== undefined && <div className={s.submitted}>{t('submitted', { id: submitted })}</div>}
