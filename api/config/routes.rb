@@ -28,11 +28,11 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
 
     namespace :account do
-      resources :refunds, only: %i[create index]
+      resources :refunds, only: %i[create new]
     end
 
     namespace :dashboard do
-      resources :refunds, only: [] do
+      resources :refunds, only: %i[index] do
         member do
           post :archive
         end
@@ -128,7 +128,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
     get :archived, to: "dashboard#archived"
     get :cart, to: "dashboard#cart"
-    get :refunds, to: "dashboard#refunds"
     get :wishlists, to: "dashboard#wishlists"
     get :users, to: "dashboard#users"
     get "/users/:id", to: "dashboard#user", as: "user"

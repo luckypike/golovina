@@ -28,7 +28,7 @@ const NewRefund: FC = () => {
   const [orders, setOrders] = useState<OrderData[]>()
   useEffect(() => {
     const _fetch = async (): Promise<void> => {
-      const { data } = await axios.get<{ orders: OrderData[] }>('/account/refunds')
+      const { data } = await axios.get<{ orders: OrderData[] }>('/account/refunds/new')
       setOrders(data.orders)
     }
 

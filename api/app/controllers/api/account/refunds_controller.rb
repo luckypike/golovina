@@ -8,7 +8,7 @@ module Api
         @cmd = Refunds::CreateCmd.call(user: current_user, refund_params: params)
       end
 
-      def index
+      def new
         authorize Refund
         @cmd = Refunds::IndexCmd.call(user: current_user)
       end

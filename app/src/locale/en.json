@@ -172,5 +172,37 @@
     "detail": "Describe the reason",
     "submit": "Submit",
     "submitted": "Заявка на возврат товара № {id} зарегистрирована. Мы скоро с вами свяжемся для уточнения."
+  },
+  "Dashboard": {
+    "Tabs": {
+      "orders": "Orders",
+      "archived": "Archive",
+      "refunds": "Refunds",
+      "carts": "Carts",
+      "wishlists": "Wishlists",
+      "users": "Users"
+    },
+    "Refunds": {
+      "title": "Refunds",
+      "loading": "Load refunds list...",
+      "state": {
+        "active": "New",
+        "archived": "Archived"
+      },
+      "what": "{count, plural, =1 {# item} other {# item}} on {amount}",
+      "full_name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "size": "Size",
+      "color": "Color",
+      "reason": {
+        "title": "Reason",
+        "size": "Size doesn't fit",
+        "defect": "Product has a defect",
+        "color": "Color doesn't match",
+        "other": "Other"
+      },
+      "archive": "Archive"
+    }
   }
 }

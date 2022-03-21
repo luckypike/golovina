@@ -28,8 +28,8 @@ RSpec.describe Api::Account::RefundsController, :aggregate_failures do
     end
   end
 
-  describe "#index" do
-    subject(:cmd) { get :index, params: { format: :json } }
+  describe "#new" do
+    subject(:cmd) { get :new, params: { format: :json } }
 
     before { allow(Refunds::IndexCmd).to receive(:call).and_return(true) }
 

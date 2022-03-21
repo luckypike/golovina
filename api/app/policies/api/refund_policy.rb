@@ -2,8 +2,12 @@
 
 module Api
   class RefundPolicy < Api::ApplicationPolicy
-    def index?
+    def new?
       user
+    end
+
+    def index?
+      user&.editor?
     end
 
     def create?
