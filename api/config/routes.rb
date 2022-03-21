@@ -67,15 +67,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   scope path: :catalog, as: :catalog do
     get "", to: "variants#all"
-    # get :last, controller: :variants
-    # get :latest, controller: :variants
-    # get :sale, controller: :variants
-    # get :soon, controller: :variants
-    # get :premium, controller: :variants
-    # get :stayhome, controller: :variants
-    # get 'basic', to: 'variants#stayhome'
-    # get :morning, controller: :variants
-    # get ':slug', to: 'products#category', as: :category, constraints: lambda { |request| Category.find_by_slug(request.params[:slug]).present? }
     get ":id", to: "themes#show", constraints: lambda { |request|
                                                  Theme.find_by(slug: request.params[:id]).present?
                                                }, as: :theme
@@ -153,39 +144,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   resources :colors, except: [:show]
 
   resources :discounts
-
-  # resources :products, path: :catalog do
-  #   member do
-  #     # post :publish
-  #     # post :archive
-  #     get :info
-  #     get 'similar/:simid', to: 'products#similar', as: 'similar'
-  #   end
-  #
-  #   collection do
-  #     # get 'control', to: 'products#control', as: :control
-  #     # get 'control/archive', to: 'products#control'
-  #     # get :all
-  #     get :latest
-  #     # get :golovina
-  #     # get :kits
-  #     get :sale
-  #     get ':slug', to: 'products#category', as: :category, constraints: lambda { |request| Category.find_by_slug(request.params[:slug]).present? }
-  #   end
-  # end
-
-  # resources :products, path: :catalog do
-  #   resources :variants, only: [:create]
-  #   post :wishlist, on: :member
-
-  #   collection do
-  #     get :all
-  #     get :latest
-  #     get :sale
-  #   end
-  # end
-
-  # get 'account/orders', to: 'users#account'
 
   resources :posts
 

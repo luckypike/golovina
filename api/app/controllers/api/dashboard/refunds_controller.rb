@@ -17,8 +17,6 @@ module Api
             ]
           )
           .order(created_at: :desc)
-
-
       end
 
       def archive

@@ -29,7 +29,7 @@ module Golovina
     config.active_job.queue_adapter = :sidekiq
     config.active_storage.variant_processor = :vips
     config.cache_store = :redis_cache_store, {
-      url: "redis://#{ENV.fetch('REDIS_HOST', :localhost)}:#{ENV.fetch('REDIS_PORT', 6379)}/#{ENV.fetch('REDIS_CACHE_DB', 1)}"
+      url: "redis://#{ENV.fetch('REDIS_HOST', :localhost)}:#{ENV.fetch('REDIS_PORT', 6379)}/#{ENV.fetch('REDIS_CACHE_DB', 1)}" # rubocop:disable Layout/LineLength
     }
 
     # TODO: Remove it
