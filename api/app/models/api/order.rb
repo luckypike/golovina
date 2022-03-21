@@ -30,5 +30,9 @@ module Api
         0
       end
     end
+
+    def paid_at
+      payed_at
+    end
   end
 end

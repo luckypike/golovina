@@ -26,7 +26,7 @@ en:
 
     state:
       active: Active
-      done: Done
+      archived: Done
 
     reason:
       sizes: Size doesn't fit

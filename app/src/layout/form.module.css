@@ -78,6 +78,10 @@ select.in:invalid {
   position: relative;
 }
 
+.checkbox > input[type='checkbox']:last-child {
+  margin-right: 0;
+}
+
 .checkbox > input[type='checkbox']:checked::after {
   position: absolute;
   left: var(--yr);

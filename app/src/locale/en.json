@@ -77,8 +77,7 @@
           "value": "2800 ₽"
         }
       },
-      "login": "Place order",
-      "checkout": "Continue as guest"
+      "submit": "Place order"
     },
     "Login": {
       "submit": "Continue as guest",
@@ -151,10 +150,27 @@
       "title": "Payment & Delivery"
     },
     "Return": {
-      "title": "Returns & Refunds"
+      "title": "Returns & Refunds",
+      "refund": "Create a refund",
+      "login": "Login for refund"
     }
   },
   "NewRefund": {
-    "title": "Refund"
+    "title": "Refund",
+    "desc": "Select the order, which one you would like to refund",
+    "order": "#{id} at {paid_at} ({amount})",
+    "check": "Select the products, you would like to refund",
+    "size": "Size",
+    "color": "Color",
+    "reason": {
+      "title": "Select refund reason",
+      "size": "Size doesn't fit",
+      "defect": "Product has a defect",
+      "color": "Color doesn't match",
+      "other": "Other"
+    },
+    "detail": "Describe the reason",
+    "submit": "Submit",
+    "submitted": "Заявка на возврат товара № {id} зарегистрирована. Мы скоро с вами свяжемся для уточнения."
   }
 }

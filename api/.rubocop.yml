@@ -16,6 +16,7 @@ AllCops:
     - config/**/*.rb
     - spec/commands/**/*.rb
     - spec/contracts/**/*.rb
+    - spec/controllers/api/**/*.rb
     - spec/jobs/**/*.rb
 
 Style/Documentation:

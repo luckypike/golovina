@@ -22,7 +22,7 @@ export default function Refund ({ refund, locale }) {
 
   const handleUpdate = (id) => {
     axios.post(
-      path('done_refund_path', { id: id }),
+      `/api/dashboard/refunds/${id}/archive`,
       { authenticity_token: document.querySelector('[name="csrf-token"]').content }
     ).then(res => {
       setState('done')

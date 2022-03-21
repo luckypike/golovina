@@ -33,11 +33,6 @@ class OrderMailer < ApplicationMailer
     mail(to: @order.user.email, subject: "Оплачен заказ № #{@order.number}")
   end
 
-  def refund refund
-    @refund = refund
-    mail(to: Rails.application.credentials[Rails.env.to_sym][:mail][:order][:mail], subject: "Оформлен возврат на заказ № #{refund.order.number}")
-  end
-
   def tracker
     @order = params[:order]
     attachments.inline['logo-white.png'] = File.read('public/logo-white.png')

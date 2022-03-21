@@ -2,8 +2,8 @@ import type { NextPage } from 'next'
 
 import NewRefund from '../../modules/NewRefund'
 
-const NewRefundPage: NextPage = () => {
+const RefundsPage: NextPage = () => {
   return <NewRefund />
 }
 
-export default NewRefundPage
+export default RefundsPage

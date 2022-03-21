@@ -8,6 +8,7 @@ ru:
       hash?: must be filled
       type?: wrong value
       true?: must be selected
+      min_size?: must be filled
 
       format?:
         failure: wrong format

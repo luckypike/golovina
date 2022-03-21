@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
-  namespace :api, defaults: { format: :json }, format: false do
+  namespace :api, defaults: { format: :json }, format: false do # rubocop:disable Metrics/BlockLength
     namespace :pages do
       get :index
     end
@@ -24,6 +24,18 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         post :promo_code, action: :apply_promo_code
         delete :promo_code, action: :delete_promo_code
         delete "order_items/:id", action: :delete_order_item
+      end
+    end
+
+    namespace :account do
+      resources :refunds, only: %i[create index]
+    end
+
+    namespace :dashboard do
+      resources :refunds, only: [] do
+        member do
+          post :archive
+        end
       end
     end
 
@@ -127,12 +139,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   resources :collections
 
-  scope format: false do
-    namespace "service", module: nil do
-      get "refund", to: "refunds#refund", format: :json
-    end
-  end
-
   resources :kits do
     collection do
       get :control
@@ -185,12 +191,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   resources :posts
 
   resources :statistics
-
-  resources :refunds do
-    member do
-      post :done
-    end
-  end
 
   resources :orders, only: [] do
     collection do

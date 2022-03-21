@@ -26,3 +26,44 @@
   margin: 0 0 var(--yr-m);
   text-align: center;
 }
+
+.container {
+  margin: 0 auto;
+  max-width: 32rem
+}
+
+.item {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1rem 6rem 1fr;
+  grid-gap: var(--xr);
+}
+
+.item:not(:last-child) {
+  margin-bottom: var(--yr-s);
+}
+
+.image {
+  position: relative;
+  padding-top: calc(4 / 3 * 100%);
+  background: rgb(var(--theme-sp-color));
+}
+
+.image img {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.hack {
+  display: none;
+}
+
+.submitted {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  margin: 0 0 var(--yr-l);
+  text-align: center;
+}

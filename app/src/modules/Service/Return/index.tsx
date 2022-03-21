@@ -16,7 +16,7 @@ export const Return: FC = () => {
   const { isAuth } = useRootContext()
 
   const handleRefundClick = (): void => {
-    void router.push('/account/refund')
+    void router.push('/account/refunds')
   }
 
   const handleLoginClick = (): void => {

@@ -1,0 +1,31 @@
+# frozen_string_literal: true
+
+orders = @cmd.orders
+
+{
+  orders: orders.map do |order|
+    {
+      id: order.id,
+      amount: order.amount.to_f,
+      paid_at: order.paid_at,
+      paid_at_fancy: l(order.paid_at),
+      order_items: order.order_items.map do |order_item|
+        variant = order_item.variant
+        image = Api::Image.where(imagable_type: "Variant", imagable_id: variant.id).active_and_ordered.first
+        {
+          id: order_item.id,
+          amount: order_item.amount.to_f,
+          size: order_item.size.slice(:id, :title),
+          variant: {
+            title: variant.title,
+            color: variant.color.slice(:id, :title),
+            image: image && {
+              id: image.id,
+              src: image.thumb_url
+            }
+          }
+        }
+      end
+    }
+  end
+}
