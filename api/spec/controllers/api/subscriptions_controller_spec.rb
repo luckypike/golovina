@@ -2,7 +2,7 @@
 
 RSpec.describe Api::SubscriptionsController, :aggregate_failures do
   describe "#create" do
-    subject(cmd) { post :create, params: params }
+    subject(:cmd) { post :create, params: params }
 
     let(:params) { { format: :json } }
 

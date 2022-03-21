@@ -73,12 +73,12 @@
 }
 
 .status.active {
-  background: rgba(0, 255, 0, 0.1);
+  background: rgba(0 255 0 / 0.1);
   color: green;
 }
 
 .status.archived {
-  background: rgba(255, 255, 0, 0.1);
+  background: rgba(255 255 0 / 0.1);
   color: orange;
 }
 
@@ -93,7 +93,7 @@
 
 @media (--s) {
   .archive {
-    margin: 0
+    margin: 0;
   }
 }
 

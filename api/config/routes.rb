@@ -143,10 +143,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   resources :colors, except: [:show]
 
-  resources :discounts
-
-  resources :posts
-
   resources :statistics
 
   resources :orders, only: [] do

@@ -32,7 +32,7 @@ RSpec.describe Api::VariantsController, :aggregate_failures do
   end
 
   describe "#update" do
-    subject { patch :update, params: params }
+    subject(:cmd) { patch :update, params: params }
 
     let(:color) { create(:color) }
     let(:variant) { create(:variant) }
