@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import s from './index.module.css'
 
 export const Pay: FC = observer(() => {
-  const { order } = useCartContext()
+  const { order, reload } = useCartContext()
   const router = useRouter()
   const t = useTranslations('Cart.Pay')
 
@@ -16,8 +16,8 @@ export const Pay: FC = observer(() => {
 
   const formRef = useRef<HTMLFormElement>(null)
   useEffect(() => {
-    formRef.current?.submit()
-  }, [])
+    if (order && !reload) formRef.current?.submit()
+  }, [reload, order])
 
   return (
     <div>
