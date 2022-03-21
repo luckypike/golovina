@@ -7,17 +7,17 @@ ENV GEM_HOME /app/.local/ruby/3.0
 ENV PATH "/app/.local/ruby/3.0/bin:${PATH}"
 
 ARG APP_VERSION
-ARG RAILS_ENV
-ARG SECRET_KEY_BASE
-ARG aws_access_key_id
-ARG aws_secret_access_key
-ARG s3_access_key_id
-ARG s3_secret_access_key
-ARG s3_endpoint
-ARG s3_bucket
+
+ENV s3_access_key_id dummy_aws_access_key_id
+ENV s3_secret_access_key dummy_aws_secret_access_key
+ENV s3_endpoint https://example.com/dummy
+ENV s3_bucket dummy_bucket
+ENV aws_access_key_id dummy_aws_access_key_id
+ENV aws_secret_access_key dummy_aws_secret_access_key
+
+ENV RAILS_ENV production
+ENV SECRET_KEY_BASE dummy_secret_key_base
 ENV DATABASE_HOST 172.17.0.1
-ENV MAIL_FROM from@example.com
-ENV MAIL_TO to@example.com
 
 RUN apk update && apk add bash git curl openssh g++ make python3 python2 imagemagick vips-dev yarn nodejs tzdata postgresql-dev postgresql-client vim
 
