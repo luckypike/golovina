@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 orders = @cmd.orders
+refunded_order_items = @cmd.refunded_order_items
 
 {
   orders: orders.map do |order|
@@ -14,6 +15,7 @@ orders = @cmd.orders
         image = Api::Image.where(imagable_type: "Variant", imagable_id: variant.id).active_and_ordered.first
         {
           id: order_item.id,
+          refunded: refunded_order_items.include?(order_item.id),
           amount: order_item.amount.to_f,
           size: order_item.size.slice(:id, :title),
           variant: {

@@ -106,7 +106,7 @@ const NewRefund: FC = () => {
                   <input {...register('order_item_ids')} className={s.hack} type="checkbox" value="" />
 
                   {order.order_items.map((orderItem) => (
-                    <label key={orderItem.id} className={s.item}>
+                    <label key={orderItem.id} className={cc([s.item, { [s.refunded]: orderItem.refunded }])}>
                       <div>
                         <div className={cc([sf.lb, sf.checkbox])}>
                           <input {...register('order_item_ids')} type="checkbox" value={orderItem.id} />
@@ -128,6 +128,13 @@ const NewRefund: FC = () => {
                         {t('size')}: {orderItem.size.title}
                         <br />
                         {t('color')}: {orderItem.variant.color.title}
+
+                        {orderItem.refunded &&
+                          <>
+                            <br />
+                            <strong>{t('refunded')}</strong>
+                          </>
+                        }
                       </div>
                     </label>
                   ))}

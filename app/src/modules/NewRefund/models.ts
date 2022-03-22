@@ -9,6 +9,7 @@ export interface OrderData {
 
 export interface OrderItemData {
   id: number
+  refunded: boolean
   size: {
     id: number
     title: string

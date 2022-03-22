@@ -6,11 +6,14 @@ RSpec.describe Refunds::IndexCmd, :aggregate_failures do
   let(:order) { create(:api_order) }
   let(:user) { order.user }
 
+  before do
+    create(:api_order_item, order: order)
+  end
+
   describe "#call" do
     context "with valid params" do
-      it { is_expected.to be_success }
-
       it do
+        expect(cmd).to be_success
         expect(cmd.orders.map(&:id)).to match([order.id])
       end
     end

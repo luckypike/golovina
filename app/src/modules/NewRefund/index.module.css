@@ -39,6 +39,11 @@
   grid-gap: var(--xr);
 }
 
+.item.refunded {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
 .item:not(:last-child) {
   margin-bottom: var(--yr-s);
 }

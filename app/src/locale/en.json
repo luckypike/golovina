@@ -164,6 +164,7 @@
     "check": "Select the products, you would like to refund",
     "size": "Size",
     "color": "Color",
+    "refunded": "Already refunded",
     "reason": {
       "title": "Select refund reason",
       "size": "Size doesn't fit",
