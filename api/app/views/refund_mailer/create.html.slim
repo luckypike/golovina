@@ -1,11 +1,11 @@
 .order
   p
     ' Оформлен возврат на заказ №
-    = @refund.order.id
+    = @refund.order_id
 
   p
     ' Товары на возврат:
     br
     - @refund.order.order_items.each do |item|
-      = item.variant.title_last
+      = item.variant.title
       br
