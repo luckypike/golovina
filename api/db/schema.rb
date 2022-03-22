@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_20_093922) do
+ActiveRecord::Schema.define(version: 2022_03_22_085037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -383,7 +383,7 @@ ActiveRecord::Schema.define(version: 2022_03_20_093922) do
     t.bigint "order_item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_item_id"], name: "index_refund_order_items_on_order_item_id"
+    t.index ["order_item_id"], name: "index_refund_order_items_on_order_item_id", unique: true
     t.index ["refund_id"], name: "index_refund_order_items_on_refund_id"
   end
 

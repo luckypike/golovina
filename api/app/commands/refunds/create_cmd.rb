@@ -34,8 +34,18 @@ module Refunds
     def validate_and_save_order_items(refund, order_item_ids)
       order_item_ids.each do |order_item_id|
         refund_order_item = Api::RefundOrderItem.new(refund: refund, order_item_id: order_item_id)
-        validate_entity!(refund_order_item)
+        validate_and_save_refund_order_item(refund_order_item)
+      end
+    end
+
+    def validate_and_save_refund_order_item(refund_order_item)
+      if refund_order_item.valid?
         refund_order_item.save!
+      else
+        fail!(
+          errors: { order_item_ids: [I18n.t("contracts.errors.refund.already_refunded?")] },
+          http_status_code: :unprocessable_entity
+        )
       end
     end
 
