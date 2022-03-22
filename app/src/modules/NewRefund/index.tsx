@@ -128,13 +128,12 @@ const NewRefund: FC = () => {
                         {t('size')}: {orderItem.size.title}
                         <br />
                         {t('color')}: {orderItem.variant.color.title}
-
-                        {orderItem.refunded &&
+                        {orderItem.refunded && (
                           <>
                             <br />
                             <strong>{t('refunded')}</strong>
                           </>
-                        }
+                        )}
                       </div>
                     </label>
                   ))}
