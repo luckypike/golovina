@@ -24,7 +24,7 @@ export default function Nav ({ locale }) {
           {I18n.t('dashboard.nav.archived')}
         </a>
 
-        <a href={path('dashboard_refunds_path')} className={styles.tab}>
+        <a href="/dashboard/refunds" className={styles.tab}>
           {I18n.t('dashboard.nav.refunds')}
         </a>
       </div>
