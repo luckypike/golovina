@@ -7,8 +7,12 @@ module Carts
     output :order_items
 
     def call
-      self.order = user.orders.state_cart.first
-      self.order_items = find_order_items(order)
+      order = user.orders.state_cart.first
+      remove_inactive_order_items(order)
+      order_items = find_order_items(order)
+
+      self.order = order
+      self.order_items = order_items
     end
 
     private
@@ -19,6 +23,10 @@ module Carts
       order.order_items.joins(:variant)
         .includes(:size, variant: [:translations, { color: :translations }])
         .where(variants: { state: :active })
+    end
+
+    def remove_inactive_order_items(order)
+      order.order_items.joins(:variant).where.not(variants: { state: :active }).destroy_all
     end
   end
 end
