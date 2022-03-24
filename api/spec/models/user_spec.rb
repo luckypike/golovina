@@ -37,11 +37,11 @@ describe User do
   end
 
   describe "#password_required?" do
-    context "if guest?" do
+    context "when guest?" do
       it { is_expected.not_to validate_presence_of(:password) }
     end
 
-    context "if common?" do
+    context "when common?" do
       before do
         allow(subject).to receive(:guest?).and_return(false)
       end
