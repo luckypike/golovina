@@ -19,6 +19,9 @@ AllCops:
     - spec/contracts/**/*.rb
     - spec/controllers/api/**/*.rb
     - spec/jobs/**/*.rb
+    - Gemfile
+    - Rakefile
+    - config.ru
 
 Style/Documentation:
   Enabled: false

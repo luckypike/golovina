@@ -153,15 +153,10 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
 
     member do
-      post :delivery
-      patch :checkout
       post :archive
       post :unarchive
-      get :pay
     end
   end
-
-  resources :order_items, only: %i[destroy]
 
   resources :slides, except: [:show]
 end

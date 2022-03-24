@@ -59,14 +59,14 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { host: Rails.application.credentials[Rails.env.to_sym][:host] }
+  config.action_mailer.default_url_options = { host: Figaro.env.host! }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "smtp.yandex.ru",
     port: 587,
-    user_name: Rails.application.credentials[Rails.env.to_sym][:mail][:username],
-    password: Rails.application.credentials[Rails.env.to_sym][:mail][:password],
+    user_name: Figaro.env.mail_username!,
+    password: Figaro.env.mail_password!,
     authentication: "plain",
     enable_starttls_auto: true
   }

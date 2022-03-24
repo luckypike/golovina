@@ -1,53 +1,53 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
 describe UserAddress do
-  describe 'associations' do
-    it { should belong_to(:user) }
-    it { should belong_to(:delivery_city).optional }
+  describe "associations" do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:delivery_city).optional }
   end
 
-  describe 'validation' do
-    context 'if russia?' do
+  describe "validation" do
+    context "when russia?" do
       before do
         allow(subject).to receive(:delivery_city).and_return(true)
       end
 
-      it { should validate_presence_of(:delivery_option) }
-      it { should_not validate_presence_of(:country) }
-      it { should_not validate_presence_of(:city) }
+      it { is_expected.to validate_presence_of(:delivery_option) }
+      it { is_expected.not_to validate_presence_of(:country) }
+      it { is_expected.not_to validate_presence_of(:city) }
 
-      context 'to door' do
+      context "when door" do
         before do
           allow(subject).to receive(:door?).and_return(true)
         end
 
-        it { should validate_presence_of(:street) }
-        it { should validate_presence_of(:house) }
-        it { should validate_presence_of(:appartment) }
+        it { is_expected.to validate_presence_of(:street) }
+        it { is_expected.to validate_presence_of(:house) }
+        it { is_expected.to validate_presence_of(:appartment) }
       end
 
-      context 'to storage' do
+      context "when storage" do
         before do
           allow(subject).to receive(:door?).and_return(false)
         end
 
-        it { should_not validate_presence_of(:street) }
-        it { should_not validate_presence_of(:house) }
-        it { should_not validate_presence_of(:appartment) }
+        it { is_expected.not_to validate_presence_of(:street) }
+        it { is_expected.not_to validate_presence_of(:house) }
+        it { is_expected.not_to validate_presence_of(:appartment) }
       end
     end
 
-    context 'if international?' do
+    context "when international?" do
       before do
         allow(subject).to receive(:delivery_city).and_return(false)
       end
 
-      it { should_not validate_presence_of(:delivery_option) }
-      it { should validate_presence_of(:country) }
-      it { should validate_presence_of(:city) }
-      it { should validate_presence_of(:street) }
-      it { should validate_presence_of(:house) }
-      it { should validate_presence_of(:appartment) }
+      it { is_expected.not_to validate_presence_of(:delivery_option) }
+      it { is_expected.to validate_presence_of(:country) }
+      it { is_expected.to validate_presence_of(:city) }
+      it { is_expected.to validate_presence_of(:street) }
+      it { is_expected.to validate_presence_of(:house) }
+      it { is_expected.to validate_presence_of(:appartment) }
     end
   end
 end
