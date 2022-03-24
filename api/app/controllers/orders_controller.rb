@@ -3,27 +3,8 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :paid
 
-  before_action :set_order, only: %i[checkout archive unarchive pay delivery]
+  before_action :set_order, only: %i[archive unarchive]
   before_action :authorize_order
-
-  def checkout
-    @order.assign_attributes({ to_pay: true })
-    @order.user.assign_attributes({ state: :common })
-
-    respond_to do |format|
-      format.json do
-        if @order.update(order_params)
-          render json: @order.slice(:id, :amount_calc, :purchasable?), status: :ok, location: pay_order_path(@order)
-        else
-          render json: @order.errors, status: :unprocessable_entity
-        end
-      end
-    end
-  end
-
-  def pay
-    render layout: false
-  end
 
   def archive
     if @order.paid?
@@ -44,7 +25,7 @@ class OrdersController < ApplicationController
   end
 
   def paid
-    if Digest::MD5.hexdigest(params.slice(:id, :sum, :clientid, :orderid).values.push(Rails.application.credentials[Rails.env.to_sym][:payment][:key]).join('')) == params[:key]
+    if Digest::MD5.hexdigest(params.slice(:id, :sum, :clientid, :orderid).values.push(Figaro.env.paykeeper_secret_key!).join('')) == params[:key]
       order = Order.find(params[:orderid])
 
       if order.cart?
@@ -53,27 +34,12 @@ class OrdersController < ApplicationController
       end
 
       if order.paid?
-        render inline: ('OK ' + Digest::MD5.hexdigest(params[:id] + Rails.application.credentials[Rails.env.to_sym][:payment][:key]))
+        render inline: ('OK ' + Digest::MD5.hexdigest(params[:id] + Figaro.env.paykeeper_secret_key!))
       else
         head :ok
       end
     else
       head :unprocessable_entity
-    end
-  end
-
-  def delivery
-    sleep 1
-
-    respond_to do |format|
-      format.json do
-        if @order.update(order_params)
-          @order.send_tracker
-          render json: @order.slice(:tracker_url), status: :ok
-        else
-          render json: @order.errors, status: :unprocessable_entity
-        end
-      end
     end
   end
 

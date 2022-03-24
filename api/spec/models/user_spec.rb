@@ -1,21 +1,21 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
 describe User do
-  describe 'associations' do
+  describe "associations" do
     it { is_expected.to have_many(:orders) }
     it { is_expected.to have_many(:user_addresses) }
   end
 
-  describe 'validation' do
+  describe "validation" do
     it { is_expected.to validate_presence_of(:email) }
 
-    context 'if guest?' do
+    context "when guest?" do
       it { is_expected.not_to validate_presence_of(:name) }
       it { is_expected.not_to validate_presence_of(:sname) }
       it { is_expected.not_to validate_presence_of(:phone) }
     end
 
-    context 'if common?' do
+    context "when common?" do
       before do
         allow(subject).to receive(:common?).and_return(true)
       end
@@ -24,7 +24,7 @@ describe User do
       it { is_expected.to validate_presence_of(:sname) }
       it { is_expected.to validate_presence_of(:phone) }
 
-      context 'and skip validate' do
+      context "when skip validate" do
         before do
           allow(subject).to receive(:skip_validation).and_return(true)
         end
@@ -36,12 +36,12 @@ describe User do
     end
   end
 
-  describe '#password_required?' do
-    context 'if guest?' do
+  describe "#password_required?" do
+    context "if guest?" do
       it { is_expected.not_to validate_presence_of(:password) }
     end
 
-    context 'if common?' do
+    context "if common?" do
       before do
         allow(subject).to receive(:guest?).and_return(false)
       end

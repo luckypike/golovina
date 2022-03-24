@@ -1,98 +1,100 @@
-source 'https://rubygems.org'
+# frozen_string_literal: true
+
+source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'rails', '~> 6.1'
+gem "rails", "~> 6.1"
 
-gem 'pg', '~> 1.0'
-gem 'puma', '~> 5.5'
+gem "pg", "~> 1.0"
+gem "puma", "~> 5.5"
 
-gem 'mjml-rails'
-gem 'slim-rails'
+gem "mjml-rails"
+gem "slim-rails"
 
-gem 'friendly_id'
+gem "friendly_id"
 
-gem 'aws-sdk-s3', require: false
-gem 'carrierwave'
-gem 'fog-aws'
-gem 'mini_magick'
-gem 'streamio-ffmpeg'
-gem 'image_processing'
+gem "aws-sdk-s3", require: false
+gem "carrierwave"
+gem "fog-aws"
+gem "image_processing"
+gem "mini_magick"
+gem "streamio-ffmpeg"
 
-gem 'figaro'
+gem "figaro"
 
-gem 'faraday'
-gem 'faraday_middleware'
+gem "faraday"
+gem "faraday_middleware"
 
-gem 'meta-tags'
+gem "meta-tags"
 
-gem 'redcarpet'
+gem "redcarpet"
 
-gem 'addressable'
+gem "addressable"
 
-gem 'devise'
-gem 'jwt'
-gem 'pundit'
+gem "devise"
+gem "jwt"
+gem "pundit"
 
+gem "dry-validation"
 gem "service_actor-rails"
-gem 'dry-validation'
 
-gem 'globalize'
-gem 'globalize-accessors'
-gem 'i18n-js'
-gem 'rails-i18n'
+gem "globalize"
+gem "globalize-accessors"
+gem "i18n-js"
+gem "rails-i18n"
 
-gem 'enum_help'
-gem 'stateful_enum'
+gem "enum_help"
+gem "stateful_enum"
 
-gem 'sidekiq'
-gem 'sidekiq-scheduler'
-gem 'hiredis'
+gem "hiredis"
+gem "sidekiq"
+gem "sidekiq-scheduler"
 
-gem 'react-rails'
-gem 'webpacker'
+gem "react-rails"
+gem "webpacker"
 
-gem 'oj'
-gem 'jbuilder'
-gem 'jb'
-gem 'jsonapi-serializer'
+gem "jb"
+gem "jbuilder"
+gem "jsonapi-serializer"
+gem "oj"
 
-gem 'sitemap_generator'
+gem "sitemap_generator"
 
-gem 'bootsnap', require: false
+gem "bootsnap", require: false
 
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
-gem 'elasticsearch-ruby'
+gem "elasticsearch-model"
+gem "elasticsearch-rails"
+gem "elasticsearch-ruby"
 
-gem 'bugsnag'
-gem 'newrelic_rpm'
+gem "bugsnag"
+gem "newrelic_rpm"
 
-gem 'amazing_print'
-gem 'rails_semantic_logger'
+gem "amazing_print"
+gem "rails_semantic_logger"
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'rspec-json_expectations'
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'webmock'
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "rspec-json_expectations"
+  gem "rspec-rails"
+  gem "webmock"
   # gem 'mock_redis'
 
   # TODO: remove it
-  gem 'shoulda-matchers'
-  gem 'rails-controller-testing'
+  gem "rails-controller-testing"
+  gem "shoulda-matchers"
 end
 
 group :development do
-  gem 'listen'
+  gem "listen"
   # gem 'web-console'
 
-  gem 'spring'
+  gem "spring"
   # gem 'spring-watcher-listen'
 
-  gem 'letter_opener'
+  gem "letter_opener"
 
-  gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec', require: false
-  gem 'rubocop-performance', require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
 end

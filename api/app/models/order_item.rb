@@ -70,7 +70,13 @@ class OrderItem < ApplicationRecord
 
     return if unallocated_quantity.zero?
 
-    OrderItemMailer.unallocated_quantity(self, unallocated_quantity).deliver_later
+    Bugsnag.notify(
+      {
+        order_id: order_id,
+        order_item_id: id,
+        unallocated_quantity: unallocated_quantity
+      }
+    )
   end
 
   class << self

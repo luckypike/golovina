@@ -5,7 +5,7 @@
 FactoryBot.define do
   factory :user, aliases: [:common_user] do
     email { Faker::Internet.email }
-    password { '123456' }
+    password { "123456" }
     name { Faker::Name.first_name }
     sname { Faker::Name.last_name }
     phone { Faker::PhoneNumber.cell_phone_with_country_code }

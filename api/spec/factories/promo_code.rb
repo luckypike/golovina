@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :promo_code do
-    title { 'demo' }
+    title { "demo" }
     discount { :amount }
     value { 100 }
     state { :active }
