@@ -131,6 +131,12 @@
     },
     "Pay": {
       "processing": "Generate bank payment, please wait.."
+    },
+    "CodeModal": {
+      "desc": "Code sended to {phone}",
+      "code": "Enter the code",
+      "error": "Wrong confirmation code",
+      "submit": "Confirm"
     }
   },
   "PromoCode": {

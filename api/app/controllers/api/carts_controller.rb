@@ -3,7 +3,7 @@
 module Api
   class CartsController < Api::ApplicationController
     before_action :authorize_cart
-    before_action :set_order, only: %i[checkout delivery delete_order_item]
+    before_action :set_order, only: %i[checkout delivery delete_order_item verify]
 
     def show
       @cmd = Carts::ShowCmd.call(user: current_user)
@@ -28,6 +28,12 @@ module Api
 
     def delivery
       Carts::DeliveryCmd.call(order: @order, delivery_params: params)
+    end
+
+    def verify
+      @cmd = Carts::VerifyCmd.call(order: @order, verify_params: params)
+
+      sign_in(::User.find(@cmd.user.id))
     end
 
     private

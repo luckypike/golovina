@@ -25,5 +25,9 @@ module Api
     def delete_order_item?
       show?
     end
+
+    def verify?
+      show?
+    end
   end
 end

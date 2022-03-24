@@ -99,7 +99,7 @@ RSpec.describe Carts::CheckoutCmd, :aggregate_failures do
 
       it do
         expect { cmd }.to raise_error(ServiceActor::Failure) do |e|
-          expect(e.result.http_status_code).to eq(:forbidden)
+          expect(e.result.http_status_code).to eq(:unprocessable_entity)
         end
       end
     end
@@ -144,6 +144,28 @@ RSpec.describe Carts::CheckoutCmd, :aggregate_failures do
       it do
         expect { cmd }.to raise_error(ServiceActor::Failure) do |e|
           expect(e.result.http_status_code).to eq(:unprocessable_entity)
+        end
+      end
+    end
+
+    context "with regular user without phone" do
+      let(:user_active) { create(:api_user) }
+      let(:order) { create(:api_order, :cart, user: user_active) }
+      let(:user) { create(:user, phone: "+79999999999") }
+      let(:checkout_params) do
+        {
+          name: "Beth", sname: "Smith",
+          email: "another@example.com", phone: user.phone
+        }
+      end
+
+      before do
+        create(:api_order, :paid, user: user)
+      end
+
+      it do
+        expect { cmd }.to raise_error(ServiceActor::Failure) do |e|
+          expect(e.result.http_status_code).to eq(:forbidden)
         end
       end
     end

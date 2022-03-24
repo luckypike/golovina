@@ -9,5 +9,9 @@ module Api
     def apple?
       true
     end
+
+    def code?
+      true
+    end
   end
 end
