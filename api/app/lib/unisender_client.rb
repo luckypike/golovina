@@ -6,7 +6,7 @@ class UnisenderClient
   attr_reader :client
 
   def initialize
-    @client = Faraday.new('https://api.unisender.com', params: { api_key: Figaro.env.unisender_api_key! }) do |f|
+    @client = Faraday.new("https://api.unisender.com", params: { api_key: Figaro.env.unisender_api_key! }) do |f|
       f.request :json
       f.response :json
     end
@@ -16,7 +16,7 @@ class UnisenderClient
     delegate :client, to: :instance
 
     def subscribe(params)
-      client.get('/ru/api/subscribe', **params)
+      client.get("/ru/api/subscribe", **params)
     end
   end
 end

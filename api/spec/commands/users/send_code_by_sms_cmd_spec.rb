@@ -13,7 +13,7 @@ RSpec.describe Users::SendCodeBySmsCmd, :aggregate_failures do
             body: include_json(
               {
                 number: user.phone,
-                text: "Golovina Mari: 1234",
+                text: "Golovina Mari: 1234"
               }
             )
           )

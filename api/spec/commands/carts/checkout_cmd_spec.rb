@@ -148,7 +148,7 @@ RSpec.describe Carts::CheckoutCmd, :aggregate_failures do
       end
     end
 
-    context "with regular user without phone" do
+    context "with regular user with another email and same phone" do
       let(:user_active) { create(:api_user) }
       let(:order) { create(:api_order, :cart, user: user_active) }
       let(:user) { create(:user, phone: "+79999999999") }
