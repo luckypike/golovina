@@ -60,4 +60,32 @@ RSpec.describe Api::SessionsController, :aggregate_failures do
       end
     end
   end
+
+  describe "#code" do
+    subject(:cmd) { post :code, params: params }
+
+    context "with correct phone" do
+      let(:send_code_by_sms_cmd) { instance_double("SendCodeBySmsCmd") }
+      let(:params) { { phone: "+79999999999" } }
+
+      before { allow(Sessions::SendCodeBySmsCmd).to receive(:call).and_return(send_code_by_sms_cmd) }
+
+      it do
+        expect(cmd).to have_http_status(:no_content)
+        expect(Sessions::SendCodeBySmsCmd).to have_received(:call)
+          .with(code_params: instance_of(ActionController::Parameters))
+      end
+    end
+
+    context "with wrong phone" do
+      let(:params) { { phone: "WRONG" } }
+
+      before { allow(Sessions::SendCodeBySmsCmd).to receive(:call).and_call_original }
+
+      it do
+        expect(cmd).to have_http_status(:unprocessable_entity)
+        expect(Sessions::SendCodeBySmsCmd).to have_received(:call)
+      end
+    end
+  end
 end

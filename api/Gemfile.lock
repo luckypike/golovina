@@ -364,6 +364,7 @@ GEM
     rspec-expectations (3.11.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
+    rspec-json_expectations (2.2.0)
     rspec-mocks (3.11.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
@@ -520,6 +521,7 @@ DEPENDENCIES
   rails_semantic_logger
   react-rails
   redcarpet
+  rspec-json_expectations
   rspec-rails
   rubocop-performance
   rubocop-rails

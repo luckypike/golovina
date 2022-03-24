@@ -1,0 +1,9 @@
+.root {
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+.desc {
+  margin: 0 0 var(--yr-m);
+  text-align: center;
+}

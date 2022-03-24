@@ -8,6 +8,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
     resource :session, only: %i[show destroy] do
       post :apple
+      post :code
     end
     resources :variants, only: %i[new edit create update]
     resources :images, only: %i[create] do
@@ -21,6 +22,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       member do
         post :checkout
         post :delivery
+        post :verify
         post :promo_code, action: :apply_promo_code
         delete :promo_code, action: :delete_promo_code
         delete "order_items/:id", action: :delete_order_item

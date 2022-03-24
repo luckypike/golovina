@@ -22,6 +22,10 @@ module Api
       redirect_to redirect_uri
     end
 
+    def code
+      Sessions::SendCodeBySmsCmd.call(code_params: params)
+    end
+
     private
 
     def parse_user_params

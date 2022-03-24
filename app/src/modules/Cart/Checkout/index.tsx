@@ -1,18 +1,21 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
+import Modal from 'react-modal'
 import { observer } from 'mobx-react-lite'
 import axios from 'axios'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
+import Cleave from 'cleave.js/react'
 import cc from 'classcat'
 
 import { useCartContext } from '../context'
+import { entries } from '../../../models'
+import { useRootContext } from '../../../services/useRootContext'
 
+// import 'reactjs-popup/dist/index.css';
 import s from './index.module.css'
 import sf from '../../../layout/form.module.css'
 import sb from '../../../css/buttons.module.css'
-import { entries } from '../../../models'
-import Cleave from 'cleave.js/react'
-import { useRootContext } from '../../../services/useRootContext'
+import { CodeModal } from './CodeModal'
 
 interface Values {
   name: string
@@ -26,13 +29,14 @@ export const Checkout: FC = observer(() => {
   const {
     sessionData: { user },
   } = useRootContext()
-  const { order, setStep } = useCartContext()
+  const { order, setStep, verify, setVerify, verified } = useCartContext()
   const t = useTranslations('Cart.Checkout')
   const {
     register,
     handleSubmit,
     control,
     setError,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<Values>({
     defaultValues: {
@@ -50,14 +54,30 @@ export const Checkout: FC = observer(() => {
       setStep('delivery')
     } catch ({
       response: {
+        status,
         data: { errors: errorsData },
       },
     }) {
-      entries(errorsData as Record<keyof Values, string[]>).forEach(([name, messages]) => {
-        messages.map((message) => setError(name, { type: 'manual', message }))
-      })
+      if (status === 403) {
+        setVerify(true)
+      } else if (status === 422) {
+        entries(errorsData as Record<keyof Values, string[]>).forEach(([name, messages]) => {
+          messages.map((message) => setError(name, { type: 'manual', message }))
+        })
+      }
     }
   }
+
+  const watchPhone = watch('phone')
+  const handleCloseCodeModal = (): void => setVerify(false)
+
+  useEffect(() => {
+    if (verified) {
+      setVerify(false)
+      void handleSubmit(onSubmit)()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [verified])
 
   return (
     <div>
@@ -130,6 +150,17 @@ export const Checkout: FC = observer(() => {
           </button>
         </div>
       </form>
+
+      <Modal className={s.modal} overlayClassName={s.overlay} isOpen={verify} onRequestClose={handleCloseCodeModal}>
+        <div className={s.close} onClick={handleCloseCodeModal}>
+          <svg viewBox="0 0 16 16">
+            <line x1="1" y1="1" x2="15" y2="15" />
+            <line x1="1" y1="15" x2="15" y2="1" />
+          </svg>
+        </div>
+
+        <CodeModal phone={watchPhone} />
+      </Modal>
     </div>
   )
 })

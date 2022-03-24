@@ -1,3 +1,57 @@
 .header {
   margin: 0 0 var(--yr-xs);
 }
+
+.overlay {
+  position: fixed;
+  display: flex;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(var(--theme-bg-secondary-color), 0.9);
+  z-index: 11;
+}
+
+.modal {
+  background: rgb(var(--theme-bg-primary-color));
+  padding: var(--yr-xl);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+@media (--s) {
+  .overlay {
+    display: block;
+  }
+
+  .modal {
+    max-width: 30rem;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.close {
+  position: absolute;
+  right: calc(var(--xr) * 2 - calc(var(--yr) * 2));
+  top: calc(var(--yr) * 2);
+  padding: 16px 8px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.close svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.close line {
+  stroke: rgb(var(--theme-fg-primary-color));
+}

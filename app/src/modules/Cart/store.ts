@@ -6,6 +6,8 @@ export class CartStore {
   orderItems: OrderItemData[] = []
   reload = true
   step: Step = 'cart'
+  verify = false
+  verified = false
 
   constructor() {
     makeAutoObservable(this)
@@ -23,5 +25,13 @@ export class CartStore {
 
   setStep = (step: Step) => {
     this.step = step
+  }
+
+  setVerify = (verify: boolean) => {
+    this.verify = verify
+  }
+
+  setVerified = (verified: boolean) => {
+    this.verified = verified
   }
 }
