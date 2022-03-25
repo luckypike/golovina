@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
 
@@ -16,11 +18,6 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current
-    Rails.logger.info('request', request.fullpath)
-    Rails.logger.info('request', request.original_url)
-    Rails.logger.info('request', request.headers['Cookie'])
-
-    # session['init'] = true
     Current.user = current_user
   end
 
@@ -60,7 +57,6 @@ class ApplicationController < ActionController::Base
   end
 
   def store_user_location!
-    # Rails.logger.info(session.inspect)
     store_location_for(:user, request.fullpath)
   end
 
