@@ -29,9 +29,7 @@ RUN bundle config set --local without development test
 RUN bundle install
 # RUN bundle exec rake db:create
 # RUN bundle exec rake db:migrate
-RUN --mount=type=secret,id=RAILS_MASTER_KEY,dst=./config/master.key \
-  bundle exec rails assets:precompile
-RUN --mount=type=secret,id=RAILS_MASTER_KEY,dst=./config/master.key \
-  bundle exec rails webpacker:compile
+RUN bundle exec rails assets:precompile
+RUN bundle exec rails webpacker:compile
 
 EXPOSE 3000

@@ -42,8 +42,6 @@ jobs:
           file: ./api/Dockerfile.k8s
           build-args: |
             APP_VERSION=${{ github.event.release.tag_name }}
-          secrets: |
-            RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
           push: true
           tags: |
             bragovo/golovina-api:${{ github.event.release.tag_name }}
