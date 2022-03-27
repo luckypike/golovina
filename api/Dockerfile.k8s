@@ -18,6 +18,7 @@ ENV aws_secret_access_key dummy_aws_secret_access_key
 ENV RAILS_ENV production
 ENV SECRET_KEY_BASE dummy_secret_key_base
 ENV DATABASE_HOST 172.17.0.1
+ENV HOST localhost:3000
 
 RUN apk update && apk add bash git curl openssh g++ make python3 python2 imagemagick vips-dev yarn nodejs tzdata postgresql-dev postgresql-client vim
 
