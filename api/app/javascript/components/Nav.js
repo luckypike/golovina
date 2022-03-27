@@ -70,7 +70,7 @@ class Nav extends Component {
           </div>
 
           <div className={styles.sub}>
-            <a href={path('contacts_path')}>{I18n.t('header.nav.contacts')}</a>
+            <a href="/contacts">{I18n.t('header.nav.contacts')}</a>
           </div>
         </Section>
 
