@@ -131,6 +131,8 @@ const DashbordRefund: FC<{ refund: RefundData }> = ({ refund }) => {
               <div>
                 <strong>{refunOrderItem.order_item.variant.title}</strong>
                 <br />
+                {t('price')}: {priceFormat(refunOrderItem.order_item.amount)}
+                <br />
                 {t('size')}: {refunOrderItem.order_item.size.title}
                 <br />
                 {t('color')}: {refunOrderItem.order_item.variant.color.title}

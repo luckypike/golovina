@@ -204,6 +204,7 @@
       "email": "Email",
       "size": "Size",
       "color": "Color",
+      "price": "Price",
       "reason": {
         "title": "Reason",
         "size": "Size doesn't fit",
