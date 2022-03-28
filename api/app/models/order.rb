@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   PROMO = 0
   GIFT = 300
@@ -16,7 +18,9 @@ class Order < ApplicationRecord
         self.payed_at = Time.current
 
         order_items.each do |item|
-          item.update(amount: item.variant.price_sell)
+          temp = item.variant.price_sell
+          temp = promo_code.apply(temp) if promo_code
+          item.update(amount: temp)
           item.process_acts
         end
       end
