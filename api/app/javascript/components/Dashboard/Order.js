@@ -243,7 +243,7 @@ function Items ({ items, locale }) {
             }
 
             <div className={styles.price}>
-              <Price sell={parseFloat(item.variant.price_sell)} origin={parseFloat(item.variant.price)} />
+              <Price sell={parseFloat(item.amount)} />
             </div>
 
             <div className={styles.color}>
