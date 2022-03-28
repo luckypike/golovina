@@ -8,6 +8,7 @@ class DashboardController < ApplicationController
 
   def archived
     @orders = Order.archived.includes(:user).with_items.order(payed_at: :desc)
+      .where("payed_at > ?", 1.year.ago)
   end
 
   def cart
