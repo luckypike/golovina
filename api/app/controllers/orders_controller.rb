@@ -3,7 +3,7 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :paid
 
-  before_action :set_order, only: %i[archive unarchive]
+  before_action :set_order, only: %i[archive unarchive delivery]
   before_action :authorize_order
 
   def archive
@@ -40,6 +40,19 @@ class OrdersController < ApplicationController
       end
     else
       head :unprocessable_entity
+    end
+  end
+
+  def delivery
+    respond_to do |format|
+      format.json do
+        if @order.update(order_params)
+          @order.send_tracker
+          render json: @order.slice(:tracker_url), status: :ok
+        else
+          render json: @order.errors, status: :unprocessable_entity
+        end
+      end
     end
   end
 
