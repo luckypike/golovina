@@ -63,6 +63,11 @@ export default function Order ({ order, locale, delivery }) {
 
         <div className={styles.what}>
           {I18n.t('order.quantity', { count: order.quantity, amount: currency(parseFloat(order.amount)) })}
+          {order.promo_code &&
+            <span className={styles.promo}>
+              {order.promo_code.title.toUpperCase()}
+            </span>
+          }
         </div>
 
         <svg viewBox="0 0 10 20" className={styles.arr}>

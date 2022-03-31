@@ -1,25 +1,27 @@
+# frozen_string_literal: true
+
 class DashboardController < ApplicationController
   before_action :authorize_dashboard
   before_action :set_user, only: %i[user]
 
   def index
-    @orders = Order.paid.includes(:user).with_items.order(payed_at: :desc)
+    @orders = Order.paid.includes(:user, :promo_code).with_items.order(payed_at: :desc)
   end
 
   def archived
-    @orders = Order.archived.includes(:user).with_items.order(payed_at: :desc)
+    @orders = Order.archived.includes(:user, :promo_code).with_items.order(payed_at: :desc)
       .where("payed_at > ?", 1.year.ago)
   end
 
   def cart
-    @orders = Order.cart.includes(:user).with_items
-      .where('updated_at > ?', Time.current - 3.months)
+    @orders = Order.cart.includes(:user, :promo_code).with_items
+      .where("updated_at > ?", 3.months.ago)
       .order(updated_at: :desc)
   end
 
   def wishlists
     @wishlists = Wishlist.with_variant.includes(:user)
-      .where('created_at > ?', 3.months.ago)
+      .where("created_at > ?", 3.months.ago)
       .order(created_at: :desc)
   end
 

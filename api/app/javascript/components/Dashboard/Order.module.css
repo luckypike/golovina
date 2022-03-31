@@ -170,3 +170,10 @@
 dd {
   margin-left: var(--xr);
 }
+
+
+.promo {
+  margin-left: var(--xr);
+  padding: 0 calc(var(--yr) * 2);
+  background: rgba(255 0 0 / 0.1);
+}

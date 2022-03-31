@@ -1,4 +1,6 @@
-json.array! @orders do |order|
+# frozen_string_literal: true
+
+json.array! @orders do |order| # rubocop:disable Metrics/BlockLength
   json.partial! order
   json.extract! order, :quantity, :updated_at, :amount_delivery
   json.amount order.payment_amount.presence || order.amount.presence || order.amount_calc
@@ -9,17 +11,18 @@ json.array! @orders do |order|
     end
   end
 
+  json.promo_code order.promo_code, :id, :title if order.promo_code
+
   json.user do
     json.partial! order.user
   end
 
-  json.items order.items do |item|
+  json.items order.items do |item| # rubocop:disable Metrics/BlockLength
     json.partial! item
     json.preorder item.acts.any?(&:preorder?)
+
     act = item.acts.detect(&:paid?)
-    if act
-      json.store act.store, :id, :title
-    end
+    json.store act.store, :id, :title if act
 
     json.variant do
       json.partial! item.variant
