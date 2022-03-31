@@ -12,6 +12,8 @@ RSpec.describe Carts::PromoCodes::ApplyCmd, :aggregate_failures do
       let(:promo_code) { create(:promo_code) }
       let(:params) { { title: promo_code.title } }
 
+      before { create(:api_order, :paid, user: user, promo_code: promo_code) }
+
       it do
         expect(cmd).to be_success
         expect(order.reload.promo_code_id).to eq(promo_code.id)
@@ -23,6 +25,26 @@ RSpec.describe Carts::PromoCodes::ApplyCmd, :aggregate_failures do
       let(:params) { { title: promo_code.title } }
 
       it { expect { cmd }.to raise_error(ActiveRecord::RecordNotFound) }
+    end
+
+    context "when promo_code is signle use" do
+      let(:promo_code) { create(:promo_code, single_use_per_user: true) }
+      let(:params) { { title: promo_code.title } }
+
+      context "when user didn't use it" do
+        it do
+          expect(cmd).to be_success
+          expect(order.reload.promo_code_id).to eq(promo_code.id)
+        end
+      end
+
+      context "when user used it before" do
+        before { create(:api_order, :paid, user: user, promo_code: promo_code) }
+
+        it do
+          expect { cmd }.to raise_error(ServiceActor::Failure)
+        end
+      end
     end
 
     context "without order" do
