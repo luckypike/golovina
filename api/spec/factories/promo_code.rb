@@ -6,6 +6,7 @@ FactoryBot.define do
     discount { :amount }
     value { 100 }
     state { :active }
+    single_use_per_user { false }
 
     trait :percentage do
       discount { :percentage }
