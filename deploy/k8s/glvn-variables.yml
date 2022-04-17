@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: glvn-variables
+data:
+  DATABASE_HOST:
+  DATABASE_NAME: golovina
+  DATABASE_USERNAME: postgres
+  DATABASE_PASSWORD: postgres
+  REDIS_HOST:
+  ELASTICSEARCH_URL:
+  S3_URL: /s3
+  RAILS_ENV: production
+  RAILS_MASTER_KEY:
+  SECRET_KEY_BASE:
+  RAILS_SALT:
+  RAILS_SERVE_STATIC_FILES: "true"
+  RAILS_LOG_TO_STDOUT: "true"
+  NEW_RELIC_API_KEY:
+  APPLEID_CLIENT_ID:
+  APPLEID_REDIRECT_URI:
+  s3_access_key_id:
+  s3_secret_access_key:
+  s3_endpoint:
+  s3_bucket:
+  aws_access_key_id:
+  aws_secret_access_key:
+  aws_endpoint:
+  aws_bucket:
+  UNISENDER_API_KEY:
+  UNISENDER_LIST_EN:
+  UNISENDER_LIST_RU:
+  MAIL_TO:
+  MAIL_FROM:
+  MAIL_PREFIX:
+  MAIL_USERNAME:
+  MAIL_PASSWORD:
+  SMSAERO_SIGN:
+  SMSAERO_USER:
+  SMSAERO_PASSWORD:
+  HOST:
+  PAYKEEPER_SECRET_KEY:
