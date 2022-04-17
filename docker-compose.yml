@@ -14,7 +14,7 @@ services:
     tmpfs:
       - /tmp
     volumes:
-      - nfsmount:/app
+      - ./:/app:cached
     ports:
       - 3000:3000
     env_file:
@@ -104,12 +104,6 @@ volumes:
     name: golovina-api-pg
   redis:
     name: golovina-api-redis
-  nfsmount:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
-      device: :${PWD}
 
 networks:
   default:
