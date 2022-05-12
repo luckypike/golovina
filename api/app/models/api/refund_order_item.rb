@@ -6,5 +6,7 @@ module Api
     belongs_to :order_item
 
     validates :order_item, uniqueness: true
+
+    delegate :amount, to: :order_item
   end
 end
