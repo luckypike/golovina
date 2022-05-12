@@ -14,5 +14,18 @@ module Api
     has_many :refund_order_items, dependent: :destroy
 
     validates :state, presence: true
+
+    # TODO: check month and day methods
+    def month
+      order.payed_at.beginning_of_month
+    end
+
+    def day
+      order.payed_at.beginning_of_day
+    end
+
+    def amount
+      @amount ||= refund_order_items.sum(&:amount)
+    end
   end
 end
