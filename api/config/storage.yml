@@ -6,7 +6,7 @@ yandex:
   service: S3
   access_key_id: <%= ENV['s3_access_key_id'] %>
   secret_access_key: <%= ENV['s3_secret_access_key'] %>
-  endpoint: <%= ENV['s3_endpoint'] %>/images
+  endpoint: <%= ENV['s3_endpoint'] %>
   bucket: <%= ENV['s3_bucket'] %>
   region: none
   public: true

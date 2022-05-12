@@ -107,9 +107,9 @@ spec:
         imagePullPolicy: Always
         env:
         - name: FASTAPI_URL
-          value: ""
+          value: "http://golovina-fastapi-service:3000/api"
         - name: API_URL
-          value: ""
+          value: "http://golovina-api-service:3000/api"
         ports:
         - containerPort: 3000
 ---

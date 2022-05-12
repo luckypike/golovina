@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: glvn-variables
+  name: golovina-variables
 data:
-  DATABASE_HOST:
+  DATABASE_HOST: 172.17.0.1
   DATABASE_NAME: golovina
   DATABASE_USERNAME: postgres
   DATABASE_PASSWORD: postgres
-  REDIS_HOST:
-  ELASTICSEARCH_URL:
+  REDIS_HOST: 172.17.0.1
+  ELASTICSEARCH_URL: 172.17.0.1
   S3_URL: /s3
   RAILS_ENV: production
   RAILS_MASTER_KEY:

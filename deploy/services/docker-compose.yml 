@@ -8,27 +8,46 @@ services:
     volumes:
       - pg:/var/lib/postgresql/data
     ports:
-      - 127.0.0.0.1:5432:5432
+      - 172.17.0.1:5432:5432
+      # - 127.0.0.1:5432:5432
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+        reservations:
+          memory: 256M
 
   redis:
     image: redis:6-alpine
     volumes:
       - redis:/data
     ports:
-      - 127.0.0.0.1:6379:6379
+      - 172.17.0.1:6379:6379
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 50M
+        reservations:
+          memory: 20M
 
   es:
     image: elasticsearch:7.16.2
     environment:
       - discovery.type=single-node
-      - "ES_JAVA_OPTS=-Xms350m -Xmx350m"
+      - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
     volumes:
       - elasticsearch:/usr/share/elasticsearch/data
     ports:
-      - 127.0.0.1:9200:9200
+      - 172.17.0.1:9200:9200
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 200M
+        reservations:
+          memory: 128M
 
 volumes:
   pg:
