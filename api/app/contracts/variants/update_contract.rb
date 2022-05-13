@@ -22,6 +22,7 @@ module Variants
       optional(:price_last).maybe(:integer)
       optional(:code).maybe(:string)
       optional(:published_at).maybe(:date)
+      optional(:single).maybe(:bool)
 
       optional(:images).value(:array).each do
         hash do

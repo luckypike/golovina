@@ -25,6 +25,7 @@ interface Values {
   price: number
   price_last: number
   published_at: Date
+  single: boolean
   images: Array<{
     id: number
     key: string
@@ -236,6 +237,13 @@ export const VariantsForm: FC = () => {
 
         <div>
           <ImagesDropzone store={store} />
+        </div>
+
+        <div className={sf.el}>
+          <label className={cc([sf.lb, sf.checkbox])}>
+            <input {...register('single')} type="checkbox" />
+            Одна фотография в каталоге
+          </label>
         </div>
 
         <div className={sf.sb}>
