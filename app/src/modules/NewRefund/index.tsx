@@ -108,7 +108,7 @@ const NewRefund: FC = () => {
                   {order.order_items.map((orderItem) => (
                     <label key={orderItem.id} className={cc([s.item, { [s.refunded]: orderItem.refunded }])}>
                       <div>
-                        <div className={cc([sf.lb, sf.checkbox])}>
+                        <div className={cc([sf.lb, sf.checkbox, s.checkbox])}>
                           <input {...register('order_item_ids')} type="checkbox" value={orderItem.id} />
                         </div>
                       </div>

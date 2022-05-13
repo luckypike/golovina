@@ -46,7 +46,7 @@ export const ImagesDropzone: FC<{ store: ImagesDropzoneStore }> = observer(({ st
       <div {...getRootProps()}>
         <input {...getInputProps()} />
 
-        <p>Drop image {isDragActive ? 'DRAG!!!' : ''}</p>
+        <p>Загрузить фотографии {isDragActive ? 'DRAG!!!' : ''}</p>
       </div>
 
       <ImagesDropzoneImages />

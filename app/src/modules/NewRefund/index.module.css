@@ -72,3 +72,8 @@
   margin: 0 0 var(--yr-l);
   text-align: center;
 }
+
+.checkbox > input[type='checkbox'] {
+  /* TODO: Remove it! */
+  margin-right: 0 !important;
+}
