@@ -6,7 +6,7 @@
 :queues:
   - default
 
-:schedule:
-  instagram_update:
-    cron: '0 0 * * * *'   # Runs every hour
-    class: InstagramUpdateJob
+# :schedule:
+#   instagram_update:
+#     cron: '0 0 * * * *'   # Runs every hour
+#     class: InstagramUpdateJob
