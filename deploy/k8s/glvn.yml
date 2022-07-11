@@ -1,0 +1,272 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golovina-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: golovina-api
+        image: bragovo/golovina-api:latest
+        imagePullPolicy: Always
+        command: ["/bin/bash", "-c"]
+        args: ["bundle exec rake db:migrate && bundle exec rails s -b 0.0.0.0"]
+        envFrom:
+        - configMapRef:
+            name: golovina-variables
+        env:
+        - name: NEW_RELIC_APP_NAME
+          value: "golovina-api"
+        ports:
+        - containerPort: 3000
+        startupProbe:
+          httpGet:
+            path: /api/status
+            port: 3000
+          failureThreshold: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golovina-sidekiq-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidekiq
+  template:
+    metadata:
+      labels:
+        app: sidekiq
+    spec:
+      containers:
+      - name: golovina-sidekiq
+        image: bragovo/golovina-api:latest
+        imagePullPolicy: Always
+        command: ["/bin/bash", "-c"]
+        args: ["bundle exec sidekiq"]
+        envFrom:
+        - configMapRef:
+            name: golovina-variables
+        env:
+        - name: NEW_RELIC_APP_NAME
+          value: "golovina-sidekiq"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golovina-fastapi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - name: golovina-fastapi
+        image: bragovo/golovina-fastapi:latest
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: golovina-variables
+        env:
+        - name: NEW_RELIC_APP_NAME
+          value: "golovina-fastapi"
+        ports:
+        - containerPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golovina-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: golovina-app
+        image: bragovo/golovina-app:latest
+        imagePullPolicy: Always
+        env:
+        - name: FASTAPI_URL
+          value: "http://golovina-fastapi-service:3000/api"
+        - name: API_URL
+          value: "http://golovina-api-service:3000/api"
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: golovina-fastapi-service
+spec:
+  selector:
+    app: fastapi
+  ports:
+  - port: 3000
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: golovina-api-service
+spec:
+  selector:
+    app: api
+  ports:
+  - port: 3000
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: golovina-app-service
+spec:
+  selector:
+    app: app
+  ports:
+  - port: 3000
+    protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: golovina-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: golovina-app-service
+            port:
+              number: 3000
+      - path: /.+
+        pathType: Exact
+        backend:
+          service:
+            name: golovina-api-service
+            port:
+              number: 3000
+      - path: /variants/[0-9]+/edit
+        pathType: Exact
+        backend:
+          service:
+            name: golovina-app-service
+            port:
+              number: 3000
+      - path: /variants/new
+        pathType: Exact
+        backend:
+          service:
+            name: golovina-app-service
+            port:
+              number: 3000
+      - path: /about
+        pathType: Exact
+        backend:
+          service:
+            name: golovina-app-service
+            port:
+              number: 3000
+      - path: /service
+        pathType: Prefix
+        backend:
+          service:
+            name: golovina-app-service
+            port:
+              number: 3000
+      - path: /account/refunds
+        pathType: Exact
+        backend:
+          service:
+            name: golovina-app-service
+            port:
+              number: 3000
+      - path: /contacts
+        pathType: Exact
+        backend:
+          service:
+            name: golovina-app-service
+            port:
+              number: 3000
+      - path: /subscribe
+        pathType: Exact
+        backend:
+          service:
+            name: golovina-app-service
+            port:
+              number: 3000
+      - path: /cart
+        pathType: Exact
+        backend:
+          service:
+            name: golovina-app-service
+            port:
+              number: 3000
+      - path: /dashboard/refunds
+        pathType: Exact
+        backend:
+          service:
+            name: golovina-app-service
+            port:
+              number: 3000
+      - path: /_next
+        pathType: Prefix
+        backend:
+          service:
+            name: golovina-app-service
+            port:
+              number: 3000
+      - path: /api/session
+        pathType: Exact
+        backend:
+          service:
+            name: golovina-fastapi-service
+            port:
+              number: 3000
+      - path: /api/delivery_cities
+        pathType: Exact
+        backend:
+          service:
+            name: golovina-fastapi-service
+            port:
+              number: 3000
+      - path: /api/session/apple
+        pathType: Prefix
+        backend:
+          service:
+            name: golovina-api-service
+            port:
+              number: 3000
+      - path: /api/session/code
+        pathType: Prefix
+        backend:
+          service:
+            name: golovina-api-service
+            port:
+              number: 3000

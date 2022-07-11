@@ -1,3 +1,5 @@
 .env
 tmp
 .local
+
+/deploy/k8s/glvn-variables-prod.yml
