@@ -17,7 +17,8 @@ class SessionsController < Devise::SessionsController
         # Wishlist.where(user: Current.user).update_all(user_id: user.id)
       end
 
-      sign_in user
+      sign_in(user)
+      cookies[:_golovina_jwt] = Sessions::SetJwtSessionCmd.call(user: user).token
       head :ok, location: after_sign_in_path_for(user)
     else
       render json: { message: t('messages.password') }, status: :unauthorized
