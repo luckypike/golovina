@@ -18,7 +18,11 @@ class SessionsController < Devise::SessionsController
       end
 
       sign_in(user)
-      cookies[:_golovina_jwt] = Sessions::SetJwtSessionCmd.call(user: user).token
+      cookies[:_golovina_jwt] = {
+        value: Sessions::SetJwtSessionCmd.call(user: user).token,
+        expires: 1.year, httponly: true
+      }
+
       head :ok, location: after_sign_in_path_for(user)
     else
       render json: { message: t('messages.password') }, status: :unauthorized

@@ -15,7 +15,10 @@ module Api
       )
 
       sign_in(::User.find(@cmd.user.id))
-      cookies[:_golovina_jwt] = Sessions::SetJwtSessionCmd.call(user: @cmd.user).token
+      cookies[:_golovina_jwt] = {
+        value: Sessions::SetJwtSessionCmd.call(user: @cmd.user).token,
+        expires: 1.year, httponly: true
+      }
 
       # TODO: Rewrite it
       redirect_uri = params[:return_uri].presence || "/"
