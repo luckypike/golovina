@@ -6,10 +6,8 @@ WORKDIR /app
 COPY . .
 RUN cargo build --release
 
-FROM rust:1.62-alpine
-
+FROM alpine
 COPY --from=builder /app/target/release/golovina-fastapi /app
 
 EXPOSE 3000
-
 CMD /app
