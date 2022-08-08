@@ -1,0 +1,17 @@
+[package]
+name = "golovina-fastapi"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+axum = "0.5.13"
+diesel = { version = "2.0.0-rc.1", default-features = false, features = ["postgres", "r2d2"] }
+dotenv = "0.15.0"
+jsonwebtoken = "8.1.1"
+lazy_static = "1.4.0"
+regex = "1.6.0"
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.20.1", default-features = false, features = ["full"] }
+tower-cookies = "0.7.0"
