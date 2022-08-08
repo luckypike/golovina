@@ -39,6 +39,10 @@ class ApplicationController < ActionController::Base
 
     user = User.create(email: User.guest_email)
     sign_in(user)
+    cookies[:_golovina_jwt] = {
+      value: Sessions::SetJwtSessionCmd.call(user: user).token,
+      expires: 1.year, httponly: true
+    }
   end
 
   def switch_locale(&action)
