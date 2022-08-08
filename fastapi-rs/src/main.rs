@@ -1,4 +1,5 @@
 use std::env;
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[macro_use]
 extern crate diesel;
@@ -10,6 +11,10 @@ pub mod schema;
 #[tokio::main]
 async fn main() {
     dotenv::dotenv().ok();
+
+    tracing_subscriber::registry()
+        .with(tracing_subscriber::fmt::layer())
+        .init();
 
     let _sentry = sentry::init((
         env::var("SENTRY_URL").unwrap(),
