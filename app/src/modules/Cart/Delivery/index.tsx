@@ -71,7 +71,7 @@ export const Delivery: FC = observer(() => {
   const [cities, setCities] = useState<DeliveryCityData[]>([])
   useEffect(() => {
     const _fetch = async (): Promise<void> => {
-      const { data } = await axios.get<DeliveryCityData[]>('/delivery_cities')
+      const { data } = await axios.get<DeliveryCityData[]>('/delivery-cities')
       setCities(data)
     }
 
