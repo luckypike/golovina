@@ -12,6 +12,7 @@ dotenv = "0.15.0"
 jsonwebtoken = "8.1.1"
 lazy_static = "1.4.0"
 regex = "1.6.0"
+sentry = "0.27.0"
 serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.20.1", default-features = false, features = ["full"] }
 tower-cookies = "0.7.0"
