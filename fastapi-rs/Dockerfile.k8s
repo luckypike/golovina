@@ -1,0 +1,15 @@
+FROM rust:1.62-alpine AS builder
+
+# RUN apk update && apk add bash gcc g++ build-base libc-dev libpq libpq-dev
+
+WORKDIR /app
+COPY . .
+RUN cargo build --release
+
+FROM rust:1.62-alpine
+
+COPY --from=builder /app/target/release/golovina-fastapi /app
+
+EXPOSE 3000
+
+CMD /app

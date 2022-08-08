@@ -29,41 +29,41 @@ services:
     stdin_open: true
     tty: true
 
-  fastapi: &fastapi
-    build: ./fastapi
-    profiles:
-      - donotstart
-    environment:
-      DATABASE_HOST: pg
-      HISTFILE: /app/tmp/.bash_history
-    env_file:
-      - .env
-    volumes:
-      - ./fastapi:/app
-      - go-build:/root/.cache/go-build
-      - go-modules:/go/pkg/mod
-    ports:
-      - 3001:3000
+  # fastapi: &fastapi
+  #   build: ./fastapi
+  #   profiles:
+  #     - donotstart
+  #   environment:
+  #     DATABASE_HOST: pg
+  #     HISTFILE: /app/tmp/.bash_history
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - ./fastapi:/app
+  #     - go-build:/root/.cache/go-build
+  #     - go-modules:/go/pkg/mod
+  #   ports:
+  #     - 3001:3000
 
-  air: &air
-    image: cosmtrek/air
-    command: "air init"
-    working_dir: /app
-    environment:
-      DATABASE_HOST: pg
-      DATABASE_NAME: golovina-dev
-      DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: postgres
-    depends_on:
-      - pg
-    env_file:
-      - .env
-    volumes:
-      - ./fastapi:/app:cached
-      - go-build:/root/.cache/go-build
-      - go-modules:/go/pkg/mod
-    ports:
-      - 3001:3000
+  # air: &air
+  #   image: cosmtrek/air
+  #   command: "air init"
+  #   working_dir: /app
+  #   environment:
+  #     DATABASE_HOST: pg
+  #     DATABASE_NAME: golovina-dev
+  #     DATABASE_USERNAME: postgres
+  #     DATABASE_PASSWORD: postgres
+  #   depends_on:
+  #     - pg
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - ./fastapi:/app:cached
+  #     - go-build:/root/.cache/go-build
+  #     - go-modules:/go/pkg/mod
+  #   ports:
+  #     - 3001:3000
 
   pg:
     image: postgres:13-alpine
@@ -98,8 +98,6 @@ services:
       - 3002:80
 
 volumes:
-  go-build:
-  go-modules:
   elasticsearch:
     name: golovina-api-es
   postgres:

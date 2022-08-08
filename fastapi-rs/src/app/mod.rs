@@ -8,7 +8,7 @@ mod orders;
 mod users;
 mod wishlists;
 
-use std::{net::SocketAddr, env};
+use std::{net::SocketAddr, env, str::FromStr};
 use lazy_static::lazy_static;
 use regex::Regex;
 use axum::{
@@ -40,9 +40,7 @@ pub async fn run() {
         .layer(CookieManagerLayer::new())
         .layer(Extension(pool));
 
-    let addr = SocketAddr::from(([0, 0, 0, 0], 3001));
-
-    // let qq = pool.get().await.unwrap();
+    let addr = SocketAddr::from_str(&env::var("APP_ADDR").unwrap()).unwrap();
 
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
