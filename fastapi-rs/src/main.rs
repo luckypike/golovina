@@ -1,4 +1,3 @@
-// use std::env;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[macro_use]
@@ -11,6 +10,7 @@ pub mod schema;
 #[tokio::main]
 async fn main() {
     dotenv::dotenv().ok();
+    openssl::init();
 
     tracing_subscriber::registry()
         .with(tracing_subscriber::fmt::layer())

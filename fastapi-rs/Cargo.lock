@@ -358,6 +358,7 @@ dependencies = [
  "dotenv",
  "jsonwebtoken",
  "lazy_static",
+ "openssl",
  "regex",
  "sentry",
  "serde",
