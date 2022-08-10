@@ -12,4 +12,5 @@ RUN apk update && apk add bash
 COPY --from=builder /app/target/release/golovina-fastapi /app
 
 EXPOSE 3000
+
 CMD /app
