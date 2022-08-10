@@ -1,14 +1,13 @@
-// use diesel::prelude::*;
-// // use diesel::{QueryDsl, RunQueryDsl};
+use sea_orm::{EntityTrait, DatabaseConnection, QueryOrder};
 
-// use super::models::DeliveryCity;
-// // use crate::app::DatabaseConnection;
-// use crate::app::db::Connection;
-// use crate::schema::delivery_cities::dsl::*;
+use super::data::DeliveryCityData;
+use super::entities;
 
-// pub fn index(mut conn: Connection) -> Vec<DeliveryCity> {
-//     delivery_cities
-//         .order((fast.desc(), title.asc()))
-//         .load::<DeliveryCity>(&mut conn)
-//         .unwrap()
-// }
+pub async fn index(pool: DatabaseConnection) -> Vec<DeliveryCityData> {
+    let delivery_cities: Vec<entities::delivery_city::Model> = entities::delivery_city::Entity::find()
+        .order_by_desc(entities::delivery_city::Column::Fast)
+        .order_by_asc(entities::delivery_city::Column::Title)
+        .all(&pool).await.unwrap();
+
+    delivery_cities.into_iter().map(|x| x.into()).collect()
+}
