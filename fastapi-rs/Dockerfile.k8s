@@ -22,7 +22,6 @@ WORKDIR /app
 COPY . .
 RUN cargo build --release
 
-FROM alpine
 COPY /app/target/release/golovina-fastapi /app
 
 EXPOSE 3000
