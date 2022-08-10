@@ -20,7 +20,7 @@
     "admin": {
       "title": "Admin"
     },
-    "subscribe": "5% discount for newsletter subscription"
+    "subscribe": "Join us"
   },
   "Footer": {
     "send": "Send us an email",
@@ -47,7 +47,7 @@
   },
   "Subscribe": {
     "title": "Subscribe",
-    "desc": "Subscribe to our newsletter and get 5% off your first order",
+    "desc": "Receive special news from Golovina Mari",
     "email": "E-mail",
     "first_name": "First name",
     "last_name": "Last name",
