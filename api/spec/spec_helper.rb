@@ -19,6 +19,8 @@ require "pundit/rspec"
 require "webmock/rspec"
 require "rspec/json_expectations"
 
+RSpec::Matchers.define_negated_matcher :not_change, :change
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

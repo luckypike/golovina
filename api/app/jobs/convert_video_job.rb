@@ -8,7 +8,7 @@ class ConvertVideoJob < ApplicationJob
     object.update(video_mp4: nil, video_poster: nil)
 
     tmp_dir = Rails.root.join("tmp/video")
-    Dir.mkdir(tmp_dir) unless Dir.exist?(tmp_dir)
+    FileUtils.mkdir_p(tmp_dir)
 
     video = FFMPEG::Movie.new(object.video.service_url)
     video_mp4_path = Rails.root.join("tmp/video/#{object.video.key}.mp4")
@@ -16,8 +16,8 @@ class ConvertVideoJob < ApplicationJob
 
     return unless video.valid?
 
-    File.delete(video_mp4_path) if File.exist?(video_mp4_path)
-    File.delete(video_poster_path) if File.exist?(video_poster_path)
+    FileUtils.rm_rf(video_mp4_path)
+    FileUtils.rm_rf(video_poster_path)
 
     video.transcode(
       video_mp4_path.to_s,
@@ -39,7 +39,7 @@ class ConvertVideoJob < ApplicationJob
     object.video_mp4.attach(io: File.open(video_mp4_path), filename: object.video.filename)
     object.video_poster.attach(io: File.open(video_poster_path), filename: object.video.filename)
 
-    File.delete(video_mp4_path) if File.exist?(video_mp4_path)
-    File.delete(video_poster_path) if File.exist?(video_poster_path)
+    FileUtils.rm_rf(video_mp4_path)
+    FileUtils.rm_rf(video_poster_path)
   end
 end

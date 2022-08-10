@@ -81,7 +81,7 @@ RSpec.describe Sessions::SignInWithAppleIdCmd, :aggregate_failures do
 
       it do
         expect { cmd }
-          .to change(Api::User, :count).by(0)
+          .to not_change(Api::User, :count)
           .and change(Api::Identity, :count).by(1)
       end
     end
@@ -108,7 +108,7 @@ RSpec.describe Sessions::SignInWithAppleIdCmd, :aggregate_failures do
 
       it do
         expect { cmd }
-          .to change(Api::User, :count).by(0)
+          .to not_change(Api::User, :count)
           .and change(Api::Identity, :count).by(1)
       end
     end
@@ -130,8 +130,8 @@ RSpec.describe Sessions::SignInWithAppleIdCmd, :aggregate_failures do
 
       it do
         expect { cmd }
-          .to change(Api::User, :count).by(0)
-          .and change(Api::Identity, :count).by(0)
+          .to not_change(Api::User, :count)
+          .and not_change(Api::Identity, :count)
       end
     end
 
