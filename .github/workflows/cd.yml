@@ -44,7 +44,6 @@ jobs:
   #           bragovo/golovina-api:latest
 
   build-and-push-fastapi-image:
-    needs: dockerhub
     runs-on: ubuntu-latest
 
     steps:
