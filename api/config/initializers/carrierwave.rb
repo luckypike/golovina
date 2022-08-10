@@ -3,12 +3,12 @@
 CarrierWave.configure do |config|
   config.fog_credentials = {
     provider: "AWS",
-    aws_access_key_id: ENV["aws_access_key_id"],
-    aws_secret_access_key: ENV["aws_secret_access_key"],
-    endpoint: ENV["aws_endpoint"]
+    aws_access_key_id: ENV.fetch("aws_access_key_id"),
+    aws_secret_access_key: ENV.fetch("aws_secret_access_key"),
+    endpoint: ENV.fetch("aws_endpoint")
   }
 
-  config.fog_directory = ENV["aws_bucket"]
+  config.fog_directory = ENV.fetch("aws_bucket")
   config.fog_public = true
   config.fog_authenticated_url_expiration = 12.hours
   config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" }

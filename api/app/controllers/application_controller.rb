@@ -18,9 +18,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current
-    if current_user && cookies[:_golovina_jwt].blank?
-      sign_out
-    end
+    sign_out if current_user && cookies[:_golovina_jwt].blank?
 
     Current.user = current_user
   end

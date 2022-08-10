@@ -14,11 +14,7 @@ module Api
         user_params: parse_user_params
       )
 
-      sign_in(::User.find(@cmd.user.id))
-      cookies[:_golovina_jwt] = {
-        value: Sessions::SetJwtSessionCmd.call(user: @cmd.user).token,
-        expires: 1.year, httponly: true
-      }
+      sign_in_with_jwt(::User.find(@cmd.user.id))
 
       # TODO: Rewrite it
       redirect_uri = params[:return_uri].presence || "/"
@@ -31,6 +27,14 @@ module Api
     end
 
     private
+
+    def sign_in_with_jwt(user)
+      sign_in(user)
+      cookies[:_golovina_jwt] = {
+        value: Sessions::SetJwtSessionCmd.call(user: user).token,
+        expires: 1.year, httponly: true
+      }
+    end
 
     def parse_user_params
       Oj.load(params[:user], symbol_keys: true, nilnil: true)
