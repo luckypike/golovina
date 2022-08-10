@@ -14,9 +14,10 @@
 # CMD /app
 
 
-FROM rust:1.62-alpine
+FROM rust:1.62-slim-bullseye
 
-RUN apk update && apk add bash gcc g++ build-base libc-dev libpq libpq-dev
+RUN apt update && apt install -y bash gcc g++ libc-dev libpq libpq-dev
+# RUN apk update && apk add bash gcc g++ build-base libc-dev libpq libpq-dev
 
 WORKDIR /app
 COPY . .
