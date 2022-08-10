@@ -27,10 +27,10 @@ pub async fn run() {
     let pool = db::create_pool(&env::var("DATABASE_URL").unwrap()).await;
 
     let app = Router::new()
-        .route("/", get(|| async { "hi" }))
         .nest(
             "/api",
             Router::new()
+                .route("/status", get(|| async {}))
                 .route("/delivery-cities", get(delivery_cities::index))
                 .route("/session", get(sessions::show))
         )
