@@ -1,6 +1,7 @@
 use serde::{Serialize, Deserialize};
 
-use crate::app::{User, categories::entities};
+use crate::app::User;
+use super::entities;
 
 #[derive(Serialize, Deserialize)]
 pub struct SessionCategoryData {
@@ -34,6 +35,20 @@ pub struct SessionThemeData {
     pub weight: i32
 }
 
+impl From<(entities::theme::Model, Vec<entities::theme_translation::Model>)> for SessionThemeData {
+    fn from(i: (entities::theme::Model, Vec<entities::theme_translation::Model>)) -> Self {
+        let translation = i.1[0].clone();
+
+        SessionThemeData {
+            id: i.0.id,
+            slug: i.0.slug,
+            weight: i.0.weight,
+            title: translation.title,
+            desc: translation.desc
+        }
+    }
+}
+
 #[derive(Serialize, Deserialize)]
 pub struct SessionUserData {
     pub id: i64,
@@ -49,7 +64,7 @@ pub struct SessionUserData {
 pub struct SessionData {
     pub user: SessionUserData,
     pub categories: Vec<SessionCategoryData>,
-    // pub themes: Vec<SessionThemeData>,
+    pub themes: Vec<SessionThemeData>,
     // pub cart: i64,
     // pub wishlist: i64,
 }

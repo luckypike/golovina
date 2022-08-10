@@ -1,12 +1,12 @@
 mod db;
 mod delivery_cities;
 mod sessions;
-mod locale;
 
 mod categories;
 mod orders;
 mod users;
 mod wishlists;
+mod themes;
 
 use std::{net::SocketAddr, env, str::FromStr};
 use regex::Regex;

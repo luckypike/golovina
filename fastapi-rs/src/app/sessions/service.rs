@@ -1,22 +1,15 @@
-// use diesel::dsl::{sum, count};
-// use diesel::prelude::*;
-
 use crate::app::{ Locale, User };
-use crate::app::categories::entities;
-// use crate::app::db::Connection;
-// use crate::schema::{ categories, category_translations, themes, theme_translations, orders, order_items, variants, wishlists };
-use super::data::{ SessionData, SessionCategoryData };
+use super::entities;
+use super::data::{ SessionData, SessionCategoryData, SessionThemeData };
 
-// use sea_orm::{DatabaseConnection, };
-use sea_orm::{EntityTrait, DatabaseConnection, QueryFilter, ColumnTrait};
-
+use sea_orm::{EntityTrait, DatabaseConnection, QueryFilter, ColumnTrait, QueryOrder};
 
 pub async fn show(user: User, locale: Locale, pool: DatabaseConnection) -> SessionData {
 
     SessionData {
         user: user.into(),
         categories: get_categories(&locale, &pool).await,
-        // themes: get_themes(&locale, &mut conn),
+        themes: get_themes(&locale, &pool).await,
         // cart: get_cart(&user, &mut conn).unwrap_or(0),
         // wishlist: get_wishlist(&user, &mut conn)
     }
@@ -29,55 +22,27 @@ async fn get_categories(locale: &Locale, pool: &DatabaseConnection) -> Vec<Sessi
             Locale::EN => "en",
             Locale::RU => "ru",
         }))
+        .filter(entities::category::Column::State.eq(1))
+        .filter(entities::category::Column::VariantsAndKitsCount.gt(0))
+        .order_by_asc(entities::category::Column::Weight)
         .all(pool).await.unwrap();
 
     categories.into_iter().map(|x| x.into()).collect()
 }
 
-// fn get_categories(locale: &Locale, conn: &mut Connection) -> Vec<SessionCategoryData> {
-//     categories::table.inner_join(
-//         category_translations::table
-//             .on(
-//                 category_translations::category_id.eq(categories::id)
-//                 .and(category_translations::locale.eq(match locale {
-//                     Locale::EN => "en",
-//                     Locale::RU => "ru",
-//                 }))
-//             )
-//     )
-//         .select((
-//             categories::id, category_translations::title, category_translations::desc,
-//             categories::slug, categories::weight,
-//         ))
-//         .order(categories::weight.asc())
-//         .filter(
-//             categories::state.eq(1)
-//             .and(categories::variants_and_kits_count.gt(0))
-//         )
-//         .load::<SessionCategoryData>(conn)
-//         .unwrap()
-// }
+async fn get_themes(locale: &Locale, pool: &DatabaseConnection) -> Vec<SessionThemeData> {
+    let categories: Vec<(entities::theme::Model, Vec<entities::theme_translation::Model>)> = entities::theme::Entity::find()
+        .find_with_related(entities::theme_translation::Entity)
+        .filter(entities::theme_translation::Column::Locale.eq(match locale {
+            Locale::EN => "en",
+            Locale::RU => "ru",
+        }))
+        .filter(entities::theme::Column::State.eq(1))
+        .order_by_asc(entities::theme::Column::Weight)
+        .all(pool).await.unwrap();
 
-// fn get_themes(locale: &Locale, conn: &mut Connection) -> Vec<SessionThemeData> {
-//     themes::table.inner_join(
-//         theme_translations::table
-//             .on(
-//                 theme_translations::theme_id.eq(themes::id)
-//                 .and(theme_translations::locale.eq(match locale {
-//                     Locale::EN => "en",
-//                     Locale::RU => "ru",
-//                 }))
-//             )
-//     )
-//         .select((
-//             themes::id, theme_translations::title, theme_translations::desc,
-//             themes::slug, themes::weight,
-//         ))
-//         .order(themes::weight.asc())
-//         .filter(themes::state.eq(1))
-//         .load::<SessionThemeData>(conn)
-//         .unwrap()
-// }
+    categories.into_iter().map(|x| x.into()).collect()
+}
 
 // fn get_cart(user: &User, conn: &mut Connection) -> Option<i64> {
 //     order_items::table

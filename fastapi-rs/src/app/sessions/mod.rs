@@ -5,6 +5,7 @@ use super::{Locale, User};
 
 mod service;
 mod data;
+mod entities;
 
 pub async fn show(
     user: User,
