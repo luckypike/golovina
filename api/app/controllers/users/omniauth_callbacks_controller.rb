@@ -34,6 +34,10 @@ module Users
       end
 
       sign_in user
+      cookies[:_golovina_jwt] = {
+        value: Sessions::SetJwtSessionCmd.call(user: user).token,
+        expires: 1.year, httponly: true
+      }
       redirect_to after_sign_in_path_for(user)
     end
 
