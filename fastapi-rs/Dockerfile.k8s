@@ -8,7 +8,7 @@ COPY . .
 RUN cargo build --release
 
 FROM alpine
-RUN apk update && apk add bash
+RUN apk update && apk add bash gcc
 COPY --from=builder /app/target/release/golovina-fastapi /app
 
 EXPOSE 3000
