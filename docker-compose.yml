@@ -11,6 +11,8 @@ services:
       ELASTICSEARCH_URL: es
       S3_URL: http://localhost:3002/s3
       DEV_HOST: glvn.lhr.rocks
+      AUTH_PRIVATE_KEY: "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEArgl9rBdlM3GBzfhQbxI5Qo5UDj7mh4SF80XiKSL5xCPu7iBR\nqKEG4mdTAZBNyB1K/2uFBFkujhdeaX2zrTObas/sIGOGOh0P/53o4gQsEmVUn/Ej\ngVl5E/iFtvgBH1P9d5NAvSmtEyP/+0TMmhUd+JLmrrfC9fjHAHR/mj2jKppWqW7m\n4SYJfxTuLsI1DVWJTDg2NM7Hj4UsLV0dAxsre1/WEi49q35moR5oO8GyWDBji31x\nUrusoktS+a+IrsfiqJ4RK4g9ObbaNTJchImmsAFxAH2J1zpBjN54KhMMrawmSxSL\nMSRP69xrTpdRrzujJu0/hC5Q0m2OJUc1qVwrJwIDAQABAoIBAQCBZwsrXwXfV0F1\nvXFI9NrgcuVq5jgQgWf7t3VustPVlAY+xocRBBITW1IrsnkzFxzBh9eSoSDtg9Cu\nTUnAucOQiuL+PiH6qctQe8BB9Wozj2Z5uhl1Puq4/6uknQhwm8m2FCYpwIgw2C6o\nTMJ4usTbI5ckR/xNWdnVq8mJDNV6gabTXc8udOyQ+492zIf2uGAaTxj70YtqdFBv\n2hFCrz4tE7xTULTty++S7L1O3FMMCsc2cEqHiByhpenBs3ihQX0IgupTVeyWWZ8J\nV2g9NnqF4Kafb3QI5laoR/S8me4lGvDFHu2ls/jWSs/crtRnR0xv6MqzicQGrZOP\n2e2hoxuhAoGBAOI3Pw38jr0MOvGcNErXMheTT3WqRHVBRVMslAyZ+aB8NAGA8kgz\nmLc9bcA0Hfc/WHudvdspMj7EeEh7MVBn1tVQqhToiw844xRmnNmILwHedJnPEGlC\npKYR22cuS0Zp6ezCsW2fspW8XqDAnKu07QzCjDyYeKTGTGKO/TYRfTmXAoGBAMTz\nhp3+eYQi/zitKIiBNbeMf/qoBTtyjt3nXGDP7gRUucS89ZTCKXrsSS0SnbyugzZU\n22jV6axaekZkTYybw8UyVoQ429y0A5lTTVB8RNUeJrQsKBUsULml+5XPrGDpwSdW\n481j9gecYil6crJYEuXvWDKwgqAqsmCCUAAsZSzxAoGAJ7HiEqY6tdmrjjIGywsv\n8wsaal9SW/D0JUAxSnTKZOrmhU0HNrw3FBBnbc63Y2duM2LeqdJ0yqbXJIDZim5u\nOEhLUBfuLuGglzfaViGbfgx3EXZQPug+1BVWFqj89IIpVi5jzAS15aiEQlkKJOc+\noXqR+SAYK3HQfYrxy8cN3kkCgYEAsK2hmoQZMF9QwuAbV3FJ5fGFMS+fGfgnj4so\nBLUi2QHEcGfuilcvbNUgw+1KUWPf01KGTWJwMCwuOo1qP/PPyEvi7tQu76sQ+2+O\nEOCZwvE8WS6vemb5t8Ddk0PsaDfqDUdWLf85SxSPvpPY5oI52ck/PqG3XMVQpWDh\nMXaiAJECgYAZAbBXCAMi26Qo0PG1AsKgUfsEjxadv5dDAWy6EiXDuNkhUnuIBCsY\nSVNtZoPzlvcH8HnQWfFajYo6Z1rYQ/lzc4U6ohc6QTHyxIJHR4hhMesuIiXK89Ue\npTulsHu/TmOa5VqD9tEybivxzdWPKZJWk9sxoK5/YMJfUYz6QGVyhQ==\n-----END RSA PRIVATE KEY-----\n"
+      AUTH_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArgl9rBdlM3GBzfhQbxI5\nQo5UDj7mh4SF80XiKSL5xCPu7iBRqKEG4mdTAZBNyB1K/2uFBFkujhdeaX2zrTOb\nas/sIGOGOh0P/53o4gQsEmVUn/EjgVl5E/iFtvgBH1P9d5NAvSmtEyP/+0TMmhUd\n+JLmrrfC9fjHAHR/mj2jKppWqW7m4SYJfxTuLsI1DVWJTDg2NM7Hj4UsLV0dAxsr\ne1/WEi49q35moR5oO8GyWDBji31xUrusoktS+a+IrsfiqJ4RK4g9ObbaNTJchImm\nsAFxAH2J1zpBjN54KhMMrawmSxSLMSRP69xrTpdRrzujJu0/hC5Q0m2OJUc1qVwr\nJwIDAQAB\n-----END PUBLIC KEY-----\n"
     tmpfs:
       - /tmp
     volumes:
@@ -27,41 +29,41 @@ services:
     stdin_open: true
     tty: true
 
-  fastapi: &fastapi
-    build: ./fastapi
-    profiles:
-      - donotstart
-    environment:
-      DATABASE_HOST: pg
-      HISTFILE: /app/tmp/.bash_history
-    env_file:
-      - .env
-    volumes:
-      - ./fastapi:/app
-      - go-build:/root/.cache/go-build
-      - go-modules:/go/pkg/mod
-    ports:
-      - 3001:3000
+  # fastapi: &fastapi
+  #   build: ./fastapi
+  #   profiles:
+  #     - donotstart
+  #   environment:
+  #     DATABASE_HOST: pg
+  #     HISTFILE: /app/tmp/.bash_history
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - ./fastapi:/app
+  #     - go-build:/root/.cache/go-build
+  #     - go-modules:/go/pkg/mod
+  #   ports:
+  #     - 3001:3000
 
-  air: &air
-    image: cosmtrek/air
-    command: "air init"
-    working_dir: /app
-    environment:
-      DATABASE_HOST: pg
-      DATABASE_NAME: golovina-dev
-      DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: postgres
-    depends_on:
-      - pg
-    env_file:
-      - .env
-    volumes:
-      - ./fastapi:/app:cached
-      - go-build:/root/.cache/go-build
-      - go-modules:/go/pkg/mod
-    ports:
-      - 3001:3000
+  # air: &air
+  #   image: cosmtrek/air
+  #   command: "air init"
+  #   working_dir: /app
+  #   environment:
+  #     DATABASE_HOST: pg
+  #     DATABASE_NAME: golovina-dev
+  #     DATABASE_USERNAME: postgres
+  #     DATABASE_PASSWORD: postgres
+  #   depends_on:
+  #     - pg
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - ./fastapi:/app:cached
+  #     - go-build:/root/.cache/go-build
+  #     - go-modules:/go/pkg/mod
+  #   ports:
+  #     - 3001:3000
 
   pg:
     image: postgres:13-alpine
@@ -96,8 +98,6 @@ services:
       - 3002:80
 
 volumes:
-  go-build:
-  go-modules:
   elasticsearch:
     name: golovina-api-es
   postgres:

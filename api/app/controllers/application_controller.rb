@@ -18,6 +18,8 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current
+    sign_out if current_user && cookies[:_golovina_jwt].blank?
+
     Current.user = current_user
   end
 
@@ -39,6 +41,10 @@ class ApplicationController < ActionController::Base
 
     user = User.create(email: User.guest_email)
     sign_in(user)
+    cookies[:_golovina_jwt] = {
+      value: Sessions::SetJwtSessionCmd.call(user: user).token,
+      expires: 1.year, httponly: true
+    }
   end
 
   def switch_locale(&action)

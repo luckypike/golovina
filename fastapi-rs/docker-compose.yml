@@ -1,0 +1,23 @@
+services:
+  fastapi: &fastapi
+    build: .
+    command: "cargo watch -x 'run --'"
+    environment:
+      # DATABASE_HOST: pg
+      HISTFILE: /app/tmp/.bash_history
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - cargo-home:/usr/local/cargo
+      - rustup-home:/usr/local/rustup
+    ports:
+      - 3001:3000
+
+volumes:
+  cargo-home:
+  rustup-home:
+
+networks:
+  default:
+    name: golovina-dev

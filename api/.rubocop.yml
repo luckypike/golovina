@@ -40,6 +40,9 @@ NestedGroups:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
+RSpec/VerifiedDoubleReference:
+  EnforcedStyle: string
+
 # Style/ClassAndModuleChildren:
 #   EnforcedStyle: compact
 

@@ -49,7 +49,7 @@ RSpec.describe Variants::CreateCmd, :aggregate_failures do
         it do
           expect { cmd }
             .to change { Api::Variant.all.size }.by(1)
-            .and change { Api::Product.all.size }.by(0)
+            .and(not_change { Api::Product.all.size })
         end
       end
     end

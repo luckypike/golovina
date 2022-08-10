@@ -1,0 +1,20 @@
+[package]
+name = "golovina-fastapi"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+axum = { version = "0.5.13", features = ["macros"] }
+dotenv = "0.15.0"
+jsonwebtoken = "8.1.1"
+regex = "1.6.0"
+sea-orm = { version = "0.9.1", features = ["sqlx-postgres"] }
+sentry = "0.27.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.83"
+sqlx = { version = "0.6.1",  default-features = false, features = [ "runtime-tokio-native-tls", "postgres", "macros" ] }
+tokio = { version = "1.20.1", default-features = false, features = ["full"] }
+tower-cookies = "0.7.0"
+tracing-subscriber = "0.3.15"

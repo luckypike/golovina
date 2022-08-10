@@ -36,8 +36,8 @@ RSpec.describe Refunds::CreateCmd, :aggregate_failures do
         it do
           expect { cmd }
             .to raise_error(ServiceActor::Failure)
-            .and change { Api::Refund.state_active.all.size }.by(0)
-            .and change { Api::RefundOrderItem.all.size }.by(0)
+            .and(not_change { Api::Refund.state_active.all.size })
+            .and(not_change { Api::RefundOrderItem.all.size })
         end
       end
     end

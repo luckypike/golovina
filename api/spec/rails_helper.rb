@@ -17,6 +17,10 @@ ENV["smsaero_user"] = "smsaero_user"
 ENV["smsaero_sign"] = "smsaero_sign"
 ENV["smsaero_password"] = "smsaero_password"
 
+auth_private_key = OpenSSL::PKey::RSA.generate(2048)
+ENV["AUTH_PRIVATE_KEY"] = auth_private_key.export
+ENV["AUTH_PUBLIC_KEY"] = auth_private_key.public_key.export
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

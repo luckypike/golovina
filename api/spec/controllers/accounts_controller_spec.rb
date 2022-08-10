@@ -22,6 +22,7 @@ describe AccountsController do
 
     context 'by common user' do
       before do
+        cookies[:_golovina_jwt] = "jwt"
         sign_in common_user
         get :show
       end
