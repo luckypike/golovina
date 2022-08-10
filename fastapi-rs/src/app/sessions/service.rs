@@ -1,23 +1,37 @@
 // use diesel::dsl::{sum, count};
 // use diesel::prelude::*;
 
-use crate::app::{Locale, User};
-// use crate::app::users::users::User;
+use crate::app::{ Locale, User };
+use crate::app::categories::entities;
 // use crate::app::db::Connection;
 // use crate::schema::{ categories, category_translations, themes, theme_translations, orders, order_items, variants, wishlists };
-use super::data::{ SessionData };
+use super::data::{ SessionData, SessionCategoryData };
 
-use sea_orm::DatabaseConnection;
+// use sea_orm::{DatabaseConnection, };
+use sea_orm::{EntityTrait, DatabaseConnection, QueryFilter, ColumnTrait};
 
 
-pub fn show(user: User, _locale: &Locale, _pool: DatabaseConnection) -> SessionData {
+pub async fn show(user: User, locale: Locale, pool: DatabaseConnection) -> SessionData {
+
     SessionData {
         user: user.into(),
-        // categories: get_categories(&locale, &mut conn),
+        categories: get_categories(&locale, &pool).await,
         // themes: get_themes(&locale, &mut conn),
         // cart: get_cart(&user, &mut conn).unwrap_or(0),
         // wishlist: get_wishlist(&user, &mut conn)
     }
+}
+
+async fn get_categories(locale: &Locale, pool: &DatabaseConnection) -> Vec<SessionCategoryData> {
+    let categories: Vec<(entities::category::Model, Vec<entities::category_translation::Model>)> = entities::category::Entity::find()
+        .find_with_related(entities::category_translation::Entity)
+        .filter(entities::category_translation::Column::Locale.eq(match locale {
+            Locale::EN => "en",
+            Locale::RU => "ru",
+        }))
+        .all(pool).await.unwrap();
+
+    categories.into_iter().map(|x| x.into()).collect()
 }
 
 // fn get_categories(locale: &Locale, conn: &mut Connection) -> Vec<SessionCategoryData> {

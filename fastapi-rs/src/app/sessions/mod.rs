@@ -11,5 +11,5 @@ pub async fn show(
     locale: Locale,
     Extension(pool): Extension<DatabaseConnection>
 ) -> Json<SessionData> {
-    Json(service::show(user, &locale, pool))
+    Json(service::show(user, locale, pool).await)
 }

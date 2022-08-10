@@ -1,14 +1,28 @@
 use serde::{Serialize, Deserialize};
 
-use crate::app::User;
+use crate::app::{User, categories::entities};
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct SessionCategoryData {
     pub id: i64,
     pub title: String,
     pub desc: Option<String>,
     pub slug: String,
     pub weight: i32
+}
+
+impl From<(entities::category::Model, Vec<entities::category_translation::Model>)> for SessionCategoryData {
+    fn from(i: (entities::category::Model, Vec<entities::category_translation::Model>)) -> Self {
+        let translation = i.1[0].clone();
+
+        SessionCategoryData {
+            id: i.0.id,
+            slug: i.0.slug,
+            weight: i.0.weight,
+            title: translation.title,
+            desc: translation.desc
+        }
+    }
 }
 
 #[derive(Serialize)]
@@ -34,7 +48,7 @@ pub struct SessionUserData {
 #[derive(Serialize)]
 pub struct SessionData {
     pub user: SessionUserData,
-    // pub categories: Vec<SessionCategoryData>,
+    pub categories: Vec<SessionCategoryData>,
     // pub themes: Vec<SessionThemeData>,
     // pub cart: i64,
     // pub wishlist: i64,

@@ -1,6 +1,5 @@
 use sea_orm::entity::prelude::*;
 use serde::Serialize;
-// use super::category_translation::Entity as CategoryTranslation
 
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Serialize)]
 #[sea_orm(table_name = "categories")]
