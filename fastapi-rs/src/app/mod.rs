@@ -7,6 +7,7 @@ mod orders;
 mod users;
 mod wishlists;
 mod themes;
+mod variants;
 
 use std::{net::SocketAddr, env, str::FromStr};
 use regex::Regex;
@@ -79,7 +80,7 @@ struct JwtUser {
     sub: i64
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct User {
     id: i64,
     email: String,

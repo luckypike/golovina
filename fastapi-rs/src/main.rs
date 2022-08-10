@@ -1,4 +1,4 @@
-// use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 use std::env;
 
@@ -10,9 +10,9 @@ mod app;
 async fn main() {
     dotenv::dotenv().ok();
 
-    // tracing_subscriber::registry()
-    //     .with(tracing_subscriber::fmt::layer())
-    //     .init();
+    tracing_subscriber::registry()
+        .with(tracing_subscriber::fmt::layer())
+        .init();
 
     let _sentry = sentry::init((
         env::var("SENTRY_URL").unwrap(),
