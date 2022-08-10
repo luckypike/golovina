@@ -59,22 +59,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-
       - uses: actions/checkout@v3
       - uses: docker/build-push-action@v3
         with:
           context: ./fastapi-rs
           file: ./fastapi-rs/Dockerfile.k8s
           push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           tags: |
             bragovo/golovina-fastapi-rs:latest
 
