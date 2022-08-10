@@ -601,7 +601,6 @@ dependencies = [
  "axum",
  "dotenv",
  "jsonwebtoken",
- "lazy_static",
  "regex",
  "sea-orm",
  "sentry",

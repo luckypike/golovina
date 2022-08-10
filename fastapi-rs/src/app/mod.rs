@@ -9,7 +9,6 @@ mod users;
 mod wishlists;
 
 use std::{net::SocketAddr, env, str::FromStr};
-use lazy_static::lazy_static;
 use regex::Regex;
 use axum::{
     extract::{Extension, FromRequest, RequestParts},
@@ -151,11 +150,9 @@ fn extract_session_cookie(cookie: &Option<Cookie>) -> String {
 }
 
 fn clear_guest_user_email(user: &mut User) {
-    lazy_static! {
-        static ref RE: Regex = Regex::new(r"^guest_(.+)@golovinamari\.com|(.+)@privaterelay\.appleid\.com$").unwrap();
-    }
+    let re: Regex = Regex::new(r"^guest_(.+)@golovinamari\.com|(.+)@privaterelay\.appleid\.com$").unwrap();
 
-    if RE.is_match(&user.email) {
+    if re.is_match(&user.email) {
         user.email = String::from("");
     }
 }
