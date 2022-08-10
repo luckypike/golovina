@@ -1,17 +1,12 @@
-use diesel::pg::PgConnection;
-use diesel::r2d2::ConnectionManager;
-use diesel::r2d2::Pool;
-use diesel::r2d2::PooledConnection;
+use sea_orm::{Database, DatabaseConnection, ConnectOptions};
 
-pub fn create_pool(url: &String) -> ConnectionPool {
-    let manager = ConnectionManager::<PgConnection>::new(url);
+pub async fn create_pool(url: &String) -> DatabaseConnection {
+    let mut opt = ConnectOptions::new(url.to_owned());
 
-    Pool::builder()
-        .max_size(10)
-        .build(manager)
-        .unwrap()
+    opt.max_connections(15)
+        .min_connections(5)
+        .sqlx_logging(true);
+        // .sqlx_logging_level(log::LevelFilter::Info);
+
+    Database::connect(opt).await.unwrap()
 }
-
-
-pub type ConnectionPool = Pool<ConnectionManager<PgConnection>>;
-pub type Connection = PooledConnection<ConnectionManager<PgConnection>>;

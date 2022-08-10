@@ -16,26 +16,24 @@ use axum::{
     routing::get,
     Router, async_trait, response::Response
 };
-use diesel::{r2d2::{PooledConnection, ConnectionManager}, PgConnection};
 use jsonwebtoken::{decode, Validation, DecodingKey, Algorithm};
-use serde::Deserialize;
+use sea_orm::prelude::*;
+use serde::{Deserialize, Serialize};
 use tower_cookies::{CookieManagerLayer, Cookies, Cookie};
-use self::{users::models::User, db::ConnectionPool};
-use crate::schema::users::dsl::*;
-use diesel::prelude::*;
+use users::entities;
 
 const JWT_COOKIE_NAME: &str = "_golovina_jwt";
 
 pub async fn run() {
-    let pool = db::create_pool(&env::var("DATABASE_URL").unwrap());
+    let pool = db::create_pool(&env::var("DATABASE_URL").unwrap()).await;
 
     let app = Router::new()
         .route("/", get(|| async { "hi" }))
         .nest(
             "/api",
             Router::new()
-                .route("/session", get(sessions::show))
                 .route("/delivery-cities", get(delivery_cities::index))
+                .route("/session", get(sessions::show))
         )
         .layer(CookieManagerLayer::new())
         .layer(Extension(pool));
@@ -77,27 +75,27 @@ where
     }
 }
 
-
-pub struct DatabaseConnection(PooledConnection<ConnectionManager<PgConnection>>);
-
-#[async_trait]
-impl<B> FromRequest<B> for DatabaseConnection
-where
-    B: Send
-{
-    type Rejection = Response;
-
-    async fn from_request(req: &mut RequestParts<B>) -> Result<Self, Self::Rejection> {
-        let Extension(pool) = Extension::<ConnectionPool>::from_request(req).await.unwrap();
-
-        let conn = pool.get().unwrap();
-        Ok(Self(conn))
-    }
-}
-
 #[derive(Debug, Deserialize)]
 struct JwtUser {
     sub: i64
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct User {
+    id: i64,
+    email: String,
+    name: Option<String>,
+    sname: Option<String>,
+    phone: Option<String>,
+    state: i32,
+    editor: bool,
+}
+
+impl From<entities::user::Model> for User {
+    fn from(model: entities::user::Model) -> Self {
+        let v = serde_json::to_value(&model).unwrap();
+        serde_json::from_value(v).unwrap()
+    }
 }
 
 #[async_trait]
@@ -113,7 +111,6 @@ where
         let session_cookie = extract_session_cookie(&cookies.get(JWT_COOKIE_NAME));
 
         let validation = Validation::new(Algorithm::RS256);
-        // validation.validate_exp = false;
 
         let user_id = match decode::<JwtUser>(
             &session_cookie,
@@ -124,19 +121,20 @@ where
             _ => 0
         };
 
-        let Extension(pool) = Extension::<ConnectionPool>::from_request(req).await.unwrap();
+        let Extension(pool) = Extension::<DatabaseConnection>::from_request(req).await.unwrap();
 
-        let mut conn = pool.get().unwrap();
-
-        let mut user: User = users.find(user_id).first::<User>(&mut conn).unwrap_or(User {
-            id: 0,
-            email: String::from(""),
-            name: Some(String::from("")),
-            sname: Some(String::from("")),
-            phone: Some(String::from("")),
-            state: 0,
-            editor: false,
-        });
+        let mut user: User = match entities::user::Entity::find_by_id(user_id).one(&pool).await.unwrap() {
+            Some(v) => v.into(),
+            _ => User {
+                id: 0,
+                email: String::from(""),
+                name: Some(String::from("")),
+                sname: Some(String::from("")),
+                phone: Some(String::from("")),
+                state: 0,
+                editor: false,
+            }
+        };
 
         clear_guest_user_email(&mut user);
 

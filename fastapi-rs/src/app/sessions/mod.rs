@@ -1,6 +1,7 @@
-use axum::Json;
+use sea_orm::DatabaseConnection;
+use axum::{Json, Extension};
 use self::data::SessionData;
-use super::{users::models::User, DatabaseConnection, Locale};
+use super::{Locale, User};
 
 mod service;
 mod data;
@@ -8,7 +9,7 @@ mod data;
 pub async fn show(
     user: User,
     locale: Locale,
-    DatabaseConnection(conn): DatabaseConnection
+    Extension(pool): Extension<DatabaseConnection>
 ) -> Json<SessionData> {
-    Json(service::show(&user, locale, conn))
+    Json(service::show(user, &locale, pool))
 }
