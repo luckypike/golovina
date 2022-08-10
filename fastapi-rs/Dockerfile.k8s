@@ -22,7 +22,7 @@ WORKDIR /app
 COPY . .
 RUN cargo build --release
 
-COPY /app/target/release/golovina-fastapi /app
+# COPY /app/target/release/golovina-fastapi /app
 
 EXPOSE 3000
-CMD /app
+CMD /app/target/release/golovina-fastapi
