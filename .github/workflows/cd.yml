@@ -10,8 +10,13 @@ jobs:
   dockerhub:
     runs-on: ubuntu-latest
     steps:
-      - uses: docker/setup-qemu-action@v1
-      - uses: docker/setup-buildx-action@v1
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+        with:
+          driver: docker-container
+          driver-opts: |
+            image=moby/buildkit:master
+            network=host
 
   # build-and-push-api-image:
   #   needs: dockerhub
@@ -58,13 +63,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - uses: docker/setup-buildx-action@v2
-        with:
-          driver: docker-container
-          driver-opts: |
-            image=moby/buildkit:master
-            network=host
 
       - uses: actions/checkout@v3
       - uses: docker/build-push-action@v3
