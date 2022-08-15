@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import * as Sentry from '@sentry/nextjs'
 import { LayoutStore } from '../../layout/store'
 
 export interface SessionData {
@@ -39,17 +40,27 @@ export class RootStore {
     themes: [],
   }
 
+  traceparentId: string
   headerInvert = false
   layoutStore = new LayoutStore()
 
-  constructor(sessionData: SessionData) {
+  constructor(sessionData: SessionData, transactionId: string) {
     this.sessionData = sessionData
+    this.traceparentId = transactionId
 
     makeAutoObservable(this)
+
+    this.setSentryTraceparentId()
   }
 
   setHeaderInvert = (headerInvert: boolean) => {
     this.headerInvert = headerInvert
+  }
+
+  setSentryTraceparentId(): void {
+    Sentry.configureScope((scope) => {
+      scope.setTag('transaction_id', this.traceparentId)
+    })
   }
 
   get isAuth(): boolean {

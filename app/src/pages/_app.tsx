@@ -1,8 +1,7 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import App, { AppContext, AppProps } from 'next/app'
 import router from 'next/router'
 import axios, { AxiosRequestConfig } from 'axios'
-import { BugsnagPluginReactResult } from '@bugsnag/plugin-react'
 import { IntlMessages, NextIntlProvider } from 'next-intl'
 
 import { Header } from '../layout/Header'
@@ -10,14 +9,10 @@ import { Footer } from '../layout/Footer'
 import { Metrics } from '../modules/Metrics'
 import { RootContext } from '../services/useRootContext'
 import { RootStore, SessionData } from '../services/stores/RootStore'
-import Bugsnag from '../lib/bugsnag'
 
 import 'normalize.css'
 import '../css/app.css'
 import '../css/react-select.css'
-
-const plugin = Bugsnag.getPlugin('react') as BugsnagPluginReactResult
-const ErrorBoundary = plugin.createErrorBoundary(React)
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL
 
@@ -26,11 +21,13 @@ function AppPage({
   pageProps,
   sessionData,
   localeData,
+  transactionId,
 }: AppProps & {
   sessionData: SessionData
   localeData: IntlMessages
+  transactionId: string
 }): JSX.Element {
-  const [rootStore] = useState(new RootStore(sessionData))
+  const [rootStore] = useState(new RootStore(sessionData, transactionId))
 
   useEffect(() => {
     const handleRouteChange = (): void => {
@@ -45,36 +42,32 @@ function AppPage({
   }, [rootStore.layoutStore])
 
   return (
-    <ErrorBoundary FallbackComponent={ErrorView}>
-      <RootContext.Provider value={rootStore}>
-        <NextIntlProvider messages={localeData}>
-          <Header />
+    <RootContext.Provider value={rootStore}>
+      <NextIntlProvider messages={localeData}>
+        <Header />
 
-          <main className="main">
-            <Component {...pageProps} />
-          </main>
+        <main className="main">
+          <Component {...pageProps} />
+        </main>
 
-          <Footer />
-          <Metrics />
-        </NextIntlProvider>
-      </RootContext.Provider>
-    </ErrorBoundary>
+        <Footer />
+        <Metrics />
+      </NextIntlProvider>
+    </RootContext.Provider>
   )
-}
-
-const ErrorView: FC = () => {
-  return <div>ERROR PAGE</div>
 }
 
 AppPage.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext)
   const locale = appContext.ctx.locale ?? 'ru'
+  const transactionId = Math.random().toString(36).substr(2, 9)
 
   let config: AxiosRequestConfig = {
     baseURL: process.env.NEXT_PUBLIC_API_URL,
     withCredentials: true,
     headers: {
       'X-Locale': locale,
+      'X-Transaction-ID': transactionId,
     },
   }
 
@@ -84,6 +77,7 @@ AppPage.getInitialProps = async (appContext: AppContext) => {
       headers: {
         Cookie: appContext.ctx.req?.headers.cookie ?? '',
         'X-Locale': locale,
+        'X-Transaction-ID': transactionId,
       },
     }
   }
@@ -91,7 +85,7 @@ AppPage.getInitialProps = async (appContext: AppContext) => {
   const localeData = (await import(`../locale/${locale}.json`)).default
 
   const { data: sessionData } = await axios.get<SessionData>('/session', config)
-  return { ...appProps, sessionData, localeData }
+  return { ...appProps, sessionData, localeData, transactionId }
 }
 
 export default AppPage
