@@ -80,7 +80,7 @@ struct JwtUser {
     sub: i64
 }
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct User {
     id: i64,
     email: String,

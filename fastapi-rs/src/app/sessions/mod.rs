@@ -7,6 +7,7 @@ mod service;
 mod data;
 mod entities;
 
+#[tracing::instrument]
 pub async fn show(
     user: User,
     locale: Locale,
