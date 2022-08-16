@@ -1,17 +1,16 @@
-use sea_orm::DatabaseConnection;
-use axum::{Json, Extension};
 use self::data::SessionData;
 use super::{Locale, User};
+use axum::{Extension, Json};
+use sea_orm::DatabaseConnection;
 
-mod service;
 mod data;
 mod entities;
+mod service;
 
-#[tracing::instrument]
 pub async fn show(
     user: User,
     locale: Locale,
-    Extension(pool): Extension<DatabaseConnection>
+    Extension(pool): Extension<DatabaseConnection>,
 ) -> Json<SessionData> {
     Json(service::show(user, locale, pool).await)
 }

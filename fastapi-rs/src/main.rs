@@ -19,8 +19,9 @@ async fn main() {
         sentry::ClientOptions {
             release: sentry::release_name!(),
             traces_sample_rate: 1.0,
-        ..Default::default()
-        }
+            debug: true,
+            ..Default::default()
+        },
     ));
 
     app::run().await
