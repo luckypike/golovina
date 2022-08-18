@@ -14,12 +14,17 @@ bytes = "1.2.1"
 dotenv = "0.15.0"
 futures = "0.3.21"
 jsonwebtoken = "8.1.1"
+libvips = "1.4.3"
 regex = "1.6.0"
 sea-orm = { version = "0.9.1", features = ["sqlx-postgres"] }
 sentry = "0.27.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0.83"
-sqlx = { version = "0.6.1",  default-features = false, features = [ "runtime-tokio-native-tls", "postgres", "macros" ] }
+sqlx = { version = "0.6.1", default-features = false, features = [
+  "runtime-tokio-native-tls",
+  "postgres",
+  "macros",
+] }
 tokio = { version = "1.20.1", default-features = false, features = ["full"] }
 tower-cookies = "0.7.0"
 tracing-subscriber = "0.3.15"
