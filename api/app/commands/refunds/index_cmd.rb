@@ -8,7 +8,7 @@ module Refunds
 
     def call
       self.orders = Api::Order
-        .includes(order_items: [:size, { variant: [:translations, { color: :translations }] }])
+        .includes(order_items: [:size, { variant: %i[translations color] }])
         .where(user: user, state: %i[paid archived]).order(payed_at: :desc)
 
       self.refunded_order_items = Api::RefundOrderItem.where(

@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :api_user, class: "Api::User" do
     email { Faker::Internet.email }
     state { :active }
+    editor { false }
 
     trait :apple_id do
       email { "123456@privaterelay.appleid.com" }

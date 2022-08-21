@@ -16,13 +16,8 @@ module Api
 
     private
 
-    # def authorize(record, query = nil)
-    #   super([:api, record], query)
-    # end
-
     def current_user
-      # TODO: remove this
-      @current_user ||= Api::User.find_by(id: warden.session_serializer.session["warden.user.user.key"]&.flatten&.first)
+      @current_user ||= Sessions::DecodeJwtCmd.call(jwt: cookies[:_golovina_jwt]).user
     end
   end
 end

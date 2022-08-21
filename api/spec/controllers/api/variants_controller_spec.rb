@@ -14,7 +14,7 @@ RSpec.describe Api::VariantsController, :aggregate_failures do
     context "when user can create" do
       let(:user) { create(:user, :editor) }
 
-      before { sign_in(user) }
+      before { cookies[:_golovina_jwt] = generate_test_jwt(user.id) }
 
       it do
         expect(cmd).to have_http_status(:ok)
@@ -43,7 +43,7 @@ RSpec.describe Api::VariantsController, :aggregate_failures do
     context "when user can create" do
       let(:user) { create(:user, :editor) }
 
-      before { sign_in(user) }
+      before { cookies[:_golovina_jwt] = generate_test_jwt(user.id) }
 
       it do
         expect(cmd).to have_http_status(:ok)

@@ -10,6 +10,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       post :apple
       post :code
     end
+
+    resources :colors
+
     resources :variants, only: %i[new edit create update]
     resources :images, only: %i[create] do
       collection do
