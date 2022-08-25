@@ -11,7 +11,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       post :code
     end
 
-    resources :colors
+    resources :colors, only: %i[index show create update]
 
     resources :variants, only: %i[new edit create update]
     resources :images, only: %i[create] do

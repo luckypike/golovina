@@ -6,15 +6,11 @@ module Api
       user&.editor?
     end
 
-    def edit?
+    def show?
       index?
     end
 
     def update?
-      index?
-    end
-
-    def new?
       index?
     end
 

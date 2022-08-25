@@ -9,10 +9,15 @@ module Api
       render json: Colors::IndexResource.new(cmd.colors).serialize
     end
 
+    def show
+      cmd = Colors::ShowCmd.call(color_id: params[:id])
+      render json: Colors::ShowResource.new(cmd.color).serialize
+    end
+
     private
 
     def authorize_color
-      authorize @color || Color
+      authorize Color
     end
   end
 end
