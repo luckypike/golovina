@@ -14,6 +14,16 @@ module Api
       render json: Colors::ShowResource.new(cmd.color).serialize
     end
 
+    def create
+      cmd = Colors::CreateCmd.call(color_params: params)
+      render json: Colors::CreateAndUpdateResource.new(cmd.color).serialize
+    end
+
+    def update
+      cmd = Colors::UpdateCmd.call(color_id: params[:id], color_params: params)
+      render json: Colors::CreateAndUpdateResource.new(cmd.color).serialize
+    end
+
     private
 
     def authorize_color

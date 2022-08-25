@@ -30,11 +30,11 @@ end
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
-  config.around do |example|
-    Sequel::Model.db.transaction(rollback: :always, auto_savepoint: true) do
-      example.run
-    end
-  end
+  # config.around do |example|
+  #   Sequel::Model.db.transaction(rollback: :always, auto_savepoint: true) do
+  #     example.run
+  #   end
+  # end
 
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view

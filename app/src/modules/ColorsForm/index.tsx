@@ -78,7 +78,7 @@ export const ColorsForm: FC = () => {
     console.log(data)
 
     try {
-      id ? await axios.post(`/colors/${id as string}`, data) : await axios.post('/colors', data)
+      id ? await axios.patch(`/colors/${id as string}`, data) : await axios.post('/colors', data)
       await router.push('/colors')
     } catch ({
       response: {

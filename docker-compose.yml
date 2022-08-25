@@ -114,4 +114,5 @@ volumes:
 
 networks:
   default:
+    external: true
     name: golovina-dev

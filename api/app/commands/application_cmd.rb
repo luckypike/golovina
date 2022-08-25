@@ -3,10 +3,10 @@
 class ApplicationCmd < Actor
   private
 
-  def validate_contract!(contract, params)
+  def validate_contract!(contract, params, **rest)
     params = params.to_unsafe_h if params.is_a?(ActionController::Parameters)
     fail!(http_status_code: :unprocessable_entity) if params.blank?
-    result = contract.new.call(**params)
+    result = contract.new(**rest).call(**params)
     fail!(errors: result.errors.to_hash, http_status_code: :unprocessable_entity) unless result.success?
 
     result.to_h

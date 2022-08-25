@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::ColorsController, :aggregate_failures do
-  subject(:ctrl) { patch(:update, params: params.merge(id: color.id)) }
+  subject(:ctrl) { post(:create, params: params) }
 
-  let(:color) { create(:api_color) }
   let(:params) do
     {
       title_ru: Faker::Color.color_name,
@@ -14,7 +13,7 @@ RSpec.describe Api::ColorsController, :aggregate_failures do
 
   before do
     cookies[:_golovina_jwt] = generate_test_jwt(user.id)
-    allow(Colors::UpdateCmd).to receive(:call).and_call_original
+    allow(Colors::CreateCmd).to receive(:call).and_call_original
     allow(Colors::CreateAndUpdateResource).to receive(:new).and_call_original
   end
 
@@ -23,18 +22,8 @@ RSpec.describe Api::ColorsController, :aggregate_failures do
 
     it do
       expect(ctrl).to have_http_status(:ok)
-      expect(Colors::UpdateCmd).to have_received(:call)
+      expect(Colors::CreateCmd).to have_received(:call)
       expect(Colors::CreateAndUpdateResource).to have_received(:new)
-    end
-
-    context "when no color" do
-      let(:color) { build(:api_color, id: 0) }
-
-      it do
-        expect(ctrl).to have_http_status(:not_found)
-        expect(Colors::UpdateCmd).to have_received(:call)
-        expect(Colors::CreateAndUpdateResource).not_to have_received(:new)
-      end
     end
   end
 
@@ -43,7 +32,7 @@ RSpec.describe Api::ColorsController, :aggregate_failures do
 
     it do
       expect(ctrl).to have_http_status(:unauthorized)
-      expect(Colors::UpdateCmd).not_to have_received(:call)
+      expect(Colors::CreateCmd).not_to have_received(:call)
       expect(Colors::CreateAndUpdateResource).not_to have_received(:new)
     end
   end
@@ -53,7 +42,7 @@ RSpec.describe Api::ColorsController, :aggregate_failures do
 
     it do
       expect(ctrl).to have_http_status(:unauthorized)
-      expect(Colors::UpdateCmd).not_to have_received(:call)
+      expect(Colors::CreateCmd).not_to have_received(:call)
       expect(Colors::CreateAndUpdateResource).not_to have_received(:new)
     end
   end
