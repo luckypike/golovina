@@ -24,6 +24,8 @@ jobs:
 
     env:
       RAILS_ENV: test
+      DATABASE_TEST_URL: postgres://postgres:postgres@localhost/golovina-test
+
 
     services:
       postgres:
