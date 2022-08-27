@@ -25,7 +25,7 @@ class KitsController < ApplicationController
             :images,
             :translations,
             :availabilities,
-            color: :translations,
+            :color,
             product: %i[translations category]
           ]
         }

@@ -59,7 +59,7 @@ class Kit < ApplicationRecord
             :images,
             :translations,
             :availabilities,
-            color: :translations,
+            :color,
             product: %i[translations category]
           ]
         }

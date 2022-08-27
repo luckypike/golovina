@@ -12,7 +12,7 @@ module Api
             [
               :order, :user,
               {
-                refund_order_items: { order_item: [:size, { variant: [:translations, { color: :translations }] }] }
+                refund_order_items: { order_item: [:size, { variant: [:translations, :color] }] }
               }
             ]
           )

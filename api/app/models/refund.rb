@@ -33,7 +33,7 @@ class Refund < ApplicationRecord
           variant: [
             :images,
             :translations,
-            color: :translations
+            :color
           ]
         }, :size] }
       )

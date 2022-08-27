@@ -1,10 +1,10 @@
-json.values do
-  color.globalize_attribute_names.each do |f|
-    json.set! f, color.send(f) || ''
-  end
+# frozen_string_literal: true
 
-  json.color color.color || ''
-  json.parent_color_id color.parent_color_id || ''
+json.values do
+  json.title_ru color.title_ru || ""
+  json.title_en color.title_en || ""
+  json.color color.color || ""
+  json.parent_color_id color.parent_color_id || ""
 end
 
 json.dictionaries do

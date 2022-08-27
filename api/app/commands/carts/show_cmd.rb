@@ -21,7 +21,7 @@ module Carts
       return [] unless order
 
       order.order_items.joins(:variant)
-        .includes(:size, variant: [:translations, { color: :translations }])
+        .includes(:size, variant: %i[translations color])
         .where(variants: { state: :active })
     end
 

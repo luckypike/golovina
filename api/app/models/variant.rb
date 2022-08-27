@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Variant < ApplicationRecord
   include Elasticsearch::Model
   # include Elasticsearch::Model::Callbacks
@@ -219,9 +221,8 @@ class Variant < ApplicationRecord
     def for_variant
       with_translations(I18n.available_locales)
         .includes(
-          :images,
+          :images, :color,
           availabilities: :size,
-          color: %i[translations],
           product: [
             :translations,
             { category: :translations }
