@@ -15,6 +15,7 @@ module Colors
     rule(:parent_color_id) do
       key.failure(:parent?) if value && color.colors.count.positive?
       key.failure(:parent?) if value && Api::Color.find_by(id: value)&.parent_color_id.present?
+      key.failure(:parent?) if value && value == color.id
     end
   end
 end

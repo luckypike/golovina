@@ -40,4 +40,18 @@ RSpec.describe Colors::UpdateContract, :aggregate_failures do
 
     it { expect(contract.errors.to_h.keys).to include(:parent_color_id) }
   end
+
+  context "when self parent" do
+    let(:color_params) do
+      {
+        title_en: Faker::Color.color_name,
+        title_ru: Faker::Color.color_name,
+        color: Faker::Color.hex_color,
+        parent_color_id: color.id
+      }
+    end
+    let(:color) { create(:api_color) }
+
+    it { expect(contract.errors.to_h.keys).to include(:parent_color_id) }
+  end
 end
