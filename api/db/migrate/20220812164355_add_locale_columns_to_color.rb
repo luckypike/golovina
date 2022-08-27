@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AddLocaleColumnsToColor < ActiveRecord::Migration[6.1]
-  def change
+  def change # rubocop:disable Metrics/MethodLength
     add_column :colors, :title_ru, :string
     add_column :colors, :title_en, :string
 
