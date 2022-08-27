@@ -1,5 +1,5 @@
 default: &default
-  url: <%= ENV.fetch('DATABASE_URL', nil) %>
+  url: <%= ENV.fetch('DATABASE_URL', "postgres://postgres:postgres@localhost/golovina-dev") %>
   pool: <%= ENV.fetch('RAILS_MAX_THREADS', 15) %>
 
 development:
@@ -7,7 +7,7 @@ development:
 
 test:
   <<: *default
-  url: <%= ENV.fetch('DATABASE_TEST_URL', nil) %>
+  url: <%= ENV.fetch("DATABASE_TEST_URL", "postgres://postgres:postgres@localhost/golovina-test") %>
 
 production: &production
   <<: *default
