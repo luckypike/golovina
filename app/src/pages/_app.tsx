@@ -15,6 +15,8 @@ import '../css/app.css'
 import '../css/react-select.css'
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL
+// axios.defaults.headers.get['Content-Type'] = 'application/json'
+// axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 function AppPage({
   Component,

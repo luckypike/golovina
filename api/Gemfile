@@ -7,13 +7,14 @@ gem "rails", "~> 6.1"
 
 gem "pg", "~> 1.0"
 gem "puma", "~> 5.6"
+# gem "sequel", "~> 5.6"
 
 gem "mjml-rails"
 gem "slim-rails"
 
 gem "friendly_id"
 
-gem "aws-sdk-s3", require: false
+gem "aws-sdk-s3"
 gem "carrierwave"
 gem "fog-aws"
 gem "image_processing"
@@ -53,6 +54,7 @@ gem "sidekiq-scheduler"
 gem "react-rails"
 gem "webpacker"
 
+gem "alba"
 gem "jb"
 gem "jbuilder"
 gem "jsonapi-serializer"

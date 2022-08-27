@@ -38,7 +38,7 @@ interface Values {
 interface Dic {
   states: Array<{ id: number; title: string }>
   themes: Array<{ id: number; title: string }>
-  colors: Array<{ id: number; title: string; parent_color_id?: number }>
+  colors: Array<{ id: number; title: string; parent_color_id: number | null }>
   categories: Array<{ id: number; title: string }>
 }
 
@@ -163,7 +163,7 @@ export const VariantsForm: FC = () => {
             <select className={sf.in} {...register('color_id')}>
               <option disabled value="" />
               {dic.colors
-                .filter((c) => c.parent_color_id !== undefined)
+                .filter((c) => c.parent_color_id === null)
                 .map((color) => (
                   <optgroup key={color.id} label={color.title}>
                     {dic.colors
@@ -263,7 +263,7 @@ export const VariantsForm: FC = () => {
           <div className={sf.el}>
             <label className={sf.it}>
               <div className={sf.lb}>Описание (EN)</div>
-              <input className={sf.in} {...register('desc_en')} />
+              <textarea className={sf.in} {...register('desc_en')} />
             </label>
 
             {errors.desc_en != null && <div className={sf.er}>{errors.desc_en.message}</div>}
@@ -272,7 +272,7 @@ export const VariantsForm: FC = () => {
           <div className={sf.el}>
             <label className={sf.it}>
               <div className={sf.lb}>Состав (EN)</div>
-              <input className={sf.in} {...register('comp_en')} />
+              <textarea className={sf.in} {...register('comp_en')} />
             </label>
 
             {errors.comp_en != null && <div className={sf.er}>{errors.comp_en.message}</div>}

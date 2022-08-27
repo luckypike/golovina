@@ -8,8 +8,8 @@ class Wishlist < ApplicationRecord
         variant: [
           :translations,
           :images,
-          color: %i[translations],
-          product: %i[translations category]
+          :color,
+          { product: %i[translations category] }
         ]
       )
     end

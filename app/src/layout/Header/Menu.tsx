@@ -82,7 +82,7 @@ export const Menu: FC = observer(() => {
             <a href="/kits/control">Образы</a>
           </div>
           <div className={s.sub}>
-            <a href="/colors">Цвета</a>
+            <Link href="/colors">Цвета</Link>
           </div>
           <div className={s.sub}>
             <a href="/slides">Слайды</a>

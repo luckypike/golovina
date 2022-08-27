@@ -1,16 +1,13 @@
+# frozen_string_literal: true
+
 class TranslateColors < ActiveRecord::Migration[5.2]
   def change
-    reversible do |dir|
-      dir.up do
-        Color.create_translation_table!(
-          { title: :string },
-          migrate_data: true
-        )
-      end
+    create_table :color_translations do |t|
+      t.references :color, foreign_key: true
+      t.string :locale
+      t.string :title
 
-      dir.down do
-        Color.drop_translation_table!
-      end
+      t.timestamps
     end
   end
 end

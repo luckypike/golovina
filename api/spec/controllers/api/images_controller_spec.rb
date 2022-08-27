@@ -10,7 +10,7 @@ RSpec.describe Api::ImagesController, :aggregate_failures do
       let(:params) { { filename: "img.jpg", content_type: "image/jpeg", byte_size: 1, checksum: "qwe", format: :json } }
       let(:user) { create(:user, :editor) }
 
-      before { sign_in(user) }
+      before { cookies[:_golovina_jwt] = generate_test_jwt(user.id) }
 
       it do
         expect(cmd).to have_http_status(:ok)

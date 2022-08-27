@@ -5,7 +5,8 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     environment:
       # RAILS_ENV: development
-      DATABASE_HOST: pg
+      DATABASE_URL: postgres://postgres:postgres@pg/golovina-dev
+      DATABASE_TEST_URL: postgres://postgres:postgres@pg/golovina-test
       REDIS_HOST: redis
       HISTFILE: /app/.local/.bash_history
       ELASTICSEARCH_URL: es
@@ -113,4 +114,5 @@ volumes:
 
 networks:
   default:
+    external: true
     name: golovina-dev

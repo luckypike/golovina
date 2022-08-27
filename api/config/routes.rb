@@ -10,6 +10,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       post :apple
       post :code
     end
+
+    resources :colors, only: %i[index show create update]
+
     resources :variants, only: %i[new edit create update]
     resources :images, only: %i[create] do
       collection do
@@ -80,14 +83,14 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   end
 
   devise_for :users,
-             path: "",
-             only: :sessions,
-             controllers: {
-               sessions: :sessions
-             },
-             path_names: {
-               sign_in: "login", sign_out: "logout"
-             }
+    path: "",
+    only: :sessions,
+    controllers: {
+      sessions: :sessions
+    },
+    path_names: {
+      sign_in: "login", sign_out: "logout"
+    }
 
   devise_scope :user do
     post "auth/apple(/:from)", to: "users/omniauth_callbacks#apple"

@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery unless: -> { request.format.json? }
 
   rescue_from Pundit::NotAuthorizedError, with: :not_authenticated
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   private
 
@@ -29,11 +30,15 @@ class ApplicationController < ActionController::Base
 
   def not_authenticated
     if user_signed_in? && current_user.common?
-      render :not_authenticated
+      head :unauthorized
     else
       session[:return_to_url] = request.original_fullpath
       redirect_to new_user_session_path
     end
+  end
+
+  def not_found
+    head :not_found
   end
 
   def set_guest_user

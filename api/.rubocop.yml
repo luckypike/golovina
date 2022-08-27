@@ -52,8 +52,8 @@ RSpec/VerifiedDoubleReference:
 # Style/Documentation:
 #   Enabled: false
 
-# Layout/ArgumentAlignment:
-#   EnforcedStyle: with_fixed_indentation
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
 
 # Metrics/MethodLength:
 #   Max: 15

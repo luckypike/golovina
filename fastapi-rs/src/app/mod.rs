@@ -1,10 +1,12 @@
 mod db;
-mod delivery_cities;
-mod sessions;
+mod s3;
 
 mod categories;
+mod delivery_cities;
 mod orders;
+mod sessions;
 mod themes;
+mod uploads;
 mod users;
 mod variants;
 mod wishlists;
@@ -14,6 +16,7 @@ use axum::{
     extract::{Extension, FromRequest, RequestParts},
     response::Response,
     routing::get,
+    routing::post,
     Router,
 };
 use jsonwebtoken::{decode, Algorithm, DecodingKey, Validation};
@@ -29,6 +32,7 @@ const JWT_COOKIE_NAME: &str = "_golovina_jwt";
 
 pub async fn run() {
     let pool = db::create_pool(&env::var("DATABASE_URL").unwrap()).await;
+    let s3_client = s3::create_s3_client(&env::var("AWS_ENDPOINT").unwrap()).await;
 
     let app = Router::new()
         .nest(
@@ -36,10 +40,12 @@ pub async fn run() {
             Router::new()
                 .route("/status", get(|| async {}))
                 .route("/delivery-cities", get(delivery_cities::index))
-                .route("/session", get(sessions::show)),
+                .route("/session", get(sessions::show))
+                .route("/upload/:preset", post(uploads::create)),
         )
         .layer(CookieManagerLayer::new())
         .layer(Extension(pool))
+        .layer(Extension(s3_client))
         .layer(SentryHttpLayer::with_transaction())
         .layer(NewSentryLayer::new_from_top());
 

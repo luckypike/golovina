@@ -46,5 +46,19 @@ module Golovina
     config.generators.javascripts = nil
     config.generators.test_framework = nil
     config.generators.helper = nil
+
+    Alba.backend = :oj
+    Alba.enable_inference!(with: :dry)
+
+    # Sequel.connect(Rails.env.test? ? ENV.fetch("DATABASE_TEST_URL", nil) : ENV.fetch("DATABASE_URL", nil))
+    # # Sequel.single_threaded = true
+    # # Sequel.extension :fiber_concurrency
+
+    # Sequel::Model.plugin :enum
+    # Sequel::Model.plugin :timestamps, update_on_create: true
+    # Sequel::Model.plugin :validation_helpers
+    # Sequel::Model.plugin :forbid_lazy_load
+    # Sequel::Model.plugin :defaults_setter
+    # Sequel::Model.plugin :update_or_create
   end
 end

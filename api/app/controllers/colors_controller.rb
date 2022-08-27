@@ -1,17 +1,18 @@
+# frozen_string_literal: true
+
 class ColorsController < ApplicationController
   before_action :set_color, only: %i[edit update destroy]
 
   def index
     authorize Color
 
-    @colors = Color.main.with_translations.includes(colors: :translations).includes(:variants).order(id: :asc)
+    @colors = Color.main.includes(:colors).includes(:variants).order(id: :asc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
-    @color = Color.new(color: '#000000')
+    @color = Color.new(color: "#000000")
     authorize @color
   end
 

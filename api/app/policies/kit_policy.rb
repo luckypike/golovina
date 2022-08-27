@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class KitPolicy < ApplicationPolicy
   def index?
-    true
+    false
   end
 
   def show?

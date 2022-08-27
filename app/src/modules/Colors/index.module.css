@@ -1,0 +1,147 @@
+.root {
+  background: rgb(var(--theme-bg-secondary-color));
+  flex-grow: 1;
+  padding: var(--yr-xl) var(--xr) calc(var(--yr) * 16);
+}
+
+@media (--s) {
+  .root {
+    padding: var(--yr-xl) var(--xr) calc(var(--yr) * 22);
+  }
+}
+
+@media (--m) {
+  .root {
+    padding: var(--yr-xl) calc(var(--xr) * 2) calc(var(--yr) * 22);
+  }
+}
+
+@media (--l) {
+  .root {
+    padding: var(--yr-xl) calc(3 / 16 * 100%);
+  }
+}
+
+.title {
+  margin: 0 0 var(--yr-m);
+  text-align: center;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+@media (--m) {
+  .container {
+    margin: 0 calc(2 / 12 * 100%);
+  }
+}
+
+.new {
+  margin-bottom: var(--yr-m);
+}
+
+.color {
+  background-color: rgb(var(--theme-bg-primary-color));
+  padding: calc(var(--xr));
+}
+
+.color:not(:last-child) {
+  margin: 0 0 var(--yr-s);
+}
+
+.handle {
+  align-items: center;
+  display: grid;
+  grid-template-columns: calc(var(--yr) * 5) 1fr calc(var(--yr) * 5);
+  grid-gap: var(--xr);
+}
+
+@media (--s) {
+  .handle {
+    grid-template-columns: calc(var(--yr) * 7) 1fr calc(var(--yr) * 7);
+  }
+}
+
+.label {
+  font-weight: 600;
+}
+
+.nested {
+  font-size: var(--fs-at);
+  line-height: var(--lh-at);
+  color: rgb(var(--theme-fg-hint-color));
+  margin-left: 1em;
+}
+
+.preview {
+  width: calc(var(--yr) * 5);
+  height: calc(var(--yr) * 5);
+}
+
+.preview img {
+  display: block;
+  width: calc(var(--yr) * 5);
+  height: calc(var(--yr) * 5);
+}
+
+@media (--s) {
+  .preview {
+    width: calc(var(--yr) * 7);
+    height: calc(var(--yr) * 7);
+  }
+
+  .preview img {
+    width: calc(var(--yr) * 7);
+    height: calc(var(--yr) * 7);
+  }
+}
+
+.edit {
+  font-size: var(--fs-at);
+  line-height: var(--lh-at);
+}
+
+.arr {
+  display: block;
+  margin: auto;
+  width: 10px;
+  height: calc(var(--yr) * 5);
+  cursor: pointer;
+  user-select: none;
+}
+
+.arr polyline {
+  fill: none;
+  stroke-width: 1px;
+  stroke: rgb(var(--theme-fg-primary-color));
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+}
+
+@media (--s) {
+  .arr {
+    width: 14px;
+    height: calc(var(--yr) * 7);
+  }
+}
+
+.colorsNested {
+  margin: var(--yr-xs) 0 0;
+  border-top: 1px solid rgb(var(--theme-sp-color));
+}
+
+.colorNested {
+  margin: var(--yr-xs) 0 0;
+  display: grid;
+  padding-right: calc(var(--yr) * 5 + var(--xr));
+  grid-template-columns: calc(var(--yr) * 5) 1fr 5rem;
+  grid-gap: var(--xr);
+}
+
+@media (--s) {
+  .colorNested {
+    grid-template-columns: calc(var(--yr) * 7) 1fr 6rem;
+    padding-right: calc(var(--yr) * 7 + var(--xr));
+  }
+}

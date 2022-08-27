@@ -11,7 +11,7 @@ RSpec.describe Api::CartsController, :aggregate_failures do
     context "with guest user" do
       let(:user) { create(:user, :guest) }
 
-      before { sign_in(user) }
+      before { cookies[:_golovina_jwt] = generate_test_jwt(user.id) }
 
       it do
         expect(cmd).to have_http_status(:ok)
@@ -22,7 +22,7 @@ RSpec.describe Api::CartsController, :aggregate_failures do
     context "with common user" do
       let(:user) { create(:user) }
 
-      before { sign_in(user) }
+      before { cookies[:_golovina_jwt] = generate_test_jwt(user.id) }
 
       it do
         expect(cmd).to have_http_status(:ok)
@@ -48,7 +48,7 @@ RSpec.describe Api::CartsController, :aggregate_failures do
     context "with user" do
       let(:user) { create(:user) }
 
-      before { sign_in(user) }
+      before { cookies[:_golovina_jwt] = generate_test_jwt(user.id) }
 
       it do
         expect(cmd).to have_http_status(:no_content)
@@ -74,7 +74,7 @@ RSpec.describe Api::CartsController, :aggregate_failures do
     context "with user" do
       let(:user) { create(:user) }
 
-      before { sign_in(user) }
+      before { cookies[:_golovina_jwt] = generate_test_jwt(user.id) }
 
       it do
         expect(cmd).to have_http_status(:no_content)
@@ -101,7 +101,7 @@ RSpec.describe Api::CartsController, :aggregate_failures do
       let(:user) { create(:user) }
 
       before do
-        sign_in(user)
+        cookies[:_golovina_jwt] = generate_test_jwt(user.id)
         create(:api_order, :cart, user: user)
       end
 
@@ -130,7 +130,7 @@ RSpec.describe Api::CartsController, :aggregate_failures do
       let(:user) { create(:user) }
 
       before do
-        sign_in(user)
+        cookies[:_golovina_jwt] = generate_test_jwt(user.id)
         create(:api_order, :cart, user: user)
       end
 

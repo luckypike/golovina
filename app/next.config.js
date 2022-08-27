@@ -11,9 +11,19 @@ const moduleExports = {
         destination: 'http://localhost:3001/api/session',
       },
       {
-        source: '/api/delivery_cities',
-        destination: 'http://localhost:3001/api/delivery_cities',
+        source: '/api/delivery-cities',
+        destination: 'http://localhost:3001/api/delivery-cities',
       },
+      {
+        source: '/api/upload/colors',
+        destination: 'http://localhost:3001/api/upload/colors',
+      },
+
+      {
+        source: '/s3/:path*',
+        destination: 'http://localhost:3002/s3/:path*',
+      },
+
       {
         source: '/api/:path*',
         destination: 'http://localhost:3000/api/:path*',
