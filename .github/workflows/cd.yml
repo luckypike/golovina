@@ -110,6 +110,7 @@ jobs:
             NEXT_PUBLIC_APPLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_APPLE_CLIENT_ID }}
             NEXT_PUBLIC_APPLE_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_APPLE_REDIRECT_URI }}
             NEXT_PUBLIC_PAYKEEPER_GAYEWAY=${{ secrets.NEXT_PUBLIC_PAYKEEPER_GAYEWAY }}
+            SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
           push: true
           tags: |
             bragovo/golovina-app:${{ github.event.release.tag_name }}

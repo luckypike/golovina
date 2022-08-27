@@ -22,6 +22,7 @@ use axum::{
 use jsonwebtoken::{decode, Algorithm, DecodingKey, Validation};
 use regex::Regex;
 use sea_orm::prelude::*;
+use sentry_tower::{NewSentryLayer, SentryHttpLayer};
 use serde::{Deserialize, Serialize};
 use std::{env, net::SocketAddr, str::FromStr};
 use tower_cookies::{Cookie, CookieManagerLayer, Cookies};
@@ -44,7 +45,9 @@ pub async fn run() {
         )
         .layer(CookieManagerLayer::new())
         .layer(Extension(pool))
-        .layer(Extension(s3_client));
+        .layer(Extension(s3_client))
+        .layer(SentryHttpLayer::with_transaction())
+        .layer(NewSentryLayer::new_from_top());
 
     let addr = SocketAddr::from_str(&env::var("APP_ADDR").unwrap()).unwrap();
 
@@ -87,7 +90,7 @@ struct JwtUser {
     sub: i64,
 }
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct User {
     id: i64,
     email: String,

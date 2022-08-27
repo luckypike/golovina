@@ -11,7 +11,7 @@ async fn main() {
     dotenv::dotenv().ok();
 
     tracing_subscriber::registry()
-        .with(tracing_subscriber::fmt::layer())
+        .with(sentry::integrations::tracing::layer())
         .init();
 
     let _sentry = sentry::init((
@@ -19,8 +19,8 @@ async fn main() {
         sentry::ClientOptions {
             release: sentry::release_name!(),
             traces_sample_rate: 1.0,
-        ..Default::default()
-        }
+            ..Default::default()
+        },
     ));
 
     app::run().await
