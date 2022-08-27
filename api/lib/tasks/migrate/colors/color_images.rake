@@ -24,7 +24,6 @@ namespace :migrate do # rubocop:disable Metrics/BlockLength
 
         image.format("webp")
         color.update(color_image: key)
-        pp key
 
         s3.put_object(
           {
