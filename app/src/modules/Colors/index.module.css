@@ -91,10 +91,10 @@
     height: calc(var(--yr) * 7);
   }
 
-.preview img {
-  width: calc(var(--yr) * 7);
-  height: calc(var(--yr) * 7);
-}
+  .preview img {
+    width: calc(var(--yr) * 7);
+    height: calc(var(--yr) * 7);
+  }
 }
 
 .edit {
