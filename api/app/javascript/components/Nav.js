@@ -62,7 +62,7 @@ class Nav extends Component {
 
         <Section id="brand" title={I18n.t('header.nav.about')} onToggle={this.toggleSection} section={section}>
           <div className={styles.sub}>
-            <a href={path('about_path')}>{I18n.t('header.nav.phil')}</a>
+            <a href="/about">{I18n.t('header.nav.phil')}</a>
           </div>
 
           <div className={styles.sub}>

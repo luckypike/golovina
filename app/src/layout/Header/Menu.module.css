@@ -87,6 +87,10 @@
   display: block;
 }
 
+.sub .active {
+  color: rgb(var(--theme-brand-color));
+}
+
 .close {
   position: fixed;
   right: calc(var(--xr) * 2 - calc(var(--yr) * 2));

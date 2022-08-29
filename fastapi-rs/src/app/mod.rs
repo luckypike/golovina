@@ -1,6 +1,7 @@
 mod db;
 mod s3;
 
+mod catalog;
 mod categories;
 mod delivery_cities;
 mod orders;
@@ -41,6 +42,7 @@ pub async fn run() {
                 .route("/status", get(|| async {}))
                 .route("/delivery-cities", get(delivery_cities::index))
                 .route("/session", get(sessions::show))
+                .route("/catalog", get(catalog::index))
                 .route("/upload/:preset", post(uploads::create)),
         )
         .layer(CookieManagerLayer::new())

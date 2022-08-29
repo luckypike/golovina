@@ -23,6 +23,13 @@ ru:
     wishlists:
       title: Избранное
 
+      count:
+        zero: нет товаров
+        one: "%{count} товар"
+        few: "%{count} товара"
+        many: "%{count} товаров"
+        other: "%{count} товара"
+
     users:
       title: Пользователи
 

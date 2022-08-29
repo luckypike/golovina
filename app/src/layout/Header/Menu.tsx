@@ -8,12 +8,14 @@ import Link from 'next/link'
 import { useRootContext } from '../../services/useRootContext'
 
 import s from './Menu.module.css'
+import { useRouter } from 'next/router'
 
 export const Menu: FC = observer(() => {
   const t = useTranslations('Menu')
   const rootStore = useRootContext()
   const { layoutStore, sessionData, isAuth, isEditor } = rootStore
   const [section, setSection] = useState<string>()
+  const { asPath: currentpath } = useRouter()
 
   const nav = useMemo(() => {
     return [...sessionData.categories, ...sessionData.themes].sort((a, b) => a.weight - b.weight)
@@ -32,11 +34,15 @@ export const Menu: FC = observer(() => {
         <Section setSection={setSection} section={section} name="catalog" duration={600}>
           {nav.map((n) => (
             <div key={n.id} className={s.sub}>
-              <a href={`/catalog/${n.slug}`}>{n.title}</a>
+              <Link href={`/catalog/${n.slug}`}>
+                <a className={cc({ [s.active]: currentpath === `/catalog/${n.slug}` })}>{n.title}</a>
+              </Link>
             </div>
           ))}
           <div className={s.sub}>
-            <a href="/catalog">{t('catalog.all')}</a>
+            <Link href="/catalog">
+              <a className={cc({ [s.active]: currentpath === '/catalog' })}>{t('catalog.all')}</a>
+            </Link>
           </div>
         </Section>
       )}
