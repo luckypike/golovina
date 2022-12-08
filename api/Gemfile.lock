@@ -277,13 +277,13 @@ GEM
     multipart-post (2.2.3)
     newrelic_rpm (8.8.0)
     nio4r (2.5.8)
-    nokogiri (1.13.8-aarch64-linux)
+    nokogiri (1.13.10-aarch64-linux)
       racc (~> 1.4)
-    nokogiri (1.13.8-arm64-darwin)
+    nokogiri (1.13.10-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.8-x86_64-darwin)
+    nokogiri (1.13.10-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.8-x86_64-linux)
+    nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
     oj (3.13.14)
     orm_adapter (0.5.0)
@@ -297,7 +297,7 @@ GEM
     pundit (2.2.0)
       activesupport (>= 3.0.0)
     raabro (1.4.0)
-    racc (1.6.0)
+    racc (1.6.1)
     rack (2.2.3.1)
     rack-proxy (0.7.2)
       rack
@@ -472,6 +472,7 @@ PLATFORMS
   arm64-darwin-20
   arm64-darwin-21
   x86_64-darwin-21
+  x86_64-linux
   x86_64-linux-musl
 
 DEPENDENCIES
